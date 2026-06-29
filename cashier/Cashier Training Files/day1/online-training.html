@@ -1,0 +1,2622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cashier Training</title>
+  <style>
+    :root {
+      --launch-green: #6cc24a;
+      --launch-green-dark: #4da62d;
+      --launch-yellow: #f2e600;
+      --launch-black: #0a0a0a;
+      --launch-white: #ffffff;
+      --gray-100: #f6f8fa;
+      --gray-200: #e5eaee;
+      --gray-300: #cfd8df;
+      --gray-700: #404852;
+      --shadow: 0 18px 50px rgba(0,0,0,0.18);
+      --radius: 24px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top left, rgba(108,194,74,0.22), transparent 32%),
+                  linear-gradient(135deg, #070707 0%, #171717 52%, #2d341f 100%);
+      color: #111;
+      overflow: hidden;
+    }
+    .deck {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      padding: 22px;
+      gap: 14px;
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+    .logo-mark {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: #111;
+      border: 3px solid var(--launch-green);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: var(--launch-yellow);
+      box-shadow: 0 0 0 3px rgba(242,230,0,0.16);
+      letter-spacing: -1px;
+    }
+    .brand-title { min-width: 0; }
+    .brand-title strong { display: block; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; }
+    .brand-title span { display: block; font-size: 0.86rem; color: #cdd5dd; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .slide-counter {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 9px 13px;
+      border-radius: 999px;
+      color: #fff;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    .stage {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .slide {
+      display: none;
+      width: min(1180px, calc(100vw - 44px), calc((100vh - 172px) * 1.7778));
+      aspect-ratio: 16 / 9;
+      max-height: calc(100vh - 172px);
+      height: auto;
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.2);
+      grid-template-rows: 10px auto 1fr auto;
+    }
+    .slide.active { display: grid; }
+    .color-strip { background: linear-gradient(90deg, var(--launch-green), var(--launch-yellow)); }
+    .slide-header {
+      padding: 16px 28px 12px;
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .eyebrow {
+      color: var(--launch-green-dark);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+    h1, h2 { margin: 0; color: #101418; line-height: 1.08; }
+    h1 { font-size: clamp(2rem, 4.5vw, 4rem); letter-spacing: -2px; }
+    h2 { font-size: clamp(1.55rem, 2.9vw, 2.75rem); letter-spacing: -1px; }
+    .module-pill {
+      background: #101418;
+      color: var(--launch-yellow);
+      padding: 9px 13px;
+      border-radius: 999px;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+    .slide-body {
+      padding: 22px 28px;
+      display: grid;
+      gap: 20px;
+      align-content: center;
+      overflow: hidden;
+      min-height: 0;
+    }
+    .hero-grid { grid-template-columns: 1.06fr 0.94fr; align-items: center; }
+    .two-col { grid-template-columns: 1fr 1fr; align-items: stretch; }
+    .three-col { grid-template-columns: repeat(3, 1fr); }
+    .card {
+      border: 1px solid var(--gray-200);
+      border-radius: 18px;
+      padding: 22px;
+      background: linear-gradient(180deg, #fff, #fbfcfd);
+      min-height: 100%;
+    }
+    .dark-card {
+      background: linear-gradient(135deg, #101418, #20262e);
+      color: #fff;
+      border-color: #2d3540;
+    }
+    .yellow-card { background: #fffde8; border-color: #efe487; }
+    .green-card { background: #f1faee; border-color: #bfe4b3; }
+    .card h3 { margin: 0 0 12px; font-size: 1.3rem; }
+    .card p { margin: 0; font-size: 1.05rem; color: #3e4650; }
+    .dark-card p, .dark-card li { color: #e6edf3; }
+    ul, ol { margin: 0; padding-left: 1.25rem; }
+    li { margin: 9px 0; font-size: 1.12rem; color: #2d333b; }
+    .big-number {
+      font-size: clamp(5rem, 13vw, 10rem);
+      font-weight: 900;
+      color: var(--launch-green);
+      line-height: 0.9;
+      letter-spacing: -8px;
+    }
+    .big-label { font-size: 1.7rem; font-weight: 900; color: #111; }
+    .script-box {
+      font-size: clamp(1.2rem, 2.1vw, 1.95rem);
+      line-height: 1.25;
+      font-weight: 800;
+      border-left: 8px solid var(--launch-green);
+      background: #f8fbf5;
+      padding: 18px 22px;
+      border-radius: 16px;
+    }
+    .path {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .path-step {
+      flex: 1;
+      text-align: center;
+      border: 1px solid var(--gray-200);
+      padding: 16px 12px;
+      border-radius: 14px;
+      background: #fff;
+      font-weight: 800;
+    }
+    .arrow { font-size: 1.6rem; font-weight: 900; color: var(--launch-green-dark); }
+    .icon-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .icon-card {
+      padding: 20px 14px;
+      border-radius: 16px;
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
+      text-align: center;
+      font-weight: 800;
+    }
+    .icon { font-size: 2.7rem; display: block; margin-bottom: 8px; }
+    .mistake {
+      background: #fff1f1;
+      border: 1px solid #efc4c4;
+      color: #821d1d;
+      padding: 16px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+    .takeaway {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #f7faf7;
+      border: 1px solid #dceedd;
+      border-radius: 15px;
+      padding: 15px 18px;
+      font-size: 1.16rem;
+      font-weight: 800;
+    }
+    .check {
+      width: 30px;
+      height: 30px;
+      flex: 0 0 30px;
+      border-radius: 50%;
+      background: var(--launch-green);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+    }
+    .notes {
+      border-top: 1px solid var(--gray-200);
+      background: #fbfcfd;
+      padding: 8px 28px;
+      color: #5b6570;
+      font-size: 0.94rem;
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .control-left, .control-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 0.98rem;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform 0.05s ease, opacity 0.15s ease;
+    }
+    button:active { transform: translateY(1px); }
+    .btn-primary { background: var(--launch-green); color: #fff; }
+    .btn-yellow { background: var(--launch-yellow); color: #111; }
+    .btn-dark { background: #111; color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+    .btn-outline { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.25); }
+    .progress-wrap { flex: 1; height: 10px; background: rgba(255,255,255,0.16); border-radius: 999px; overflow: hidden; min-width: 180px; }
+    .progress { height: 100%; width: 0%; background: linear-gradient(90deg, var(--launch-green), var(--launch-yellow)); border-radius: 999px; }
+    .speaker-notes-panel {
+      display: none;
+      position: fixed;
+      right: 24px;
+      bottom: 86px;
+      width: min(520px, calc(100vw - 48px));
+      max-height: 50vh;
+      overflow: auto;
+      background: #fff;
+      border-radius: 18px;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      z-index: 20;
+    }
+    .speaker-notes-panel h3 { margin: 0 0 8px; }
+    .speaker-notes-panel p { margin: 0; color: #2d333b; line-height: 1.55; }
+    .audio-placeholder {
+      padding: 12px 14px;
+      border: 1px dashed #b6c2cc;
+      border-radius: 12px;
+      background: #fbfcfd;
+      color: #5b6570;
+      font-size: 0.92rem;
+      margin-top: 14px;
+    }
+
+    .audio-panel { max-height: 92px; margin-top: 16px; padding: 14px 16px; border: 3px solid var(--launch-green); border-radius: 18px; background: #f5fff1; box-shadow: 0 8px 22px rgba(108,194,74,0.18); }
+    .audio-title { font-weight: 900; color: #111; font-size: 1.05rem; }
+    .audio-note { margin-top: 7px; color: #3e4650; font-size: 0.9rem; }
+    .btn-narration { background: var(--launch-yellow); color: #111; border: 2px solid rgba(0,0,0,0.18); box-shadow: 0 0 0 3px rgba(242,230,0,0.2); }
+
+
+    .audio-status { margin-top: 10px; font-weight: 900; color: #101418; }
+    .audio-meter { margin-top: 10px; height: 12px; border-radius: 999px; background: rgba(0,0,0,0.12); overflow: hidden; }
+    .audio-meter-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, var(--launch-green), var(--launch-yellow)); transition: width 0.15s linear; }
+    .lock-note { margin-top: 8px; color: #5a6570; font-size: 0.9rem; }
+    button:disabled { cursor: not-allowed; opacity: 0.52 !important; filter: grayscale(25%); }
+    .start-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      background: radial-gradient(circle at top left, rgba(108,194,74,0.24), transparent 34%), rgba(0,0,0,0.82);
+      backdrop-filter: blur(4px);
+    }
+    .start-card {
+      max-width: 720px;
+      background: #fff;
+      color: #111;
+      border-radius: 26px;
+      padding: 34px;
+      box-shadow: 0 22px 70px rgba(0,0,0,0.45);
+      border-top: 12px solid var(--launch-green);
+    }
+    .start-card h2 { margin: 0 0 10px; font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1; letter-spacing: -2px; }
+    .start-card p { font-size: 1.12rem; color: #2f3842; line-height: 1.5; }
+    .start-card .start-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; align-items: center; }
+    .start-card .small-note { font-size: 0.9rem; color: #5d6873; margin-top: 12px; }
+
+
+    .brand-logo-img { width: 170px; max-width: 28vw; height: auto; display: block; }
+    .brand-logo-stack { display:flex; align-items:center; gap:16px; min-width:0; }
+    .brand-title-with-logo { padding-left: 4px; }
+
+    .role-slide { background: #050605; color: #fff; grid-template-rows: 1fr; border-radius: var(--radius); }
+    .role-slide .color-strip { display:none; }
+    .role-layout { height:100%; display:grid; grid-template-columns: 47% 53%; min-height:0; }
+    .role-copy { padding: 24px 30px 20px; display:flex; flex-direction:column; justify-content:flex-start; background: radial-gradient(circle at 10% 18%, rgba(108,194,74,0.18), transparent 28%), linear-gradient(180deg,#070907,#0c0e0c); border-right:1px solid rgba(108,194,74,0.35); min-height:0; overflow:hidden; }
+    .role-logo { width: 165px; max-width: 76%; margin-bottom: 14px; }
+    .role-title { font-size: clamp(2rem, 3.4vw, 3.55rem); line-height: .94; margin: 0 0 12px; letter-spacing: -2px; text-transform: uppercase; font-weight: 900; }
+    .role-title .green { color: var(--launch-green); display:block; }
+    .role-title .white { color:#fff; display:block; }
+    .role-accent { width: 72px; height: 5px; background: var(--launch-yellow); border-radius: 999px; margin-bottom: 14px; }
+    .role-subhead { color: var(--launch-green); font-size: 1.02rem; font-weight:900; margin-bottom: 9px; }
+    .role-list { list-style:none; padding:0; margin:0; display:grid; gap: 7px; }
+    .role-list li { display:flex; align-items:center; gap: 10px; margin:0; color:#fff; font-size:0.88rem; font-weight:700; line-height:1.18; }
+    .role-icon { width:24px; height:24px; border:2px solid var(--launch-green); border-radius:50%; display:grid; place-items:center; color:var(--launch-green); font-size:.88rem; flex:0 0 24px; }
+    .role-bottom-callout { margin-top: 12px; border: 1.5px solid var(--launch-green); border-radius: 12px; padding: 9px 12px; display:flex; gap:12px; align-items:center; font-size:0.88rem; font-weight:900; line-height:1.22; }
+    .role-bottom-callout .star { color: var(--launch-green); font-size: 1.35rem; line-height:1; }
+    .role-bottom-callout span strong { color: var(--launch-green); }
+    .role-visual { position:relative; min-width:0; overflow:hidden; background:#111; }
+    .role-visual img { width:100%; height:100%; object-fit:cover; display:block; filter: contrast(1.04) saturate(1.04); }
+    .role-visual:after { content:""; position:absolute; inset:0; background: linear-gradient(90deg, rgba(5,6,5,0.22), transparent 28%), linear-gradient(180deg, transparent 70%, rgba(5,6,5,0.16)); pointer-events:none; }
+    .role-audio { position:absolute; left:22px; bottom:14px; right:22px; background: rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.16); backdrop-filter: blur(8px); border-radius:14px; padding:7px 10px; color:#fff; z-index:3; }
+    .role-audio .audio-status { margin-top:0; color:#fff; }
+    .role-audio .lock-note { color:#cfd8df; }
+    .role-audio .audio-meter { background:rgba(255,255,255,0.16); }
+
+
+
+
+    /* Slide 4: Guest script / returning guest flow */
+    .script-slide .slide-header { padding: 13px 28px 10px; }
+    .script-slide .slide-body { padding: 14px 28px 10px; align-content: stretch; }
+    .script-flow-grid { height:100%; min-height:0; display:grid; grid-template-columns: 1.08fr .92fr; gap:18px; align-items:stretch; }
+    .script-left { display:flex; flex-direction:column; gap:8px; min-height:0; }
+    .opening-script-card { border-left:7px solid var(--launch-green); border-radius:16px; background:linear-gradient(180deg,#f8fbf5,#ffffff); border-top:1px solid var(--gray-200); border-right:1px solid var(--gray-200); border-bottom:1px solid var(--gray-200); padding:13px 18px; display:grid; grid-template-columns:54px 1fr; gap:14px; align-items:center; }
+    .quote-bubble { width:50px; height:50px; border-radius:50%; background:var(--launch-green); color:#fff; display:grid; place-items:center; font-size:2.35rem; line-height:1; font-weight:900; }
+    .opening-script-card .script-main { font-size:1.58rem; line-height:1.08; font-weight:900; color:#101418; letter-spacing:-.8px; }
+    .tone-reminder { margin-top:7px; color:#34404c; font-size:.78rem; display:flex; align-items:center; gap:8px; }
+    .tone-reminder .person-icon { color:var(--launch-green-dark); font-weight:900; font-size:1.25rem; }
+    .returning-flow-card { flex:1; min-height:0; border-radius:16px; border:1px solid #cfe8c8; background:linear-gradient(180deg,#f7fcf4,#fff); padding:12px 16px 10px; overflow:hidden; }
+    .returning-heading { display:flex; align-items:center; gap:10px; margin-bottom:8px; color:var(--launch-green-dark); font-size:.86rem; text-transform:uppercase; font-weight:900; }
+    .returning-heading .round-icon { width:34px; height:34px; border-radius:50%; border:2px solid var(--launch-green); display:grid; place-items:center; font-size:1.15rem; }
+    .flow-steps { display:grid; gap:7px; }
+    .flow-step { display:grid; grid-template-columns:32px 34px 1fr; gap:10px; align-items:center; border-bottom:1px solid #dbeed6; padding:0 0 7px; }
+    .flow-step:last-child { border-bottom:none; }
+    .step-num { width:27px; height:27px; border-radius:50%; background:var(--launch-green); color:#fff; display:grid; place-items:center; font-weight:900; font-size:.86rem; }
+    .step-icon { width:29px; height:29px; border-radius:50%; background:#eef9ea; border:1px solid #c7e9be; color:var(--launch-green-dark); display:grid; place-items:center; font-size:1rem; }
+    .step-copy { font-size:.86rem; color:#111; line-height:1.16; }
+    .step-copy strong { font-weight:900; }
+    .step-copy span { color:#3d4650; }
+    .script-right { display:grid; grid-template-rows: 1fr auto; gap:12px; min-height:0; }
+    .script-photo { min-height:0; border-radius:18px; overflow:hidden; border:1px solid var(--gray-200); background:#111; }
+    .script-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+    .waiver-callout { border:2px solid var(--launch-yellow); background:linear-gradient(180deg,#fffbe5,#fff8c7); border-radius:16px; padding:12px 16px; display:grid; grid-template-columns:48px 1fr; gap:13px; align-items:center; }
+    .waiver-icon { width:42px; height:42px; border-radius:50%; background:#101418; color:var(--launch-yellow); display:grid; place-items:center; font-size:1.55rem; font-weight:900; }
+    .waiver-copy h3 { margin:0 0 4px; font-size:1rem; color:#101418; text-transform:uppercase; }
+    .waiver-copy p { margin:0; color:#101418; font-size:.84rem; line-height:1.18; font-weight:800; }
+    .waiver-copy .sub { margin-top:5px; padding-top:5px; border-top:1px solid rgba(0,0,0,.12); font-weight:500; color:#2f3842; }
+    .script-audio { display:none; }
+    .script-audio .audio-status { margin-top:0; font-size:.86rem; }
+    .script-audio .audio-meter { height:8px; margin-top:6px; }
+    @media (max-width: 900px) {
+      .script-flow-grid { grid-template-columns:1fr; }
+      .opening-script-card .script-main { font-size:1.35rem; }
+      .script-right { grid-template-rows:auto; }
+      .script-photo { min-height:220px; }
+    }
+
+    /* Slide 3: 10-second rule interactive countdown */
+    .ten-rule-slide .slide-body { padding: 22px 28px 16px; }
+    .ten-rule-grid { display:grid; grid-template-columns: 1.05fr 0.95fr; gap: 22px; align-items: stretch; height:100%; min-height:0; }
+    .timer-card { border:1px solid var(--gray-200); border-radius:20px; padding:20px; background:linear-gradient(180deg,#fff,#fbfcfd); display:grid; grid-template-columns: 210px 1fr; gap:22px; align-items:center; min-height:0; }
+    .countdown-clock { width:200px; height:200px; border-radius:50%; display:grid; place-items:center; position:relative; background: conic-gradient(var(--launch-green) 0deg, #e4e8ec 0deg); box-shadow: 0 14px 34px rgba(108,194,74,.22); }
+    .countdown-clock:before { content:""; position:absolute; inset:13px; border-radius:50%; background:#fff; box-shadow: inset 0 0 0 1px #e2e7ec; }
+    .countdown-core { position:relative; z-index:1; text-align:center; }
+    .countdown-number { display:block; font-size:4.8rem; line-height:.86; font-weight:900; color:var(--launch-green); letter-spacing:-4px; }
+    .countdown-label { display:block; margin-top:8px; font-size:1rem; font-weight:900; text-transform:uppercase; color:#101418; }
+    .countdown-sub { display:block; margin-top:2px; color:var(--launch-green-dark); font-weight:900; font-size:.78rem; text-transform:uppercase; letter-spacing:.5px; }
+    .timer-copy h3 { margin:0 0 12px; font-size:1.46rem; line-height:1.18; color:#111; }
+    .busy-rule { border-top:2px solid #cfe8c8; padding-top:14px; margin-top:14px; }
+    .busy-rule strong { color:#101418; display:block; font-size:1.02rem; margin-bottom:6px; text-transform:uppercase; }
+    .nonverbal-list { display:grid; grid-template-columns:1fr 1fr; gap:8px 14px; margin-top:12px; }
+    .nonverbal-item { display:flex; align-items:center; gap:8px; font-weight:800; color:#111; font-size:.98rem; }
+    .nonverbal-icon { width:28px; height:28px; border-radius:50%; display:grid; place-items:center; color:var(--launch-green-dark); background:#eef9ea; border:1px solid #bfe5b4; font-size:.92rem; }
+    .greeting-panel { background:linear-gradient(135deg,#101418,#1b222b); color:#fff; border-radius:20px; padding:24px; position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:space-between; min-height:0; }
+    .greeting-panel:before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 18% 80%, rgba(108,194,74,.18), transparent 34%); pointer-events:none; }
+    .greeting-panel h3 { margin:0 0 16px; font-size:1.38rem; position:relative; z-index:1; }
+    .greeting-quote { position:relative; z-index:1; border-left:8px solid var(--launch-yellow); background:rgba(255,255,255,.08); border-radius:18px; padding:24px 24px; font-size:1.7rem; line-height:1.22; font-weight:900; box-shadow:0 18px 32px rgba(0,0,0,.18); }
+    .standard-banner { margin-top:16px; border-radius:14px; padding:13px 16px; background:#f1faee; border:1px solid #d8efd3; display:flex; align-items:center; gap:12px; font-size:1.02rem; color:#111; }
+    .standard-badge { width:34px; height:34px; border-radius:50%; background:var(--launch-green); color:#fff; display:grid; place-items:center; font-weight:900; flex:0 0 34px; }
+    .ten-audio { margin-top:10px; padding:8px 12px; border-radius:12px; background:#f7faf7; border:1px solid #dbeed6; }
+    .ten-audio .audio-status { margin-top:0; font-size:.86rem; }
+    .ten-audio .audio-meter { height:8px; margin-top:6px; }
+
+    /* Slide 5: Positive Guest Interaction */
+    .hospitality-slide .slide-body { padding: 14px 28px 10px; align-content: stretch; }
+    .hospitality-body { display: grid; grid-template-rows: auto 1fr auto; gap: 12px; }
+    .hospitality-banner {
+      display: flex; align-items: center; gap: 18px; padding: 14px 18px;
+      border: 1px solid #dfe6dc; border-radius: 18px; background: linear-gradient(180deg,#ffffff 0%,#f7fbf5 100%);
+    }
+    .hospitality-star { width: 52px; height: 52px; border-radius: 50%; background: var(--launch-green); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.7rem; font-weight:900; flex-shrink:0; }
+    .hospitality-banner strong { display:block; font-size:1.05rem; font-weight:900; color:#101418; }
+    .hospitality-banner span { display:block; margin-top:4px; font-size:.88rem; color:#111; }
+    .hospitality-grid { display:grid; grid-template-columns: repeat(5, 1fr); gap: 12px; min-height:0; }
+    .hospitality-card { border:1px solid #dfe6dc; border-radius:18px; background:#fff; padding: 14px 12px 12px; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; min-width:0; }
+    .hospitality-icon { width:54px; height:54px; border-radius:50%; background:rgba(108,194,74,.18); display:flex; align-items:center; justify-content:center; font-size:1.8rem; margin-bottom:10px; }
+    .hospitality-card h3 { margin:0 0 10px; padding-bottom:8px; border-bottom:2px solid rgba(108,194,74,.35); color:var(--launch-green-dark); font-size:.88rem; line-height:1.12; text-transform:uppercase; letter-spacing:.03em; font-weight:1000; }
+    .hospitality-card p { margin:0 0 6px; font-size:.74rem; line-height:1.22; color:#14191f; }
+    .hospitality-card p strong { font-weight:900; }
+    .child-card { background:linear-gradient(180deg,#fff 0%,#f8fff5 100%); border-color:#bfe4b4; }
+    .hospitality-bottom { display:flex; align-items:center; gap:14px; padding:10px 16px; border:1px solid #dfe6dc; border-radius:14px; background:#fbfdfb; font-size:.86rem; color:#111; }
+    .checkmark { width:34px; height:34px; border-radius:50%; border:2px solid var(--launch-green); color:var(--launch-green-dark); display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:1000; flex-shrink:0; }
+    .sr-audio-status { position:absolute; left:-9999px; }
+    .sr-audio-meter { display:none; }
+
+    @media (max-width: 900px) {
+      .ten-rule-grid, .timer-card { grid-template-columns: 1fr; }
+      .countdown-clock { width:160px; height:160px; justify-self:center; }
+      .countdown-number { font-size:3.6rem; }
+      .greeting-quote { font-size:1.25rem; }
+    }
+    @media (max-width: 900px) {
+      .role-copy { padding: 16px 18px; }
+      .role-logo { width: 120px; margin-bottom: 8px; }
+      .role-title { font-size: clamp(1.5rem, 5vw, 2.4rem); letter-spacing: -1px; }
+      .role-list li { font-size: 0.68rem; gap: 7px; }
+      .role-icon { width: 18px; height: 18px; flex-basis:18px; font-size:.65rem; }
+      .role-subhead { font-size: 0.76rem; }
+      .role-bottom-callout { display:none; }
+      .role-audio { display:none; }
+    }
+
+    @media (max-width: 900px) {
+      body { overflow: auto; }
+      .deck { min-height: 100vh; height: auto; padding: 12px; }
+      .slide { height: auto; min-height: 72vh; }
+      .slide-body, .hero-grid, .two-col, .three-col, .icon-row { grid-template-columns: 1fr; }
+      .controls { align-items: stretch; flex-direction: column; }
+      .control-left, .control-right { width: 100%; justify-content: center; }
+      .progress-wrap { width: 100%; }
+      .path { flex-direction: column; }
+      .arrow { transform: rotate(90deg); }
+    }
+    @media print {
+      body { overflow: visible; background: #fff; }
+      .deck { height: auto; padding: 0; display: block; }
+      .topbar, .controls, .speaker-notes-panel { display: none !important; }
+      .stage { display: block; }
+      .slide { display: grid !important; page-break-after: always; width: 100%; height: 100vh; box-shadow: none; border-radius: 0; border: none; }
+    }
+  </style>
+<style id="v24-slide6-only-css">
+.slide6-body-native {
+  padding: 20px 30px 16px;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  gap: 12px;
+  min-height: 0;
+}
+.slide6-top-callout {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid #dcebd4;
+  background: linear-gradient(180deg,#f7fbf5,#eef8eb);
+  border-radius: 15px;
+  padding: 12px 16px;
+}
+.slide6-callout-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #6cc24a;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 1.25rem;
+  flex: 0 0 auto;
+}
+.slide6-top-callout strong {
+  display: block;
+  font-size: 1rem;
+  color: #111820;
+  margin-bottom: 2px;
+}
+.slide6-top-callout span {
+  display: block;
+  font-size: .86rem;
+  color: #334155;
+}
+.slide6-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  min-height: 0;
+}
+.slide6-col {
+  border: 1px solid #dfe7ed;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #fff;
+  min-height: 0;
+}
+.slide6-col-head {
+  background: #111820;
+  color: #fff;
+  padding: 10px 12px;
+  font-size: .86rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-weight: 900;
+}
+.slide6-col-head.yellow-head {
+  color: #111820;
+  background: #f2e600;
+}
+.slide6-item {
+  padding: 9px 12px;
+  border-bottom: 1px solid #edf1f4;
+}
+.slide6-item strong {
+  display: block;
+  color: #9b1c1c;
+  font-size: .88rem;
+  margin-bottom: 2px;
+}
+.slide6-item span {
+  display: block;
+  color: #27313c;
+  font-size: .76rem;
+  line-height: 1.22;
+}
+.slide6-help {
+  margin: 9px 10px 10px;
+  padding: 9px 10px;
+  border: 1px solid #f2d24d;
+  background: #fff8d6;
+  border-radius: 10px;
+  font-weight: 800;
+  color: #111820;
+  font-size: .76rem;
+  line-height: 1.22;
+}
+.slide6-audio-native {
+  padding: 8px 11px;
+  border: 1px solid #dfe7ed;
+  border-radius: 12px;
+  background: #f7fbf5;
+}
+.slide6-audio-native .audio-status {
+  font-weight: 800;
+  color: #111820;
+  font-size: .82rem;
+}
+.slide6-audio-native .audio-meter {
+  height: 7px;
+  background: #d8ded6;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+.slide6-audio-native .audio-meter-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,#6cc24a,#f2e600);
+  border-radius: 999px;
+}
+.slide6-audio-native .lock-note {
+  font-size: .72rem;
+  color: #56616d;
+  margin-top: 3px;
+}
+.slide6-body-native .notes {
+  border-top: 1px solid #e5eaee;
+  padding-top: 6px;
+  color: #55616d;
+  font-size: .78rem;
+}
+</style>
+
+
+<style id="v25-slide7-css">
+.slide7-body{
+  padding:20px 30px 16px;
+  display:grid;
+  grid-template-rows:auto 1fr auto auto;
+  gap:14px;
+}
+.slide7-callout{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  background:#f5f8f1;
+  border-radius:16px;
+  padding:16px 18px;
+  border:1px solid #dce6d6;
+}
+.slide7-callout-bar{
+  width:6px;
+  align-self:stretch;
+  border-radius:999px;
+  background:#6cc24a;
+}
+.slide7-callout strong{
+  display:block;
+  font-size:1.05rem;
+  color:#111820;
+  margin-bottom:4px;
+}
+.slide7-callout span{
+  display:block;
+  font-size:.88rem;
+  color:#42505f;
+}
+.slide7-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+.slide7-card{
+  background:#f7f8fa;
+  border:1px solid #dfe5ea;
+  border-radius:16px;
+  padding:20px 14px;
+  text-align:center;
+}
+.slide7-icon{
+  font-size:2.2rem;
+  margin-bottom:12px;
+}
+.slide7-card h3{
+  font-size:1rem;
+  margin:0 0 8px;
+  color:#111820;
+}
+.slide7-card p{
+  font-size:.82rem;
+  line-height:1.3;
+  color:#42505f;
+  margin:0;
+}
+.slide7-audio{
+  padding:8px 12px;
+  border:1px solid #dfe7ed;
+  border-radius:12px;
+  background:#f7fbf5;
+}
+.slide7-audio .audio-status{
+  font-size:.84rem;
+  font-weight:800;
+}
+.slide7-audio .audio-meter{
+  height:7px;
+  background:#d8ded6;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:5px;
+}
+.slide7-audio .audio-meter-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#6cc24a,#f2e600);
+}
+.slide7-audio .lock-note{
+  margin-top:3px;
+  font-size:.72rem;
+  color:#56616d;
+}
+.slide7-body .notes{
+  border-top:1px solid #e5eaee;
+  padding-top:6px;
+  color:#55616d;
+  font-size:.78rem;
+}
+</style>
+
+
+
+<style id="v27-slide8-css">
+.slide8-body{
+  padding:12px 22px 10px;
+  display:grid;
+  grid-template-rows:1fr auto auto;
+  gap:10px;
+}
+.slide8-grid{
+  display:grid;
+  grid-template-columns:1.02fr .98fr;
+  gap:14px;
+}
+.slide8-left,
+.slide8-right{
+  border-radius:16px;
+  overflow:hidden;
+}
+.slide8-left{
+  background:#f7fbf5;
+  border:1px solid #dce7d4;
+  padding:14px;
+}
+.slide8-card-title{
+  font-size:1rem;
+  font-weight:900;
+  margin-bottom:12px;
+  color:#111820;
+}
+.waiver-method{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  background:#fff;
+  border:1px solid #e1e7ec;
+  border-radius:12px;
+  padding:10px;
+  margin-bottom:10px;
+}
+.waiver-icon{
+  font-size:1.45rem;
+  line-height:1;
+}
+.waiver-method strong{
+  display:block;
+  font-size:.86rem;
+  color:#111820;
+  margin-bottom:1px;
+}
+.waiver-method span{
+  display:block;
+  font-size:.72rem;
+  color:#4a5563;
+  line-height:1.18;
+}
+.slide8-right{
+  background:linear-gradient(180deg,#14181f,#111820);
+  color:#fff;
+  border:1px solid #2a313a;
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+}
+.warning-header{
+  font-size:1.25rem;
+  font-weight:900;
+  margin-bottom:10px;
+  color:#f2e600;
+}
+.warning-box{
+  border:2px solid #ffcf4a;
+  background:rgba(255,255,255,.05);
+  border-radius:14px;
+  padding:10px;
+}
+.warning-box strong{
+  display:block;
+  font-size:.9rem;
+  margin-bottom:8px;
+}
+.warning-box ul{
+  margin:0;
+  padding-left:16px;
+}
+.warning-box li{
+  margin-bottom:6px;
+  font-size:.76rem;
+  line-height:1.18;
+  color:#f5f7fa;
+}
+.compliance-footer{
+  margin-top:auto;
+  border-top:1px solid rgba(255,255,255,.15);
+  padding-top:10px;
+  font-size:.74rem;
+  line-height:1.2;
+  color:#f5f7fa;
+  font-weight:700;
+}
+.slide8-audio{
+  padding:5px 10px;
+  border:1px solid #dfe7ed;
+  border-radius:10px;
+  background:#f7fbf5;
+}
+.slide8-audio .audio-status{
+  font-size:.78rem;
+  font-weight:800;
+}
+.slide8-audio .audio-meter{
+  height:6px;
+  background:#d8ded6;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:4px;
+}
+.slide8-audio .audio-meter-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#6cc24a,#f2e600);
+}
+.slide8-audio .lock-note{
+  margin-top:2px;
+  font-size:.66rem;
+  color:#56616d;
+}
+.slide8-body .notes{
+  border-top:1px solid #e5eaee;
+  padding-top:4px;
+  color:#55616d;
+  font-size:.72rem;
+}
+</style>
+
+
+
+<style id="v29-slide9-css">
+.slide9-body{
+  padding:12px 22px 10px;
+  display:grid;
+  grid-template-rows:auto 1fr auto auto;
+  gap:10px;
+}
+.slide9-top{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  align-items:center;
+}
+.slide9-callout{
+  flex:1;
+  background:#f7fbf5;
+  border:1px solid #dce7d4;
+  border-radius:12px;
+  padding:10px 14px;
+  font-size:.82rem;
+  font-weight:700;
+  color:#1f2937;
+}
+.status-row{
+  display:flex;
+  gap:8px;
+}
+.status-pill{
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:.72rem;
+  font-weight:900;
+}
+.status-pill.green{
+  background:#dcfce7;
+  color:#166534;
+}
+.status-pill.yellow{
+  background:#fef3c7;
+  color:#92400e;
+}
+.slide9-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:16px;
+  min-height:0;
+}
+.slide9-left{
+  display:flex;
+  flex-direction:column;
+}
+.slide9-image{
+  width:100%;
+  border-radius:14px;
+  border:2px solid #dfe5ea;
+  object-fit:contain;
+  max-height:255px;
+}
+.image-note{
+  margin-top:6px;
+  font-size:.72rem;
+  color:#55616d;
+}
+.slide9-right{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.process-box{
+  border:1px solid #dfe5ea;
+  border-radius:16px;
+  background:#fff;
+  padding:12px;
+}
+.process-step{
+  display:flex;
+  gap:12px;
+  padding:7px 0;
+  border-bottom:1px solid #edf1f4;
+}
+.process-step:last-child{
+  border-bottom:none;
+}
+.step-num{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:#111820;
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:.78rem;
+  font-weight:900;
+  flex:0 0 auto;
+}
+.yellow-step{
+  background:#f2e600;
+  color:#111820;
+}
+.green-step{
+  background:#6cc24a;
+}
+.process-step strong{
+  display:block;
+  font-size:.82rem;
+  color:#111820;
+  margin-bottom:1px;
+}
+.process-step span{
+  display:block;
+  font-size:.72rem;
+  color:#4a5563;
+  line-height:1.18;
+}
+.expired-box{
+  border:2px solid #f2e600;
+  background:#fffde8;
+  border-radius:14px;
+  padding:12px;
+  font-size:.76rem;
+  line-height:1.25;
+  color:#111820;
+}
+.expired-box strong{
+  display:block;
+  margin-bottom:4px;
+  font-size:.84rem;
+}
+.slide9-audio{
+  padding:6px 10px;
+  border:1px solid #dfe7ed;
+  border-radius:10px;
+  background:#f7fbf5;
+}
+.slide9-audio .audio-status{
+  font-size:.78rem;
+  font-weight:800;
+}
+.slide9-audio .audio-meter{
+  height:6px;
+  background:#d8ded6;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:4px;
+}
+.slide9-audio .audio-meter-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#6cc24a,#f2e600);
+}
+.slide9-audio .lock-note{
+  margin-top:2px;
+  font-size:.66rem;
+  color:#56616d;
+}
+.slide9-body .notes{
+  border-top:1px solid #e5eaee;
+  padding-top:4px;
+  color:#55616d;
+  font-size:.72rem;
+}
+</style>
+
+
+<style id="v32-slide10-css">
+.slide10-body{
+  padding:14px 24px 12px;
+  display:grid;
+  grid-template-rows:auto 1fr auto auto;
+  gap:10px;
+}
+.scenario-callout{
+  background:#f7fbf5;
+  border:1px solid #dce7d4;
+  border-radius:12px;
+  padding:10px 14px;
+  font-size:.82rem;
+  font-weight:700;
+  color:#1f2937;
+}
+.scenario-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.scenario-column{
+  border-radius:18px;
+  padding:14px;
+}
+.guest-column{
+  background:#f8fafc;
+  border:1px solid #dfe5ea;
+}
+.cashier-column{
+  background:#f7fbf5;
+  border:1px solid #dce7d4;
+}
+.scenario-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:1rem;
+  font-weight:900;
+  margin-bottom:12px;
+  color:#111820;
+}
+.positive-title{
+  color:#166534;
+}
+.scenario-icon{
+  font-size:1.15rem;
+}
+.speech-card{
+  border-radius:14px;
+  padding:12px 14px;
+  margin-bottom:10px;
+  font-size:.86rem;
+  line-height:1.25;
+  font-weight:700;
+}
+.guest-card{
+  background:#ffffff;
+  border:1px solid #dfe5ea;
+  color:#111820;
+}
+.cashier-card{
+  background:#ffffff;
+  border:1px solid #cde7c7;
+  color:#166534;
+}
+.manager-note{
+  border-top:1px solid #e5eaee;
+  padding-top:6px;
+  font-size:.74rem;
+  color:#55616d;
+}
+.slide10-audio{
+  padding:4px 8px;
+  border:1px solid #dfe7ed;
+  border-radius:8px;
+  background:#f7fbf5;
+}
+.slide10-audio .audio-status{
+  font-size:.76rem;
+  font-weight:800;
+}
+.slide10-audio .audio-meter{
+  height:6px;
+  background:#d8ded6;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:4px;
+}
+.slide10-audio .audio-meter-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#6cc24a,#f2e600);
+}
+.slide10-audio .lock-note{
+  margin-top:2px;
+  font-size:.66rem;
+  color:#56616d;
+}
+</style>
+
+
+<style id="v33-slide11-css">
+.slide11-body{
+  padding:14px 24px 12px;
+  display:grid;
+  grid-template-rows:auto 1fr auto auto;
+  gap:10px;
+}
+.readiness-banner{
+  background:linear-gradient(90deg,#6cc24a,#8edb5f);
+  color:#111820;
+  border-radius:14px;
+  padding:10px 16px;
+  font-size:.95rem;
+  font-weight:900;
+  text-align:center;
+  letter-spacing:.08em;
+}
+.expectation-list{
+  display:grid;
+  gap:12px;
+}
+.expectation-item{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  background:#f7fbf5;
+  border:1px solid #dce7d4;
+  border-radius:18px;
+  padding:16px 18px;
+  font-size:.96rem;
+  font-weight:800;
+  color:#111820;
+}
+.expectation-check{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#6cc24a;
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:1.4rem;
+  font-weight:900;
+  flex:0 0 auto;
+}
+.standards-callout{
+  border-top:1px solid #e5eaee;
+  padding-top:6px;
+  font-size:.78rem;
+  color:#55616d;
+  font-weight:700;
+}
+.slide11-audio{
+  padding:4px 8px;
+  border:1px solid #dfe7ed;
+  border-radius:8px;
+  background:#f7fbf5;
+}
+.slide11-audio .audio-status{
+  font-size:.76rem;
+  font-weight:800;
+}
+.slide11-audio .audio-meter{
+  height:6px;
+  background:#d8ded6;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:4px;
+}
+.slide11-audio .audio-meter-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#6cc24a,#f2e600);
+}
+.slide11-audio .lock-note{
+  margin-top:2px;
+  font-size:.66rem;
+  color:#56616d;
+}
+</style>
+
+
+
+<style id="sock-slides-css">
+/* v37: Fit-only corrections for the two sock slides. No global deck changes. */
+
+/* Slide 11 - Sock Policy */
+.sock-policy-layout{
+  padding:14px 22px 12px;
+  display:grid;
+  grid-template-columns:.92fr 1.08fr;
+  gap:16px;
+  align-items:start;
+  height:100%;
+  box-sizing:border-box;
+  overflow:hidden;
+}
+.sock-hero{
+  min-height:0;
+}
+.sock-hero img{
+  width:100%;
+  max-height:285px;
+  object-fit:contain;
+  border-radius:14px;
+  border:2px solid #dce7d4;
+  display:block;
+}
+.sock-policy-panel{
+  display:grid;
+  grid-template-rows:auto 1fr auto auto;
+  gap:10px;
+  min-height:0;
+}
+.sock-policy-callout{
+  background:#f7fbf5;
+  border:1px solid #cfe2c4;
+  border-radius:14px;
+  padding:10px 12px;
+  font-size:.86rem;
+  line-height:1.2;
+  font-weight:900;
+  color:#111820;
+}
+.sock-policy-rules{
+  display:grid;
+  gap:7px;
+}
+.sock-rule{
+  background:#fff;
+  border:1px solid #dde5ea;
+  border-radius:12px;
+  padding:8px 11px;
+  font-weight:800;
+  font-size:.78rem;
+  line-height:1.18;
+}
+.sock-script-box{
+  background:#111820;
+  color:#fff;
+  border-radius:14px;
+  padding:11px 12px;
+  font-size:.78rem;
+  line-height:1.35;
+}
+.cashier-day1-sock-policy .required-audio{
+  padding:4px 8px;
+  border:1px solid #dfe7ed;
+  border-radius:8px;
+  background:#f7fbf5;
+  font-size:.72rem;
+}
+.cashier-day1-sock-policy .required-audio .audio-status{
+  font-size:.74rem;
+  font-weight:800;
+}
+.cashier-day1-sock-policy .required-audio .audio-meter{
+  height:5px;
+  background:#d8ded6;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:4px;
+}
+.cashier-day1-sock-policy .required-audio .lock-note{
+  font-size:.64rem;
+  color:#56616d;
+  margin-top:2px;
+}
+
+/* Slide 12 - Sock FAQ */
+.sock-faq-layout{
+  padding:14px 22px 12px;
+  display:grid;
+  grid-template-columns:1.12fr .88fr;
+  gap:16px;
+  align-items:start;
+  height:100%;
+  box-sizing:border-box;
+  overflow:hidden;
+}
+.sock-faq-left{
+  display:grid;
+  grid-template-rows:repeat(4, auto) auto;
+  gap:8px;
+  min-height:0;
+}
+.faq-item{
+  background:#f8fafb;
+  border:1px solid #dde5ea;
+  border-radius:12px;
+  padding:9px 11px;
+}
+.faq-q{
+  font-weight:900;
+  color:#111820;
+  margin-bottom:4px;
+  font-size:.8rem;
+  line-height:1.15;
+}
+.faq-a{
+  color:#334155;
+  font-size:.72rem;
+  line-height:1.22;
+}
+.escalation-box{
+  background:#fff8dc;
+  border:2px solid #f2e600;
+}
+.sock-faq-right{
+  min-height:0;
+  display:grid;
+  place-items:start center;
+}
+.sock-faq-right img{
+  width:100%;
+  max-height:440px;
+  object-fit:contain;
+  border-radius:14px;
+  border:2px solid #dce7d4;
+  display:block;
+}
+.cashier-day1-sock-faq .required-audio{
+  padding:4px 8px;
+  border:1px solid #dfe7ed;
+  border-radius:8px;
+  background:#f7fbf5;
+  font-size:.72rem;
+}
+.cashier-day1-sock-faq .required-audio .audio-status{
+  font-size:.74rem;
+  font-weight:800;
+}
+.cashier-day1-sock-faq .required-audio .audio-meter{
+  height:5px;
+  background:#d8ded6;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:4px;
+}
+.cashier-day1-sock-faq .required-audio .lock-note{
+  font-size:.64rem;
+  color:#56616d;
+  margin-top:2px;
+}
+</style>
+
+
+
+
+
+
+<style id="v47-next-steps-audio">
+.next-steps-audio{
+  margin-top:24px;
+  padding:8px 12px;
+  border:1px solid #dfe7ed;
+  border-radius:10px;
+  background:#f7fbf5;
+}
+.next-steps-audio .audio-status{
+  font-size:.82rem;
+  font-weight:800;
+}
+.next-steps-audio .audio-meter{
+  height:6px;
+  background:#d8ded6;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:4px;
+}
+.next-steps-audio .audio-meter-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#6cc24a,#f2e600);
+}
+.next-steps-audio .lock-note{
+  margin-top:2px;
+  font-size:.68rem;
+  color:#56616d;
+}
+</style>
+
+
+<style id="v48-next-steps-sizing-fix">
+.next-steps-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+  margin-top:18px;
+  align-items:stretch;
+}
+
+.next-step-card{
+  background:#f5f7f5;
+  border:2px solid #d8e2d8;
+  border-radius:22px;
+  padding:20px 18px;
+  min-height:320px;
+  overflow:hidden;
+}
+
+.step-number{
+  width:46px;
+  height:46px;
+  border-radius:999px;
+  background:#73c043;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.35rem;
+  font-weight:800;
+  margin-bottom:14px;
+}
+
+.next-step-card h3{
+  font-size:1.08rem;
+  line-height:1.15;
+  margin-bottom:12px;
+  font-weight:900;
+}
+
+.next-step-card p{
+  font-size:.88rem;
+  line-height:1.45;
+}
+
+.slide[data-title="Next Steps"] h1{
+  font-size:3.2rem !important;
+  line-height:1.0 !important;
+}
+
+.slide[data-title="Next Steps"] .pill{
+  font-size:.9rem;
+}
+
+.slide[data-title="Next Steps"] .manager-note{
+  margin-top:10px;
+  font-size:.74rem;
+}
+
+.next-steps-audio{
+  margin-top:12px !important;
+}
+
+@media(max-width:1100px){
+  .next-steps-grid{
+    grid-template-columns:1fr;
+  }
+
+  .next-step-card{
+    min-height:auto;
+  }
+}
+</style>
+
+
+<style id="v51-next-steps-header-fix">
+.slide[data-title="Next Steps"] .slide-header{
+  padding-top:28px !important;
+  padding-bottom:12px !important;
+  align-items:flex-start !important;
+}
+
+.slide[data-title="Next Steps"] h1{
+  margin-top:0 !important;
+  padding-top:0 !important;
+  line-height:.95 !important;
+}
+
+.slide[data-title="Next Steps"] .pill,
+.slide[data-title="Next Steps"] .module-pill{
+  margin-top:8px !important;
+}
+</style>
+
+
+<style id="deployment-lock-style">
+  .audio-status, .sr-audio-status { display: none !important; }
+  button[disabled] { opacity: .55 !important; cursor: not-allowed !important; }
+</style>
+</head>
+<body>
+
+  <div class="start-overlay" id="startOverlay">
+    <div class="start-card">
+      <div class="eyebrow">Day 1 Online Training</div>
+      <h2>Begin Cashier Training</h2>
+      <p>Testing mode: narration will still play, but you can move forward without waiting for it to finish. The required lock can be restored later for the final version.</p>
+      <div class="start-actions">
+        <button class="btn-primary" type="button" onclick="startTraining()">Start Day 1 Training</button>
+        <button class="btn-dark" type="button" onclick="toggleFullScreen()">Full Screen</button>
+      </div>
+      <div class="small-note">Use this on a tablet, office computer, or training station. Browser audio rules require this first click before narration can start.</div>
+    </div>
+  </div>
+
+  <div class="deck">
+    <div class="topbar">
+      <div class="brand brand-logo-stack">
+        <img class="brand-logo-img" src="../assets/launch-family-entertainment-logo.png" alt="Launch Family Entertainment">
+        <div class="brand-title brand-title-with-logo">
+          <strong>Cashier Training</strong>
+          <span>Day 1: Guest Greeting, Interaction & Waivers</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;"><a href="index.html" style="color:#fff;text-decoration:none;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);padding:9px 13px;border-radius:999px;font-weight:bold;">Back to Day 1 Menu</a><div class="slide-counter" id="slideCounter">Slide 1 / 14</div></div>
+    </div>
+
+    <div class="stage">
+      <section class="slide active" data-notes="Welcome to Launch Front End Training. As a cashier and check-in associate, you are often the first person a guest interacts with. Your attitude, professionalism, and attention to detail directly affect guest experience, safety, and operational flow. Day 1 is focused on greeting guests properly, communicating clearly, and handling waivers correctly.">
+        <div class="color-strip"></div>
+        <div class="slide-header"><div><div class="eyebrow">Day 1 Module</div><h1>Front End Starts the Experience</h1></div><div class="module-pill">Cashier Training</div></div>
+        <div class="slide-body hero-grid">
+          <div>
+            <div class="script-box">Your job is not just to sell admission.<br><br>You set the tone for the guest's entire visit.</div>
+            <div class="audio-panel">
+              <div class="audio-title">Slide 1 Narration</div>
+              <audio preload="auto" data-required="true" style="display:none;">
+                <source src="audio/Cashier Day 1 - Intro.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+              <div class="audio-status" id="audioStatus-0">Narration locked until training starts.</div><div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-0"></div></div><div class="lock-note">Testing mode: you can move forward without waiting for narration.</div>
+            </div>
+          </div>
+          <div class="card dark-card">
+            <h3>Today’s focus</h3>
+            <ul>
+              <li>Greeting guests quickly and professionally</li>
+              <li>Using positive body language</li>
+              <li>Understanding waiver rules</li>
+              <li>Directing guests through the waiver process</li>
+              <li>Knowing when to ask for help</li>
+            </ul>
+          </div>
+        </div>
+        <div class="notes">Manager note: This presentation should be completed before the employee begins Day 1 floor training.</div>
+      </section>
+
+
+      <section class="slide role-slide" data-notes="The front-end team plays a critical role in every guest visit. The check-in counter is more than just a register. It is the first point of interaction between Launch and the guest. The way you greet guests, answer questions, explain procedures, and manage check-in directly shapes the guest experience from the very first moment. A strong check-in creates confidence, keeps operations organized, and helps support guest safety. As a front-end team member, you are responsible for creating a welcoming environment while ensuring proper procedures are followed. Every great guest experience starts at check-in.">
+        <div class="color-strip"></div>
+        <div class="role-layout">
+          <div class="role-copy">
+            <img class="role-logo" src="../assets/launch-family-entertainment-logo.png" alt="Launch Family Entertainment">
+            <h2 class="role-title"><span class="green">Your Role</span><span class="white">At Check-In</span></h2>
+            <div class="role-accent"></div>
+            <div class="role-subhead">You are responsible for:</div>
+            <ul class="role-list">
+              <li><span class="role-icon">☺</span>Creating a positive first impression</li>
+              <li><span class="role-icon">✋</span>Greeting guests professionally</li>
+              <li><span class="role-icon">⬟</span>Supporting guest safety</li>
+              <li><span class="role-icon">☑</span>Managing waiver procedures</li>
+              <li><span class="role-icon">▤</span>Keeping check-in organized</li>
+              <li><span class="role-icon">★</span>Starting every visit the right way</li>
+            </ul>
+            <div class="role-bottom-callout"><div class="star">☆</div><span>The front desk sets the tone for the entire <strong>Launch</strong> experience.</span></div>
+          </div>
+          <div class="role-visual">
+            <img src="../assets/slide2-checkin-visual.png" alt="Cashier assisting guests at check-in">
+            <div class="role-audio">
+              <audio preload="auto" data-required="true" style="display:none;">
+                <source src="audio/Cashier Day 1 - Greeting Guests.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+              <div class="audio-status" id="audioStatus-1">Narration will play automatically.</div>
+              <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-1"></div></div>
+              <div class="lock-note">Testing mode: you can move forward without waiting for narration.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide ten-rule-slide" data-notes="Every guest entering the facility should be acknowledged within ten seconds. This standard applies throughout the entire day, including busy periods. Guests should never feel ignored or uncertain about where to go after entering the facility. If you are already assisting another guest, a quick acknowledgment is still required. During especially busy periods, acknowledgment may also be non-verbal. Eye contact, a wave, a smile, or a quick nod can all help reassure guests that they have been acknowledged and will be assisted shortly. Fast acknowledgment creates a more organized, professional, and welcoming guest experience.">
+        <div class="color-strip"></div>
+        <div class="slide-header"><div><div class="eyebrow">Greeting Standard</div><h2>The 10-Second Rule</h2></div><div class="module-pill">Required</div></div>
+        <div class="slide-body">
+          <div class="ten-rule-grid">
+            <div>
+              <div class="timer-card">
+                <div class="countdown-clock" id="tenSecondClock" aria-label="10 second countdown clock">
+                  <div class="countdown-core">
+                    <span class="countdown-number" id="tenSecondNumber">10</span>
+                    <span class="countdown-label">Seconds</span>
+                    <span class="countdown-sub">or less</span>
+                  </div>
+                </div>
+                <div class="timer-copy">
+                  <h3>Every guest should be acknowledged within 10 seconds of entering the facility.</h3>
+                  <div class="busy-rule">
+                    <strong>During busy periods:</strong>
+                    <div>Acknowledgment can be verbal or non-verbal.</div>
+                    <div class="nonverbal-list">
+                      <div class="nonverbal-item"><span class="nonverbal-icon">👁</span>Eye contact</div>
+                      <div class="nonverbal-item"><span class="nonverbal-icon">✋</span>A wave</div>
+                      <div class="nonverbal-item"><span class="nonverbal-icon">☺</span>A smile</div>
+                      <div class="nonverbal-item"><span class="nonverbal-icon">✓</span>A quick nod</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="standard-banner"><span class="standard-badge">!</span><span><strong>Standard:</strong> acknowledgment is required even during busy periods.</span></div>
+              <div class="ten-audio">
+                <audio preload="auto" data-required="true" style="display:none;">
+                  <source src="audio/Cashier Day 1 - Positive Guest Interaction.mp3" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                </audio>
+                <div class="audio-status" id="audioStatus-2">Narration will play automatically.</div>
+                <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-2"></div></div>
+                <div class="lock-note">Testing mode: you can move forward without waiting for narration.</div>
+              </div>
+            </div>
+            <div class="greeting-panel">
+              <div>
+                <h3>If you are already helping someone:</h3>
+                <div class="greeting-quote">“Hi! Welcome to Launch.<br>I’ll be with you shortly.”</div>
+              </div>
+              <div style="position:relative;z-index:1;color:#cfd8df;font-weight:700;font-size:.96rem;line-height:1.35;">A quick acknowledgment tells the guest: “I see you, and help is coming.”</div>
+            </div>
+          </div>
+        </div>
+        <div class="notes">Standard: verbal or non-verbal acknowledgment is required within 10 seconds.</div>
+      </section>
+
+      <section class="slide script-slide" data-notes="One of the most important responsibilities at the front desk is starting every guest interaction correctly. A strong greeting helps create a welcoming, organized, and professional environment from the beginning of the visit. Use a clear and friendly introduction: Hello, welcome to Launch, have you been here before? Speak clearly, smile naturally, and maintain eye contact. If the guest has visited before, confirm whether they have completed a waiver within the last year. Once the waiver has been verified, proceed with the standard check-in process. Remember, every guest entering the facility must have a valid waiver on file. This includes participants, spectators, parents, and minors. Consistent guest interaction creates a smoother and more professional experience for everyone entering the park.">
+        <div class="color-strip"></div>
+        <div class="slide-header"><div><div class="eyebrow">Guest Script</div><h2>Start Every Interaction Correctly</h2></div><div class="module-pill">Script</div></div>
+        <div class="slide-body">
+          <div class="script-flow-grid">
+            <div class="script-left">
+              <div class="opening-script-card">
+                <div class="quote-bubble">“</div>
+                <div>
+                  <div class="script-main">Hello! Welcome to Launch!<br>Have you been here before?</div>
+                  <div class="tone-reminder"><span class="person-icon">♙</span><span>Speak clearly, smile naturally, and maintain eye contact.</span></div>
+                </div>
+              </div>
+
+              <div class="returning-flow-card">
+                <div class="returning-heading"><span class="round-icon">↩</span><span>If yes: Returning Guest</span></div>
+                <div class="flow-steps">
+                  <div class="flow-step"><div class="step-num">1</div><div class="step-icon">👥</div><div class="step-copy"><strong>Welcome them back.</strong></div></div>
+                  <div class="flow-step"><div class="step-num">2</div><div class="step-icon">☑</div><div class="step-copy"><strong>Confirm waiver status.</strong> <span>Ask if they have completed a waiver within the last year.</span></div></div>
+                  <div class="flow-step"><div class="step-num">3</div><div class="step-icon">▦</div><div class="step-copy"><strong>Verify waiver within the last year.</strong></div></div>
+                  <div class="flow-step"><div class="step-num">4</div><div class="step-icon">➜</div><div class="step-copy"><strong>Proceed with the standard check-in process.</strong></div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="script-right">
+              <div class="script-photo"><img src="../assets/slide2-checkin-visual.png" alt="Cashier greeting family at check-in"></div>
+              <div class="waiver-callout">
+                <div class="waiver-icon">!</div>
+                <div class="waiver-copy">
+                  <h3>Waiver Requirement</h3>
+                  <p>All guests entering the facility must have a valid waiver on file.</p>
+                  <p class="sub">This includes participants, spectators, parents, and minors.</p>
+                </div>
+              </div>
+              <div class="script-audio">
+                <audio preload="auto" data-required="true" style="display:none;">
+                  <source src="audio/Cashier Day 1 - 10 Second Greeting Rule.mp3" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                </audio>
+                <div class="audio-status" id="audioStatus-3">Narration will play automatically.</div>
+                <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-3"></div></div>
+                <div class="lock-note">Testing mode: you can move forward without waiting for narration.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="notes">Manager note: have the trainee practice this script out loud before floor training.</div>
+      </section>
+
+      <section class="slide hospitality-slide" data-notes="Positive guest interaction is one of the most important parts of the front-end role. Every conversation with a guest helps shape their experience at Launch. Guests should feel welcomed, respected, and comfortable from the moment they enter the facility. Start by maintaining eye contact while speaking and listening. Stay focused during guest interactions. Use positive body language, including a smile, open posture, and friendly tone. Whenever possible, use the guest’s name. When families enter the facility, acknowledge and engage with the children as well. Consistent positive interaction helps build trust, improves guest satisfaction, and reflects the Launch standard of hospitality.">
+        <div class="color-strip"></div>
+        <div class="slide-header"><div><div class="eyebrow">Hospitality Standard</div><h2>Positive Guest Interaction</h2></div><div class="module-pill">Behavior</div></div>
+        <div class="slide-body hospitality-body">
+          <div class="hospitality-banner">
+            <div class="hospitality-star">★</div>
+            <div>
+              <strong>Every guest interaction shapes the experience at Launch.</strong>
+              <span>Use these behaviors to create a welcoming, safe, and memorable visit for every guest.</span>
+            </div>
+          </div>
+
+          <div class="hospitality-grid">
+            <div class="hospitality-card">
+              <div class="hospitality-icon">👀</div>
+              <h3>Maintain Eye Contact</h3>
+              <p><strong>Look at the guest while speaking and listening.</strong></p>
+              <p>It shows you are engaged and attentive.</p>
+            </div>
+            <div class="hospitality-card">
+              <div class="hospitality-icon">🎯</div>
+              <h3>Stay Focused</h3>
+              <p><strong>Give the guest your full attention.</strong></p>
+              <p>Avoid distractions and multitasking.</p>
+            </div>
+            <div class="hospitality-card">
+              <div class="hospitality-icon">🙂</div>
+              <h3>Positive Body Language</h3>
+              <p><strong>Smile, use open posture, and keep your tone friendly.</strong></p>
+              <p>Your body language should match your words.</p>
+            </div>
+            <div class="hospitality-card">
+              <div class="hospitality-icon">🗣️</div>
+              <h3>Use Guest Names</h3>
+              <p><strong>Use a guest’s name whenever possible.</strong></p>
+              <p>It creates a personal and welcoming experience.</p>
+            </div>
+            <div class="hospitality-card child-card">
+              <div class="hospitality-icon">🧒</div>
+              <h3>Acknowledge Children</h3>
+              <p><strong>Engage children as part of the family experience.</strong></p>
+              <p>A smile, greeting, or friendly comment can build excitement.</p>
+            </div>
+          </div>
+
+          <div class="hospitality-bottom">
+            <span class="checkmark">✓</span>
+            <strong>Consistent positive interactions build trust, increase guest satisfaction, and reflect the Launch difference.</strong>
+          </div>
+
+          <audio preload="auto" data-required="true" style="display:none;">
+            <source src="audio/Cashier Day 1 - Waiver Check In Process.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+          <div class="sr-audio-status" id="audioStatus-4">Narration will play automatically.</div>
+          <div class="sr-audio-meter"><div class="audio-meter-fill" id="audioProgress-4"></div></div>
+        </div>
+        <div class="notes">Manager note: These behaviors should be observed during the Day 1 shift.</div>
+      </section>
+
+      
+      <section class="slide cashier-day1-what-not-to-do" data-module="Cashier Day 1 - What Not To Do" data-notes="Professional behavior at the front counter directly affects the guest experience. Guests notice attitude, body language, professionalism, and tone at all times. Negative behavior can make guests feel uncomfortable, ignored, or unwelcome. Avoid closed-off body language, eating or chewing gum, side conversations, visible frustration, and guessing instead of asking for help.">
+        <div class="color-strip"></div>
+        <div class="slide-header">
+          <div>
+            <div class="eyebrow">Behaviors That Hurt</div>
+            <h2>The Guest Experience</h2>
+          </div>
+          <div class="module-pill">Professionalism</div>
+        </div>
+
+        <div class="slide-body slide6-body-native">
+          <div class="slide6-top-callout">
+            <div class="slide6-callout-icon">!</div>
+            <div>
+              <strong>Guests notice your attitude, body language, and professionalism at all times.</strong>
+              <span>These behaviors can create a negative experience and reflect poorly on Launch.</span>
+            </div>
+          </div>
+
+          <div class="slide6-columns">
+            <div class="slide6-col">
+              <div class="slide6-col-head">Body Language</div>
+              <div class="slide6-item"><strong>Crossed arms</strong><span>Can appear closed off or unapproachable.</span></div>
+              <div class="slide6-item"><strong>No eye contact</strong><span>Can make guests feel ignored or unimportant.</span></div>
+              <div class="slide6-item"><strong>Visible frustration</strong><span>Huffing, pouting, or reacting negatively creates a poor atmosphere.</span></div>
+            </div>
+
+            <div class="slide6-col">
+              <div class="slide6-col-head yellow-head">Professional Conduct</div>
+              <div class="slide6-item"><strong>Eating or chewing gum</strong><span>Can appear distracted or unprofessional.</span></div>
+              <div class="slide6-item"><strong>Talking to coworkers while helping a guest</strong><span>Divides your attention and makes the guest feel less important.</span></div>
+            </div>
+
+            <div class="slide6-col">
+              <div class="slide6-col-head">Guest Service</div>
+              <div class="slide6-item"><strong>Ignoring a guest</strong><span>Guests should never feel invisible or overlooked.</span></div>
+              <div class="slide6-item"><strong>Guessing instead of asking for help</strong><span>Can lead to incorrect information and poor guest experiences.</span></div>
+              <div class="slide6-help">Never guess if you are unsure. Ask a supervisor or manager for help.</div>
+            </div>
+          </div>
+
+          <div class="required-audio slide6-audio-native">
+            <audio data-required="true" preload="metadata">
+              <source src="audio/Cashier Day 1 - What Not To Do.mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+            <div class="audio-status" id="audioStatus-5">Narration will play automatically.</div>
+            <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-5"></div></div>
+            <div class="lock-note">Testing mode: you can move forward without waiting for narration.</div>
+          </div>
+
+          <div class="notes">Manager note: this slide should be reinforced during live observation.</div>
+        </div>
+      </section>
+
+
+      
+      <section class="slide cashier-day1-waiver-rules" data-module="Cashier Day 1 - Waiver Rules" data-notes="Every guest entering Launch must have a valid waiver on file. Adults complete their own waiver, minors require a parent or guardian waiver, and spectators or non-participants still require waiver verification.">
+        <div class="color-strip"></div>
+
+        <div class="slide-header">
+          <div>
+            <div class="eyebrow">Compliance</div>
+            <h2>Waiver Rules</h2>
+          </div>
+          <div class="module-pill">Every Guest</div>
+        </div>
+
+        <div class="slide-body slide7-body">
+          <div class="slide7-callout">
+            <div class="slide7-callout-bar"></div>
+            <div>
+              <strong>Every guest entering the facility must have a valid waiver on file.</strong>
+              <span>This includes participants, spectators, parents, guardians, and minors.</span>
+            </div>
+          </div>
+
+          <div class="slide7-grid">
+            <div class="slide7-card">
+              <div class="slide7-icon">👨</div>
+              <h3>Adult Participants</h3>
+              <p>Adults complete and sign their own waiver before admission.</p>
+            </div>
+
+            <div class="slide7-card">
+              <div class="slide7-icon">👶</div>
+              <h3>Minor Participants</h3>
+              <p>Minors require a waiver completed by a parent or legal guardian.</p>
+            </div>
+
+            <div class="slide7-card">
+              <div class="slide7-icon">👨‍👩‍👧</div>
+              <h3>Parents / Guardians</h3>
+              <p>Parents and guardians must also complete waiver verification when entering.</p>
+            </div>
+
+            <div class="slide7-card">
+              <div class="slide7-icon">🪑</div>
+              <h3>Non‑Participants</h3>
+              <p>Spectators and non-jumpers still require waiver verification.</p>
+            </div>
+          </div>
+
+          <div class="required-audio slide7-audio">
+            <audio data-required="true" preload="metadata">
+              <source src="audio/Cashier Day 1 - Waiver Rules.mp3" type="audio/mpeg">
+            </audio>
+            <div class="audio-status" id="audioStatus-6">Narration will play automatically.</div>
+            <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-6"></div></div>
+            <div class="lock-note">Testing mode: navigation remains enabled.</div>
+          </div>
+
+          <div class="notes">Important: non-jumpers still require waiver verification.</div>
+        </div>
+      </section>
+
+
+      
+      <section class="slide cashier-day1-completing-a-waiver" data-module="Cashier Day 1 - Completing a Waiver" data-notes="Waivers are legal documents and must be completed directly by the guest or legal guardian. Employees may guide guests to the process but may never complete, submit, or sign a waiver on behalf of a guest.">
+        <div class="color-strip"></div>
+
+        <div class="slide-header">
+          <div>
+            <div class="eyebrow">Process</div>
+            <h2>Completing a Waiver</h2>
+          </div>
+          <div class="module-pill">Guest Action</div>
+        </div>
+
+        <div class="slide-body slide8-body">
+          <div class="slide8-grid">
+            <div class="slide8-left">
+              <div class="slide8-card-title">Approved Waiver Methods</div>
+
+              <div class="waiver-method">
+                <div class="waiver-icon">🖥️</div>
+                <div>
+                  <strong>Waiver Kiosk</strong>
+                  <span>Guests may complete waivers at approved waiver stations.</span>
+                </div>
+              </div>
+
+              <div class="waiver-method">
+                <div class="waiver-icon">📱</div>
+                <div>
+                  <strong>Guest Smartphone</strong>
+                  <span>Guests may complete waivers on their own personal device.</span>
+                </div>
+              </div>
+
+              <div class="waiver-method">
+                <div class="waiver-icon">🌐</div>
+                <div>
+                  <strong>Park Website</strong>
+                  <span>Waivers may also be completed online before arrival.</span>
+                </div>
+              </div>
+
+              <div class="waiver-method">
+                <div class="waiver-icon">🔳</div>
+                <div>
+                  <strong>QR Code Station</strong>
+                  <span>QR codes may direct guests to the waiver page.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="slide8-right">
+              <div class="warning-header">Never Do This</div>
+
+              <div class="warning-box">
+                <strong>Employees may NEVER complete a waiver for a guest.</strong>
+
+                <ul>
+                  <li>Do not type information for them</li>
+                  <li>Do not click or submit the waiver</li>
+                  <li>Do not sign for a guest</li>
+                  <li>Do not complete waivers for friends or family</li>
+                </ul>
+              </div>
+
+              <div class="compliance-footer">
+                Waivers are legal documents and must be completed directly by the guest or legal guardian.
+              </div>
+            </div>
+          </div>
+
+          <div class="required-audio slide8-audio">
+            <audio data-required="true" preload="metadata">
+              <source src="audio/Cashier Day 1 - Completing a Waiver.mp3" type="audio/mpeg">
+            </audio>
+            <div class="audio-status" id="audioStatus-7">Narration will play automatically.</div>
+            <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-7"></div></div>
+            <div class="lock-note">Testing mode: navigation remains enabled.</div>
+          </div>
+
+          <div class="notes">This should be treated as a hard rule, not a customer service preference.</div>
+        </div>
+      </section>
+
+
+      
+<section class="slide cashier-day1-waiver-verification" data-module="Cashier Day 1 - Waiver Verification" data-notes="Search waivers using phone number whenever possible. TRUE means previously verified. FALSE means ID verification is required. Selecting a FALSE waiver after ID verification changes it to verified.">
+  <div class="color-strip"></div>
+
+  <div class="slide-header">
+    <div>
+      <div class="eyebrow">Verification</div>
+      <h2>Waiver Search & Verification</h2>
+    </div>
+    <div class="module-pill">CenterEdge</div>
+  </div>
+
+  <div class="slide-body slide9-body">
+
+    <div class="slide9-top">
+      <div class="slide9-callout">
+        Phone number searches are usually faster and more accurate than searching by last name.
+      </div>
+
+      <div class="status-row">
+        <div class="status-pill green">TRUE = Previously Verified</div>
+        <div class="status-pill yellow">FALSE = ID Verification Required</div>
+      </div>
+    </div>
+
+    <div class="slide9-grid">
+
+      <div class="slide9-left">
+        <img src="assets/waiver-search-screen.png" class="slide9-image">
+
+        <div class="image-note">
+          Example waiver search results showing both verified and unverified guests.
+        </div>
+      </div>
+
+      <div class="slide9-right">
+
+        <div class="process-box">
+          <div class="process-step">
+            <div class="step-num">1</div>
+            <div>
+              <strong>Search the waiver</strong>
+              <span>Use the guest phone number whenever possible.</span>
+            </div>
+          </div>
+
+          <div class="process-step">
+            <div class="step-num">2</div>
+            <div>
+              <strong>Review guest details</strong>
+              <span>Confirm the correct guest, date of birth, and linked children.</span>
+            </div>
+          </div>
+
+          <div class="process-step">
+            <div class="step-num yellow-step">3</div>
+            <div>
+              <strong>FALSE = Verify ID</strong>
+              <span>Check a valid ID before proceeding.</span>
+            </div>
+          </div>
+
+          <div class="process-step">
+            <div class="step-num green-step">4</div>
+            <div>
+              <strong>Select the waiver</strong>
+              <span>Clicking “Select” after ID verification changes the waiver to VERIFIED.</span>
+            </div>
+          </div>
+
+          <div class="process-step">
+            <div class="step-num">5</div>
+            <div>
+              <strong>Attach correctly</strong>
+              <span>Always attach the correct waiver to the correct transaction.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="expired-box">
+          <strong>Expired Waiver?</strong>
+          Guest completes a new waiver and returns directly to the same cashier.
+        </div>
+
+      </div>
+    </div>
+
+    <div class="required-audio slide9-audio">
+      <audio data-required="true" preload="metadata">
+        <source src="audio/Cashier Day 1 - Waiver Verification.mp3" type="audio/mpeg">
+      </audio>
+
+      <div class="audio-status" id="audioStatus-8">Narration will play automatically.</div>
+      <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-8"></div></div>
+      <div class="lock-note">Testing mode: navigation remains enabled.</div>
+    </div>
+
+    <div class="notes">
+      Never attach the wrong waiver to a guest transaction.
+    </div>
+
+  </div>
+</section>
+
+
+      
+<section class="slide cashier-day1-common-guest-situations" data-module="Cashier Day 1 - Common Guest Situations" data-notes="Remain calm, professional, and consistent during guest interactions. Do not argue with guests and do not make exceptions to waiver policy.">
+  <div class="color-strip"></div>
+
+  <div class="slide-header">
+    <div>
+      <div class="eyebrow">Practice Scenarios</div>
+      <h2>Common Day 1 Guest Situations</h2>
+    </div>
+    <div class="module-pill">Role Play</div>
+  </div>
+
+  <div class="slide-body slide10-body">
+
+    <div class="scenario-callout">
+      Stay calm, professional, and confident when explaining waiver requirements.
+    </div>
+
+    <div class="scenario-grid">
+
+      <div class="scenario-column guest-column">
+        <div class="scenario-title">
+          <span class="scenario-icon">🗣️</span>
+          Guest Says:
+        </div>
+
+        <div class="speech-card guest-card">
+          “I filled this out last year.”
+        </div>
+
+        <div class="speech-card guest-card">
+          “I’m not jumping.”
+        </div>
+
+        <div class="speech-card guest-card">
+          “Can you just do it for me?”
+        </div>
+
+        <div class="speech-card guest-card">
+          “Why does everyone need one?”
+        </div>
+      </div>
+
+      <div class="scenario-column cashier-column">
+        <div class="scenario-title positive-title">
+          <span class="scenario-icon">✅</span>
+          Best Practice Response:
+        </div>
+
+        <div class="speech-card cashier-card">
+          “Let me verify that for you in the system.”
+        </div>
+
+        <div class="speech-card cashier-card">
+          “All guests entering the facility require a waiver.”
+        </div>
+
+        <div class="speech-card cashier-card">
+          “I’m unable to complete the waiver on your behalf.”
+        </div>
+
+        <div class="speech-card cashier-card">
+          “If needed, I can get a manager to assist further.”
+        </div>
+      </div>
+
+    </div>
+
+    <div class="manager-note">
+      Managers should role-play at least two scenarios before the employee begins live guest interaction.
+    </div>
+
+    <div class="required-audio slide10-audio">
+      <audio data-required="true" preload="metadata">
+        <source src="audio/Cashier Day 1 - Common Guest Situations.mp3" type="audio/mpeg">
+      </audio>
+
+      <div class="audio-status" id="audioStatus-9">Narration will play automatically.</div>
+      <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-9"></div></div>
+      <div class="lock-note">Testing mode: navigation remains enabled.</div>
+    </div>
+
+  </div>
+</section>
+
+
+      
+
+<section class="slide cashier-day1-sock-policy" data-module="Cashier Day 1 - Sock Policy">
+  <div class="color-strip"></div>
+  <div class="slide-header">
+    <div>
+      <div class="eyebrow">Safety Policy</div>
+      <h2>Launch Grip Sock Policy</h2>
+    </div>
+    <div class="module-pill">Required</div>
+  </div>
+
+  <div class="slide-body sock-policy-layout">
+
+    <div class="sock-hero">
+      <img src="assets/LaunchSocksOnly_DigitalSignage(1).png" alt="Launch Sock Policy">
+    </div>
+
+    <div class="sock-policy-panel">
+      <div class="sock-policy-callout">
+        All participants must wear approved Launch Grip Socks on attractions.
+      </div>
+
+      <div class="sock-policy-rules">
+        <div class="sock-rule">✓ Launch socks are required for participation</div>
+        <div class="sock-rule">✓ Cashiers must visually confirm the socks</div>
+        <div class="sock-rule">✕ Competitor grip socks are NOT permitted</div>
+        <div class="sock-rule">✕ Personal socks are NOT permitted</div>
+        <div class="sock-rule">✓ Guests may reuse Launch socks on future visits</div>
+      </div>
+
+      <div class="sock-script-box">
+        <strong>Cashier Script:</strong><br>
+        “Do you have your Launch Grip Socks today?”
+      </div>
+
+      <div class="required-audio">
+<audio data-required="true" preload="metadata">
+  <source src="audio/Cashier Day 1 - Sock Policy.mp3" type="audio/mpeg">
+</audio>
+
+<div class="audio-status" id="audioStatus-sockpolicy">Playing required narration...</div>
+<div class="audio-meter">
+  <div class="audio-meter-fill" id="audioProgress-sockpolicy"></div>
+</div>
+<div class="lock-note">Testing mode: navigation remains enabled.</div>
+</div>
+
+  </div>
+</section>
+
+<section class="slide cashier-day1-sock-faq" data-module="Cashier Day 1 - Sock FAQ">
+  <div class="color-strip"></div>
+  <div class="slide-header">
+    <div>
+      <div class="eyebrow">Guest Questions</div>
+      <h2>Sock FAQs & Escalation</h2>
+    </div>
+    <div class="module-pill">FAQ</div>
+  </div>
+
+  <div class="slide-body sock-faq-layout">
+
+    <div class="sock-faq-left">
+
+      <div class="faq-item">
+        <div class="faq-q">“Why can’t I use competitor socks?”</div>
+        <div class="faq-a">Launch requires approved socks for safety, consistency, and attraction standards.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">“Buying socks is a scam.”</div>
+        <div class="faq-a">Remain calm, explain the policy briefly, and avoid arguing with the guest.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">“You don’t have my size.”</div>
+        <div class="faq-a">Ask a supervisor or manager for assistance before escalating the situation.</div>
+      </div>
+
+      <div class="faq-item escalation-box">
+        <strong>Important:</strong> If a guest becomes upset about the sock policy, calmly explain the rules and involve a manager early.
+      </div>
+
+      <div class="required-audio">
+<audio data-required="true" preload="metadata">
+  <source src="audio/Cashier Day 1 - Sock FAQ.mp3" type="audio/mpeg">
+</audio>
+
+<div class="audio-status" id="audioStatus-sockfaq">Playing required narration...</div>
+<div class="audio-meter">
+  <div class="audio-meter-fill" id="audioProgress-sockfaq"></div>
+</div>
+<div class="lock-note">Testing mode: navigation remains enabled.</div>
+</div>
+
+    </div>
+
+    <div class="sock-faq-right">
+      <img src="assets/LaunchSocksSizeChart_8.5x11.jpg" alt="Launch Sock Size Chart">
+    </div>
+
+  </div>
+</section>
+<section class="slide cashier-day1-key-expectations" data-module="Cashier Day 1 - Key Expectations" data-notes="These expectations apply during every shift and every guest interaction. Employees should seek help when unsure rather than guessing.">
+  <div class="color-strip"></div>
+
+  <div class="slide-header">
+    <div>
+      <div class="eyebrow">Day 1 Standards</div>
+      <h2>Key Expectations</h2>
+    </div>
+    <div class="module-pill">Checklist</div>
+  </div>
+
+  <div class="slide-body slide11-body">
+
+    <div class="readiness-banner">
+      READY FOR FLOOR TRAINING
+    </div>
+
+    <div class="expectation-list">
+
+      <div class="expectation-item">
+        <div class="expectation-check">✓</div>
+        <div>Greet every guest within 10 seconds.</div>
+      </div>
+
+      <div class="expectation-item">
+        <div class="expectation-check">✓</div>
+        <div>Use eye contact, positive posture, and clear communication.</div>
+      </div>
+
+      <div class="expectation-item">
+        <div class="expectation-check">✓</div>
+        <div>Verify that every guest has a valid waiver.</div>
+      </div>
+
+      <div class="expectation-item">
+        <div class="expectation-check">✓</div>
+        <div>Never complete a waiver for a guest.</div>
+      </div>
+
+      <div class="expectation-item">
+        <div class="expectation-check">✓</div>
+        <div>Ask a manager or knowledgeable employee when unsure.</div>
+      </div>
+
+    </div>
+
+    <div class="standards-callout">
+      These standards apply during every shift, not just training.
+    </div>
+
+    <div class="required-audio slide11-audio">
+      <audio data-required="true" preload="metadata">
+        <source src="audio/Cashier Day 1 - Key Expectations.mp3" type="audio/mpeg">
+      </audio>
+
+      <div class="audio-status" id="audioStatus-10">Narration will play automatically.</div>
+      <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-10"></div></div>
+      <div class="lock-note">Testing mode: navigation remains enabled.</div>
+    </div>
+
+  </div>
+</section>
+
+
+      
+<section class="slide" data-title="Next Steps">
+  <div class="slide-header">
+    <div>
+      <div class="eyebrow">DAY 1 WRAP UP</div>
+      <h1>Next Steps</h1>
+    </div>
+    <div class="pill">CHECKLIST</div>
+  </div>
+
+  <div class="next-steps-grid">
+    <div class="next-step-card">
+      <div class="step-number">1</div>
+      <h3>Print Today's Checklist</h3>
+      <p>Return to the Day 1 menu and print the cashier training checklist before floor training begins.</p>
+    </div>
+
+    <div class="next-step-card">
+      <div class="step-number">2</div>
+      <h3>Complete Supervised Floor Training</h3>
+      <p>Work the shift alongside a trainer or manager and review waivers, socks, guest interaction, POS basics, and escalation procedures.</p>
+    </div>
+
+    <div class="next-step-card">
+      <div class="step-number">3</div>
+      <h3>Complete the Day 1 Exam</h3>
+      <p>After hands-on training is complete, return to the training menu and complete the Day 1 cashier exam.</p>
+    </div>
+  </div>
+
+  <div class="manager-note">
+    Manager note: The employee should not complete the Day 1 exam until all checklist items and floor training have been completed.
+  </div>
+
+<div class="required-audio next-steps-audio">
+  <audio data-required="true" preload="metadata">
+    <source src="audio/Cashier Day 1 - Next Steps.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="audio-status" id="audioStatus-nextsteps">
+    Playing required narration...
+  </div>
+
+  <div class="audio-meter">
+    <div class="audio-meter-fill" id="audioProgress-nextsteps"></div>
+  </div>
+
+  <div class="lock-note">
+    Testing mode: navigation remains enabled.
+  </div>
+</div>
+
+</section>
+
+    </div>
+
+    <div class="speaker-notes-panel" id="notesPanel"><h3>Speaker / Narration Script</h3><p id="notesText"></p></div>
+
+    <div class="controls">
+      <div class="control-left">
+        <button class="btn-outline" onclick="prevSlide()">Previous</button>
+        <button class="btn-primary" id="nextBtn" onclick="nextSlide()">Next</button>
+      </div>
+      <div class="progress-wrap"><div class="progress" id="progress"></div></div>
+      <div class="control-right">
+        <button class="btn-narration" id="playNarrationBtn" onclick="toggleNarration()">▶ Play Narration</button>
+        <button class="btn-yellow" onclick="toggleNotes()">Narration Script</button>
+        <button class="btn-dark" onclick="toggleFullScreen()">Full Screen</button>
+        <button class="btn-outline" onclick="window.print()">Print Slides</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    let current = 0;
+    let trainingStarted = false;
+    const completedNarration = new Set();
+    const maxPlayedTime = new Map();
+    let countdownInterval = null;
+
+    function currentSlideAudio() {
+      return slides[current].querySelector('audio');
+    }
+
+    function slideRequiresNarration(index = current) {
+      return !!slides[index].querySelector('audio[data-required="true"]');
+    }
+
+    function currentNarrationComplete() {
+      return !slideRequiresNarration(current) || completedNarration.has(current);
+    }
+
+    function setAudioProgress(index, audio) {
+      const fill = document.getElementById(`audioProgress-${index}`);
+      const status = document.getElementById(`audioStatus-${index}`);
+      if (!fill || !status || !audio || !audio.duration) return;
+      const pct = Math.max(0, Math.min(100, (audio.currentTime / audio.duration) * 100));
+      fill.style.width = `${pct}%`;
+      if (completedNarration.has(index)) {
+        status.textContent = 'Narration complete. You may continue.';
+      } else if (!trainingStarted) {
+        status.textContent = 'Narration locked until training starts.';
+      } else if (!audio.paused) {
+        status.textContent = 'Playing required narration...';
+      } else {
+        status.textContent = 'Narration paused by browser. Press Replay Narration to continue.';
+      }
+    }
+
+    function updateNarrationButton() {
+      const btn = document.getElementById('playNarrationBtn');
+      if (!btn) return;
+      const audio = currentSlideAudio();
+      if (!audio) {
+        btn.textContent = 'No Narration Yet';
+        btn.disabled = true;
+        btn.style.opacity = '0.65';
+      } else {
+        btn.disabled = !trainingStarted || (!audio.paused && !completedNarration.has(current));
+        btn.style.opacity = '1';
+        btn.textContent = completedNarration.has(current) ? '↻ Replay Narration' : '▶ Play Narration';
+      }
+    }
+
+    function updateNextLock() {
+      const nextBtn = document.getElementById('nextBtn');
+      if (!nextBtn) return;
+      if (current >= slides.length - 1) {
+        nextBtn.disabled = true;
+        nextBtn.textContent = 'Complete';
+        return;
+      }
+      const locked = !currentNarrationComplete();
+      nextBtn.disabled = locked;
+      nextBtn.textContent = locked ? 'Next Locked' : 'Next';
+      nextBtn.title = locked ? 'Complete the slide narration to continue.' : '';
+    }
+
+    function stopAllAudio(reset = true) {
+      document.querySelectorAll('audio').forEach(a => {
+        a.pause();
+        if (reset) a.currentTime = 0;
+      });
+    }
+
+    function playCurrentNarration() {
+      const audio = currentSlideAudio();
+      if (!audio) return Promise.resolve();
+      document.querySelectorAll('audio').forEach(a => { if (a !== audio) a.pause(); });
+      if (completedNarration.has(current)) audio.currentTime = 0;
+      setAudioProgress(current, audio);
+      return audio.play().then(() => {
+        updateNarrationButton();
+        updateNextLock();
+      });
+    }
+
+    function startTraining() {
+      trainingStarted = true;
+      const overlay = document.getElementById('startOverlay');
+      if (overlay) overlay.style.display = 'none';
+      updateSlide(false);
+      playCurrentNarration().catch(() => {
+        const status = document.getElementById(`audioStatus-${current}`);
+        if (status) status.textContent = 'Browser blocked audio. Click Play Narration once to continue.';
+      });
+    }
+
+    function toggleNarration() {
+      const audio = currentSlideAudio();
+      if (!audio || !trainingStarted) return;
+      playCurrentNarration().catch(() => {
+        alert('The browser blocked audio playback. Click Start Day 1 Training or click this button again.');
+      });
+    }
+
+    function wireAudioEvents(index, audio) {
+      if (!audio || audio.dataset.wired === 'true') return;
+      audio.dataset.wired = 'true';
+      maxPlayedTime.set(index, 0);
+
+      audio.addEventListener('timeupdate', () => {
+        const maxSoFar = maxPlayedTime.get(index) || 0;
+        if (audio.currentTime > maxSoFar) maxPlayedTime.set(index, audio.currentTime);
+        setAudioProgress(index, audio);
+      });
+
+      audio.addEventListener('seeking', () => {
+        const maxSoFar = maxPlayedTime.get(index) || 0;
+        if (!completedNarration.has(index) && audio.currentTime > maxSoFar + 1) {
+          audio.currentTime = maxSoFar;
+        }
+      });
+
+      audio.addEventListener('play', () => {
+        setAudioProgress(index, audio);
+        updateNarrationButton();
+        updateNextLock();
+      });
+
+      audio.addEventListener('pause', () => {
+        setAudioProgress(index, audio);
+        updateNarrationButton();
+      });
+
+      audio.addEventListener('ended', () => {
+        completedNarration.add(index);
+        maxPlayedTime.set(index, audio.duration || audio.currentTime);
+        setAudioProgress(index, audio);
+        updateNarrationButton();
+        updateNextLock();
+      });
+    }
+
+
+
+    function resetTenSecondCountdown() {
+      const clock = document.getElementById('tenSecondClock');
+      const number = document.getElementById('tenSecondNumber');
+      if (!clock || !number) return;
+      if (countdownInterval) clearInterval(countdownInterval);
+      countdownInterval = null;
+      number.textContent = '10';
+      clock.style.background = `conic-gradient(var(--launch-green) 0deg, #e4e8ec 0deg)`;
+    }
+
+    function startTenSecondCountdown() {
+      const clock = document.getElementById('tenSecondClock');
+      const number = document.getElementById('tenSecondNumber');
+      if (!clock || !number) return;
+      if (countdownInterval) clearInterval(countdownInterval);
+      const duration = 10000;
+      const started = Date.now();
+      function tick() {
+        const elapsed = Math.min(duration, Date.now() - started);
+        const remaining = Math.max(0, Math.ceil((duration - elapsed) / 1000));
+        const degrees = (elapsed / duration) * 360;
+        number.textContent = String(remaining).padStart(2, '0');
+        clock.style.background = `conic-gradient(var(--launch-green) ${degrees}deg, #e4e8ec ${degrees}deg)`;
+        if (elapsed >= duration) {
+          clearInterval(countdownInterval);
+          countdownInterval = null;
+          number.textContent = '00';
+          clock.style.background = `conic-gradient(var(--launch-green) 360deg, #e4e8ec 360deg)`;
+        }
+      }
+      tick();
+      countdownInterval = setInterval(tick, 120);
+    }
+
+    function updateSlide(shouldAutoPlay = true) {
+      stopAllAudio();
+      slides.forEach((slide, index) => slide.classList.toggle('active', index === current));
+      resetTenSecondCountdown();
+      if (current === 2 && trainingStarted) startTenSecondCountdown();
+      document.getElementById('slideCounter').textContent = `Slide ${current + 1} / ${slides.length}`;
+      document.getElementById('progress').style.width = `${((current + 1) / slides.length) * 100}%`;
+      document.getElementById('notesText').textContent = slides[current].dataset.notes || '';
+
+      slides.forEach((slide, index) => {
+        const audio = slide.querySelector('audio');
+        if (audio) wireAudioEvents(index, audio);
+      });
+
+      updateNarrationButton();
+      updateNextLock();
+
+      const audio = currentSlideAudio();
+      if (trainingStarted && shouldAutoPlay && audio && !completedNarration.has(current)) {
+        playCurrentNarration().catch(() => {
+          const status = document.getElementById(`audioStatus-${current}`);
+          if (status) status.textContent = 'Browser blocked automatic narration. Click Play Narration to continue.';
+        });
+      }
+    }
+
+    function nextSlide(force = false) {
+      if (!force && !currentNarrationComplete()) {
+        updateNextLock();
+        return;
+      }
+      if (current < slides.length - 1) { current++; updateSlide(true); }
+    }
+
+    function prevSlide() {
+      if (current > 0) { current--; updateSlide(false); }
+    }
+
+    function toggleNotes() {
+      const panel = document.getElementById('notesPanel');
+      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+      document.getElementById('notesText').textContent = slides[current].dataset.notes || '';
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+      else document.exitFullscreen?.();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'f') {
+        e.preventDefault();
+        nextSlide(true);
+        return;
+      }
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(false); }
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key.toLowerCase() === 'n') toggleNotes();
+      if (!e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'f') toggleFullScreen();
+    });
+
+    updateSlide(false);
+  </script>
+</body>
+</html>

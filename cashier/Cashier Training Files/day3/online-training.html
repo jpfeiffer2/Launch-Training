@@ -1,0 +1,2702 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 3 Cashier Training</title><style>
+:root{--g:#6cc24a;--y:#f2e600;--dark:#0d1318;--ink:#111820;--muted:#5d6874;--line:#dfe7ed}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#071018,#111820 60%,#2c351f);color:#111;overflow:hidden}
+.deck{height:100vh;display:grid;grid-template-rows:auto 1fr auto;padding:18px;gap:14px}.topbar{background:#070b0f;color:#fff;border-radius:20px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 8px 28px rgba(0,0,0,.28)}
+.brand{display:flex;gap:12px;align-items:center}.logo-mark{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:3px solid var(--g);color:var(--y);font-weight:900;background:#111}.brand-title strong{display:block;font-size:1.15rem;letter-spacing:.5px}.brand-title span{color:#d3d9df;font-size:.9rem}.top-actions{display:flex;gap:12px;align-items:center}.pill-btn{background:#1c252e;color:#fff;text-decoration:none;border-radius:999px;padding:10px 14px;font-weight:800}.slide-counter{background:var(--g);color:#081008;border-radius:999px;padding:10px 14px;font-weight:900}
+.stage{position:relative;min-height:0}.slide{display:none;position:absolute;inset:0;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 18px 60px rgba(0,0,0,.3);grid-template-rows:auto 1fr}.slide.active{display:grid}.color-strip{height:9px;background:linear-gradient(90deg,var(--g),var(--y))}.slide-header{display:flex;justify-content:space-between;align-items:start;padding:22px 32px 10px;border-bottom:1px solid #edf1f4}.eyebrow{text-transform:uppercase;letter-spacing:2px;color:#289b22;font-weight:900;font-size:.78rem}.slide h1{font-size:clamp(2.3rem,4.5vw,4.1rem);line-height:.95;margin:4px 0 0;letter-spacing:-2px;color:#101820}.module-pill{background:#111820;color:#f2e600;border-radius:999px;padding:10px 14px;font-weight:900;text-transform:uppercase;font-size:.78rem}.slide-body{padding:22px 32px 28px;min-height:0}.controls{background:#fff;border-radius:20px;padding:12px;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;box-shadow:0 -6px 28px rgba(0,0,0,.18)}button{border:0;border-radius:999px;padding:12px 16px;font-weight:900;cursor:pointer}.btn-dark{background:#111820;color:#fff}.btn-primary{background:#6cc24a;color:#071018}.btn-yellow{background:#f2e600;color:#111}.btn-outline{background:#fff;color:#111;border:2px solid #dfe7ed}.progress-wrap{height:10px;background:#e8eef2;border-radius:999px;overflow:hidden}.progress{height:100%;width:0;background:linear-gradient(90deg,var(--g),var(--y))}.speaker-notes-panel{display:none;position:absolute;right:30px;bottom:96px;width:min(620px,calc(100% - 60px));background:#111820;color:#fff;border-radius:20px;padding:20px;box-shadow:0 18px 60px rgba(0,0,0,.4);z-index:10}.speaker-notes-panel h3{color:#f2e600;margin:0 0 8px}
+.cover-grid,.split{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;height:100%;align-items:stretch}.cover-copy{background:#111820;color:#fff;border-radius:22px;padding:34px;display:flex;flex-direction:column;justify-content:center}.big-title{font-size:7rem;line-height:.85;color:#6cc24a;font-weight:900;letter-spacing:-6px}.cover-copy h2{font-size:2.6rem;line-height:1;margin:12px 0}.cover-copy p,.content-panel p.large{font-size:1.28rem;line-height:1.45;color:#d8e1e9}.pill-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.pill-row span{background:#f2e600;color:#111;border-radius:999px;padding:10px 14px;font-weight:900}.hero-photo,.photo-panel{border-radius:22px;overflow:hidden;min-height:0}.hero-photo img,.photo-panel img{width:100%;height:100%;object-fit:cover;display:block}.content-panel{background:#f8fafc;border:1px solid #e1e7ec;border-radius:22px;padding:26px;display:flex;flex-direction:column;justify-content:center}.content-panel h3{font-size:2rem;line-height:1;margin:0 0 14px;color:#0b7f24}.check-card{background:#fff;border:1px solid #e1e7ec;border-radius:16px;padding:15px 16px;margin:8px 0;display:flex;flex-direction:column;gap:4px}.check-card b{font-size:1.1rem;color:#111820}.check-card span{color:#56616d;line-height:1.35}.takeaway,.banner{background:#111820;color:#fff;border-left:8px solid #f2e600;border-radius:18px;padding:18px 22px;font-weight:900;font-size:1.18rem;margin-top:14px}.loyalty-overview{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.loyalty-card{border:1px solid #dfe7ed;border-radius:22px;padding:28px;background:#f8fafc;min-height:315px;display:flex;flex-direction:column;justify-content:center}.loyalty-card.dark{background:#111820;color:#fff}.loyalty-card .icon{width:74px;height:74px;border-radius:50%;display:grid;place-items:center;background:#6cc24a;color:#111820;font-size:1.8rem;font-weight:900;margin-bottom:18px}.loyalty-card h3{font-size:1.75rem;margin:0 0 10px}.loyalty-card p{font-size:1.12rem;line-height:1.45}.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;height:100%}.benefit{background:#f8fafc;border:1px solid #dfe7ed;border-radius:20px;padding:22px;display:flex;flex-direction:column;justify-content:center}.benefit span{font-size:2.5rem;font-weight:900;color:#0b8f2a;margin-bottom:8px}.benefit b{font-size:1.25rem}.benefit p{color:#58636e;line-height:1.35}.process-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:16px;align-items:stretch}.step{background:#f8fafc;border:1px solid #dfe7ed;border-radius:22px;padding:26px;text-align:center}.step-num{width:58px;height:58px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;background:#6cc24a;font-weight:900;font-size:1.6rem}.step h3{font-size:1.65rem;margin:0 0 8px}.step p{color:#58636e;line-height:1.4}.arrow{display:grid;place-items:center;font-size:3rem;color:#6cc24a;font-weight:900}.pos-callout,.manager-note,.script-card{margin-top:20px;background:#fff9ce;border:2px solid #f2e600;border-radius:18px;padding:18px 22px;font-size:1.15rem;line-height:1.4}.app-slide{display:grid;grid-template-columns:.8fr 1.2fr;gap:26px;height:100%;align-items:center}.phone-mock{height:460px;border-radius:38px;background:#111820;color:#fff;padding:26px;box-shadow:0 20px 60px rgba(0,0,0,.25);border:10px solid #050708}.phone-top{color:#6cc24a;font-weight:900;text-align:center;margin-bottom:26px}.points{font-size:4rem;font-weight:900;text-align:center;color:#f2e600}.reward{text-transform:uppercase;letter-spacing:1px;margin:28px 0 10px;color:#d4dde6}.coupon{background:#fff;color:#111;border-radius:16px;padding:16px;margin:12px 0;font-weight:900}.coupon.green{background:#6cc24a}.qa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.qa{border:1px solid #dfe7ed;border-radius:20px;padding:22px;background:#f8fafc}.qa h3{margin:0 0 10px;font-size:1.45rem;color:#0b8f2a}.qa p{font-size:1.08rem;line-height:1.4;color:#303943}.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}.do-dont div{border-radius:18px;padding:18px;background:#fff;border:1px solid #dfe7ed}.do-dont h4{margin:0 0 8px;color:#0b8f2a}.conversation-slide{display:grid;gap:22px}.quote-box{background:#111820;color:#fff;border-radius:22px;padding:28px;font-size:2.1rem;font-weight:900;border-left:10px solid #6cc24a}.listener-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.listener-grid div{border:1px solid #dfe7ed;background:#f8fafc;border-radius:18px;padding:20px}.listener-grid b{display:block;font-size:1.25rem;color:#111820;margin-bottom:8px}.listener-grid span{color:#56616d;line-height:1.35}.arcade-slide{display:grid;grid-template-columns:1fr 1fr;gap:24px;height:100%}.arcade-cards{display:grid;grid-template-rows:repeat(3,1fr);gap:16px}.arcade-card{background:#f8fafc;border:1px solid #dfe7ed;border-radius:20px;padding:22px}.arcade-card span{font-size:2.2rem;font-weight:900;color:#0b8f2a}.arcade-card b{display:block;font-size:1.35rem;margin:6px 0}.opportunity-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.opportunity-grid div{min-height:135px;border-radius:22px;display:grid;place-items:center;text-align:center;font-weight:900;font-size:1.25rem;color:#fff;background:linear-gradient(135deg,#111820,#0b8f2a);box-shadow:0 14px 30px rgba(0,0,0,.12)}.future-slide,.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;height:100%}.future-card,.summary-grid div{border:1px solid #dfe7ed;background:#f8fafc;border-radius:22px;padding:24px;display:flex;flex-direction:column;justify-content:center}.future-card span,.summary-grid span{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#6cc24a;font-size:1.5rem;font-weight:900;margin-bottom:16px}.future-card h3{font-size:1.55rem;margin:0 0 8px}.ethics-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.ethical{border-radius:24px;padding:32px;min-height:335px}.ethical h3{font-size:2.5rem;margin:0 0 18px}.ethical ul{font-size:1.45rem;line-height:1.6;font-weight:900}.ethical.good{background:#eefbea;border:2px solid #6cc24a}.ethical.bad{background:#fff1f1;border:2px solid #f2a0a0}.workflow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.flow-step{background:#f8fafc;border:1px solid #dfe7ed;border-radius:22px;padding:22px}.flow-step span{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:#6cc24a;font-weight:900;margin-bottom:14px}.flow-step b{font-size:1.45rem}.flow-step p{color:#56616d;line-height:1.35}.summary-grid b{font-size:1.35rem}.summary-grid p{color:#56616d}.next-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.next-steps div{background:#f8fafc;border:1px solid #dfe7ed;border-radius:24px;padding:32px;text-align:center}.next-steps span{font-size:4rem}.next-steps h3{font-size:2rem;margin:10px 0}.next-steps p{font-size:1.1rem;color:#56616d;line-height:1.4}
+
+
+/* Slide 2 targeted fit correction */
+.slide:nth-of-type(2) .slide-header {
+  padding: 14px 28px 8px;
+}
+.slide:nth-of-type(2) h1 {
+  font-size: clamp(2rem, 3.55vw, 3.35rem);
+  line-height: .96;
+  letter-spacing: -1.6px;
+}
+.slide:nth-of-type(2) .slide-body {
+  padding: 16px 28px 20px;
+}
+.slide:nth-of-type(2) .split {
+  gap: 18px;
+}
+.slide:nth-of-type(2) .photo-panel {
+  max-height: 430px;
+}
+.slide:nth-of-type(2) .content-panel {
+  padding: 20px 22px;
+  justify-content: flex-start;
+}
+.slide:nth-of-type(2) .content-panel h3 {
+  font-size: 1.75rem;
+  margin-bottom: 10px;
+}
+.slide:nth-of-type(2) .check-card {
+  padding: 12px 14px;
+  margin: 7px 0;
+}
+.slide:nth-of-type(2) .check-card b {
+  font-size: 1rem;
+}
+.slide:nth-of-type(2) .check-card span {
+  font-size: .95rem;
+  line-height: 1.25;
+}
+.slide:nth-of-type(2) .takeaway {
+  margin-top: 10px;
+  padding: 14px 18px;
+  font-size: 1rem;
+}
+
+/* Slide 1 targeted fit correction */
+.slide:first-of-type .slide-header {
+  padding: 16px 28px 8px;
+}
+.slide:first-of-type h1 {
+  font-size: clamp(2rem, 3.4vw, 3.25rem);
+}
+.slide:first-of-type .slide-body {
+  padding: 16px 28px 20px;
+}
+.slide:first-of-type .cover-grid {
+  gap: 18px;
+}
+.slide:first-of-type .cover-copy {
+  padding: 24px 28px;
+}
+.slide:first-of-type .big-title {
+  font-size: 4.8rem;
+  letter-spacing: -4px;
+}
+.slide:first-of-type .cover-copy h2 {
+  font-size: 2.05rem;
+  margin: 8px 0 10px;
+}
+.slide:first-of-type .cover-copy p {
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+.slide:first-of-type .pill-row {
+  margin-top: 14px;
+}
+.slide:first-of-type .pill-row span {
+  padding: 8px 12px;
+  font-size: .9rem;
+}
+.slide:first-of-type .hero-photo img {
+  object-position: center center;
+}
+
+
+.audio-panel{margin-top:14px;background:#f8fafc;border:1px solid #dfe7ed;border-radius:16px;padding:12px 14px;color:#111}
+.audio-title{font-weight:900;color:#0b8f2a;text-transform:uppercase;font-size:.78rem;letter-spacing:1px;margin-bottom:8px}
+.audio-status{font-size:.9rem;color:#4b5563;margin-bottom:8px}
+.audio-meter{height:8px;background:#dfe7ed;border-radius:999px;overflow:hidden}
+.audio-meter-fill{height:100%;width:0;background:linear-gradient(90deg,var(--g),var(--y))}
+.btn-narration{background:#0b8f2a;color:#fff}
+.btn-narration:disabled{opacity:.55;cursor:not-allowed}
+.start-overlay{position:fixed;inset:0;background:rgba(5,8,10,.88);z-index:1000;display:grid;place-items:center;padding:24px}
+.start-card{width:min(620px,100%);background:#fff;border-radius:24px;padding:34px;box-shadow:0 24px 80px rgba(0,0,0,.45);text-align:center;border-top:10px solid var(--g)}
+.start-card h2{margin:0 0 10px;font-size:2.4rem;color:#111820}
+.start-card p{color:#4b5563;line-height:1.45;font-size:1.08rem}
+.start-card button{background:#6cc24a;color:#071018;font-size:1.05rem;padding:14px 22px;margin-top:14px}
+
+
+
+
+
+
+
+/* Slide 3 approved content-image placement */
+.slide.approved-slide3-content {
+  background: transparent;
+  grid-template-rows: 1fr;
+  padding: 0;
+  overflow: hidden;
+}
+.slide.approved-slide3-content img {
+  width: 100%;
+  height: calc(100% - 32px);
+  margin-top: 2px;
+  object-fit: contain;
+  object-position: center top;
+  display: block;
+  border-radius: 24px;
+  background: transparent;
+}
+.slide.approved-slide3-content:not(.active) {
+  display: none !important;
+}
+.slide.approved-slide3-content.active {
+  display: grid !important;
+}
+
+
+/* Slide 3 final micro-fit adjustment */
+.slide.approved-slide3-content {
+  padding-bottom: 6px;
+}
+
+
+/* Slide 3 narration wiring */
+.slide.approved-slide3-content .slide3-audio-panel {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+/* Slide 4 direct HTML rebuild - approved creative */
+.slide4-direct-html {
+  display:block;
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  border-radius:24px;
+  background:#fff;
+  font-family:Arial, Helvetica, sans-serif;
+}
+.slide4-direct-html:not(.active){display:none!important}
+.slide4-direct-html.active{display:block!important}
+.slide4-direct-html .slide4-bg{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 82% 17%,rgba(108,194,74,.14),transparent 20%),
+    linear-gradient(162deg,#fff 0%,#fff 58%,#e9f8dc 78%,#7cdd28 100%);
+}
+.slide4-direct-html .slide4-bg:after{
+  content:"";
+  position:absolute;
+  right:-60px;
+  bottom:-65px;
+  width:620px;
+  height:345px;
+  opacity:.23;
+  background:repeating-linear-gradient(135deg,rgba(44,150,20,.26) 0 5px,transparent 5px 14px);
+  transform:skew(-8deg);
+}
+.slide4-direct-html .slide4-title{
+  position:absolute;
+  left:42px;
+  top:37px;
+  width:910px;
+  z-index:2;
+}
+.slide4-direct-html .slide4-title h1{
+  margin:0 0 16px;
+  font-size:5.25rem;
+  line-height:.88;
+  letter-spacing:-4px;
+  font-weight:1000;
+  font-style:italic;
+  color:#06090c;
+  text-shadow:0 2px 0 rgba(0,0,0,.06);
+}
+.slide4-direct-html .slide4-title h2{
+  margin:0 0 20px;
+  font-size:2.02rem;
+  line-height:1.05;
+  color:#198b17;
+  font-weight:1000;
+}
+.slide4-direct-html .slide4-rule{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  width:690px;
+  color:#54b839;
+}
+.slide4-direct-html .slide4-rule span{
+  height:3px;
+  flex:1;
+  background:linear-gradient(90deg,#55bd36,#f2e600);
+}
+.slide4-direct-html .slide4-rule b{font-size:1.3rem}
+.slide4-direct-html .slide4-brand{
+  position:absolute;
+  right:47px;
+  top:27px;
+  width:530px;
+  height:235px;
+  z-index:3;
+  text-align:center;
+}
+.slide4-direct-html .launch-word{
+  font-size:3.05rem;
+  font-weight:1000;
+  letter-spacing:-1.5px;
+  line-height:.78;
+  color:#06090c;
+}
+.slide4-direct-html .launch-sub{
+  display:inline-block;
+  color:#17852b;
+  font-weight:1000;
+  font-size:1.05rem;
+  border-bottom:4px solid #f2e600;
+  padding-bottom:2px;
+}
+.slide4-direct-html .loyal-logo{
+  position:absolute;
+  left:7px;
+  right:7px;
+  top:82px;
+  padding:18px 18px 24px;
+  border-radius:23px;
+  border:6px solid #111820;
+  background:linear-gradient(180deg,#1ea933,#085b1f);
+  box-shadow:0 8px 0 #dff400,0 18px 34px rgba(0,0,0,.16);
+  font-size:2.45rem;
+  line-height:.9;
+  font-weight:1000;
+  color:#111820;
+  text-shadow:3px 3px #dff400;
+  transform:rotate(-1deg);
+}
+.slide4-direct-html .loyal-logo:before{
+  content:"LOYAL ";
+  color:#5abe26;
+}
+.slide4-direct-html .loyal-logo{
+  color:#fff;
+}
+.slide4-direct-html .loyal-logo span{
+  display:block;
+  width:44%;
+  margin:9px auto -10px;
+  background:#6cc24a;
+  color:#fff;
+  border-radius:4px;
+  padding:6px;
+  text-shadow:none;
+  font-size:1.35rem;
+}
+.slide4-direct-html .brand-star{
+  position:absolute;
+  color:#67c63f;
+  font-size:1.6rem;
+  font-weight:900;
+}
+.slide4-direct-html .s1{left:0;top:122px}
+.slide4-direct-html .s2{left:95px;top:36px}
+.slide4-direct-html .s3{right:75px;top:38px}
+.slide4-direct-html .s4{right:6px;top:112px}
+.slide4-direct-html .benefit-grid-d{
+  position:absolute;
+  left:49px;
+  right:49px;
+  top:359px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  z-index:4;
+}
+.slide4-direct-html .benefit-d{
+  height:181px;
+  border-radius:14px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(108,194,74,.55);
+  box-shadow:0 8px 18px rgba(0,0,0,.14);
+  display:grid;
+  grid-template-columns:145px 1fr;
+  align-items:center;
+  padding:16px 24px 16px 18px;
+}
+.slide4-direct-html .benefit-icon{
+  position:relative;
+  width:118px;
+  height:118px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:radial-gradient(circle at 32% 26%,#8bdd50,#58b92e 76%);
+  color:#05080b;
+  font-size:3.95rem;
+  font-weight:1000;
+  margin:auto;
+}
+.slide4-direct-html .benefit-icon small{
+  position:absolute;
+  font-size:2rem;
+  font-weight:1000;
+  color:#05080b;
+}
+.slide4-direct-html .star-icon{font-size:5.2rem}
+.slide4-direct-html .bolt-icon{font-size:5.1rem}
+.slide4-direct-html .cake-icon{font-size:4.4rem}
+.slide4-direct-html .phone-icon{
+  font-size:5.2rem;
+  line-height:.7;
+}
+.slide4-direct-html .phone-icon small{
+  font-size:1.3rem;
+}
+.slide4-direct-html .benefit-copy h3{
+  margin:0;
+  font-size:2.05rem;
+  line-height:.98;
+  font-weight:1000;
+  color:#05080b;
+}
+.slide4-direct-html .benefit-copy h3 span{
+  color:#11851d;
+}
+.slide4-direct-html .mini-line{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#10871e;
+  margin:11px 0 12px;
+}
+.slide4-direct-html .mini-line span{
+  height:2px;
+  flex:1;
+  background:linear-gradient(90deg,#39ad2b,#f2e600);
+}
+.slide4-direct-html .mini-line b{
+  font-size:.9rem;
+}
+.slide4-direct-html .benefit-copy p{
+  margin:0;
+  font-size:1.13rem;
+  line-height:1.18;
+  color:#05080b;
+}
+.slide4-direct-html .slide4-bottom{display:none !important;}
+.slide4-direct-html .slide4-bottom:before,
+.slide4-direct-html .slide4-bottom:after{
+  content:"";
+  position:absolute;
+  inset:-8px -22px;
+  z-index:-1;
+  background:#050709;
+  clip-path:polygon(0 22%,100% 0,98% 80%,2% 100%);
+}
+.slide4-direct-html .bottom-star{
+  width:70px;
+  height:70px;
+  display:grid;
+  place-items:center;
+  color:#79d042;
+  font-size:4.2rem;
+  margin-right:25px;
+}
+.slide4-direct-html .slide4-bottom p{
+  margin:0;
+  font-size:2.05rem;
+  line-height:1;
+  font-weight:1000;
+  font-style:italic;
+  color:#fff;
+}
+.slide4-direct-html .slide4-bottom span{
+  color:#6fd34a;
+}
+
+
+/* Slide 4 viewport fit correction */
+.slide4-direct-html .slide4-title { left: 34px; top: 28px; width: 790px; }
+.slide4-direct-html .slide4-title h1 { font-size: 4.15rem; line-height: .9; margin-bottom: 10px; }
+.slide4-direct-html .slide4-title h2 { font-size: 1.55rem; line-height: 1.05; margin-bottom: 14px; }
+.slide4-direct-html .slide4-rule { width: 565px; }
+.slide4-direct-html .slide4-brand { right: 54px; top: 24px; width: 430px; height: 170px; }
+.slide4-direct-html .launch-word { font-size: 2.3rem; }
+.slide4-direct-html .launch-sub { font-size: .78rem; }
+.slide4-direct-html .loyal-logo { top: 68px; font-size: 1.85rem; padding: 12px 12px 15px; border-width: 5px; border-radius: 18px; }
+.slide4-direct-html .loyal-logo:before { content: none !important; }
+.slide4-direct-html .loyal-logo strong { color: #5abe26; text-shadow: 2px 2px #dff400; }
+.slide4-direct-html .loyal-logo span { font-size: .95rem; padding: 4px; margin-top: 6px; }
+.slide4-direct-html .brand-star { font-size: 1.2rem; }
+.slide4-direct-html .benefit-grid-d { top: 270px; left: 42px; right: 42px; gap: 14px; }
+.slide4-direct-html .benefit-d { height: 145px; grid-template-columns: 105px 1fr; padding: 12px 16px 12px 12px; border-radius: 12px; }
+.slide4-direct-html .benefit-icon { width: 82px; height: 82px; font-size: 2.55rem; }
+.slide4-direct-html .benefit-icon small { font-size: 1.25rem; }
+.slide4-direct-html .star-icon { font-size: 3.3rem; }
+.slide4-direct-html .bolt-icon { font-size: 3.55rem; }
+.slide4-direct-html .cake-icon { font-size: 3rem; }
+.slide4-direct-html .phone-icon { font-size: 3.3rem; }
+.slide4-direct-html .phone-icon small { font-size: .85rem; }
+.slide4-direct-html .benefit-copy h3 { font-size: 1.42rem; line-height: .98; }
+.slide4-direct-html .mini-line { margin: 7px 0 8px; }
+.slide4-direct-html .benefit-copy p { font-size: .9rem; line-height: 1.12; }
+.slide4-direct-html .slide4-bottom{display:none !important;}
+.slide4-direct-html .slide4-bottom:before,
+.slide4-direct-html .slide4-bottom:after { inset: -5px -14px; }
+.slide4-direct-html .bottom-star { width: 48px; height: 48px; font-size: 2.9rem; margin-right: 18px; }
+.slide4-direct-html .slide4-bottom p { font-size: 1.45rem; }
+
+
+/* Slide 4 second-pass fit correction: keep bottom banner below all card text */
+.slide4-direct-html .slide4-title {
+  top: 24px;
+}
+.slide4-direct-html .slide4-title h1 {
+  font-size: 3.75rem;
+  margin-bottom: 8px;
+}
+.slide4-direct-html .slide4-title h2 {
+  font-size: 1.38rem;
+  margin-bottom: 10px;
+}
+.slide4-direct-html .slide4-rule {
+  width: 520px;
+}
+.slide4-direct-html .slide4-brand {
+  top: 20px;
+  width: 395px;
+}
+.slide4-direct-html .launch-word {
+  font-size: 2.05rem;
+}
+.slide4-direct-html .launch-sub {
+  font-size: .7rem;
+}
+.slide4-direct-html .loyal-logo {
+  top: 60px;
+  font-size: 1.65rem;
+  padding: 10px 10px 13px;
+}
+.slide4-direct-html .loyal-logo span {
+  font-size: .82rem;
+}
+.slide4-direct-html .benefit-grid-d {
+  top: 235px;
+  gap: 10px 14px;
+}
+.slide4-direct-html .benefit-d {
+  height: 126px;
+  grid-template-columns: 88px 1fr;
+  padding: 9px 13px 9px 10px;
+}
+.slide4-direct-html .benefit-icon {
+  width: 66px;
+  height: 66px;
+  font-size: 2.05rem;
+}
+.slide4-direct-html .benefit-icon small {
+  font-size: 1rem;
+}
+.slide4-direct-html .star-icon {
+  font-size: 2.65rem;
+}
+.slide4-direct-html .bolt-icon {
+  font-size: 2.9rem;
+}
+.slide4-direct-html .cake-icon {
+  font-size: 2.35rem;
+}
+.slide4-direct-html .phone-icon {
+  font-size: 2.6rem;
+}
+.slide4-direct-html .phone-icon small {
+  font-size: .65rem;
+}
+.slide4-direct-html .benefit-copy h3 {
+  font-size: 1.15rem;
+  line-height: .95;
+}
+.slide4-direct-html .mini-line {
+  margin: 5px 0 6px;
+}
+.slide4-direct-html .benefit-copy p {
+  font-size: .74rem;
+  line-height: 1.08;
+}
+.slide4-direct-html .slide4-bottom{display:none !important;}
+.slide4-direct-html .bottom-star {
+  width: 38px;
+  height: 38px;
+  font-size: 2.25rem;
+  margin-right: 14px;
+}
+.slide4-direct-html .slide4-bottom p {
+  font-size: 1.18rem;
+}
+
+
+/* Slide 4 narration wiring */
+.slide4-direct-html .slide4-audio-panel {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+/* Slide 5 direct HTML rebuild - approved workflow */
+.slide5-direct-html {
+  display:block;
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  border-radius:24px;
+  background:#fff;
+  font-family:Arial, Helvetica, sans-serif;
+}
+.slide5-direct-html:not(.active){display:none!important}
+.slide5-direct-html.active{display:block!important}
+.slide5-direct-html .s5-bg {
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 88% 18%, rgba(108,194,74,.13), transparent 24%),
+    linear-gradient(145deg,#fff 0%,#fff 72%,#edf9e2 100%);
+}
+.slide5-direct-html .s5-header {
+  position:absolute;
+  left:34px;
+  right:34px;
+  top:24px;
+  height:88px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  z-index:2;
+}
+.slide5-direct-html .s5-header h1 {
+  margin:0 0 8px;
+  font-size:3.15rem;
+  line-height:.95;
+  letter-spacing:-1.8px;
+  font-weight:1000;
+  color:#111820;
+}
+.slide5-direct-html .s5-header p {
+  margin:0;
+  font-size:1.28rem;
+  color:#4b5563;
+  font-weight:700;
+}
+.slide5-direct-html .s5-pill {
+  background:#111820;
+  color:#f2e600;
+  border-radius:999px;
+  padding:10px 18px;
+  font-weight:1000;
+  text-transform:uppercase;
+  margin-top:8px;
+  box-shadow:0 6px 18px rgba(0,0,0,.18);
+}
+.slide5-direct-html .s5-columns {
+  position:absolute;
+  left:34px;
+  right:34px;
+  top:142px;
+  height:400px;
+  display:grid;
+  grid-template-columns: .88fr 1.08fr .92fr;
+  gap:18px;
+  z-index:3;
+}
+.slide5-direct-html .s5-panel {
+  background:rgba(255,255,255,.94);
+  border:1px solid rgba(27,132,39,.5);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 8px 22px rgba(0,0,0,.12);
+}
+.slide5-direct-html .s5-panel-title,
+.slide5-direct-html .s5-pos-title {
+  background:linear-gradient(180deg,#058126,#04681e);
+  color:#fff;
+  text-align:center;
+  text-transform:uppercase;
+  font-weight:1000;
+  font-size:1.32rem;
+  padding:14px 16px;
+}
+.slide5-direct-html .s5-panel-sub {
+  background:linear-gradient(180deg,#078027,#077326);
+  color:#fff;
+  text-align:center;
+  font-weight:900;
+  font-size:1.05rem;
+  line-height:1.25;
+  padding:0 20px 16px;
+}
+.slide5-direct-html .s5-join-row {
+  display:grid;
+  grid-template-columns:96px 1fr;
+  gap:14px;
+  align-items:center;
+  padding:22px 22px 8px;
+}
+.slide5-direct-html .s5-icon {
+  width:74px;
+  height:74px;
+  border-radius:50%;
+  border:2px solid #0b7e25;
+  display:grid;
+  place-items:center;
+  color:#111820;
+  font-size:2.45rem;
+  position:relative;
+  margin:auto;
+  background:#fff;
+}
+.slide5-direct-html .circle-doc span {
+  position:absolute;
+  right:8px;
+  bottom:8px;
+  font-size:.9rem;
+  color:#fff;
+  background:#0b8f2a;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+}
+.slide5-direct-html .s5-join-row h3 {
+  margin:0 0 5px;
+  font-size:1.08rem;
+  line-height:1.05;
+  color:#087022;
+  font-weight:1000;
+}
+.slide5-direct-html .s5-join-row p {
+  margin:0;
+  font-size:1rem;
+  line-height:1.23;
+  color:#26313b;
+}
+.slide5-direct-html .s5-or {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 22px 2px;
+}
+.slide5-direct-html .s5-or span {
+  height:1px;
+  background:#d3dde5;
+  flex:1;
+}
+.slide5-direct-html .s5-or b {
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#087022;
+  color:#fff;
+  font-size:1.08rem;
+}
+.slide5-direct-html .pos-panel {
+  background:#f7f9fb;
+  border-color:#1a1f26;
+}
+.slide5-direct-html .s5-pos-title {
+  background:#111820;
+  font-size:1.13rem;
+  letter-spacing:.5px;
+}
+.slide5-direct-html .s5-pos-frame {
+  margin:0;
+  height:212px;
+  background:#111820;
+  border-bottom:4px solid #111820;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+}
+.slide5-direct-html .s5-pos-frame img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  display:block;
+}
+.slide5-direct-html .s5-pos-caption {
+  padding:10px 22px 14px;
+  text-align:center;
+  color:#26313b;
+}
+.slide5-direct-html .s5-pos-caption strong {
+  display:block;
+  font-size:1.02rem;
+  color:#111820;
+  margin-bottom:4px;
+}
+.slide5-direct-html .s5-pos-caption p {
+  margin:0 0 8px;
+  font-size:.96rem;
+}
+.slide5-direct-html .s5-pos-caption ul {
+  margin:0;
+  padding:0;
+  list-style:none;
+  text-align:left;
+  display:grid;
+  gap:4px;
+  font-size:.92rem;
+}
+.slide5-direct-html .s5-pos-caption li:before {
+  content:"✓";
+  display:inline-grid;
+  place-items:center;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:#39a633;
+  color:#fff;
+  font-size:.75rem;
+  margin-right:8px;
+  font-weight:900;
+}
+.slide5-direct-html .key-panel .s5-panel-title {
+  background:linear-gradient(180deg,#078b28,#066e20);
+}
+.slide5-direct-html .s5-key-row {
+  display:grid;
+  grid-template-columns:92px 1fr;
+  gap:14px;
+  align-items:center;
+  padding:22px 24px 16px;
+}
+.slide5-direct-html .s5-key-icon {
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  border:2px solid #168c2b;
+  display:grid;
+  place-items:center;
+  font-size:2.2rem;
+  color:#111820;
+  background:#fff;
+  position:relative;
+}
+.slide5-direct-html .s5-key-icon span {
+  position:absolute;
+  right:6px;
+  bottom:6px;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:#0b8f2a;
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:.9rem;
+}
+.slide5-direct-html .s5-key-row h3 {
+  margin:0 0 4px;
+  color:#087022;
+  font-size:1.26rem;
+  line-height:1.02;
+  font-weight:1000;
+}
+.slide5-direct-html .s5-key-row p {
+  margin:0;
+  color:#26313b;
+  font-size:1.02rem;
+  line-height:1.18;
+}
+.slide5-direct-html .s5-divider {
+  height:1px;
+  background:#d9e1e8;
+  margin:0 24px;
+}
+.slide5-direct-html .s5-warning {
+  position:absolute;
+  left:34px;
+  right:34px;
+  bottom:20px;
+  height:72px;
+  background:#111820;
+  color:#fff;
+  border-radius:10px;
+  display:grid;
+  grid-template-columns:85px 250px 1fr;
+  align-items:center;
+  padding:0 28px;
+  z-index:4;
+  box-shadow:0 12px 24px rgba(0,0,0,.22);
+}
+.slide5-direct-html .s5-warning-icon {
+  width:58px;
+  height:58px;
+  background:#f2e600;
+  color:#111820;
+  clip-path:polygon(50% 0%,100% 88%,0% 88%);
+  display:grid;
+  place-items:center;
+  font-weight:1000;
+  font-size:2rem;
+  padding-top:12px;
+}
+.slide5-direct-html .s5-warning-title {
+  color:#f2e600;
+  font-size:1.55rem;
+  line-height:1;
+  text-transform:uppercase;
+  font-weight:1000;
+}
+.slide5-direct-html .s5-warning-text {
+  font-size:1.03rem;
+  line-height:1.22;
+  font-weight:800;
+}
+.slide5-direct-html .s5-warning-text strong {
+  color:#f2e600;
+}
+
+
+/* Slide 5 viewport fit correction */
+.slide5-direct-html .s5-header {
+  top: 18px;
+  height: 64px;
+}
+.slide5-direct-html .s5-header h1 {
+  font-size: 2.55rem;
+  line-height: .92;
+  margin-bottom: 4px;
+}
+.slide5-direct-html .s5-header p {
+  font-size: 1.02rem;
+}
+.slide5-direct-html .s5-pill {
+  padding: 8px 16px;
+  margin-top: 4px;
+}
+
+.slide5-direct-html .s5-columns {
+  top: 108px;
+  height: 405px;
+  gap: 14px;
+}
+.slide5-direct-html .s5-panel-title,
+.slide5-direct-html .s5-pos-title {
+  font-size: 1.05rem;
+  padding: 10px 12px;
+}
+.slide5-direct-html .s5-panel-sub {
+  font-size: .86rem;
+  line-height: 1.15;
+  padding: 0 14px 10px;
+}
+.slide5-direct-html .s5-join-row {
+  grid-template-columns: 70px 1fr;
+  gap: 10px;
+  padding: 16px 16px 4px;
+}
+.slide5-direct-html .s5-icon {
+  width: 58px;
+  height: 58px;
+  font-size: 1.9rem;
+}
+.slide5-direct-html .circle-doc span {
+  right: 5px;
+  bottom: 5px;
+  width: 17px;
+  height: 17px;
+  font-size: .72rem;
+}
+.slide5-direct-html .s5-join-row h3 {
+  font-size: .92rem;
+  margin-bottom: 3px;
+}
+.slide5-direct-html .s5-join-row p {
+  font-size: .82rem;
+  line-height: 1.16;
+}
+.slide5-direct-html .s5-or {
+  padding: 5px 16px 0;
+}
+.slide5-direct-html .s5-or b {
+  width: 34px;
+  height: 34px;
+  font-size: .88rem;
+}
+
+.slide5-direct-html .s5-pos-frame {
+  height: 180px;
+}
+.slide5-direct-html .s5-pos-caption {
+  padding: 8px 16px 10px;
+}
+.slide5-direct-html .s5-pos-caption strong {
+  font-size: .9rem;
+  margin-bottom: 3px;
+}
+.slide5-direct-html .s5-pos-caption p {
+  font-size: .8rem;
+  margin-bottom: 6px;
+}
+.slide5-direct-html .s5-pos-caption ul {
+  font-size: .78rem;
+  gap: 3px;
+}
+.slide5-direct-html .s5-pos-caption li:before {
+  width: 16px;
+  height: 16px;
+  font-size: .68rem;
+  margin-right: 6px;
+}
+
+.slide5-direct-html .s5-key-row {
+  grid-template-columns: 68px 1fr;
+  gap: 10px;
+  padding: 16px 18px 12px;
+}
+.slide5-direct-html .s5-key-icon {
+  width: 56px;
+  height: 56px;
+  font-size: 1.7rem;
+}
+.slide5-direct-html .s5-key-icon span {
+  width: 18px;
+  height: 18px;
+  font-size: .75rem;
+}
+.slide5-direct-html .s5-key-row h3 {
+  font-size: 1rem;
+  line-height: 1.02;
+  margin-bottom: 3px;
+}
+.slide5-direct-html .s5-key-row p {
+  font-size: .84rem;
+  line-height: 1.14;
+}
+.slide5-direct-html .s5-divider {
+  margin: 0 18px;
+}
+
+.slide5-direct-html .s5-warning {
+  left: 34px;
+  right: 34px;
+  bottom: 16px;
+  height: 54px;
+  grid-template-columns: 58px 170px 1fr;
+  padding: 0 18px;
+  border-radius: 8px;
+}
+.slide5-direct-html .s5-warning-icon {
+  width: 42px;
+  height: 42px;
+  font-size: 1.45rem;
+  padding-top: 8px;
+}
+.slide5-direct-html .s5-warning-title {
+  font-size: 1.14rem;
+  line-height: .95;
+}
+.slide5-direct-html .s5-warning-text {
+  font-size: .82rem;
+  line-height: 1.08;
+}
+
+
+/* Slide 5 narration wiring */
+.slide5-direct-html .slide5-audio-panel {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+/* Slide 6 direct HTML rebuild - approved app FAQ */
+.slide6-direct-html{
+  display:block;
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  border-radius:24px;
+  background:#071012;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#fff;
+}
+.slide6-direct-html:not(.active){display:none!important}
+.slide6-direct-html.active{display:block!important}
+.slide6-direct-html .s6-bg{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 35% 20%,rgba(108,194,74,.08),transparent 22%),
+    radial-gradient(circle at 95% 5%,rgba(108,194,74,.08),transparent 20%),
+    linear-gradient(135deg,#070b0d 0%,#12191e 58%,#07100a 100%);
+}
+.slide6-direct-html .s6-top{
+  position:absolute;
+  left:38px;
+  right:38px;
+  top:26px;
+  height:120px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  z-index:2;
+}
+.slide6-direct-html .s6-top h1{
+  margin:0;
+  font-size:3rem;
+  line-height:.9;
+  font-weight:1000;
+  letter-spacing:-1.6px;
+}
+.slide6-direct-html .s6-top h2{
+  margin:6px 0 6px;
+  font-size:2rem;
+  line-height:1;
+  color:#6cc24a;
+  font-weight:1000;
+}
+.slide6-direct-html .s6-top p{
+  margin:0;
+  max-width:580px;
+  font-size:1rem;
+  line-height:1.22;
+  color:#fff;
+  font-style:italic;
+}
+.slide6-direct-html .s6-pill{
+  margin-top:14px;
+  border:1px solid #78d43c;
+  color:#f2e600;
+  border-radius:999px;
+  padding:11px 28px;
+  font-weight:1000;
+  text-transform:uppercase;
+  box-shadow:0 0 18px rgba(108,194,74,.25);
+}
+.slide6-direct-html .s6-main{
+  position:absolute;
+  left:38px;
+  right:38px;
+  top:162px;
+  height:386px;
+  display:grid;
+  grid-template-columns:.84fr 1fr;
+  gap:24px;
+  z-index:3;
+}
+.slide6-direct-html .s6-app-panel,
+.slide6-direct-html .s6-faq-panel{
+  border:1px solid #257d22;
+  border-radius:14px;
+  background:linear-gradient(180deg,rgba(21,29,34,.95),rgba(12,17,20,.96));
+  overflow:hidden;
+  box-shadow:0 12px 30px rgba(0,0,0,.28);
+}
+.slide6-direct-html .s6-panel-title,
+.slide6-direct-html .s6-faq-title{
+  background:linear-gradient(180deg,#2f7c22,#1f5d18);
+  color:#fff;
+  text-align:center;
+  font-size:1.25rem;
+  font-weight:1000;
+  padding:11px 16px;
+}
+.slide6-direct-html .s6-app-content{
+  display:grid;
+  grid-template-columns:300px 1fr;
+  gap:22px;
+  padding:8px 22px 20px;
+}
+.slide6-direct-html .s6-phone{
+  height:345px;
+  background:#071012;
+  border:6px solid #0a0d0f;
+  border-radius:32px 32px 0 0;
+  padding:16px 16px 0;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 10px 25px rgba(0,0,0,.25);
+  overflow:hidden;
+}
+.slide6-direct-html .s6-phone-top{
+  width:76px;height:11px;background:#050708;border-radius:999px;margin:0 auto 28px;
+}
+.slide6-direct-html .s6-phone-logo{
+  text-align:center;
+  font-size:1.8rem;
+  font-weight:1000;
+  line-height:.85;
+  margin-bottom:24px;
+}
+.slide6-direct-html .s6-phone-logo span{
+  color:#6cc24a;
+}
+.slide6-direct-html .s6-phone-row{
+  height:49px;
+  border-radius:8px;
+  display:grid;
+  grid-template-columns:42px 1fr auto;
+  align-items:center;
+  gap:9px;
+  padding:0 12px;
+  margin-bottom:10px;
+  color:#fff;
+  font-weight:900;
+}
+.slide6-direct-html .s6-phone-row b{
+  font-size:1.5rem;
+}
+.slide6-direct-html .s6-phone-row span{
+  font-size:.88rem;
+}
+.slide6-direct-html .s6-phone-row strong{
+  font-size:1.05rem;
+}
+.slide6-direct-html .s6-phone-row.green{background:#55ad31}
+.slide6-direct-html .s6-phone-row.purple{background:#6841a0}
+.slide6-direct-html .s6-phone-row.blue{background:#2c82be}
+.slide6-direct-html .s6-phone-row.orange{background:#d85b10}
+.slide6-direct-html .s6-app-copy{
+  padding-top:14px;
+}
+.slide6-direct-html .s6-app-copy h3{
+  margin:0 0 10px;
+  color:#6cc24a;
+  font-size:1.35rem;
+  font-weight:1000;
+}
+.slide6-direct-html .s6-app-copy p{
+  margin:0 0 12px;
+  font-size:.98rem;
+  line-height:1.2;
+}
+.slide6-direct-html .s6-app-copy ul{
+  list-style:none;
+  margin:0 0 16px;
+  padding:0;
+  display:grid;
+  gap:9px;
+  font-size:.97rem;
+  line-height:1.14;
+}
+.slide6-direct-html .s6-app-copy li{
+  display:grid;
+  grid-template-columns:28px 1fr;
+  gap:8px;
+  align-items:start;
+}
+.slide6-direct-html .s6-app-copy li:before{
+  content:"✓";
+  width:24px;height:24px;border-radius:50%;
+  background:#6cc24a;color:#071012;
+  display:grid;place-items:center;
+  font-weight:1000;
+}
+.slide6-direct-html .s6-important{
+  border-top:2px solid #6cc24a;
+  padding-top:14px;
+  display:grid;
+  grid-template-columns:34px 1fr;
+  gap:10px;
+}
+.slide6-direct-html .s6-important b{
+  width:28px;height:28px;border-radius:50%;
+  background:#6cc24a;color:#071012;
+  display:grid;place-items:center;
+  font-weight:1000;
+  font-style:normal;
+}
+.slide6-direct-html .s6-important strong{
+  display:block;
+  color:#6cc24a;
+  font-size:1.07rem;
+  margin-bottom:4px;
+}
+.slide6-direct-html .s6-important p{
+  font-size:.94rem;
+  line-height:1.18;
+  margin:0;
+}
+.slide6-direct-html .s6-faq-panel{
+  padding-bottom:8px;
+}
+.slide6-direct-html .s6-faq-card{
+  margin:8px 12px 0;
+  border-radius:8px;
+  background:linear-gradient(180deg,#20272c,#171d21);
+  min-height:58px;
+  display:grid;
+  grid-template-columns:106px 1fr;
+  align-items:center;
+  padding:8px 18px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
+}
+.slide6-direct-html .s6-faq-icon{
+  width:52px;height:52px;border-radius:50%;
+  border:2px solid #6cc24a;
+  display:grid;place-items:center;
+  font-size:1.55rem;
+  margin:auto;
+  color:#fff;
+  position:relative;
+}
+.slide6-direct-html .s6-faq-icon:after{
+  content:"";
+  position:absolute;
+  right:-27px;
+  top:4px;
+  bottom:4px;
+  width:2px;
+  background:#257d22;
+}
+.slide6-direct-html .s6-faq-text h3{
+  margin:0 0 5px;
+  font-size:1.13rem;
+  line-height:1;
+  font-weight:1000;
+}
+.slide6-direct-html .s6-faq-text p{
+  margin:0;
+  font-size:.92rem;
+  line-height:1.16;
+  color:#f0f5f2;
+}
+.slide6-direct-html .s6-faq-text span{
+  display:inline-grid;
+  place-items:center;
+  width:18px;height:18px;
+  margin-right:9px;
+  background:#6cc24a;
+  color:#071012;
+  border-radius:50%;
+  font-size:.75rem;
+  font-weight:1000;
+}
+.slide6-direct-html .s6-remember{
+  position:absolute;
+  left:38px;
+  right:38px;
+  bottom:20px;
+  height:72px;
+  border:1px solid #257d22;
+  border-radius:12px;
+  background:linear-gradient(180deg,rgba(18,27,31,.96),rgba(10,14,17,.97));
+  display:grid;
+  grid-template-columns:82px 170px 1fr 88px;
+  gap:18px;
+  align-items:center;
+  padding:0 22px;
+  z-index:4;
+}
+.slide6-direct-html .s6-light{
+  width:56px;height:56px;border-radius:50%;
+  background:#6cc24a;
+  display:grid;place-items:center;
+  font-size:2rem;
+}
+.slide6-direct-html .s6-remember-title{
+  color:#6cc24a;
+  font-size:1.65rem;
+  font-weight:1000;
+  text-transform:uppercase;
+  border-right:2px solid #257d22;
+  padding-right:20px;
+}
+.slide6-direct-html .s6-remember-copy{
+  font-size:.98rem;
+  line-height:1.35;
+  color:#fff;
+}
+.slide6-direct-html .s6-people{
+  color:#6cc24a;
+  font-size:2.6rem;
+  text-align:right;
+}
+
+
+/* Slide 6 viewport fit correction */
+.slide6-direct-html .s6-top {
+  top: 18px;
+  height: 92px;
+}
+.slide6-direct-html .s6-top h1 {
+  font-size: 2.45rem;
+}
+.slide6-direct-html .s6-top h2 {
+  font-size: 1.6rem;
+  margin: 4px 0 4px;
+}
+.slide6-direct-html .s6-top p {
+  font-size: .86rem;
+  line-height: 1.12;
+  max-width: 520px;
+}
+.slide6-direct-html .s6-pill {
+  margin-top: 8px;
+  padding: 8px 22px;
+}
+
+.slide6-direct-html .s6-main {
+  top: 126px;
+  height: 416px;
+  gap: 18px;
+}
+.slide6-direct-html .s6-panel-title,
+.slide6-direct-html .s6-faq-title {
+  font-size: 1.05rem;
+  padding: 9px 12px;
+}
+.slide6-direct-html .s6-app-content {
+  grid-template-columns: 255px 1fr;
+  gap: 16px;
+  padding: 8px 16px 14px;
+}
+.slide6-direct-html .s6-phone {
+  height: 330px;
+  border-radius: 26px 26px 0 0;
+  padding: 12px 12px 0;
+}
+.slide6-direct-html .s6-phone-top {
+  width: 64px;
+  height: 9px;
+  margin-bottom: 22px;
+}
+.slide6-direct-html .s6-phone-logo {
+  font-size: 1.45rem;
+  margin-bottom: 20px;
+}
+.slide6-direct-html .s6-phone-row {
+  height: 43px;
+  margin-bottom: 8px;
+  grid-template-columns: 34px 1fr auto;
+  padding: 0 10px;
+}
+.slide6-direct-html .s6-phone-row b {
+  font-size: 1.25rem;
+}
+.slide6-direct-html .s6-phone-row span {
+  font-size: .78rem;
+}
+.slide6-direct-html .s6-phone-row strong {
+  font-size: .9rem;
+}
+.slide6-direct-html .s6-app-copy {
+  padding-top: 8px;
+}
+.slide6-direct-html .s6-app-copy h3 {
+  font-size: 1.12rem;
+  margin-bottom: 7px;
+}
+.slide6-direct-html .s6-app-copy p {
+  font-size: .84rem;
+  margin-bottom: 8px;
+}
+.slide6-direct-html .s6-app-copy ul {
+  gap: 7px;
+  font-size: .82rem;
+  line-height: 1.08;
+  margin-bottom: 10px;
+}
+.slide6-direct-html .s6-app-copy li {
+  grid-template-columns: 24px 1fr;
+}
+.slide6-direct-html .s6-app-copy li:before {
+  width: 20px;
+  height: 20px;
+}
+.slide6-direct-html .s6-important {
+  padding-top: 10px;
+  grid-template-columns: 28px 1fr;
+}
+.slide6-direct-html .s6-important b {
+  width: 24px;
+  height: 24px;
+}
+.slide6-direct-html .s6-important strong {
+  font-size: .94rem;
+}
+.slide6-direct-html .s6-important p {
+  font-size: .78rem;
+}
+
+.slide6-direct-html .s6-faq-card {
+  margin: 7px 12px 0;
+  min-height: 52px;
+  grid-template-columns: 88px 1fr;
+  padding: 6px 14px;
+}
+.slide6-direct-html .s6-faq-icon {
+  width: 44px;
+  height: 44px;
+  font-size: 1.25rem;
+}
+.slide6-direct-html .s6-faq-icon:after {
+  right: -22px;
+}
+.slide6-direct-html .s6-faq-text h3 {
+  font-size: .98rem;
+  margin-bottom: 3px;
+}
+.slide6-direct-html .s6-faq-text p {
+  font-size: .78rem;
+  line-height: 1.08;
+}
+.slide6-direct-html .s6-faq-text span {
+  width: 16px;
+  height: 16px;
+  margin-right: 7px;
+}
+
+.slide6-direct-html .s6-remember {
+  bottom: 14px;
+  height: 46px;
+  grid-template-columns: 46px 128px 1fr 50px;
+  gap: 10px;
+  padding: 0 14px;
+}
+.slide6-direct-html .s6-light {
+  width: 34px;
+  height: 34px;
+  font-size: 1.25rem;
+}
+.slide6-direct-html .s6-remember-title {
+  font-size: 1.05rem;
+  padding-right: 12px;
+}
+.slide6-direct-html .s6-remember-copy {
+  font-size: .72rem;
+  line-height: 1.18;
+}
+.slide6-direct-html .s6-people {
+  font-size: 1.55rem;
+}
+
+
+/* Slide 6 narration wiring */
+.slide6-direct-html .slide6-audio-panel {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+/* Slide 6 final lower-right FAQ micro-fit */
+.slide6-direct-html .s6-faq-card:last-child .s6-faq-text p {
+  font-size: .72rem;
+  line-height: 1.02;
+}
+
+
+
+
+
+/* Final Day 3 slides - v201 */
+.slide13-birthday .slide-body,
+.slide14-respect .slide-body,
+.slide15-together .slide-body,
+.slide16-next .slide-body{padding:18px 30px 24px;}
+
+.birthday-board{display:grid;grid-template-columns:1.04fr .96fr;gap:18px;height:100%;}
+.bday-hero{background:radial-gradient(circle at 25% 15%,rgba(242,230,0,.28),transparent 34%),linear-gradient(135deg,#111820,#0b7f24);border-radius:24px;color:#fff;padding:26px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;box-shadow:0 18px 42px rgba(0,0,0,.18)}
+.bday-hero:after{content:"";position:absolute;right:-70px;bottom:-90px;width:260px;height:260px;border-radius:50%;border:34px solid rgba(108,194,74,.25)}
+.bday-hero .bday-icon{font-size:4.5rem;line-height:1;margin-bottom:12px;filter:drop-shadow(0 8px 16px rgba(0,0,0,.25))}
+.bday-hero h2{font-size:2.8rem;line-height:.95;margin:0 0 12px;letter-spacing:-1.8px;position:relative;z-index:1}
+.bday-hero p{font-size:1.2rem;line-height:1.35;margin:0;color:#e7eef4;max-width:92%;position:relative;z-index:1}
+.bday-spark{position:absolute;background:#f2e600;color:#111820;border-radius:999px;padding:10px 14px;font-weight:900;right:22px;top:22px;transform:rotate(5deg);box-shadow:0 10px 22px rgba(0,0,0,.25)}
+.bday-clues{display:grid;grid-template-rows:repeat(3,1fr);gap:12px;min-height:0}
+.bday-card{background:#f8fafc;border:1px solid #dfe7ed;border-radius:20px;padding:16px 18px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;box-shadow:0 10px 24px rgba(17,24,32,.08)}
+.bday-card span{width:58px;height:58px;border-radius:18px;background:#111820;color:#f2e600;display:grid;place-items:center;font-size:2rem;font-weight:900}
+.bday-card b{display:block;color:#111820;font-size:1.18rem;margin-bottom:4px}.bday-card p{margin:0;color:#58636e;line-height:1.25;font-size:.98rem}
+.bday-bottom{grid-column:1/3;background:#111820;color:#fff;border-radius:18px;padding:13px 18px;font-weight:900;display:flex;align-items:center;justify-content:center;gap:18px;font-size:1.05rem}.bday-bottom mark{background:#6cc24a;color:#071018;border-radius:999px;padding:7px 12px;font-weight:900}
+
+.respect-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px;height:100%;}
+.respect-big{background:linear-gradient(135deg,#111820,#182534);border-radius:24px;color:#fff;padding:24px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden}.respect-big:before{content:"";position:absolute;inset:22px;border:2px dashed rgba(242,230,0,.28);border-radius:22px}.respect-big .stop-icon{font-size:4rem;margin-bottom:10px}.respect-big h2{font-size:2.55rem;line-height:.95;margin:0 0 10px;color:#f2e600;position:relative}.respect-big p{font-size:1.18rem;line-height:1.35;margin:0;color:#e1e8ef;position:relative}.respect-flow{margin-top:18px;display:flex;gap:8px;align-items:center;justify-content:center;position:relative}.respect-flow span{background:#6cc24a;color:#071018;border-radius:999px;padding:9px 12px;font-weight:900}.respect-flow i{font-style:normal;color:#f2e600;font-weight:900}
+.respect-side{display:grid;grid-template-rows:1fr 1fr;gap:14px}.respect-card{border-radius:22px;padding:21px 24px;display:flex;flex-direction:column;justify-content:center}.respect-card.good{background:#eefbea;border:2px solid #6cc24a}.respect-card.bad{background:#fff3f3;border:2px solid #ffb0b0}.respect-card h3{margin:0 0 10px;font-size:1.65rem;color:#111820}.respect-card ul{margin:0;padding-left:22px;font-size:1.08rem;line-height:1.45;font-weight:800;color:#2e3942}.respect-footer{grid-column:1/3;background:#fff9ce;border:2px solid #f2e600;border-radius:18px;padding:12px 18px;text-align:center;font-weight:900;font-size:1.06rem;color:#111820}
+
+.together-board{height:100%;display:grid;grid-template-rows:auto 1fr auto;gap:12px}.together-top{display:flex;align-items:center;justify-content:center;gap:16px;background:#111820;color:#fff;border-radius:18px;padding:14px 18px;font-weight:900;font-size:1.15rem}.together-top span{background:#f2e600;color:#111820;border-radius:999px;padding:8px 12px}.scenario-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;min-height:0}.scenario-card{background:#f8fafc;border:1px solid #dfe7ed;border-radius:20px;padding:15px 16px;display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:start;box-shadow:0 10px 22px rgba(17,24,32,.07)}.scenario-card .sc-icon{width:52px;height:52px;border-radius:16px;background:#6cc24a;display:grid;place-items:center;font-size:1.85rem}.scenario-card h3{font-size:1.12rem;margin:0 0 7px;color:#111820}.scenario-card p{margin:0;color:#56616d;line-height:1.25;font-size:.93rem}.scenario-card b{color:#0b7f24}.response-line{margin-top:8px;background:#fff;border-left:5px solid #f2e600;border-radius:10px;padding:8px 10px;font-size:.9rem;color:#111820;font-weight:800}.together-bottom{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.together-bottom div{background:#111820;color:#fff;border-radius:16px;padding:12px;text-align:center;font-weight:900}.together-bottom span{display:block;color:#f2e600;font-size:1.5rem;margin-bottom:2px}
+
+.next-finish{height:100%;display:grid;grid-template-rows:auto 1fr auto;gap:14px}.finish-hero{background:linear-gradient(90deg,#111820,#0b7f24);color:#fff;border-radius:22px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between}.finish-hero h2{font-size:2rem;line-height:1;margin:0;color:#f2e600}.finish-hero p{margin:0;color:#e8eef3;font-weight:800}.finish-badge{font-size:3.2rem}.finish-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.finish-step{background:#f8fafc;border:1px solid #dfe7ed;border-radius:22px;padding:18px;text-align:center;display:flex;flex-direction:column;justify-content:center}.finish-step span{width:62px;height:62px;border-radius:20px;background:#111820;color:#f2e600;display:grid;place-items:center;font-size:2rem;margin:0 auto 12px}.finish-step h3{font-size:1.28rem;margin:0 0 8px;color:#111820}.finish-step p{font-size:.97rem;line-height:1.25;margin:0;color:#56616d}.finish-bottom{background:#fff9ce;border:2px solid #f2e600;color:#111820;border-radius:18px;padding:13px 18px;text-align:center;font-weight:900;font-size:1.08rem}
+
+
+/* Slide 15 compact fit fix - v205 */
+.slide15-together .slide-body{padding:12px 28px 12px;}
+.slide15-together .together-board{height:100%;grid-template-rows:48px minmax(0,1fr) 54px;gap:10px;overflow:hidden;}
+.slide15-together .together-top{min-height:48px;padding:8px 14px;border-radius:16px;font-size:1.05rem;gap:10px;}
+.slide15-together .together-top span{padding:7px 11px;}
+.slide15-together .scenario-grid{height:100%;gap:10px;min-height:0;}
+.slide15-together .scenario-card{min-height:0;padding:10px 12px;border-radius:17px;grid-template-columns:44px 1fr;gap:10px;overflow:hidden;}
+.slide15-together .scenario-card .sc-icon{width:44px;height:44px;border-radius:14px;font-size:1.55rem;}
+.slide15-together .scenario-card h3{font-size:.98rem;line-height:1.1;margin:0 0 4px;}
+.slide15-together .scenario-card p{font-size:.82rem;line-height:1.12;margin:0;}
+.slide15-together .response-line{margin-top:6px;padding:6px 8px;border-left-width:4px;border-radius:9px;font-size:.78rem;line-height:1.15;}
+.slide15-together .together-bottom{height:54px;gap:10px;align-items:stretch;}
+.slide15-together .together-bottom div{border-radius:14px;padding:6px 10px;font-size:.95rem;display:flex;align-items:center;justify-content:center;gap:8px;}
+.slide15-together .together-bottom span{display:inline;font-size:1.25rem;margin:0;}
+@media(max-width:1000px){body{overflow:auto}.deck{height:auto}.slide{position:relative;min-height:650px}.cover-grid,.split,.app-slide,.arcade-slide{grid-template-columns:1fr}.benefit-grid,.qa-grid,.loyalty-overview,.opportunity-grid,.future-slide,.summary-grid,.workflow,.next-steps{grid-template-columns:1fr}.controls{grid-template-columns:1fr}.arrow{display:none}}
+@media print{body{background:#fff;overflow:hidden}.deck{display:block;padding:0}.topbar,.controls,.speaker-notes-panel{display:none!important}.slide{display:grid!important;page-break-after:always;width:100%;height:100vh;box-shadow:none;border-radius:0}}
+
+
+
+
+/* Slide 7 native final rebuild - fits actual training viewport */
+.slide7-native-final{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  border-radius:24px;
+  background:#fff;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#111820;
+}
+.slide7-native-final:not(.active){display:none!important;}
+.slide7-native-final.active{display:block!important;}
+.slide7-native-final .s7f-bg{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg,#fff 0%,#fff 78%,#f5fbf2 100%);
+}
+.slide7-native-final .s7f-topline{
+  position:absolute; left:0; right:0; top:0; height:8px;
+  background:linear-gradient(90deg,#6cc24a,#f2e600);
+}
+.slide7-native-final .s7f-label{
+  position:absolute; left:36px; top:30px;
+  color:#0b8f2a; font-weight:1000; text-transform:uppercase;
+  letter-spacing:3px; font-size:.78rem;
+}
+.slide7-native-final .s7f-pill{
+  position:absolute; right:32px; top:30px;
+  background:#111820; color:#f2e600; border-radius:999px;
+  padding:9px 18px; text-transform:uppercase; font-weight:1000;
+  box-shadow:0 8px 20px rgba(0,0,0,.18);
+}
+.slide7-native-final .s7f-title{
+  position:absolute; left:36px; right:36px; top:56px; height:116px;
+}
+.slide7-native-final .s7f-title h1{
+  margin:0; font-size:3.15rem; line-height:.92; letter-spacing:-2px; font-weight:1000;
+}
+.slide7-native-final .s7f-title p{
+  margin:26px 0 0 8px; font-size:.96rem; line-height:1.25;
+}
+.slide7-native-final .s7f-left-card{
+  position:absolute; left:36px; top:202px; width:620px; height:300px;
+  background:#f8fafc; border:1px solid #dbe5ed; border-radius:16px;
+  box-shadow:0 8px 20px rgba(0,0,0,.06);
+  box-sizing:border-box; padding:28px 30px 22px;
+}
+.slide7-native-final .s7f-heading-row{
+  display:grid; grid-template-columns:92px 1fr; gap:18px; align-items:center;
+}
+.slide7-native-final .s7f-person{
+  width:72px; height:72px; border-radius:50%; background:#fff;
+  display:grid; place-items:center; font-size:2rem; color:#087022;
+  box-shadow:0 0 0 1px #e5edf3; position:relative;
+}
+.slide7-native-final .s7f-person span{
+  position:absolute; right:8px; top:7px; width:22px; height:22px;
+  border:2px solid #087022; border-radius:8px; background:#fff;
+  display:grid; place-items:center; font-size:.85rem;
+}
+.slide7-native-final .s7f-heading-row h2{
+  margin:0 0 8px; font-size:1.42rem; line-height:1.05; color:#087022; font-weight:1000;
+}
+.slide7-native-final .s7f-heading-row p{
+  margin:0; font-size:.94rem; line-height:1.25;
+}
+.slide7-native-final .s7f-do-dont{
+  position:absolute; left:30px; right:30px; bottom:28px;
+  display:grid; grid-template-columns:1fr 1fr; gap:24px;
+}
+.slide7-native-final .s7f-mini-card{
+  min-height:116px; border-radius:14px; box-sizing:border-box;
+  padding:16px 18px 12px 86px; position:relative;
+}
+.slide7-native-final .s7f-do{background:linear-gradient(180deg,#f0faeb,#f8fdf5); border:1px solid #dfeee0;}
+.slide7-native-final .s7f-dont{background:linear-gradient(180deg,#fff1f1,#fff8f8); border:1px solid #f2dddd;}
+.slide7-native-final .s7f-round{
+  position:absolute; left:26px; top:16px; width:42px; height:42px; border-radius:50%;
+  display:grid; place-items:center; color:#fff; font-size:1.65rem; font-weight:1000;
+}
+.slide7-native-final .s7f-do .s7f-round{background:#39a633;}
+.slide7-native-final .s7f-dont .s7f-round{background:#cf3340;}
+.slide7-native-final .s7f-mini-card h3{
+  margin:0 0 9px; color:#087022; font-size:1.12rem; line-height:1; font-weight:1000;
+}
+.slide7-native-final .s7f-dont h3{color:#c62f3e;}
+.slide7-native-final .s7f-mini-card ul{
+  list-style:none; margin:0; padding:0; display:grid; gap:5px; font-size:.82rem; line-height:1.08;
+}
+.slide7-native-final .s7f-mini-card li{
+  display:grid; grid-template-columns:22px 1fr; gap:7px; align-items:center;
+}
+.slide7-native-final .s7f-mini-card li span{font-size:1rem;}
+.slide7-native-final .s7f-photo{
+  position:absolute; right:36px; top:202px; width:585px; height:235px;
+  border-radius:14px; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,.18);
+}
+.slide7-native-final .s7f-photo img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+.slide7-native-final .s7f-better{
+  position:absolute; right:36px; top:456px; width:585px; height:74px;
+  background:#111820; color:#fff; border-radius:14px;
+  display:grid; grid-template-columns:92px 1fr; align-items:center;
+  padding:0 22px; box-sizing:border-box;
+}
+.slide7-native-final .s7f-bulb{
+  width:54px; height:54px; border:3px solid #62c13e; border-radius:50%;
+  color:#6cc24a; display:grid; place-items:center; font-size:1.65rem;
+}
+.slide7-native-final .s7f-better h3{
+  margin:0 0 5px; color:#6cc24a; font-size:1.12rem; line-height:1; font-weight:1000;
+}
+.slide7-native-final .s7f-better p{
+  margin:0; font-size:.86rem; line-height:1.18;
+}
+.slide7-native-final .s7f-bottom{
+  position:absolute; left:36px; right:36px; bottom:14px; height:44px;
+  border:1px solid #dce4eb; border-radius:12px; background:rgba(255,255,255,.92);
+  display:grid; grid-template-columns:54px 1fr; align-items:center; padding:0 18px; box-sizing:border-box;
+  box-shadow:0 4px 14px rgba(0,0,0,.05);
+}
+.slide7-native-final .s7f-star{
+  width:34px; height:34px; border-radius:50%; background:#5fbf3d; color:#fff;
+  display:grid; place-items:center; font-size:1.2rem;
+}
+.slide7-native-final .s7f-bottom p{
+  margin:0; font-size:.86rem; line-height:1.1;
+}
+.slide7-native-final .s7f-bottom strong{color:#087022;}
+
+
+
+/* Slide 7 final overlap fix - right side clears goal banner */
+.slide7-native-final .s7f-photo{
+  top: 168px !important;
+  height: 235px !important;
+}
+.slide7-native-final .s7f-better{
+  top: 420px !important;
+  height: 68px !important;
+  grid-template-columns: 82px 1fr !important;
+  padding: 0 20px !important;
+}
+.slide7-native-final .s7f-bulb{
+  width: 50px !important;
+  height: 50px !important;
+  font-size: 1.5rem !important;
+}
+.slide7-native-final .s7f-better h3{
+  font-size: 1.08rem !important;
+  margin-bottom: 4px !important;
+}
+.slide7-native-final .s7f-better p{
+  font-size: .82rem !important;
+  line-height: 1.14 !important;
+}
+.slide7-native-final .s7f-bottom{
+  bottom: 12px !important;
+  height: 42px !important;
+  z-index: 2 !important;
+}
+.slide7-native-final .s7f-photo,
+.slide7-native-final .s7f-better{
+  z-index: 3 !important;
+}
+
+
+
+/* Slide 8 visual polish - native HTML/CSS only */
+
+/* Slide 9 admissions refresh */
+.slide9-admissions .slide-body{padding:16px 32px 18px;}
+.s9-wrap{display:grid;grid-template-columns:.88fr 1.12fr;gap:20px;height:100%;min-height:0;}
+.s9-visual{position:relative;border-radius:24px;overflow:hidden;background:#111820;min-height:0;box-shadow:0 14px 34px rgba(17,24,32,.16);}
+.s9-visual img{width:100%;height:100%;object-fit:cover;display:block;opacity:.78;filter:saturate(1.08) contrast(1.05);}
+.s9-visual:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,24,32,.12),rgba(17,24,32,.82));}
+.s9-local-badge{position:absolute;top:18px;left:18px;right:18px;z-index:2;background:rgba(255,255,255,.95);border-left:8px solid var(--g);border-radius:18px;padding:14px 16px;box-shadow:0 10px 25px rgba(0,0,0,.18);}
+.s9-local-badge span{display:block;text-transform:uppercase;letter-spacing:1.6px;font-size:.72rem;font-weight:900;color:#0b8f2a;margin-bottom:4px;}
+.s9-local-badge b{display:block;font-size:1.35rem;line-height:1.05;color:#111820;}
+.s9-photo-caption{position:absolute;left:22px;right:22px;bottom:22px;z-index:2;color:#fff;}
+.s9-photo-caption h3{font-size:1.95rem;line-height:.98;margin:0 0 8px;color:#fff;letter-spacing:-.5px;}
+.s9-photo-caption p{margin:0;color:#dbe6ef;font-size:1.04rem;line-height:1.3;font-weight:700;}
+.s9-playbook{display:grid;grid-template-rows:auto 1fr auto;gap:14px;min-height:0;}
+.s9-lead{background:linear-gradient(135deg,#111820,#162432);color:#fff;border-left:9px solid var(--y);border-radius:22px;padding:18px 22px;box-shadow:0 10px 25px rgba(0,0,0,.13);}
+.s9-lead span{display:block;color:#aee49a;text-transform:uppercase;letter-spacing:1.5px;font-size:.74rem;font-weight:900;margin-bottom:5px;}
+.s9-lead strong{display:block;font-size:1.78rem;line-height:1.02;letter-spacing:-.6px;}
+.s9-card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;min-height:0;}
+.s9-card{position:relative;background:#f8fafc;border:1px solid #dfe7ed;border-radius:20px;padding:14px 16px 14px 76px;box-shadow:0 8px 20px rgba(17,24,32,.07);overflow:hidden;}
+.s9-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--g);}
+.s9-card .s9-icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:14px;background:#fff;border:1px solid #e1e7ec;display:grid;place-items:center;font-size:1.35rem;box-shadow:0 6px 14px rgba(17,24,32,.08);}
+.s9-card b{display:block;font-size:1.1rem;line-height:1.05;color:#111820;margin-bottom:5px;}
+.s9-card span{display:block;color:#55616c;font-size:.93rem;line-height:1.25;}
+.s9-card.value:before{background:var(--y);}.s9-card.fit:before{background:#111820;}.s9-card.local:before{background:#0b8f2a;}
+.s9-bottom{background:#fff9ce;border:2px solid var(--y);border-radius:18px;padding:13px 18px;display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:center;text-align:center;color:#111820;font-weight:900;box-shadow:0 8px 18px rgba(17,24,32,.08);}
+.s9-bottom div:not(.s9-arrow){display:flex;align-items:center;justify-content:center;gap:8px;font-size:.98rem;}
+.s9-bottom span{font-size:1.25rem;}.s9-arrow{font-size:1.35rem;color:#0b8f2a;}
+@media(max-height:760px){.slide9-admissions .slide-body{padding:12px 32px 14px}.s9-wrap{gap:16px}.s9-lead{padding:14px 20px}.s9-lead strong{font-size:1.52rem}.s9-card{padding:11px 14px 11px 68px}.s9-card .s9-icon{width:38px;height:38px;left:16px}.s9-card b{font-size:1rem}.s9-card span{font-size:.86rem}.s9-photo-caption h3{font-size:1.65rem}.s9-bottom{padding:10px 14px}.s9-bottom div:not(.s9-arrow){font-size:.9rem}}
+
+.slide8-listening .slide-body{padding:18px 32px 20px;}
+.s8-conversation-slide{display:grid;grid-template-rows:auto 1fr auto;gap:16px;height:100%;min-height:0;}
+.s8-quote-wrap{background:linear-gradient(135deg,#111820,#162432);color:#fff;border-radius:22px;padding:20px 28px;display:flex;align-items:center;gap:18px;border-left:10px solid var(--g);box-shadow:0 12px 28px rgba(0,0,0,.14);}
+.s8-quote-icon{width:62px;height:62px;border-radius:18px;background:rgba(108,194,74,.18);display:grid;place-items:center;font-size:2.15rem;flex:0 0 auto;}
+.s8-quote-copy{display:flex;flex-direction:column;gap:5px;}
+.s8-quote-copy span{text-transform:uppercase;letter-spacing:1.6px;color:#aee49a;font-size:.78rem;font-weight:900;}
+.s8-quote-copy strong{font-size:2.05rem;line-height:1.02;letter-spacing:-.5px;}
+.s8-listener-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;min-height:0;}
+.s8-listen-card{position:relative;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;background:#f8fafc;border:1px solid #dfe7ed;border-radius:20px;padding:15px 17px 15px 15px;box-shadow:0 9px 22px rgba(17,24,32,.07);overflow:hidden;}
+.s8-listen-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--g);}
+.s8-card-icon{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;background:#fff;border:1px solid #e1e7ec;font-size:1.65rem;box-shadow:0 6px 14px rgba(17,24,32,.08);}
+.s8-card-content b{display:block;font-size:1.18rem;color:#111820;margin-bottom:5px;}
+.s8-card-content span{display:block;color:#56616d;line-height:1.25;font-size:.99rem;}
+.s8-opportunity-tag{grid-column:2;background:#fff9ce;border:1px solid #f2e600;border-radius:999px;color:#111820;font-weight:900;font-size:.78rem;padding:6px 10px;width:max-content;margin-top:2px;}
+.s8-listen-card.birthday:before{background:#f2e600;}.s8-listen-card.all-day:before{background:#6cc24a;}.s8-listen-card.arcade:before{background:#111820;}
+.s8-framework{background:#111820;color:#fff;border-left:8px solid #f2e600;border-radius:18px;padding:14px 18px;display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:12px;box-shadow:0 10px 24px rgba(0,0,0,.16);}
+.s8-framework div:not(.s8-arrow){display:flex;align-items:center;justify-content:center;gap:10px;font-size:1.1rem;font-weight:900;text-align:center;}
+.s8-framework span{font-size:1.45rem;}.s8-arrow{color:#6cc24a;font-size:1.65rem;font-weight:900;text-align:center;}
+@media(max-height:760px){.s8-quote-wrap{padding:16px 24px}.s8-quote-icon{width:54px;height:54px;font-size:1.9rem}.s8-quote-copy strong{font-size:1.8rem}.s8-listen-card{padding:13px 15px 13px 14px}.s8-card-icon{width:48px;height:48px}.s8-framework{padding:12px 16px}.s8-framework div:not(.s8-arrow){font-size:1rem}}
+
+
+/* Slide 8 compact fit refinement */
+.slide8-listening .slide-body{padding:14px 32px 16px;}
+.s8-conversation-slide{gap:12px;}
+.s8-quote-wrap{padding:14px 24px;gap:14px;}
+.s8-quote-icon{width:48px;height:48px;border-radius:14px;font-size:1.75rem;}
+.s8-quote-copy strong{font-size:1.72rem;line-height:1;}
+.s8-quote-copy span{font-size:.72rem;}
+.s8-listener-grid{gap:12px 14px;}
+.s8-listen-card{grid-template-columns:auto 1fr auto;padding:12px 14px 12px 13px;gap:12px;min-height:82px;}
+.s8-card-icon{width:44px;height:44px;border-radius:13px;font-size:1.45rem;}
+.s8-card-content b{font-size:1.08rem;margin-bottom:4px;}
+.s8-card-content span{font-size:.92rem;line-height:1.2;}
+.s8-opportunity-tag{grid-column:3;margin-top:0;align-self:center;white-space:nowrap;font-size:.72rem;padding:6px 9px;}
+.s8-framework{padding:10px 16px;}
+.s8-framework div:not(.s8-arrow){font-size:1rem;gap:8px;}
+.s8-framework span{font-size:1.25rem;}.s8-arrow{font-size:1.45rem;}
+
+
+/* Slide 10 compact arcade redesign */
+.slide10-arcade .slide-body{position:relative;padding-bottom:72px;}
+.arcade10-layout{display:grid;grid-template-columns:.95fr 1.05fr;gap:20px;height:100%;min-height:0;}
+.arcade10-left{display:grid;grid-template-rows:1fr auto;gap:12px;min-height:0;}
+.arcade10-photo{border-radius:20px;overflow:hidden;min-height:0;border:1px solid #dfe7ed;}
+.arcade10-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.arcade10-value{background:#111820;color:#fff;border-left:8px solid #f2e600;border-radius:18px;padding:14px 18px;}
+.arcade10-tag{text-transform:uppercase;letter-spacing:1.4px;font-size:.78rem;font-weight:900;color:#f2e600;margin-bottom:4px;}
+.arcade10-math{display:flex;align-items:center;gap:14px;font-weight:900;line-height:1;}
+.arcade10-math span{font-size:2.35rem;}
+.arcade10-math b{font-size:1.9rem;color:#6cc24a;}
+.arcade10-value p{margin:6px 0 0;color:#d8e1e9;font-size:.95rem;line-height:1.25;}
+.arcade10-right{display:grid;grid-template-rows:auto repeat(3,1fr);gap:12px;min-height:0;}
+.arcade10-hero{background:linear-gradient(135deg,#111820,#21303e);color:#fff;border-radius:20px;padding:16px 18px;display:flex;align-items:center;gap:14px;border-left:8px solid #6cc24a;}
+.arcade10-hero span{font-size:2.1rem;}
+.arcade10-hero b{font-size:1.45rem;line-height:1.1;}
+.arcade10-card{background:#f8fafc;border:1px solid #dfe7ed;border-radius:18px;padding:15px 18px;display:grid;grid-template-columns:46px 1fr;gap:12px;align-items:center;min-height:0;}
+.arcade10-card>span{width:42px;height:42px;border-radius:50%;background:#6cc24a;color:#111820;display:grid;place-items:center;font-weight:900;font-size:1.25rem;}
+.arcade10-card b{font-size:1.22rem;display:block;margin-bottom:4px;color:#111820;}
+.arcade10-card p{margin:0;color:#4d5965;line-height:1.28;font-size:1rem;}
+.arcade10-framework{position:absolute;left:0;right:0;bottom:0;background:#fff9ce;border:2px solid #f2e600;border-radius:16px;padding:12px 18px;display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:center;text-align:center;font-weight:900;color:#111820;}
+.arcade10-framework div{display:flex;align-items:center;justify-content:center;gap:8px;}
+.arcade10-framework div:nth-child(2),.arcade10-framework div:nth-child(4){color:#6cc24a;font-size:1.35rem;}
+.arcade10-framework span{font-size:1.3rem;}
+@media(max-width:1000px){.arcade10-layout{grid-template-columns:1fr}.arcade10-framework{position:relative;margin-top:12px;grid-template-columns:1fr}.slide10-arcade .slide-body{padding-bottom:0}}
+
+
+.slide11-radar-v3 .slide-body{padding-top:8px;}
+.radar11-stage{position:relative;height:330px;margin:0 auto;max-width:1180px;border-radius:24px;background:radial-gradient(circle at center,rgba(138,209,75,.20) 0,rgba(138,209,75,.09) 24%,rgba(255,255,255,0) 54%),linear-gradient(180deg,#ffffff 0,#f8fbff 100%);overflow:hidden;}
+.radar11-lines{position:absolute;inset:0;width:100%;height:100%;z-index:1;}
+.radar11-lines line{stroke:#7ed957;stroke-width:3;stroke-dasharray:8 9;opacity:.38;}
+.radar11-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:292px;height:292px;z-index:2;}
+.radar11-ring{position:absolute;border-radius:50%;border:3px solid rgba(126,217,87,.38);inset:0;animation:none;}
+.radar11-ring.ring2{inset:42px;border-color:rgba(255,225,0,.55);}
+.radar11-ring.ring3{inset:84px;border-color:rgba(126,217,87,.55);background:rgba(255,255,255,.44);}
+.radar11-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:190px;height:154px;border-radius:24px;background:#081321;color:#fff;box-shadow:0 12px 28px rgba(0,0,0,.24);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:4px solid rgba(255,225,0,.85);}
+.radar11-core .radar11-icon{font-size:38px;line-height:1;margin-bottom:6px;}
+.radar11-core strong{font-size:30px;line-height:1;font-weight:950;letter-spacing:.04em;}
+.radar11-core span{font-size:18px;margin-top:5px;font-weight:800;color:#e9f3ff;}
+.radar11-card{position:absolute;z-index:3;width:282px;min-height:72px;border-radius:18px;padding:13px 14px;display:flex;align-items:center;gap:11px;box-shadow:0 10px 22px rgba(8,19,33,.10);border:1px solid rgba(8,19,33,.08);}
+.radar11-card>span{width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#fff;font-size:24px;box-shadow:inset 0 0 0 1px rgba(8,19,33,.06);flex:none;}
+.radar11-card b{display:block;font-size:16px;line-height:1.08;color:#0d1622;font-weight:950;}
+.radar11-card small{display:block;margin-top:5px;font-size:15px;color:#253247;font-weight:800;}
+.radar11-card.food{left:150px;top:20px;background:#fff1db;border-left:8px solid #ff9900;}
+.radar11-card.games{right:150px;top:20px;background:#e8f5ff;border-left:8px solid #3aa0ff;}
+.radar11-card.party{left:92px;top:128px;background:#fff0f5;border-left:8px solid #ff5f87;}
+.radar11-card.group{right:92px;top:128px;background:#f0edff;border-left:8px solid #7957ff;}
+.radar11-card.return{left:150px;bottom:20px;background:#fff9df;border-left:8px solid #d9b600;}
+.radar11-card.more{right:150px;bottom:20px;background:#eafbf2;border-left:8px solid #2ebf6b;}
+.radar11-flow{margin:10px auto 0;max-width:980px;height:54px;border-radius:18px;background:#081321;color:#fff;display:flex;align-items:center;justify-content:center;gap:24px;box-shadow:0 8px 18px rgba(8,19,33,.18);}
+.radar11-flow div{display:flex;align-items:center;gap:9px;font-size:20px;}
+.radar11-flow span{font-size:25px;}.radar11-flow b{font-size:20px;}.radar11-flow i{font-style:normal;color:#ffe100;font-weight:950;font-size:27px;}
+.radar11-note{text-align:center;font-size:15px;font-weight:800;color:#314052;margin-top:6px;}
+@media(max-width:1100px){.radar11-card.food,.radar11-card.return{left:45px}.radar11-card.games,.radar11-card.more{right:45px}.radar11-card.party{left:20px}.radar11-card.group{right:20px}.radar11-card{width:255px}.radar11-card b{font-size:15px}.radar11-card small{font-size:14px}}
+
+/* Slide 12 - Creating Future Visits Journey */
+.slide12-journey .slide-body{display:flex;flex-direction:column;gap:12px;height:100%;}
+.journey12-subtitle{text-align:center;font-size:1.32rem;font-weight:900;color:#253247;margin:-8px 0 4px;}
+.journey12-path{position:relative;flex:1;min-height:340px;border-radius:26px;background:linear-gradient(180deg,#ffffff 0%,#f7fbff 100%);border:1px solid #dfe7ed;overflow:hidden;padding:26px 26px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.75);}
+.journey12-path:before{content:"";position:absolute;left:70px;right:70px;top:48%;height:12px;border-radius:999px;background:linear-gradient(90deg,#6cc24a,#f2e600,#6cc24a);opacity:.42;transform:translateY(-50%);}
+.journey12-path:after{content:"";position:absolute;left:6%;right:6%;top:46%;height:150px;border-bottom:5px dashed rgba(8,19,33,.12);border-radius:0 0 50% 50%;}
+.journey12-step{position:relative;z-index:2;width:19%;min-height:245px;border-radius:24px;background:#fff;border:1px solid rgba(8,19,33,.08);box-shadow:0 14px 28px rgba(8,19,33,.10);padding:18px 13px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;}
+.journey12-step:nth-child(2),.journey12-step:nth-child(4){margin-top:62px;}
+.journey12-icon{width:82px;height:82px;border-radius:50%;display:grid;place-items:center;font-size:40px;background:#111820;color:#fff;border:5px solid #f2e600;box-shadow:0 10px 20px rgba(8,19,33,.18);margin-bottom:12px;}
+.journey12-step h3{font-size:1.24rem;line-height:1.06;margin:0 0 8px;color:#111820;font-weight:950;}
+.journey12-step p{font-size:.96rem;line-height:1.22;color:#56616d;margin:0;font-weight:700;}
+.journey12-arrow{position:relative;z-index:3;font-size:32px;font-weight:950;color:#0b8f2a;flex:0 0 auto;text-shadow:0 2px 0 #fff;}
+.journey12-step.return .journey12-icon{background:#0b8f2a;transform:scale(1.1);}
+.journey12-step.return{border:2px solid rgba(108,194,74,.55);}
+.journey12-bottom{height:88px;border-radius:22px;background:#081321;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:14px 26px;box-shadow:0 12px 26px rgba(8,19,33,.20);}
+.journey12-bottom .motto{display:flex;flex-direction:column;gap:3px;}
+.journey12-bottom .motto b{font-size:1.42rem;color:#f2e600;text-transform:uppercase;letter-spacing:.04em;}
+.journey12-bottom .motto span{font-size:.95rem;color:#dce7f2;font-weight:800;}
+.journey12-flow{display:flex;align-items:center;gap:14px;font-size:1.08rem;font-weight:950;}
+.journey12-flow div{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.10);border-radius:999px;padding:10px 13px;}
+.journey12-flow i{font-style:normal;color:#f2e600;font-size:1.4rem;}
+@media(max-width:1100px){.journey12-step{padding:14px 10px}.journey12-icon{width:68px;height:68px;font-size:32px}.journey12-step h3{font-size:1.05rem}.journey12-step p{font-size:.86rem}.journey12-flow{gap:8px;font-size:.95rem}.journey12-bottom{padding:12px 18px}}
+
+</style>
+<style id="deployment-lock-style">
+  .audio-status, .sr-audio-status { display: none !important; }
+  button[disabled] { opacity: .55 !important; cursor: not-allowed !important; }
+</style>
+</head>
+<body>
+<div class="start-overlay" id="startOverlay">
+  <div class="start-card">
+    <h2>Start Day 3 Training</h2>
+    <p>Click below to begin the Day 3 slideshow and enable narration playback. This matches the browser audio behavior used in the earlier training days.</p>
+    <button onclick="startTraining()">Start Day 3 Training</button>
+  </div>
+</div>
+<div class="deck">
+  <div class="topbar"><div class="brand"><div class="logo-mark">L</div><div class="brand-title"><strong>CASHIER TRAINING</strong><span>Day 3: Loyalty, Upselling & Revenue Growth</span></div></div><div class="top-actions"><a class="pill-btn" href="index.html">Back to Day 3 Menu</a><div class="slide-counter" id="slideCounter">Slide 1 / 16</div></div></div>
+  <div class="stage">
+      <section class="slide active" data-notes="Welcome to Day 3. Today focuses on helping guests get more value from their visit while supporting revenue growth through loyalty enrollment, thoughtful recommendations, and location-specific upsell opportunities.">
+        <div class="color-strip"></div>
+        <div class="slide-header"><div><div class="eyebrow">DAY 3 CASHIER TRAINING</div><h1>Loyalty, Upselling & Revenue Growth</h1></div><div class="module-pill">Start</div></div>
+        <div class="slide-body">
+        <div class="cover-grid">
+          <div class="cover-copy">
+            <div class="big-title">Day 3</div>
+            <h2>Loyalty, Upselling & Revenue Growth</h2>
+            <p>Today builds on greeting, waivers, wristbands, guest service, and cash handling by teaching how to make helpful recommendations that improve the guest experience.</p>
+            <div class="pill-row"><span>Loyalty</span><span>Recommendations</span><span>Upselling</span><span>Repeat Visits</span></div>
+            <div class="audio-panel">
+              <div class="audio-title">Slide 1 Narration</div>
+              <audio preload="auto" data-required="true" style="display:none;">
+                <source src="audio/Cashier Day 3 - Intro.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+              <div class="audio-status" id="audioStatus-0">Narration locked until training starts.</div>
+              <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-0"></div></div>
+            </div>
+          </div>
+          <div class="hero-photo"><img src="images/Main_Check_In_Photo.JPG" alt="Launch check-in area"></div>
+        </div>
+        </div>
+      </section>
+<section class="slide" data-notes="Upselling should never feel pushy. The goal is to help guests choose the options that will give them the best visit. Strong recommendations connect back to the Launch vision of creating awesome memories.">
+        <div class="color-strip"></div>
+        <div class="slide-header"><div><div class="eyebrow">Guest Experience</div><h1>Creating AWESOME Memories Through Recommendations</h1></div><div class="module-pill">Mindset</div></div>
+        <div class="slide-body">
+        <div class="split">
+          <div class="photo-panel"><img src="images/Trampoline_Jumper.jpg" alt="Guest enjoying Launch attraction"></div>
+          <div class="content-panel">
+            <h3>Recommendations Are Guest Service</h3>
+            <div class="check-card"><b>Listen first.</b><span>Use what the guest tells you to understand their visit.</span></div>
+            <div class="check-card"><b>Recommend second.</b><span>Offer the option that best fits their needs.</span></div>
+            <div class="check-card"><b>Respect the decision.</b><span>If the guest declines, continue with the same positive attitude.</span></div>
+            <div class="takeaway">A good recommendation helps the guest have a better experience.</div>
+            <div class="audio-panel">
+              <div class="audio-title">Slide 2 Narration</div>
+              <audio preload="auto" data-required="true" style="display:none;">
+                <source src="audio/Cashier Day 3 - Slide 2.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+              <div class="audio-status" id="audioStatus-1">Narration locked until training starts.</div>
+              <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-1"></div></div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+<section class="slide approved-slide3-content" data-notes="The Launch Loyalty Program is a free rewards program. It is not a paid membership. Guests earn points through qualifying purchases and can receive rewards, birthday perks, and exclusive offers.">
+        <img src="images/slide3-approved-content.png" alt="What is the Launch Loyalty Program">
+              <div class="audio-panel slide3-audio-panel">
+          <div class="audio-title">Slide 3 Narration</div>
+          <audio preload="auto" data-required="true" style="display:none;">
+            <source src="audio/Cashier Day 3 - Slide 3.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+          <div class="audio-status" id="audioStatus-2">Narration locked until training starts.</div>
+          <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-2"></div></div>
+        </div>
+      </section>
+<section class="slide slide4-direct-html" data-notes="This slide explains the main benefits guests receive by joining Launch Loyalty, including the five dollar next-day reward, points on purchases, a fifteen dollar reward at fifteen hundred points, birthday offers, exclusive discounts, and app access.">
+        <div class="slide4-bg"></div>
+        <div class="slide4-brand">
+          <div class="launch-word">LAUNCH</div>
+          <div class="launch-sub">FAMILY ENTERTAINMENT</div>
+          <div class="loyal-logo"><strong>LOYAL</strong> LAUNCHER<span>REWARDS</span></div>
+          <div class="brand-star s1">★</div><div class="brand-star s2">★</div><div class="brand-star s3">★</div><div class="brand-star s4">★</div>
+        </div>
+        <div class="slide4-title">
+          <h1>What’s In It For Me?</h1>
+          <h2>The benefits guests receive by joining Launch Loyalty.</h2>
+          <div class="slide4-rule"><span></span><b>★</b><span></span></div>
+        </div>
+        <div class="benefit-grid-d">
+          <div class="benefit-d">
+            <div class="benefit-icon">🎁<small>$</small></div>
+            <div class="benefit-copy"><h3>FREE<br><span>$5 REWARD</span></h3><div class="mini-line"><span></span><b>★</b><span></span></div><p>New members receive<br>a $5 reward 24 hours<br>after joining.</p></div>
+          </div>
+          <div class="benefit-d">
+            <div class="benefit-icon star-icon">★</div>
+            <div class="benefit-copy"><h3><span>10 POINTS</span><br>PER DOLLAR</h3><div class="mini-line"><span></span><b>★</b><span></span></div><p>Earn points on<br>qualifying purchases<br>throughout the park.</p></div>
+          </div>
+          <div class="benefit-d">
+            <div class="benefit-icon">🎁</div>
+            <div class="benefit-copy"><h3><span>$15 REWARD</span><br>AT 1,500 POINTS</h3><div class="mini-line"><span></span><b>★</b><span></span></div><p>Reach 1,500 points and<br>receive a $15 reward<br>to use on a future visit.</p></div>
+          </div>
+          <div class="benefit-d">
+            <div class="benefit-icon cake-icon">🎂</div>
+            <div class="benefit-copy"><h3><span>BIRTHDAY</span><br>OFFERS</h3><div class="mini-line"><span></span><b>★</b><span></span></div><p>Special rewards and<br>promotions during<br>a guest’s birthday period.</p></div>
+          </div>
+          <div class="benefit-d">
+            <div class="benefit-icon bolt-icon">⚡</div>
+            <div class="benefit-copy"><h3><span>EXCLUSIVE</span><br>DISCOUNTS</h3><div class="mini-line"><span></span><b>★</b><span></span></div><p>Flash deals and<br>Loyalty-only promotions<br>throughout the year.</p></div>
+          </div>
+          <div class="benefit-d">
+            <div class="benefit-icon phone-icon">▯<small>★</small></div>
+            <div class="benefit-copy"><h3><span>MOBILE APP</span><br>ACCESS</h3><div class="mini-line"><span></span><b>★</b><span></span></div><p>Track points, rewards,<br>and available offers<br>anytime, anywhere.</p></div>
+          </div>
+        </div>
+        <div class="slide4-bottom">
+          <div class="bottom-star">★</div>
+          <p>The <span>more value</span> guests understand, the <span>more likely</span> they are to join.</p>
+        </div>
+              <div class="audio-panel slide4-audio-panel">
+          <div class="audio-title">Slide 4 Narration</div>
+          <audio preload="auto" data-required="true" style="display:none;">
+            <source src="audio/Cashier Day 3 - Slide 4.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+          <div class="audio-status" id="audioStatus-3">Narration locked until training starts.</div>
+          <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-3"></div></div>
+        </div>
+      </section>
+<section class="slide slide5-direct-html" data-notes="This slide explains the difference between joining Launch Loyalty and earning rewards. Guests join through the waiver or a Loyalty QR code. During checkout, the front end associate enters the guest's phone number to connect the transaction to an existing Loyalty account, earn points, and apply available rewards.">
+        <div class="s5-bg"></div>
+        <div class="s5-header">
+          <div>
+            <h1>How Guests Join &amp; Earn Rewards</h1>
+            <p>Understanding the difference between joining Loyalty and earning rewards.</p>
+          </div>
+          <div class="s5-pill">Loyalty</div>
+        </div>
+
+        <div class="s5-columns">
+          <div class="s5-panel join-panel">
+            <div class="s5-panel-title">Join Loyalty</div>
+            <div class="s5-panel-sub">Guests create their Loyalty account before earning rewards.</div>
+
+            <div class="s5-join-row">
+              <div class="s5-icon circle-doc">▤<span>✓</span></div>
+              <div>
+                <h3>1. Waiver Registration</h3>
+                <p>Guests can register for Launch Loyalty during the waiver process.</p>
+              </div>
+            </div>
+
+            <div class="s5-or"><span></span><b>OR</b><span></span></div>
+
+            <div class="s5-join-row">
+              <div class="s5-icon circle-qr">▦</div>
+              <div>
+                <h3>2. Loyalty QR Code</h3>
+                <p>Guests can scan any Launch Loyalty QR code throughout the park to register.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="s5-panel pos-panel">
+            <div class="s5-pos-title">Loyalty Phone Number Prompt</div>
+            <div class="s5-pos-frame">
+              <img src="images/slide5-pos-phone-prompt.png" alt="POS phone number prompt">
+            </div>
+            <div class="s5-pos-caption">
+              <strong>This screen appears during checkout.</strong>
+              <p>The front end associate enters the guest's phone number here to:</p>
+              <ul>
+                <li>Earn points</li>
+                <li>Apply available rewards</li>
+                <li>Access existing Loyalty benefits</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="s5-panel key-panel">
+            <div class="s5-panel-title">Cashier Key Points</div>
+
+            <div class="s5-key-row">
+              <div class="s5-key-icon">👤<span>✓</span></div>
+              <div>
+                <h3>Phone Number = Existing Account</h3>
+                <p>Entering a phone number does <strong>NOT</strong> create a Loyalty account.</p>
+              </div>
+            </div>
+
+            <div class="s5-divider"></div>
+
+            <div class="s5-key-row">
+              <div class="s5-key-icon">★</div>
+              <div>
+                <h3>Points Are Automatic</h3>
+                <p>Once the purchase is completed, points are added automatically.</p>
+              </div>
+            </div>
+
+            <div class="s5-divider"></div>
+
+            <div class="s5-key-row">
+              <div class="s5-key-icon">🎁</div>
+              <div>
+                <h3>Rewards Are Automatic</h3>
+                <p>Eligible rewards connected to the account are automatically applied during checkout.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="s5-warning">
+          <div class="s5-warning-icon">!</div>
+          <div class="s5-warning-title">Common Mistake</div>
+          <div class="s5-warning-text">
+            A guest cannot join Launch Loyalty by entering a phone number at checkout.<br>
+            <strong>Guests must first register through the waiver or a Loyalty QR code.</strong>
+          </div>
+        </div>
+              <div class="audio-panel slide5-audio-panel">
+          <div class="audio-title">Slide 5 Narration</div>
+          <audio preload="auto" data-required="true" style="display:none;">
+            <source src="audio/Cashier Day 3 - Slide 5.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+          <div class="audio-status" id="audioStatus-4">Narration locked until training starts.</div>
+          <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-4"></div></div>
+        </div>
+      </section>
+<section class="slide slide6-direct-html" data-notes="This slide explains the limited current role of the Launch Loyalty App and answers the most common guest questions. The app is optional and currently allows guests to see their point balance, earned rewards, reward history, and available offers. For more detailed questions, cashiers should refer to their manager, local leadership, or the park's Loyalty materials.">
+        <div class="s6-bg"></div>
+
+        <div class="s6-top">
+          <div>
+            <h1>Launch Loyalty</h1>
+            <h2>The App &amp; Common Questions</h2>
+            <p>Everything a cashier needs to know about the Launch Loyalty App and common guest questions.</p>
+          </div>
+          <div class="s6-pill">Loyalty</div>
+        </div>
+
+        <div class="s6-main">
+          <div class="s6-app-panel">
+            <div class="s6-panel-title">The Launch Loyalty App</div>
+            <div class="s6-app-content">
+              <div class="s6-phone">
+                <div class="s6-phone-top"></div>
+                <div class="s6-phone-logo">LAUNCH<br><span>LOYALTY</span></div>
+                <div class="s6-phone-row green"><b>★</b><span>Current Points</span><strong>1,250</strong></div>
+                <div class="s6-phone-row purple"><b>🎁</b><span>Available Rewards</span><strong>›</strong></div>
+                <div class="s6-phone-row blue"><b>☷</b><span>Loyalty Activity</span><strong>›</strong></div>
+                <div class="s6-phone-row orange"><b>🏷</b><span>Available Offers</span><strong>›</strong></div>
+              </div>
+              <div class="s6-app-copy">
+                <h3>What Does The App Do?</h3>
+                <p>The Launch Loyalty App allows guests to:</p>
+                <ul>
+                  <li>View their current point balance</li>
+                  <li>See earned rewards</li>
+                  <li>Track Loyalty activity</li>
+                  <li>Access available offers</li>
+                </ul>
+                <div class="s6-important">
+                  <b>i</b>
+                  <div>
+                    <strong>Important</strong>
+                    <p>The app is optional. Guests do not need the app to participate in Launch Loyalty.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="s6-faq-panel">
+            <div class="s6-faq-title">Common Guest Questions</div>
+
+            <div class="s6-faq-card">
+              <div class="s6-faq-icon">$</div>
+              <div class="s6-faq-text"><h3>Is Loyalty Free?</h3><p><span>✓</span>Yes. Launch Loyalty is completely free to join.</p></div>
+            </div>
+
+            <div class="s6-faq-card">
+              <div class="s6-faq-icon">👤</div>
+              <div class="s6-faq-text"><h3>Is Loyalty a Membership?</h3><p><span>✓</span>No. Loyalty is a free rewards program.</p></div>
+            </div>
+
+            <div class="s6-faq-card">
+              <div class="s6-faq-icon">▯</div>
+              <div class="s6-faq-text"><h3>Do I Need the App?</h3><p><span>✓</span>No. The app is optional.</p></div>
+            </div>
+
+            <div class="s6-faq-card">
+              <div class="s6-faq-icon">☆</div>
+              <div class="s6-faq-text"><h3>How Do I Earn Points?</h3><p><span>✓</span>Join Loyalty and provide your phone number during checkout.</p></div>
+            </div>
+
+            <div class="s6-faq-card">
+              <div class="s6-faq-icon">?</div>
+              <div class="s6-faq-text"><h3>What If I Have More Questions?</h3><p><span>✓</span>Each park has detailed Loyalty reference materials available. Speak with your manager or local leadership for additional information.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="s6-remember">
+          <div class="s6-light">💡</div>
+          <div class="s6-remember-title">Remember</div>
+          <div class="s6-remember-copy">You do not need to know every detail of the Loyalty program.<br>Your job is to explain the basics, answer common questions, and know where to direct guests for additional information.</div>
+          <div class="s6-people">👥</div>
+        </div>
+              <div class="audio-panel slide6-audio-panel">
+          <div class="audio-title">Slide 6 Narration</div>
+          <audio preload="auto" data-required="true" style="display:none;">
+            <source src="audio/Cashier Day 3 - Slide 6.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+          <div class="audio-status" id="audioStatus-5">Narration locked until training starts.</div>
+          <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-5"></div></div>
+        </div>
+      </section>
+
+<section class="slide slide7-native-final" data-notes="This slide introduces upselling as a helpful recommendation that improves the guest experience. Upselling should not feel like pressure or a trick. The cashier should recommend value, explain benefits, and respect the guest's answer.">
+        <div class="s7f-bg"></div>
+        <div class="s7f-topline"></div>
+        <div class="s7f-label">Upselling</div>
+        <div class="s7f-pill">Sales</div>
+
+        <div class="s7f-title">
+          <h1>What Is Upselling?</h1>
+          <p>Upselling is a helpful recommendation that adds value to the guest experience.<br>
+          It’s about offering the right add-on at the right time to enhance their visit.</p>
+        </div>
+
+        <div class="s7f-left-card">
+          <div class="s7f-heading-row">
+            <div class="s7f-person">👤<span>☆</span></div>
+            <div>
+              <h2>Upselling Is a Helpful Recommendation</h2>
+              <p>It is not pressure. It is not tricking the guest.<br>It is giving them a better option when it fits their visit.</p>
+            </div>
+          </div>
+
+          <div class="s7f-do-dont">
+            <div class="s7f-mini-card s7f-do">
+              <div class="s7f-round">✓</div>
+              <h3>DO</h3>
+              <ul>
+                <li><span>💬</span>Recommend value</li>
+                <li><span>👍</span>Explain benefits</li>
+                <li><span>♡</span>Respect the answer</li>
+              </ul>
+            </div>
+            <div class="s7f-mini-card s7f-dont">
+              <div class="s7f-round">×</div>
+              <h3>DON’T</h3>
+              <ul>
+                <li><span>🗣</span>Pressure</li>
+                <li><span>?</span>Mislead</li>
+                <li><span>➜</span>Keep pushing after a guest says no</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="s7f-photo">
+          <img src="images/Bowling.jpg" alt="Guests enjoying bowling at Launch">
+        </div>
+
+        <div class="s7f-better">
+          <div class="s7f-bulb">💡</div>
+          <div>
+            <h3>Think “Better Experience.”</h3>
+            <p>Your recommendation can help guests have more fun, more convenience, or more value.</p>
+          </div>
+        </div>
+
+        <div class="s7f-bottom">
+          <div class="s7f-star">★</div>
+          <p><strong>Our goal is to help every guest get the most out of their visit.</strong> A smart recommendation can make their experience even better!</p>
+        </div>
+
+        <div class="audio-panel slide7-audio-panel">
+          <div class="audio-title">Slide 7 Narration</div>
+          <audio preload="auto" data-required="true" style="display:none;">
+            <source src="audio/Cashier Day 3 - Slide 7.m4a" type="audio/mp4">
+            Your browser does not support the audio element.
+          </audio>
+          <div class="audio-status" id="audioStatus-6">Narration locked until training starts.</div>
+          <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-6"></div></div>
+        </div>
+
+      </section>
+<section class="slide slide8-listening" data-notes="Do not replace the Day 1 greeting. Every interaction still starts with Welcome to Launch, have you been here before. Day 3 teaches cashiers to listen to the guest's answer and identify helpful recommendations.">
+        <div class="color-strip"></div>
+        <div class="slide-header"><div><div class="eyebrow">Opportunities</div><h1>Listening for Upsell Opportunities</h1></div><div class="module-pill">Listen</div></div>
+        <div class="slide-body">
+        <div class="s8-conversation-slide">
+          <div class="s8-quote-wrap">
+            <div class="s8-quote-icon">💬</div>
+            <div class="s8-quote-copy">
+              <span>Start with the same Day 1 greeting.</span>
+              <strong>“Welcome to Launch! Have you been here before?”</strong>
+            </div>
+          </div>
+
+          <div class="s8-listener-grid">
+            <div class="s8-listen-card first-time">
+              <div class="s8-card-icon">⭐</div>
+              <div class="s8-card-content"><b>“It’s our first time.”</b><span>Explain packages and mention Loyalty.</span></div>
+              <div class="s8-opportunity-tag">Package + Loyalty</div>
+            </div>
+            <div class="s8-listen-card birthday">
+              <div class="s8-card-icon">🎉</div>
+              <div class="s8-card-content"><b>“We’re here for a birthday.”</b><span>Mention arcade, future parties, and rewards.</span></div>
+              <div class="s8-opportunity-tag">Parties + Rewards</div>
+            </div>
+            <div class="s8-listen-card all-day">
+              <div class="s8-card-icon">⏰</div>
+              <div class="s8-card-content"><b>“We’re staying all day.”</b><span>Recommend upgrades, arcade, or location-specific add-ons.</span></div>
+              <div class="s8-opportunity-tag">Upgrade + Add-Ons</div>
+            </div>
+            <div class="s8-listen-card arcade">
+              <div class="s8-card-icon">🎮</div>
+              <div class="s8-card-content"><b>“The kids love arcade games.”</b><span>Recommend an arcade card.</span></div>
+              <div class="s8-opportunity-tag">Arcade Card</div>
+            </div>
+          </div>
+
+          <div class="s8-framework">
+            <div><span>👂</span><b>Listen First</b></div>
+            <div class="s8-arrow">→</div>
+            <div><span>💡</span><b>Identify Need</b></div>
+            <div class="s8-arrow">→</div>
+            <div><span>🎯</span><b>Make Recommendation</b></div>
+          </div>
+        </div>
+        <div class="audio-panel slide8-audio-panel">
+          <div class="audio-title">Slide 8 Narration</div>
+          <audio preload="auto" data-required="true" style="display:none;">
+            <source src="audio/Cashier Day 3 - Slide 8 v2.m4a" type="audio/mp4">
+            Your browser does not support the audio element.
+          </audio>
+          <div class="audio-status" id="audioStatus-7">Narration locked until training starts.</div>
+          <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-7"></div></div>
+        </div>
+        </div>
+      </section>
+<section class="slide slide9-admissions" data-notes="Successful up-selling starts with knowing what your location offers. While every Launch location is different, guests rely on you to help them understand their options and choose the experience that best fits their visit. Before making a recommendation, take time to learn about your park's attraction packages, promotions, memberships, arcade offerings, food options, and any location-specific attractions or experiences. Remember, the goal is not to recommend the most expensive package. The goal is to recommend the package that provides the best value for that particular guest. Start by asking questions and listening carefully. How many guests are visiting today? Is it their first time? Are they planning to stay for a short visit or most of the day? The answers to those questions will help you identify which options may provide additional value. When discussing packages, focus on what the guest receives, not just what they spend. Help them understand the benefits, attractions, play time, or additional experiences included in each option. A knowledgeable cashier creates confidence. When guests trust your recommendations, they are more likely to choose options that improve their experience and create a more memorable visit. Know the offerings. Understand the value. Match the recommendation to the guest.">
+        <div class="color-strip"></div>
+        <div class="slide-header"><div><div class="eyebrow">Admissions</div><h1>Upselling Admissions & Attractions</h1></div><div class="module-pill">Packages</div></div>
+        <div class="slide-body">
+          <div class="s9-wrap">
+            <div class="s9-visual">
+              <img src="images/VR_Arena.jpg" alt="Launch VR Arena">
+              <div class="s9-local-badge"><span>Local Knowledge Matters</span><b>Every Launch is different.</b></div>
+              <div class="s9-photo-caption"><h3>Know what your park offers.</h3><p>Use your current menu board, promotion materials, and leadership guidance.</p></div>
+            </div>
+            <div class="s9-playbook">
+              <div class="s9-lead"><span>Cashier Playbook</span><strong>Recommend the best fit for this guest, at this location.</strong></div>
+              <div class="s9-card-grid">
+                <div class="s9-card"><div class="s9-icon">📋</div><b>Know the Packages</b><span>Understand what each current package includes before recommending an upgrade.</span></div>
+                <div class="s9-card value"><div class="s9-icon">💡</div><b>Explain the Value</b><span>Tell guests what they gain: more time, more options, or a better overall experience.</span></div>
+                <div class="s9-card fit"><div class="s9-icon">👥</div><b>Match the Visit</b><span>Use their group size, time in the park, and interests to guide the recommendation.</span></div>
+                <div class="s9-card local"><div class="s9-icon">📍</div><b>Stay Location-Specific</b><span>Do not guess. Use the attractions, add-ons, and promotions available in your park.</span></div>
+              </div>
+              <div class="s9-bottom"><div><span>👂</span>Listen</div><div class="s9-arrow">→</div><div><span>📋</span>Know the Options</div><div class="s9-arrow">→</div><div><span>🎯</span>Recommend the Fit</div></div>
+              <div class="audio-panel slide9-audio-panel" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+                <div class="audio-title">Slide 9 Narration</div>
+                <audio preload="auto" data-required="true" style="display:none;">
+                  <source src="audio/Cashier Day 3 - Slide 9.m4a" type="audio/mp4">
+                  Your browser does not support the audio element.
+                </audio>
+                <div class="audio-status" id="audioStatus-8">Narration locked until training starts.</div>
+                <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-8"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+<section class="slide slide10-arcade" data-notes="Arcade play is one of the easiest and most effective recommendations you can make to a guest. Unlike attractions and packages, every Launch location has an arcade, making it a great option to discuss with almost any guest. Arcade games add another layer of fun to the visit and help guests stay engaged even longer. Many families enjoy spending time on the attractions and then heading to the arcade to continue the experience. When discussing arcade cards, focus on the value the guest receives. Many locations offer bonus play when guests purchase larger arcade cards. For example, a guest may purchase a fifty-dollar arcade card and receive additional bonus value at no extra cost. Because promotions and bonus amounts vary by location, it is important to know your park's current arcade offers and be able to explain them confidently. Listen for clues during the conversation. If guests mention arcade games, prizes, spending more time in the park, or finding activities for the whole family, an arcade card may be a great recommendation. Remember, the goal is not simply to sell more. The goal is to help guests get the most enjoyment and value from their visit. Listen for interest, recommend arcade play, and explain the value.">
+        <div class="color-strip"></div>
+        <div class="slide-header"><div><div class="eyebrow">Arcade</div><h1>Upselling Arcade Play</h1></div><div class="module-pill">Add-On</div></div>
+        <div class="slide-body">
+          <div class="arcade10-layout">
+            <div class="arcade10-left">
+              <div class="arcade10-photo"><img src="images/Basketball_Arcade.jpg" alt="Arcade basketball game"></div>
+              <div class="arcade10-value">
+                <div class="arcade10-tag">Example Value Offer</div>
+                <div class="arcade10-math"><span>$50</span><b>→</b><span>$75</span></div>
+                <p>Some parks offer bonus play on larger arcade purchases. Incentives vary by location.</p>
+              </div>
+            </div>
+            <div class="arcade10-right">
+              <div class="arcade10-hero"><span>🎮</span><b>More Games. More Fun. More Memories.</b></div>
+              <div class="arcade10-card"><span>1</span><div><b>Every Launch Has An Arcade</b><p>Arcade is a universal add-on opportunity at every location.</p></div></div>
+              <div class="arcade10-card"><span>2</span><div><b>Extends The Visit</b><p>Arcade play gives guests another reason to stay longer and enjoy more of the park.</p></div></div>
+              <div class="arcade10-card"><span>3</span><div><b>Explain The Value</b><p>Know your park's current arcade offers so you can explain bonus play clearly.</p></div></div>
+            </div>
+          </div>
+          <div class="arcade10-framework"><div><span>👂</span><b>Listen for Interest</b></div><div>→</div><div><span>🎮</span><b>Recommend Arcade</b></div><div>→</div><div><span>⭐</span><b>Explain the Value</b></div></div>
+          <div class="audio-panel slide10-audio-panel" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+            <div class="audio-title">Slide 10 Narration</div>
+            <audio preload="auto" data-required="true" style="display:none;">
+              <source src="audio/Cashier Day 3 - Slide 10.m4a" type="audio/mp4">
+              Your browser does not support the audio element.
+            </audio>
+            <div class="audio-status" id="audioStatus-9">Narration locked until training starts.</div>
+            <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-9"></div></div>
+          </div>
+        </div>
+      </section>
+<section class="slide slide11-radar-v3" data-notes="As you interact with guests, you&#x27;ll begin to notice clues that can lead to valuable up-selling opportunities. The key is to listen carefully and understand what the guest is trying to accomplish during their visit. For example, a guest who mentions they&#x27;re getting hungry may appreciate learning about food and beverage options. A family that loves arcade games may benefit from an arcade card or bonus play promotion. If a parent mentions an upcoming birthday, that can be a great opportunity to discuss birthday party packages. When guests talk about bringing a large group, you can share information about group events and special offerings. You may also hear guests mention that they plan to return in the future. Depending on your location, that could be an opportunity to discuss memberships, seasonal passes, or other programs designed for repeat visits. Remember, every Launch location is different. Some locations offer attractions, promotions, memberships, or experiences that may not be available everywhere. It is important to understand the offerings at your location and stay informed about current promotions. The most successful cashiers follow a simple process. First, listen for clues. Next, identify the guest&#x27;s need. Finally, explain the value of the option you&#x27;re recommending. Listen for clues, match the need, and explain the value.">
+<div class="color-strip"></div>
+<div class="slide-header"><div><div class="eyebrow">Opportunity Radar</div><h1>Additional Upsell Opportunities</h1></div><div class="module-pill">Listen For Clues</div></div>
+<div class="slide-body">
+<div class="radar11-stage">
+  <svg class="radar11-lines" viewBox="0 0 1120 330" preserveAspectRatio="none" aria-hidden="true">
+    <line x1="340" y1="78" x2="560" y2="158" />
+    <line x1="780" y1="78" x2="560" y2="158" />
+    <line x1="300" y1="164" x2="560" y2="164" />
+    <line x1="820" y1="164" x2="560" y2="164" />
+    <line x1="340" y1="252" x2="560" y2="172" />
+    <line x1="780" y1="252" x2="560" y2="172" />
+  </svg>
+  <div class="radar11-center">
+    <div class="radar11-ring ring1"></div>
+    <div class="radar11-ring ring2"></div>
+    <div class="radar11-ring ring3"></div>
+    <div class="radar11-core"><div class="radar11-icon">🎯</div><strong>LISTEN</strong><span>FOR CLUES</span></div>
+  </div>
+  <div class="radar11-card food"><span>🍕</span><div><b>“We're getting hungry.”</b><small>Food & Beverage</small></div></div>
+  <div class="radar11-card games"><span>🎮</span><div><b>“The kids love games.”</b><small>Arcade Play</small></div></div>
+  <div class="radar11-card party"><span>🎂</span><div><b>“Birthday next month.”</b><small>Birthday Parties</small></div></div>
+  <div class="radar11-card group"><span>👥</span><div><b>“We have a big group.”</b><small>Groups & Events</small></div></div>
+  <div class="radar11-card return"><span>🎟️</span><div><b>“We'll definitely be back.”</b><small>Memberships & Passes</small></div></div>
+  <div class="radar11-card more"><span>🎳</span><div><b>“What else is there to do?”</b><small>Attractions & Add-Ons</small></div></div>
+</div>
+<div class="radar11-flow"><div><span>👂</span><b>Listen</b></div><i>→</i><div><span>🔍</span><b>Identify Need</b></div><i>→</i><div><span>⭐</span><b>Explain Value</b></div></div>
+<div class="radar11-note">Every Launch is different. Learn your location's offerings and current promotions.</div>
+<div class="audio-panel slide11-audio-panel" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+  <div class="audio-title">Slide 11 Narration</div>
+  <audio preload="auto" data-required="true" style="display:none;">
+    <source src="audio/Cashier Day 3 - Slide 11.m4a" type="audio/mp4">
+    Your browser does not support the audio element.
+  </audio>
+  <div class="audio-status" id="audioStatus-10">Narration locked until training starts.</div>
+  <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-10"></div></div>
+</div>
+</div>
+</section>
+<section class="slide slide12-journey" data-notes="Cashiers can help create future visits by connecting today's guest experience to future reasons to return. Loyalty rewards, birthday awareness, local memberships or seasonal passes, and a positive send-off can all help turn one great visit into the next one.">
+        <div class="color-strip"></div>
+        <div class="slide-header"><div><div class="eyebrow">Future Visits</div><h1>Creating Future Visits</h1></div><div class="module-pill">Guest Journey</div></div>
+        <div class="slide-body">
+          <div class="journey12-subtitle">A great visit today can become many visits tomorrow.</div>
+          <div class="journey12-path">
+            <div class="journey12-step"><div class="journey12-icon">🎉</div><h3>Guest Visits Today</h3><p>Create an awesome first impression.</p></div>
+            <div class="journey12-arrow">➜</div>
+            <div class="journey12-step"><div class="journey12-icon">⭐</div><h3>Joins Loyalty</h3><p>Earn points, rewards, and future offers.</p></div>
+            <div class="journey12-arrow">➜</div>
+            <div class="journey12-step"><div class="journey12-icon">🎂</div><h3>Plans a Birthday Party</h3><p>Today's guest could become tomorrow's party host.</p></div>
+            <div class="journey12-arrow">➜</div>
+            <div class="journey12-step"><div class="journey12-icon">🎟️</div><h3>Passes & Memberships</h3><p>Programs vary by location.</p></div>
+            <div class="journey12-arrow">➜</div>
+            <div class="journey12-step return"><div class="journey12-icon">🔁</div><h3>Returns Again</h3><p>Happy guests become repeat guests.</p></div>
+          </div>
+          <div class="journey12-bottom">
+            <div class="motto"><b>Every Interaction Matters</b><span>Today's transaction can create the next visit.</span></div>
+            <div class="journey12-flow"><div>👂 <b>Listen</b></div><i>→</i><div>⭐ <b>Add Value</b></div><i>→</i><div>🎉 <b>Have an Awesome Time</b></div></div>
+          </div>
+        </div>
+      
+          <div class="audio-panel slide12-audio-panel" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+            <div class="audio-title">Slide 12 Narration</div>
+            <audio preload="auto" data-required="true" style="display:none;">
+              <source src="audio/Cashier Day 3 - Slide 12.m4a" type="audio/mp4">
+              Your browser does not support the audio element.
+            </audio>
+            <div class="audio-status" id="audioStatus-11">Narration locked until training starts.</div>
+            <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-11"></div></div>
+          </div>
+</section>
+
+<section class="slide slide13-birthday" data-notes="Birthday awareness is not about pressuring guests into booking a party at the front counter. It is about recognizing celebration clues, mentioning that Launch hosts birthday parties, and directing detailed questions to the right team member or local party information.">
+        <div class="color-strip"></div>
+        <div class="slide-header"><div><div class="eyebrow">Future Celebrations</div><h1>Birthday Parties & Future Celebrations</h1></div><div class="module-pill">Slide 13</div></div>
+        <div class="slide-body">
+          <div class="birthday-board">
+            <div class="bday-hero">
+              <div class="bday-spark">Future Visit Opportunity</div>
+              <div class="bday-icon">🎂</div>
+              <h2>Today’s guest could be tomorrow’s party host.</h2>
+              <p>Listen for celebration clues and make a helpful connection when it fits the conversation.</p>
+            </div>
+            <div class="bday-clues">
+              <div class="bday-card"><span>🎉</span><div><b>“We’re here celebrating today.”</b><p>Recognize the moment and mention that Launch hosts birthday parties.</p></div></div>
+              <div class="bday-card"><span>🗓️</span><div><b>“His birthday is next month.”</b><p>This is a natural time to share where they can learn more about parties.</p></div></div>
+              <div class="bday-card"><span>👥</span><div><b>“We may bring friends next time.”</b><p>Point them toward party or group information based on your location’s process.</p></div></div>
+            </div>
+            <div class="bday-bottom"><mark>Listen</mark> Mention parties when appropriate <mark>Direct Questions</mark> Keep the interaction helpful</div>
+          </div>
+        </div>
+        <div class="audio-panel slide13-audio-panel" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+          <div class="audio-title">Slide 13 Narration</div>
+          <audio preload="auto" data-required="true" style="display:none;">
+            <source src="audio/Cashier Day 3 - Slide 13.m4a" type="audio/mp4">
+            Your browser does not support the audio element.
+          </audio>
+          <div class="audio-status" id="audioStatus-12">Narration locked until training starts.</div>
+          <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-12"></div></div>
+        </div>
+      </section>
+<section class="slide slide14-respect" data-notes="Helpful recommendations should never become pressure. Cashiers should make honest suggestions, explain the value clearly, and respect the guest's answer. If a guest declines, move forward with the same positive service.">
+        <div class="color-strip"></div>
+        <div class="slide-header"><div><div class="eyebrow">Guest Trust</div><h1>Respect the Guest’s Decision</h1></div><div class="module-pill">Slide 14</div></div>
+        <div class="slide-body">
+          <div class="respect-layout">
+            <div class="respect-big">
+              <div class="stop-icon">🤝</div>
+              <h2>Helpful, Not Pushy</h2>
+              <p>A good recommendation gives the guest confidence. It should never make the guest feel pressured.</p>
+              <div class="respect-flow"><span>Recommend</span><i>→</i><span>Explain Value</span><i>→</i><span>Respect the Answer</span></div>
+            </div>
+            <div class="respect-side">
+              <div class="respect-card good"><h3>Do This</h3><ul><li>Be honest and clear</li><li>Explain what the guest receives</li><li>Match the offer to their visit</li><li>Stay positive if they decline</li></ul></div>
+              <div class="respect-card bad"><h3>Avoid This</h3><ul><li>Do not pressure or argue</li><li>Do not hide pricing</li><li>Do not recommend something you do not understand</li><li>Do not keep pushing after “no”</li></ul></div>
+            </div>
+            <div class="respect-footer">The guest should leave feeling helped, respected, and excited for their Launch experience.</div>
+          </div>
+        </div>
+        <div class="audio-panel slide14-audio-panel" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+          <div class="audio-title">Slide 14 Narration</div>
+          <audio preload="auto" data-required="true" style="display:none;">
+            <source src="audio/Cashier Day 3 - Slide 14.m4a" type="audio/mp4">
+            Your browser does not support the audio element.
+          </audio>
+          <div class="audio-status" id="audioStatus-13">Narration locked until training starts.</div>
+          <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-13"></div></div>
+        </div>
+      </section>
+<section class="slide slide15-together" data-notes="This slide connects the Day 3 concepts into practical front-end examples. Cashiers should listen to what the guest says, identify the opportunity, and respond with a helpful recommendation that fits the guest's needs and the location's current offerings.">
+        <div class="color-strip"></div>
+        <div class="slide-header"><div><div class="eyebrow">Practical Application</div><h1>Putting It All Together</h1></div><div class="module-pill">Slide 15</div></div>
+        <div class="slide-body">
+          <div class="together-board">
+            <div class="together-top"><span>Guest Says</span> → <span>Cashier Hears</span> → <span>Helpful Recommendation</span></div>
+            <div class="scenario-grid">
+              <div class="scenario-card"><div class="sc-icon">🎮</div><div><h3>“The kids love arcade games.”</h3><p><b>Opportunity:</b> Arcade play or bonus value.</p><div class="response-line">“You may want to look at our arcade card options. Some larger cards may include bonus play.”</div></div></div>
+              <div class="scenario-card"><div class="sc-icon">⏰</div><div><h3>“We’re staying for a while.”</h3><p><b>Opportunity:</b> Better package or add-on.</p><div class="response-line">“Based on your visit, this package may give you more value for the time you’ll be here.”</div></div></div>
+              <div class="scenario-card"><div class="sc-icon">🎂</div><div><h3>“His birthday is coming up.”</h3><p><b>Opportunity:</b> Future birthday party.</p><div class="response-line">“Launch also hosts birthday parties. I can show you where to find more information.”</div></div></div>
+              <div class="scenario-card"><div class="sc-icon">🔁</div><div><h3>“We’ll definitely be back.”</h3><p><b>Opportunity:</b> Loyalty and repeat-visit products.</p><div class="response-line">“Make sure you’re earning Loyalty points today, and ask about any current return-visit offers.”</div></div></div>
+            </div>
+            <div class="together-bottom"><div><span>👂</span>Listen First</div><div><span>🎯</span>Match the Need</div><div><span>⭐</span>Explain Value</div></div>
+          </div>
+        </div>
+        <div class="audio-panel slide15-audio-panel" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+          <div class="audio-title">Slide 15 Narration</div>
+          <audio preload="auto" data-required="true" style="display:none;">
+            <source src="audio/Cashier Day 3 - Slide 15.m4a" type="audio/mp4">
+            Your browser does not support the audio element.
+          </audio>
+          <div class="audio-status" id="audioStatus-14">Narration locked until training starts.</div>
+          <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-14"></div></div>
+        </div>
+      </section>
+<section class="slide slide16-next" data-notes="Day 3 ends by moving from online training into hands-on practice. The employee should print the Day 3 checklist, review local offerings and current promotions, practice helpful recommendations with a trainer, and then complete the Day 3 exam.">
+        <div class="color-strip"></div>
+        <div class="slide-header"><div><div class="eyebrow">Next Steps</div><h1>
+Complete Day 3 Training</h1></div><div class="module-pill">Finish</div></div>
+        <div class="slide-body">
+          <div class="next-finish">
+            <div class="finish-hero"><div><h2>Practice Before the Exam</h2><p>Use what you learned today during hands-on front-end training.</p></div><div class="finish-badge">✅</div></div>
+            <div class="finish-steps">
+              <div class="finish-step"><span>🖨️</span><h3>Print Checklist</h3><p>Give the Day 3 checklist to your trainer.</p></div>
+              <div class="finish-step"><span>📍</span><h3>Know Your Park</h3><p>Review local offerings, promotions, parties, and arcade options.</p></div>
+              <div class="finish-step"><span>👥</span><h3>Practice</h3><p>Work through guest examples and helpful recommendations.</p></div>
+              <div class="finish-step"><span>📝</span><h3>Take Exam</h3><p>Return here after trainer sign-off to complete the Day 3 exam.</p></div>
+            </div>
+            <div class="finish-bottom">Final focus: be helpful, be accurate, explain value, and create awesome memories.</div>
+          </div>
+        </div>
+        <div class="audio-panel slide16-audio-panel" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+          <div class="audio-title">Slide 16 Narration</div>
+          <audio preload="auto" data-required="true" style="display:none;">
+            <source src="audio/Cashier Day 3 - Slide 16.m4a" type="audio/mp4">
+            Your browser does not support the audio element.
+          </audio>
+          <div class="audio-status" id="audioStatus-15">Narration locked until training starts.</div>
+          <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-15"></div></div>
+        </div>
+      </section>
+  </div>
+  <div class="speaker-notes-panel" id="notesPanel"><h3>Speaker / Narration Script</h3><p id="notesText"></p></div>
+<div class="controls"><div><button class="btn-dark" onclick="prevSlide()">Previous</button><button class="btn-primary" id="nextBtn" onclick="nextSlide(false)">Next</button></div><div class="progress-wrap"><div class="progress" id="progress"></div></div><div><button class="btn-narration" id="playNarrationBtn" onclick="toggleNarration()">▶ Play Narration</button><button class="btn-yellow" onclick="toggleNotes()">Narration Script</button><button class="btn-dark" onclick="toggleFullScreen()">Full Screen</button><button class="btn-outline" onclick="window.print()">Print Slides</button></div></div>
+</div>
+<script>
+const slides = Array.from(document.querySelectorAll('.slide'));
+let current = 0;
+let trainingStarted = false;
+const completedNarration = new Set();
+
+function currentSlideAudio() {
+  return slides[current].querySelector('audio');
+}
+
+function slideRequiresNarration(index = current) {
+  return !!slides[index].querySelector('audio[data-required="true"]') || !!slides[index].querySelector('audio');
+}
+
+function currentNarrationComplete() {
+  return !slideRequiresNarration(current) || completedNarration.has(current);
+}
+
+function updateNextLock() {
+  const nextBtn = document.getElementById('nextBtn');
+  if (!nextBtn) return;
+  if (current >= slides.length - 1) {
+    nextBtn.disabled = true;
+    nextBtn.textContent = 'Complete';
+    return;
+  }
+  const locked = !currentNarrationComplete();
+  nextBtn.disabled = locked;
+  nextBtn.textContent = locked ? 'Next Locked' : 'Next';
+  nextBtn.title = locked ? 'Complete the slide narration to continue.' : '';
+}
+
+
+function setAudioProgress(index, audio) {
+  const fill = document.getElementById(`audioProgress-${index}`);
+  const status = document.getElementById(`audioStatus-${index}`);
+  if (!fill || !status || !audio) return;
+  const duration = audio.duration || 0;
+  const pct = duration ? Math.max(0, Math.min(100, (audio.currentTime / duration) * 100)) : 0;
+  fill.style.width = `${pct}%`;
+  if (completedNarration.has(index)) status.textContent = 'Narration complete.';
+  else if (!trainingStarted) status.textContent = 'Narration locked until training starts.';
+  else if (!audio.paused) status.textContent = 'Playing narration...';
+  else status.textContent = 'Narration ready. Click Play Narration if needed.';
+}
+
+function updateNarrationButton() {
+  const btn = document.getElementById('playNarrationBtn');
+  if (!btn) return;
+  const audio = currentSlideAudio();
+  if (!audio) {
+    btn.textContent = 'Play Narration';
+    btn.disabled = true;
+    btn.style.opacity = '.6';
+  } else {
+    btn.disabled = !trainingStarted;
+    btn.style.opacity = '1';
+    btn.textContent = completedNarration.has(current) ? '↻ Replay Narration' : '▶ Play Narration';
+  }
+}
+
+function stopAllAudio(reset=true) {
+  document.querySelectorAll('audio').forEach(a => {
+    a.pause();
+    if (reset) a.currentTime = 0;
+  });
+}
+
+function wireAudioEvents(index, audio) {
+  if (!audio || audio.dataset.wired === 'true') return;
+  audio.dataset.wired = 'true';
+  audio.addEventListener('timeupdate', () => setAudioProgress(index, audio));
+  audio.addEventListener('play', () => { setAudioProgress(index, audio); updateNarrationButton(); updateNextLock(); });
+  audio.addEventListener('pause', () => { setAudioProgress(index, audio); updateNarrationButton(); updateNextLock(); });
+  audio.addEventListener('ended', () => {
+    completedNarration.add(index);
+    setAudioProgress(index, audio);
+    updateNarrationButton();
+    updateNextLock();
+  });
+}
+
+function playCurrentNarration() {
+  const audio = currentSlideAudio();
+  if (!audio) return Promise.resolve();
+  document.querySelectorAll('audio').forEach(a => { if (a !== audio) a.pause(); });
+  if (completedNarration.has(current)) audio.currentTime = 0;
+  audio.volume = 1.0;
+  setAudioProgress(current, audio);
+  return audio.play().then(() => { updateNarrationButton(); updateNextLock(); });
+}
+
+function startTraining() {
+  trainingStarted = true;
+  const overlay = document.getElementById('startOverlay');
+  if (overlay) overlay.style.display = 'none';
+  updateSlide(false);
+  playCurrentNarration().catch(() => {
+    const status = document.getElementById(`audioStatus-${current}`);
+    if (status) status.textContent = 'Browser blocked audio. Click Play Narration once to continue.';
+  });
+}
+
+function toggleNarration() {
+  const audio = currentSlideAudio();
+  if (!audio || !trainingStarted) return;
+  playCurrentNarration().catch(() => alert('The browser blocked audio playback. Click Start Day 3 Training or click this button again.'));
+}
+
+function updateSlide(shouldAutoPlay = true) {
+  stopAllAudio();
+  slides.forEach((slide, index) => {
+    slide.classList.toggle('active', index === current);
+    const audio = slide.querySelector('audio');
+    if (audio) wireAudioEvents(index, audio);
+  });
+  document.getElementById('slideCounter').textContent = `Slide ${current + 1} / ${slides.length}`;
+  document.getElementById('progress').style.width = `${((current + 1) / slides.length) * 100}%`;
+  document.getElementById('notesText').textContent = slides[current].dataset.notes || '';
+  updateNarrationButton();
+  updateNextLock();
+  const audio = currentSlideAudio();
+  if (trainingStarted && shouldAutoPlay && audio && !completedNarration.has(current)) {
+    playCurrentNarration().catch(() => {
+      const status = document.getElementById(`audioStatus-${current}`);
+      if (status) status.textContent = 'Browser blocked automatic narration. Click Play Narration to continue.';
+    });
+  }
+}
+
+function nextSlide(force = false) { if (!force && !currentNarrationComplete()) { updateNextLock(); return; } if (current < slides.length - 1) { current++; updateSlide(true); } }
+function prevSlide() { if (current > 0) { current--; updateSlide(false); } }
+function toggleNotes() {
+  const panel = document.getElementById('notesPanel');
+  panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+  document.getElementById('notesText').textContent = slides[current].dataset.notes || '';
+}
+function toggleFullScreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); }
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'f') { e.preventDefault(); nextSlide(true); return; }
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(false); }
+  if (e.key === 'ArrowLeft') prevSlide();
+  if (e.key.toLowerCase()==='n') toggleNotes();
+});
+updateSlide(false);
+</script></body></html>
+
+

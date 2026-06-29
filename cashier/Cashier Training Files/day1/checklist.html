@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cashier Day 1 - Trainer Checklist</title>
+  <style>
+    :root {
+      --launch-green:#6cc24a;
+      --launch-yellow:#f2e600;
+      --ink:#111820;
+      --muted:#4b5563;
+      --line:#dfe5ea;
+      --soft:#f7fbf5;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      color:var(--ink);
+      background:linear-gradient(135deg,#101410,#1c2418);
+      padding:28px;
+    }
+    .page {
+      max-width:980px;
+      margin:0 auto;
+      background:#fff;
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+    header {
+      padding:28px 34px 22px;
+      border-top:8px solid var(--launch-green);
+      border-bottom:1px solid var(--line);
+    }
+    .eyebrow {
+      color:#2d9a22;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:.82rem;
+      margin-bottom:8px;
+    }
+    h1 {
+      margin:0;
+      font-size:2.35rem;
+      letter-spacing:-.04em;
+    }
+    .sub {
+      margin-top:8px;
+      color:var(--muted);
+      font-size:1rem;
+      line-height:1.4;
+    }
+    .actions {
+      display:flex;
+      gap:12px;
+      padding:18px 34px;
+      background:#f8fafc;
+      border-bottom:1px solid var(--line);
+    }
+    button, .button {
+      border:0;
+      border-radius:999px;
+      padding:12px 20px;
+      font-weight:900;
+      font-size:.95rem;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-block;
+    }
+    .print { background:var(--launch-yellow); color:#000; }
+    .back { background:#111820; color:#fff; }
+    main { padding:24px 34px 34px; }
+    .info-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+      margin-bottom:22px;
+    }
+    .field {
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 12px;
+      min-height:58px;
+    }
+    .field label {
+      display:block;
+      font-size:.72rem;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-weight:800;
+      margin-bottom:10px;
+    }
+    .line {
+      border-bottom:1px solid #9ca3af;
+      height:20px;
+    }
+    section {
+      border:1px solid var(--line);
+      border-radius:16px;
+      overflow:hidden;
+      margin-bottom:16px;
+    }
+    .section-head {
+      background:#111820;
+      color:#fff;
+      padding:12px 16px;
+      font-weight:900;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .section-head span {
+      color:var(--launch-yellow);
+      font-size:.82rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+    .rows { padding:8px 14px 12px; }
+    .row {
+      display:grid;
+      grid-template-columns:26px 1fr 95px 95px;
+      gap:10px;
+      align-items:start;
+      padding:10px 0;
+      border-bottom:1px solid #eef2f4;
+      font-size:.92rem;
+      line-height:1.3;
+    }
+    .row:last-child { border-bottom:0; }
+    .box {
+      width:20px;
+      height:20px;
+      border:2px solid #111820;
+      border-radius:4px;
+      margin-top:1px;
+    }
+    .initial-line {
+      border-bottom:1px solid #9ca3af;
+      height:24px;
+    }
+    .small-label {
+      font-size:.62rem;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.07em;
+      font-weight:800;
+      margin-top:3px;
+    }
+    .notes-area {
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+      margin-top:18px;
+    }
+    .notes-lines {
+      height:40px;
+      background:repeating-linear-gradient(#fff,#fff 29px,#cbd5e1 30px);
+      margin-top:10px;
+    }
+    .signatures {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:60px;
+    }
+    .sig {
+      border-top:2px solid #111820;
+      padding-top:8px;
+      font-weight:800;
+      color:#374151;
+    }
+    .footer-note {
+      margin-top:18px;
+      background:#fff8dc;
+      border:2px solid var(--launch-yellow);
+      border-radius:14px;
+      padding:12px 14px;
+      font-weight:800;
+      line-height:1.35;
+    }
+    @media print {
+      body { background:#fff; padding:0; }
+      .page { box-shadow:none; border-radius:0; max-width:none; }
+      .actions { display:none; }
+      header { padding:18px 24px 14px; }
+      h1 { font-size:1.9rem; }
+      main { padding:16px 24px; }
+      section { break-inside:avoid; page-break-inside:avoid; }
+      .row { grid-template-columns:24px 1fr 80px 80px; font-size:.82rem; padding:7px 0; }
+      .footer-note { break-inside:avoid; }
+    }
+  </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style id="v58-notes-height-reduction">
+@media print {
+  /* Reclaim vertical space by making the trainer notes area shorter. */
+  .notes-area {
+    padding: 8px 10px !important;
+    margin-top: 8px !important;
+    margin-bottom: 18px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .notes-area strong {
+    font-size: .78rem !important;
+  }
+
+  .notes-lines {
+    height: 26px !important;
+    margin-top: 6px !important;
+    background: repeating-linear-gradient(#fff,#fff 16px,#cbd5e1 17px) !important;
+  }
+
+  .signatures {
+    margin-top: 0 !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    background: #fff !important;
+  }
+
+  .sig {
+    min-height: 42px !important;
+    padding-top: 8px !important;
+    font-size: .82rem !important;
+    background: #fff !important;
+    border-top: 2px solid #111820 !important;
+  }
+}
+</style>
+
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="eyebrow">Cashier Day 1</div>
+      <h1>Trainer Floor Checklist</h1>
+      <div class="sub">Use this checklist after the online module and before the end-of-shift exam. Trainer should observe, demonstrate, and confirm each item with the trainee.</div>
+    </header>
+
+    <div class="actions">
+      <button class="print" onclick="window.print()">Print / Save as PDF</button>
+      <a class="button back" href="index.html">Back to Day 1 Menu</a>
+    </div>
+
+    <main>
+      <div class="info-grid">
+        <div class="field"><label>Trainee Name</label><div class="line"></div></div>
+        <div class="field"><label>Trainer Name</label><div class="line"></div></div>
+        <div class="field"><label>Date</label><div class="line"></div></div>
+      </div>
+
+      <section>
+        <div class="section-head">Guest Greeting & Interaction <span>Hospitality</span></div>
+        <div class="rows">
+          <div class="row"><div class="box"></div><div>Greets every guest within 10 seconds, including verbal or non-verbal acknowledgment during busy periods.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Uses eye contact, positive posture, friendly tone, and clear communication.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Acknowledges children as well as adults during family check-in interactions.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Avoids negative behaviors: crossed arms, chewing gum, eating, side conversations, ignoring guests, or visible frustration.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">Waiver Rules & Verification <span>Compliance</span></div>
+        <div class="rows">
+          <div class="row"><div class="box"></div><div>Confirms every guest entering the facility has a valid waiver, including non-participants, spectators, parents, guardians, and minors.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Understands that minors require a waiver completed by a parent or legal guardian.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Can search for waivers by phone number or name and identify TRUE/FALSE verification status.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>For FALSE waivers, verifies the guest's ID before clicking Select; understands that Select verifies the waiver when no duplicate issue appears.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Understands employees may guide guests to the waiver process but may never complete, submit, sign, or fill out a waiver for a guest.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Explains expired waiver process: guest completes a new waiver and returns to the same cashier without waiting in line again.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">Launch Grip Sock Policy <span>Safety</span></div>
+        <div class="rows">
+          <div class="row"><div class="box"></div><div>Confirms all participating guests wear approved Launch Grip Socks on attractions.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Explains that personal socks and competitor grip socks are not permitted.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Uses script: “Do you have your Launch Grip Socks today?” and visually confirms when guest says yes.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Can assist with sock size selection and knows where socks are located in POS/register area.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Explains sock policy calmly and calls for a supervisor/manager before guest frustration escalates.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">POS, Add-Ons & Transaction Flow <span>Operations</span></div>
+        <div class="rows">
+          <div class="row"><div class="box"></div><div>Listens to the guest’s needs and recommends appropriate park offerings/packages.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Practices add-on and upsell opportunities without pressuring the guest.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Can explain where the guest should go after check-in, including cubbies, restrooms, ramps, attractions, and food areas.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Prints and gives receipt when required and clearly explains next steps to the guest.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">Escalation & Manager Support <span>Judgment</span></div>
+        <div class="rows">
+          <div class="row"><div class="box"></div><div>Asks a manager or knowledgeable employee when unsure instead of guessing.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Uses calm, professional language when a guest questions waiver or sock policy.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Knows when to call for a supervisor/manager before a guest interaction escalates.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+        </div>
+      </section>
+
+      <div class="notes-area">
+        <strong>Trainer Notes / Follow-Up Items</strong>
+        <div class="notes-lines"></div>
+      </div>
+<div class="signatures">
+        <div class="sig">Trainer / Manager Signature</div>
+        <div class="sig">Employee Signature</div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

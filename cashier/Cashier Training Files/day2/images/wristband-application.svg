@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500">
+<rect width="900" height="500" fill="#f5f7fa"/>
+<rect x="80" y="180" width="340" height="140" rx="12" fill="#222"/>
+<rect x="90" y="190" width="320" height="120" rx="8" fill="#fff"/>
+<text x="250" y="250" font-size="28" text-anchor="middle" font-family="Arial">CHECK-IN COUNTER</text>
+<circle cx="260" cy="120" r="45" fill="#ffd7b5"/>
+<rect x="220" y="165" width="80" height="110" rx="10" fill="#00a651"/>
+<text x="260" y="225" font-size="18" fill="white" text-anchor="middle">CASHIER</text>
+<circle cx="620" cy="120" r="45" fill="#ffd7b5"/>
+<rect x="580" y="165" width="80" height="110" rx="10" fill="#4d4d4d"/>
+<text x="620" y="225" font-size="18" fill="white" text-anchor="middle">GUEST</text>
+<line x1="300" y1="210" x2="560" y2="210" stroke="#00a651" stroke-width="12"/>
+<rect x="500" y="195" width="40" height="30" rx="8" fill="#00a651"/>
+<text x="450" y="80" font-size="34" font-family="Arial" fill="#00a651" text-anchor="middle">Cashier Applies Wristband</text>
+</svg>

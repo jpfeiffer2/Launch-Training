@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cashier Training</title>
+  <style>
+    :root {
+      --launch-green: #6cc24a;
+      --launch-green-dark: #4da62d;
+      --launch-yellow: #f2e600;
+      --launch-black: #0a0a0a;
+      --launch-white: #ffffff;
+      --launch-gray-100: #f5f7f8;
+      --launch-gray-200: #e5eaee;
+      --launch-gray-300: #cfd8df;
+      --launch-gray-700: #495057;
+      --launch-blue: #1f6feb;
+      --pass-bg: #edf9ee;
+      --pass-border: #89c997;
+      --fail-bg: #fff1f1;
+      --fail-border: #e3a1a1;
+      --warning-bg: #fff8e6;
+      --warning-border: #f0c36d;
+      --shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #f8fafb 0%, #f2f5f7 100%);
+      color: #1f2328;
+      line-height: 1.5;
+    }
+
+    .page-shell {
+      max-width: 1080px;
+      margin: 24px auto;
+      padding: 0 16px 40px;
+    }
+
+    .container {
+      background: var(--launch-white);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid var(--launch-gray-200);
+    }
+
+    .brand-topbar {
+      height: 10px;
+      background: linear-gradient(90deg, var(--launch-green) 0%, var(--launch-yellow) 100%);
+    }
+
+    .header {
+      background: #ffffff;
+      color: #111;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 4px solid var(--launch-yellow);
+    }
+
+
+    .exam-logo {
+      max-width: 290px;
+      height: auto;
+      display: block;
+      margin: 0 auto 14px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 1.25rem;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      color: #111;
+    }
+
+    .header-divider {
+      width: 1px;
+      height: 24px;
+      background: rgba(0,0,0,0.18);
+      flex-shrink: 0;
+    }
+
+    .header p {
+      margin: 0;
+      color: #666;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .content {
+      padding: 24px;
+    }
+
+    .meta-card,
+    .toolbar,
+    .result,
+    .certificate,
+    .validation-box {
+      border: 1px solid var(--launch-gray-200);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .meta-card {
+      padding: 18px;
+      margin-bottom: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfcfc 100%);
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #20262d;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 11px 12px;
+      font-size: 1rem;
+      border: 1px solid var(--launch-gray-300);
+      border-radius: 10px;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      background: #fff;
+    }
+
+    .field input:focus {
+      outline: none;
+      border-color: var(--launch-green);
+      box-shadow: 0 0 0 3px rgba(108, 194, 74, 0.15);
+    }
+
+    .toolbar {
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      background: #fafcfd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .toolbar-left,
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .progress-box {
+      font-weight: bold;
+      color: #1f2328;
+      background: #fff;
+      border: 1px solid var(--launch-gray-200);
+      border-radius: 999px;
+      padding: 8px 12px;
+    }
+
+    .mode-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.96rem;
+      color: #2b3137;
+      background: #fff;
+      border: 1px solid var(--launch-gray-200);
+      border-radius: 999px;
+      padding: 8px 12px;
+    }
+
+    .validation-box {
+      display: none;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      background: var(--warning-bg);
+      border-color: var(--warning-border);
+      color: #6b4f10;
+    }
+
+    .validation-box strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .validation-box ul {
+      margin: 8px 0 0 20px;
+      padding: 0;
+    }
+
+    .question {
+      margin: 18px 0;
+      padding: 20px;
+      border: 1px solid var(--launch-gray-200);
+      border-radius: 16px;
+      background: linear-gradient(180deg, #ffffff 0%, #fcfcfd 100%);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .question.hidden {
+      display: none;
+    }
+
+    .question-number {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(108, 194, 74, 0.12);
+      color: var(--launch-green-dark);
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .question h3 {
+      margin: 0 0 14px 0;
+      font-size: 1.1rem;
+      color: #161b22;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .options label {
+      display: block;
+      padding: 12px 14px;
+      border: 1px solid var(--launch-gray-200);
+      border-radius: 12px;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .options label:hover {
+      border-color: var(--launch-green);
+      background: #f8fdf5;
+    }
+
+    .options input {
+      margin-right: 10px;
+      transform: scale(1.05);
+    }
+
+    .question.unanswered {
+      border-color: #e3a1a1;
+      box-shadow: 0 0 0 3px rgba(201, 42, 42, 0.08);
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 0.98rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.05s ease, opacity 0.15s ease, background 0.15s ease;
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    button:hover {
+      opacity: 0.95;
+    }
+
+    .btn-primary {
+      background: var(--launch-green);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--launch-green-dark);
+    }
+
+    .btn-secondary {
+      background: #59636e;
+      color: #fff;
+    }
+
+    .btn-dark {
+      background: var(--launch-black);
+      color: #fff;
+    }
+
+    .btn-yellow {
+      background: var(--launch-yellow);
+      color: #111;
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: #1f2328;
+      border: 1px solid var(--launch-gray-300);
+    }
+
+    .result {
+      display: none;
+      margin-top: 26px;
+      padding: 20px;
+    }
+
+    .result.pass {
+      background: var(--pass-bg);
+      border-color: var(--pass-border);
+    }
+
+    .result.fail {
+      background: var(--fail-bg);
+      border-color: var(--fail-border);
+    }
+
+    .result h2 {
+      margin-top: 0;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 16px 0 6px;
+    }
+
+    .score-card {
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .score-card .label {
+      display: block;
+      font-size: 0.9rem;
+      color: #55606b;
+      margin-bottom: 4px;
+    }
+
+    .score-card .value {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #111;
+    }
+
+    .missed {
+      margin-top: 18px;
+    }
+
+    .missed-item {
+      margin: 10px 0;
+      padding: 12px 14px;
+      background: #fff8e8;
+      border-left: 4px solid #f0ad4e;
+      border-radius: 8px;
+    }
+
+    /* ── Printable Certificate ───────────────────────── */
+    .result-certificate {
+      margin-top: 26px;
+      border: 3px solid var(--launch-green);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    }
+
+    .cert-header {
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+      border-bottom: 4px solid var(--launch-yellow);
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .cert-header-left {
+      color: #fff;
+    }
+
+    .cert-org {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      color: var(--launch-yellow);
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .cert-title-line {
+      font-size: 1.6rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .cert-subtitle {
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: 4px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .cert-stamp {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 4px;
+      padding: 10px 22px;
+      border-radius: 10px;
+      border: 3px solid;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .cert-stamp.stamp-pass {
+      color: #198754;
+      border-color: #198754;
+      background: rgba(25,135,84,0.08);
+    }
+
+    .cert-stamp.stamp-fail {
+      color: #c92a2a;
+      border-color: #c92a2a;
+      background: rgba(201,42,42,0.08);
+    }
+
+    .cert-info-row {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--launch-gray-200);
+    }
+
+    .cert-info-field {
+      flex: 1;
+      padding: 14px 20px;
+      border-right: 1px solid var(--launch-gray-200);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .cert-info-field:last-child {
+      border-right: none;
+    }
+
+    .cert-info-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      font-weight: bold;
+    }
+
+    .cert-info-value {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #111;
+    }
+
+    .cert-score-value {
+      font-size: 1.2rem;
+      color: var(--launch-green-dark);
+    }
+
+    .cert-statement {
+      padding: 18px 28px;
+      font-size: 0.97rem;
+      color: #444;
+      border-bottom: 1px solid var(--launch-gray-200);
+      line-height: 1.6;
+    }
+
+    .cert-missed {
+      padding: 0 28px;
+      border-bottom: 1px solid var(--launch-gray-200);
+    }
+
+    .cert-sig-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 24px 28px 20px;
+    }
+
+    .cert-sig-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .cert-sig-line {
+      border-bottom: 1.5px solid #444;
+      min-height: 36px;
+    }
+
+    .cert-sig-label {
+      font-size: 0.78rem;
+      color: #666;
+      letter-spacing: 0.5px;
+    }
+
+    .cert-actions {
+      padding: 12px 28px 16px;
+      display: flex;
+      gap: 12px;
+      border-top: 1px solid var(--launch-gray-200);
+      background: #fafcfd;
+    }
+
+    .status-pass {
+      color: #198754;
+      font-weight: bold;
+    }
+
+    .status-fail {
+      color: #c92a2a;
+      font-weight: bold;
+    }
+
+    .signature-area {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      margin-top: 38px;
+      text-align: left;
+    }
+
+    .signature-line {
+      border-top: 1px solid #666;
+      padding-top: 8px;
+      min-height: 42px;
+    }
+
+    .footer-note {
+      margin-top: 10px;
+      color: #66707a;
+      font-size: 0.94rem;
+    }
+
+    .pdf-note {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #f7fbff;
+      border: 1px solid #cfe0ff;
+      color: #294b80;
+    }
+
+
+    .saved-records {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border: 1px solid var(--launch-gray-200);
+      border-radius: 14px;
+      background: #fbfcfd;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    }
+
+    .saved-records-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--launch-gray-200);
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+    }
+
+    .saved-records h2 {
+      margin: 0 0 4px;
+      font-size: 1.25rem;
+      color: #111;
+    }
+
+    .saved-records p {
+      margin: 0;
+      color: #5f6b76;
+      font-size: 0.92rem;
+    }
+
+    .saved-records-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .saved-record-item {
+      display: grid;
+      grid-template-columns: 1.2fr .9fr .7fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--launch-gray-200);
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .record-main {
+      font-weight: 800;
+      color: #111;
+    }
+
+    .record-sub {
+      color: #65707a;
+      font-size: 0.86rem;
+      margin-top: 2px;
+    }
+
+    .record-score {
+      font-weight: 900;
+      color: var(--launch-green-dark);
+    }
+
+    .record-fail {
+      color: #c92a2a;
+    }
+
+    .record-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+
+    .pre-exam-nav {
+      display: flex;
+      justify-content: flex-start;
+      margin: 12px 0 18px;
+    }
+
+    @media (max-width: 860px) {
+      .saved-records-head,
+      .saved-record-item {
+        display: block;
+      }
+
+      .record-actions {
+        justify-content: flex-start;
+        margin-top: 10px;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .meta-grid,
+      .score-grid,
+      .signature-area {
+        grid-template-columns: 1fr;
+      }
+
+      .content {
+        padding: 16px;
+      }
+
+      .header {
+        padding: 20px 16px 18px;
+      }
+
+      .header h1 {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* Tablet mode: fit everything on screen */
+    body.tablet-mode {
+      overflow: hidden;
+      height: 100dvh;
+    }
+
+    body.tablet-mode .page-shell {
+      margin: 0;
+      padding: 0;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body.tablet-mode .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border-radius: 0;
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    body.tablet-mode .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 12px 16px;
+      min-height: 0;
+    }
+
+    body.tablet-mode .meta-card {
+      margin-bottom: 10px;
+      padding: 12px;
+      flex-shrink: 0;
+    }
+
+    body.tablet-mode .toolbar {
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      flex-shrink: 0;
+    }
+
+    body.tablet-mode #quizForm {
+      flex: 1;
+      overflow-y: auto;
+      min-height: 0;
+    }
+
+    body.tablet-mode .question {
+      margin: 0;
+      padding: 16px;
+      border-radius: 12px;
+    }
+
+    body.tablet-mode .options label {
+      padding: 10px 12px;
+    }
+
+    body.tablet-mode .buttons {
+      margin-top: 10px;
+      padding-bottom: 6px;
+      flex-shrink: 0;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .page-shell {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+      }
+
+      .header,
+      .meta-card,
+      .toolbar,
+      .validation-box,
+      #quizForm,
+      .buttons,
+      .footer-note,
+      .pdf-note,
+      .no-print {
+        display: none !important;
+      }
+
+      .result-certificate {
+        display: block !important;
+        border: 2px solid #333;
+        border-radius: 0;
+        box-shadow: none;
+        margin: 0;
+      }
+
+      .cert-header {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cert-stamp {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cert-missed {
+        border-bottom: none;
+      }
+
+      .brand-topbar {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="container">
+      <div class="brand-topbar"></div>
+
+      <div class="header">
+        <img class="exam-logo" src="../assets/launch-family-entertainment-logo.png" alt="Launch Family Entertainment">
+        <h1>Day 1 Cashier Training Exam</h1>
+        <div class="header-divider"></div>
+        <p>System-wide employee training assessment &bull; Required-answer validation &bull; Print-ready completion record</p>
+      </div>
+
+      <div class="content">
+        <div class="meta-card">
+          <div class="meta-grid">
+            <div class="field">
+              <label for="employeeName">Employee Name</label>
+              <input type="text" id="employeeName" />
+            </div>
+            <div class="field">
+              <label for="quizDate">Date</label>
+              <input type="date" id="quizDate" />
+            </div>
+            <div class="field">
+              <label for="trainerName">Trainer/Manager</label>
+              <input type="text" id="trainerName" />
+            </div>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <div class="toolbar-left">
+            <div class="progress-box" id="progressBox">All 35 questions visible</div>
+          </div>
+
+          <div class="toolbar-right">
+            <button type="button" class="btn-outline" onclick="showAllQuestions()">Show All</button>
+          </div>
+        </div>
+
+        <div class="pre-exam-nav no-print"><button type="button" class="btn-outline" id="preExamReturnMenuBtn" onclick="window.location.href='index.html'">Return to Day 1 Main Menu</button></div>
+
+        <div id="validationBox" class="validation-box"></div>
+
+        <form id="quizForm"></form>
+
+        <div class="buttons">
+          <button type="button" class="btn-primary" onclick="gradeQuiz()">Submit Quiz</button>
+          <button type="button" class="btn-secondary" onclick="resetQuiz()">Reset</button>
+          <button type="button" class="btn-dark" id="printCertBtn" onclick="printResultSheet()" style="display:none;">&#128438; Print / Save Exam Record</button>
+          <button type="button" class="btn-outline" id="returnMenuBtn" onclick="window.location.href='index.html'" style="display:none;">Return to Day 1 Main Menu</button>
+        </div>
+
+
+        
+        <div id="resultBox" class="result-certificate" style="display:none;">
+          <!-- Certificate Header -->
+          <div class="cert-header">
+            <div class="cert-header-left">
+              <div class="cert-org">LAUNCH FAMILY ENTERTAINMENT</div>
+              <div class="cert-title-line">DAY 1 CASHIER TRAINING</div>
+              <div class="cert-subtitle">Training Assessment Record</div>
+            </div>
+            <div class="cert-stamp" id="certStamp">PASS</div>
+          </div>
+
+          <!-- Employee Info Row -->
+          <div class="cert-info-row">
+            <div class="cert-info-field">
+              <span class="cert-info-label">Employee Name</span>
+              <span class="cert-info-value" id="summaryEmployee">—</span>
+            </div>
+            <div class="cert-info-field">
+              <span class="cert-info-label">Date</span>
+              <span class="cert-info-value" id="certDate">—</span>
+            </div>
+            <div class="cert-info-field">
+              <span class="cert-info-label">Trainer / Manager</span>
+              <span class="cert-info-value" id="certTrainer">—</span>
+            </div>
+            <div class="cert-info-field cert-score-field">
+              <span class="cert-info-label">Score</span>
+              <span class="cert-info-value cert-score-value" id="summaryScore">—</span>
+            </div>
+            <div class="cert-info-field">
+              <span class="cert-info-label">Percentage</span>
+              <span class="cert-info-value" id="summaryPercent">—</span>
+            </div>
+          </div>
+
+          <!-- Completion Statement -->
+          <div class="cert-statement" id="certStatement"></div>
+
+          <!-- Missed Questions (screen only) -->
+          <div id="missedQuestions" class="missed cert-missed"></div>
+
+          <!-- Signature Row -->
+          <div class="cert-sig-row">
+            <div class="cert-sig-block">
+              <div class="cert-sig-line"></div>
+              <div class="cert-sig-label">Trainer / Manager Signature</div>
+            </div>
+            <div class="cert-sig-block">
+              <div class="cert-sig-line"></div>
+              <div class="cert-sig-label">Employee Signature</div>
+            </div>
+          </div>
+
+          <!-- Print action bar -->
+          <div class="cert-actions no-print">
+            <button type="button" class="btn-dark" onclick="printResultSheet()">&#128438; Print / Save as PDF</button>
+          </div>
+        </div>
+
+        <div class="pdf-note">
+          After submission, print or save the exam record as a PDF and return to the Day 1 Main Menu.
+        </div>
+
+        <div class="footer-note">
+          Passing score is set to 80%. All questions and employee details must be completed before submission.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const passingPercent = 80;
+    let currentQuestionIndex = 0;
+    let isSingleQuestionMode = false;
+    let lastScoreState = null;
+
+    let questions = [
+      { id: 1, text: 'What is the correct opening greeting?', options: { A: '"Hi, what do you need?"', B: '"Hello/good morning/good afternoon! Welcome to Launch! Have you been in before?"', C: '"Did you already sign the waiver?"', D: '"Hi, how can I help you?"' }, answer: 'B' },
+      { id: 2, text: 'If a returning guest says they have filled out a waiver within the last year, what should you say next?', options: { A: '"Go straight to the attractions."', B: '"Awesome! We can proceed with getting you checked in."', C: '"You still need to fill out another waiver."', D: '"Wait for a manager."' }, answer: 'B' },
+      { id: 3, text: 'If a guest has never been in before, what is the first thing they need to do?', options: { A: 'Buy socks', B: 'Pick a food package', C: 'Fill out a waiver', D: 'Get a wristband' }, answer: 'C' },
+      { id: 4, text: 'Who must have a waiver on file?', options: { A: 'Only guests who are jumping', B: 'Only adults', C: 'Everyone in the park, even non-participants', D: 'Only children' }, answer: 'C' },
+      { id: 5, text: 'Who can complete a waiver for a minor?', options: { A: 'Any employee', B: 'The minor themselves', C: 'A friend over 18', D: 'A parent or guardian' }, answer: 'D' },
+      { id: 6, text: "What should a cashier do after listening to a guest's needs?", options: { A: 'Ignore upselling opportunities', B: "Make park offering suggestions based on the guest's needs", C: 'Send them to another employee immediately', D: 'Only offer socks' }, answer: 'B' },
+      { id: 7, text: 'What is the best approach when making a recommendation to a guest?', options: { A: 'Offer the cheapest package first', B: 'Skip package explanations', C: 'Offer the highest package first and explain the value', D: 'Only upsell food' }, answer: 'C' },
+      { id: 8, text: 'What should you ask regarding socks?', options: { A: '"Do you want to buy souvenirs?"', B: '"Do you have your Launch Grip Socks today?"', C: '"Are your socks clean?"', D: '"Do you want regular socks?"' }, answer: 'B' },
+      { id: 9, text: 'If a guest says they have socks, what should you do?', options: { A: 'Take their word for it', B: 'Ask them to describe the socks', C: 'Quickly look at the socks to confirm they are Launch socks', D: 'Let them enter without checking' }, answer: 'C' },
+      { id: 10, text: 'Why are Launch Grip Socks required?', options: { A: 'For branding only', B: 'For safety on all attractions', C: 'To increase sales', D: 'To match wristbands' }, answer: 'B' },
+      { id: 11, text: 'What must you explain when wristbanding a guest?', options: { A: 'Sock color options', B: 'The refund policy', C: 'Until what time the wristband is valid', D: 'Employee schedules' }, answer: 'C' },
+      { id: 12, text: 'What should be explained about the park layout?', options: { A: 'Only where the food is', B: 'Where cubbies, restrooms, ramps, and attractions are located', C: 'Only emergency exits', D: 'Where staff break rooms are' }, answer: 'B' },
+      { id: 13, text: 'What catch phrase should be said at the end of every customer interaction?', options: { A: '"See you later."', B: '"Enjoy."', C: '"Have an awesome time!"', D: '"Thanks for coming."' }, answer: 'C' },
+      { id: 14, text: 'A family of 4 says it is their first visit. What should you do first?', options: { A: 'Sell socks immediately and send them to the attractions', B: 'Greet them warmly and direct them to complete waivers for everyone in the party, including non-participants', C: 'Tell only the children to fill out waivers', D: 'Ask them to wait without explanation' }, answer: 'B' },
+      { id: 15, text: 'A guest says, "I already have socks," but does not show them. What should you do?', options: { A: 'Let them in without checking', B: 'Ask them to buy another pair anyway', C: 'Politely ask to quickly see the socks to confirm they are approved Launch socks', D: 'Tell them socks are optional' }, answer: 'C' },
+      { id: 16, text: 'A guest says buying socks is a scam. What is the best response?', options: { A: '"If you do not like it, you can leave."', B: '"We totally understand your concern; however, they are required for your safety."', C: '"That is just company policy."', D: '"Everyone has to pay, so it does not matter."' }, answer: 'B' },
+      { id: 17, text: 'A guest asks where to go after checking in. What should you explain?', options: { A: 'Only where to stand in line', B: 'Only where the food area is', C: 'The park layout, including cubbies, restrooms, ramps, and attractions', D: 'Nothing unless they ask a second time' }, answer: 'C' },
+      { id: 18, text: 'A guest is upset and asking questions you do not know how to answer. What should you do?', options: { A: 'Guess so the line keeps moving', B: 'Stay calm, remain professional, and get a manager or knowledgeable employee to assist', C: 'Ignore the guest until they calm down', D: 'Argue with the guest' }, answer: 'B' },
+      { id: 19, text: 'What should you point out to first-time guests to make waiver completion easier?', options: { A: 'The snack counter', B: 'The birthday party room', C: 'The QR code', D: 'The employee break room' }, answer: 'C' },
+      { id: 20, text: 'Why can guests not use their own socks?', options: { A: 'Their socks may not match the wristband color', B: 'Personal socks have not been tested for safety on Launch attractions', C: 'Employees cannot tell what brand they are', D: 'Guests must buy a new pair every visit' }, answer: 'B' },
+      { id: 21, text: "If you cannot answer a guest's question, what should you do?", options: { A: 'Guess the answer', B: 'Tell the guest to figure it out', C: 'Ask a knowledgeable employee or manager for help', D: 'Ignore the question' }, answer: 'C' },
+      { id: 22, text: 'Which of the following is something you should avoid when interacting with a guest?', options: { A: 'Making eye contact', B: 'Smiling and nodding', C: "Using the guest's name", D: 'Chewing gum' }, answer: 'D' },
+      { id: 23, text: 'What information should you give guests about their wristband?', options: { A: 'The color of the wristband only', B: 'The employee who handed it to them', C: 'What time it is valid until', D: 'How many attractions are in the park' }, answer: 'C' },
+      { id: 24, text: 'Eye contact helps the guest know you are listening.', options: { A: 'True', B: 'False' }, answer: 'A' },
+      { id: 25, text: 'If you do not know an answer, it is best to guess.', options: { A: 'True', B: 'False' }, answer: 'B' },
+      { id: 26, text: "Using the guest's name can help them feel more comfortable and welcomed.", options: { A: 'True', B: 'False' }, answer: 'A' },
+      { id: 27, text: 'Crossed arms and lack of eye contact are positive body language.', options: { A: 'True', B: 'False' }, answer: 'B' },
+      { id: 28, text: 'It is acceptable to chew gum while helping guests.', options: { A: 'True', B: 'False' }, answer: 'B' },
+      { id: 29, text: 'If a guest is irate, you should pout or huff to show frustration.', options: { A: 'True', B: 'False' }, answer: 'B' },
+      { id: 30, text: 'Talking to other employees while helping a guest is listed as something not to do.', options: { A: 'True', B: 'False' }, answer: 'A' },
+      { id: 31, text: 'Guests may use competitor socks because they are basically the same.', options: { A: 'True', B: 'False' }, answer: 'B' },
+      { id: 32, text: 'Launch offers 7 different sock sizes.', options: { A: 'True', B: 'False' }, answer: 'A' },
+      { id: 33, text: 'What should you do if you are already helping another guest when new guests enter?', options: { A: 'Ignore the new guests until you are finished', B: 'Acknowledge them and let them know you will be with them shortly', C: 'Tell them to wait outside', D: 'Ask another guest to help them' }, answer: 'B' },
+      { id: 34, text: 'If a waiver is expired, what should the cashier tell the guest?', options: { A: 'They can continue because they signed one before', B: 'They must complete a new waiver and may return to the same cashier afterward', C: 'They need to wait in line again after completing it', D: 'Only minors need a new waiver' }, answer: 'B' },
+      { id: 35, text: 'When should a cashier involve a manager?', options: { A: 'Only after arguing with the guest', B: 'When a guest becomes upset, irate, or the cashier is unsure how to proceed', C: 'Never, cashiers should handle all issues alone', D: 'Only for payment questions' }, answer: 'B' }
+    ];
+    function shuffleQuestions(items) {
+      const shuffled = [...items];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
+    questions = shuffleQuestions(questions);
+
+
+    function renderQuiz() {
+      const form = document.getElementById('quizForm');
+      form.innerHTML = '';
+
+      questions.forEach((q, index) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        div.id = `question-${index}`;
+
+        let optionsHtml = '';
+        for (const key in q.options) {
+          optionsHtml += `
+            <label>
+              <input type="radio" name="q${q.id}" value="${key}" onchange="clearQuestionWarning(${index})">
+              ${key}. ${q.options[key]}
+            </label>
+          `;
+        }
+
+        div.innerHTML = `
+          <div class="question-number">Question ${index + 1}</div>
+          <h3>${q.text}</h3>
+          <div class="options">${optionsHtml}</div>
+        `;
+
+        form.appendChild(div);
+      });
+
+      updateQuestionVisibility();
+    }
+
+    function toggleMode() {
+      isSingleQuestionMode = document.getElementById('singleQuestionMode').checked;
+      document.body.classList.toggle('tablet-mode', isSingleQuestionMode);
+      updateQuestionVisibility();
+    }
+
+    function showSingleQuestionMode() {
+      document.getElementById('singleQuestionMode').checked = true;
+      isSingleQuestionMode = true;
+      document.body.classList.add('tablet-mode');
+      updateQuestionVisibility();
+    }
+
+    function showAllQuestions() {
+      document.getElementById('singleQuestionMode').checked = false;
+      isSingleQuestionMode = false;
+      document.body.classList.remove('tablet-mode');
+      updateQuestionVisibility();
+    }
+
+    function updateQuestionVisibility() {
+      const progressBox = document.getElementById('progressBox');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      questions.forEach((_, index) => {
+        const qEl = document.getElementById(`question-${index}`);
+        if (!qEl) return;
+
+        if (isSingleQuestionMode) {
+          qEl.classList.toggle('hidden', index !== currentQuestionIndex);
+        } else {
+          qEl.classList.remove('hidden');
+        }
+      });
+
+      if (isSingleQuestionMode) {
+        progressBox.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+        prevBtn.style.display = 'inline-block';
+        nextBtn.style.display = 'inline-block';
+      } else {
+        progressBox.textContent = `All ${questions.length} questions visible`;
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+      }
+    }
+
+    function nextQuestion() {
+      if (!isSingleQuestionMode) return;
+      if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        updateQuestionVisibility();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function prevQuestion() {
+      if (!isSingleQuestionMode) return;
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        updateQuestionVisibility();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function clearQuestionWarning(index) {
+      const qEl = document.getElementById(`question-${index}`);
+      if (qEl) qEl.classList.remove('unanswered');
+    }
+
+    function getEmployeeData() {
+      return {
+        employeeName: document.getElementById('employeeName').value.trim(),
+        quizDate: document.getElementById('quizDate').value,
+        trainerName: document.getElementById('trainerName').value.trim()
+      };
+    }
+
+    function validateQuiz() {
+      const validationBox = document.getElementById('validationBox');
+      const employee = getEmployeeData();
+      const errors = [];
+      const unanswered = [];
+
+      document.querySelectorAll('.question').forEach(q => q.classList.remove('unanswered'));
+
+      if (!employee.employeeName) errors.push('Employee Name is required.');
+      if (!employee.quizDate) errors.push('Date is required.');
+      if (!employee.trainerName) errors.push('Trainer/Manager is required.');
+
+      questions.forEach((q, index) => {
+        const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
+        if (!selected) {
+          unanswered.push(index + 1);
+          const qEl = document.getElementById(`question-${index}`);
+          if (qEl) qEl.classList.add('unanswered');
+        }
+      });
+
+      if (unanswered.length) {
+        errors.push(`All questions must be answered before submission. Missing: ${unanswered.join(', ')}`);
+      }
+
+      if (errors.length) {
+        validationBox.style.display = 'block';
+        validationBox.innerHTML = `
+          <strong>Please complete the following before submitting:</strong>
+          <ul>
+            ${errors.map(err => `<li>${err}</li>`).join('')}
+          </ul>
+        `;
+
+        if (unanswered.length) {
+          const firstMissingIndex = questions.findIndex(q => unanswered.includes(q.id));
+          if (firstMissingIndex !== -1 && isSingleQuestionMode) {
+            currentQuestionIndex = firstMissingIndex;
+            updateQuestionVisibility();
+          }
+          const firstMissing = document.getElementById(`question-${firstMissingIndex}`);
+          if (firstMissing) firstMissing.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          validationBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        return false;
+      }
+
+      validationBox.style.display = 'none';
+      validationBox.innerHTML = '';
+      return true;
+    }
+
+    function calculateResults() {
+      let score = 0;
+      const total = questions.length;
+      const missed = [];
+      const responses = [];
+
+      questions.forEach((q, index) => {
+        const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
+        const userAnswer = selected ? selected.value : null;
+        const response = {
+          displayNumber: index + 1,
+          originalId: q.id,
+          questionText: q.text,
+          selectedAnswer: userAnswer,
+          selectedText: userAnswer ? q.options[userAnswer] : '',
+          correctAnswer: q.answer,
+          correctText: q.options[q.answer],
+          isCorrect: userAnswer === q.answer
+        };
+        responses.push(response);
+
+        if (response.isCorrect) {
+          score++;
+        } else {
+          missed.push({
+            id: index + 1,
+            originalId: q.id,
+            text: q.text,
+            selected: userAnswer ? `${userAnswer}. ${q.options[userAnswer]}` : 'No answer selected',
+            correct: `${q.answer}. ${q.options[q.answer]}`
+          });
+        }
+      });
+
+      const percent = Math.round((score / total) * 100);
+      const passed = percent >= passingPercent;
+      const employee = getEmployeeData();
+
+      lastScoreState = { score, total, percent, passed, missed, responses, employee };
+      return lastScoreState;
+    }
+
+    function gradeQuiz() {
+      if (!validateQuiz()) return;
+
+      const { score, total, percent, passed, missed, employee } = calculateResults();
+
+      const resultBox = document.getElementById('resultBox');
+      resultBox.style.display = 'block';
+
+      // Stamp
+      const stamp = document.getElementById('certStamp');
+      stamp.textContent = passed ? 'PASS' : 'FAIL';
+      stamp.className = `cert-stamp ${passed ? 'stamp-pass' : 'stamp-fail'}`;
+
+      // Fields
+      document.getElementById('summaryEmployee').textContent = employee.employeeName;
+      document.getElementById('certDate').textContent = employee.quizDate;
+      document.getElementById('certTrainer').textContent = employee.trainerName;
+      document.getElementById('summaryScore').textContent = `${score} / ${total}`;
+      document.getElementById('summaryPercent').textContent = `${percent}%`;
+
+      // Statement
+      document.getElementById('certStatement').innerHTML = passed
+        ? `<strong>${employee.employeeName}</strong> has successfully completed the Launch Family Entertainment Day 1 Cashier Training assessment with a score of <strong>${score}/${total} (${percent}%)</strong>. Passing threshold: ${passingPercent}%.`
+        : `<strong>${employee.employeeName}</strong> completed the Launch Family Entertainment Day 1 Cashier Training assessment with a score of <strong>${score}/${total} (${percent}%)</strong> — below the ${passingPercent}% passing threshold. Please review missed questions below and retest.`;
+
+      // Missed questions
+      const missedQuestions = document.getElementById('missedQuestions');
+      if (missed.length === 0) {
+        missedQuestions.innerHTML = '<p style="padding:14px 0"><strong>&#10003; Perfect score — no missed questions.</strong></p>';
+      } else {
+        missedQuestions.innerHTML =
+          '<h3 style="margin:16px 0 8px">Missed Questions</h3>' +
+          missed.map(item => `
+            <div class="missed-item">
+              <div><strong>Q${item.id}:</strong> ${item.text}</div>
+              <div><strong>Selected answer:</strong> ${item.selected || "Not recorded"}</div>\n              <div><strong>Correct answer:</strong> ${item.correct}</div>
+            </div>
+          `).join('') + '<div style="height:12px"></div>';
+      }
+
+      const record = {
+        score,
+        total,
+        percent,
+        passed,
+        missed,
+        employee,
+        submittedAt: new Date().toISOString()
+      };
+
+      lastScoreState = record;
+      saveExamRecord(record);
+
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('printCertBtn').style.display = 'inline-block';
+      const returnBtn = document.getElementById('returnMenuBtn');
+      if (returnBtn) returnBtn.style.display = 'inline-block';
+    }
+
+    function updateCertificate() {} // merged into gradeQuiz
+
+    function printResultSheet() {
+      if (!lastScoreState) {
+        gradeQuiz();
+        if (!lastScoreState) return;
+      }
+      window.print();
+    }
+
+    const examRecordStorageKey = 'launch_cashier_day1_exam_records_v1';
+
+    function getSavedExamRecords() {
+      try {
+        return JSON.parse(localStorage.getItem(examRecordStorageKey) || '[]');
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function saveExamRecord(record) {
+      const records = getSavedExamRecords();
+      records.unshift(record);
+      localStorage.setItem(examRecordStorageKey, JSON.stringify(records));
+      renderSavedRecords();
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, function(char) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        }[char];
+      });
+    }
+
+    function formatTimestamp(timestamp) {
+      try {
+        return new Date(timestamp).toLocaleString();
+      } catch (error) {
+        return timestamp || '';
+      }
+    }
+
+    function renderSavedRecords() {
+      const list = document.getElementById('savedRecordsList');
+      if (!list) return;
+
+      const records = getSavedExamRecords();
+
+      if (!records.length) {
+        list.innerHTML = 'No saved exam records yet.';
+        return;
+      }
+
+      list.innerHTML = records.map((record, index) => {
+        const resultClass = record.passed ? 'record-score' : 'record-score record-fail';
+        const resultText = record.passed ? 'PASS' : 'FAIL';
+
+        return `
+          <div class="saved-record-item">
+            <div>
+              <div class="record-main">${escapeHtml(record.employee.employeeName || 'Unnamed Employee')}</div>
+              <div class="record-sub">Submitted: ${escapeHtml(formatTimestamp(record.submittedAt))}</div>
+            </div>
+            <div>
+              <div><strong>Date:</strong> ${escapeHtml(record.employee.quizDate || '')}</div>
+              <div class="record-sub"><strong>Trainer:</strong> ${escapeHtml(record.employee.trainerName || '')}</div>
+            </div>
+            <div class="${resultClass}">
+              ${resultText}<br>${record.score}/${record.total} (${record.percent}%)
+            </div>
+            <div class="record-actions">
+              <button type="button" class="btn-outline" onclick="loadSavedRecord(${index})">View</button>
+              <button type="button" class="btn-dark" onclick="printSavedRecord(${index})">Print</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function showResultRecord(record) {
+      lastScoreState = record;
+
+      const resultBox = document.getElementById('resultBox');
+      resultBox.style.display = 'block';
+
+      const stamp = document.getElementById('certStamp');
+      stamp.textContent = record.passed ? 'PASS' : 'FAIL';
+      stamp.className = `cert-stamp ${record.passed ? 'stamp-pass' : 'stamp-fail'}`;
+
+      document.getElementById('summaryEmployee').textContent = record.employee.employeeName;
+      document.getElementById('certDate').textContent = record.employee.quizDate;
+      document.getElementById('certTrainer').textContent = record.employee.trainerName;
+      document.getElementById('summaryScore').textContent = `${record.score} / ${record.total}`;
+      document.getElementById('summaryPercent').textContent = `${record.percent}%`;
+
+      document.getElementById('certStatement').innerHTML = record.passed
+        ? `<strong>${escapeHtml(record.employee.employeeName)}</strong> has successfully completed the Launch Family Entertainment Day 1 Cashier Training assessment with a score of <strong>${record.score}/${record.total} (${record.percent}%)</strong>. Passing threshold: ${passingPercent}%.`
+        : `<strong>${escapeHtml(record.employee.employeeName)}</strong> completed the Launch Family Entertainment Day 1 Cashier Training assessment with a score of <strong>${record.score}/${record.total} (${record.percent}%)</strong> — below the ${passingPercent}% passing threshold. Please review missed questions below and retest.`;
+
+      const missedQuestions = document.getElementById('missedQuestions');
+      if (!record.missed.length) {
+        missedQuestions.innerHTML = '<p style="padding:14px 0"><strong>&#10003; Perfect score — no missed questions.</strong></p>';
+      } else {
+        missedQuestions.innerHTML =
+          '<h3 style="margin:16px 0 8px">Missed Questions</h3>' +
+          record.missed.map(item => `
+            <div class="missed-item">
+              <div><strong>Q${item.id}:</strong> ${escapeHtml(item.text)}</div>
+              <div><strong>Selected answer:</strong> ${escapeHtml(item.selected || "Not recorded")}</div>\n              <div><strong>Correct answer:</strong> ${escapeHtml(item.correct)}</div>
+            </div>
+          `).join('') + '<div style="height:12px"></div>';
+      }
+
+      document.getElementById('printCertBtn').style.display = 'inline-block';
+      const returnBtn = document.getElementById('returnMenuBtn');
+      if (returnBtn) returnBtn.style.display = 'inline-block';
+    }
+
+    function loadSavedRecord(index) {
+      const records = getSavedExamRecords();
+      const record = records[index];
+      if (!record) return;
+      showResultRecord(record);
+      document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function printSavedRecord(index) {
+      const records = getSavedExamRecords();
+      const record = records[index];
+      if (!record) return;
+      showResultRecord(record);
+      window.print();
+    }
+
+
+    function lockEmployeeName() {
+      const field = document.getElementById('employeeName');
+      if (!field.disabled) {
+        field.disabled = true;
+        field.style.background = '#f0f0f0';
+        field.style.color = '#555';
+        field.title = 'Employee name is locked once the quiz has started. Use Reset to start over.';
+      }
+    }
+
+    function resetQuiz() {
+      document.getElementById('quizForm').reset();
+      const nameField = document.getElementById('employeeName');
+      nameField.disabled = false;
+      nameField.style.background = '';
+      nameField.style.color = '';
+      nameField.title = '';
+      nameField.value = '';
+      document.getElementById('quizDate').value = '';
+      document.getElementById('trainerName').value = '';
+      document.getElementById('resultBox').style.display = 'none';
+      document.getElementById('validationBox').style.display = 'none';
+      document.getElementById('validationBox').innerHTML = '';
+      document.getElementById('missedQuestions').innerHTML = '';
+      document.getElementById('printCertBtn').style.display = 'none';
+      const returnBtn = document.getElementById('returnMenuBtn');
+      if (returnBtn) returnBtn.style.display = 'none';
+      document.querySelectorAll('.question').forEach(q => q.classList.remove('unanswered'));
+      lastScoreState = null;
+      currentQuestionIndex = 0;
+      updateQuestionVisibility();
+      document.getElementById('quizForm').addEventListener('change', lockEmployeeName, { once: true });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    renderQuiz();
+    updateQuestionVisibility();
+    renderSavedRecords();
+
+    // Lock employee name on first radio selection
+    document.getElementById('quizForm').addEventListener('change', function() {
+      lockEmployeeName();
+    }, { once: true });
+  </script>
+</body>
+</html>
