@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1.0" name="viewport"/><title>Day 1 Online Training</title><style>
+:root{--g:#6cc24a;--gd:#4da62d;--y:#f2e600;--b:#080b0d;--w:#fff;--ink:#0f1720;--muted:#647184;--line:#e6edf2;--danger:#e11d48;--blue:#2563eb;--shadow:0 22px 60px rgba(0,0,0,.28);--radius:26px}*{box-sizing:border-box}html,body{height:100%;overflow:hidden}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at 18% 15%,rgba(108,194,74,.33),transparent 26%),radial-gradient(circle at 85% 20%,rgba(242,230,0,.18),transparent 28%),linear-gradient(135deg,#050606,#13191c 52%,#243119);color:var(--ink)}.deck{height:100vh;width:100vw;display:flex;flex-direction:column;padding:20px;gap:13px}.topbar{display:flex;align-items:center;justify-content:space-between;color:#fff;gap:16px;flex-shrink:0}.brand{display:flex;align-items:center;gap:14px;min-width:0}.logo-mark{width:54px;height:54px;border-radius:50%;background:#111;border:3px solid var(--g);display:grid;place-items:center;font-weight:900;color:var(--y);box-shadow:0 0 0 3px rgba(242,230,0,.16)}.brand-title strong{display:block;font-size:1rem;letter-spacing:1px;text-transform:uppercase}.brand-title span{display:block;font-size:.86rem;color:#cdd5dd}.slide-counter{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:9px 13px;border-radius:999px;font-weight:bold}.stage{flex:1;min-height:0;display:grid;place-items:center;overflow:hidden}.slide{display:none;width:min(1180px,calc(100vw - 44px),calc((100vh - 172px) * 1.7778));aspect-ratio:16/9;max-height:calc(100vh - 172px);background:#fff;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);position:relative}.slide.active{display:block}.bar{position:absolute;inset:0 auto auto 0;height:10px;width:100%;background:linear-gradient(90deg,var(--g),var(--y),var(--g))}.bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:saturate(1.08);}.bg:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,7,10,.88),rgba(4,7,10,.62) 42%,rgba(4,7,10,.15));}.bg-soft{position:absolute;inset:0;background:linear-gradient(135deg,#fff 0%,#f5f8f1 60%,#eaf3e8 100%)}.header{position:absolute;top:22px;left:28px;right:28px;display:flex;align-items:center;justify-content:space-between;z-index:3}.eyebrow{text-transform:uppercase;letter-spacing:2px;color:var(--g);font-weight:900;font-size:.78rem}.pill{background:#101418;color:var(--y);padding:9px 13px;border-radius:999px;font-weight:900;text-transform:uppercase;font-size:.78rem;white-space:nowrap}.content{position:absolute;z-index:2;inset:78px 34px 88px;display:grid;align-items:center;gap:24px}.hero .content{grid-template-columns:1.05fr .95fr}.dark h1,.dark h2,.dark p{color:#fff}.dark .kicker{color:var(--y)}h1,h2{margin:0;font-weight:1000;line-height:.96;letter-spacing:-1.5px}h1{font-size:clamp(2.8rem,5.6vw,5.35rem)}h2{font-size:clamp(2.2rem,4.6vw,4.4rem)}p{font-size:1.12rem;line-height:1.45;margin:0}.sub{font-size:1.45rem;font-weight:800;line-height:1.22;margin-top:16px}.kicker{font-size:1.05rem;font-weight:900;color:#203;line-height:1.3}.callout{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 12px 35px rgba(0,0,0,.12)}.dark .callout{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.22);backdrop-filter:blur(7px)}.callout h3{font-size:1.35rem;margin:0 0 12px}.big-list{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}.big-list li{font-size:.92rem;font-weight:900;background:#f2f6f1;border-left:8px solid var(--g);border-radius:14px;padding:12px 14px}.dark .big-list li{background:rgba(255,255,255,.13);color:#fff;border-left-color:var(--y)}.split{display:grid;grid-template-columns:1fr 1fr;gap:20px}.mini{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;min-height:150px;box-shadow:0 12px 30px rgba(0,0,0,.08)}.mini.bad{border-top:10px solid var(--danger)}.mini.good{border-top:10px solid var(--g)}.mini h3{font-size:1.55rem;margin:0 0 10px}.scenario{background:#101418;color:#fff;border-radius:26px;padding:28px;box-shadow:0 20px 50px rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.14)}.scenario .label{display:inline-block;background:var(--y);color:#000;font-weight:1000;border-radius:999px;padding:8px 13px;margin-bottom:16px;text-transform:uppercase;font-size:.78rem;letter-spacing:1px}.scenario h3{font-size:2.2rem;line-height:1.05;margin:0 0 16px;color:#fff}.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.answers div{border-radius:16px;padding:13px 14px;background:rgba(255,255,255,.1);font-weight:800}.image-card{height:100%;min-height:330px;border-radius:28px;background-size:cover;background-position:center;box-shadow:0 18px 45px rgba(0,0,0,.20);position:relative;overflow:hidden;border:8px solid #fff}.image-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 48%,rgba(0,0,0,.72));}.image-card span{position:absolute;bottom:18px;left:18px;right:18px;color:#fff;font-size:1.25rem;font-weight:1000;z-index:2}.scan-ring{width:360px;height:360px;border:18px solid var(--g);border-radius:50%;display:grid;place-items:center;margin:auto;position:relative;background:radial-gradient(circle,#fff 0 34%,#f6fbe9 35% 100%)}.scan-ring:before,.scan-ring:after{content:"";position:absolute;background:var(--y);}.scan-ring:before{height:18px;width:430px}.scan-ring:after{width:18px;height:430px}.scan-ring b{position:relative;z-index:2;background:#101418;color:var(--y);padding:18px 22px;border-radius:22px;font-size:1.4rem}.badge-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}.badge{background:#101418;color:#fff;border-radius:999px;padding:10px 14px;font-weight:900}.dark .badge{background:var(--y);color:#000}.narration{position:absolute;left:0;right:0;bottom:0;z-index:5;background:#f8fafc;border-top:1px solid #d9e2ea;padding:10px 28px;font-size:.83rem;color:#39424e;max-height:70px;overflow:auto}.narration strong{color:#101418}.controls{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-shrink:0}.home-link{color:#fff;text-decoration:none;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);padding:11px 15px;border-radius:999px;font-weight:800}.control-group{display:flex;gap:10px}.navbtn,.primary,.speak{border:0;border-radius:999px;padding:12px 18px;font-weight:1000;cursor:pointer}.navbtn{background:#e8eef2}.primary{background:var(--y);color:#000}.speak{background:var(--g);color:#071009}.navbtn:disabled,.primary:disabled,.speak:disabled{opacity:.42;cursor:not-allowed;filter:grayscale(1);background:#9ca3af!important;color:#374151!important;box-shadow:none!important}.footer-note{position:absolute;right:28px;bottom:82px;z-index:4;background:rgba(0,0,0,.68);color:#fff;border-radius:999px;padding:8px 13px;font-size:.8rem;font-weight:900}.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.flow .step{background:#101418;color:#fff;border-radius:24px;padding:22px;min-height:170px}.flow .step b{display:block;font-size:3rem;color:var(--y);line-height:1}.flow .step span{display:block;font-size:1.2rem;font-weight:900;margin-top:10px}.center{display:grid;place-items:center;text-align:center}.center .callout{max-width:820px}.quote{font-size:2.4rem;font-weight:1000;line-height:1.05}.small{font-size:.98rem;color:var(--muted)}
+
+.start-overlay{position:fixed;inset:0;z-index:9999;background:radial-gradient(circle at 20% 20%,rgba(108,194,74,.38),transparent 28%),linear-gradient(135deg,rgba(0,0,0,.94),rgba(16,24,18,.96));display:grid;place-items:center;padding:28px;color:#fff}
+.start-card{width:min(640px,92vw);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.20);border-radius:28px;box-shadow:0 24px 80px rgba(0,0,0,.45);padding:34px;text-align:center}
+.start-card .eyebrow{color:var(--g);letter-spacing:2px;text-transform:uppercase;font-weight:900;font-size:.82rem;margin-bottom:8px}
+.start-card h2{margin:0 0 12px;font-size:2.4rem;line-height:1.05;color:#fff}
+.start-card p{margin:0 auto 22px;max-width:520px;color:#dbe7df;line-height:1.55;font-size:1.05rem}
+.start-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.start-actions button{border:0;border-radius:999px;padding:13px 22px;font-weight:900;cursor:pointer;font-size:1rem}
+.start-actions .btn-primary{background:linear-gradient(135deg,var(--g),var(--y));color:#061006}
+.start-actions .btn-dark{background:#111;color:#fff;border:1px solid rgba(255,255,255,.25)}
+.small-note{margin-top:16px;font-size:.86rem;color:#afbdaf}
+
+
+/* Slide 2 redesign */
+.slide2-redesign{
+  background:#070a08;
+  color:#fff;
+}
+.slide2-redesign .s2-bg{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 72% 34%, rgba(108,194,74,.28), transparent 30%),
+    radial-gradient(circle at 92% 88%, rgba(242,230,0,.13), transparent 26%),
+    linear-gradient(135deg,#040504 0%, #071009 43%, #17220f 100%);
+}
+.slide2-redesign .s2-bg:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size:36px 36px;
+  opacity:.45;
+}
+.slide2-redesign .s2-shell{
+  position:absolute;
+  inset:28px;
+  z-index:2;
+  display:grid;
+  grid-template-columns:.98fr 1.02fr;
+  gap:16px;
+  align-items:stretch;
+}
+.slide2-redesign .s2-left{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:16px 4px 16px 4px;
+}
+.slide2-redesign .s2-eyebrow{
+  color:var(--g);
+  font-weight:1000;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  font-size:.95rem;
+  margin-bottom:26px;
+}
+.slide2-redesign .s2-kicker{
+  color:var(--y);
+  font-weight:1000;
+  text-transform:uppercase;
+  letter-spacing:1.8px;
+  font-size:1rem;
+  margin-bottom:12px;
+}
+.slide2-redesign h1{
+  color:#fff;
+  font-size:clamp(3rem,5.3vw,5.7rem);
+  line-height:.9;
+  letter-spacing:-3px;
+  text-shadow:0 8px 28px rgba(0,0,0,.55);
+}
+.slide2-redesign .s2-sub{
+  margin-top:22px;
+  color:#fff;
+  font-size:1.42rem;
+  line-height:1.2;
+  font-weight:900;
+  max-width:540px;
+}
+.slide2-redesign .s2-sub span{
+  color:var(--g);
+}
+.slide2-redesign .s2-banner{
+  margin-top:30px;
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  align-self:flex-start;
+  background:linear-gradient(90deg,var(--g),var(--y));
+  color:#030403;
+  padding:13px 22px;
+  border-radius:999px;
+  font-weight:1000;
+  font-size:1.02rem;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  box-shadow:0 12px 35px rgba(0,0,0,.28);
+}
+.slide2-redesign .s2-banner b{
+  font-size:1.4rem;
+  line-height:0;
+}
+.slide2-redesign .s2-right{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  align-items:stretch;
+}
+.slide2-redesign .compare-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:26px;
+  min-height:360px;
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 24px 70px rgba(0,0,0,.4);
+  background:#111;
+}
+.slide2-redesign .compare-card:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:url('../assets/day1-slide1-approved.png');
+  background-size:cover;
+  background-repeat:no-repeat;
+  opacity:.92;
+}
+.slide2-redesign .compare-card.wrong:before{
+  background-position:68% 52%;
+  filter:saturate(.55) brightness(.55) blur(.4px);
+}
+.slide2-redesign .compare-card.right:before{
+  background-position:78% 52%;
+  filter:saturate(1.08) brightness(.78);
+}
+.slide2-redesign .compare-card:after{
+  content:"";
+  position:absolute;
+  inset:0;
+}
+.slide2-redesign .compare-card.wrong:after{
+  background:linear-gradient(180deg,rgba(225,29,72,.32),rgba(4,4,4,.88));
+}
+.slide2-redesign .compare-card.right:after{
+  background:linear-gradient(180deg,rgba(108,194,74,.28),rgba(4,4,4,.86));
+}
+.slide2-redesign .card-top{
+  position:absolute;
+  z-index:2;
+  top:18px;
+  left:18px;
+  right:18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.slide2-redesign .tag{
+  padding:9px 14px;
+  border-radius:999px;
+  font-weight:1000;
+  color:#fff;
+  background:rgba(0,0,0,.72);
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+.slide2-redesign .wrong .mark{
+  color:#fff;
+  background:var(--danger);
+}
+.slide2-redesign .right .mark{
+  color:#031005;
+  background:var(--g);
+}
+.slide2-redesign .mark{
+  width:46px;
+  height:46px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  font-size:1.7rem;
+  font-weight:1000;
+  box-shadow:0 10px 28px rgba(0,0,0,.35);
+}
+.slide2-redesign .card-copy{
+  position:absolute;
+  z-index:2;
+  left:22px;
+  right:22px;
+  bottom:24px;
+}
+.slide2-redesign .card-copy h2{
+  color:#fff;
+  margin:0 0 12px;
+  font-size:1.42rem;
+  line-height:1;
+  letter-spacing:-.5px;
+}
+.slide2-redesign .card-copy p{
+  color:#fff;
+  font-size:.92rem;
+  line-height:1.18;
+  font-weight:800;
+}
+.slide2-redesign .wrong .card-copy h2{color:#fff}
+.slide2-redesign .right .card-copy h2{color:var(--y)}
+.slide2-redesign .monitor-figure{
+  position:absolute;
+  z-index:2;
+  left:50%;
+  top:42%;
+  transform:translate(-50%,-50%);
+  width:96px;
+  height:160px;
+  opacity:.95;
+}
+.slide2-redesign .monitor-figure:before{
+  content:"";
+  position:absolute;
+  left:29px;
+  top:0;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#111;
+  border:4px solid currentColor;
+}
+.slide2-redesign .monitor-figure:after{
+  content:"";
+  position:absolute;
+  left:18px;
+  top:43px;
+  width:60px;
+  height:82px;
+  border-radius:24px 24px 12px 12px;
+  background:currentColor;
+}
+.slide2-redesign .wrong .monitor-figure{
+  color:#fff;
+  transform:translate(-50%,-50%) rotate(-10deg);
+}
+.slide2-redesign .right .monitor-figure{
+  color:var(--g);
+}
+.slide2-redesign .wrong .stance,
+.slide2-redesign .right .stance{
+  position:absolute;
+  z-index:3;
+  left:50%;
+  top:58%;
+  transform:translateX(-50%);
+  color:#fff;
+  font-weight:1000;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  opacity:.95;
+}
+.slide2-redesign .wrong .stance{color:#ffbac9}
+.slide2-redesign .right .stance{color:#d7ffbf}
+@media(max-width:900px){
+  .slide2-redesign .s2-shell{grid-template-columns:1fr;gap:18px}
+  .slide2-redesign .s2-right{display:none}
+}
+
+
+/* v15 Slide 2 sizing correction */
+.slide2-redesign .s2-shell{
+  inset:26px 30px 34px 30px !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:20px !important;
+}
+.slide2-redesign .s2-right{
+  gap:18px !important;
+}
+.slide2-redesign .compare-card{
+  min-height:350px !important;
+}
+.slide2-redesign .card-copy{
+  bottom:24px !important;
+}
+.slide2-redesign .card-copy h2{
+  font-size:1.45rem !important;
+  line-height:1.02 !important;
+  margin-bottom:8px !important;
+}
+.slide2-redesign .card-copy p{
+  font-size:.9rem !important;
+  line-height:1.16 !important;
+}
+.slide2-redesign .stance{
+  top:57% !important;
+  font-size:.82rem !important;
+}
+.slide2-redesign .monitor-figure{
+  top:39% !important;
+  width:74px !important;
+  height:126px !important;
+}
+.slide2-redesign .monitor-figure:before{
+  left:22px !important;
+  width:30px !important;
+  height:30px !important;
+}
+.slide2-redesign .monitor-figure:after{
+  left:13px !important;
+  top:35px !important;
+  width:48px !important;
+  height:66px !important;
+}
+
+
+/* v16 Slide 2 unique visual scenes - no repeated Slide 1 hero image */
+.slide2-redesign .compare-card:before{
+  background-image:none !important;
+  opacity:1 !important;
+  filter:none !important;
+}
+.slide2-redesign .compare-card.wrong:before,
+.slide2-redesign .compare-card.right:before{
+  background-image:none !important;
+}
+.slide2-redesign .compare-card.wrong{
+  background:linear-gradient(180deg,#251014 0%,#090909 100%) !important;
+}
+.slide2-redesign .compare-card.right{
+  background:linear-gradient(180deg,#10220c 0%,#080908 100%) !important;
+}
+.slide2-redesign .compare-card:after{
+  z-index:1 !important;
+  pointer-events:none;
+}
+.slide2-redesign .scene{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  border-radius:26px;
+}
+.slide2-redesign .scene:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,.18), transparent 34%),
+    linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,.62));
+}
+.slide2-redesign .court-grid{
+  position:absolute;
+  left:-18%;
+  right:-18%;
+  bottom:1%;
+  height:45%;
+  transform:perspective(460px) rotateX(56deg);
+  background:
+    linear-gradient(90deg, rgba(118,185,0,.55) 0 9%, #111 9% 13%, rgba(255,230,0,.62) 13% 22%, #111 22% 27%, rgba(118,185,0,.55) 27% 37%, #111 37% 42%, rgba(255,230,0,.62) 42% 51%, #111 51% 56%, rgba(118,185,0,.55) 56% 66%, #111 66% 71%, rgba(255,230,0,.62) 71% 80%, #111 80% 85%, rgba(118,185,0,.55) 85% 100%),
+    linear-gradient(0deg, #111 0 8%, transparent 8% 20%, #111 20% 28%, transparent 28% 43%, #111 43% 52%, transparent 52% 67%, #111 67% 76%, transparent 76%);
+  opacity:.85;
+  box-shadow:0 -20px 80px rgba(0,0,0,.55) inset;
+}
+.slide2-redesign .wall-sign{
+  position:absolute;
+  top:21%;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:2rem;
+  font-weight:1000;
+  font-style:italic;
+  letter-spacing:1px;
+  color:rgba(255,255,255,.28);
+  text-shadow:0 3px 12px rgba(0,0,0,.55);
+}
+.slide2-redesign .pad{
+  position:absolute;
+  border-radius:10px;
+  opacity:.95;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+.slide2-redesign .pad-a{left:8%;bottom:26%;width:38%;height:11%;background:var(--g);transform:rotate(-10deg);}
+.slide2-redesign .pad-b{right:3%;bottom:31%;width:43%;height:10%;background:var(--y);transform:rotate(8deg);}
+.slide2-redesign .pad-c{left:22%;bottom:16%;width:55%;height:8%;background:var(--g);transform:rotate(4deg);opacity:.72;}
+.slide2-redesign .guest{
+  position:absolute;
+  width:17px;
+  height:17px;
+  border-radius:50%;
+  background:#d9d9d9;
+  box-shadow:0 18px 0 -1px #252525, 0 36px 0 -5px #111;
+  opacity:.86;
+}
+.slide2-redesign .guest:after{
+  content:"";
+  position:absolute;
+  left:-5px;
+  top:17px;
+  width:27px;
+  height:20px;
+  border-radius:12px 12px 4px 4px;
+  background:#2b2b2b;
+}
+.slide2-redesign .g1{left:22%;bottom:38%;transform:scale(.82);}
+.slide2-redesign .g2{left:68%;bottom:45%;transform:scale(.7);}
+.slide2-redesign .g3{left:47%;bottom:31%;transform:scale(.6);}
+.slide2-redesign .employee{
+  position:absolute;
+  z-index:2;
+  width:78px;
+  height:132px;
+  color:#0b0b0b;
+}
+.slide2-redesign .employee:before{
+  content:"";
+  position:absolute;
+  left:24px;
+  top:0;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:#e5c6a6;
+  box-shadow:0 0 0 4px rgba(0,0,0,.75);
+}
+.slide2-redesign .employee:after{
+  content:"";
+  position:absolute;
+  left:10px;
+  top:36px;
+  width:60px;
+  height:74px;
+  border-radius:18px 18px 8px 8px;
+  background:#080808;
+  box-shadow:0 8px 24px rgba(0,0,0,.55);
+}
+.slide2-redesign .employee .shirt{
+  position:absolute;
+  z-index:3;
+  left:14px;
+  top:64px;
+  width:54px;
+  text-align:center;
+  font-size:6px;
+  line-height:1;
+  color:var(--g);
+  font-weight:1000;
+  transform:rotate(90deg);
+  letter-spacing:.3px;
+}
+.slide2-redesign .employee.leaning{
+  right:8%;
+  top:31%;
+  transform:rotate(-16deg);
+}
+.slide2-redesign .employee.leaning:before{
+  filter:saturate(.85);
+}
+.slide2-redesign .employee.leaning:after{
+  background:#0a0a0a;
+}
+.slide2-redesign .employee.walking{
+  left:13%;
+  top:30%;
+  transform:rotate(4deg);
+}
+.slide2-redesign .employee.walking:after{
+  box-shadow:0 0 0 2px rgba(118,185,0,.38),0 8px 24px rgba(0,0,0,.55);
+}
+.slide2-redesign .employee.walking:before{
+  box-shadow:0 0 0 4px rgba(0,0,0,.75), 42px 69px 0 -10px var(--g), 63px 93px 0 -12px var(--y);
+}
+.slide2-redesign .phone-glow{
+  position:absolute;
+  right:13%;
+  top:57%;
+  width:18px;
+  height:28px;
+  border-radius:4px;
+  background:rgba(255,255,255,.9);
+  box-shadow:0 0 22px rgba(255,255,255,.9);
+  transform:rotate(-14deg);
+  z-index:3;
+}
+.slide2-redesign .scan-ring{
+  position:absolute;
+  border:3px solid rgba(118,185,0,.72);
+  border-radius:50%;
+  z-index:1;
+  opacity:.8;
+}
+.slide2-redesign .ring1{left:40%;top:36%;width:100px;height:100px;}
+.slide2-redesign .ring2{left:52%;top:47%;width:145px;height:145px;border-color:rgba(255,230,0,.45);}
+.slide2-redesign .wrong .scene{
+  filter:saturate(.72);
+}
+.slide2-redesign .right .scene{
+  filter:saturate(1.08);
+}
+.slide2-redesign .wrong .card-copy h2{
+  color:#fff !important;
+}
+.slide2-redesign .right .card-copy h2{
+  color:var(--y) !important;
+}
+
+
+/* v18 Slide 2 approved photo comparison */
+.slide2-redesign .s2-shell{
+  inset:26px 30px 34px 30px !important;
+  grid-template-columns:.88fr 1.12fr !important;
+  gap:28px !important;
+}
+.slide2-redesign .approved-photo-wrap{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+.slide2-redesign .approved-photo{
+  width:100% !important;
+  height:auto !important;
+  max-height:500px !important;
+  object-fit:contain !important;
+  border-radius:24px !important;
+  box-shadow:0 24px 70px rgba(0,0,0,.48) !important;
+  display:block !important;
+}
+.slide2-redesign .s2-left h1{
+  font-size:clamp(3rem,5.2vw,5.8rem) !important;
+}
+.slide2-redesign .s2-sub{
+  font-size:1.25rem !important;
+}
+@media(max-width:900px){
+  .slide2-redesign .s2-shell{grid-template-columns:1fr !important;}
+  .slide2-redesign .approved-photo-wrap{display:none !important;}
+}
+
+
+/* v23 Slide 3 approved awareness image */
+.slide3-image{
+  background:#000;
+  padding:0 !important;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.slide3-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+  border-radius:28px;
+  box-shadow:0 24px 70px rgba(0,0,0,.48);
+}
+
+
+/* v24 correction: ensure only the current slide renders and slide 3 cannot stack with previous slide */
+.slide:not(.active){
+  display:none !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+.slide.active{
+  display:block !important;
+  visibility:visible !important;
+}
+.slide3-image{
+  background:#000 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  display:none !important;
+}
+.slide3-image.active{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+.slide3-image img{
+  width:100% !important;
+  height:100% !important;
+  max-width:100% !important;
+  max-height:100% !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  display:block !important;
+  border-radius:24px !important;
+}
+
+
+/* v26 Slide 4 approved full-slide image */
+.slide4-image{
+  background:#000 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  display:none !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+.slide4-image.active{
+  display:flex !important;
+}
+.slide4-image img{
+  width:100% !important;
+  height:100% !important;
+  max-width:100% !important;
+  max-height:100% !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  display:block !important;
+  border-radius:24px !important;
+  box-shadow:0 24px 70px rgba(0,0,0,.48);
+}
+
+
+/* v30 Slide 5 restored as approved full-slide image */
+.slide5-image{
+  background:#000 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  display:none !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+.slide5-image.active{
+  display:flex !important;
+}
+.slide5-image img{
+  width:100% !important;
+  height:100% !important;
+  max-width:100% !important;
+  max-height:100% !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  display:block !important;
+  border-radius:24px !important;
+  box-shadow:0 24px 70px rgba(0,0,0,.48);
+}
+
+
+/* v32 Slide 6 approved full-slide image */
+.slide6-image{
+  background:#000 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  display:none !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+.slide6-image.active{
+  display:flex !important;
+}
+.slide6-image img{
+  width:100% !important;
+  height:100% !important;
+  max-width:100% !important;
+  max-height:100% !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  display:block !important;
+  border-radius:24px !important;
+  box-shadow:0 24px 70px rgba(0,0,0,.48);
+}
+
+
+/* v35 Slide 7 approved full-slide image */
+.slide7-image{
+  background:#000 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  display:none !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+.slide7-image.active{
+  display:flex !important;
+}
+.slide7-image img{
+  width:100% !important;
+  height:100% !important;
+  max-width:100% !important;
+  max-height:100% !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  display:block !important;
+  border-radius:24px !important;
+  box-shadow:0 24px 70px rgba(0,0,0,.48);
+}
+
+
+.slide8-image{
+  background:#000 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  display:none !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+.slide8-image.active{display:flex !important;}
+.slide8-image img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:contain !important;
+  display:block !important;
+}
+
+
+/* v41 Slide 9: approved static image with subtle scan spotlights */
+.slide9-spotlight{
+  background:#000 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  display:none !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+.slide9-spotlight.active{
+  display:flex !important;
+}
+.slide9-spotlight .spotlight-stage{
+  position:relative;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  border-radius:24px;
+  background:#000;
+  box-shadow:0 24px 70px rgba(0,0,0,.48);
+}
+.slide9-spotlight .spotlight-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center center;
+  display:block;
+}
+.slide9-spotlight .scan-spot{
+  position:absolute;
+  z-index:5;
+  border:5px solid #e6ef00;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(230,239,0,.28) 0%, rgba(118,185,0,.12) 45%, rgba(118,185,0,0) 72%);
+  box-shadow:0 0 0 8px rgba(230,239,0,.14), 0 0 42px rgba(230,239,0,.75);
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.82);
+  animation:spotlightScan 15s infinite steps(1,end);
+  pointer-events:none;
+}
+.slide9-spotlight .scan-spot:after{
+  content:"";
+  position:absolute;
+  inset:-10px;
+  border:2px dashed rgba(255,255,255,.75);
+  border-radius:50%;
+}
+
+/* Positions are based on the approved 16:9 slide artwork. */
+.slide9-spotlight .scan-spot-1{
+  left:15.2%;
+  top:44.5%;
+  width:120px;
+  height:120px;
+  animation-delay:0s;
+}
+.slide9-spotlight .scan-spot-2{
+  left:43.5%;
+  top:35.8%;
+  width:135px;
+  height:135px;
+  animation-delay:-12s;
+}
+.slide9-spotlight .scan-spot-3{
+  left:74.2%;
+  top:41.8%;
+  width:130px;
+  height:130px;
+  animation-delay:-9s;
+}
+.slide9-spotlight .scan-spot-4{
+  left:22.0%;
+  top:65.2%;
+  width:112px;
+  height:112px;
+  animation-delay:-6s;
+}
+.slide9-spotlight .scan-spot-5{
+  left:86.5%;
+  top:56.0%;
+  width:130px;
+  height:130px;
+  animation-delay:-3s;
+}
+
+@keyframes spotlightScan{
+  0%,19.99%{opacity:1;transform:translate(-50%,-50%) scale(1);}
+  20%,100%{opacity:0;transform:translate(-50%,-50%) scale(.82);}
+}
+
+
+
+
+/* v43 Slide 9: tight fake-logo mask with official transparent logo overlay */
+  position:absolute;
+  z-index:4;
+  left:55.25%;
+  top:22.05%;
+  width:8.4%;
+  height:auto;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.55));
+}
+
+
+
+/* v52 Slide 10: timed Main Court rule cards synced to recorded audio */
+.slide10-maincourt{
+  background:#000 !important;
+  overflow:hidden !important;
+  display:none !important;
+}
+.slide10-maincourt.active{display:block !important;}
+.slide10-maincourt .mc-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center center;
+  background:#000;
+  display:block;
+}
+.slide10-maincourt .mc-shade{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.86) 0%, rgba(0,0,0,.62) 32%, rgba(0,0,0,.20) 57%, rgba(0,0,0,.48) 100%),
+    linear-gradient(0deg, rgba(0,0,0,.55) 0%, transparent 22%, transparent 72%, rgba(0,0,0,.35) 100%);
+  z-index:1;
+}
+.slide10-maincourt .mc-left{
+  position:absolute;
+  z-index:3;
+  left:4.5%;
+  top:8.5%;
+  width:39%;
+  color:#fff;
+}
+.slide10-maincourt .mc-eyebrow{
+  display:inline-block;
+  color:#9fe870;
+  font-weight:1000;
+  letter-spacing:2px;
+  font-size:.78rem;
+  text-transform:uppercase;
+  padding-bottom:8px;
+  border-bottom:4px solid #e6ef00;
+  margin-bottom:18px;
+}
+.slide10-maincourt h1{
+  color:#fff;
+  font-size:clamp(3rem,6.2vw,5.7rem);
+  line-height:.86;
+  letter-spacing:-3px;
+  text-shadow:0 8px 24px rgba(0,0,0,.65);
+}
+.slide10-maincourt h1::first-line{color:#77c844;}
+.slide10-maincourt .mc-sub{
+  margin-top:18px;
+  max-width:420px;
+  color:#fff;
+  font-size:1.05rem;
+  line-height:1.25;
+  font-weight:900;
+  text-shadow:0 3px 12px rgba(0,0,0,.75);
+}
+.slide10-maincourt .mc-mantra{
+  margin-top:18px;
+  color:#f2e600;
+  font-size:1.22rem;
+  line-height:1.1;
+  font-weight:1000;
+  text-shadow:0 3px 12px rgba(0,0,0,.75);
+}
+.slide10-maincourt .mc-cards{
+  position:absolute;
+  z-index:4;
+  right:4.2%;
+  top:6.4%;
+  width:35.2%;
+  display:grid;
+  gap:10px;
+}
+.slide10-maincourt .mc-card{
+  display:grid;
+  grid-template-columns:54px 1fr;
+  gap:13px;
+  align-items:center;
+  min-height:72px;
+  background:rgba(255,255,255,.96);
+  border:3px solid #6cc24a;
+  border-radius:18px;
+  padding:11px 15px;
+  color:#111827;
+  box-shadow:0 14px 30px rgba(0,0,0,.28);
+  opacity:0;
+  transform:translateX(55px) scale(.98);
+  animation:mainCourtCardIn .7s ease-out forwards;
+}
+.slide10-maincourt .mc-card h3{
+  margin:0 0 3px;
+  font-size:1rem;
+  line-height:.96;
+  color:#111827;
+  text-transform:uppercase;
+  font-weight:1000;
+  letter-spacing:.2px;
+}
+.slide10-maincourt .mc-card p{
+  margin:0;
+  font-size:.73rem;
+  line-height:1.14;
+  font-weight:900;
+  color:#26313d;
+}
+.slide10-maincourt .mc-num{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:1.55rem;
+  font-weight:1000;
+  background:linear-gradient(135deg,#9fe870,#e6ef00);
+  color:#111;
+  box-shadow:0 10px 22px rgba(0,0,0,.22);
+}
+.slide10-maincourt .card1{animation-delay:27s;}
+.slide10-maincourt .card2{animation-delay:34s;}
+.slide10-maincourt .card3{animation-delay:44s;}
+.slide10-maincourt .card4{animation-delay:52s;}
+.slide10-maincourt .card5{animation-delay:60s;}
+.slide10-maincourt .card6{animation-delay:69s;}
+@keyframes mainCourtCardIn{
+  to{opacity:1;transform:translateX(0) scale(1);}
+}
+.slide10-maincourt .mc-footer{
+  position:absolute;
+  z-index:3;
+  left:4.2%;
+  bottom:6.1%;
+  width:55.5%;
+  background:rgba(0,0,0,.78);
+  border:2px solid rgba(108,194,74,.75);
+  border-radius:0 28px 28px 0;
+  color:#9fe870;
+  padding:12px 20px;
+  font-size:1.15rem;
+  line-height:1.05;
+  font-weight:1000;
+  font-style:italic;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+  text-shadow:0 3px 10px rgba(0,0,0,.8);
+  opacity:0;
+  animation:mainCourtFooterIn .7s ease-out forwards;
+  animation-delay:78s;
+}
+@keyframes mainCourtFooterIn{to{opacity:1;}}
+.slide10-maincourt .footer-note{
+  left:50%;
+  right:auto;
+  bottom:13%;
+  transform:translateX(-50%);
+  max-width:54%;
+  text-align:center;
+}
+
+
+/* v53 Slide 11: Dodgeball Court Monitoring HTML overlays only */
+.slide11-dodgeball{
+  background:#000 !important;
+  overflow:hidden !important;
+  display:none !important;
+}
+.slide11-dodgeball.active{display:block !important;}
+.slide11-dodgeball .db-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  background:#000;
+  display:block;
+}
+.slide11-dodgeball .db-shade{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.86) 0%, rgba(0,0,0,.66) 31%, rgba(0,0,0,.22) 58%, rgba(0,0,0,.36) 100%),
+    linear-gradient(0deg, rgba(0,0,0,.60) 0%, transparent 23%, transparent 72%, rgba(0,0,0,.28) 100%);
+}
+.slide11-dodgeball .db-left{
+  position:absolute;
+  z-index:3;
+  left:4.2%;
+  top:7.4%;
+  width:41%;
+  color:#fff;
+}
+.slide11-dodgeball .db-eyebrow{
+  display:inline-block;
+  color:#9fe870;
+  font-weight:1000;
+  letter-spacing:2px;
+  font-size:.78rem;
+  text-transform:uppercase;
+  padding-bottom:8px;
+  border-bottom:4px solid #e6ef00;
+  margin-bottom:16px;
+}
+.slide11-dodgeball h1{
+  color:#fff;
+  font-size:clamp(2.85rem,5.8vw,5.35rem);
+  line-height:.87;
+  letter-spacing:-3px;
+  text-shadow:0 8px 24px rgba(0,0,0,.70);
+}
+.slide11-dodgeball h1::first-line{color:#9fe870;}
+.slide11-dodgeball .db-sub{
+  margin-top:16px;
+  max-width:430px;
+  color:#fff;
+  font-size:1.04rem;
+  line-height:1.25;
+  font-weight:900;
+  text-shadow:0 3px 12px rgba(0,0,0,.78);
+}
+.slide11-dodgeball .db-sub strong{color:#e6ef00;}
+.slide11-dodgeball .db-cards{
+  position:absolute;
+  z-index:4;
+  left:4.2%;
+  right:4.2%;
+  bottom:16.2%;
+  width:auto;
+  display:grid;
+  grid-template-columns:repeat(6, 1fr);
+  gap:8px;
+}
+.slide11-dodgeball .db-card{
+  display:grid;
+  grid-template-columns:34px 1fr;
+  gap:7px;
+  align-items:center;
+  min-height:76px;
+  background:rgba(255,255,255,.95);
+  border:2.2px solid #6cc24a;
+  border-radius:14px;
+  padding:8px 8px;
+  color:#111827;
+  box-shadow:0 14px 28px rgba(0,0,0,.30);
+  opacity:0;
+  transform:translateY(24px) scale(.98);
+  animation:dodgeballCardIn .65s ease-out forwards;
+}
+.slide11-dodgeball .db-card h3{
+  margin:0 0 3px;
+  font-size:.54rem;
+  line-height:.96;
+  color:#111827;
+  text-transform:uppercase;
+  font-weight:1000;
+  letter-spacing:.1px;
+}
+.slide11-dodgeball .db-card p{
+  margin:0;
+  font-size:.47rem;
+  line-height:1.08;
+  font-weight:900;
+  color:#26313d;
+}
+.slide11-dodgeball .db-num{
+  width:31px;
+  height:31px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:.98rem;
+  font-weight:1000;
+  background:linear-gradient(135deg,#9fe870,#e6ef00);
+  color:#111;
+  box-shadow:0 9px 18px rgba(0,0,0,.22);
+}
+.slide11-dodgeball .card1{animation-delay:.8s;}
+.slide11-dodgeball .card2{animation-delay:1.35s;}
+.slide11-dodgeball .card3{animation-delay:1.9s;}
+.slide11-dodgeball .card4{animation-delay:2.45s;}
+.slide11-dodgeball .card5{animation-delay:3s;}
+.slide11-dodgeball .card6{animation-delay:3.55s;}
+@keyframes dodgeballCardIn{to{opacity:1;transform:translateY(0) scale(1);}}
+.slide11-dodgeball .db-footer{
+  position:absolute;
+  z-index:3;
+  left:4.2%;
+  bottom:5.2%;
+  width:72%;
+  background:rgba(0,0,0,.82);
+  border:2px solid rgba(108,194,74,.78);
+  border-radius:0 28px 28px 0;
+  color:#9fe870;
+  padding:11px 20px;
+  font-size:1.02rem;
+  line-height:1.08;
+  font-weight:1000;
+  font-style:italic;
+  text-transform:uppercase;
+  letter-spacing:.45px;
+  text-shadow:0 3px 10px rgba(0,0,0,.8);
+  opacity:0;
+  animation:dodgeballFooterIn .65s ease-out forwards;
+  animation-delay:4.2s;
+}
+@keyframes dodgeballFooterIn{to{opacity:1;}}
+
+
+
+/* v57 Slide 11: narration-synced two-wave Dodgeball cards */
+.slide11-dodgeball .db-cards{
+  left:4.2%;
+  right:auto;
+  bottom:15.8%;
+  width:77.5%;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:12px;
+}
+.slide11-dodgeball .db-card{
+  grid-template-columns:44px 1fr;
+  gap:10px;
+  min-height:94px;
+  border-radius:16px;
+  padding:11px 13px;
+  transform:translateY(24px) scale(.98);
+}
+.slide11-dodgeball .db-card h3{
+  font-size:.76rem;
+  line-height:.97;
+  margin-bottom:5px;
+}
+.slide11-dodgeball .db-card p{
+  font-size:.61rem;
+  line-height:1.13;
+}
+.slide11-dodgeball .db-num{
+  width:40px;
+  height:40px;
+  font-size:1.2rem;
+}
+.slide11-dodgeball .card1,
+.slide11-dodgeball .card2,
+.slide11-dodgeball .card3,
+.slide11-dodgeball .card4,
+.slide11-dodgeball .card5,
+.slide11-dodgeball .card6{
+  grid-row:1;
+}
+.slide11-dodgeball .card1{grid-column:1; animation:dodgeballCardIn .65s 30s ease-out forwards, dodgeballCardOut .45s 88s ease-in forwards;}
+.slide11-dodgeball .card2{grid-column:2; animation:dodgeballCardIn .65s 44s ease-out forwards, dodgeballCardOut .45s 88s ease-in forwards;}
+.slide11-dodgeball .card3{grid-column:3; animation:dodgeballCardIn .65s 57s ease-out forwards, dodgeballCardOut .45s 88s ease-in forwards;}
+.slide11-dodgeball .card4{grid-column:1; animation:dodgeballCardIn .65s 91s ease-out forwards;}
+.slide11-dodgeball .card5{grid-column:2; animation:dodgeballCardIn .65s 104s ease-out forwards;}
+.slide11-dodgeball .card6{grid-column:3; animation:dodgeballCardIn .65s 120s ease-out forwards;}
+@keyframes dodgeballCardOut{to{opacity:0;transform:translateY(-16px) scale(.985);}}
+.slide11-dodgeball .db-footer{
+  bottom:5.2%;
+  width:72%;
+  font-size:1.05rem;
+  animation-delay:125s;
+}
+
+
+/* v60 Slide 12: Airbag Safety HTML overlays */
+.slide12-airbags{
+  background:#000 !important;
+  overflow:hidden !important;
+  display:none !important;
+}
+.slide12-airbags.active{display:block !important;}
+.slide12-airbags .ab-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  background:#000;
+  display:block;
+}
+.slide12-airbags .ab-shade{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.86) 0%, rgba(0,0,0,.64) 34%, rgba(0,0,0,.22) 58%, rgba(0,0,0,.50) 100%),
+    linear-gradient(0deg, rgba(0,0,0,.70) 0%, transparent 26%, transparent 72%, rgba(0,0,0,.35) 100%);
+}
+.slide12-airbags .ab-left{
+  position:absolute;
+  z-index:3;
+  left:4.2%;
+  top:7.2%;
+  width:39%;
+  color:#fff;
+}
+.slide12-airbags .ab-eyebrow{
+  display:inline-block;
+  color:#9fe870;
+  font-weight:1000;
+  letter-spacing:2px;
+  font-size:.78rem;
+  text-transform:uppercase;
+  padding-bottom:8px;
+  border-bottom:4px solid #e6ef00;
+  margin-bottom:16px;
+}
+.slide12-airbags h1{
+  color:#fff;
+  font-size:clamp(3.2rem,6.1vw,5.65rem);
+  line-height:.86;
+  letter-spacing:-3px;
+  text-shadow:0 8px 24px rgba(0,0,0,.72);
+}
+.slide12-airbags h1::first-line{color:#9fe870;}
+.slide12-airbags .ab-sub{
+  margin-top:16px;
+  max-width:455px;
+  color:#fff;
+  font-size:1.05rem;
+  line-height:1.25;
+  font-weight:900;
+  text-shadow:0 3px 12px rgba(0,0,0,.78);
+}
+.slide12-airbags .ab-sub strong{color:#e6ef00;}
+.slide12-airbags .ab-cards{
+  position:absolute;
+  z-index:4;
+  right:4.1%;
+  top:13.8%;
+  width:36%;
+  display:grid;
+  gap:12px;
+}
+.slide12-airbags .ab-card{
+  display:grid;
+  grid-template-columns:50px 1fr;
+  gap:12px;
+  align-items:center;
+  min-height:96px;
+  background:rgba(255,255,255,.96);
+  border:3px solid #6cc24a;
+  border-radius:18px;
+  padding:12px 15px;
+  color:#111827;
+  box-shadow:0 14px 30px rgba(0,0,0,.32);
+  opacity:0;
+  transform:translateX(48px) scale(.98);
+  animation:airbagCardIn .65s ease-out forwards;
+}
+.slide12-airbags .ab-card h3{
+  margin:0 0 5px;
+  font-size:1.02rem;
+  line-height:.98;
+  color:#111827;
+  text-transform:uppercase;
+  font-weight:1000;
+  letter-spacing:.1px;
+}
+.slide12-airbags .ab-card p{
+  margin:0;
+  font-size:.74rem;
+  line-height:1.16;
+  font-weight:900;
+  color:#26313d;
+}
+.slide12-airbags .ab-num{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:1.38rem;
+  font-weight:1000;
+  background:linear-gradient(135deg,#9fe870,#e6ef00);
+  color:#111;
+  box-shadow:0 10px 22px rgba(0,0,0,.24);
+}
+.slide12-airbags .card1{animation-delay:21s;}
+.slide12-airbags .card2{animation-delay:34s;}
+.slide12-airbags .card3{animation-delay:48s;}
+.slide12-airbags .card4{animation-delay:65s;}
+@keyframes airbagCardIn{to{opacity:1;transform:translateX(0) scale(1);}}
+.slide12-airbags .ab-footer{
+  position:absolute;
+  z-index:5;
+  left:4.2%;
+  bottom:5.6%;
+  width:66%;
+  background:rgba(0,0,0,.84);
+  border:2px solid rgba(108,194,74,.78);
+  border-radius:0 28px 28px 0;
+  color:#9fe870;
+  padding:12px 20px;
+  font-size:1.12rem;
+  line-height:1.08;
+  font-weight:1000;
+  font-style:italic;
+  text-transform:uppercase;
+  letter-spacing:.55px;
+  text-shadow:0 3px 10px rgba(0,0,0,.8);
+  opacity:0;
+  animation:airbagFooterIn .65s 78s ease-out forwards;
+}
+@keyframes airbagFooterIn{to{opacity:1;}}
+
+
+
+/* v62 Slide 13: Ninja Course HTML overlays */
+.slide13-ninja{
+  background:#050806;
+  color:#fff;
+}
+.slide13-ninja.active{display:block !important;}
+.slide13-ninja .nj-bg{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(1.06) contrast(1.04);
+}
+.slide13-ninja .nj-shade{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.54) 38%,rgba(0,0,0,.20) 68%,rgba(0,0,0,.10) 100%);
+}
+.slide13-ninja .nj-title{
+  position:absolute;left:42px;top:42px;width:42%;z-index:2;
+}
+.slide13-ninja .nj-eyebrow{
+  color:#b7ff47;font-weight:1000;text-transform:uppercase;letter-spacing:3px;font-size:.85rem;margin-bottom:10px;text-shadow:0 2px 10px rgba(0,0,0,.65);
+}
+.slide13-ninja h1{
+  color:#fff;font-size:clamp(3.1rem,5.9vw,6rem);line-height:.88;margin:0;text-transform:uppercase;text-shadow:0 8px 28px rgba(0,0,0,.75);
+}
+.slide13-ninja h1 span{color:#9fe870;display:block;}
+.slide13-ninja .nj-sub{
+  margin-top:16px;color:#fff;font-size:1.08rem;line-height:1.28;font-weight:900;max-width:465px;text-shadow:0 3px 12px rgba(0,0,0,.75);
+}
+.slide13-ninja .nj-sub strong{color:#e6ef00;}
+.slide13-ninja .nj-cards{
+  position:absolute;left:44px;top:292px;width:43%;display:grid;grid-template-columns:1fr;gap:8px;z-index:3;
+}
+.slide13-ninja .nj-card{
+  min-height:64px;display:grid;grid-template-columns:52px 1fr;gap:11px;align-items:center;
+  padding:9px 14px;background:rgba(255,255,255,.94);color:#101820;border:2px solid #82e23d;border-radius:16px;
+  box-shadow:0 14px 30px rgba(0,0,0,.34);opacity:0;
+}
+.slide13-ninja .nj-card.top-in.visible{animation:ninjaTopIn .72s cubic-bezier(.2,.9,.2,1.08) forwards;}
+.slide13-ninja .nj-card.left-in.visible{animation:ninjaLeftIn .72s cubic-bezier(.2,.9,.2,1.08) forwards;}
+.slide13-ninja .nj-card.card1,
+.slide13-ninja .nj-card.card2,
+.slide13-ninja .nj-card.card3,
+.slide13-ninja .nj-card.card4{animation-delay:0s;}
+@keyframes ninjaTopIn{from{opacity:0;transform:translateY(-62px) scale(.96);}to{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes ninjaLeftIn{from{opacity:0;transform:translateX(-72px) scale(.96);}to{opacity:1;transform:translateX(0) scale(1);}}
+.slide13-ninja .nj-num{
+  width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#d8ff00,#76d83c);color:#071009;font-size:1.28rem;font-weight:1000;box-shadow:0 7px 16px rgba(0,0,0,.22);
+}
+.slide13-ninja .nj-card h3{
+  margin:0 0 2px 0;font-size:.92rem;line-height:1;text-transform:uppercase;color:#111827;letter-spacing:.2px;
+}
+.slide13-ninja .nj-card p{
+  margin:0;font-size:.73rem;line-height:1.12;font-weight:800;color:#26313d;
+}
+.slide13-ninja .nj-footer{
+  position:absolute;right:38px;top:42px;width:38%;z-index:4;opacity:0;transform:translate(34px,-36px);
+  background:rgba(0,0,0,.76);border:2px solid #7fe23f;border-radius:20px;padding:14px 20px;
+  color:#a9ff5a;font-weight:1000;text-transform:uppercase;font-style:italic;letter-spacing:1px;font-size:1rem;line-height:1.18;text-shadow:0 2px 10px rgba(0,0,0,.7);
+}
+.slide13-ninja .nj-footer.visible{animation:ninjaFooterTopRight .7s ease-out forwards;}
+@keyframes ninjaFooterTopRight{to{opacity:1;transform:translate(0,0);}}
+.slide13-ninja .footer-note{
+  right:38px;bottom:28px;left:auto;max-width:430px;text-align:center;
+}
+
+
+
+
+/* v67 Slide 14: Know Your Attractions */
+.slide14-attractions{
+  background:#050806;
+  color:#fff;
+  overflow:hidden;
+}
+.slide14-attractions .ky-bg{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
+  filter:saturate(1.04) contrast(1.04);
+}
+.slide14-attractions .ky-shade{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.84) 0%,rgba(0,0,0,.66) 25%,rgba(0,0,0,.22) 52%,rgba(0,0,0,.14) 100%),
+    linear-gradient(0deg,rgba(0,0,0,.58) 0%,rgba(0,0,0,.12) 55%,rgba(0,0,0,.20) 100%);
+}
+.slide14-attractions .ky-title{
+  position:absolute;left:42px;top:40px;width:34%;z-index:3;
+}
+.slide14-attractions .ky-eyebrow{
+  color:#b7ff47;font-weight:1000;text-transform:uppercase;letter-spacing:3px;font-size:.85rem;margin-bottom:10px;text-shadow:0 2px 10px rgba(0,0,0,.75);
+}
+.slide14-attractions h1{
+  margin:0;color:#fff;font-size:clamp(3.2rem,6.1vw,6rem);line-height:.88;text-transform:uppercase;text-shadow:0 8px 30px rgba(0,0,0,.82);
+}
+.slide14-attractions h1 span{display:block;color:#9fe870;}
+.slide14-attractions .ky-intro{
+  margin:17px 0 0 0;max-width:440px;color:#fff;font-size:1.05rem;line-height:1.34;font-weight:850;text-shadow:0 3px 12px rgba(0,0,0,.85);
+}
+.slide14-attractions .ky-intro strong{color:#e6ef00;}
+.slide14-attractions .ky-wave{
+  position:absolute;left:43%;right:3.6%;display:grid;grid-template-columns:1fr 1fr;gap:14px;z-index:4;
+  pointer-events:none;
+}
+.slide14-attractions .ky-wave1{bottom:28%;}
+.slide14-attractions .ky-wave2{bottom:12%;visibility:visible;}
+.slide14-attractions .ky-card{
+  min-height:114px;display:grid;grid-template-columns:54px 1fr;gap:12px;align-items:center;
+  padding:15px 18px;background:rgba(255,255,255,.96);color:#111827;border:2px solid #82e23d;border-radius:18px;
+  box-shadow:0 18px 40px rgba(0,0,0,.44);opacity:0;transform:translateY(24px) scale(.97);
+}
+.slide14-attractions .ky-num{
+  width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#d8ff00,#76d83c);color:#071009;font-size:1.3rem;font-weight:1000;box-shadow:0 8px 18px rgba(0,0,0,.24);
+}
+.slide14-attractions .ky-card h3{
+  margin:0 0 5px 0;font-size:1rem;line-height:1.01;text-transform:uppercase;letter-spacing:.15px;color:#111827;
+}
+.slide14-attractions .ky-card p{
+  margin:0;font-size:.78rem;line-height:1.18;font-weight:800;color:#26313d;
+}
+.slide14-attractions.active .ky-wave1 .ky-card:nth-child(1){animation:kyWaveOneIn .65s 1.1s ease forwards;}
+.slide14-attractions.active .ky-wave1 .ky-card:nth-child(2){animation:kyWaveTwoIn .65s 1.4s ease forwards;}
+.slide14-attractions.active .ky-wave2 .ky-card:nth-child(1){animation:kyWaveOneIn .65s 6.2s ease forwards;}
+.slide14-attractions.active .ky-wave2 .ky-card:nth-child(2){animation:kyWaveTwoIn .65s 6.5s ease forwards;}
+@keyframes kyWaveOneIn{
+  from{opacity:0;transform:translateX(-54px) scale(.97);} to{opacity:1;transform:translateX(0) scale(1);}
+}
+@keyframes kyWaveTwoIn{
+  from{opacity:0;transform:translateX(54px) scale(.97);} to{opacity:1;transform:translateX(0) scale(1);}
+}
+.slide14-attractions .ky-final{
+  position:absolute;left:43%;right:3.8%;bottom:3.6%;z-index:5;
+  padding:14px 18px;background:rgba(0,0,0,.87);border:2px solid #8be246;border-radius:20px;
+  color:#b7ff62;font-size:1.0rem;line-height:1.1;font-weight:1000;font-style:italic;text-transform:uppercase;letter-spacing:.5px;text-align:center;
+  text-shadow:0 3px 12px rgba(0,0,0,.82);box-shadow:0 18px 42px rgba(0,0,0,.44);
+  opacity:0;transform:scaleX(.72) translateY(22px);
+}
+.slide14-attractions.active .ky-final{animation:kyFinalIn .72s 11.3s cubic-bezier(.2,.9,.2,1.08) forwards;}
+@keyframes kyFinalIn{to{opacity:1;transform:scaleX(1) translateY(0);}}
+.slide14-attractions .ky-devnote{
+  position:absolute;right:26px;top:26px;z-index:6;background:rgba(0,0,0,.67);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:8px 13px;
+  color:#fff;font-size:.72rem;font-weight:800;box-shadow:0 7px 18px rgba(0,0,0,.3);
+}
+
+</style></head><body>
+<div class="start-overlay" id="startOverlay">
+<div class="start-card">
+<div class="eyebrow">Day 1 Online Training</div>
+<h2>Begin Attraction Monitor Training</h2>
+<p>Press start to begin the slide show. Narration will play automatically, and the Next button will unlock once the required narration is complete.</p>
+<div class="start-actions">
+<button class="btn-primary" onclick="startTraining()" type="button">Start Day 1 Training</button>
+<button class="btn-dark" onclick="toggleFullScreen()" type="button">Full Screen</button>
+</div>
+<div class="small-note"></div>
+</div>
+</div>
+<main class="deck"><div class="topbar"><div class="brand"><div class="logo-mark">L</div><div class="brand-title"><strong>Launch Attraction Monitor Training</strong><span>Day 1 Online Training</span></div></div><div class="slide-counter"><span id="cur">1</span> / <span id="total">16</span></div></div><div class="stage"><section class="slide active" data-narration="Welcome to Attraction Monitor Training. This job is different from almost every other position in the park because you are working where the action is actually happening. Guests are jumping, running, competing, laughing, and sometimes pushing the limits. Your job is not to stand nearby and hope everything goes well. Your job is to actively manage the attractions so guests can have fun without creating avoidable risk. That means watching constantly, moving with purpose, correcting unsafe behavior early, and communicating with leadership when you need support. A great Attraction Monitor is visible, confident, friendly, and consistent. During this training, we are going to focus less on memorizing policy language and more on what you should actually do during a real shift."><img alt="Welcome to the Attractions" src="../assets/day1-slide1-approved.png" style="display:block;width:100%;height:100%;object-fit:contain;background:#000;"/></section><section class="slide slide2-redesign" data-audio="audio/day1-slide2.m4a" data-narration="The biggest mistake a new Attraction Monitor can make is thinking the job is just watching people jump. Watching is only part of it. Monitoring means you are actively controlling the attraction. You should be moving through your assigned area, scanning near and far, checking wristbands and socks, listening for unsafe behavior, and stepping in before small issues turn into injuries. Guests will often test limits without realizing how dangerous it can be. They may run, double bounce, sit on trampolines, cut across lanes, or ignore another guest nearby. If you are leaning, distracted, or talking with another employee, you will miss those warning signs. The standard is simple: be present, be visible, and be active.">
+<div class="s2-bg"></div>
+<div class="s2-shell">
+<div class="s2-left">
+<div class="s2-eyebrow">DAY 1 · SLIDE 2</div>
+<div class="s2-kicker">Passive monitoring creates risk</div>
+<h1>More Than<br/>Just Watching</h1>
+<p class="s2-sub">Attraction monitoring is an <span>active job</span>, not a standing position.</p>
+<div class="s2-banner"><b>»</b> Move. Scan. Engage.</div>
+</div>
+<div class="s2-right approved-photo-wrap">
+<img alt="Wrong versus right attraction monitoring comparison" class="approved-photo" src="../assets/day1-slide2-passive-active.png"/>
+</div>
+</div>
+</section><section class="slide slide3-image" data-narration="Imagine you are monitoring a busy Saturday afternoon. One guest is sitting on a trampoline square. Another guest is running across the court. A younger child is moving toward a larger jumper. Someone else has the wrong socks. None of those things may look serious by themselves, but they can become serious quickly if nobody steps in. That is why Attraction Monitors cannot focus on only one person or one conversation for too long. Your eyes need to keep moving. You are looking for patterns, spacing, speed, size differences, rule violations, and body language. The accident you prevent may be the one nobody else even noticed was about to happen. Good monitoring is early action, not late reaction.">
+<img alt="Situational awareness training: spot developing risks across the full attraction" src="../assets/day1-slide3-awareness.png"/>
+</section><section class="slide slide4-image" data-narration="Launch is supposed to be fun. Guests should feel energy, excitement, and freedom to enjoy the attractions. But none of that matters if the experience becomes unsafe. As an Attraction Monitor, you may have to stop a guest who is having fun because the way they are playing is creating risk. That can feel uncomfortable at first, especially if they do not understand the rule. Remember, your job is not to win a popularity contest in the moment. Your job is to protect the guest, protect the people around them, and protect the park. You can still be friendly. You can still smile. But when safety is involved, you must be firm, clear, and consistent.">
+<img alt="Safety creates fun training slide" src="../assets/day1-slide4-safety-creates-fun.png"/>
+</section><section class="slide slide5-image" data-narration="When you look across your assigned attraction, you should not just be asking, “Is anyone hurt?” You should be asking, “What could become unsafe in the next few seconds?” Watch for guests running across trampolines, sitting on jumping surfaces, roughhousing, climbing where they should not, double bouncing, or entering an area before it is clear. At the same time, check the basics: wristbands, jump time, Launch socks, and whether guests are in the correct area. You also need to watch spacing. A small child near a much larger jumper can create risk even if neither guest is breaking a rule on purpose. Strong monitors look for the next problem before it happens.">
+<img alt="Universal rules every guest must follow" src="../assets/day1-slide5-rules.png"/>
+</section><section class="slide slide6-image" data-narration="Before you step into position, make sure you are fully prepared. Your whistle is how you get attention quickly when the court is loud. Your walkie is how you call for a Supervisor, Manager, coverage, or emergency support. Your First Aid bag is part of the park response system and must be with the assigned monitor. If you are missing a whistle, your walkie is not working, or your First Aid bag is not stocked or available, do not simply work around it. Tell a Supervisor before you take the court. The time to discover missing equipment is before something happens, not while you are trying to respond to an injury or unsafe situation.">
+<img alt="Wristbands mean access training slide" src="../assets/day1-slide6-wristbands-access.png"/>
+</section><section class="slide slide7-image" data-narration="A monitor who stands in one spot will only see the court from one angle. That creates blind spots. When you move with purpose, you see behind guests, across lanes, into corners, and toward entry points. You also become more visible to guests, which helps prevent rule breaking before it starts. Movement does not mean wandering away from your position or turning your back on the attraction. It means using your assigned area intelligently. Walk the zone. Pause where you can see the most. Shift when the crowd shifts. If a guest looks like they might do something unsafe, move closer before you need to correct them. Your location should help you control the court.">
+<img alt="Correcting guests professionally training slide" src="../assets/day1-slide7-correcting-guests.png"/>
+</section>
+<section class="slide slide8-image" data-narration="">
+<img alt="Launch Grip Socks Required" src="../assets/day1-slide8-socks-policy.png"/>
+</section>
+<section class="slide slide9-spotlight" data-narration="Your appearance affects how guests respond to you. When you are in proper uniform, wearing your name badge, carrying the right equipment, and standing with confidence, guests are more likely to recognize you as the person responsible for the area. If you look distracted, unprepared, or half out of uniform, your corrections carry less weight. This is especially important with parents. When a parent has a question or concern, they need to quickly identify a Launch employee who is actively paying attention. Looking professional is not about being formal. It is about making it clear that you are ready, responsible, and in control of the attraction you are monitoring.">
+<div class="spotlight-stage">
+<img alt="Stay in your zone attraction monitoring slide" class="spotlight-bg" src="../assets/day1-slide9-stay-zone-spotlight.png"/>
+<div class="scan-spot scan-spot-1"></div>
+<div class="scan-spot scan-spot-2"></div>
+<div class="scan-spot scan-spot-3"></div>
+<div class="scan-spot scan-spot-4"></div>
+<div class="scan-spot scan-spot-5"></div>
+</div>
+</section>
+<section class="slide slide10-maincourt" data-narration="Main Court rules are some of the most important rules an Attraction Monitor enforces. On the Main Court, watch for one jumper per square, no double bouncing, no sitting or lying down, no running across lanes, no climbing or hanging, and guests following monitor directions. These are not optional preferences. They are the rules that keep jumpers separated, controlled, and safer while the court is active.">
+<img alt="Main Court trampoline area background" class="mc-bg" src="../assets/day1-slide10-main-court-bg.png"/>
+<div class="mc-shade"></div>
+<div class="mc-left">
+<div class="mc-eyebrow">DAY 1 · SLIDE 10</div>
+<h1>Main Court<br/>Rules</h1>
+<p class="mc-sub">These are the rules monitors enforce every day on the Main Court.</p>
+<div class="mc-mantra">Know the rule.<br/>Correct the behavior.<br/>Protect the jumper.</div>
+</div>
+<div aria-label="Main Court rule cards" class="mc-cards">
+<div class="mc-card card1"><div class="mc-num">1</div><div><h3>One Jumper Per Square</h3><p>Only one guest should be jumping in each trampoline square at a time.</p></div></div>
+<div class="mc-card card2"><div class="mc-num">2</div><div><h3>No Double Bouncing</h3><p>Do not affect another jumper’s bounce or jump while someone is still on the bed.</p></div></div>
+<div class="mc-card card3"><div class="mc-num">3</div><div><h3>No Sitting or Lying Down</h3><p>Guests may not sit, lie down, or rest on trampoline beds.</p></div></div>
+<div class="mc-card card4"><div class="mc-num">4</div><div><h3>No Running Across Lanes</h3><p>Guests should walk on and off the court and stay under control.</p></div></div>
+<div class="mc-card card5"><div class="mc-num">5</div><div><h3>No Climbing or Hanging</h3><p>Wall pads, nets, and court boundaries are not climbing areas.</p></div></div>
+<div class="mc-card card6"><div class="mc-num">6</div><div><h3>Follow Monitor Directions</h3><p>Guests must follow the Attraction Monitor’s instructions immediately.</p></div></div>
+</div>
+<div class="mc-footer">Main Court safety depends on active rule enforcement.</div>
+</section><section class="slide slide11-dodgeball" data-narration="Dodgeball court monitoring requires you to manage both safety and fair play. Dodgeball has game-specific exceptions, but core safety rules still apply. The monitor also acts as the referee by watching for headshots, enforcing rules fairly, managing fair matchups, and keeping games moving.">
+<img alt="Dodgeball court background" class="db-bg" src="../assets/day1-slide11-dodgeball-bg.png"/>
+<div class="db-shade"></div>
+<div class="db-left">
+<div class="db-eyebrow">Day 1 · Slide 11</div>
+<h1>Dodgeball Court<br/>Monitoring</h1>
+<p class="db-sub">On Dodgeball, the Attraction Monitor is also the <strong>referee</strong>. Watch for safety, enforce the rules, and keep the game fair.</p>
+</div>
+<div aria-label="Dodgeball monitoring rule cards" class="db-cards">
+<div class="db-card card1"><div class="db-num">1</div><div><h3>Core Safety Rules Still Apply</h3><p>Dodgeball has game-specific exceptions, but the park&#39;s core safety rules remain in effect.</p></div></div>
+<div class="db-card card2"><div class="db-num">2</div><div><h3>Watch For Headshots</h3><p>Intentional headshots are not permitted and should be addressed immediately.</p></div></div>
+<div class="db-card card3"><div class="db-num">3</div><div><h3>Enforce Rules Fairly</h3><p>Referee decisions should be consistent and impartial for all players.</p></div></div>
+<div class="db-card card4"><div class="db-num">4</div><div><h3>Keep The Game Moving</h3><p>Do not allow games to drag on while large groups wait outside the court.</p></div></div>
+<div class="db-card card5"><div class="db-num">5</div><div><h3>Create Fair Matchups</h3><p>Separate younger guests from older guests when needed for a safer game.</p></div></div>
+<div class="db-card card6"><div class="db-num">6</div><div><h3>Safety Before Competition</h3><p>The goal is a safe and enjoyable experience, not just determining a winner.</p></div></div>
+</div>
+<div class="db-footer">A great referee creates a safe, fair, and fun game for everyone.</div>
+</section><section class="slide slide12-airbags" data-narration="Airbags require active supervision. The Attraction Monitor controls access, keeps each landing zone clear, watches for safe landings, directs guests to exit promptly, and decides when the next participant may jump.">
+<img alt="Airbag attraction background" class="ab-bg" src="../assets/day1-slide12-airbag-bg.png"/>
+<div class="ab-shade"></div>
+<div class="ab-left">
+<div class="ab-eyebrow">Day 1 · Slide 12</div>
+<h1>Airbag<br/>Safety</h1>
+<p class="ab-sub">Whether your park uses a Launch Pad or another style of airbag, the monitor <strong>controls access</strong> and keeps the landing area clear.</p>
+</div>
+<div aria-label="Airbag safety rule cards" class="ab-cards">
+<div class="ab-card card1"><div class="ab-num">1</div><div><h3>One Landing Zone. One Guest.</h3><p>Never allow the next participant to enter until the landing area is completely clear.</p></div></div>
+<div class="ab-card card2"><div class="ab-num">2</div><div><h3>Safe Landings Only</h3><p>Guests should land on their back or bottom. Stop head-first dives, unsafe flips, or uncontrolled landings.</p></div></div>
+<div class="ab-card card3"><div class="ab-num">3</div><div><h3>Clear The Airbag</h3><p>After landing, guests must exit promptly using the designated exit path.</p></div></div>
+<div class="ab-card card4"><div class="ab-num">4</div><div><h3>You Decide When It Is Safe</h3><p>The Attraction Monitor—not the guest—determines when the next jump may begin.</p></div></div>
+</div>
+<div class="ab-footer">A clear landing area is a safe landing area.</div></section><section class="slide slide13-ninja" data-narration="On the Ninja Course, the Attraction Monitor controls spacing and progression. Watch that guests move one obstacle at a time, avoid tricks and horseplay, stay aware of the equipment and other guests, and follow instructions so the course remains safe and controlled.">
+<img alt="Ninja Course background" class="nj-bg" src="../assets/day1-slide13-ninja-bg.png"/>
+<div class="nj-shade"></div>
+<div class="nj-title">
+  <div class="nj-eyebrow">DAY 1 · SLIDE 13</div>
+  <h1><span>Ninja</span>Course</h1>
+  <p class="nj-sub">Success on the Ninja Course comes from <strong>spacing</strong>, awareness, and controlled movement.</p>
+</div>
+<div aria-label="Ninja Course rule cards" class="nj-cards">
+  <div class="nj-card top-in card1"><div class="nj-num">1</div><div><h3>One Guest Per Obstacle</h3><p>Wait until the previous guest clears an obstacle before entering.</p></div></div>
+  <div class="nj-card left-in card2"><div class="nj-num">2</div><div><h3>No Tricks Or Horseplay</h3><p>No flips, hanging upside down, pushing, or contact with other guests.</p></div></div>
+  <div class="nj-card top-in card3"><div class="nj-num">3</div><div><h3>Stay Aware</h3><p>Watch your surroundings, land feet first, and follow the intended course.</p></div></div>
+  <div class="nj-card left-in card4"><div class="nj-num">4</div><div><h3>Monitor Controls The Course</h3><p>Control spacing, stop unsafe behavior, and ensure everyone follows instructions.</p></div></div>
+</div>
+<div class="nj-footer">Spacing prevents collisions. Awareness prevents injuries.</div>
+</section><section class="slide slide14-attractions" data-narration="Every Launch park is different. The attractions covered in this online training are common across the system, but your location may offer additional experiences with their own rules, capacity limits, access requirements, and operating procedures. During your hands-on training, learn every attraction in your park. Never guess or monitor an attraction you do not fully understand. Ask your trainer or manager questions, because the better you know each attraction, the faster you can recognize unsafe behavior and protect your guests.">
+<img alt="Collage of attractions available at different Launch parks" class="ky-bg" src="../assets/day1-slide14-attractions-bg.png"/>
+<div class="ky-shade"></div>
+<div class="ky-title">
+  <div class="ky-eyebrow">Day 1 · Slide 14</div>
+  <h1>Know Your<span>Attractions</span></h1>
+  <p class="ky-intro">The attractions covered in this course are common across Launch, but <strong>every park offers a different combination of experiences.</strong> Your hands-on shift is where you learn the attractions at your location.</p>
+</div>
+<div class="ky-wave ky-wave1">
+  <article class="ky-card"><div class="ky-num">1</div><div><h3>Every Park Is Unique</h3><p>Your location may offer attractions that are not covered in this online lesson.</p></div></article>
+  <article class="ky-card"><div class="ky-num">2</div><div><h3>Learn Every Attraction</h3><p>During hands-on training, learn the rules, capacity limits, access requirements, and operating procedures for every attraction in your park.</p></div></article>
+</div>
+<div class="ky-wave ky-wave2">
+  <article class="ky-card"><div class="ky-num">3</div><div><h3>Ask Before You Operate</h3><p>Never guess. Ask your trainer or manager before monitoring an attraction you do not fully understand.</p></div></article>
+  <article class="ky-card"><div class="ky-num">4</div><div><h3>Knowledge Protects Guests</h3><p>The better you know an attraction, the faster you can recognize unsafe behavior and prevent injuries.</p></div></article>
+</div>
+<div class="ky-final">Do not monitor an attraction until you understand how to operate it safely.</div>
+<div class="ky-devnote">Audio will be added separately · Cards are animated for visual testing</div>
+</section><section class="slide hero" data-narration="When incidents are reviewed, the issue is often not that a monitor did not know the rule. The issue is that the monitor was not fully engaged at the moment the rule needed to be enforced. Phones, side conversations, leaning, grouping with coworkers, staring at another incident, and waiting too long to correct a guest all create risk. These behaviors also make the park look less professional to parents. A good Attraction Monitor does not need to be perfect, but they do need to be focused. If you catch yourself drifting, reset immediately. Move your feet, scan your area, check wristbands and socks, and re-engage with the guests in front of you."><div class="bg-soft"></div><div class="bar"></div><div class="header"><div><div class="eyebrow">DAY 1 · Slide 15</div></div><div class="pill">Mistakes</div></div><div class="content"><div><div class="kicker">Avoid the habits that create risk</div><h1>Common Monitoring Mistakes</h1><p class="sub">Most monitor problems are attention problems.</p></div><div class="split"><div class="mini bad"><h3>Wrong</h3><p>Phones, grouping, leaning, daydreaming, watching another incident, or waiting too long to correct behavior.</p></div><div class="mini good"><h3>Right</h3><p>Eyes moving, body moving, equipment ready, rules enforced, and management called when needed.</p></div></div></div><div class="narration"><strong>Narration Draft:</strong> When incidents are reviewed, the issue is often not that a monitor did not know the rule. The issue is that the monitor was not fully engaged at the moment the rule needed to be enforced. Phones, side conversations, leaning, grouping with coworkers, staring at another incident, and waiting too long to correct a guest all create risk. These behaviors also make the park look less professional to parents. A good Attraction Monitor does not need to be perfect, but they do need to be focused. If you catch yourself drifting, reset immediately. Move your feet, scan your area, check wristbands and socks, and re-engage with the guests in front of you.</div></section><section class="slide hero dark" data-narration="Day 1 gave you the foundation: what an Attraction Monitor is responsible for, how to scan, how to move, how to correct guests, and when to call for support. The next step is hands-on practice. Print the Day 1 checklist and work with your trainer on the floor. They should not be checking whether you can repeat the wording from this training. They should be watching whether you can demonstrate the job. Can you use the walkie properly? Can you check wristbands and socks? Can you correct a guest professionally? Can you stay focused while the court is active? Those observable skills are what matter. Once the hands-on shift is complete, return for the Day 1 exam."><div class="bg-soft"></div><div class="bar"></div><div class="header"><div><div class="eyebrow">DAY 1 · Slide 16</div></div><div class="pill">Next Steps</div></div><div class="content"><div><div class="kicker">Next step: hands-on validation</div><h1>Day 1 Floor Challenge</h1><p class="sub">Now your trainer needs to see the behavior, not just hear the answers.</p><ul class="big-list"><li>Print today’s checklist</li><li>Complete supervised floor practice</li><li>Return for the Day 1 exam</li></ul></div><div class="image-card" style="background-image:url('../video_frames/montage.jpg')"><span>Training moves from screen to floor.</span></div></div><div class="narration"><strong>Narration Draft:</strong> Day 1 gave you the foundation: what an Attraction Monitor is responsible for, how to scan, how to move, how to correct guests, and when to call for support. The next step is hands-on practice. Print the Day 1 checklist and work with your trainer on the floor. They should not be checking whether you can repeat the wording from this training. They should be watching whether you can demonstrate the job. Can you use the walkie properly? Can you check wristbands and socks? Can you correct a guest professionally? Can you stay focused while the court is active? Those observable skills are what matter. Once the hands-on shift is complete, return for the Day 1 exam.</div></section></div><div class="controls"><a class="home-link" href="./index.html">← Day Menu</a><div class="control-group"><button class="navbtn" id="prev">Back</button><button class="speak" id="speak">Play Narration</button><button aria-disabled="true" class="primary" disabled="" id="next">Next</button></div></div></main><script>
+const slides=[...document.querySelectorAll('.slide')];
+let idx=0;
+let trainingStarted=false;
+const completedNarration=new Set();
+const maxPlayedTime=new Map();
+
+const cur=document.getElementById('cur');
+const total=document.getElementById('total');
+const prev=document.getElementById('prev');
+const next=document.getElementById('next');
+const speak=document.getElementById('speak');
+total.textContent=slides.length;
+
+// Recorded narration files. Add future slide audio here as recordings are approved.
+const recordedNarration={
+  0:'../audio/day1_slide1.m4a',
+  1:'../audio/day1_slide2.m4a' ,
+  2:'../audio/day1_slide3.m4a' ,
+  3:'../audio/day1_slide4.m4a' ,
+  4:'../audio/day1_slide5.m4a' ,
+  5:'../audio/day1_slide6.m4a' ,
+  6:'../audio/day1_slide7.m4a' ,
+  7:'../audio/day1_slide8.m4a',
+  8:'../audio/day1_slide9.m4a',
+  9:'../audio/day1_slide10.m4a',
+  10:'../audio/day1_slide11.m4a',
+  11:'../audio/day1_slide12.m4a',
+  12:'../audio/day1_slide13.m4a'
+};
+
+const audioPlayer=new Audio();
+audioPlayer.preload='auto';
+let narrationStarted=false;
+
+function hasRecordedAudio(index=idx){
+  return Object.prototype.hasOwnProperty.call(recordedNarration,index);
+}
+
+function currentNarrationComplete(){
+  return !hasRecordedAudio(idx) || completedNarration.has(idx);
+}
+
+function setNextLocked(locked){
+  next.disabled=locked;
+  next.setAttribute('aria-disabled', locked ? 'true' : 'false');
+  next.title=locked ? 'Complete the slide narration to continue.' : '';
+}
+
+function updateNarrationControls(){
+  const hasAudio=hasRecordedAudio();
+  speak.disabled=!trainingStarted || !hasAudio;
+  if(!hasAudio){
+    speak.textContent='Narration Pending';
+  }else if(completedNarration.has(idx)){
+    speak.textContent='Replay Narration';
+  }else if(narrationStarted){
+    speak.textContent='Narration Playing';
+  }else{
+    speak.textContent='Play Narration';
+  }
+  setNextLocked(hasAudio && !completedNarration.has(idx));
+}
+
+function stopAudio(reset=true){
+  audioPlayer.pause();
+  if(reset){
+    try{audioPlayer.currentTime=0;}catch(e){}
+  }
+  narrationStarted=false;
+}
+
+function loadCurrentAudio(){
+  const src=recordedNarration[idx];
+  if(!src) return false;
+  const resolved=new URL(src, window.location.href).href;
+  if(audioPlayer.src!==resolved){
+    audioPlayer.src=src;
+    audioPlayer.load();
+  }
+  return true;
+}
+
+async function playNarration(){
+  if(!trainingStarted || !loadCurrentAudio()) return;
+  if(completedNarration.has(idx)){
+    try{audioPlayer.currentTime=0;}catch(e){}
+  }
+  try{
+    await audioPlayer.play();
+    narrationStarted=true;
+    updateNarrationControls();
+  }catch(e){
+    narrationStarted=false;
+    updateNarrationControls();
+    // Cashier Training uses a start click to satisfy browser audio rules.
+    // If a browser still blocks playback, the Play Narration button remains available.
+  }
+}
+
+function startTraining(){
+  trainingStarted=true;
+  const overlay=document.getElementById('startOverlay');
+  if(overlay) overlay.style.display='none';
+  show(0,true);
+}
+
+
+function toggleFullScreen(){
+  if(!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+  else document.exitFullscreen?.();
+}
+
+function toggleNarration(){
+  playNarration();
+}
+
+
+function resetSlide13TimedElements(){
+  const slide=slides[12];
+  if(!slide) return;
+  slide.querySelectorAll('.nj-card,.nj-footer').forEach(el=>{
+    el.classList.remove('visible');
+    el.style.animation='none';
+    // Force reflow so animations replay cleanly when the class is added again.
+    void el.offsetWidth;
+    el.style.animation='';
+  });
+}
+
+function syncSlide13TimedElements(){
+  if(idx!==12) return;
+  const slide=slides[12];
+  if(!slide) return;
+  const t=audioPlayer.currentTime || 0;
+  const markers=[
+    ['.nj-card.card1',18],
+    ['.nj-card.card2',33],
+    ['.nj-card.card3',51],
+    ['.nj-card.card4',74],
+    ['.nj-footer',82]
+  ];
+  markers.forEach(([selector,seconds])=>{
+    const el=slide.querySelector(selector);
+    if(el && t>=seconds) el.classList.add('visible');
+  });
+}
+
+audioPlayer.addEventListener('timeupdate',()=>{
+  const maxSoFar=maxPlayedTime.get(idx)||0;
+  if(audioPlayer.currentTime>maxSoFar) maxPlayedTime.set(idx,audioPlayer.currentTime);
+  syncSlide13TimedElements();
+});
+
+audioPlayer.addEventListener('seeking',()=>{
+  const maxSoFar=maxPlayedTime.get(idx)||0;
+  if(!completedNarration.has(idx) && audioPlayer.currentTime>maxSoFar+1){
+    audioPlayer.currentTime=maxSoFar;
+  }
+});
+
+audioPlayer.addEventListener('ended',()=>{
+  completedNarration.add(idx);
+  maxPlayedTime.set(idx,audioPlayer.duration||audioPlayer.currentTime);
+  narrationStarted=false;
+  updateNarrationControls();
+});
+
+audioPlayer.addEventListener('play',()=>{
+  narrationStarted=true;
+  syncSlide13TimedElements();
+  updateNarrationControls();
+});
+
+audioPlayer.addEventListener('pause',()=>{
+  if(!audioPlayer.ended) narrationStarted=false;
+  updateNarrationControls();
+});
+
+function show(i,shouldAutoPlay=true){
+  stopAudio();
+  idx=i;
+  slides.forEach((s,n)=>s.classList.toggle('active',n===idx));
+  if(idx===12){
+    resetSlide13TimedElements();
+    if(completedNarration.has(idx)){
+      const slide=slides[12];
+      slide?.querySelectorAll('.nj-card,.nj-footer').forEach(el=>el.classList.add('visible'));
+    }
+  }
+  cur.textContent=idx+1;
+  prev.disabled=idx===0;
+  next.textContent=idx===slides.length-1?'Finish':'Next';
+  updateNarrationControls();
+  if(trainingStarted && shouldAutoPlay && hasRecordedAudio() && !completedNarration.has(idx)){
+    playNarration();
+  }
+}
+
+function nextSlide(){
+  if(!currentNarrationComplete()){
+    updateNarrationControls();
+    return;
+  }
+  if(idx<slides.length-1) show(idx+1,true);
+  else location.href='./index.html';
+}
+
+function prevSlide(){
+  if(idx>0) show(idx-1,false);
+}
+
+prev.onclick=prevSlide;
+next.onclick=nextSlide;
+speak.onclick=toggleNarration;
+
+function forceNextSlideForTesting(){
+  stopAudio();
+  completedNarration.add(idx);
+  if(idx<slides.length-1) show(idx+1,true);
+  else location.href='./index.html';
+}
+
+document.addEventListener('keydown',(e)=>{
+  if(e.ctrlKey && e.shiftKey && e.key.toLowerCase()==='f'){e.preventDefault();forceNextSlideForTesting();return;}
+  if(e.key==='ArrowRight' || e.key===' '){e.preventDefault();nextSlide();}
+  if(e.key==='ArrowLeft'){e.preventDefault();prevSlide();}
+  if(!e.ctrlKey && !e.shiftKey && e.key.toLowerCase()==='f') toggleFullScreen();
+});
+
+// Show the first slide and lock Next immediately. Narration begins after the Start button click.
+show(0,false);
+
+
+
+function developerNextSlide(){
+  if(window.__devAdvanceInProgress) return;
+  window.__devAdvanceInProgress = true;
+  setTimeout(()=>{ window.__devAdvanceInProgress = false; }, 250);
+
+  completedNarration.add(idx);
+  const target = Math.min(idx + 1, slides.length - 1);
+  if(target !== idx){
+    show(target, true);
+  }else{
+    updateNarrationControls();
+  }
+}
+
+document.addEventListener('keydown', (e)=>{
+  const key = String(e.key || '').toLowerCase();
+  if(e.ctrlKey && e.shiftKey && key === 'f'){
+    e.preventDefault();
+    e.stopPropagation();
+    developerNextSlide();
+  }
+}, true);
+
+</script></body></html>
