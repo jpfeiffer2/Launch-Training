@@ -1,6 +1,36 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Day 3 Cashier Training</title><style>
 :root{--g:#6cc24a;--y:#f2e600}*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#070707,#1c1c1c 55%,#2d341f);min-height:100vh;color:#111;display:grid;place-items:center;padding:24px}.shell{width:min(1060px,100%)}a{color:inherit}.back{display:inline-block;color:#fff;text-decoration:none;margin-bottom:18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);padding:10px 14px;border-radius:999px;font-weight:700}.records-link{display:inline-block;color:#fff;text-decoration:none;margin-left:10px;margin-bottom:18px;background:#111820;border:1px solid rgba(255,255,255,.22);padding:10px 14px;border-radius:999px;font-weight:900}.hero{color:#fff;margin-bottom:22px}.hero h1{margin:0;font-size:clamp(2.1rem,5vw,4rem);letter-spacing:-2px}.hero p{color:#cfd7df;margin:8px 0 0;line-height:1.4}.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}.card{background:#fff;border-radius:22px;box-shadow:0 18px 50px rgba(0,0,0,.22);overflow:hidden;text-decoration:none;min-height:280px;display:flex;flex-direction:column}.strip{height:10px;background:linear-gradient(90deg,var(--g),var(--y))}.body{padding:26px;display:flex;flex-direction:column;gap:12px;flex:1}.eyebrow{text-transform:uppercase;letter-spacing:2px;color:#4da62d;font-weight:900;font-size:.78rem}.card h2{margin:0;font-size:2rem}.card p{margin:0;color:#505a64;line-height:1.45}.button{margin-top:auto;background:#101418;color:#f2e600;border-radius:999px;padding:13px 15px;text-align:center;font-weight:900}@media(max-width:1000px){.grid{grid-template-columns:1fr}.card{min-height:0}}</style>
+  <style>
+    html { display: none; }
+    html.portal-authenticated { display: block; }
+  </style>
+  <script>
+    (() => {
+      const storageKey = "launchTrainingUnlockedUntil";
+      const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+
+      if (unlockedUntil <= Date.now()) {
+        localStorage.removeItem(storageKey);
+
+        const marker = "/Launch-Training/";
+        const currentPath = window.location.pathname;
+        const markerPosition = currentPath.indexOf(marker);
+        const portalBase = markerPosition >= 0
+          ? currentPath.slice(0, markerPosition + marker.length)
+          : "/";
+
+        const returnPath =
+          currentPath + window.location.search + window.location.hash;
+
+        window.location.replace(
+          portalBase + "?return=" + encodeURIComponent(returnPath)
+        );
+      } else {
+        document.documentElement.classList.add("portal-authenticated");
+      }
+    })();
+  </script>
 </head><body><main class="shell"><a class="back" href="../../index.html">← Cashier Training Home</a><a class="records-link" href="../../../index.html">Training Portal</a><a class="records-link" href="./exam-records.html">Exam Records</a><div class="hero"><h1>Day 3 Cashier Training</h1><p>Loyalty, upselling, recommendations, revenue growth, and ethical selling.</p></div><section class="grid">
   <a class="card" href="./online-training.html"><div class="strip"></div><div class="body"><div class="eyebrow">Step 1</div><h2>Online Training</h2><p>Presentation module covering Launch Loyalty, upselling, guest recommendations, and future visits.</p><div class="button">Start Online Training</div></div></a>
   <a class="card" href="./checklist.html"><div class="strip"></div><div class="body"><div class="eyebrow">Step 2</div><h2>Print Today's Checklist</h2><p>Trainer-led Day 3 floor checklist covering loyalty enrollment, upselling, and ethical recommendations.</p><div class="button">Open Checklist</div></div></a>

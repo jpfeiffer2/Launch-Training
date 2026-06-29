@@ -1468,7 +1468,37 @@
   color:#fff;font-size:.72rem;font-weight:800;box-shadow:0 7px 18px rgba(0,0,0,.3);
 }
 
-</style></head><body>
+</style>  <style>
+    html { display: none; }
+    html.portal-authenticated { display: block; }
+  </style>
+  <script>
+    (() => {
+      const storageKey = "launchTrainingUnlockedUntil";
+      const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+
+      if (unlockedUntil <= Date.now()) {
+        localStorage.removeItem(storageKey);
+
+        const marker = "/Launch-Training/";
+        const currentPath = window.location.pathname;
+        const markerPosition = currentPath.indexOf(marker);
+        const portalBase = markerPosition >= 0
+          ? currentPath.slice(0, markerPosition + marker.length)
+          : "/";
+
+        const returnPath =
+          currentPath + window.location.search + window.location.hash;
+
+        window.location.replace(
+          portalBase + "?return=" + encodeURIComponent(returnPath)
+        );
+      } else {
+        document.documentElement.classList.add("portal-authenticated");
+      }
+    })();
+  </script>
+</head><body>
 <div class="start-overlay" id="startOverlay">
 <div class="start-card">
 <div class="eyebrow">Day 1 Online Training</div>

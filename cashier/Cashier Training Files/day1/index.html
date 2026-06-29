@@ -79,6 +79,36 @@
 }
 </style>
 
+  <style>
+    html { display: none; }
+    html.portal-authenticated { display: block; }
+  </style>
+  <script>
+    (() => {
+      const storageKey = "launchTrainingUnlockedUntil";
+      const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+
+      if (unlockedUntil <= Date.now()) {
+        localStorage.removeItem(storageKey);
+
+        const marker = "/Launch-Training/";
+        const currentPath = window.location.pathname;
+        const markerPosition = currentPath.indexOf(marker);
+        const portalBase = markerPosition >= 0
+          ? currentPath.slice(0, markerPosition + marker.length)
+          : "/";
+
+        const returnPath =
+          currentPath + window.location.search + window.location.hash;
+
+        window.location.replace(
+          portalBase + "?return=" + encodeURIComponent(returnPath)
+        );
+      } else {
+        document.documentElement.classList.add("portal-authenticated");
+      }
+    })();
+  </script>
 </head><body><main class="shell"><a class="back" href="../../index.html">← Cashier Training Home</a><a class="records-link" href="../../../index.html">Training Portal</a><a class="records-link" href="./exam-records.html">Exam Records</a><div class="hero"><h1>Day 1 Cashier Training</h1><p>Start with the online training module, print today’s checklist for supervised floor training, then complete the exam at the end of the shift.</p></div><section class="grid">
   <a class="card" href="./online-training.html">
     <div class="strip"></div>

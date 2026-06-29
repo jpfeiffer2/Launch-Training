@@ -6,8 +6,40 @@
   <meta name="description" content="Launch Family Entertainment employee training portal">
   <title>Launch Training Portal</title>
   <link rel="stylesheet" href="shared/css/portal.css">
+  <script src="shared/js/portal-lock.js" defer></script>
 </head>
 <body>
+  <section class="login-gate" id="login-gate" aria-labelledby="login-title" hidden>
+    <div class="login-card">
+      <img
+        class="login-logo"
+        src="shared/images/launch-family-entertainment-logo.png"
+        alt="Launch Family Entertainment">
+      <p class="eyebrow">Employee Access</p>
+      <h1 id="login-title">Launch Training Portal</h1>
+      <p class="login-copy">
+        Enter the shared training password to continue.
+      </p>
+
+      <form id="portal-login-form" class="login-form">
+        <label for="portal-password">Password</label>
+        <input
+          id="portal-password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          required>
+        <button type="submit">Unlock Training Portal</button>
+        <p class="login-error" id="login-error" role="alert" aria-live="polite"></p>
+      </form>
+
+      <p class="login-notice">
+        This access screen is a basic deterrent and is not a secure authentication system.
+      </p>
+    </div>
+  </section>
+
+  <div id="portal-app" hidden>
   <a class="skip-link" href="#training-programs">Skip to training programs</a>
 
   <header class="site-header">
@@ -16,7 +48,7 @@
         class="brand-logo"
         src="shared/images/launch-family-entertainment-logo.png"
         alt="Launch Family Entertainment">
-      <div class="header-label">Employee Development</div>
+      <div class="header-actions"><div class="header-label">Employee Development</div><button class="lock-button" id="lock-portal" type="button">Lock Portal</button></div>
     </div>
   </header>
 
@@ -109,5 +141,6 @@
     <p>Launch Family Entertainment · Employee Training Portal</p>
     <p class="footer-version">Portal v1.0</p>
   </footer>
+  </div>
 </body>
 </html>

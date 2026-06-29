@@ -1,3 +1,33 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Day 2 Attraction Monitor Training</title><style>
 :root{--g:#6cc24a;--gd:#4da62d;--y:#f2e600;--b:#0a0a0a;--w:#fff;--muted:#5b6570;--line:#e5eaee;--danger:#dc2626;--blue:#2563eb;--shadow:0 18px 50px rgba(0,0,0,.18);--radius:24px}*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at top left,rgba(108,194,74,.22),transparent 32%),linear-gradient(135deg,#070707,#171717 52%,#2d341f);color:#111}.btn,.button{border:0;border-radius:999px;padding:12px 18px;font-weight:900;text-decoration:none;display:inline-block;cursor:pointer}.dark{background:#101418;color:#f2e600}.yellow{background:var(--y);color:#000}.back{display:inline-block;color:#fff;text-decoration:none;margin-bottom:18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);padding:10px 14px;border-radius:999px;font-weight:700}.strip{height:10px;background:linear-gradient(90deg,var(--g),var(--y))}.eyebrow{text-transform:uppercase;letter-spacing:2px;color:var(--gd);font-weight:900;font-size:.78rem}h1,h2,h3{margin:0;color:#101418}p{line-height:1.45}.logo-mark{width:54px;height:54px;border-radius:50%;background:#111;border:3px solid var(--g);display:grid;place-items:center;font-weight:900;color:var(--y);box-shadow:0 0 0 3px rgba(242,230,0,.16)}
-body{min-height:100vh;display:grid;place-items:center;padding:24px}.shell{width:min(960px,100%)}.hero{color:#fff;margin-bottom:22px}.hero h1{font-size:clamp(2.1rem,5vw,4rem);letter-spacing:-2px;color:#fff}.hero p{color:#cfd7df}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;border-radius:22px;box-shadow:var(--shadow);overflow:hidden;text-decoration:none;min-height:280px;display:flex;flex-direction:column;color:#111}.body{padding:26px;display:flex;flex-direction:column;gap:12px;flex:1}.card h2{font-size:2rem}.card p{color:#505a64;margin:0}.button{margin-top:auto;background:#101418;color:#f2e600;text-align:center}.records-link{display:inline-block;margin-left:12px;padding:10px 18px;border-radius:999px;background:#111820;color:#fff;text-decoration:none;font-weight:900;border:1px solid rgba(255,255,255,.2)}@media(max-width:900px){.grid{grid-template-columns:1fr}}</style></head><body><main class="shell"><a class="back" href="../../index.html">← Court Monitor Home</a><a class="records-link" href="../../../index.html">Training Portal</a><a class="records-link" href="./exam-records.html">Exam Records</a><div class="hero"><h1>Day 2 Attraction Monitor Training</h1><p>Core attraction monitoring for Main Court, Dodgeball, Ninja Course, and Launch Pad / Stunt Jump.</p></div><section class="grid"><a class="card" href="./online-training.html"><div class="strip"></div><div class="body"><div class="eyebrow">Step 1</div><h2>Online Training</h2><p>Complete the narrated slide module for today’s Attraction Monitor topics.</p><div class="button">Start Online Training</div></div></a><a class="card" href="./checklist.html"><div class="strip"></div><div class="body"><div class="eyebrow">Step 2</div><h2>Print Today's Checklist</h2><p>Trainer-led hands-on validation checklist for the supervised shift.</p><div class="button">Open Checklist</div></div></a><a class="card" href="./end-of-shift-exam.html"><div class="strip"></div><div class="body"><div class="eyebrow">Step 3</div><h2>End-of-Shift Exam</h2><p>Complete the assessment after the online and hands-on portions are finished.</p><div class="button">Start Exam</div></div></a></section></main></body></html>
+body{min-height:100vh;display:grid;place-items:center;padding:24px}.shell{width:min(960px,100%)}.hero{color:#fff;margin-bottom:22px}.hero h1{font-size:clamp(2.1rem,5vw,4rem);letter-spacing:-2px;color:#fff}.hero p{color:#cfd7df}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;border-radius:22px;box-shadow:var(--shadow);overflow:hidden;text-decoration:none;min-height:280px;display:flex;flex-direction:column;color:#111}.body{padding:26px;display:flex;flex-direction:column;gap:12px;flex:1}.card h2{font-size:2rem}.card p{color:#505a64;margin:0}.button{margin-top:auto;background:#101418;color:#f2e600;text-align:center}.records-link{display:inline-block;margin-left:12px;padding:10px 18px;border-radius:999px;background:#111820;color:#fff;text-decoration:none;font-weight:900;border:1px solid rgba(255,255,255,.2)}@media(max-width:900px){.grid{grid-template-columns:1fr}}</style>  <style>
+    html { display: none; }
+    html.portal-authenticated { display: block; }
+  </style>
+  <script>
+    (() => {
+      const storageKey = "launchTrainingUnlockedUntil";
+      const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+
+      if (unlockedUntil <= Date.now()) {
+        localStorage.removeItem(storageKey);
+
+        const marker = "/Launch-Training/";
+        const currentPath = window.location.pathname;
+        const markerPosition = currentPath.indexOf(marker);
+        const portalBase = markerPosition >= 0
+          ? currentPath.slice(0, markerPosition + marker.length)
+          : "/";
+
+        const returnPath =
+          currentPath + window.location.search + window.location.hash;
+
+        window.location.replace(
+          portalBase + "?return=" + encodeURIComponent(returnPath)
+        );
+      } else {
+        document.documentElement.classList.add("portal-authenticated");
+      }
+    })();
+  </script>
+</head><body><main class="shell"><a class="back" href="../../index.html">← Court Monitor Home</a><a class="records-link" href="../../../index.html">Training Portal</a><a class="records-link" href="./exam-records.html">Exam Records</a><div class="hero"><h1>Day 2 Attraction Monitor Training</h1><p>Core attraction monitoring for Main Court, Dodgeball, Ninja Course, and Launch Pad / Stunt Jump.</p></div><section class="grid"><a class="card" href="./online-training.html"><div class="strip"></div><div class="body"><div class="eyebrow">Step 1</div><h2>Online Training</h2><p>Complete the narrated slide module for today’s Attraction Monitor topics.</p><div class="button">Start Online Training</div></div></a><a class="card" href="./checklist.html"><div class="strip"></div><div class="body"><div class="eyebrow">Step 2</div><h2>Print Today's Checklist</h2><p>Trainer-led hands-on validation checklist for the supervised shift.</p><div class="button">Open Checklist</div></div></a><a class="card" href="./end-of-shift-exam.html"><div class="strip"></div><div class="body"><div class="eyebrow">Step 3</div><h2>End-of-Shift Exam</h2><p>Complete the assessment after the online and hands-on portions are finished.</p><div class="button">Start Exam</div></div></a></section></main></body></html>

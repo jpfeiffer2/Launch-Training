@@ -1,5 +1,35 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Day 2 Exam Records</title><style>
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#090b09,#1c2418);color:#111;padding:28px}.page{max-width:1100px;margin:0 auto;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 18px 55px rgba(0,0,0,.35)}header{padding:28px 34px;border-top:8px solid #6cc24a;border-bottom:1px solid #dfe5ea;display:flex;justify-content:space-between;gap:20px;align-items:center}h1{margin:0;font-size:2.2rem}.sub{color:#5f6b76;margin-top:6px}.button{border:0;border-radius:999px;padding:12px 20px;font-weight:900;text-decoration:none;background:#111820;color:#fff;cursor:pointer}main{padding:24px 34px}.records-list{display:grid;gap:12px}.record{display:grid;grid-template-columns:1.2fr .9fr .7fr auto;gap:14px;align-items:center;border:1px solid #dfe5ea;border-radius:16px;padding:16px;background:#fff}.main{font-weight:900}.subtext{color:#65707a;font-size:.88rem;margin-top:3px}.score{font-weight:900;color:#4da62d}.score.fail{color:#c92a2a}.empty{padding:24px;border:1px dashed #cbd5e1;border-radius:16px;color:#65707a;background:#f8fafc}.notice{margin-top:16px;padding:12px 14px;border-radius:12px;background:#fff8dc;border:2px solid #f2e600;font-weight:800}.print{display:none}@media(max-width:900px){header,.record{display:block}.button{margin-top:10px;display:inline-block}}@media print{body{background:#fff;padding:0}.page{box-shadow:none;border-radius:0}header,.records-list,.notice{display:none!important}.print{display:block!important;padding:28px}.grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid #dfe5ea;margin-bottom:16px}.cell{padding:10px;border-right:1px solid #dfe5ea}.cell:last-child{border-right:0}.label{font-size:11px;text-transform:uppercase;color:#555;font-weight:800}.value{font-size:16px;font-weight:900;margin-top:4px}.missed{border-bottom:1px solid #e5eaee;padding:8px 0}.sigrow{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:60px}.sig{border-top:2px solid #111820;padding-top:8px;font-weight:800}}</style></head><body><div class="page"><header><div><h1>Day 2 Exam Records</h1><div class="sub">Completed exam records saved in this browser.</div></div><div style="display:flex;gap:10px;flex-wrap:wrap;"><a class="button" href="index.html">Return to Day 2 Main Menu</a><a class="button" href="../../../index.html">Training Portal</a></div></header><main><div id="records" class="records-list"></div><div class="notice">Records are stored in this browser's local storage. There is no delete button inside the app.</div><div id="print" class="print"></div></main></div><script>
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#090b09,#1c2418);color:#111;padding:28px}.page{max-width:1100px;margin:0 auto;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 18px 55px rgba(0,0,0,.35)}header{padding:28px 34px;border-top:8px solid #6cc24a;border-bottom:1px solid #dfe5ea;display:flex;justify-content:space-between;gap:20px;align-items:center}h1{margin:0;font-size:2.2rem}.sub{color:#5f6b76;margin-top:6px}.button{border:0;border-radius:999px;padding:12px 20px;font-weight:900;text-decoration:none;background:#111820;color:#fff;cursor:pointer}main{padding:24px 34px}.records-list{display:grid;gap:12px}.record{display:grid;grid-template-columns:1.2fr .9fr .7fr auto;gap:14px;align-items:center;border:1px solid #dfe5ea;border-radius:16px;padding:16px;background:#fff}.main{font-weight:900}.subtext{color:#65707a;font-size:.88rem;margin-top:3px}.score{font-weight:900;color:#4da62d}.score.fail{color:#c92a2a}.empty{padding:24px;border:1px dashed #cbd5e1;border-radius:16px;color:#65707a;background:#f8fafc}.notice{margin-top:16px;padding:12px 14px;border-radius:12px;background:#fff8dc;border:2px solid #f2e600;font-weight:800}.print{display:none}@media(max-width:900px){header,.record{display:block}.button{margin-top:10px;display:inline-block}}@media print{body{background:#fff;padding:0}.page{box-shadow:none;border-radius:0}header,.records-list,.notice{display:none!important}.print{display:block!important;padding:28px}.grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid #dfe5ea;margin-bottom:16px}.cell{padding:10px;border-right:1px solid #dfe5ea}.cell:last-child{border-right:0}.label{font-size:11px;text-transform:uppercase;color:#555;font-weight:800}.value{font-size:16px;font-weight:900;margin-top:4px}.missed{border-bottom:1px solid #e5eaee;padding:8px 0}.sigrow{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:60px}.sig{border-top:2px solid #111820;padding-top:8px;font-weight:800}}</style>  <style>
+    html { display: none; }
+    html.portal-authenticated { display: block; }
+  </style>
+  <script>
+    (() => {
+      const storageKey = "launchTrainingUnlockedUntil";
+      const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+
+      if (unlockedUntil <= Date.now()) {
+        localStorage.removeItem(storageKey);
+
+        const marker = "/Launch-Training/";
+        const currentPath = window.location.pathname;
+        const markerPosition = currentPath.indexOf(marker);
+        const portalBase = markerPosition >= 0
+          ? currentPath.slice(0, markerPosition + marker.length)
+          : "/";
+
+        const returnPath =
+          currentPath + window.location.search + window.location.hash;
+
+        window.location.replace(
+          portalBase + "?return=" + encodeURIComponent(returnPath)
+        );
+      } else {
+        document.documentElement.classList.add("portal-authenticated");
+      }
+    })();
+  </script>
+</head><body><div class="page"><header><div><h1>Day 2 Exam Records</h1><div class="sub">Completed exam records saved in this browser.</div></div><div style="display:flex;gap:10px;flex-wrap:wrap;"><a class="button" href="index.html">Return to Day 2 Main Menu</a><a class="button" href="../../../index.html">Training Portal</a></div></header><main><div id="records" class="records-list"></div><div class="notice">Records are stored in this browser's local storage. There is no delete button inside the app.</div><div id="print" class="print"></div></main></div><script>
 const storageKey='launch_cashier_day2_exam_records_v1';
 function getRecords(){try{return JSON.parse(localStorage.getItem(storageKey)||'[]')}catch(e){return[]}}
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
