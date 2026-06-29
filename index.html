@@ -6,7 +6,6 @@
   <meta name="description" content="Launch Family Entertainment employee training portal">
   <title>Launch Training Portal</title>
   <link rel="stylesheet" href="shared/css/portal.css">
-  <script src="shared/js/portal-lock.js" defer></script>
 </head>
 <body>
   <section class="login-gate" id="login-gate" aria-labelledby="login-title" hidden>
@@ -32,10 +31,6 @@
         <button type="submit">Unlock Training Portal</button>
         <p class="login-error" id="login-error" role="alert" aria-live="polite"></p>
       </form>
-
-      <p class="login-notice">
-        This access screen is a basic deterrent and is not a secure authentication system.
-      </p>
     </div>
   </section>
 
@@ -142,5 +137,141 @@
     <p class="footer-version">Portal v1.0</p>
   </footer>
   </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var STORAGE_KEY = "launchTrainingUnlockedUntil";
+      var SESSION_DURATION_MS = 8 * 60 * 60 * 1000;
+      var PASSWORD = "Awesome!";
+
+      var gate = document.getElementById("login-gate");
+      var portal = document.getElementById("portal-app");
+      var form = document.getElementById("portal-login-form");
+      var passwordInput = document.getElementById("portal-password");
+      var errorMessage = document.getElementById("login-error");
+      var lockButton = document.getElementById("lock-portal");
+
+      function getPortalBasePath() {
+        var marker = "/Launch-Training/";
+        var currentPath = window.location.pathname;
+        var markerPosition = currentPath.indexOf(marker);
+
+        if (markerPosition >= 0) {
+          return currentPath.slice(0, markerPosition + marker.length);
+        }
+
+        return currentPath.endsWith("/")
+          ? currentPath
+          : currentPath.slice(0, currentPath.lastIndexOf("/") + 1);
+      }
+
+      function getSafeReturnPath() {
+        var requestedPath =
+          new URLSearchParams(window.location.search).get("return");
+        var portalBasePath = getPortalBasePath();
+
+        if (
+          requestedPath &&
+          requestedPath.indexOf(portalBasePath) === 0 &&
+          requestedPath.indexOf("//") !== 0
+        ) {
+          return requestedPath;
+        }
+
+        return "";
+      }
+
+      function readUnlockTime() {
+        try {
+          return Number(window.localStorage.getItem(STORAGE_KEY) || 0);
+        } catch (error) {
+          return 0;
+        }
+      }
+
+      function saveUnlockTime(value) {
+        try {
+          window.localStorage.setItem(STORAGE_KEY, String(value));
+          return true;
+        } catch (error) {
+          errorMessage.textContent =
+            "This browser is blocking local storage. Allow site storage and try again.";
+          return false;
+        }
+      }
+
+      function clearUnlockTime() {
+        try {
+          window.localStorage.removeItem(STORAGE_KEY);
+        } catch (error) {
+          // Nothing else is required.
+        }
+      }
+
+      function showPortal() {
+        gate.hidden = true;
+        portal.hidden = false;
+        document.body.classList.add("portal-unlocked");
+      }
+
+      function showLogin() {
+        portal.hidden = true;
+        gate.hidden = false;
+        document.body.classList.remove("portal-unlocked");
+        window.setTimeout(function () {
+          passwordInput.focus();
+        }, 0);
+      }
+
+      if (readUnlockTime() > Date.now()) {
+        var initialReturnPath = getSafeReturnPath();
+
+        if (
+          initialReturnPath &&
+          initialReturnPath !== window.location.pathname
+        ) {
+          window.location.replace(initialReturnPath);
+        } else {
+          showPortal();
+        }
+      } else {
+        clearUnlockTime();
+        showLogin();
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        errorMessage.textContent = "";
+
+        if (passwordInput.value !== PASSWORD) {
+          errorMessage.textContent = "Incorrect password. Please try again.";
+          passwordInput.select();
+          return;
+        }
+
+        if (!saveUnlockTime(Date.now() + SESSION_DURATION_MS)) {
+          return;
+        }
+
+        var returnPath = getSafeReturnPath();
+
+        if (returnPath) {
+          window.location.replace(returnPath);
+        } else {
+          passwordInput.value = "";
+          showPortal();
+          window.history.replaceState(null, "", getPortalBasePath());
+        }
+      });
+
+      lockButton.addEventListener("click", function () {
+        clearUnlockTime();
+        window.location.replace(getPortalBasePath());
+      });
+    })();
+  </script>
+
 </body>
 </html>
