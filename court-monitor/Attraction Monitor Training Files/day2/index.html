@@ -12,11 +12,11 @@ body{min-height:100vh;display:grid;place-items:center;padding:24px}.shell{width:
       if (unlockedUntil <= Date.now()) {
         localStorage.removeItem(storageKey);
 
-        const marker = "/Launch-Training/";
         const currentPath = window.location.pathname;
-        const markerPosition = currentPath.indexOf(marker);
-        const portalBase = markerPosition >= 0
-          ? currentPath.slice(0, markerPosition + marker.length)
+        const moduleMarker = "/court-monitor/";
+        const modulePosition = currentPath.indexOf(moduleMarker);
+        const portalBase = modulePosition >= 0
+          ? currentPath.slice(0, modulePosition + 1)
           : "/";
 
         const returnPath =
@@ -30,4 +30,4 @@ body{min-height:100vh;display:grid;place-items:center;padding:24px}.shell{width:
       }
     })();
   </script>
-</head><body><main class="shell"><a class="back" href="../../index.html">← Court Monitor Home</a><a class="records-link" href="../../../index.html">Training Portal</a><a class="records-link" href="./exam-records.html">Exam Records</a><div class="hero"><h1>Day 2 Attraction Monitor Training</h1><p>Core attraction monitoring for Main Court, Dodgeball, Ninja Course, and Launch Pad / Stunt Jump.</p></div><section class="grid"><a class="card" href="./online-training.html"><div class="strip"></div><div class="body"><div class="eyebrow">Step 1</div><h2>Online Training</h2><p>Complete the narrated slide module for today’s Attraction Monitor topics.</p><div class="button">Start Online Training</div></div></a><a class="card" href="./checklist.html"><div class="strip"></div><div class="body"><div class="eyebrow">Step 2</div><h2>Print Today's Checklist</h2><p>Trainer-led hands-on validation checklist for the supervised shift.</p><div class="button">Open Checklist</div></div></a><a class="card" href="./end-of-shift-exam.html"><div class="strip"></div><div class="body"><div class="eyebrow">Step 3</div><h2>End-of-Shift Exam</h2><p>Complete the assessment after the online and hands-on portions are finished.</p><div class="button">Start Exam</div></div></a></section></main></body></html>
+</head><body><main class="shell"><a class="back" href="../../index.html">← Court Monitor Home</a><a class="records-link" href="../../../index.html">Training Portal</a><a class="records-link" href="./exam-records.html">Exam Records</a><div class="hero"><h1>Day 2 Attraction Monitor Training</h1><p>Standards, professional readiness, cleaning, equipment response, and injury procedures.</p></div><section class="grid"><a class="card" href="./online-training.html"><div class="strip"></div><div class="body"><div class="eyebrow">Step 1</div><h2>Online Training</h2><p>Complete the Day 2 module on standards, readiness, cleaning, and injury response.</p><div class="button">Start Online Training</div></div></a><a class="card" href="./checklist.html"><div class="strip"></div><div class="body"><div class="eyebrow">Step 2</div><h2>Print Today's Checklist</h2><p>Trainer-led hands-on validation checklist for the supervised shift.</p><div class="button">Open Checklist</div></div></a><a class="card" href="./end-of-shift-exam.html"><div class="strip"></div><div class="body"><div class="eyebrow">Step 3</div><h2>End-of-Shift Exam</h2><p>Complete the assessment after the online and hands-on portions are finished.</p><div class="button">Start Exam</div></div></a></section></main></body></html>

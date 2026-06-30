@@ -12,11 +12,11 @@
       if (unlockedUntil <= Date.now()) {
         localStorage.removeItem(storageKey);
 
-        const marker = "/Launch-Training/";
         const currentPath = window.location.pathname;
-        const markerPosition = currentPath.indexOf(marker);
-        const portalBase = markerPosition >= 0
-          ? currentPath.slice(0, markerPosition + marker.length)
+        const moduleMarker = "/court-monitor/";
+        const modulePosition = currentPath.indexOf(moduleMarker);
+        const portalBase = modulePosition >= 0
+          ? currentPath.slice(0, modulePosition + 1)
           : "/";
 
         const returnPath =
@@ -30,4 +30,41 @@
       }
     })();
   </script>
-</head><body><div class="wrap"><div class="head"><h1>Day 1 Attraction Monitor Trainer Checklist</h1><div class="sub">Observable hands-on validation · Trainer checklist</div></div><div class="body"><div class="actions"><a class="btn" href="./index.html">← Day Menu</a><a class="btn" href="../../../index.html">Training Portal</a><a class="btn" href="#" onclick="window.print();return false;">Print Checklist</a></div><div class="note">Trainer: validate behavior on the floor. Do not initial items based only on verbal answers.</div><div class="info"><div>Employee Name:<div class="line"></div></div><div>Trainer Name:<div class="line"></div></div><div>Date:<div class="line"></div></div></div><div class="item" style="font-weight:900;background:#eef6ea"><div>Training Item</div><div>Trainer Initials</div><div>Trainee Initials</div></div><div class="section"><h2>Readiness</h2><div class="item"><div>Arrives in proper uniform with name badge visible</div><div class="box"></div><div class="box"></div></div><div class="item"><div>Has whistle, working walkie, and First Aid bag as required</div><div class="box"></div><div class="box"></div></div><div class="item"><div>Demonstrates professional floor presence without phone, gum, or leaning</div><div class="box"></div><div class="box"></div></div></div><div class="section"><h2>Core Monitoring Skills</h2><div class="item"><div>Demonstrates 360° scanning while attraction is active</div><div class="box"></div><div class="box"></div></div><div class="item"><div>Moves through assigned position without abandoning coverage</div><div class="box"></div><div class="box"></div></div><div class="item"><div>Checks wristbands, jump time, and Launch socks correctly</div><div class="box"></div><div class="box"></div></div></div><div class="section"><h2>Guest Interaction</h2><div class="item"><div>Corrects a guest professionally using rule plus safety reason</div><div class="box"></div><div class="box"></div></div><div class="item"><div>Uses whistle appropriately without overusing it</div><div class="box"></div><div class="box"></div></div><div class="item"><div>Calls management for repeated rule breaking or difficult guest behavior</div><div class="box"></div><div class="box"></div></div></div><div class="section"><h2>Coverage</h2><div class="item"><div>Explains why a court can never be left unattended</div><div class="box"></div><div class="box"></div></div><div class="item"><div>Radios for coverage and waits until replacement arrives</div><div class="box"></div><div class="box"></div></div></div><div class="sign"><div>Employee Sign-Off:<div class="line"></div></div><div>Trainer Sign-Off:<div class="line"></div></div></div></div></div></body></html>
+</head><body><div class="wrap"><div class="head"><h1>Day 1 Attraction Monitor Trainer Checklist</h1><div class="sub">Observable hands-on validation · Trainer checklist</div></div><div class="body"><div class="actions"><a class="btn" href="./index.html">← Day Menu</a><a class="btn" href="../../../index.html">Training Portal</a><a class="btn" href="#" onclick="window.print();return false;">Print Checklist</a></div><div class="note">Trainer: validate behavior on the floor. Do not initial items based only on verbal answers.</div><div class="info"><div>Employee Name:<div class="line"></div></div><div>Trainer Name:<div class="line"></div></div><div>Date:<div class="line"></div></div></div><div class="item" style="font-weight:900;background:#eef6ea"><div>Training Item</div><div>Trainer Initials</div><div>Trainee Initials</div></div><div class="section"><h2>Readiness</h2>
+<div class="item"><div>Arrives in proper uniform with name badge visible</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Has whistle, working walkie, and First Aid bag as required</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Demonstrates professional floor presence without phone, gum, or leaning</div><div class="box"></div><div class="box"></div></div>
+</div>
+<div class="section"><h2>Core Monitoring Skills</h2>
+<div class="item"><div>Maintains active visual scanning and remains focused on the assigned attraction zone</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Positions themselves so the entire assigned area can be effectively monitored</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Checks wristbands, access restrictions, jump time, and Launch Grip Socks correctly</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Recognizes unsafe behavior without relying on the trainer to point it out</div><div class="box"></div><div class="box"></div></div>
+</div>
+<div class="section"><h2>Guest Interaction</h2>
+<div class="item"><div>Corrects unsafe guest behavior promptly using a friendly, firm, and professional approach</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Clearly explains the rule and connects the correction to guest safety</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Uses whistle appropriately without overusing it</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Calls management for repeated rule breaking, difficult guest behavior, or unresolved safety concerns</div><div class="box"></div><div class="box"></div></div>
+</div>
+<div class="section"><h2>Coverage</h2>
+<div class="item"><div>Does not leave an attraction unattended</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Radios for coverage and waits until replacement arrives before leaving the assigned zone</div><div class="box"></div><div class="box"></div></div>
+</div>
+<div class="section"><h2>Attraction Knowledge</h2>
+<div class="item"><div>Main Court — Understands all rules, monitoring responsibilities, guest-flow expectations, and safe operating procedures</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Dodgeball — Understands all rules, monitoring responsibilities, referee duties, game-management expectations, and safe operating procedures</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Airbags — Understands all rules, landing requirements, guest-flow responsibilities, and safe operating procedures</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Ninja Course — Understands all rules, spacing requirements, fall procedures, guest-flow responsibilities, and safe operating procedures</div><div class="box"></div><div class="box"></div></div>
+</div>
+<div class="section"><h2>Park-Specific Attractions</h2>
+<div class="item"><div>Attraction: ____________________________________ — Understands all rules, access requirements, monitoring responsibilities, and safe operating procedures</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Attraction: ____________________________________ — Understands all rules, access requirements, monitoring responsibilities, and safe operating procedures</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Attraction: ____________________________________ — Understands all rules, access requirements, monitoring responsibilities, and safe operating procedures</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Attraction: ____________________________________ — Understands all rules, access requirements, monitoring responsibilities, and safe operating procedures</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Attraction: ____________________________________ — Understands all rules, access requirements, monitoring responsibilities, and safe operating procedures</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Attraction: ____________________________________ — Understands all rules, access requirements, monitoring responsibilities, and safe operating procedures</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Attraction: ____________________________________ — Understands all rules, access requirements, monitoring responsibilities, and safe operating procedures</div><div class="box"></div><div class="box"></div></div>
+<div class="item"><div>Attraction: ____________________________________ — Understands all rules, access requirements, monitoring responsibilities, and safe operating procedures</div><div class="box"></div><div class="box"></div></div>
+</div>
+<div class="sign"><div>Employee Sign-Off:<div class="line"></div></div><div>Trainer Sign-Off:<div class="line"></div></div></div></div></div></body></html>

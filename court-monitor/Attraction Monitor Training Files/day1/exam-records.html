@@ -12,11 +12,11 @@ body{padding:28px;background:#f4f6f8}.page{max-width:1050px;margin:0 auto;backgr
       if (unlockedUntil <= Date.now()) {
         localStorage.removeItem(storageKey);
 
-        const marker = "/Launch-Training/";
         const currentPath = window.location.pathname;
-        const markerPosition = currentPath.indexOf(marker);
-        const portalBase = markerPosition >= 0
-          ? currentPath.slice(0, markerPosition + marker.length)
+        const moduleMarker = "/court-monitor/";
+        const modulePosition = currentPath.indexOf(moduleMarker);
+        const portalBase = modulePosition >= 0
+          ? currentPath.slice(0, modulePosition + 1)
           : "/";
 
         const returnPath =
