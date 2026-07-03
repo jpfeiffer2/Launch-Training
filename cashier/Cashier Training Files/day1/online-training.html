@@ -1575,6 +1575,121 @@
       }
     })();
   </script>
+
+<style id="cashier-layout-polish-v3">
+  /* Use more of the browser window while keeping the slide canvas centered. */
+  @media screen and (min-width: 1001px) {
+    .deck {
+      height: 100vh !important;
+      min-height: 100vh !important;
+      padding: 14px 18px !important;
+      gap: 10px !important;
+      display: grid !important;
+      grid-template-rows: auto minmax(0, 1fr) auto !important;
+    }
+
+    .topbar {
+      min-height: 52px !important;
+    }
+
+    .stage {
+      min-height: 0 !important;
+    }
+
+    .controls {
+      padding-top: 9px !important;
+      padding-bottom: 9px !important;
+    }
+  }
+
+  /* Day 1 typography was designed around the old narration panels.
+     With those panels removed, use the available room for clearer text. */
+  .role-list li { font-size: .96rem !important; line-height: 1.24 !important; }
+  .role-subhead { font-size: 1.08rem !important; }
+
+  .tone-reminder,
+  .returning-heading,
+  .step-copy,
+  .waiver-copy p,
+  .countdown-sub {
+    font-size: .92rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .hospitality-slide .slide-body {
+    padding-top: 18px !important;
+    padding-bottom: 18px !important;
+  }
+
+  .hospitality-grid { gap: 14px !important; }
+
+  .hospitality-card {
+    padding: 18px 14px 16px !important;
+    justify-content: flex-start !important;
+  }
+
+  .hospitality-icon {
+    width: 60px !important;
+    height: 60px !important;
+    font-size: 2rem !important;
+  }
+
+  .hospitality-card h3 {
+    font-size: .94rem !important;
+    line-height: 1.16 !important;
+  }
+
+  .hospitality-card p {
+    font-size: .82rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .hospitality-bottom {
+    font-size: .92rem !important;
+    padding: 12px 16px !important;
+  }
+
+  .slide6-item strong { font-size: .94rem !important; }
+  .slide6-item span { font-size: .82rem !important; line-height: 1.25 !important; }
+  .slide6-help { font-size: .82rem !important; }
+
+  .slide7-card {
+    padding: 22px 16px !important;
+  }
+
+  .slide7-card h3 { font-size: 1.04rem !important; }
+  .slide7-card p { font-size: .88rem !important; line-height: 1.34 !important; }
+
+  .waiver-method strong { font-size: .92rem !important; }
+  .waiver-method span { font-size: .80rem !important; line-height: 1.26 !important; }
+  .warning-box li { font-size: .82rem !important; line-height: 1.28 !important; }
+  .compliance-footer { font-size: .82rem !important; }
+
+  .slide9-callout { font-size: .88rem !important; }
+  .status-pill,
+  .image-note { font-size: .78rem !important; }
+  .process-step strong { font-size: .90rem !important; }
+  .process-step span { font-size: .80rem !important; line-height: 1.25 !important; }
+  .expired-box { font-size: .82rem !important; }
+
+  .scenario-callout { font-size: .88rem !important; }
+  .speech-card { font-size: .92rem !important; line-height: 1.32 !important; }
+  .manager-note { font-size: .82rem !important; line-height: 1.3 !important; }
+
+  .standards-callout { font-size: .84rem !important; }
+  .sock-policy-callout { font-size: .92rem !important; }
+  .sock-rule { font-size: .84rem !important; line-height: 1.24 !important; }
+  .sock-script-box { font-size: .84rem !important; line-height: 1.38 !important; }
+
+  .faq-q { font-size: .88rem !important; }
+  .faq-a { font-size: .80rem !important; line-height: 1.28 !important; }
+
+  .next-step-card p { font-size: .96rem !important; line-height: 1.35 !important; }
+  .slide[data-title="Next Steps"] .manager-note {
+    font-size: .82rem !important;
+  }
+</style>
+
 </head>
 <body>
 

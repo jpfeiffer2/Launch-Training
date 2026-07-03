@@ -1352,7 +1352,7 @@
     }
     .stage > .slide {
       width: 1180px !important;
-      height: 690px !important;
+      height: 664px !important;
       max-width: none !important;
       max-height: none !important;
       min-height: 0 !important;
@@ -1400,6 +1400,60 @@
       }
     })();
   </script>
+
+<style id="cashier-day2-alignment-polish-v3">
+  /* Day 2 now uses the same 16:9 presentation canvas as Day 1. */
+  @media screen and (min-width: 1001px) {
+    .deck {
+      height: 100vh !important;
+      min-height: 100vh !important;
+      padding: 12px 18px !important;
+      gap: 10px !important;
+      grid-template-rows: auto minmax(0, 1fr) auto !important;
+    }
+
+    .topbar {
+      padding-top: 10px !important;
+      padding-bottom: 10px !important;
+    }
+
+    .controls {
+      padding-top: 9px !important;
+      padding-bottom: 9px !important;
+    }
+
+    .stage > .slide {
+      height: 664px !important;
+    }
+  }
+
+  /* Image-based slides had been placed in an automatic grid row, which
+     pinned the artwork to the top and left unused white space below it.
+     Center the complete artwork without cropping any text or graphics. */
+  .slide.full-image-slide {
+    background: #ffffff !important;
+  }
+
+  .slide.full-image-slide.active {
+    display: block !important;
+  }
+
+  .slide.full-image-slide > img {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    transform: translate(-50%, -50%) !important;
+    display: block !important;
+    border-radius: 22px !important;
+  }
+</style>
+
 </head>
 <body>
 
@@ -1761,7 +1815,7 @@
 
       </section>
 
-      <section class="slide" data-notes="Every cash transaction is an opportunity to demonstrate accuracy, accountability, and professionalism. As a cashier, you should only use your assigned cash drawer. Never share drawers or process transactions using another team member's till. When accepting cash, always enter the amount received before selecting the cash payment option in the point-of-sale system. After the transaction is complete, manually count the change back to the guest. If a guest presents a large bill, disputes the amount of change received, if the drawer appears incorrect, or if you are unsure how to process a payment, stop and ask for help. Never guess when handling cash. Remember, accurate cash handling protects our guests, our team members, and Launch Family Entertainment.">
+      <section class="slide full-image-slide" data-notes="Every cash transaction is an opportunity to demonstrate accuracy, accountability, and professionalism. As a cashier, you should only use your assigned cash drawer. Never share drawers or process transactions using another team member's till. When accepting cash, always enter the amount received before selecting the cash payment option in the point-of-sale system. After the transaction is complete, manually count the change back to the guest. If a guest presents a large bill, disputes the amount of change received, if the drawer appears incorrect, or if you are unsure how to process a payment, stop and ask for help. Never guess when handling cash. Remember, accurate cash handling protects our guests, our team members, and Launch Family Entertainment.">
         <img src="images/cash-handling-basics-slide.png" alt="Cash Handling Basics training slide" style="width:100%;height:100%;object-fit:cover;border-radius:22px;display:block;">
       
       <div class="audio-panel" style="display:none;">
@@ -1773,7 +1827,7 @@
       </div>
 </section>
 
-      <section class="slide" data-notes="Occasionally, payment issues or guest disputes may occur at the register. When they do, your job is to remain calm, professional, and focused on finding the correct solution. The first step is to listen carefully and allow the guest to explain the concern. Avoid interrupting, arguing, or becoming defensive. Next, verify the facts. Review the transaction, check the receipt, and confirm what occurred before making any assumptions. If there is uncertainty about the transaction, pause the process. Do not guess, do not make promises, and do not attempt to resolve issues beyond your level of authority. Instead, involve a manager or supervisor who can review the situation and determine the appropriate resolution. Common situations that require additional support include declined credit cards, guests disputing the amount of change they received, split payment transactions, and refund requests. Remember, when money is involved, accuracy is more important than speed. Most importantly, never argue with a guest about money at the register.">
+      <section class="slide full-image-slide" data-notes="Occasionally, payment issues or guest disputes may occur at the register. When they do, your job is to remain calm, professional, and focused on finding the correct solution. The first step is to listen carefully and allow the guest to explain the concern. Avoid interrupting, arguing, or becoming defensive. Next, verify the facts. Review the transaction, check the receipt, and confirm what occurred before making any assumptions. If there is uncertainty about the transaction, pause the process. Do not guess, do not make promises, and do not attempt to resolve issues beyond your level of authority. Instead, involve a manager or supervisor who can review the situation and determine the appropriate resolution. Common situations that require additional support include declined credit cards, guests disputing the amount of change they received, split payment transactions, and refund requests. Remember, when money is involved, accuracy is more important than speed. Most importantly, never argue with a guest about money at the register.">
         <img src="images/payment-issues-slide.png" alt="Payment Issues and Guest Disputes" style="width:100%;height:100%;object-fit:cover;border-radius:22px;display:block;">
       
       <div class="audio-panel" style="display:none;">
@@ -1785,7 +1839,7 @@
       </div>
 </section>
 
-      <section class="slide" data-notes="At some point, every team member will encounter a guest who is upset, frustrated, or dissatisfied. How you respond in these moments can have a significant impact on the guest experience. The first step is to stay calm. Take a breath, remain professional, and avoid reacting emotionally to the situation. Next, listen carefully to the guest. Allow them to explain their concern without interrupting. Once you understand the issue, acknowledge the concern. This does not mean admitting fault. It means showing the guest that you understand why they are upset and that you are committed to helping find a solution. Throughout the conversation, use positive and professional language. Maintain a respectful tone, focus on what you can do to help, and avoid negative statements whenever possible. If the situation continues to escalate, or if you are unsure how to resolve the issue, involve a manager early. Never argue with the guest, blame the guest, admit fault, use negative walkie language, become defensive, or display frustration through your tone or body language. Our goal is to protect the guest experience, resolve the concern professionally, and represent Launch Family Entertainment in a positive manner.">
+      <section class="slide full-image-slide" data-notes="At some point, every team member will encounter a guest who is upset, frustrated, or dissatisfied. How you respond in these moments can have a significant impact on the guest experience. The first step is to stay calm. Take a breath, remain professional, and avoid reacting emotionally to the situation. Next, listen carefully to the guest. Allow them to explain their concern without interrupting. Once you understand the issue, acknowledge the concern. This does not mean admitting fault. It means showing the guest that you understand why they are upset and that you are committed to helping find a solution. Throughout the conversation, use positive and professional language. Maintain a respectful tone, focus on what you can do to help, and avoid negative statements whenever possible. If the situation continues to escalate, or if you are unsure how to resolve the issue, involve a manager early. Never argue with the guest, blame the guest, admit fault, use negative walkie language, become defensive, or display frustration through your tone or body language. Our goal is to protect the guest experience, resolve the concern professionally, and represent Launch Family Entertainment in a positive manner.">
         <img src="images/handling-difficult-guests-slide.png" alt="Handling Difficult Guests training slide" style="width:100%;height:100%;object-fit:cover;border-radius:22px;display:block;">
       
       <div class="audio-panel" style="display:none;">
@@ -1797,7 +1851,7 @@
       </div>
 </section>
 
-      <section class="slide" data-notes="Congratulations. You have now completed the classroom portion of Day 2 training. Throughout today's training, you learned the key skills and expectations required to provide an outstanding guest experience at Launch Family Entertainment. During your hands-on training shift, you will focus on six important areas: professionalism, appearance standards, guest service, wristbands, cash handling, and escalation. These six skills represent the core expectations for Launch cashiers and will be the focus of your hands-on training experience.">
+      <section class="slide full-image-slide" data-notes="Congratulations. You have now completed the classroom portion of Day 2 training. Throughout today's training, you learned the key skills and expectations required to provide an outstanding guest experience at Launch Family Entertainment. During your hands-on training shift, you will focus on six important areas: professionalism, appearance standards, guest service, wristbands, cash handling, and escalation. These six skills represent the core expectations for Launch cashiers and will be the focus of your hands-on training experience.">
         <img src="images/day2-success-checklist-slide.png" alt="Day 2 Success Checklist training slide" style="width:100%;height:100%;object-fit:cover;border-radius:22px;display:block;">
       
 <div class="audio-panel" style="display:none;">
@@ -1808,7 +1862,7 @@
 <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-12"></div></div>
 </div></section>
 
-      <section class="slide" data-notes="You have now completed the classroom portion of Day 2 training. Print your Day 2 Checklist and provide it to your trainer. Complete your hands-on training shift, then return to this training program and complete the Day 2 Exam.">
+      <section class="slide full-image-slide" data-notes="You have now completed the classroom portion of Day 2 training. Print your Day 2 Checklist and provide it to your trainer. Complete your hands-on training shift, then return to this training program and complete the Day 2 Exam.">
         <img src="images/day2-next-steps-slide.png" alt="Day 2 Next Steps training slide" style="width:100%;height:100%;object-fit:cover;border-radius:22px;display:block;">
       
 <div class="audio-panel" style="display:none;">
@@ -2048,7 +2102,7 @@ updateSlide(false);
 <script id="cashier-responsive-canvas-script">
 (() => {
   const BASE_WIDTH = 1180;
-  const BASE_HEIGHT = 690;
+  const BASE_HEIGHT = 664;
   let frame = 0;
 
   function fitCashierSlides() {
