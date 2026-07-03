@@ -1856,6 +1856,44 @@
 @media(max-width:1100px){.journey12-step{padding:14px 10px}.journey12-icon{width:68px;height:68px;font-size:32px}.journey12-step h3{font-size:1.05rem}.journey12-step p{font-size:.86rem}.journey12-flow{gap:8px;font-size:.95rem}.journey12-bottom{padding:12px 18px}}
 
 </style>
+
+
+<style id="cashier-slide8-audio-fit-fix">
+  /* Slide 8 uses the full designed canvas; keep narration active but move its status panel off-canvas. */
+  .slide8-listening .slide8-audio-panel {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+</style>
+<style id="cashier-responsive-canvas-fix">
+  /* Preserve the designed slide canvas and scale it uniformly to the available browser space. */
+  @media screen and (min-width: 1001px) {
+    .stage {
+      position: relative !important;
+      display: block !important;
+      overflow: hidden !important;
+    }
+    .stage > .slide {
+      width: 1180px !important;
+      height: 690px !important;
+      max-width: none !important;
+      max-height: none !important;
+      min-height: 0 !important;
+      aspect-ratio: auto !important;
+      position: absolute !important;
+      inset: auto !important;
+      left: 50% !important;
+      top: 50% !important;
+      transform: translate(-50%, -50%) scale(var(--cashier-slide-scale, 1)) !important;
+      transform-origin: center center !important;
+    }
+  }
+</style>
 <style id="deployment-lock-style">
   .audio-status, .sr-audio-status { display: none !important; }
   button[disabled] { opacity: .55 !important; cursor: not-allowed !important; }
@@ -2727,6 +2765,44 @@ document.addEventListener('keydown', e => {
   if (e.key.toLowerCase()==='n') toggleNotes();
 });
 updateSlide(false);
-</script></body></html>
+</script>
+<script id="cashier-responsive-canvas-script">
+(() => {
+  const BASE_WIDTH = 1180;
+  const BASE_HEIGHT = 690;
+  let frame = 0;
+
+  function fitCashierSlides() {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => {
+      const stage = document.querySelector('.stage');
+      if (!stage) return;
+
+      if (window.innerWidth <= 1000) {
+        stage.style.removeProperty('--cashier-slide-scale');
+        return;
+      }
+
+      const availableWidth = Math.max(1, stage.clientWidth);
+      const availableHeight = Math.max(1, stage.clientHeight);
+      const scale = Math.min(1, availableWidth / BASE_WIDTH, availableHeight / BASE_HEIGHT);
+      stage.style.setProperty('--cashier-slide-scale', scale.toFixed(4));
+    });
+  }
+
+  window.addEventListener('resize', fitCashierSlides, { passive: true });
+  document.addEventListener('fullscreenchange', fitCashierSlides);
+  window.addEventListener('load', fitCashierSlides);
+  document.addEventListener('DOMContentLoaded', fitCashierSlides);
+
+  const stage = document.querySelector('.stage');
+  if (stage && 'ResizeObserver' in window) {
+    new ResizeObserver(fitCashierSlides).observe(stage);
+  }
+
+  fitCashierSlides();
+})();
+</script>
+</body></html>
 
 

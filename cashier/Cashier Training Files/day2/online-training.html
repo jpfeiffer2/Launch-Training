@@ -1325,6 +1325,31 @@
 </style>
 
 
+
+<style id="cashier-responsive-canvas-fix">
+  /* Preserve the designed slide canvas and scale it uniformly to the available browser space. */
+  @media screen and (min-width: 1001px) {
+    .stage {
+      position: relative !important;
+      display: block !important;
+      overflow: hidden !important;
+    }
+    .stage > .slide {
+      width: 1180px !important;
+      height: 690px !important;
+      max-width: none !important;
+      max-height: none !important;
+      min-height: 0 !important;
+      aspect-ratio: auto !important;
+      position: absolute !important;
+      inset: auto !important;
+      left: 50% !important;
+      top: 50% !important;
+      transform: translate(-50%, -50%) scale(var(--cashier-slide-scale, 1)) !important;
+      transform-origin: center center !important;
+    }
+  }
+</style>
 <style id="deployment-lock-style">
   .audio-status, .sr-audio-status { display: none !important; }
   button[disabled] { opacity: .55 !important; cursor: not-allowed !important; }
@@ -1402,7 +1427,6 @@
                 <audio preload="auto" data-required="true" style="display:none;"><source src="audio/Cashier Day 2 - Intro.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
                 <div class="audio-status" id="audioStatus-0">Narration locked until training starts.</div>
                 <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-0"></div></div>
-                <div class="lock-note">Testing mode: you can move forward without waiting for narration.</div>
               </div>
             </div>
           </div>
@@ -1426,7 +1450,6 @@
                 <audio preload="auto" data-required="true" style="display:none;"><source src="audio/Cashier Day 2 - Create Awesome Memories.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
                 <div class="audio-status" id="audioStatus-1">Narration locked until training starts.</div>
                 <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-1"></div></div>
-                <div class="lock-note">Testing mode: you can move forward without waiting for narration.</div>
               </div>
             </div>
           </div>
@@ -1472,7 +1495,6 @@
               </audio>
               <div class="audio-status" id="audioStatus-2">Narration locked until training starts.</div>
               <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-2"></div></div>
-              <div class="lock-note">Testing mode: you can move forward without waiting for narration.</div>
             </div>
           </div>
           <div class="core-values-poster-wrap">
@@ -1515,7 +1537,6 @@
               </audio>
               <div class="audio-status" id="audioStatus-3">Narration locked until training starts.</div>
               <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-3"></div></div>
-              <div class="lock-note">Testing mode: you can move forward without waiting for narration.</div>
             </div>
           </div>
         </div>
@@ -1551,7 +1572,6 @@
               <div class="audio-title">Slide 5 Narration</div>
               <audio preload="auto" data-required="true" style="display:none;"><source src="audio/Cashier Day 2 - Professional Guest Readiness.mp3" type="audio/mpeg"></audio><div class="audio-status" id="audioStatus-4">Narration locked until training starts.</div>
               <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-4"></div></div>
-              <div class="lock-note">Testing mode: you can move forward without waiting for narration.</div>
             </div>
           </div>
         </div>
@@ -1594,7 +1614,6 @@
       </audio>
       <div class="audio-status" id="audioStatus-5">Narration locked until training starts.</div>
       <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-5"></div></div>
-      <div class="lock-note">Testing mode: you can move forward without waiting for narration.</div>
     </div>
   </div>
 </div>
@@ -1625,7 +1644,6 @@
         <div class="audio-title">Slide 7 Narration</div>
         <audio preload="auto" data-required="true" style="display:none;"><source src="audio/Cashier Day 2 - Read the Guest.mp3" type="audio/mpeg"></audio><div class="audio-status" id="audioStatus-6">Narration locked until training starts.</div>
         <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-6"></div></div>
-        <div class="lock-note">Testing mode: you can move forward without waiting for narration.</div>
       </div>
     </div>
   </div>
@@ -2010,4 +2028,42 @@ document.addEventListener('keydown', (e) => {
 updateSlide(false);
 </script>
 
+
+<script id="cashier-responsive-canvas-script">
+(() => {
+  const BASE_WIDTH = 1180;
+  const BASE_HEIGHT = 690;
+  let frame = 0;
+
+  function fitCashierSlides() {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => {
+      const stage = document.querySelector('.stage');
+      if (!stage) return;
+
+      if (window.innerWidth <= 1000) {
+        stage.style.removeProperty('--cashier-slide-scale');
+        return;
+      }
+
+      const availableWidth = Math.max(1, stage.clientWidth);
+      const availableHeight = Math.max(1, stage.clientHeight);
+      const scale = Math.min(1, availableWidth / BASE_WIDTH, availableHeight / BASE_HEIGHT);
+      stage.style.setProperty('--cashier-slide-scale', scale.toFixed(4));
+    });
+  }
+
+  window.addEventListener('resize', fitCashierSlides, { passive: true });
+  document.addEventListener('fullscreenchange', fitCashierSlides);
+  window.addEventListener('load', fitCashierSlides);
+  document.addEventListener('DOMContentLoaded', fitCashierSlides);
+
+  const stage = document.querySelector('.stage');
+  if (stage && 'ResizeObserver' in window) {
+    new ResizeObserver(fitCashierSlides).observe(stage);
+  }
+
+  fitCashierSlides();
+})();
+</script>
 </body></html>

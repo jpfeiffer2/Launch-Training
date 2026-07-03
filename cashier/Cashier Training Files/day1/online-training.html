@@ -1485,6 +1485,31 @@
 </style>
 
 
+
+<style id="cashier-responsive-canvas-fix">
+  /* Preserve the designed slide canvas and scale it uniformly to the available browser space. */
+  @media screen and (min-width: 1001px) {
+    .stage {
+      position: relative !important;
+      display: block !important;
+      overflow: hidden !important;
+    }
+    .stage > .slide {
+      width: 1180px !important;
+      height: 664px !important;
+      max-width: none !important;
+      max-height: none !important;
+      min-height: 0 !important;
+      aspect-ratio: auto !important;
+      position: absolute !important;
+      inset: auto !important;
+      left: 50% !important;
+      top: 50% !important;
+      transform: translate(-50%, -50%) scale(var(--cashier-slide-scale, 1)) !important;
+      transform-origin: center center !important;
+    }
+  }
+</style>
 <style id="deployment-lock-style">
   .audio-status, .sr-audio-status { display: none !important; }
   button[disabled] { opacity: .55 !important; cursor: not-allowed !important; }
@@ -1526,7 +1551,7 @@
     <div class="start-card">
       <div class="eyebrow">Day 1 Online Training</div>
       <h2>Begin Cashier Training</h2>
-      <p>Testing mode: narration will still play, but you can move forward without waiting for it to finish. The required lock can be restored later for the final version.</p>
+      <p>Narration begins after you start the training.</p>
       <div class="start-actions">
         <button class="btn-primary" type="button" onclick="startTraining()">Start Day 1 Training</button>
         <button class="btn-dark" type="button" onclick="toggleFullScreen()">Full Screen</button><a class="btn-dark" href="../../../index.html" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">Training Portal</a>
@@ -1560,7 +1585,7 @@
                 <source src="audio/Cashier Day 1 - Intro.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
               </audio>
-              <div class="audio-status" id="audioStatus-0">Narration locked until training starts.</div><div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-0"></div></div><div class="lock-note">Testing mode: you can move forward without waiting for narration.</div>
+              <div class="audio-status" id="audioStatus-0">Narration locked until training starts.</div><div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-0"></div></div>
             </div>
           </div>
           <div class="card dark-card">
@@ -1605,7 +1630,6 @@
               </audio>
               <div class="audio-status" id="audioStatus-1">Narration will play automatically.</div>
               <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-1"></div></div>
-              <div class="lock-note">Testing mode: you can move forward without waiting for narration.</div>
             </div>
           </div>
         </div>
@@ -1647,7 +1671,6 @@
                 </audio>
                 <div class="audio-status" id="audioStatus-2">Narration will play automatically.</div>
                 <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-2"></div></div>
-                <div class="lock-note">Testing mode: you can move forward without waiting for narration.</div>
               </div>
             </div>
             <div class="greeting-panel">
@@ -1704,7 +1727,6 @@
                 </audio>
                 <div class="audio-status" id="audioStatus-3">Narration will play automatically.</div>
                 <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-3"></div></div>
-                <div class="lock-note">Testing mode: you can move forward without waiting for narration.</div>
               </div>
             </div>
           </div>
@@ -1821,7 +1843,6 @@
             </audio>
             <div class="audio-status" id="audioStatus-5">Narration will play automatically.</div>
             <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-5"></div></div>
-            <div class="lock-note">Testing mode: you can move forward without waiting for narration.</div>
           </div>
 
           <div class="notes">Manager note: this slide should be reinforced during live observation.</div>
@@ -1882,7 +1903,6 @@
             </audio>
             <div class="audio-status" id="audioStatus-6">Narration will play automatically.</div>
             <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-6"></div></div>
-            <div class="lock-note">Testing mode: navigation remains enabled.</div>
           </div>
 
           <div class="notes">Important: non-jumpers still require waiver verification.</div>
@@ -1966,7 +1986,6 @@
             </audio>
             <div class="audio-status" id="audioStatus-7">Narration will play automatically.</div>
             <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-7"></div></div>
-            <div class="lock-note">Testing mode: navigation remains enabled.</div>
           </div>
 
           <div class="notes">This should be treated as a hard rule, not a customer service preference.</div>
@@ -2068,7 +2087,6 @@
 
       <div class="audio-status" id="audioStatus-8">Narration will play automatically.</div>
       <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-8"></div></div>
-      <div class="lock-note">Testing mode: navigation remains enabled.</div>
     </div>
 
     <div class="notes">
@@ -2158,7 +2176,6 @@
 
       <div class="audio-status" id="audioStatus-9">Narration will play automatically.</div>
       <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-9"></div></div>
-      <div class="lock-note">Testing mode: navigation remains enabled.</div>
     </div>
 
   </div>
@@ -2210,7 +2227,6 @@
 <div class="audio-meter">
   <div class="audio-meter-fill" id="audioProgress-sockpolicy"></div>
 </div>
-<div class="lock-note">Testing mode: navigation remains enabled.</div>
 </div>
 
   </div>
@@ -2258,7 +2274,6 @@
 <div class="audio-meter">
   <div class="audio-meter-fill" id="audioProgress-sockfaq"></div>
 </div>
-<div class="lock-note">Testing mode: navigation remains enabled.</div>
 </div>
 
     </div>
@@ -2326,7 +2341,6 @@
 
       <div class="audio-status" id="audioStatus-10">Narration will play automatically.</div>
       <div class="audio-meter"><div class="audio-meter-fill" id="audioProgress-10"></div></div>
-      <div class="lock-note">Testing mode: navigation remains enabled.</div>
     </div>
 
   </div>
@@ -2378,10 +2392,6 @@
 
   <div class="audio-meter">
     <div class="audio-meter-fill" id="audioProgress-nextsteps"></div>
-  </div>
-
-  <div class="lock-note">
-    Testing mode: navigation remains enabled.
   </div>
 </div>
 
@@ -2648,5 +2658,43 @@
 
     updateSlide(false);
   </script>
+
+<script id="cashier-responsive-canvas-script">
+(() => {
+  const BASE_WIDTH = 1180;
+  const BASE_HEIGHT = 664;
+  let frame = 0;
+
+  function fitCashierSlides() {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => {
+      const stage = document.querySelector('.stage');
+      if (!stage) return;
+
+      if (window.innerWidth <= 1000) {
+        stage.style.removeProperty('--cashier-slide-scale');
+        return;
+      }
+
+      const availableWidth = Math.max(1, stage.clientWidth);
+      const availableHeight = Math.max(1, stage.clientHeight);
+      const scale = Math.min(1, availableWidth / BASE_WIDTH, availableHeight / BASE_HEIGHT);
+      stage.style.setProperty('--cashier-slide-scale', scale.toFixed(4));
+    });
+  }
+
+  window.addEventListener('resize', fitCashierSlides, { passive: true });
+  document.addEventListener('fullscreenchange', fitCashierSlides);
+  window.addEventListener('load', fitCashierSlides);
+  document.addEventListener('DOMContentLoaded', fitCashierSlides);
+
+  const stage = document.querySelector('.stage');
+  if (stage && 'ResizeObserver' in window) {
+    new ResizeObserver(fitCashierSlides).observe(stage);
+  }
+
+  fitCashierSlides();
+})();
+</script>
 </body>
 </html>
