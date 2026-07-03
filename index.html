@@ -10,24 +10,13 @@
 <body>
   <section class="login-gate" id="login-gate" aria-labelledby="login-title" hidden>
     <div class="login-card">
-      <img
-        class="login-logo"
-        src="shared/images/launch-family-entertainment-logo.png"
-        alt="Launch Family Entertainment">
+      <img class="login-logo" src="shared/images/launch-family-entertainment-logo.png" alt="Launch Family Entertainment">
       <p class="eyebrow">Employee Access</p>
       <h1 id="login-title">Launch Training Portal</h1>
-      <p class="login-copy">
-        Enter the shared training password to continue.
-      </p>
-
+      <p class="login-copy">Enter the shared training password to continue.</p>
       <form id="portal-login-form" class="login-form">
         <label for="portal-password">Password</label>
-        <input
-          id="portal-password"
-          name="password"
-          type="password"
-          autocomplete="current-password"
-          required>
+        <input id="portal-password" name="password" type="password" autocomplete="current-password" required>
         <button type="submit">Unlock Training Portal</button>
         <p class="login-error" id="login-error" role="alert" aria-live="polite"></p>
       </form>
@@ -35,107 +24,140 @@
   </section>
 
   <div id="portal-app" hidden>
-  <a class="skip-link" href="#training-programs">Skip to training programs</a>
+    <a class="skip-link" href="#training-programs">Skip to training programs</a>
 
-  <header class="site-header">
-    <div class="header-inner">
-      <img
-        class="brand-logo"
-        src="shared/images/launch-family-entertainment-logo.png"
-        alt="Launch Family Entertainment">
-      <div class="header-actions"><div class="header-label">Employee Development</div><button class="lock-button" id="lock-portal" type="button">Lock Portal</button></div>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero" aria-labelledby="portal-title">
-      <div class="hero-content">
-        <p class="eyebrow">Launch Training Portal</p>
-        <h1 id="portal-title">Build the skills to create awesome memories.</h1>
-        <p class="hero-copy">
-          Select your assigned training program below. Complete each required day,
-          checklist, and exam in order.
-        </p>
-      </div>
-    </section>
-
-    <section class="program-section" id="training-programs" aria-labelledby="program-heading">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Training Programs</p>
-          <h2 id="program-heading">Choose your role</h2>
+    <header class="site-header">
+      <div class="header-inner">
+        <img class="brand-logo" src="shared/images/launch-family-entertainment-logo.png" alt="Launch Family Entertainment">
+        <div class="header-actions">
+          <span class="header-label">Employee Development</span>
+          <button class="lock-button" id="lock-portal" type="button">Lock Portal</button>
         </div>
-        <p class="section-note">Additional programs will be activated as they are completed.</p>
       </div>
+    </header>
 
-      <div class="program-grid">
-        <a class="program-card program-card--active" href="cashier/" aria-label="Open Cashier Training version 2.30">
-          <div class="card-topline">
-            <span class="program-code" aria-hidden="true">C</span>
-            <span class="status status--available">Available</span>
-          </div>
-          <div class="card-body">
-            <h3>Cashier Training</h3>
-            <p>Guest interaction, waivers, core standards, loyalty, and up-selling.</p>
-          </div>
-          <div class="card-footer">
-            <span>Version 2.30</span>
-            <span class="card-action">Begin training <span aria-hidden="true">→</span></span>
-          </div>
-        </a>
+    <main>
+      <section class="hero" aria-labelledby="portal-title">
+        <div class="hero-overlay"></div>
+        <div class="hero-accent hero-accent--green" aria-hidden="true"></div>
+        <div class="hero-accent hero-accent--yellow" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Launch Training Portal</p>
+          <h1 id="portal-title">Train to create <span>awesome memories.</span></h1>
+          <p class="hero-copy">Build the knowledge, confidence, and skills needed to deliver a safe, energetic, and memorable Launch experience.</p>
+          <a class="hero-button" href="#training-programs">Choose Your Training <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-stats" aria-label="Training portal highlights">
+          <div><strong>2</strong><span>Programs Live</span></div>
+          <div><strong>3</strong><span>Training Days</span></div>
+          <div><strong>1</strong><span>Launch Standard</span></div>
+        </div>
+      </section>
 
-        <a class="program-card program-card--active" href="court-monitor/" aria-label="Open Court Monitor Training test build version 80">
-          <div class="card-topline">
-            <span class="program-code" aria-hidden="true">CM</span>
-            <span class="status status--available">Testing</span>
+      <section class="program-section" id="training-programs" aria-labelledby="program-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Training Programs</p>
+            <h2 id="program-heading">Choose your role</h2>
           </div>
-          <div class="card-body">
-            <h3>Court Monitor Training</h3>
-            <p>Attraction supervision, safety standards, guest coaching, and incident response.</p>
-          </div>
-          <div class="card-footer">
-            <span>Test Build v80</span>
-            <span class="card-action">Open training <span aria-hidden="true">→</span></span>
-          </div>
-        </a>
+          <p class="section-note">Complete each assigned day, print the hands-on checklist, and return for the exam.</p>
+        </div>
 
-        <article class="program-card program-card--disabled" aria-labelledby="krave-title">
-          <div class="card-topline">
-            <span class="program-code" aria-hidden="true">K</span>
-            <span class="status">Coming soon</span>
-          </div>
-          <div class="card-body">
-            <h3 id="krave-title">Krave Training</h3>
-            <p>Food safety, product preparation, service standards, and kitchen operations.</p>
-          </div>
-          <div class="card-footer">
-            <span>Planned</span>
-            <span class="card-action card-action--muted">Not yet available</span>
-          </div>
-        </article>
+        <div class="program-grid">
+          <a class="program-card program-card--active" href="cashier/" aria-label="Open Cashier Training version 2.30">
+            <div class="card-media">
+              <img src="shared/images/cashier-training.jpg" alt="Launch employee at the guest check-in counter">
+              <span class="status status--available">Available</span>
+              <span class="program-code" aria-hidden="true">C</span>
+            </div>
+            <div class="card-content">
+              <p class="card-kicker">Front Desk &amp; Guest Experience</p>
+              <h3>Cashier Training</h3>
+              <p>Guest interaction, waivers, core standards, loyalty, and up-selling.</p>
+              <div class="card-footer">
+                <span>Version 2.30</span>
+                <span class="card-action">Begin Training <span aria-hidden="true">→</span></span>
+              </div>
+            </div>
+          </a>
 
-        <article class="program-card program-card--disabled" aria-labelledby="party-title">
-          <div class="card-topline">
-            <span class="program-code" aria-hidden="true">PH</span>
-            <span class="status">Coming soon</span>
+          <a class="program-card program-card--active" href="court-monitor/" aria-label="Open Court Monitor Training test build version 80">
+            <div class="card-media">
+              <img src="shared/images/court-monitor-training.jpg" alt="Guest using a Launch trampoline attraction">
+              <span class="status status--testing">Testing</span>
+              <span class="program-code" aria-hidden="true">CM</span>
+            </div>
+            <div class="card-content">
+              <p class="card-kicker">Safety &amp; Attraction Operations</p>
+              <h3>Court Monitor Training</h3>
+              <p>Attraction supervision, safety standards, guest coaching, and incident response.</p>
+              <div class="card-footer">
+                <span>Test Build v80</span>
+                <span class="card-action">Open Training <span aria-hidden="true">→</span></span>
+              </div>
+            </div>
+          </a>
+
+          <article class="program-card program-card--disabled" aria-labelledby="party-title">
+            <div class="card-media">
+              <img src="shared/images/party-host-training.jpg" alt="Guests enjoying a Launch bowling attraction">
+              <span class="status">Coming Soon</span>
+              <span class="program-code" aria-hidden="true">PH</span>
+            </div>
+            <div class="card-content">
+              <p class="card-kicker">Celebrations &amp; Events</p>
+              <h3 id="party-title">Party Host Training</h3>
+              <p>Party preparation, timeline execution, guest service, and event recovery.</p>
+              <div class="card-footer">
+                <span>In Development</span>
+                <span class="card-action card-action--muted">Coming Soon</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="program-card program-card--disabled" aria-labelledby="krave-title">
+            <div class="card-media">
+              <img src="shared/images/krave-training.jpg" alt="Launch team member preparing a guest beverage">
+              <span class="status">Coming Soon</span>
+              <span class="program-code" aria-hidden="true">K</span>
+            </div>
+            <div class="card-content">
+              <p class="card-kicker">Food &amp; Beverage</p>
+              <h3 id="krave-title">Krave Training</h3>
+              <p>Food safety, product preparation, service standards, and kitchen operations.</p>
+              <div class="card-footer">
+                <span>Planned</span>
+                <span class="card-action card-action--muted">Coming Soon</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="process-section" aria-labelledby="process-title">
+        <div class="process-inner">
+          <div class="process-heading">
+            <p class="eyebrow">The Launch Training Path</p>
+            <h2 id="process-title">Learn it. Practice it. Prove it.</h2>
+            <p>Online training builds the foundation. Hands-on coaching turns that knowledge into the Launch standard.</p>
           </div>
-          <div class="card-body">
-            <h3 id="party-title">Party Host Training</h3>
-            <p>Party preparation, timeline execution, guest service, and event recovery.</p>
-          </div>
-          <div class="card-footer">
-            <span>Planned</span>
-            <span class="card-action card-action--muted">Not yet available</span>
-          </div>
-        </article>
+          <ol class="process-steps">
+            <li><span>01</span><div><strong>Learn</strong><p>Complete the online training for your assigned role.</p></div></li>
+            <li><span>02</span><div><strong>Print</strong><p>Print the checklist for your hands-on training shift.</p></div></li>
+            <li><span>03</span><div><strong>Practice</strong><p>Work with a trainer and demonstrate each required skill.</p></div></li>
+            <li><span>04</span><div><strong>Test</strong><p>Return to the portal and complete the end-of-shift exam.</p></div></li>
+          </ol>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>Launch Family Entertainment</strong>
+        <span>Employee Training Portal</span>
       </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p>Launch Family Entertainment · Employee Training Portal</p>
-    <p class="footer-version">Portal v1.0</p>
-  </footer>
+      <p class="footer-version">Portal v1.1</p>
+    </footer>
   </div>
 
   <script>
@@ -168,15 +190,10 @@
       }
 
       function getSafeReturnPath() {
-        var requestedPath =
-          new URLSearchParams(window.location.search).get("return");
+        var requestedPath = new URLSearchParams(window.location.search).get("return");
         var portalBasePath = getPortalBasePath();
 
-        if (
-          requestedPath &&
-          requestedPath.indexOf(portalBasePath) === 0 &&
-          requestedPath.indexOf("//") !== 0
-        ) {
+        if (requestedPath && requestedPath.indexOf(portalBasePath) === 0 && requestedPath.indexOf("//") !== 0) {
           return requestedPath;
         }
 
@@ -184,11 +201,8 @@
       }
 
       function readUnlockTime() {
-        try {
-          return Number(window.localStorage.getItem(STORAGE_KEY) || 0);
-        } catch (error) {
-          return 0;
-        }
+        try { return Number(window.localStorage.getItem(STORAGE_KEY) || 0); }
+        catch (error) { return 0; }
       }
 
       function saveUnlockTime(value) {
@@ -196,18 +210,14 @@
           window.localStorage.setItem(STORAGE_KEY, String(value));
           return true;
         } catch (error) {
-          errorMessage.textContent =
-            "This browser is blocking local storage. Allow site storage and try again.";
+          errorMessage.textContent = "This browser is blocking local storage. Allow site storage and try again.";
           return false;
         }
       }
 
       function clearUnlockTime() {
-        try {
-          window.localStorage.removeItem(STORAGE_KEY);
-        } catch (error) {
-          // Nothing else is required.
-        }
+        try { window.localStorage.removeItem(STORAGE_KEY); }
+        catch (error) { }
       }
 
       function showPortal() {
@@ -220,18 +230,12 @@
         portal.hidden = true;
         gate.hidden = false;
         document.body.classList.remove("portal-unlocked");
-        window.setTimeout(function () {
-          passwordInput.focus();
-        }, 0);
+        window.setTimeout(function () { passwordInput.focus(); }, 0);
       }
 
       if (readUnlockTime() > Date.now()) {
         var initialReturnPath = getSafeReturnPath();
-
-        if (
-          initialReturnPath &&
-          initialReturnPath !== window.location.pathname
-        ) {
+        if (initialReturnPath && initialReturnPath !== window.location.pathname) {
           window.location.replace(initialReturnPath);
         } else {
           showPortal();
@@ -251,12 +255,9 @@
           return;
         }
 
-        if (!saveUnlockTime(Date.now() + SESSION_DURATION_MS)) {
-          return;
-        }
+        if (!saveUnlockTime(Date.now() + SESSION_DURATION_MS)) return;
 
         var returnPath = getSafeReturnPath();
-
         if (returnPath) {
           window.location.replace(returnPath);
         } else {
@@ -272,6 +273,5 @@
       });
     })();
   </script>
-
 </body>
 </html>
