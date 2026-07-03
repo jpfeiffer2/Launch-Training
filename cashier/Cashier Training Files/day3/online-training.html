@@ -2192,6 +2192,365 @@
   }
 </style>
 
+
+<style id="cashier-day3-targeted-polish-v5">
+  /* Slide 3: show the full approved artwork, including its original
+     key-message strip, then place the web summary below it. */
+  .slide.approved-slide3-content > img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    object-position: center top !important;
+  }
+
+  .slide3-web-summary {
+    top: 486px !important;
+    bottom: auto !important;
+    min-height: 0 !important;
+    height: 186px !important;
+    padding: 16px 18px 13px !important;
+    gap: 12px !important;
+  }
+
+  .slide3-web-summary > div:not(.slide3-summary-message) {
+    padding: 12px 14px !important;
+  }
+
+  .slide3-web-summary strong {
+    font-size: 1.52rem !important;
+  }
+
+  .slide3-web-summary span {
+    margin-top: 5px !important;
+    font-size: .94rem !important;
+  }
+
+  .slide3-summary-message {
+    font-size: .96rem !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Slide 7: the original layout was wider than the actual 1180px
+     presentation canvas. Refit both columns and keep all text inside. */
+  .slide7-native-final .s7f-left-card {
+    left: 30px !important;
+    top: 188px !important;
+    width: 540px !important;
+    height: 390px !important;
+    padding: 26px 24px 22px !important;
+    overflow: hidden !important;
+  }
+
+  .slide7-native-final .s7f-heading-row {
+    grid-template-columns: 78px minmax(0,1fr) !important;
+    gap: 14px !important;
+  }
+
+  .slide7-native-final .s7f-heading-row h2 {
+    font-size: 1.34rem !important;
+  }
+
+  .slide7-native-final .s7f-heading-row p {
+    font-size: .90rem !important;
+    line-height: 1.23 !important;
+  }
+
+  .slide7-native-final .s7f-do-dont {
+    left: 24px !important;
+    right: 24px !important;
+    bottom: 24px !important;
+    gap: 14px !important;
+  }
+
+  .slide7-native-final .s7f-mini-card {
+    min-width: 0 !important;
+    min-height: 160px !important;
+    padding: 18px 12px 15px 70px !important;
+  }
+
+  .slide7-native-final .s7f-round {
+    left: 18px !important;
+  }
+
+  .slide7-native-final .s7f-mini-card ul {
+    min-width: 0 !important;
+    font-size: .84rem !important;
+    line-height: 1.16 !important;
+    gap: 7px !important;
+  }
+
+  .slide7-native-final .s7f-mini-card li {
+    min-width: 0 !important;
+    overflow-wrap: anywhere !important;
+    align-items: start !important;
+  }
+
+  .slide7-native-final .s7f-photo,
+  .slide7-native-final .s7f-better {
+    right: 30px !important;
+    width: 560px !important;
+  }
+
+  .slide7-native-final .s7f-photo {
+    top: 188px !important;
+    height: 272px !important;
+  }
+
+  .slide7-native-final .s7f-better {
+    top: 476px !important;
+    height: 102px !important;
+    grid-template-columns: 76px minmax(0,1fr) !important;
+    padding: 0 18px !important;
+  }
+
+  .slide7-native-final .s7f-better h3 {
+    font-size: 1.22rem !important;
+  }
+
+  .slide7-native-final .s7f-better p {
+    font-size: .91rem !important;
+    line-height: 1.22 !important;
+  }
+
+  /* Slide 8: increase the text and icon scale to use the large cards. */
+  .slide8-listening .s8-conversation-slide {
+    gap: 14px !important;
+  }
+
+  .slide8-listening .s8-quote-wrap {
+    min-height: 80px !important;
+    padding: 16px 24px !important;
+  }
+
+  .slide8-listening .s8-quote-copy span {
+    font-size: .84rem !important;
+    letter-spacing: 1.45px !important;
+  }
+
+  .slide8-listening .s8-quote-copy strong {
+    font-size: 1.94rem !important;
+    line-height: 1.02 !important;
+  }
+
+  .slide8-listening .s8-listener-grid {
+    gap: 14px !important;
+  }
+
+  .slide8-listening .s8-listen-card {
+    grid-template-columns: 58px minmax(0,1fr) auto !important;
+    min-height: 138px !important;
+    padding: 18px 18px 18px 16px !important;
+    gap: 14px !important;
+  }
+
+  .slide8-listening .s8-card-icon {
+    width: 54px !important;
+    height: 54px !important;
+    font-size: 1.7rem !important;
+  }
+
+  .slide8-listening .s8-card-content b {
+    font-size: 1.30rem !important;
+    line-height: 1.12 !important;
+    margin-bottom: 7px !important;
+  }
+
+  .slide8-listening .s8-card-content span {
+    font-size: 1.03rem !important;
+    line-height: 1.28 !important;
+  }
+
+  .slide8-listening .s8-opportunity-tag {
+    font-size: .82rem !important;
+    padding: 8px 11px !important;
+  }
+
+  .slide8-listening .s8-framework {
+    min-height: 60px !important;
+    padding: 12px 18px !important;
+  }
+
+  .slide8-listening .s8-framework div:not(.s8-arrow) {
+    font-size: 1.12rem !important;
+  }
+
+  /* Slide 11: expand the radar and process strip into the unused lower area. */
+  .slide11-radar-v3 .slide-body {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+
+  .slide11-radar-v3 .radar11-stage {
+    height: 392px !important;
+  }
+
+  .slide11-radar-v3 .radar11-center {
+    width: 326px !important;
+    height: 326px !important;
+  }
+
+  .slide11-radar-v3 .radar11-card {
+    width: 276px !important;
+    min-height: 82px !important;
+    padding: 14px 15px !important;
+  }
+
+  .slide11-radar-v3 .radar11-card b {
+    font-size: 18px !important;
+    line-height: 1.1 !important;
+  }
+
+  .slide11-radar-v3 .radar11-card small {
+    font-size: 16px !important;
+  }
+
+  .slide11-radar-v3 .radar11-card.food,
+  .slide11-radar-v3 .radar11-card.games {
+    top: 22px !important;
+  }
+
+  .slide11-radar-v3 .radar11-card.party,
+  .slide11-radar-v3 .radar11-card.group {
+    top: 151px !important;
+  }
+
+  .slide11-radar-v3 .radar11-card.return,
+  .slide11-radar-v3 .radar11-card.more {
+    bottom: 22px !important;
+  }
+
+  .slide11-radar-v3 .radar11-flow {
+    height: 64px !important;
+    margin-top: 12px !important;
+    max-width: 1040px !important;
+  }
+
+  .slide11-radar-v3 .radar11-flow div,
+  .slide11-radar-v3 .radar11-flow b {
+    font-size: 22px !important;
+  }
+
+  .slide11-radar-v3 .radar11-note {
+    margin-top: 9px !important;
+    font-size: 18px !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Slide 14: scale the bottom message to the size of its callout box. */
+  .slide14-respect .respect-layout {
+    grid-template-rows: minmax(0,1fr) 82px !important;
+  }
+
+  .slide14-respect .respect-footer {
+    min-height: 82px !important;
+    padding: 14px 24px !important;
+    display: grid !important;
+    place-items: center !important;
+    font-size: 1.34rem !important;
+    line-height: 1.22 !important;
+  }
+
+  /* Slide 15: enlarge all practical examples and center their contents. */
+  .slide15-together .together-board {
+    grid-template-rows: 56px minmax(0,1fr) 64px !important;
+    gap: 12px !important;
+  }
+
+  .slide15-together .together-top {
+    font-size: 1.16rem !important;
+  }
+
+  .slide15-together .scenario-grid {
+    gap: 12px !important;
+  }
+
+  .slide15-together .scenario-card {
+    grid-template-columns: 60px minmax(0,1fr) !important;
+    padding: 18px !important;
+    gap: 14px !important;
+    align-items: center !important;
+  }
+
+  .slide15-together .scenario-card > div:last-child {
+    align-self: center !important;
+  }
+
+  .slide15-together .scenario-card .sc-icon {
+    width: 58px !important;
+    height: 58px !important;
+    font-size: 2rem !important;
+  }
+
+  .slide15-together .scenario-card h3 {
+    font-size: 1.24rem !important;
+    line-height: 1.15 !important;
+    margin-bottom: 7px !important;
+  }
+
+  .slide15-together .scenario-card p {
+    font-size: 1rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .slide15-together .response-line {
+    margin-top: 9px !important;
+    padding: 10px 12px !important;
+    font-size: .98rem !important;
+    line-height: 1.24 !important;
+  }
+
+  .slide15-together .together-bottom div {
+    font-size: 1.08rem !important;
+  }
+
+  .slide15-together .together-bottom span {
+    font-size: 1.5rem !important;
+  }
+
+  /* Slide 16: increase all hands-on directions for trainer readability. */
+  .slide16-next .finish-hero {
+    padding: 20px 24px !important;
+  }
+
+  .slide16-next .finish-hero h2 {
+    font-size: 2.34rem !important;
+  }
+
+  .slide16-next .finish-hero p {
+    margin-top: 5px !important;
+    font-size: 1.08rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .slide16-next .finish-step {
+    padding: 22px 18px !important;
+  }
+
+  .slide16-next .finish-step span {
+    width: 72px !important;
+    height: 72px !important;
+    font-size: 2.34rem !important;
+    margin-bottom: 15px !important;
+  }
+
+  .slide16-next .finish-step h3 {
+    font-size: 1.52rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  .slide16-next .finish-step p {
+    font-size: 1.10rem !important;
+    line-height: 1.30 !important;
+  }
+
+  .slide16-next .finish-bottom {
+    padding: 16px 22px !important;
+    font-size: 1.28rem !important;
+    line-height: 1.2 !important;
+  }
+</style>
+
 </head>
 <body>
 <div class="start-overlay" id="startOverlay">
