@@ -1855,6 +1855,22 @@
 .journey12-flow i{font-style:normal;color:#f2e600;font-size:1.4rem;}
 @media(max-width:1100px){.journey12-step{padding:14px 10px}.journey12-icon{width:68px;height:68px;font-size:32px}.journey12-step h3{font-size:1.05rem}.journey12-step p{font-size:.86rem}.journey12-flow{gap:8px;font-size:.95rem}.journey12-bottom{padding:12px 18px}}
 
+
+  /* Production display: keep narration audio and completion gating active,
+     but remove the in-slide narration status panels and progress bars. */
+  .audio-panel,
+  .role-audio,
+  .ten-audio,
+  .script-audio,
+  .required-audio,
+  .audio-title,
+  .audio-status,
+  .audio-meter,
+  .sr-audio-status,
+  .sr-audio-meter {
+    display: none !important;
+  }
+
 </style>
 
 

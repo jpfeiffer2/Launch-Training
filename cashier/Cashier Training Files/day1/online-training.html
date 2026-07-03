@@ -322,6 +322,21 @@
     .start-card h2 { margin: 0 0 10px; font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1; letter-spacing: -2px; }
     .start-card p { font-size: 1.12rem; color: #2f3842; line-height: 1.5; }
     .start-card .start-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; align-items: center; }
+    .start-card .portal-start-link {
+      min-height: 44px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 0.98rem;
+      font-weight: 900;
+      line-height: 1;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      transition: transform 0.05s ease, opacity 0.15s ease;
+    }
+    .start-card .portal-start-link:active { transform: translateY(1px); }
     .start-card .small-note { font-size: 0.9rem; color: #5d6873; margin-top: 12px; }
 
 
@@ -478,7 +493,23 @@
       .stage { display: block; }
       .slide { display: grid !important; page-break-after: always; width: 100%; height: 100vh; box-shadow: none; border-radius: 0; border: none; }
     }
-  </style>
+  
+  /* Production display: keep narration audio and completion gating active,
+     but remove the in-slide narration status panels and progress bars. */
+  .audio-panel,
+  .role-audio,
+  .ten-audio,
+  .script-audio,
+  .required-audio,
+  .audio-title,
+  .audio-status,
+  .audio-meter,
+  .sr-audio-status,
+  .sr-audio-meter {
+    display: none !important;
+  }
+
+</style>
 <style id="v24-slide6-only-css">
 .slide6-body-native {
   padding: 20px 30px 16px;
@@ -1554,7 +1585,8 @@
       <p>Narration begins after you start the training.</p>
       <div class="start-actions">
         <button class="btn-primary" type="button" onclick="startTraining()">Start Day 1 Training</button>
-        <button class="btn-dark" type="button" onclick="toggleFullScreen()">Full Screen</button><a class="btn-dark" href="../../../index.html" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">Training Portal</a>
+        <button class="btn-dark" type="button" onclick="toggleFullScreen()">Full Screen</button>
+        <a class="btn-dark portal-start-link" href="../../../index.html">Training Portal</a>
       </div>
       <div class="small-note">Use this on a tablet, office computer, or training station. Browser audio rules require this first click before narration can start.</div>
     </div>
