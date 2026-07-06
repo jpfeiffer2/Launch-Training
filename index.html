@@ -176,24 +176,56 @@
       var lockButton = document.getElementById("lock-portal");
 
       function getPortalBasePath() {
-        var marker = "/Launch-Training/";
         var currentPath = window.location.pathname;
-        var markerPosition = currentPath.indexOf(marker);
 
-        if (markerPosition >= 0) {
-          return currentPath.slice(0, markerPosition + marker.length);
+        // Current GitHub Pages project-site address:
+        // https://jpfeiffer2.github.io/Launch-Training/
+        var projectMarker = "/Launch-Training/";
+        var projectPosition = currentPath.indexOf(projectMarker);
+
+        if (projectPosition >= 0) {
+          return currentPath.slice(0, projectPosition + projectMarker.length);
         }
 
-        return currentPath.endsWith("/")
-          ? currentPath
-          : currentPath.slice(0, currentPath.lastIndexOf("/") + 1);
+        // Future custom-domain address:
+        // https://training.launchfamilyentertainment.com/
+        // If the user reaches the password gate from a direct module link,
+        // return them to the domain root after login.
+        var moduleMarkers = [
+          "/cashier/",
+          "/court-monitor/",
+          "/party-host/",
+          "/krave/"
+        ];
+
+        for (var i = 0; i < moduleMarkers.length; i += 1) {
+          var modulePosition = currentPath.indexOf(moduleMarkers[i]);
+
+          if (modulePosition >= 0) {
+            return currentPath.slice(0, modulePosition + 1) || "/";
+          }
+        }
+
+        return "/";
       }
 
       function getSafeReturnPath() {
         var requestedPath = new URLSearchParams(window.location.search).get("return");
         var portalBasePath = getPortalBasePath();
 
-        if (requestedPath && requestedPath.indexOf(portalBasePath) === 0 && requestedPath.indexOf("//") !== 0) {
+        if (!requestedPath || requestedPath.indexOf("//") === 0) {
+          return "";
+        }
+
+        // Accept old GitHub Pages project-site paths and future custom-domain root paths.
+        if (
+          requestedPath.indexOf("/Launch-Training/") === 0 ||
+          requestedPath.indexOf("/cashier/") === 0 ||
+          requestedPath.indexOf("/court-monitor/") === 0 ||
+          requestedPath.indexOf("/party-host/") === 0 ||
+          requestedPath.indexOf("/krave/") === 0 ||
+          requestedPath === portalBasePath
+        ) {
           return requestedPath;
         }
 
