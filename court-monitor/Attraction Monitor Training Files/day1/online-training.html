@@ -1559,7 +1559,53 @@
   display:inline-block;margin-left:7px;color:#f2e600;font-weight:1000;
 }
 
-.portal-nav-links{display:flex;gap:10px;align-items:center;flex-wrap:wrap}</style>  <style>
+.portal-nav-links{display:flex;gap:10px;align-items:center;flex-wrap:wrap}</style><script id="launch-training-media-tracker">
+(function () {
+  if (window.launchTrainingMediaRegistry) return;
+  window.launchTrainingMediaRegistry = [];
+  var NativeAudio = window.Audio;
+  window.Audio = function () {
+    var media = new (Function.prototype.bind.apply(NativeAudio, [null].concat(Array.prototype.slice.call(arguments))))();
+    window.launchTrainingMediaRegistry.push(media);
+    return media;
+  };
+  window.Audio.prototype = NativeAudio.prototype;
+})();
+</script>
+
+<style id="launch-training-pause-style">
+  .pause-training-btn {
+    border: 0;
+    border-radius: 999px;
+    padding: 12px 18px;
+    background: #f2e600;
+    color: #111820;
+    font-weight: 900;
+    cursor: pointer;
+  }
+
+  .pause-training-btn[aria-pressed="true"] {
+    background: #ffffff;
+    color: #111820;
+  }
+
+  body.training-paused .slide.active {
+    outline: 4px solid rgba(242, 230, 0, .75);
+    outline-offset: 4px;
+  }
+
+  body.training-paused #next,
+  body.training-paused #nextBtn {
+    pointer-events: none;
+    opacity: .55;
+  }
+
+  body.training-paused * {
+    animation-play-state: paused !important;
+  }
+</style>
+
+  <style>
     html { display: none; }
     html.portal-authenticated { display: block; }
   </style>
@@ -1752,7 +1798,7 @@
   </article>
 </div>
 <div class="floor-callout"><strong>Your next step:</strong> Return to the Day 1 menu, print the hands-on training checklist, and report to your trainer. After the checklist is complete, return to the menu and take the Day 1 exam.<span class="floor-menu-note">Use “Back to Day 1 Menu” below.</span></div>
-</section></div><div class="controls"><div class="portal-nav-links"><a class="home-link" href="./index.html">← Day Menu</a><a class="home-link" href="../../../index.html">Training Portal</a></div><div class="control-group"><button class="navbtn" id="prev">Back</button><button class="speak" id="speak">Play Narration</button><button aria-disabled="true" class="primary" disabled="" id="next">Next</button></div></div></main><script>
+</section></div><div class="controls"><div class="portal-nav-links"><a class="home-link" href="./index.html">← Day Menu</a><a class="home-link" href="../../../index.html">Training Portal</a></div><div class="control-group"><button class="navbtn" id="prev">Back</button><button class="speak" id="speak">Play Narration</button><button class="pause-training-btn" id="pauseTrainingBtn" type="button" aria-pressed="false">⏸ Pause</button><button aria-disabled="true" class="primary" disabled="" id="next">Next</button></div></div></main><script>
 const slides=[...document.querySelectorAll('.slide')];
 let idx=0;
 let trainingStarted=false;
@@ -2089,4 +2135,121 @@ document.addEventListener('keydown', (e)=>{
   }
 }, true);
 
-</script></body></html>
+</script><script id="launch-training-pause-script">
+(function () {
+  "use strict";
+
+  function ready(callback) {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", callback);
+    } else {
+      callback();
+    }
+  }
+
+  ready(function () {
+    var button = document.getElementById("pauseTrainingBtn");
+    if (!button) return;
+
+    var paused = false;
+    var resumeTarget = null;
+
+    function visibleSlide() {
+      return document.querySelector(".slide.active") || document;
+    }
+
+    function allMedia() {
+      var domMedia = Array.prototype.slice.call(document.querySelectorAll("audio, video"));
+      var registry = Array.isArray(window.launchTrainingMediaRegistry)
+        ? window.launchTrainingMediaRegistry
+        : [];
+      return domMedia.concat(registry).filter(function (media, index, list) {
+        return media && list.indexOf(media) === index;
+      });
+    }
+
+    function currentMedia() {
+      var active = visibleSlide();
+      var mediaList = allMedia();
+      var playing = mediaList.find(function (media) { return !media.paused && !media.ended; });
+      var activeMedia = active.querySelector ? active.querySelector("audio, video") : null;
+
+      return playing || activeMedia || mediaList[0] || null;
+    }
+
+    function setButtonState() {
+      button.textContent = paused ? "▶ Resume" : "⏸ Pause";
+      button.setAttribute("aria-pressed", paused ? "true" : "false");
+      button.title = paused ? "Resume the current narration" : "Pause the current narration";
+    }
+
+    function pauseTraining() {
+      paused = true;
+      resumeTarget = currentMedia();
+      document.body.classList.add("training-paused");
+      if ("speechSynthesis" in window && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+        window.launchTrainingSpeechPaused = true;
+        window.speechSynthesis.pause();
+      }
+      allMedia().forEach(function (media) {
+        if (!media.paused && !media.ended) {
+          if (media.dataset) {
+            media.dataset.trainingPaused = "true";
+          }
+          media.pause();
+        }
+      });
+      setButtonState();
+    }
+
+    function resumeTraining() {
+      paused = false;
+      document.body.classList.remove("training-paused");
+      setButtonState();
+
+      if ("speechSynthesis" in window && window.launchTrainingSpeechPaused) {
+        window.launchTrainingSpeechPaused = false;
+        window.speechSynthesis.resume();
+      }
+
+      var target = resumeTarget || currentMedia();
+      allMedia().forEach(function (media) {
+        if (media.dataset) {
+          delete media.dataset.trainingPaused;
+        }
+      });
+
+      if (target && typeof target.play === "function" && !target.ended) {
+        target.play().catch(function () {});
+      }
+    }
+
+    button.addEventListener("click", function () {
+      if (paused) {
+        resumeTraining();
+      } else {
+        pauseTraining();
+      }
+    });
+
+    document.addEventListener("play", function (event) {
+      if (paused && event.target && event.target.matches && event.target.matches("audio, video")) {
+        window.setTimeout(function () { event.target.pause(); }, 0);
+      }
+    }, true);
+
+    document.addEventListener("click", function (event) {
+      if (!paused) return;
+
+      var blockedButton = event.target.closest && event.target.closest("#next, #nextBtn, #speak, #playNarrationBtn");
+      if (blockedButton) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    }, true);
+
+    setButtonState();
+  });
+})();
+</script>
+</body></html>
