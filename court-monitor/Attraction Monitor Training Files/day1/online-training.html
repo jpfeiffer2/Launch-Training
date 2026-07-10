@@ -1635,6 +1635,7 @@
       }
     })();
   </script>
+
 </head><body>
 <div class="start-overlay" id="startOverlay">
 <div class="start-card">
@@ -1746,7 +1747,7 @@
 <div aria-label="Ninja Course rule cards" class="nj-cards">
   <div class="nj-card top-in card1"><div class="nj-num">1</div><div><h3>One Guest Per Obstacle</h3><p>Wait until the previous guest clears an obstacle before entering.</p></div></div>
   <div class="nj-card left-in card2"><div class="nj-num">2</div><div><h3>No Tricks Or Horseplay</h3><p>No flips, hanging upside down, pushing, or contact with other guests.</p></div></div>
-  <div class="nj-card top-in card3"><div class="nj-num">3</div><div><h3>Stay Aware</h3><p>Watch your surroundings, land feet first, and follow the intended course.</p></div></div>
+  <div class="nj-card top-in card3"><div class="nj-num">3</div><div><h3>Stay Aware</h3><p>Watch your surroundings, land on your back or bottom if you fall, and follow the intended course.</p></div></div>
   <div class="nj-card left-in card4"><div class="nj-num">4</div><div><h3>Monitor Controls The Course</h3><p>Control spacing, stop unsafe behavior, and ensure everyone follows instructions.</p></div></div>
 </div>
 <div class="nj-footer">Spacing prevents collisions. Awareness prevents injuries.</div>
@@ -2187,10 +2188,12 @@ document.addEventListener('keydown', (e)=>{
       paused = true;
       resumeTarget = currentMedia();
       document.body.classList.add("training-paused");
+
       if ("speechSynthesis" in window && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
         window.launchTrainingSpeechPaused = true;
         window.speechSynthesis.pause();
       }
+
       allMedia().forEach(function (media) {
         if (!media.paused && !media.ended) {
           if (media.dataset) {
@@ -2199,6 +2202,7 @@ document.addEventListener('keydown', (e)=>{
           media.pause();
         }
       });
+
       setButtonState();
     }
 
@@ -2213,6 +2217,7 @@ document.addEventListener('keydown', (e)=>{
       }
 
       var target = resumeTarget || currentMedia();
+
       allMedia().forEach(function (media) {
         if (media.dataset) {
           delete media.dataset.trainingPaused;
@@ -2252,4 +2257,5 @@ document.addEventListener('keydown', (e)=>{
   });
 })();
 </script>
+
 </body></html>
