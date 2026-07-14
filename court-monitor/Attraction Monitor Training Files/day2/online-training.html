@@ -14,7 +14,7 @@
 .start-actions .btn-dark{background:#111;color:#fff;border:1px solid rgba(255,255,255,.25)}
 *{box-sizing:border-box}html,body{height:100%;overflow:hidden}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at 18% 15%,rgba(108,194,74,.30),transparent 27%),radial-gradient(circle at 85% 18%,rgba(242,230,0,.15),transparent 29%),linear-gradient(135deg,#050606,#13191c 54%,#243119);color:var(--ink)}
 .deck{height:100vh;width:100vw;display:flex;flex-direction:column;padding:20px;gap:13px}.topbar{display:flex;align-items:center;justify-content:space-between;color:#fff;gap:16px;flex-shrink:0}.brand{display:flex;align-items:center;gap:14px;min-width:0}.logo-mark{width:54px;height:54px;border-radius:50%;background:#111;border:3px solid var(--g);display:grid;place-items:center;font-weight:900;color:var(--y);box-shadow:0 0 0 3px rgba(242,230,0,.16)}.brand-title strong{display:block;font-size:1rem;letter-spacing:1px;text-transform:uppercase}.brand-title span{display:block;font-size:.86rem;color:#cdd5dd}.slide-counter{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:9px 13px;border-radius:999px;font-weight:bold}
-.stage{flex:1;min-height:0;display:grid;place-items:center;overflow:hidden}.slide{display:none;width:min(1180px,calc(100vw - 44px),calc((100vh - 172px) * 1.7778));aspect-ratio:16/9;max-height:calc(100vh - 172px);background:#fff;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);position:relative}.slide.active{display:block}.bar{position:absolute;inset:0 auto auto 0;height:10px;width:100%;background:linear-gradient(90deg,var(--g),var(--y),var(--g));z-index:4}.header{position:absolute;top:24px;left:30px;right:30px;display:flex;align-items:center;justify-content:space-between;z-index:4}.eyebrow{text-transform:uppercase;letter-spacing:2px;color:#b8ff91;font-weight:900;font-size:.8rem}.pill{background:#101418;color:var(--y);padding:9px 14px;border-radius:999px;font-weight:900;text-transform:uppercase;font-size:.76rem;white-space:nowrap;border:1px solid rgba(255,255,255,.15)}
+.stage{flex:1;min-height:0;display:grid;place-items:center;overflow:hidden}.slide{display:none;width:min(1180px,calc(100vw - 44px),calc((100vh - 172px) * 1.7778));aspect-ratio:16/9;max-height:calc(100vh - 172px);background:#fff;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);position:relative}.slide.active{display:block}.bar{position:absolute;inset:0 auto auto 0;height:10px;width:100%;background:linear-gradient(90deg,var(--g),var(--y),var(--g));z-index:4}.header{position:absolute;top:24px;left:30px;right:30px;display:flex;align-items:center;justify-content:space-between;z-index:4}.eyebrow{text-transform:uppercase;letter-spacing:2px;color:#b8ff91;font-weight:900;font-size:.8rem}.slide-label-hidden{visibility:hidden}.pill{background:#101418;color:var(--y);padding:9px 14px;border-radius:999px;font-weight:900;text-transform:uppercase;font-size:.76rem;white-space:nowrap;border:1px solid rgba(255,255,255,.15)}
 .placeholder-slide{background:linear-gradient(135deg,#07100b 0%,#101a15 52%,#1d2616 100%);color:#fff}
 .day2-slide1-approved{background:#050606 url("../assets/day2-slide1-prevention-response-bg.png") center center/cover no-repeat;color:#fff}
 .day2-slide1-approved:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.76) 34%,rgba(0,0,0,.30) 58%,rgba(0,0,0,.12) 100%);z-index:1}
@@ -167,6 +167,73 @@
 .d2s7-examples2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.d2s7-mini{padding:9px 12px;border-radius:15px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);font-size:.71rem;line-height:1.15;color:#e8efea;font-weight:850}.d2s7-mini strong{display:block;color:var(--y);font-size:.62rem;letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px}
 .d2s7-takeaway{position:absolute;left:43.5%;right:4%;bottom:2.3%;z-index:6;padding:12px 17px;border-radius:18px;background:rgba(0,0,0,.87);border-left:8px solid var(--y);box-shadow:0 16px 32px rgba(0,0,0,.34);font-size:.88rem;line-height:1.12;font-weight:1000;text-transform:uppercase;color:#fff}.d2s7-takeaway span{color:#b8ff91}
 @media(max-width:800px){.d2s7-wrap:before{left:40%;right:-18%;bottom:12%;height:14px;opacity:.14}.d2s7-left{left:3%;top:4.5%;width:36%}.d2s7-title{font-size:1.82rem}.d2s7-intro{font-size:.54rem;margin-top:7px}.d2s7-examples{gap:6px;margin-top:10px}.d2s7-ex{padding:6px 7px;border-radius:10px;gap:6px}.d2s7-ex .icon{width:16px;height:16px;flex-basis:16px;font-size:.55rem;box-shadow:0 0 0 3px rgba(242,230,0,.09)}.d2s7-ex strong{font-size:.42rem;margin-bottom:1px}.d2s7-ex span{font-size:.37rem}.d2s7-right{right:2.8%;top:5%;width:56%;bottom:15%;gap:7px}.d2s7-status{padding:10px 10px 9px;border-radius:16px}.d2s7-status:before{left:10px;top:8px;font-size:.44rem}.d2s7-status-grid{gap:6px;margin-top:18px}.d2s7-state{padding:8px 6px 7px;border-radius:11px;min-height:71px}.d2s7-state:after{right:8px;top:8px;width:6px;height:6px}.d2s7-state .badge{font-size:.38rem;padding:3px 5px;margin-bottom:5px}.d2s7-state strong{font-size:.64rem;margin-bottom:4px}.d2s7-state span{font-size:.39rem}.d2s7-actions{gap:6px}.d2s7-action{padding:7px 7px;border-radius:11px;min-height:64px}.d2s7-action .step{font-size:.37rem;padding:2px 5px;margin-bottom:4px}.d2s7-action strong{font-size:.52rem;margin-bottom:3px}.d2s7-action span{font-size:.38rem}.d2s7-examples2{gap:6px}.d2s7-mini{padding:6px 7px;border-radius:10px;font-size:.4rem}.d2s7-mini strong{font-size:.36rem;margin-bottom:2px}.d2s7-takeaway{left:42.5%;right:3%;bottom:3%;font-size:.46rem;padding:8px 9px;border-radius:11px;border-left-width:5px}}
+
+
+.day2-slide8-injuries{background:radial-gradient(circle at 16% 18%,rgba(108,194,74,.18),transparent 30%),radial-gradient(circle at 80% 18%,rgba(242,230,0,.10),transparent 24%),linear-gradient(135deg,#050806 0%,#0b110d 52%,#121713 100%);color:#fff}
+.day2-slide8-injuries:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:40px 40px;opacity:.32}
+.d2s8-wrap{position:absolute;inset:0;z-index:2;overflow:hidden;color:#fff}
+.d2s8-left{position:absolute;left:4%;top:8%;bottom:9%;width:35.5%;display:flex;flex-direction:column;align-items:flex-start;z-index:4}.d2s8-eyebrow{font-size:.8rem;font-weight:1000;letter-spacing:2px;color:#b8ff91;text-transform:uppercase;margin-bottom:10px}.d2s8-title{font-size:clamp(2.75rem,4.65vw,4.75rem);font-weight:1000;line-height:.9;letter-spacing:-2.8px;text-transform:uppercase;text-shadow:0 10px 28px rgba(0,0,0,.45)}.d2s8-title span{display:block;color:var(--y)}.d2s8-intro{margin-top:12px;max-width:420px;font-size:.98rem;line-height:1.25;font-weight:820;color:#edf4ee}.d2s8-intro strong{color:#b8ff91}
+.d2s8-list{margin-top:14px;width:100%;display:grid;gap:9px;max-width:420px}.d2s8-line{padding:10px 13px 10px 15px;border-radius:15px;background:rgba(0,0,0,.58);border-left:6px solid rgba(108,194,74,.9);box-shadow:0 12px 24px rgba(0,0,0,.22)}.d2s8-line strong{display:block;font-size:.92rem;line-height:1.03;text-transform:uppercase;letter-spacing:.45px;color:#fff;margin-bottom:3px}.d2s8-line span{display:block;font-size:.76rem;line-height:1.15;color:#dbe4dc;font-weight:800}
+.d2s8-focus{margin-top:13px;padding:13px 15px;border-radius:17px;background:linear-gradient(135deg,rgba(242,230,0,.16),rgba(108,194,74,.12));border:1px solid rgba(242,230,0,.35);box-shadow:0 14px 30px rgba(0,0,0,.24);max-width:420px}.d2s8-focus-label{font-size:.72rem;font-weight:1000;letter-spacing:1.4px;text-transform:uppercase;color:#fff8a6;margin-bottom:5px}.d2s8-focus-copy{font-size:1.05rem;line-height:1.1;font-weight:1000;text-transform:uppercase;color:#fff}
+.d2s8-scene{position:absolute;right:3.4%;top:8.5%;width:54.5%;bottom:14.5%;border-radius:26px;background:linear-gradient(180deg,rgba(11,15,12,.96),rgba(8,10,9,.92));border:2px solid rgba(108,194,74,.42);box-shadow:0 24px 50px rgba(0,0,0,.34);z-index:4;padding:18px 18px 16px;overflow:hidden}.d2s8-scene-title{font-size:.82rem;font-weight:1000;letter-spacing:1.8px;color:#b8ff91;text-transform:uppercase;margin-bottom:10px}
+.d2s8-map{position:relative;height:69%;border-radius:22px;border:2px solid rgba(108,194,74,.34);background:linear-gradient(180deg,rgba(108,194,74,.06),rgba(255,255,255,.02));overflow:hidden;padding:44px 18px 58px;display:grid;grid-template-columns:1fr 86px 1fr;gap:14px}.d2s8-map:before{content:"ATTRACTION STOPPED";position:absolute;left:18px;top:14px;right:18px;height:24px;border-radius:999px;background:repeating-linear-gradient(135deg,#161616 0 18px,var(--y) 18px 36px);color:#111;text-align:center;font-size:.68rem;font-weight:1000;letter-spacing:1.3px;line-height:24px;text-transform:uppercase;box-shadow:0 8px 18px rgba(0,0,0,.22)}
+.d2s8-area{position:relative;border-radius:18px;padding:14px 13px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-width:0}.d2s8-injury-area{background:rgba(242,230,0,.08);border:1px solid rgba(242,230,0,.32)}.d2s8-safe-area{background:rgba(108,194,74,.08);border:1px solid rgba(108,194,74,.35)}.d2s8-area-label{position:absolute;left:11px;top:10px;padding:5px 8px;border-radius:999px;background:rgba(0,0,0,.56);font-size:.58rem;font-weight:1000;letter-spacing:1px;text-transform:uppercase;color:#fff}.d2s8-area-label.green{color:#caffaf}.d2s8-person{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;margin:9px 0 8px;font-size:1.35rem;font-weight:1000}.d2s8-person.injured{background:linear-gradient(145deg,var(--y),#ffbb00);color:#141300;box-shadow:0 0 0 10px rgba(242,230,0,.10)}.d2s8-guest-group{display:flex;gap:8px;margin:12px 0 10px}.d2s8-guest{width:33px;height:46px;border-radius:16px 16px 10px 10px;background:linear-gradient(180deg,#dff9d0,#6cc24a);box-shadow:0 0 0 5px rgba(108,194,74,.08)}.d2s8-area strong{font-size:1.03rem;line-height:1.03;text-transform:uppercase;color:#fff}.d2s8-area span{display:block;margin-top:5px;font-size:.74rem;line-height:1.15;font-weight:850;color:#dce5de}
+.d2s8-clear-lane{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;border-radius:16px;border:1px dashed rgba(255,255,255,.22);background:rgba(0,0,0,.25);color:#fff}.d2s8-clear-lane strong{font-size:.76rem;line-height:1.06;text-transform:uppercase;letter-spacing:.8px;color:#fff}.d2s8-clear-lane:before,.d2s8-clear-lane:after{content:"";position:absolute;top:50%;width:36px;height:3px;border-radius:999px;background:var(--y);opacity:.86}.d2s8-clear-lane:before{left:-38px}.d2s8-clear-lane:after{right:-38px}.d2s8-clear-lane em{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);font-style:normal;font-size:.57rem;font-weight:1000;text-transform:uppercase;letter-spacing:.8px;color:#b8ff91;white-space:nowrap}
+.d2s8-station{position:absolute;bottom:13px;padding:9px 12px;border-radius:999px;font-size:.72rem;font-weight:1000;letter-spacing:.3px;box-shadow:0 8px 18px rgba(0,0,0,.24);white-space:nowrap}.d2s8-monitor-station{left:18px;background:rgba(242,230,0,.14);border:1px solid rgba(242,230,0,.42);color:#fff6a6}.d2s8-call-station{right:18px;background:rgba(108,194,74,.16);border:1px solid rgba(108,194,74,.42);color:#c9ffac}
+.d2s8-flow{position:relative;margin-top:14px;height:86px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.d2s8-node{position:relative;min-height:86px;border-radius:17px;background:rgba(0,0,0,.58);border:1px solid rgba(255,255,255,.10);padding:12px 10px 10px 54px}.d2s8-node .num{position:absolute;left:12px;top:14px;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,var(--y),#b6ea00);color:#111;font-size:.95rem;font-weight:1000;box-shadow:0 8px 20px rgba(0,0,0,.3)}.d2s8-node strong{display:block;font-size:.88rem;line-height:1.02;text-transform:uppercase;color:#fff}.d2s8-node span{display:block;margin-top:4px;font-size:.66rem;line-height:1.12;color:#d9e2db;font-weight:800}
+.d2s8-takeaway{position:absolute;left:43%;right:4%;bottom:3%;padding:12px 17px;border-radius:18px;background:rgba(0,0,0,.88);border-left:8px solid var(--y);box-shadow:0 16px 34px rgba(0,0,0,.36);font-size:.82rem;line-height:1.14;font-weight:1000;text-transform:uppercase;color:#fff;z-index:6}.d2s8-takeaway span{color:#b8ff91}
+@media(max-width:800px){.d2s8-left{left:3%;top:5%;bottom:9%;width:38%}.d2s8-title{font-size:1.95rem}.d2s8-intro{font-size:.54rem;margin-top:7px}.d2s8-list{margin-top:8px;gap:5px}.d2s8-line{padding:6px 7px 6px 8px;border-radius:9px;border-left-width:4px}.d2s8-line strong{font-size:.42rem;margin-bottom:2px}.d2s8-line span{font-size:.34rem}.d2s8-focus{margin-top:8px;padding:7px 8px;border-radius:10px}.d2s8-focus-label{font-size:.36rem;margin-bottom:2px}.d2s8-focus-copy{font-size:.5rem}.d2s8-scene{right:2.6%;top:5%;width:56%;bottom:14%;padding:10px 10px 9px;border-radius:16px}.d2s8-scene-title{font-size:.4rem;margin-bottom:5px}.d2s8-map{height:68%;border-radius:14px;padding:24px 8px 32px;grid-template-columns:1fr 42px 1fr;gap:6px}.d2s8-map:before{left:8px;right:8px;top:7px;height:13px;font-size:.34rem;line-height:13px}.d2s8-area{border-radius:10px;padding:6px 5px}.d2s8-area-label{left:5px;top:5px;padding:2px 4px;font-size:.27rem}.d2s8-person{width:28px;height:28px;border-radius:9px;font-size:.7rem;margin:6px 0 4px}.d2s8-person.injured{box-shadow:0 0 0 5px rgba(242,230,0,.10)}.d2s8-guest-group{gap:3px;margin:7px 0 5px}.d2s8-guest{width:14px;height:22px;border-radius:8px 8px 5px 5px}.d2s8-area strong{font-size:.42rem}.d2s8-area span{font-size:.32rem;margin-top:2px}.d2s8-clear-lane strong{font-size:.35rem}.d2s8-clear-lane:before,.d2s8-clear-lane:after{width:16px;height:2px}.d2s8-clear-lane:before{left:-17px}.d2s8-clear-lane:after{right:-17px}.d2s8-clear-lane em{bottom:6px;font-size:.25rem}.d2s8-station{bottom:7px;padding:4px 5px;font-size:.3rem}.d2s8-monitor-station{left:8px}.d2s8-call-station{right:8px}.d2s8-flow{margin-top:7px;height:44px;gap:5px}.d2s8-node{min-height:44px;border-radius:9px;padding:6px 4px 4px 26px}.d2s8-node .num{left:5px;top:7px;width:17px;height:17px;font-size:.48rem}.d2s8-node strong{font-size:.34rem}.d2s8-node span{font-size:.27rem;margin-top:2px}.d2s8-takeaway{left:42.5%;right:3%;bottom:3%;font-size:.4rem;padding:7px 9px;border-radius:11px;border-left-width:5px}}
+
+/* Day 2 Slide 8 v125: locked image on left, text on right */
+.day2-slide8-injuries .d2s8-left{left:auto;right:4%;top:8%;bottom:11.5%;width:34.5%;display:flex;flex-direction:column;align-items:flex-start;z-index:5}
+.day2-slide8-injuries .d2s8-title{font-size:clamp(2.35rem,3.55vw,3.65rem);line-height:.92;letter-spacing:-2px}
+.day2-slide8-injuries .d2s8-intro{margin-top:12px;font-size:1rem;line-height:1.26;max-width:100%}
+.day2-slide8-injuries .d2s8-list{margin-top:14px;gap:9px;max-width:100%}
+.day2-slide8-injuries .d2s8-line{padding:11px 13px 11px 15px;border-radius:15px}
+.day2-slide8-injuries .d2s8-line strong{font-size:.93rem}
+.day2-slide8-injuries .d2s8-line span{font-size:.74rem;line-height:1.13}
+.day2-slide8-injuries .d2s8-focus{margin-top:13px;padding:13px 15px;max-width:100%}
+.day2-slide8-injuries .d2s8-focus-copy{font-size:1rem;line-height:1.08}
+.d2s8-image-panel{position:absolute;left:3.4%;top:8.5%;width:57.5%;bottom:8.5%;z-index:4;border-radius:24px;background:linear-gradient(180deg,rgba(11,15,12,.97),rgba(5,7,6,.95));border:2px solid rgba(108,194,74,.48);box-shadow:0 24px 50px rgba(0,0,0,.36);padding:10px;overflow:hidden}
+.d2s8-image-panel img{width:100%;height:100%;object-fit:contain;display:block;border-radius:17px;background:#000}
+.day2-slide8-injuries .d2s8-takeaway{left:auto;right:4%;width:34.5%;bottom:3%;padding:11px 15px;font-size:.75rem;line-height:1.12;border-left-width:7px}
+@media(max-width:800px){.day2-slide8-injuries .d2s8-left{left:auto;right:3%;top:5%;bottom:10.5%;width:35.5%}.day2-slide8-injuries .d2s8-title{font-size:1.4rem}.day2-slide8-injuries .d2s8-intro{font-size:.42rem;margin-top:6px}.day2-slide8-injuries .d2s8-list{margin-top:6px;gap:4px}.day2-slide8-injuries .d2s8-line{padding:5px 6px 5px 7px;border-radius:8px;border-left-width:4px}.day2-slide8-injuries .d2s8-line strong{font-size:.35rem}.day2-slide8-injuries .d2s8-line span{font-size:.28rem}.day2-slide8-injuries .d2s8-focus{margin-top:6px;padding:6px 7px;border-radius:9px}.day2-slide8-injuries .d2s8-focus-label{font-size:.3rem}.day2-slide8-injuries .d2s8-focus-copy{font-size:.38rem}.d2s8-image-panel{left:2.6%;top:5%;width:58%;bottom:7%;padding:5px;border-radius:15px}.d2s8-image-panel img{border-radius:10px}.day2-slide8-injuries .d2s8-takeaway{right:3%;width:35.5%;bottom:3%;font-size:.31rem;padding:6px 7px;border-radius:9px;border-left-width:4px}}
+/* v126 Slide 8 fitting pass: locked image left, compact text right */
+.day2-slide8-injuries .d2s8-left{right:4%;top:8.2%;bottom:13.2%;width:34.5%;justify-content:flex-start;overflow:hidden}
+.day2-slide8-injuries .d2s8-eyebrow{font-size:.72rem;margin-bottom:8px;letter-spacing:1.8px}
+.day2-slide8-injuries .d2s8-title{font-size:clamp(2.05rem,3.05vw,3.12rem);line-height:.92;letter-spacing:-1.7px}
+.day2-slide8-injuries .d2s8-intro{margin-top:9px;font-size:.86rem;line-height:1.18;max-width:100%}
+.day2-slide8-injuries .d2s8-list{margin-top:10px;gap:7px;max-width:100%}
+.day2-slide8-injuries .d2s8-line{padding:8px 11px 8px 13px;border-radius:13px;border-left-width:5px}
+.day2-slide8-injuries .d2s8-line strong{font-size:.78rem;line-height:1.02;margin-bottom:3px;letter-spacing:.3px}
+.day2-slide8-injuries .d2s8-line span{font-size:.61rem;line-height:1.1}
+.day2-slide8-injuries .d2s8-focus{margin-top:9px;padding:10px 12px;border-radius:14px;max-width:100%}
+.day2-slide8-injuries .d2s8-focus-label{font-size:.58rem;margin-bottom:4px;letter-spacing:1.2px}
+.day2-slide8-injuries .d2s8-focus-copy{font-size:.77rem;line-height:1.08}
+.day2-slide8-injuries .d2s8-takeaway{right:4%;width:34.5%;bottom:3.4%;padding:9px 12px;font-size:.61rem;line-height:1.08;border-left-width:6px;border-radius:14px}
+@media(max-width:800px){.day2-slide8-injuries .d2s8-left{right:3%;top:5.5%;bottom:11%;width:35.5%}.day2-slide8-injuries .d2s8-eyebrow{font-size:.34rem;margin-bottom:4px}.day2-slide8-injuries .d2s8-title{font-size:1.12rem}.day2-slide8-injuries .d2s8-intro{font-size:.32rem;margin-top:4px}.day2-slide8-injuries .d2s8-list{margin-top:5px;gap:3px}.day2-slide8-injuries .d2s8-line{padding:4px 5px 4px 6px;border-radius:7px;border-left-width:3px}.day2-slide8-injuries .d2s8-line strong{font-size:.26rem;margin-bottom:1px}.day2-slide8-injuries .d2s8-line span{font-size:.21rem}.day2-slide8-injuries .d2s8-focus{margin-top:5px;padding:4px 5px;border-radius:7px}.day2-slide8-injuries .d2s8-focus-label{font-size:.22rem;margin-bottom:1px}.day2-slide8-injuries .d2s8-focus-copy{font-size:.26rem}.day2-slide8-injuries .d2s8-takeaway{right:3%;width:35.5%;bottom:3%;font-size:.22rem;padding:4px 5px;border-radius:7px;border-left-width:3px}}
+
+
+.day2-slide9-certified{background:radial-gradient(circle at 15% 16%,rgba(108,194,74,.20),transparent 28%),radial-gradient(circle at 84% 20%,rgba(242,230,0,.13),transparent 25%),linear-gradient(135deg,#040605 0%,#0b100d 54%,#111711 100%);color:#fff}
+.day2-slide9-certified:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.026) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.026) 1px,transparent 1px);background-size:40px 40px;opacity:.34}
+.d2s9-wrap{position:absolute;inset:0;z-index:2;overflow:hidden;color:#fff}.d2s9-left{position:absolute;left:4%;top:9%;bottom:16%;width:34%;z-index:4;display:flex;flex-direction:column;align-items:flex-start}.d2s9-kicker{font-size:.82rem;font-weight:1000;letter-spacing:2px;text-transform:uppercase;color:#b8ff91;margin-bottom:10px}.d2s9-title{font-size:clamp(2.55rem,4.25vw,4.35rem);line-height:.9;letter-spacing:-2.4px;font-weight:1000;text-transform:uppercase;text-shadow:0 10px 28px rgba(0,0,0,.46)}.d2s9-title span{display:block;color:var(--y)}.d2s9-intro{margin-top:13px;max-width:420px;font-size:1.02rem;line-height:1.24;font-weight:850;color:#eef5ef}.d2s9-intro strong{color:#b8ff91}.d2s9-boundary{margin-top:16px;width:100%;padding:14px 16px;border-radius:18px;background:linear-gradient(135deg,rgba(242,230,0,.16),rgba(108,194,74,.10));border:1px solid rgba(242,230,0,.38);box-shadow:0 15px 32px rgba(0,0,0,.26)}.d2s9-boundary small{display:block;font-size:.70rem;font-weight:1000;letter-spacing:1.4px;text-transform:uppercase;color:#fff8a6;margin-bottom:6px}.d2s9-boundary strong{display:block;font-size:1.10rem;line-height:1.08;text-transform:uppercase;color:#fff}.d2s9-flow{display:none}.d2s9-flow-step{min-height:72px;border-radius:15px;background:rgba(0,0,0,.58);border:1px solid rgba(255,255,255,.11);padding:10px 9px;text-align:center}.d2s9-flow-step b{display:block;color:var(--y);font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}.d2s9-flow-step span{display:block;color:#e5ece6;font-size:.69rem;line-height:1.12;font-weight:850}
+.d2s9-right{position:absolute;right:3.4%;top:8.5%;bottom:15%;width:56.5%;z-index:4;display:grid;grid-template-columns:1fr 1fr;gap:14px}.d2s9-panel{position:relative;border-radius:24px;background:linear-gradient(180deg,rgba(13,17,14,.96),rgba(7,9,8,.94));border:2px solid rgba(255,255,255,.12);box-shadow:0 24px 48px rgba(0,0,0,.34);padding:18px 18px 16px;overflow:hidden}.d2s9-panel:before{content:"";position:absolute;right:-90px;top:-90px;width:190px;height:190px;border-radius:50%;opacity:.22}.d2s9-do{border-color:rgba(108,194,74,.58)}.d2s9-do:before{background:radial-gradient(circle,rgba(108,194,74,.95),transparent 70%)}.d2s9-dont{border-color:rgba(255,94,94,.50)}.d2s9-dont:before{background:radial-gradient(circle,rgba(255,94,94,.78),transparent 70%)}.d2s9-panel-head{display:flex;align-items:center;gap:11px;margin-bottom:13px}.d2s9-symbol{width:41px;height:41px;border-radius:50%;display:grid;place-items:center;font-size:1.35rem;font-weight:1000;box-shadow:0 0 0 8px rgba(255,255,255,.04)}.d2s9-do .d2s9-symbol{background:linear-gradient(145deg,var(--g),#b8ff91);color:#071007}.d2s9-dont .d2s9-symbol{background:linear-gradient(145deg,#ff5e5e,#ff9a9a);color:#200707}.d2s9-panel h2{margin:0;font-size:1.52rem;line-height:1;text-transform:uppercase;letter-spacing:-.4px}.d2s9-panel ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}.d2s9-panel li{position:relative;min-height:42px;padding:9px 11px 8px 39px;border-radius:13px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.10);color:#f4f7f4;font-size:.86rem;line-height:1.12;font-weight:900}.d2s9-panel li:before{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:.76rem;font-weight:1000}.d2s9-do li:before{content:"✓";background:rgba(108,194,74,.20);color:#caffaf;border:1px solid rgba(108,194,74,.45)}.d2s9-dont li:before{content:"×";background:rgba(255,94,94,.18);color:#ffb2b2;border:1px solid rgba(255,94,94,.40)}
+.d2s9-takeaway{position:absolute;left:4%;right:4%;bottom:3%;z-index:6;padding:13px 17px;border-radius:18px;background:rgba(0,0,0,.88);border-left:8px solid var(--y);box-shadow:0 16px 34px rgba(0,0,0,.36);font-size:.86rem;line-height:1.14;font-weight:1000;text-transform:uppercase;color:#fff}.d2s9-takeaway span{color:#b8ff91}
+@media(max-width:800px){.d2s9-left{left:3%;top:5%;bottom:12%;width:35%}.d2s9-kicker{font-size:.4rem;margin-bottom:5px}.d2s9-title{font-size:1.55rem}.d2s9-intro{font-size:.44rem;margin-top:7px}.d2s9-boundary{margin-top:8px;padding:8px 9px;border-radius:11px}.d2s9-boundary small{font-size:.3rem;margin-bottom:3px}.d2s9-boundary strong{font-size:.5rem}.d2s9-flow{gap:4px}.d2s9-flow-step{min-height:36px;border-radius:8px;padding:5px 4px}.d2s9-flow-step b{font-size:.28rem;margin-bottom:2px}.d2s9-flow-step span{font-size:.24rem}.d2s9-right{right:2.6%;top:5%;bottom:12%;width:58%;gap:7px}.d2s9-panel{border-radius:15px;padding:10px 9px}.d2s9-panel-head{gap:6px;margin-bottom:7px}.d2s9-symbol{width:24px;height:24px;font-size:.78rem;box-shadow:0 0 0 4px rgba(255,255,255,.04)}.d2s9-panel h2{font-size:.78rem}.d2s9-panel ul{gap:5px}.d2s9-panel li{min-height:25px;border-radius:8px;padding:5px 5px 5px 22px;font-size:.36rem}.d2s9-panel li:before{left:6px;width:11px;height:11px;font-size:.38rem}.d2s9-takeaway{left:3%;right:3%;bottom:3%;font-size:.42rem;padding:8px 9px;border-radius:11px;border-left-width:5px}}
+
+
+
+.day2-slide10-minor{background:radial-gradient(circle at 16% 18%,rgba(108,194,74,.18),transparent 26%),radial-gradient(circle at 82% 20%,rgba(242,230,0,.10),transparent 25%),linear-gradient(135deg,#050706 0%,#0a100d 52%,#121612 100%);color:#fff}
+.day2-slide10-minor:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:42px 42px;opacity:.28}
+.d2s10-wrap{position:absolute;inset:0;z-index:2;overflow:hidden;color:#fff}.d2s10-main{position:absolute;left:3.5%;right:3.5%;top:8%;bottom:15.8%;display:grid;grid-template-columns:57% 1fr;gap:24px;z-index:4}.d2s10-visual{position:relative;border-radius:24px;background:linear-gradient(180deg,rgba(12,15,12,.98),rgba(3,5,4,.94));border:2px solid rgba(108,194,74,.54);box-shadow:0 22px 50px rgba(0,0,0,.38);overflow:hidden;padding:16px}.d2s10-visual-title{position:absolute;left:18px;top:16px;z-index:6;padding:7px 11px;border-radius:999px;background:rgba(0,0,0,.72);border:1px solid rgba(108,194,74,.46);color:#b8ff91;font-size:.67rem;font-weight:1000;letter-spacing:1.5px;text-transform:uppercase}.d2s10-carousel{position:absolute;inset:16px;border-radius:18px;overflow:hidden;background:#020302}.d2s10-shot{position:absolute;inset:0;opacity:0;animation:d2s10ShotCycle 20s infinite}.d2s10-shot:nth-child(1){animation-delay:0s}.d2s10-shot:nth-child(2){animation-delay:5s}.d2s10-shot:nth-child(3){animation-delay:10s}.d2s10-shot:nth-child(4){animation-delay:15s}.d2s10-shot img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.02);animation:d2s10PhotoMove 20s ease-in-out infinite}.d2s10-shot:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08) 0%,transparent 42%,rgba(0,0,0,.66) 100%)}.d2s10-shot-label{position:absolute;left:18px;right:18px;bottom:16px;z-index:3;display:flex;align-items:center;gap:12px}.d2s10-shot-label .num{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,var(--y),#b9ec00);color:#111;font-size:1.2rem;font-weight:1000;box-shadow:0 9px 22px rgba(0,0,0,.35)}.d2s10-shot-label strong{display:block;font-size:1.05rem;line-height:1;text-transform:uppercase;color:#fff;letter-spacing:.3px}.d2s10-shot-label span{display:block;margin-top:3px;font-size:.78rem;line-height:1.15;color:#e6efe8;font-weight:850}.d2s10-right{position:relative;display:flex;flex-direction:column;min-height:0}.d2s10-kicker{font-size:.76rem;font-weight:1000;letter-spacing:1.8px;text-transform:uppercase;color:#b8ff91;margin-bottom:9px}.d2s10-title{font-size:clamp(2.2rem,3.3vw,3.35rem);font-weight:1000;line-height:.91;letter-spacing:-1.7px;text-transform:uppercase;text-shadow:0 10px 28px rgba(0,0,0,.5)}.d2s10-title span{display:block;color:var(--y)}.d2s10-intro{margin-top:12px;font-size:.9rem;line-height:1.22;font-weight:850;color:#edf4ee;max-width:405px}.d2s10-intro strong{color:#b8ff91}.d2s10-active-card{position:relative;margin-top:15px;min-height:124px;border-radius:20px;background:linear-gradient(180deg,rgba(14,18,14,.95),rgba(3,5,4,.92));border:1px solid rgba(108,194,74,.42);box-shadow:0 16px 34px rgba(0,0,0,.32);overflow:hidden}.d2s10-caption{position:absolute;inset:0;padding:15px 16px;opacity:0;animation:d2s10TextCycle 20s infinite}.d2s10-caption:nth-child(1){animation-delay:0s}.d2s10-caption:nth-child(2){animation-delay:5s}.d2s10-caption:nth-child(3){animation-delay:10s}.d2s10-caption:nth-child(4){animation-delay:15s}.d2s10-caption small{display:inline-block;padding:5px 9px;border-radius:999px;background:rgba(242,230,0,.13);border:1px solid rgba(242,230,0,.35);color:#fff8a6;font-size:.62rem;font-weight:1000;letter-spacing:1.1px;text-transform:uppercase;margin-bottom:8px}.d2s10-caption strong{display:block;font-size:1.18rem;line-height:1.02;text-transform:uppercase;color:#fff;margin-bottom:6px}.d2s10-caption span{display:block;font-size:.87rem;line-height:1.18;color:#dfe8e1;font-weight:850}.d2s10-rule{margin-top:15px;border-radius:18px;background:linear-gradient(180deg,rgba(16,20,16,.95),rgba(0,0,0,.84));border:1px solid rgba(242,230,0,.42);box-shadow:0 16px 34px rgba(0,0,0,.32);padding:15px 15px;position:relative;overflow:hidden}.d2s10-rule:before{content:"";position:absolute;left:-40%;top:0;width:38%;height:100%;background:linear-gradient(90deg,transparent,rgba(242,230,0,.14),transparent);animation:d2s10Sweep 4.6s ease-in-out infinite}.d2s10-rule-label{font-size:.66rem;font-weight:1000;letter-spacing:1.35px;text-transform:uppercase;color:#fff8a6;margin-bottom:6px}.d2s10-rule-copy{font-size:.92rem;line-height:1.08;font-weight:1000;text-transform:uppercase;color:#fff}.d2s10-rule-copy span{color:#b8ff91}.d2s10-step-strip{margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.d2s10-chip{position:relative;border-radius:14px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.10);padding:9px 7px;text-align:center;color:#e9f1ea;font-size:.58rem;line-height:1.05;font-weight:1000;text-transform:uppercase;overflow:hidden}.d2s10-chip:before{content:"";display:block;width:24px;height:24px;margin:0 auto 5px;border-radius:50%;background:rgba(108,194,74,.24);border:1px solid rgba(108,194,74,.48)}.d2s10-chip:after{content:"";position:absolute;inset:0;background:rgba(242,230,0,.14);opacity:0;animation:d2s10ChipCycle 20s infinite}.d2s10-chip:nth-child(1):after{animation-delay:0s}.d2s10-chip:nth-child(2):after{animation-delay:5s}.d2s10-chip:nth-child(3):after{animation-delay:10s}.d2s10-chip:nth-child(4):after{animation-delay:15s}.d2s10-takeaway{position:absolute;left:3.5%;right:3.5%;bottom:3%;padding:12px 16px;border-radius:18px;background:rgba(0,0,0,.88);border-left:8px solid var(--y);box-shadow:0 16px 34px rgba(0,0,0,.36);font-size:.78rem;line-height:1.12;font-weight:1000;text-transform:uppercase;color:#fff;z-index:6}.d2s10-takeaway span{color:#b8ff91}@keyframes d2s10ShotCycle{0%,21%{opacity:1}25%,100%{opacity:0}}@keyframes d2s10TextCycle{0%,21%{opacity:1;transform:translateY(0)}25%,100%{opacity:0;transform:translateY(8px)}}@keyframes d2s10ChipCycle{0%,21%{opacity:1}25%,100%{opacity:0}}@keyframes d2s10PhotoMove{0%,100%{transform:scale(1.02)}50%{transform:scale(1.055)}}@keyframes d2s10Sweep{0%,40%{transform:translateX(0);opacity:0}52%{opacity:1}80%,100%{transform:translateX(360%);opacity:0}}@media(max-width:800px){.d2s10-main{left:3%;right:3%;top:5%;bottom:15%;grid-template-columns:56% 1fr;gap:9px}.d2s10-visual{border-radius:15px;padding:8px}.d2s10-visual-title{left:9px;top:9px;font-size:.34rem;padding:4px 6px}.d2s10-carousel{inset:8px;border-radius:10px}.d2s10-shot-label{left:8px;right:8px;bottom:8px;gap:6px}.d2s10-shot-label .num{width:24px;height:24px;font-size:.66rem}.d2s10-shot-label strong{font-size:.48rem}.d2s10-shot-label span{font-size:.35rem}.d2s10-kicker{font-size:.43rem;margin-bottom:5px}.d2s10-title{font-size:1.55rem}.d2s10-intro{font-size:.45rem;margin-top:6px}.d2s10-active-card{margin-top:8px;min-height:64px;border-radius:12px}.d2s10-caption{padding:8px}.d2s10-caption small{font-size:.31rem;padding:2px 5px;margin-bottom:4px}.d2s10-caption strong{font-size:.52rem;margin-bottom:3px}.d2s10-caption span{font-size:.36rem}.d2s10-rule{margin-top:8px;padding:8px 8px;border-radius:11px}.d2s10-rule-label{font-size:.32rem;margin-bottom:3px}.d2s10-rule-copy{font-size:.42rem}.d2s10-step-strip{gap:4px}.d2s10-chip{border-radius:8px;padding:4px 3px;font-size:.27rem}.d2s10-chip:before{width:12px;height:12px;margin-bottom:2px}.d2s10-takeaway{left:3%;right:3%;bottom:3%;font-size:.42rem;padding:8px 9px;border-radius:11px;border-left-width:5px}}
+
+
+/* Slide 10 narration-synced sequence state */
+.day2-slide10-minor .d2s10-shot,.day2-slide10-minor .d2s10-caption{animation:none!important;opacity:0;transform:none;transition:opacity .45s ease}
+.day2-slide10-minor .d2s10-shot.active,.day2-slide10-minor .d2s10-caption.active{opacity:1}
+.day2-slide10-minor .d2s10-chip:after{animation:none!important;opacity:0;transition:opacity .35s ease}
+.day2-slide10-minor .d2s10-chip.active{border-color:rgba(242,230,0,.56);background:rgba(242,230,0,.13);box-shadow:0 0 20px rgba(242,230,0,.10) inset}
+.day2-slide10-minor .d2s10-chip.active:after{opacity:1}
 .placeholder-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(90deg,#000,transparent 85%)}.placeholder-slide:after{content:"";position:absolute;width:480px;height:480px;border-radius:50%;right:-110px;bottom:-180px;background:radial-gradient(circle,rgba(108,194,74,.28),transparent 68%)}.placeholder-content{position:absolute;z-index:2;inset:92px 48px 52px;display:grid;grid-template-columns:180px 1fr;gap:38px;align-items:center}.slide-number{font-size:8.5rem;font-weight:1000;line-height:1;color:rgba(242,230,0,.92);letter-spacing:-10px;text-shadow:0 12px 35px rgba(0,0,0,.35)}.placeholder-copy{max-width:790px}.status{display:inline-block;color:#0c130a;background:var(--g);border-radius:999px;padding:8px 13px;font-weight:1000;font-size:.72rem;letter-spacing:1px;margin-bottom:20px}h1{font-size:clamp(2.7rem,5.3vw,5.2rem);line-height:.94;letter-spacing:-2px;margin:0;color:#fff}.objective{font-size:1.35rem;line-height:1.34;color:#dce5de;margin:20px 0 28px;max-width:820px}.planning-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.planning-card{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:15px 17px;min-height:92px;backdrop-filter:blur(4px)}.planning-card span{display:block;color:#b8c3ba;font-size:.75rem;font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px}.planning-card strong{display:block;color:#fff;font-size:1rem;line-height:1.28}
 .d2s6-response{position:absolute;left:18px;right:18px;bottom:16px;z-index:6;display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
 .d2s6-step{border-radius:15px;background:rgba(0,0,0,.78);border:1px solid rgba(108,194,74,.55);padding:10px 11px;min-height:64px}.d2s6-step strong{display:block;color:var(--y);font-size:.66rem;text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}.d2s6-step span{display:block;color:#e7efe8;font-weight:850;font-size:.62rem;line-height:1.18}
@@ -187,37 +254,12 @@
   window.Audio.prototype = NativeAudio.prototype;
 })();
 </script>
-
 <style id="launch-training-pause-style">
-  .pause-training-btn {
-    border: 0;
-    border-radius: 999px;
-    padding: 12px 18px;
-    background: #f2e600;
-    color: #111820;
-    font-weight: 900;
-    cursor: pointer;
-  }
-
-  .pause-training-btn[aria-pressed="true"] {
-    background: #ffffff;
-    color: #111820;
-  }
-
-  body.training-paused .slide.active {
-    outline: 4px solid rgba(242, 230, 0, .75);
-    outline-offset: 4px;
-  }
-
-  body.training-paused #next,
-  body.training-paused #nextBtn {
-    pointer-events: none;
-    opacity: .55;
-  }
-
-  body.training-paused * {
-    animation-play-state: paused !important;
-  }
+  .pause-training-btn{border:0;border-radius:999px;padding:12px 18px;background:#f2e600;color:#111820;font-weight:900;cursor:pointer}
+  .pause-training-btn[aria-pressed="true"]{background:#ffffff;color:#111820}
+  body.training-paused .slide.active{outline:4px solid rgba(242,230,0,.75);outline-offset:4px}
+  body.training-paused #next,body.training-paused #nextBtn{pointer-events:none;opacity:.55}
+  body.training-paused *{animation-play-state:paused!important}
 </style>
 
   <style>
@@ -228,23 +270,14 @@
     (() => {
       const storageKey = "launchTrainingUnlockedUntil";
       const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
-
       if (unlockedUntil <= Date.now()) {
         localStorage.removeItem(storageKey);
-
         const currentPath = window.location.pathname;
         const moduleMarker = "/court-monitor/";
         const modulePosition = currentPath.indexOf(moduleMarker);
-        const portalBase = modulePosition >= 0
-          ? currentPath.slice(0, modulePosition + 1)
-          : "/";
-
-        const returnPath =
-          currentPath + window.location.search + window.location.hash;
-
-        window.location.replace(
-          portalBase + "?return=" + encodeURIComponent(returnPath)
-        );
+        const portalBase = modulePosition >= 0 ? currentPath.slice(0, modulePosition + 1) : "/";
+        const returnPath = currentPath + window.location.search + window.location.hash;
+        window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
       } else {
         document.documentElement.classList.add("portal-authenticated");
       }
@@ -269,7 +302,6 @@
   <div class="stage"><section class="slide day2-slide1-approved active" data-slide="1" aria-label="Day 2 Slide 1: When Prevention Is Not Enough">
       <div class="d2s1-wrap">
         <div class="d2s1-left">
-          <div class="d2s1-eyebrow">DAY 2 · SLIDE 1</div>
           <div class="d2s1-title">When Prevention <span class="accent">Is Not Enough</span></div>
           <div class="d2s1-intro">Day 1 focused on <strong>preventing unsafe situations.</strong> Day 2 focuses on what happens when an incident still occurs—and how your response protects everyone around it.</div>
           <div class="d2s1-takeaway">You may not be able to prevent every injury—but <span>your response can prevent the situation from becoming worse.</span></div>
@@ -283,7 +315,6 @@
     </section><section class="slide day2-slide2-values" data-slide="2" aria-label="Day 2 Slide 2: Our Vision and Core Values">
       <div class="d2s2-wrap">
         <div class="d2s2-left">
-          <div class="d2s2-eyebrow">DAY 2 · SLIDE 2</div>
           <div class="d2s2-title">Our Vision <span>To Create Awesome Memories</span></div>
           <div class="d2s2-intro">Every decision we make—from enforcing a rule to helping an injured guest—should support this vision. Our <strong>Core Values</strong> guide how we protect guests, support one another, and represent Launch.</div>
           <div class="d2s2-values-label">Our Core Values</div>
@@ -304,7 +335,6 @@
       <div class="d2s3-wrap">
         <div class="d2s3-note">Audio will be added separately · Cards are animated for visual testing</div>
         <div class="d2s3-left">
-          <div class="d2s3-eyebrow">DAY 2 · SLIDE 3</div>
           <div class="d2s3-title">Core Values <span>In Action</span></div>
           <div class="d2s3-intro">Launch values are not just words on a poster. Attraction Monitors show them through the decisions they make during every shift—especially when a situation requires <strong>professional judgment</strong>.</div>
         </div>
@@ -320,7 +350,6 @@
       <div class="d2s4-wrap">
         <div class="d2s4-note">Audio will be added separately · Callouts are animated for visual testing</div>
         <div class="d2s4-heading">
-          <div class="d2s4-eyebrow">DAY 2 · SLIDE 4</div>
           <div class="d2s4-title">Dress Ready. <span>Work Ready.</span></div>
           <div class="d2s4-intro">Guests should be able to identify Launch team members immediately. Attraction Monitors must report to position in the <strong>approved uniform</strong> with the required communication equipment and a properly stocked first aid bag.</div>
         </div>
@@ -345,7 +374,6 @@
     </section><section class="slide day2-slide5-ready" data-slide="5" aria-label="Day 2 Slide 5: Ready Before You Step On">
       <div class="d2s5-wrap">
         <div class="d2s5-left">
-          <div class="d2s5-eyebrow">DAY 2 · SLIDE 5</div>
           <div class="d2s5-title">Ready Before <span>You Step On</span></div>
           <div class="d2s5-intro">Before taking position, every Attraction Monitor must confirm they are <strong>equipped, assigned, and ready to respond.</strong></div>
           <div class="d2s5-mini-rule"><span>First Aid Bag:</span> Worn while actively monitoring and stocked before taking position.</div>
@@ -378,7 +406,6 @@
     </section><section class="slide day2-slide6-clean" data-slide="6" aria-label="Day 2 Slide 6: Keep the Area Guest Ready">
       <div class="d2s6-wrap">
         <div class="d2s6-left">
-          <div class="d2s6-eyebrow">DAY 2 · SLIDE 6</div>
           <div class="d2s6-title">Keep the Area <span>Guest Ready</span></div>
           <div class="d2s6-intro">Cleanliness is not separate from safety. <strong>Trash, spills, loose items, blocked access, and damaged padding</strong> can create hazards and make the attraction look poorly managed.</div>
           <div class="d2s6-rule"><span>Scan.</span> <span>Correct.</span> <span>Call for help.</span> Never lose coverage to clean.</div>
@@ -398,7 +425,7 @@
       <div class="d2s7-wrap">
         <div class="bar"></div>
         <div class="header">
-          <div class="eyebrow">DAY 2 · SLIDE 7</div>
+          <div class="eyebrow slide-label-hidden" aria-hidden="true"></div>
           <div class="pill">Safety Response</div>
         </div>
         <div class="d2s7-left">
@@ -427,91 +454,119 @@
         </div>
         <div class="d2s7-takeaway">Not sure? <span>Close it. Reopen only when cleared.</span></div>
       </div>
-    </section><section class="slide placeholder-slide" data-slide="8">
-      <div class="placeholder-grid"></div>
-      <div class="bar"></div>
-      <div class="header">
-        <div class="eyebrow">DAY 2 · SLIDE 8</div>
-        <div class="pill">Safety Response</div>
-      </div>
-      <div class="placeholder-content">
-        <div class="slide-number">08</div>
-        <div class="placeholder-copy">
-          <div class="status">STRUCTURE LOCKED · VISUAL DESIGN PENDING</div>
-          <h1>Damaged Equipment and Attraction Closure</h1>
-          <p class="objective">Stop participation, clear access, and notify leadership whenever unsafe equipment or conditions are identified.</p>
-          <div class="planning-row">
-            <div class="planning-card"><span>Learning focus</span><strong>Safety Response</strong></div>
-            <div class="planning-card"><span>Policy source</span><strong>2026 Main Court / Injury SOP</strong></div>
+    </section><section class="slide day2-slide8-injuries" data-slide="8" aria-label="Day 2 Slide 8: Injuries Still Happen">
+      <div class="d2s8-wrap">
+        <div class="bar"></div>
+        <div class="header">
+          <div class="eyebrow slide-label-hidden" aria-hidden="true"></div>
+          <div class="pill">Injury Response</div>
+        </div>
+        <div class="d2s8-image-panel">
+          <img src="../assets/day2-slide8-injury-scene-response.png" alt="Injury scene response guide showing the injured trampoline and all adjacent trampolines cleared, guests moved to a safe waiting area, and a monitor calling leadership.">
+        </div>
+        <div class="d2s8-left">
+          <div class="d2s8-eyebrow">Injury Response</div>
+          <div class="d2s8-title">Injuries <span>Still Happen</span></div>
+          <div class="d2s8-intro">When an injury happens, your first job is <strong>scene control.</strong></div>
+          <div class="d2s8-list">
+            <div class="d2s8-line"><strong>1. Stop play</strong><span>Whistle. Stop nearby activity.</span></div>
+            <div class="d2s8-line"><strong>2. Clear the trampoline area</strong><span>Injured trampoline + all adjacent trampolines, including diagonals.</span></div>
+            <div class="d2s8-line"><strong>3. Move guests back</strong><span>Keep guests in a safe waiting area.</span></div>
+            <div class="d2s8-line"><strong>4. Call leadership</strong><span>Get a Supervisor or Manager immediately.</span></div>
+          </div>
+          <div class="d2s8-focus">
+            <div class="d2s8-focus-label">Key Rule</div>
+            <div class="d2s8-focus-copy">Do not let one injury become two.</div>
           </div>
         </div>
+        <div class="d2s8-takeaway">Protect the scene. <span>Get the right help.</span></div>
       </div>
-    </section><section class="slide placeholder-slide" data-slide="9">
-      <div class="placeholder-grid"></div>
-      <div class="bar"></div>
-      <div class="header">
-        <div class="eyebrow">DAY 2 · SLIDE 9</div>
-        <div class="pill">Injury Response</div>
-      </div>
-      <div class="placeholder-content">
-        <div class="slide-number">09</div>
-        <div class="placeholder-copy">
-          <div class="status">STRUCTURE LOCKED · VISUAL DESIGN PENDING</div>
-          <h1>Injuries Still Happen</h1>
-          <p class="objective">Recognize that proper monitoring reduces risk but cannot prevent every incident.</p>
-          <div class="planning-row">
-            <div class="planning-card"><span>Learning focus</span><strong>Injury Response</strong></div>
-            <div class="planning-card"><span>Policy source</span><strong>2026 Injury SOP</strong></div>
+    </section><section class="slide day2-slide9-certified" data-slide="9" aria-label="Day 2 Slide 9: If You Are Not First Aid or CPR Certified">
+      <div class="d2s9-wrap">
+        <div class="bar"></div>
+        <div class="header">
+          <div class="eyebrow slide-label-hidden" aria-hidden="true"></div>
+          <div class="pill">Injury Response</div>
+        </div>
+        <div class="d2s9-left">
+          <div class="d2s9-kicker">Role Boundary</div>
+          <div class="d2s9-title">If You Are <span>Not Certified</span></div>
+          <div class="d2s9-intro">You are still important in an injury response. Your job is to <strong>control the scene, communicate clearly, and support leadership.</strong></div>
+          <div class="d2s9-boundary"><small>Key Standard</small><strong>Do not become the medical responder beyond your training.</strong></div>
+        </div>
+        <div class="d2s9-right">
+          <div class="d2s9-panel d2s9-do">
+            <div class="d2s9-panel-head"><div class="d2s9-symbol">✓</div><h2>Do</h2></div>
+            <ul>
+              <li>Stop play near the injured guest.</li>
+              <li>Clear guests back from the area.</li>
+              <li>Call a Supervisor or Manager.</li>
+              <li>Hand off the First Aid bag when leadership arrives.</li>
+              <li>Follow leadership direction.</li>
+            </ul>
+          </div>
+          <div class="d2s9-panel d2s9-dont">
+            <div class="d2s9-panel-head"><div class="d2s9-symbol">×</div><h2>Do Not</h2></div>
+            <ul>
+              <li>Diagnose the injury.</li>
+              <li>Move the injured guest unless directed.</li>
+              <li>Provide care you are not trained to give.</li>
+              <li>Leave the attraction uncontrolled.</li>
+              <li>Let guests crowd the area.</li>
+            </ul>
           </div>
         </div>
+        <div class="d2s9-takeaway">You are responsible for <span>control, communication, and support</span> — not medical treatment beyond your training.</div>
       </div>
-    </section><section class="slide placeholder-slide" data-slide="10">
-      <div class="placeholder-grid"></div>
-      <div class="bar"></div>
-      <div class="header">
-        <div class="eyebrow">DAY 2 · SLIDE 10</div>
-        <div class="pill">Injury Response</div>
-      </div>
-      <div class="placeholder-content">
-        <div class="slide-number">10</div>
-        <div class="placeholder-copy">
-          <div class="status">STRUCTURE LOCKED · VISUAL DESIGN PENDING</div>
-          <h1>Clear the Area. Protect the Scene.</h1>
-          <p class="objective">Protect the injured guest, control surrounding activity, and prevent a second incident.</p>
-          <div class="planning-row">
-            <div class="planning-card"><span>Learning focus</span><strong>Injury Response</strong></div>
-            <div class="planning-card"><span>Policy source</span><strong>2026 Injury SOP</strong></div>
+    </section><section class="slide day2-slide10-minor" data-slide="10" aria-label="Day 2 Slide 10: Minor Injuries">
+      <div class="d2s10-wrap">
+        <div class="bar"></div>
+        <div class="header">
+          <div class="eyebrow"></div>
+          <div class="pill">Minor Injuries</div>
+        </div>
+        <div class="d2s10-main">
+          <div class="d2s10-visual">
+            <div class="d2s10-visual-title">Minor Injury Response Sequence</div>
+            <div class="d2s10-carousel" aria-hidden="true">
+              <div class="d2s10-shot active"><img src="../assets/day2-slide10-minor-1.png" alt=""><div class="d2s10-shot-label"><div class="num">1</div><div><strong>Guest reports pain</strong><span>Minor-looking injuries still get a full response.</span></div></div></div>
+              <div class="d2s10-shot"><img src="../assets/day2-slide10-minor-2.png" alt=""><div class="d2s10-shot-label"><div class="num">2</div><div><strong>Stop nearby play</strong><span>Keep guests back and protect the area.</span></div></div></div>
+              <div class="d2s10-shot"><img src="../assets/day2-slide10-minor-3.png" alt=""><div class="d2s10-shot-label"><div class="num">3</div><div><strong>Leadership responds</strong><span>Brief the Supervisor or Manager clearly.</span></div></div></div>
+              <div class="d2s10-shot"><img src="../assets/day2-slide10-minor-4.png" alt=""><div class="d2s10-shot-label"><div class="num">4</div><div><strong>Wait for clearance</strong><span>Monitor the attraction until it is cleared.</span></div></div></div>
+            </div>
+          </div>
+          <div class="d2s10-right">
+            <div class="d2s10-kicker">Injury Response</div>
+            <div class="d2s10-title">Minor Injury? <span>Follow Procedure</span></div>
+            <div class="d2s10-intro">A guest may be alert and talking, but a minor-looking injury still needs the full response process.</div>
+            <div class="d2s10-active-card">
+              <div class="d2s10-caption active"><small>Step 1</small><strong>Guest reports pain</strong><span>Take it seriously, even if the guest is alert or the injury appears minor.</span></div>
+              <div class="d2s10-caption"><small>Step 2</small><strong>Stop nearby play</strong><span>Secure the injured trampoline area and keep guests away.</span></div>
+              <div class="d2s10-caption"><small>Step 3</small><strong>Leadership responds</strong><span>Call a Supervisor or Manager and brief them on what happened.</span></div>
+              <div class="d2s10-caption"><small>Step 4</small><strong>Wait for clearance</strong><span>Do not reopen the area until leadership says it is cleared.</span></div>
+            </div>
+            <div class="d2s10-rule">
+              <div class="d2s10-rule-copy">Minor does <span>not</span> mean optional.</div>
+            </div>
+            <div class="d2s10-step-strip">
+              <div class="d2s10-chip active">Report pain</div>
+              <div class="d2s10-chip">Stop play</div>
+              <div class="d2s10-chip">Call leadership</div>
+              <div class="d2s10-chip">Wait to reopen</div>
+            </div>
           </div>
         </div>
+        <div class="d2s10-takeaway">Treat every injury seriously: <span>secure the area, call leadership, and wait for clearance.</span></div>
       </div>
     </section><section class="slide placeholder-slide" data-slide="11">
       <div class="placeholder-grid"></div>
       <div class="bar"></div>
       <div class="header">
-        <div class="eyebrow">DAY 2 · SLIDE 11</div>
+        <div class="eyebrow slide-label-hidden" aria-hidden="true"></div>
         <div class="pill">Injury Response</div>
       </div>
       <div class="placeholder-content">
         <div class="slide-number">11</div>
-        <div class="placeholder-copy">
-          <div class="status">STRUCTURE LOCKED · VISUAL DESIGN PENDING</div>
-          <h1>Minor Injuries</h1>
-          <p class="objective">Respond appropriately when a guest is alert, mobile, and appears to have a minor injury.</p>
-          <div class="planning-row">
-            <div class="planning-card"><span>Learning focus</span><strong>Injury Response</strong></div>
-            <div class="planning-card"><span>Policy source</span><strong>2026 Injury SOP</strong></div>
-          </div>
-        </div>
-      </div>
-    </section><section class="slide placeholder-slide" data-slide="12">
-      <div class="placeholder-grid"></div>
-      <div class="bar"></div>
-      <div class="header">
-        <div class="eyebrow">DAY 2 · SLIDE 12</div>
-        <div class="pill">Injury Response</div>
-      </div>
-      <div class="placeholder-content">
-        <div class="slide-number">12</div>
         <div class="placeholder-copy">
           <div class="status">STRUCTURE LOCKED · VISUAL DESIGN PENDING</div>
           <h1>Serious Injuries and Code Blue</h1>
@@ -522,15 +577,15 @@
           </div>
         </div>
       </div>
-    </section><section class="slide placeholder-slide" data-slide="13">
+    </section><section class="slide placeholder-slide" data-slide="12">
       <div class="placeholder-grid"></div>
       <div class="bar"></div>
       <div class="header">
-        <div class="eyebrow">DAY 2 · SLIDE 13</div>
+        <div class="eyebrow slide-label-hidden" aria-hidden="true"></div>
         <div class="pill">Injury Response</div>
       </div>
       <div class="placeholder-content">
-        <div class="slide-number">13</div>
+        <div class="slide-number">12</div>
         <div class="placeholder-copy">
           <div class="status">STRUCTURE LOCKED · VISUAL DESIGN PENDING</div>
           <h1>Certified vs. Non-Certified Responsibilities</h1>
@@ -541,15 +596,15 @@
           </div>
         </div>
       </div>
-    </section><section class="slide placeholder-slide" data-slide="14">
+    </section><section class="slide placeholder-slide" data-slide="13">
       <div class="placeholder-grid"></div>
       <div class="bar"></div>
       <div class="header">
-        <div class="eyebrow">DAY 2 · SLIDE 14</div>
+        <div class="eyebrow slide-label-hidden" aria-hidden="true"></div>
         <div class="pill">Injury Response</div>
       </div>
       <div class="placeholder-content">
-        <div class="slide-number">14</div>
+        <div class="slide-number">13</div>
         <div class="placeholder-copy">
           <div class="status">STRUCTURE LOCKED · VISUAL DESIGN PENDING</div>
           <h1>Bodily Fluids, Sanitation, and Handoff</h1>
@@ -560,15 +615,15 @@
           </div>
         </div>
       </div>
-    </section><section class="slide placeholder-slide" data-slide="15">
+    </section><section class="slide placeholder-slide" data-slide="14">
       <div class="placeholder-grid"></div>
       <div class="bar"></div>
       <div class="header">
-        <div class="eyebrow">DAY 2 · SLIDE 15</div>
+        <div class="eyebrow slide-label-hidden" aria-hidden="true"></div>
         <div class="pill">Next Step</div>
       </div>
       <div class="placeholder-content">
-        <div class="slide-number">15</div>
+        <div class="slide-number">14</div>
         <div class="placeholder-copy">
           <div class="status">STRUCTURE LOCKED · VISUAL DESIGN PENDING</div>
           <h1>Day 2: Put It Into Practice</h1>
@@ -604,7 +659,10 @@ const recordedNarration={
   3:'../audio/day2_slide4.m4a',
   4:'../audio/day2_slide5.m4a',
   5:'../audio/day2_slide6.m4a',
-  6:'../audio/day2_slide7.m4a'
+  6:'../audio/day2_slide7.m4a',
+  7:'../audio/day2_slide8.m4a',
+  8:'../audio/day2_slide9.m4a',
+  9:'../audio/day2_slide10.m4a'
 };
 const audioPlayer=new Audio();
 audioPlayer.preload='auto';
@@ -788,6 +846,32 @@ function syncSlide5TimedElements(){
   if(takeaway && t>=62) takeaway.classList.add('visible');
 }
 
+
+function setSlide10Step(stepNumber){
+  const slide=slides[9];
+  if(!slide) return;
+  const step=Math.max(1,Math.min(4,stepNumber));
+  const shots=[...slide.querySelectorAll('.d2s10-shot')];
+  const captions=[...slide.querySelectorAll('.d2s10-caption')];
+  const chips=[...slide.querySelectorAll('.d2s10-chip')];
+  [shots,captions,chips].forEach(group=>{
+    group.forEach((el,n)=>el.classList.toggle('active',n===step-1));
+  });
+}
+function resetSlide10Preview(){
+  setSlide10Step(1);
+}
+function syncSlide10TimedElements(){
+  if(idx!==9) return;
+  const t=audioPlayer.currentTime||0;
+  let step=1;
+  if(t>=55) step=4;
+  else if(t>=40) step=3;
+  else if(t>=30) step=2;
+  else step=1;
+  setSlide10Step(step);
+}
+
 audioPlayer.addEventListener('timeupdate',()=>{
   const maxSoFar=maxPlayedTime.get(idx)||0;
   if(audioPlayer.currentTime>maxSoFar) maxPlayedTime.set(idx,audioPlayer.currentTime);
@@ -796,6 +880,7 @@ audioPlayer.addEventListener('timeupdate',()=>{
   syncSlide3TimedElements();
   syncSlide4TimedElements();
   syncSlide5TimedElements();
+  syncSlide10TimedElements();
 });
 audioPlayer.addEventListener('seeking',()=>{
   const maxSoFar=maxPlayedTime.get(idx)||0;
@@ -816,6 +901,7 @@ audioPlayer.addEventListener('play',()=>{
   syncSlide3TimedElements();
   syncSlide4TimedElements();
   syncSlide5TimedElements();
+  syncSlide10TimedElements();
   updateNarrationControls();
 });
 audioPlayer.addEventListener('pause',()=>{
@@ -861,6 +947,13 @@ function show(i,shouldAutoPlay=true){
       slides[4]?.querySelectorAll('.d2s5-hub,.d2s5-tile,.d2s5-supplies,.d2s5-takeaway').forEach(el=>el.classList.add('visible'));
     }
   }
+
+  if(idx===9){
+    resetSlide10Preview();
+    if(completedNarration.has(idx)){
+      setSlide10Step(4);
+    }
+  }
   cur.textContent=idx+1;
   prev.disabled=idx===0;
   next.textContent=idx===slides.length-1?'Finish':'Next';
@@ -895,125 +988,7 @@ document.addEventListener('keydown',(e)=>{
 });
 show(0,false);
 </script><script id="launch-training-pause-script">
-(function () {
-  "use strict";
-
-  function ready(callback) {
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", callback);
-    } else {
-      callback();
-    }
-  }
-
-  ready(function () {
-    var button = document.getElementById("pauseTrainingBtn");
-    if (!button) return;
-
-    var paused = false;
-    var resumeTarget = null;
-
-    function visibleSlide() {
-      return document.querySelector(".slide.active") || document;
-    }
-
-    function allMedia() {
-      var domMedia = Array.prototype.slice.call(document.querySelectorAll("audio, video"));
-      var registry = Array.isArray(window.launchTrainingMediaRegistry)
-        ? window.launchTrainingMediaRegistry
-        : [];
-      return domMedia.concat(registry).filter(function (media, index, list) {
-        return media && list.indexOf(media) === index;
-      });
-    }
-
-    function currentMedia() {
-      var active = visibleSlide();
-      var mediaList = allMedia();
-      var playing = mediaList.find(function (media) { return !media.paused && !media.ended; });
-      var activeMedia = active.querySelector ? active.querySelector("audio, video") : null;
-
-      return playing || activeMedia || mediaList[0] || null;
-    }
-
-    function setButtonState() {
-      button.textContent = paused ? "▶ Resume" : "⏸ Pause";
-      button.setAttribute("aria-pressed", paused ? "true" : "false");
-      button.title = paused ? "Resume the current narration" : "Pause the current narration";
-    }
-
-    function pauseTraining() {
-      paused = true;
-      resumeTarget = currentMedia();
-      document.body.classList.add("training-paused");
-
-      if ("speechSynthesis" in window && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
-        window.launchTrainingSpeechPaused = true;
-        window.speechSynthesis.pause();
-      }
-
-      allMedia().forEach(function (media) {
-        if (!media.paused && !media.ended) {
-          if (media.dataset) {
-            media.dataset.trainingPaused = "true";
-          }
-          media.pause();
-        }
-      });
-
-      setButtonState();
-    }
-
-    function resumeTraining() {
-      paused = false;
-      document.body.classList.remove("training-paused");
-      setButtonState();
-
-      if ("speechSynthesis" in window && window.launchTrainingSpeechPaused) {
-        window.launchTrainingSpeechPaused = false;
-        window.speechSynthesis.resume();
-      }
-
-      var target = resumeTarget || currentMedia();
-
-      allMedia().forEach(function (media) {
-        if (media.dataset) {
-          delete media.dataset.trainingPaused;
-        }
-      });
-
-      if (target && typeof target.play === "function" && !target.ended) {
-        target.play().catch(function () {});
-      }
-    }
-
-    button.addEventListener("click", function () {
-      if (paused) {
-        resumeTraining();
-      } else {
-        pauseTraining();
-      }
-    });
-
-    document.addEventListener("play", function (event) {
-      if (paused && event.target && event.target.matches && event.target.matches("audio, video")) {
-        window.setTimeout(function () { event.target.pause(); }, 0);
-      }
-    }, true);
-
-    document.addEventListener("click", function (event) {
-      if (!paused) return;
-
-      var blockedButton = event.target.closest && event.target.closest("#next, #nextBtn, #speak, #playNarrationBtn");
-      if (blockedButton) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-      }
-    }, true);
-
-    setButtonState();
-  });
-})();
+(function(){"use strict";function ready(cb){if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",cb)}else{cb()}}ready(function(){var button=document.getElementById("pauseTrainingBtn");if(!button)return;var paused=false;var resumeTarget=null;function visibleSlide(){return document.querySelector(".slide.active")||document}function allMedia(){var domMedia=Array.prototype.slice.call(document.querySelectorAll("audio, video"));var registry=Array.isArray(window.launchTrainingMediaRegistry)?window.launchTrainingMediaRegistry:[];return domMedia.concat(registry).filter(function(media,index,list){return media&&list.indexOf(media)===index})}function currentMedia(){var active=visibleSlide();var mediaList=allMedia();var playing=mediaList.find(function(media){return !media.paused&&!media.ended});var activeMedia=active.querySelector?active.querySelector("audio, video"):null;return playing||activeMedia||mediaList[0]||null}function setButtonState(){button.textContent=paused?"▶ Resume":"⏸ Pause";button.setAttribute("aria-pressed",paused?"true":"false");button.title=paused?"Resume the current narration":"Pause the current narration"}function pauseTraining(){paused=true;resumeTarget=currentMedia();document.body.classList.add("training-paused");if("speechSynthesis" in window&&window.speechSynthesis.speaking&&!window.speechSynthesis.paused){window.launchTrainingSpeechPaused=true;window.speechSynthesis.pause()}allMedia().forEach(function(media){if(!media.paused&&!media.ended){if(media.dataset){media.dataset.trainingPaused="true"}media.pause()}});setButtonState()}function resumeTraining(){paused=false;document.body.classList.remove("training-paused");setButtonState();if("speechSynthesis" in window&&window.launchTrainingSpeechPaused){window.launchTrainingSpeechPaused=false;window.speechSynthesis.resume()}var target=resumeTarget||currentMedia();allMedia().forEach(function(media){if(media.dataset){delete media.dataset.trainingPaused}});if(target&&typeof target.play==="function"&&!target.ended){target.play().catch(function(){})}}button.addEventListener("click",function(){if(paused){resumeTraining()}else{pauseTraining()}});document.addEventListener("play",function(event){if(paused&&event.target&&event.target.matches&&event.target.matches("audio, video")){window.setTimeout(function(){event.target.pause()},0)}},true);document.addEventListener("click",function(event){if(!paused)return;var blockedButton=event.target.closest&&event.target.closest("#next, #nextBtn, #speak, #playNarrationBtn");if(blockedButton){event.preventDefault();event.stopImmediatePropagation()}},true);setButtonState()})})();
 </script>
 
 </body></html>

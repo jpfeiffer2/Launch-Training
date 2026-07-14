@@ -8,23 +8,14 @@
     (() => {
       const storageKey = "launchTrainingUnlockedUntil";
       const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
-
       if (unlockedUntil <= Date.now()) {
         localStorage.removeItem(storageKey);
-
         const currentPath = window.location.pathname;
         const moduleMarker = "/court-monitor/";
         const modulePosition = currentPath.indexOf(moduleMarker);
-        const portalBase = modulePosition >= 0
-          ? currentPath.slice(0, modulePosition + 1)
-          : "/";
-
-        const returnPath =
-          currentPath + window.location.search + window.location.hash;
-
-        window.location.replace(
-          portalBase + "?return=" + encodeURIComponent(returnPath)
-        );
+        const portalBase = modulePosition >= 0 ? currentPath.slice(0, modulePosition + 1) : "/";
+        const returnPath = currentPath + window.location.search + window.location.hash;
+        window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
       } else {
         document.documentElement.classList.add("portal-authenticated");
       }
