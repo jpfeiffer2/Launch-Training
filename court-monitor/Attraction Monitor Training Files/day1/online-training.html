@@ -1583,10 +1583,26 @@
     font-weight: 900;
     cursor: pointer;
   }
-  .pause-training-btn[aria-pressed="true"] { background: #ffffff; color: #111820; }
-  body.training-paused .slide.active { outline: 4px solid rgba(242, 230, 0, .75); outline-offset: 4px; }
-  body.training-paused #next, body.training-paused #nextBtn { pointer-events: none; opacity: .55; }
-  body.training-paused * { animation-play-state: paused !important; }
+
+  .pause-training-btn[aria-pressed="true"] {
+    background: #ffffff;
+    color: #111820;
+  }
+
+  body.training-paused .slide.active {
+    outline: 4px solid rgba(242, 230, 0, .75);
+    outline-offset: 4px;
+  }
+
+  body.training-paused #next,
+  body.training-paused #nextBtn {
+    pointer-events: none;
+    opacity: .55;
+  }
+
+  body.training-paused * {
+    animation-play-state: paused !important;
+  }
 </style>
 
   <style>
@@ -2123,50 +2139,120 @@ document.addEventListener('keydown', (e)=>{
 </script><script id="launch-training-pause-script">
 (function () {
   "use strict";
-  function ready(callback) { if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", callback); } else { callback(); } }
+
+  function ready(callback) {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", callback);
+    } else {
+      callback();
+    }
+  }
+
   ready(function () {
     var button = document.getElementById("pauseTrainingBtn");
     if (!button) return;
+
     var paused = false;
     var resumeTarget = null;
-    function visibleSlide() { return document.querySelector(".slide.active") || document; }
+
+    function visibleSlide() {
+      return document.querySelector(".slide.active") || document;
+    }
+
     function allMedia() {
       var domMedia = Array.prototype.slice.call(document.querySelectorAll("audio, video"));
-      var registry = Array.isArray(window.launchTrainingMediaRegistry) ? window.launchTrainingMediaRegistry : [];
-      return domMedia.concat(registry).filter(function (media, index, list) { return media && list.indexOf(media) === index; });
+      var registry = Array.isArray(window.launchTrainingMediaRegistry)
+        ? window.launchTrainingMediaRegistry
+        : [];
+      return domMedia.concat(registry).filter(function (media, index, list) {
+        return media && list.indexOf(media) === index;
+      });
     }
+
     function currentMedia() {
       var active = visibleSlide();
       var mediaList = allMedia();
       var playing = mediaList.find(function (media) { return !media.paused && !media.ended; });
       var activeMedia = active.querySelector ? active.querySelector("audio, video") : null;
+
       return playing || activeMedia || mediaList[0] || null;
     }
-    function setButtonState() { button.textContent = paused ? "▶ Resume" : "⏸ Pause"; button.setAttribute("aria-pressed", paused ? "true" : "false"); button.title = paused ? "Resume the current narration" : "Pause the current narration"; }
+
+    function setButtonState() {
+      button.textContent = paused ? "▶ Resume" : "⏸ Pause";
+      button.setAttribute("aria-pressed", paused ? "true" : "false");
+      button.title = paused ? "Resume the current narration" : "Pause the current narration";
+    }
+
     function pauseTraining() {
       paused = true;
       resumeTarget = currentMedia();
       document.body.classList.add("training-paused");
-      if ("speechSynthesis" in window && window.speechSynthesis.speaking && !window.speechSynthesis.paused) { window.launchTrainingSpeechPaused = true; window.speechSynthesis.pause(); }
-      allMedia().forEach(function (media) { if (!media.paused && !media.ended) { if (media.dataset) { media.dataset.trainingPaused = "true"; } media.pause(); } });
+
+      if ("speechSynthesis" in window && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+        window.launchTrainingSpeechPaused = true;
+        window.speechSynthesis.pause();
+      }
+
+      allMedia().forEach(function (media) {
+        if (!media.paused && !media.ended) {
+          if (media.dataset) {
+            media.dataset.trainingPaused = "true";
+          }
+          media.pause();
+        }
+      });
+
       setButtonState();
     }
+
     function resumeTraining() {
       paused = false;
       document.body.classList.remove("training-paused");
       setButtonState();
-      if ("speechSynthesis" in window && window.launchTrainingSpeechPaused) { window.launchTrainingSpeechPaused = false; window.speechSynthesis.resume(); }
+
+      if ("speechSynthesis" in window && window.launchTrainingSpeechPaused) {
+        window.launchTrainingSpeechPaused = false;
+        window.speechSynthesis.resume();
+      }
+
       var target = resumeTarget || currentMedia();
-      allMedia().forEach(function (media) { if (media.dataset) { delete media.dataset.trainingPaused; } });
-      if (target && typeof target.play === "function" && !target.ended) { target.play().catch(function () {}); }
+
+      allMedia().forEach(function (media) {
+        if (media.dataset) {
+          delete media.dataset.trainingPaused;
+        }
+      });
+
+      if (target && typeof target.play === "function" && !target.ended) {
+        target.play().catch(function () {});
+      }
     }
-    button.addEventListener("click", function () { if (paused) { resumeTraining(); } else { pauseTraining(); } });
-    document.addEventListener("play", function (event) { if (paused && event.target && event.target.matches && event.target.matches("audio, video")) { window.setTimeout(function () { event.target.pause(); }, 0); } }, true);
+
+    button.addEventListener("click", function () {
+      if (paused) {
+        resumeTraining();
+      } else {
+        pauseTraining();
+      }
+    });
+
+    document.addEventListener("play", function (event) {
+      if (paused && event.target && event.target.matches && event.target.matches("audio, video")) {
+        window.setTimeout(function () { event.target.pause(); }, 0);
+      }
+    }, true);
+
     document.addEventListener("click", function (event) {
       if (!paused) return;
+
       var blockedButton = event.target.closest && event.target.closest("#next, #nextBtn, #speak, #playNarrationBtn");
-      if (blockedButton) { event.preventDefault(); event.stopImmediatePropagation(); }
+      if (blockedButton) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
     }, true);
+
     setButtonState();
   });
 })();
