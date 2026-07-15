@@ -15,14 +15,23 @@
     (() => {
       const storageKey = "launchTrainingUnlockedUntil";
       const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+
       if (unlockedUntil <= Date.now()) {
         localStorage.removeItem(storageKey);
+
         const currentPath = window.location.pathname;
         const moduleMarker = "/court-monitor/";
         const modulePosition = currentPath.indexOf(moduleMarker);
-        const portalBase = modulePosition >= 0 ? currentPath.slice(0, modulePosition + 1) : "/";
-        const returnPath = currentPath + window.location.search + window.location.hash;
-        window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
+        const portalBase = modulePosition >= 0
+          ? currentPath.slice(0, modulePosition + 1)
+          : "/";
+
+        const returnPath =
+          currentPath + window.location.search + window.location.hash;
+
+        window.location.replace(
+          portalBase + "?return=" + encodeURIComponent(returnPath)
+        );
       } else {
         document.documentElement.classList.add("portal-authenticated");
       }
@@ -36,7 +45,7 @@
 <div class="content">
 <p class="summary-note">A score of 80% or higher is required to pass.</p>
 <div class="meta-card"><div class="meta-grid"><div class="field"><label>Employee Name</label><input id="employee" /></div><div class="field"><label>Trainer Name</label><input id="trainer" /></div><div class="field"><label>Park Location</label><input id="park" /></div></div></div>
-<div class="toolbar"><div class="progress-wrap"><div class="progress-box">30 questions</div><div class="answered-box" id="answered">0 of 30 answered</div></div><div><a class="button dark2" href="./index.html">Back to Day Menu</a> <a class="button dark2" href="../../../index.html">Training Portal</a></div></div>
+<div class="toolbar"><div class="progress-wrap"><div class="progress-box">30 questions</div><div class="answered-box" id="answered">0 of 30 answered</div></div><div><a class="button dark2" href="./index.html">Back to Day Menu</a><a class="button dark2" href="../../../index.html">Training Portal</a></div></div>
 <form id="exam"></form>
 <div class="actions exam-submit-row"><button class="yellow" id="submit" type="button">Submit Exam</button></div>
 <div class="result" id="result"></div>

@@ -1,6 +1,13 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Day 2 Attraction Monitor Training Exam</title><style>
-:root{--g:#6cc24a;--gd:#4da62d;--y:#f2e600;--b:#0a0a0a;--w:#fff;--muted:#5b6570;--line:#e5eaee;--danger:#dc2626;--blue:#2563eb;--shadow:0 18px 50px rgba(0,0,0,.18);--radius:24px}*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at top left,rgba(108,194,74,.22),transparent 32%),linear-gradient(135deg,#070707,#171717 52%,#2d341f);color:#111}.btn,.button{border:0;border-radius:999px;padding:12px 18px;font-weight:900;text-decoration:none;display:inline-block;cursor:pointer}.dark{background:#101418;color:#f2e600}.yellow{background:var(--y);color:#000}.back{display:inline-block;color:#fff;text-decoration:none;margin-bottom:18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);padding:10px 14px;border-radius:999px;font-weight:700}.strip{height:10px;background:linear-gradient(90deg,var(--g),var(--y))}.eyebrow{text-transform:uppercase;letter-spacing:2px;color:var(--gd);font-weight:900;font-size:.78rem}h1,h2,h3{margin:0;color:#101418}p{line-height:1.45}.logo-mark{width:54px;height:54px;border-radius:50%;background:#111;border:3px solid var(--g);display:grid;place-items:center;font-weight:900;color:var(--y);box-shadow:0 0 0 3px rgba(242,230,0,.16)}
-body{background:linear-gradient(180deg,#f8fafb,#f2f5f7);color:#1f2328;line-height:1.5}.page-shell{max-width:1080px;margin:24px auto;padding:0 16px 40px}.container{background:#fff;border-radius:18px;box-shadow:0 8px 28px rgba(0,0,0,.08);overflow:hidden;border:1px solid var(--line)}.brand-topbar{height:10px;background:linear-gradient(90deg,var(--g),var(--y))}.header{padding:18px 24px;border-bottom:4px solid var(--y);display:flex;gap:16px;align-items:center}.header h1{font-size:1.35rem;white-space:nowrap}.header p{margin:0;color:#666}.content{padding:24px}.meta-card,.toolbar,.result,.question-card{border:1px solid var(--line);border-radius:14px;background:#fff}.meta-card{padding:18px;margin-bottom:18px}.meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.field label{display:block;font-weight:bold;margin-bottom:6px}.field input{width:100%;padding:11px;border:1px solid #cfd8df;border-radius:10px;font-size:1rem}.toolbar{padding:14px 16px;margin-bottom:18px;background:#fafcfd;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.progress-box{font-weight:bold;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 12px}.question-card{padding:18px;margin-bottom:18px}.question-text{font-size:1.13rem;font-weight:900;margin-bottom:14px}.answers{display:grid;gap:10px}.answer{border:1px solid #d7e0e7;border-radius:12px;padding:12px;cursor:pointer;display:flex;gap:10px;align-items:flex-start}.answer input{margin-top:3px}.answer:hover{border-color:var(--g);background:#f8fcf6}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}button,.button{border:0;border-radius:999px;padding:11px 18px;font-weight:900;cursor:pointer;text-decoration:none}.primary{background:var(--g);color:#071207}.yellow{background:var(--y);color:#000}.dark2{background:#111820;color:#fff}.result{padding:18px;margin-top:18px;display:none}.pass{background:#edf9ee;border-color:#89c997}.fail{background:#fff1f1;border-color:#e3a1a1}.review{margin-top:16px;display:grid;gap:8px}.wrong{border-left:6px solid #dc2626;background:#fff7f7;padding:10px;border-radius:8px}@media(max-width:760px){.meta-grid{grid-template-columns:1fr}.header{display:block}}</style>  <style>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Day 2 Attraction Monitor Training Exam</title>
+<style>
+:root{--g:#6cc24a;--gd:#4da62d;--y:#f2e600;--b:#0a0a0a;--w:#fff;--muted:#5b6570;--line:#e5eaee;--danger:#dc2626;--blue:#2563eb;--shadow:0 18px 50px rgba(0,0,0,.18);--radius:24px}*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#f8fafb,#f2f5f7);color:#1f2328;line-height:1.5}.btn,.button{border:0;border-radius:999px;padding:12px 18px;font-weight:900;text-decoration:none;display:inline-block;cursor:pointer}.eyebrow{text-transform:uppercase;letter-spacing:2px;color:var(--gd);font-weight:900;font-size:.78rem}h1,h2,h3{margin:0;color:#101418}p{line-height:1.45}.page-shell{max-width:1080px;margin:24px auto;padding:0 16px 40px}.container{background:#fff;border-radius:18px;box-shadow:0 8px 28px rgba(0,0,0,.08);overflow:hidden;border:1px solid var(--line)}.brand-topbar{height:10px;background:linear-gradient(90deg,var(--g),var(--y))}.header{padding:18px 24px;border-bottom:4px solid var(--y);display:flex;gap:16px;align-items:flex-start;justify-content:space-between}.header h1{font-size:1.35rem}.header p{margin:4px 0 0;color:#666}.random-badge{flex:0 0 auto;background:#111820;color:#fff;border-radius:999px;padding:9px 13px;font-size:.78rem;font-weight:900}.content{padding:24px}.meta-card,.toolbar,.result,.question-card{border:1px solid var(--line);border-radius:14px;background:#fff}.meta-card{padding:18px;margin-bottom:18px}.meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.field label{display:block;font-weight:bold;margin-bottom:6px}.field input{width:100%;padding:11px;border:1px solid #cfd8df;border-radius:10px;font-size:1rem}.toolbar{padding:14px 16px;margin-bottom:18px;background:#fafcfd;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.progress-wrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.progress-box,.answered-box{font-weight:bold;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 12px}.answered-box{color:#47515b}.question-card{padding:20px;margin-bottom:18px}.category{display:inline-block;margin-bottom:9px;color:#3f7f2b;background:#eff9eb;border:1px solid #cfe9c5;border-radius:999px;padding:5px 9px;font-size:.74rem;font-weight:900;text-transform:uppercase;letter-spacing:.6px}.question-text{font-size:1.13rem;font-weight:900;margin-bottom:14px}.answers{display:grid;gap:10px}.answer{border:1px solid #d7e0e7;border-radius:12px;padding:12px;cursor:pointer;display:flex;gap:10px;align-items:flex-start}.answer input{margin-top:3px}.answer:hover{border-color:var(--g);background:#f8fcf6}.answer.selected{border-color:var(--g);background:#f1f9ed;box-shadow:0 0 0 2px rgba(108,194,74,.12)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}button,.button{border:0;border-radius:999px;padding:11px 18px;font-weight:900;cursor:pointer;text-decoration:none}.primary{background:var(--g);color:#071207}.yellow{background:var(--y);color:#000}.dark2{background:#111820;color:#fff}.result{padding:18px;margin-top:18px;display:none}.pass{background:#edf9ee;border-color:#89c997}.fail{background:#fff1f1;border-color:#e3a1a1}.review{margin-top:16px;display:grid;gap:8px}.wrong{border-left:6px solid #dc2626;background:#fff7f7;padding:10px;border-radius:8px}.summary-note{margin:0 0 16px;color:#5c6670;font-size:.92rem}#exam{display:grid;gap:16px}.question-card{margin-bottom:0;scroll-margin-top:18px}.exam-submit-row{justify-content:flex-end;padding-top:4px}.unanswered{border-color:#e3a1a1;box-shadow:0 0 0 3px rgba(220,38,38,.10)}@media(max-width:760px){.meta-grid{grid-template-columns:1fr}.header{display:block}.random-badge{display:inline-block;margin-top:10px}}
+</style>
+  <style>
     html { display: none; }
     html.portal-authenticated { display: block; }
   </style>
@@ -8,25 +15,130 @@ body{background:linear-gradient(180deg,#f8fafb,#f2f5f7);color:#1f2328;line-heigh
     (() => {
       const storageKey = "launchTrainingUnlockedUntil";
       const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+
       if (unlockedUntil <= Date.now()) {
         localStorage.removeItem(storageKey);
+
         const currentPath = window.location.pathname;
         const moduleMarker = "/court-monitor/";
         const modulePosition = currentPath.indexOf(moduleMarker);
-        const portalBase = modulePosition >= 0 ? currentPath.slice(0, modulePosition + 1) : "/";
-        const returnPath = currentPath + window.location.search + window.location.hash;
-        window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
+        const portalBase = modulePosition >= 0
+          ? currentPath.slice(0, modulePosition + 1)
+          : "/";
+
+        const returnPath =
+          currentPath + window.location.search + window.location.hash;
+
+        window.location.replace(
+          portalBase + "?return=" + encodeURIComponent(returnPath)
+        );
       } else {
         document.documentElement.classList.add("portal-authenticated");
       }
     })();
   </script>
 
-</head><body><div class="page-shell"><div class="container"><div class="brand-topbar"></div><div class="header"><h1>Day 2 Attraction Monitor Training Exam</h1><p>Attraction Monitor Training · answers stay in fixed A/B/C/D order</p></div><div class="content"><div class="meta-card"><div class="meta-grid"><div class="field"><label>Employee Name</label><input id="employee" /></div><div class="field"><label>Trainer Name</label><input id="trainer" /></div><div class="field"><label>Park Location</label><input id="park" /></div></div></div><div class="toolbar"><div class="progress-box" id="progress">Question 1</div><div><a class="button dark2" href="./index.html">Back to Day Menu</a> <a class="button dark2" href="../../../index.html">Training Portal</a></div></div><form id="exam"></form><div class="actions"><button class="dark2" id="prev" type="button">Back</button><button class="primary" id="next" type="button">Next</button><button class="yellow" id="submit" type="button" style="display:none">Submit Exam</button></div><div class="result" id="result"></div></div></div></div><script>
-const BANK=[["You need to use the restroom and no replacement has arrived. What should you do?", ["Radio for coverage and remain at your position until relieved", "Leave quickly and come right back", "Ask a guest to watch the area", "Close the attraction without telling anyone"], 0], ["Which behavior is NOT active monitoring?", ["Leaning against padding while talking to another employee", "Scanning the full court", "Walking your assigned area", "Checking wristbands and socks"], 0], ["A guest is sitting on a trampoline bed. What should you do?", ["Ask them to move off the trampoline and explain the safety reason", "Ignore it if they are tired", "Tell another guest to handle it", "Wait until the end of their jump time"], 0], ["What equipment should an Attraction Monitor have before taking position?", ["Whistle, working walkie, and First Aid bag", "Cell phone and water bottle", "Clipboard only", "Nothing if a manager is nearby"], 0], ["What should you do if a guest keeps ignoring rules after correction?", ["Call a Supervisor or Manager", "Argue until they listen", "Ignore them", "Let other guests correct them"], 0], ["What does a wristband help a monitor verify?", ["Guest eligibility and jump time", "Shoe size", "Food order number", "Birthday party room"], 0], ["Why is continuous movement important?", ["It improves visibility and shows the area is supervised", "It makes the shift go faster", "It lets you visit coworkers", "It avoids having to use the walkie"], 0], ["What is the best way to correct a guest?", ["Calmly state the rule and explain the safety reason", "Yell so everyone hears", "Embarrass them so they remember", "Do nothing unless they complain"], 0], ["What is the primary focus for all guests and associates?", ["Safety", "Speed", "Sales", "Noise control"], 0], ["Which is a common monitoring mistake?", ["Watching an injury instead of continuing to monitor your assigned area", "Checking footwear", "Using a whistle when needed", "Calling for help early"], 0], ["Which attractions receive full training in this program?", ["Main Court, Dodgeball, Ninja Course, and Launch Pad / Stunt Jump", "Every possible Launch attraction", "Only arcade and bowling", "Only attractions at the trainee\u2019s home park"], 0], ["What is a key Main Court rule?", ["One person per square", "Guests may sit wherever they want", "Larger guests always get priority", "Socks are optional"], 0], ["What should a monitor do if two jumpers are affecting each other\u2019s bounce?", ["Separate or redirect them before a collision occurs", "Wait to see if they fall", "Tell them to jump higher", "Ignore it if they are friends"], 0], ["Dodgeball gets heated and guests start arguing. What should the monitor do?", ["Pause play and reset expectations", "Let them work it out", "Join the argument", "Walk away from the court"], 0], ["Why does Ninja Course require spacing control?", ["Guests can collide, rush obstacles, or land unsafely", "It makes the line look shorter", "It prevents guests from asking questions", "It is only needed when managers are watching"], 0], ["What should guests remove before using the Ninja Course?", ["Loose jewelry, watches, phones, cameras, and loose items", "Launch socks", "Wristbands", "Shirts"], 0], ["What is critical on Launch Pad / Stunt Jump?", ["The landing area must be clear before the next guest jumps", "Guests may self-dispatch", "Two guests should jump together", "The monitor should stand far away"], 0], ["What should you do if a trampoline bed rips?", ["Safely clear the area and call management immediately", "Cover it with a towel", "Let small children use it only", "Wait until closing"], 0], ["Which issue requires management attention before opening?", ["Exposed metal or damaged padding", "A guest asking a question", "A long line at check-in", "A birthday party arriving early"], 0], ["For other attractions not covered in this training, what should employees do?", ["Follow posted rules, manufacturer guidance, and Supervisor direction", "Make up rules based on common sense only", "Ignore the attraction", "Train guests to monitor each other"], 0]];
-function shuffle(a){let x=[...a];for(let i=x.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x}
-const QUESTIONS=shuffle(BANK).slice(0,20);let idx=0;const answers={};const form=document.getElementById('exam'),progress=document.getElementById('progress');
-function render(){const q=QUESTIONS[idx];progress.textContent=`Question ${idx+1} of ${QUESTIONS.length}`;form.innerHTML=`<div class="question-card"><div class="question-text">${idx+1}. ${q[0]}</div><div class="answers">${q[1].map((a,i)=>`<label class="answer"><input type="radio" name="q" value="${i}" ${answers[idx]===i?'checked':''}> <strong>${String.fromCharCode(65+i)}.</strong> <span>${a}</span></label>`).join('')}</div></div>`;form.querySelectorAll('input').forEach(inp=>inp.onchange=()=>answers[idx]=Number(inp.value));document.getElementById('prev').disabled=idx===0;document.getElementById('next').style.display=idx===QUESTIONS.length-1?'none':'inline-block';document.getElementById('submit').style.display=idx===QUESTIONS.length-1?'inline-block':'none'}
-document.getElementById('prev').onclick=()=>{if(idx>0){idx--;render()}};document.getElementById('next').onclick=()=>{if(answers[idx]===undefined){alert('Please select an answer before continuing.');return}if(idx<QUESTIONS.length-1){idx++;render()}};
-document.getElementById('submit').onclick=()=>{if(answers[idx]===undefined){alert('Please select an answer before submitting.');return}let correct=0,review=[];QUESTIONS.forEach((q,i)=>{if(answers[i]===q[2]) correct++; else review.push(`<div class="wrong"><strong>Question ${i+1}:</strong> ${q[0]}<br>Your answer: ${q[1][answers[i]]||'No answer'}<br>Correct answer: ${q[1][q[2]]}</div>`)});let score=Math.round(correct/QUESTIONS.length*100);let pass=score>=80;let rec={date:new Date().toLocaleString(),employee:employee.value,trainer:trainer.value,park:park.value,day:'day2',score,correct,total:QUESTIONS.length};let key='courtMonitorExamRecords';let records=JSON.parse(localStorage.getItem(key)||'[]');records.push(rec);localStorage.setItem(key,JSON.stringify(records));const r=document.getElementById('result');r.className='result '+(pass?'pass':'fail');r.style.display='block';r.innerHTML=`<h2>${pass?'PASS':'NEEDS REVIEW'} · ${score}%</h2><p>${correct} of ${QUESTIONS.length} correct. This result has been saved to local exam records on this computer.</p><div class="actions"><button onclick="window.print()" class="yellow">Print Result</button><a class="button dark2" href="./exam-records.html">View Exam Records</a></div><div class="review">${review.join('')}</div>`;window.scrollTo(0,document.body.scrollHeight)};render();
-</script></body></html>
+</head>
+<body>
+<div class="page-shell"><div class="container"><div class="brand-topbar"></div>
+<div class="header"><div><h1>Day 2 Attraction Monitor Training Exam</h1><p>30 questions: 25 Day 2 questions plus 5 randomized Day 1 review questions.</p></div><div class="random-badge">Randomized Questions + Answers</div></div>
+<div class="content">
+<p class="summary-note">A score of 80% or higher is required to pass. Questions and answer choices randomize each time the exam is opened.</p>
+<div class="meta-card"><div class="meta-grid"><div class="field"><label>Employee Name</label><input id="employee" /></div><div class="field"><label>Trainer Name</label><input id="trainer" /></div><div class="field"><label>Park Location</label><input id="park" /></div></div></div>
+<div class="toolbar"><div class="progress-wrap"><div class="progress-box">30 questions</div><div class="answered-box" id="answered">0 of 30 answered</div></div><div><a class="button dark2" href="./index.html">Back to Day Menu</a><a class="button dark2" href="../../../index.html">Training Portal</a></div></div>
+<form id="exam"></form>
+<div class="actions exam-submit-row"><button class="yellow" id="submit" type="button">Submit Exam</button></div>
+<div class="result" id="result"></div>
+</div></div></div>
+<script src="../question-banks/day1-question-bank.js"></script>
+<script src="../question-banks/day2-question-bank.js"></script>
+<script>
+function shuffle(items){
+  const copy=[...items];
+  for(let i=copy.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [copy[i],copy[j]]=[copy[j],copy[i]];
+  }
+  return copy;
+}
+function escapeHtml(value){
+  return String(value).replace(/[&<>'"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]));
+}
+function prepareQuestion(source, origin){
+  const options=shuffle(source.answers.map((text,index)=>({text,isCorrect:index===source.correct})));
+  return {...source,origin,options,correctIndex:options.findIndex(option=>option.isCorrect)};
+}
+if(!Array.isArray(window.DAY2_QUESTION_BANK)||window.DAY2_QUESTION_BANK.length!==25){
+  document.body.innerHTML='<div style="font-family:Arial;padding:30px"><h1>Question bank error</h1><p>The Day 2 question bank could not be loaded.</p></div>';
+  throw new Error('Day 2 question bank missing or does not contain 25 questions.');
+}
+if(!Array.isArray(window.DAY1_QUESTION_BANK)||window.DAY1_QUESTION_BANK.length<5){
+  document.body.innerHTML='<div style="font-family:Arial;padding:30px"><h1>Question bank error</h1><p>The Day 1 review question bank could not be loaded.</p></div>';
+  throw new Error('Day 1 question bank missing or does not contain enough questions.');
+}
+const day2Questions=shuffle(window.DAY2_QUESTION_BANK).map(q=>prepareQuestion(q,'Day 2'));
+const day1Review=shuffle(window.DAY1_QUESTION_BANK).slice(0,5).map(q=>prepareQuestion(q,'Day 1 Review'));
+const QUESTIONS=shuffle([...day2Questions,...day1Review]);
+const responses={};
+const form=document.getElementById('exam');
+const answered=document.getElementById('answered');
+function updateAnswered(){
+  answered.textContent=`${Object.keys(responses).length} of ${QUESTIONS.length} answered`;
+}
+function renderAll(){
+  form.innerHTML=QUESTIONS.map((q,index)=>`<div class="question-card" id="question-${index}"><div class="question-text">${index+1}. ${escapeHtml(q.question)}</div><div class="answers">${q.options.map((option,i)=>`<label class="answer ${responses[index]===i?'selected':''}"><input type="radio" name="q${index}" value="${i}" ${responses[index]===i?'checked':''}> <strong>${String.fromCharCode(65+i)}.</strong> <span>${escapeHtml(option.text)}</span></label>`).join('')}</div></div>`).join('');
+  form.querySelectorAll('input[type="radio"]').forEach(input=>input.addEventListener('change',()=>{
+    const questionIndex=Number(input.name.slice(1));
+    responses[questionIndex]=Number(input.value);
+    const card=document.getElementById(`question-${questionIndex}`);
+    card.classList.remove('unanswered');
+    card.querySelectorAll('.answer').forEach(label=>label.classList.remove('selected'));
+    input.closest('.answer').classList.add('selected');
+    updateAnswered();
+  }));
+  updateAnswered();
+}
+document.getElementById('submit').addEventListener('click',()=>{
+  const missing=QUESTIONS.map((_,i)=>i).filter(i=>responses[i]===undefined);
+  document.querySelectorAll('.question-card').forEach(card=>card.classList.remove('unanswered'));
+  if(missing.length){
+    missing.forEach(i=>document.getElementById(`question-${i}`).classList.add('unanswered'));
+    alert(`Please answer all questions before submitting. ${missing.length} question${missing.length===1?' is':'s are'} still unanswered.`);
+    document.getElementById(`question-${missing[0]}`).scrollIntoView({behavior:'smooth',block:'start'});
+    return;
+  }
+  let correct=0;
+  const review=[];
+  const details=[];
+  QUESTIONS.forEach((q,i)=>{
+    const selected=responses[i];
+    const isCorrect=selected===q.correctIndex;
+    if(isCorrect) correct++;
+    else review.push(`<div class="wrong"><strong>Question ${i+1}:</strong> ${escapeHtml(q.question)}<br>Your answer: ${escapeHtml(q.options[selected]?.text||'No answer')}<br>Correct answer: ${escapeHtml(q.options[q.correctIndex].text)}</div>`);
+    details.push({
+      id:q.id,
+      origin:q.origin,
+      category:q.category,
+      question:q.question,
+      selectedAnswer:q.options[selected]?.text||'',
+      correctAnswer:q.options[q.correctIndex].text,
+      isCorrect
+    });
+  });
+  const score=Math.round(correct/QUESTIONS.length*100);
+  const pass=score>=80;
+  const rec={date:new Date().toLocaleString(),employee:employee.value,trainer:trainer.value,park:park.value,day:'day2',score,correct,total:QUESTIONS.length,responses:details};
+  const key='courtMonitorExamRecords';
+  const records=JSON.parse(localStorage.getItem(key)||'[]');
+  records.push(rec);
+  localStorage.setItem(key,JSON.stringify(records));
+  const result=document.getElementById('result');
+  result.className='result '+(pass?'pass':'fail');
+  result.style.display='block';
+  result.innerHTML=`<h2>${pass?'PASS':'NEEDS REVIEW'} · ${score}%</h2><p>${correct} of ${QUESTIONS.length} correct. This result and the full question-and-answer detail have been saved to local exam records on this computer.</p><div class="actions"><button onclick="window.print()" class="yellow">Print Result</button><a class="button dark2" href="./exam-records.html">View Exam Records</a></div><div class="review">${review.join('')}</div>`;
+  result.scrollIntoView({behavior:'smooth',block:'start'});
+});
+renderAll();
+</script>
+</body>
+</html>
