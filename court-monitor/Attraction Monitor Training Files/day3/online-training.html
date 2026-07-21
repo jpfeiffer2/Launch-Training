@@ -119,31 +119,122 @@
 .d3s3-takeaway span{color:var(--y)}
 @media(max-width:900px){.d3s3-wrap{grid-template-columns:1fr;gap:18px;inset:58px 28px 34px}.d3s3 h1{font-size:3rem}.d3s3-sub{max-width:none}.d3s3-rule{max-width:none}.d3s3-grid,.d3s3-lanes{grid-template-columns:1fr}}
 
+
+
+/* Day 3 Slide 4 - slow days */
+.d3s4{background:#06090b;color:#fff;overflow:hidden}
+.d3s4:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 16% 22%,rgba(108,194,74,.22),transparent 24%),radial-gradient(circle at 82% 18%,rgba(242,230,0,.12),transparent 24%),linear-gradient(135deg,#050607 0%,#0d1416 48%,#1d2a18 100%)}
+.d3s4:after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:46px 46px;opacity:.33;mask-image:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.90))}
+.d3s4-wrap{position:absolute;z-index:3;inset:54px 44px 42px;display:grid;grid-template-columns:.76fr 1.24fr;gap:28px;align-items:stretch}
+.d3s4-copy{display:flex;flex-direction:column;justify-content:flex-start;min-height:0;padding-top:6px}
+.d3s4-kicker{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;padding:9px 15px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:var(--y);text-transform:uppercase;letter-spacing:1.2px;font-weight:1000;font-size:.76rem;margin-bottom:14px}
+.d3s4-kicker:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--g);box-shadow:0 0 0 8px rgba(108,194,74,.12)}
+.d3s4 h1{margin:0;color:#fff;font-size:clamp(2.12rem,3.85vw,3.62rem);line-height:.9;letter-spacing:-2px}
+.d3s4 h1 span{display:block;color:var(--y)}
+.d3s4-sub{margin-top:12px;max-width:410px;color:#eef2f5;font-size:.91rem;line-height:1.17;font-weight:840}
+.d3s4-risk{margin-top:14px;max-width:410px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:13px 14px 14px;box-shadow:0 18px 42px rgba(0,0,0,.22)}
+.d3s4-risk h3{margin:0 0 10px;color:#b9ff92;font-size:.88rem;letter-spacing:1px;text-transform:uppercase;line-height:1.1}
+.d3s4-risk-tags{display:grid;gap:8px}
+.d3s4-risk-tags span{display:block;position:relative;background:rgba(255,255,255,.06);border-radius:14px;padding:9px 11px 9px 36px;color:#fff;font-size:.8rem;line-height:1.1;font-weight:840}
+.d3s4-risk-tags span:before{content:"";position:absolute;left:12px;top:50%;transform:translateY(-50%);width:12px;height:12px;border-radius:50%;background:linear-gradient(180deg,var(--y),#cfe000);box-shadow:0 0 0 4px rgba(242,230,0,.10)}
+.d3s4-board{position:relative;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:30px;padding:20px;box-shadow:0 22px 54px rgba(0,0,0,.30);display:grid;grid-template-rows:auto 1fr auto;gap:18px;min-height:0;height:100%}
+.d3s4-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.d3s4-top h3{margin:0;color:#fff;font-size:1.22rem;line-height:1.06}
+.d3s4-pill{display:inline-flex;align-items:center;padding:8px 12px;border-radius:999px;background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.18);color:var(--y);font-size:.73rem;font-weight:1000;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.d3s4-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;min-height:0;height:100%}
+.d3s4-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-radius:22px;padding:18px 15px 16px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);display:flex;flex-direction:column;gap:12px;min-height:0;height:100%}
+.d3s4-icon{width:44px;height:44px;border-radius:16px;background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.16);display:grid;place-items:center;color:var(--y);font-weight:1000;font-size:1.15rem;flex:0 0 auto}
+.d3s4-card h4{margin:0;color:#b8ff91;font-size:.98rem;line-height:1.05;letter-spacing:1px;text-transform:uppercase}
+.d3s4-card p{margin:0;color:#fff;font-size:.88rem;line-height:1.2;font-weight:820}
+.d3s4-card.warn h4{color:#ffd96d}
+.d3s4-card.good h4{color:#9fff8e}
+.d3s4-takeaway{background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.14);border-left:9px solid var(--g);border-radius:18px;padding:13px 16px;color:#fff;font-size:.96rem;font-weight:1000;box-shadow:0 14px 32px rgba(0,0,0,.24)}
+.d3s4-takeaway span{color:var(--y)}
+@media(max-width:900px){.d3s4-wrap{grid-template-columns:1fr;gap:18px;inset:58px 28px 34px}.d3s4 h1{font-size:3rem}.d3s4-sub,.d3s4-risk{max-width:none}.d3s4-grid{grid-template-columns:1fr}.d3s4-card{min-height:auto}}
+
+
+
+
+/* Day 3 Slide 5 - daily safety checks */
+.d3s5{background:#06090b;color:#fff;overflow:hidden}
+.d3s5:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 17% 18%,rgba(108,194,74,.22),transparent 25%),radial-gradient(circle at 80% 20%,rgba(242,230,0,.12),transparent 25%),linear-gradient(135deg,#050607 0%,#0d1416 50%,#1d2a18 100%)}
+.d3s5:after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:46px 46px;opacity:.33;mask-image:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.90))}
+.d3s5-wrap{position:absolute;z-index:3;inset:56px 40px 30px;display:grid;grid-template-columns:.82fr 1.18fr;gap:24px;align-items:stretch}
+.d3s5-copy{display:flex;flex-direction:column;justify-content:flex-start;min-height:0;padding-top:2px}
+.d3s5-kicker{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:var(--y);text-transform:uppercase;letter-spacing:1.3px;font-weight:1000;font-size:.8rem;margin-bottom:18px}
+.d3s5-kicker:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--g);box-shadow:0 0 0 8px rgba(108,194,74,.12)}
+.d3s5 h1{margin:0;color:#fff;font-size:clamp(2.35rem,4.55vw,4.15rem);line-height:.9;letter-spacing:-2px}
+.d3s5 h1 span{display:block;color:var(--y)}
+.d3s5-sub{margin-top:12px;max-width:445px;color:#eef2f5;font-size:.96rem;line-height:1.2;font-weight:840}
+.d3s5-note{margin-top:14px;max-width:445px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:13px 14px 12px;box-shadow:0 18px 42px rgba(0,0,0,.22)}
+.d3s5-note h3{margin:0 0 7px;color:#b9ff92;font-size:.95rem;letter-spacing:1px;text-transform:uppercase;line-height:1.1}
+.d3s5-note p{margin:0;color:#fff;font-size:.83rem;line-height:1.18;font-weight:840}
+.d3s5-note .small-note{margin-top:9px;padding:9px 11px;border-radius:15px;background:rgba(8,11,13,.72);border-left:6px solid var(--y);font-size:.77rem;line-height:1.13;color:#fff;font-weight:840}
+.d3s5-board{position:relative;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:30px;padding:16px;box-shadow:0 22px 54px rgba(0,0,0,.30);display:grid;grid-template-rows:auto 1fr auto;gap:12px;min-height:100%}
+.d3s5-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.d3s5-top h3{margin:0;color:#fff;font-size:1.16rem;line-height:1.05}
+.d3s5-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.18);color:var(--y);font-size:.74rem;font-weight:1000;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.d3s5-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:stretch}
+.d3s5-card{background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.10);border-radius:22px;padding:14px 12px 12px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);display:flex;flex-direction:column;min-height:238px}
+.d3s5-num{width:40px;height:40px;border-radius:14px;background:#090d0f;display:grid;place-items:center;color:var(--y);font-size:1rem;font-weight:1000;margin-bottom:10px;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.d3s5-card h4{margin:0 0 8px;color:#b9ff92;font-size:.91rem;line-height:1.03;letter-spacing:1px;text-transform:uppercase}
+.d3s5-card p{margin:0;color:#fff;font-size:.78rem;line-height:1.12;font-weight:830}
+.d3s5-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
+.d3s5-list li{position:relative;background:rgba(8,11,13,.68);border:1px solid rgba(255,255,255,.08);border-radius:13px;padding:7px 8px 7px 26px;color:#fff;font-size:.72rem;line-height:1.06;font-weight:820}
+.d3s5-list li:before{content:"";position:absolute;left:10px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:var(--y)}
+.d3s5-card.alt h4{color:#ffd96d}.d3s5-card.alt .d3s5-list li{background:rgba(52,40,5,.62)}
+.d3s5-card.good h4{color:#9fff8e}.d3s5-card.good .d3s5-list li{background:rgba(16,49,17,.62)}
+.d3s5-takeaway{background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.14);border-left:9px solid var(--g);border-radius:18px;padding:10px 14px;color:#fff;font-size:.84rem;line-height:1.14;font-weight:1000;box-shadow:0 14px 32px rgba(0,0,0,.24)}
+.d3s5-takeaway span{color:var(--y)}
+@media(max-width:900px){.d3s5-wrap{grid-template-columns:1fr;gap:18px;inset:58px 28px 34px}.d3s5 h1{font-size:3rem}.d3s5-sub,.d3s5-note{max-width:none}.d3s5-cards{grid-template-columns:1fr}.d3s5-card{min-height:0}}
+
+
+
+
+/* Day 3 Slide 6 - balanced mid-shift problem */
+.d3s6{background:#06090b;color:#fff;overflow:hidden}
+.d3s6:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 16% 18%,rgba(108,194,74,.22),transparent 24%),radial-gradient(circle at 82% 18%,rgba(242,230,0,.12),transparent 24%),linear-gradient(135deg,#050607 0%,#0d1416 48%,#1d2918 100%)}
+.d3s6:after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:46px 46px;opacity:.33;mask-image:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.90))}
+.d3s6-wrap{position:absolute;z-index:3;inset:54px 40px 34px;display:grid;grid-template-columns:.78fr 1.22fr;gap:26px;align-items:stretch}
+.d3s6-copy{display:grid;grid-template-rows:auto auto 1fr;min-height:100%;align-items:start}
+.d3s6-kicker{display:inline-flex;align-items:center;gap:10px;align-self:start;justify-self:start;padding:9px 15px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:var(--y);text-transform:uppercase;letter-spacing:1.3px;font-weight:1000;font-size:.78rem;margin-bottom:16px}
+.d3s6-kicker:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--g);box-shadow:0 0 0 8px rgba(108,194,74,.12)}
+.d3s6-titleblock{align-self:start}
+.d3s6 h1{margin:0;color:#fff;font-size:clamp(2.25rem,4.25vw,3.9rem);line-height:.9;letter-spacing:-2px}
+.d3s6 h1 span{display:block;color:var(--y)}
+.d3s6-sub{margin-top:13px;max-width:430px;color:#eef2f5;font-size:.9rem;line-height:1.18;font-weight:840}
+.d3s6-note{align-self:stretch;margin-top:16px;max-width:430px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:24px;padding:16px;box-shadow:0 18px 42px rgba(0,0,0,.22);display:flex;flex-direction:column;justify-content:space-between;min-height:210px}
+.d3s6-note h3{margin:0 0 8px;color:#b9ff92;font-size:.95rem;letter-spacing:1px;text-transform:uppercase;line-height:1.1}
+.d3s6-note p{margin:0;color:#fff;font-size:.82rem;line-height:1.16;font-weight:835}
+.d3s6-tags{margin-top:12px;display:grid;grid-template-columns:1fr;gap:8px}
+.d3s6-tags div{background:rgba(8,11,13,.72);border:1px solid rgba(255,255,255,.08);border-radius:15px;padding:9px 11px;color:#fff;font-size:.78rem;line-height:1.1;font-weight:830}
+.d3s6-board{position:relative;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:30px;padding:18px;box-shadow:0 22px 54px rgba(0,0,0,.30);display:grid;grid-template-rows:auto 1fr auto;gap:14px;min-height:100%;height:100%}
+.d3s6-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.d3s6-top h3{margin:0;color:#fff;font-size:1.2rem;line-height:1.05}
+.d3s6-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.18);color:var(--y);font-size:.72rem;font-weight:1000;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.d3s6-steps{display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:14px;min-height:0}
+.d3s6-step{background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.10);border-radius:24px;padding:16px 14px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);display:grid;grid-template-rows:auto auto 1fr;align-items:start;min-height:0}
+.d3s6-num{width:38px;height:38px;border-radius:13px;background:#090d0f;display:grid;place-items:center;color:var(--y);font-size:.98rem;font-weight:1000;margin-bottom:10px;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.d3s6-step h4{margin:0 0 10px;color:#b9ff92;font-size:.9rem;line-height:1.03;letter-spacing:1px;text-transform:uppercase}
+.d3s6-step p{margin:0;color:#fff;font-size:.82rem;line-height:1.16;font-weight:830;align-self:start}
+.d3s6-takeaway{background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.14);border-left:9px solid var(--g);border-radius:18px;padding:12px 16px;color:#fff;font-size:.88rem;line-height:1.14;font-weight:1000;box-shadow:0 14px 32px rgba(0,0,0,.24)}
+.d3s6-takeaway span{color:var(--y)}
+@media(max-width:900px){.d3s6-wrap{grid-template-columns:1fr;gap:18px;inset:56px 28px 34px}.d3s6 h1{font-size:3rem}.d3s6-sub,.d3s6-note{max-width:none}.d3s6-steps{grid-template-columns:1fr;grid-template-rows:none}.d3s6-board{min-height:0}}
+
+
+
 .portal-nav-links{display:flex;gap:10px;align-items:center;flex-wrap:wrap}</style><script id="launch-training-media-tracker">
-(function () {
-  if (window.launchTrainingMediaRegistry) return;
-  window.launchTrainingMediaRegistry = [];
-  var NativeAudio = window.Audio;
-  window.Audio = function () {
-    var media = new (Function.prototype.bind.apply(NativeAudio, [null].concat(Array.prototype.slice.call(arguments))))();
-    window.launchTrainingMediaRegistry.push(media);
-    return media;
-  };
-  window.Audio.prototype = NativeAudio.prototype;
-})();
+(function(){if(window.launchTrainingMediaRegistry)return;window.launchTrainingMediaRegistry=[];var N=window.Audio;window.Audio=function(){var m=new(Function.prototype.bind.apply(N,[null].concat(Array.prototype.slice.call(arguments))))();window.launchTrainingMediaRegistry.push(m);return m};window.Audio.prototype=N.prototype})();
 </script>
 <style id="launch-training-pause-style">
-  .pause-training-btn { border: 0; border-radius: 999px; padding: 12px 18px; background: #f2e600; color: #111820; font-weight: 900; cursor: pointer; }
-  .pause-training-btn[aria-pressed="true"] { background: #ffffff; color: #111820; }
-  body.training-paused .slide.active { outline: 4px solid rgba(242, 230, 0, .75); outline-offset: 4px; }
-  body.training-paused #next, body.training-paused #nextBtn { pointer-events: none; opacity: .55; }
-  body.training-paused * { animation-play-state: paused !important; }
+.pause-training-btn{border:0;border-radius:999px;padding:12px 18px;background:#f2e600;color:#111820;font-weight:900;cursor:pointer}
+.pause-training-btn[aria-pressed="true"]{background:#fff;color:#111820}
+body.training-paused .slide.active{outline:4px solid rgba(242,230,0,.75);outline-offset:4px}
+body.training-paused #next,body.training-paused #nextBtn{pointer-events:none;opacity:.55}
+body.training-paused *{animation-play-state:paused!important}
 </style>
 
-  <style>
-    html { display: none; }
-    html.portal-authenticated { display: block; }
-  </style>
+  <style>html{display:none}html.portal-authenticated{display:block}</style>
   <script>
     (() => {
       const storageKey = "launchTrainingUnlockedUntil";
@@ -282,68 +373,137 @@
   </div>
 </div>
 </section>
-<section class="slide hero" data-narration="Planning placeholder for Day 3 slide 4: Slow Days Are Not Easy Mode. Purpose: Address the risk that monitors become less alert when guest volume is low." data-slide="4">
-<div class="bg-soft"></div>
+<section class="slide d3s4" data-narration="Slow days can be tricky for Attraction Monitors. When the park is busy, it is usually obvious that you need to stay alert. There are more guests, more activity, and more things happening at the same time. But when the floor is quiet, it can be easy to let your guard down. That is where complacency becomes a problem. A slow day does not mean the attraction is automatically safe. Guests may be spread out across different areas. A few kids may still be jumping, running, climbing, double bouncing, or breaking rules. Equipment can still shift. Trash, spills, or other hazards can still appear. The danger on a slow shift is that a monitor may stop scanning, stand in one place too long, talk with coworkers, or assume that because there are fewer guests, nothing unsafe is happening. The standard does not change based on volume. You still need to stay active. You still need to scan. You still need to enforce rules, engage with guests when appropriate, keep the area guest ready, and call leadership when something is unsafe. Slow does not mean safe by default. A strong Attraction Monitor stays alert no matter how many guests are in the park." data-slide="4">
 <div class="bar"></div>
-<div class="header">
-<div><div aria-hidden="true" class="eyebrow slide-label-hidden"></div></div>
-<div class="pill">Vigilance</div>
+<div class="d3s4-wrap">
+  <div class="d3s4-copy">
+    <div class="d3s4-kicker">Stay alert on quiet shifts</div>
+    <h1>Slow Days Are <span>Not Easy Mode</span></h1>
+    <p class="d3s4-sub">A quiet floor still requires active monitoring. Fewer guests can make it easier to relax at the exact time you still need strong awareness.</p>
+    <div class="d3s4-risk">
+      <h3>Complacency is the risk</h3>
+      <div class="d3s4-risk-tags">
+        <span>Standing still too long.</span>
+        <span>Stopping your scan because the floor looks calm.</span>
+        <span>Assuming fewer guests means fewer problems.</span>
+      </div>
+    </div>
+  </div>
+  <div class="d3s4-board" aria-label="Why slow shifts still require strong monitoring">
+    <div class="d3s4-top">
+      <h3>Why quiet shifts can still be difficult</h3>
+      <div class="d3s4-pill">Same standard</div>
+    </div>
+    <div class="d3s4-grid">
+      <div class="d3s4-card warn">
+        <div class="d3s4-icon">01</div>
+        <h4>Fewer guests</h4>
+        <p>Lower volume does not remove risk. Guests may spread across different areas, and one unsafe guest can still create a problem quickly.</p>
+      </div>
+      <div class="d3s4-card warn">
+        <div class="d3s4-icon">02</div>
+        <h4>Lower pressure</h4>
+        <p>Quiet shifts make it easier to drift, get comfortable, talk too much, or stop moving with purpose.</p>
+      </div>
+      <div class="d3s4-card good">
+        <div class="d3s4-icon">03</div>
+        <h4>Same standard</h4>
+        <p>Scan, enforce rules, engage safely, keep the area guest ready, and call leadership when something is unsafe.</p>
+      </div>
+    </div>
+    <div class="d3s4-takeaway">Slow does not mean <span>safe by default.</span></div>
+  </div>
 </div>
-<div class="content">
-<div>
-<div class="kicker">Complacency risk</div>
-<h1>Slow Days Are Not Easy Mode</h1>
-<p class="sub">A quiet floor still requires active monitoring.</p>
-</div>
-<div class="callout">
-<h3>Purpose</h3>
-<p>Address the risk that monitors become less alert when guest volume is low.</p>
-<ul class="big-list"><li>Unsafe behavior can still happen with only a few guests.</li><li>Guests may spread out, making coverage harder.</li><li>Equipment issues or hazards can appear at any time.</li></ul>
-</div>
-</div>
-<div class="narration"><strong>Planning Placeholder:</strong> Slide 4 topic and purpose only. Final visual design and narration pending.</div>
 </section>
-<section class="slide hero" data-narration="Planning placeholder for Day 3 slide 5: Daily Safety Checks. Purpose: Provide a brief overview of daily checks while clarifying that they are generally completed by experienced monitors, supervisors, or leadership." data-slide="5">
-<div class="bg-soft"></div>
+<section class="slide d3s5" data-narration="Before attractions are opened for guests, Daily Safety Checks are completed and logged. This is not usually something a brand-new Attraction Monitor will complete on their own. In most parks, the official Daily Safety Check is handled by a supervisor, manager, or a more experienced team member who has been trained on what to look for. However, every Attraction Monitor should understand the general process. The Daily Safety Check is a formal inspection. It records who completed the check, the date, the time, and the areas or attractions reviewed. The checklist is also different from park to park because every park has different attractions, layouts, equipment, and safety concerns. Some checks may involve trampoline courts, springs, pads, straps, netting, airbags, blowers, platforms, electronics, VR equipment, laser tag, bowling, arcade, fire safety items, or other attraction-specific details. The goal is simple: attractions should not open to guests until the required checks have been completed and any unsafe concerns have been reported or addressed. As a new Attraction Monitor, you may not be the person completing the official checklist yet. But you still need to understand that this process happens before opening and that it is an important part of keeping the park safe. You also need to understand that the checklist does not end your responsibility. Conditions can change during the day. Padding can move, equipment can become damaged, guests can create hazards, and cleanliness issues can appear. So even if you are not completing the official Daily Safety Check, you are still responsible for noticing unsafe conditions, reporting them immediately, and following leadership direction. You may not complete the official checklist yet — but you are still responsible for helping keep the attraction safe." data-slide="5">
 <div class="bar"></div>
-<div class="header">
-<div><div aria-hidden="true" class="eyebrow slide-label-hidden"></div></div>
-<div class="pill">Safety Checks</div>
+<div class="d3s5-wrap">
+  <div class="d3s5-copy">
+    <div class="d3s5-kicker">Before opening</div>
+    <h1>Daily Safety <span>Checks</span></h1>
+    <p class="d3s5-sub">Daily Safety Checks are completed and logged before attractions open to guests.</p>
+    <div class="d3s5-note">
+      <h3>Know the process</h3>
+      <p>New monitors are not usually responsible for completing the official checklist on their own. This is normally handled by leadership or experienced team members.</p>
+      <div class="small-note">Your role is to understand why the check matters and report anything unsafe you notice during your shift.</div>
+    </div>
+  </div>
+  <div class="d3s5-board" aria-label="Daily Safety Check overview">
+    <div class="d3s5-top">
+      <h3>What the process is looking for</h3>
+      <div class="d3s5-pill">Logged inspection</div>
+    </div>
+    <div class="d3s5-cards">
+      <div class="d3s5-card">
+        <div class="d3s5-num">01</div>
+        <h4>Formal opening check</h4>
+        <p>The checklist records who completed the inspection and when it was completed.</p>
+        <ul class="d3s5-list">
+          <li>Employee / inspector</li>
+          <li>Date and time</li>
+          <li>Comments and verification</li>
+        </ul>
+      </div>
+      <div class="d3s5-card alt">
+        <div class="d3s5-num">02</div>
+        <h4>Attraction-specific items</h4>
+        <p>Different parks and attractions have different equipment and safety concerns.</p>
+        <ul class="d3s5-list">
+          <li>Pads, springs, straps, and netting</li>
+          <li>Airbags, blowers, alarms, and platforms</li>
+          <li>Electronics, props, lanes, and guest areas</li>
+        </ul>
+      </div>
+      <div class="d3s5-card good">
+        <div class="d3s5-num">03</div>
+        <h4>Your responsibility</h4>
+        <p>The opening checklist does not end your responsibility once the park opens.</p>
+        <ul class="d3s5-list">
+          <li>Notice unsafe conditions</li>
+          <li>Report concerns immediately</li>
+          <li>Follow leadership direction</li>
+        </ul>
+      </div>
+    </div>
+    <div class="d3s5-takeaway">You may not complete the official checklist yet — <span>but you are still responsible for helping keep the attraction safe.</span></div>
+  </div>
 </div>
-<div class="content">
-<div>
-<div class="kicker">Before the park opens</div>
-<h1>Daily Safety Checks</h1>
-<p class="sub">Daily Safety Checks are completed and logged before guests use the attractions.</p>
-</div>
-<div class="callout">
-<h3>Purpose</h3>
-<p>Provide a brief overview of daily checks while clarifying that they are generally completed by experienced monitors, supervisors, or leadership.</p>
-<ul class="big-list"><li>Checks help confirm attractions are safe and guest ready before opening.</li><li>They may include padding, netting, courts, equipment, entry/exit areas, and visible hazards.</li><li>New monitors should understand why checks matter even if they are not assigned to complete the official log.</li></ul>
-</div>
-</div>
-<div class="narration"><strong>Planning Placeholder:</strong> Slide 5 topic and purpose only. Final visual design and narration pending.</div>
 </section>
-<section class="slide hero" data-narration="Planning placeholder for Day 3 slide 6: Safety Checks Do Not Replace Active Monitoring. Purpose: Prevent the mindset that a morning safety check means conditions cannot change later." data-slide="6">
-<div class="bg-soft"></div>
+<section class="slide d3s6" data-narration="When you find a problem during your shift, treat it as a live safety issue. Do not assume it was already reported, and do not assume it is fine because the area passed a safety check earlier. Conditions can change after opening. Pads can shift, equipment can become damaged, netting can tear, or guests can create hazards such as trash, spills, or bodily fluids. If the area is unsafe, stop use right away. Keep guests back and protect the area. Call leadership and give the exact location and what you found. Then support the response and wait for clearance. Do not reopen the area on your own. Your job is to notice the issue, act quickly, and keep guests away until leadership confirms the area is safe." data-slide="6">
 <div class="bar"></div>
-<div class="header">
-<div><div aria-hidden="true" class="eyebrow slide-label-hidden"></div></div>
-<div class="pill">Ongoing Safety</div>
+<div class="d3s6-wrap">
+  <div class="d3s6-copy">
+    <div class="d3s6-kicker">Mid-shift issue</div>
+    <div class="d3s6-titleblock">
+      <h1>Problem <span>Mid-Shift</span></h1>
+      <p class="d3s6-sub">If something becomes unsafe after opening, respond immediately. Do not wait or assume someone else already handled it.</p>
+    </div>
+    <div class="d3s6-note">
+      <div>
+        <h3>What can change?</h3>
+        <p>Even after an opening check, attraction conditions can change during the day.</p>
+      </div>
+      <div class="d3s6-tags">
+        <div>Pads shift, netting tears, or equipment becomes damaged.</div>
+        <div>Trash, spills, or bodily fluids create a hazard.</div>
+        <div>Guests begin using an area in an unsafe way.</div>
+      </div>
+    </div>
+  </div>
+  <div class="d3s6-board" aria-label="Mid-shift problem response standard">
+    <div class="d3s6-top">
+      <h3>Use the response standard</h3>
+      <div class="d3s6-pill">Act immediately</div>
+    </div>
+    <div class="d3s6-steps">
+      <div class="d3s6-step"><div class="d3s6-num">1</div><h4>Stop use</h4><p>If the area is unsafe, stop play or use right away.</p></div>
+      <div class="d3s6-step"><div class="d3s6-num">2</div><h4>Protect area</h4><p>Keep guests back and prevent the issue from getting worse.</p></div>
+      <div class="d3s6-step"><div class="d3s6-num">3</div><h4>Call leadership</h4><p>Give the exact location and clearly explain what you found.</p></div>
+      <div class="d3s6-step"><div class="d3s6-num">4</div><h4>Wait for clearance</h4><p>Support the response. Do not reopen the area on your own.</p></div>
+    </div>
+    <div class="d3s6-takeaway">If something looks wrong during the shift, treat it like a <span>live safety issue.</span></div>
+  </div>
 </div>
-<div class="content">
-<div>
-<div class="kicker">After opening</div>
-<h1>Safety Checks Do Not Replace Active Monitoring</h1>
-<p class="sub">The opening check starts the day. Active monitoring protects the day.</p>
-</div>
-<div class="callout">
-<h3>Purpose</h3>
-<p>Prevent the mindset that a morning safety check means conditions cannot change later.</p>
-<ul class="big-list"><li>Padding can shift, equipment can become damaged, and guests can create hazards.</li><li>Trash, spills, or bodily fluids can appear during the shift.</li><li>Report anything unsafe you notice, even if the attraction passed the opening check.</li></ul>
-</div>
-</div>
-<div class="narration"><strong>Planning Placeholder:</strong> Slide 6 topic and purpose only. Final visual design and narration pending.</div>
 </section>
 <section class="slide hero" data-narration="Planning placeholder for Day 3 slide 7: When You Find a Problem Mid-Shift. Purpose: Reinforce what to do when a safety issue appears after the park has already opened." data-slide="7">
 <div class="bg-soft"></div>
@@ -543,7 +703,7 @@ const maxPlayedTime=new Map();
 const cur=document.getElementById('cur'),prev=document.getElementById('prev'),next=document.getElementById('next'),speak=document.getElementById('speak');
 const total=document.getElementById('total');
 if(total) total.textContent=slides.length;
-const recordedNarration={0:'../audio/day3_slide1.m4a',1:'../audio/day3_slide2.m4a',2:'../audio/day3_slide3.m4a'};
+const recordedNarration={0:'../audio/day3_slide1.m4a',1:'../audio/day3_slide2.m4a',2:'../audio/day3_slide3.m4a',3:'../audio/day3_slide4.m4a',4:'../audio/day3_slide5.m4a',5:'../audio/day3_slide6.m4a'};
 const audioPlayer=new Audio();
 audioPlayer.preload='auto';
 function hasRecordedAudio(index=idx){return Object.prototype.hasOwnProperty.call(recordedNarration,index);}
@@ -650,55 +810,18 @@ document.addEventListener('keydown',(e)=>{
 });
 show(0,false);
 </script><script id="launch-training-pause-script">
-(function () {
-  "use strict";
-  function ready(callback) { if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", callback); } else { callback(); } }
-  ready(function () {
-    var button = document.getElementById("pauseTrainingBtn");
-    if (!button) return;
-    var paused = false;
-    var resumeTarget = null;
-    function visibleSlide() { return document.querySelector(".slide.active") || document; }
-    function allMedia() {
-      var domMedia = Array.prototype.slice.call(document.querySelectorAll("audio, video"));
-      var registry = Array.isArray(window.launchTrainingMediaRegistry) ? window.launchTrainingMediaRegistry : [];
-      return domMedia.concat(registry).filter(function (media, index, list) { return media && list.indexOf(media) === index; });
-    }
-    function currentMedia() {
-      var active = visibleSlide();
-      var mediaList = allMedia();
-      var playing = mediaList.find(function (media) { return !media.paused && !media.ended; });
-      var activeMedia = active.querySelector ? active.querySelector("audio, video") : null;
-      return playing || activeMedia || mediaList[0] || null;
-    }
-    function setButtonState() {
-      button.textContent = paused ? "▶ Resume" : "⏸ Pause";
-      button.setAttribute("aria-pressed", paused ? "true" : "false");
-      button.title = paused ? "Resume the current narration" : "Pause the current narration";
-    }
-    function pauseTraining() {
-      paused = true;
-      resumeTarget = currentMedia();
-      document.body.classList.add("training-paused");
-      if ("speechSynthesis" in window && window.speechSynthesis.speaking && !window.speechSynthesis.paused) { window.launchTrainingSpeechPaused = true; window.speechSynthesis.pause(); }
-      allMedia().forEach(function (media) { if (!media.paused && !media.ended) { if (media.dataset) media.dataset.trainingPaused = "true"; media.pause(); } });
-      setButtonState();
-    }
-    function resumeTraining() {
-      paused = false;
-      document.body.classList.remove("training-paused");
-      setButtonState();
-      if ("speechSynthesis" in window && window.launchTrainingSpeechPaused) { window.launchTrainingSpeechPaused = false; window.speechSynthesis.resume(); }
-      var target = resumeTarget || currentMedia();
-      allMedia().forEach(function (media) { if (media.dataset) delete media.dataset.trainingPaused; });
-      if (target && typeof target.play === "function" && !target.ended) target.play().catch(function () {});
-    }
-    button.addEventListener("click", function () { paused ? resumeTraining() : pauseTraining(); });
-    document.addEventListener("play", function (event) { if (paused && event.target && event.target.matches && event.target.matches("audio, video")) window.setTimeout(function () { event.target.pause(); }, 0); }, true);
-    document.addEventListener("click", function (event) { if (!paused) return; var blockedButton = event.target.closest && event.target.closest("#next, #nextBtn, #speak, #playNarrationBtn"); if (blockedButton) { event.preventDefault(); event.stopImmediatePropagation(); } }, true);
-    setButtonState();
-  });
-})();
+(function(){"use strict";function ready(cb){document.readyState==="loading"?document.addEventListener("DOMContentLoaded",cb):cb()}
+ready(function(){var b=document.getElementById("pauseTrainingBtn");if(!b)return;var paused=false,resumeTarget=null;
+function visible(){return document.querySelector(".slide.active")||document}
+function allMedia(){var dom=[].slice.call(document.querySelectorAll("audio, video"));var reg=Array.isArray(window.launchTrainingMediaRegistry)?window.launchTrainingMediaRegistry:[];return dom.concat(reg).filter(function(m,i,l){return m&&l.indexOf(m)===i})}
+function current(){var a=visible(),list=allMedia(),playing=list.find(function(m){return !m.paused&&!m.ended});var active=a.querySelector?a.querySelector("audio, video"):null;return playing||active||list[0]||null}
+function set(){b.textContent=paused?"▶ Resume":"⏸ Pause";b.setAttribute("aria-pressed",paused?"true":"false");b.title=paused?"Resume the current narration":"Pause the current narration"}
+function pause(){paused=true;resumeTarget=current();document.body.classList.add("training-paused");if("speechSynthesis" in window&&window.speechSynthesis.speaking&&!window.speechSynthesis.paused){window.launchTrainingSpeechPaused=true;window.speechSynthesis.pause()}allMedia().forEach(function(m){if(!m.paused&&!m.ended){if(m.dataset)m.dataset.trainingPaused="true";m.pause()}});set()}
+function resume(){paused=false;document.body.classList.remove("training-paused");set();if("speechSynthesis" in window&&window.launchTrainingSpeechPaused){window.launchTrainingSpeechPaused=false;window.speechSynthesis.resume()}var t=resumeTarget||current();allMedia().forEach(function(m){if(m.dataset)delete m.dataset.trainingPaused});if(t&&typeof t.play==="function"&&!t.ended)t.play().catch(function(){})}
+b.addEventListener("click",function(){paused?resume():pause()});
+document.addEventListener("play",function(e){if(paused&&e.target&&e.target.matches&&e.target.matches("audio, video"))setTimeout(function(){e.target.pause()},0)},true);
+document.addEventListener("click",function(e){if(!paused)return;var x=e.target.closest&&e.target.closest("#next,#nextBtn,#speak,#playNarrationBtn");if(x){e.preventDefault();e.stopImmediatePropagation()}},true);
+set()})})();
 </script>
 
 </body></html>

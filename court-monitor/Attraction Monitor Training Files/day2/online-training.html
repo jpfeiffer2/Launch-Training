@@ -274,30 +274,17 @@
 .controls{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-shrink:0}.home-link{color:#fff;text-decoration:none;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);padding:11px 15px;border-radius:999px;font-weight:800}.control-group{display:flex;gap:10px;align-items:center}button{border:0;border-radius:999px;padding:12px 18px;font-weight:900;cursor:pointer}.navbtn{background:#eef2f5;color:#111}.speak{background:#4b544a;color:#fff;cursor:pointer}.primary{background:var(--y);color:#000}button:disabled{opacity:.48;cursor:not-allowed}
 @media(max-width:800px){.placeholder-content{grid-template-columns:1fr;gap:8px;inset:80px 28px 35px}.slide-number{font-size:4rem;letter-spacing:-4px}h1{font-size:2.4rem}.objective{font-size:1rem;margin:12px 0 16px}.planning-row{grid-template-columns:1fr}.planning-card{min-height:auto}}
 .portal-nav-links{display:flex;gap:10px;align-items:center;flex-wrap:wrap}</style><script id="launch-training-media-tracker">
-(function () {
-  if (window.launchTrainingMediaRegistry) return;
-  window.launchTrainingMediaRegistry = [];
-  var NativeAudio = window.Audio;
-  window.Audio = function () {
-    var media = new (Function.prototype.bind.apply(NativeAudio, [null].concat(Array.prototype.slice.call(arguments))))();
-    window.launchTrainingMediaRegistry.push(media);
-    return media;
-  };
-  window.Audio.prototype = NativeAudio.prototype;
-})();
+(function(){if(window.launchTrainingMediaRegistry)return;window.launchTrainingMediaRegistry=[];var N=window.Audio;window.Audio=function(){var m=new(Function.prototype.bind.apply(N,[null].concat(Array.prototype.slice.call(arguments))))();window.launchTrainingMediaRegistry.push(m);return m};window.Audio.prototype=N.prototype})();
 </script>
 <style id="launch-training-pause-style">
-  .pause-training-btn { border: 0; border-radius: 999px; padding: 12px 18px; background: #f2e600; color: #111820; font-weight: 900; cursor: pointer; }
-  .pause-training-btn[aria-pressed="true"] { background: #ffffff; color: #111820; }
-  body.training-paused .slide.active { outline: 4px solid rgba(242, 230, 0, .75); outline-offset: 4px; }
-  body.training-paused #next, body.training-paused #nextBtn { pointer-events: none; opacity: .55; }
-  body.training-paused * { animation-play-state: paused !important; }
+.pause-training-btn{border:0;border-radius:999px;padding:12px 18px;background:#f2e600;color:#111820;font-weight:900;cursor:pointer}
+.pause-training-btn[aria-pressed="true"]{background:#fff;color:#111820}
+body.training-paused .slide.active{outline:4px solid rgba(242,230,0,.75);outline-offset:4px}
+body.training-paused #next,body.training-paused #nextBtn{pointer-events:none;opacity:.55}
+body.training-paused *{animation-play-state:paused!important}
 </style>
 
-  <style>
-    html { display: none; }
-    html.portal-authenticated { display: block; }
-  </style>
+  <style>html{display:none}html.portal-authenticated{display:block}</style>
   <script>
     (() => {
       const storageKey = "launchTrainingUnlockedUntil";
@@ -1143,55 +1130,18 @@ document.addEventListener('keydown',(e)=>{
 });
 show(0,false);
 </script><script id="launch-training-pause-script">
-(function () {
-  "use strict";
-  function ready(callback) { if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", callback); } else { callback(); } }
-  ready(function () {
-    var button = document.getElementById("pauseTrainingBtn");
-    if (!button) return;
-    var paused = false;
-    var resumeTarget = null;
-    function visibleSlide() { return document.querySelector(".slide.active") || document; }
-    function allMedia() {
-      var domMedia = Array.prototype.slice.call(document.querySelectorAll("audio, video"));
-      var registry = Array.isArray(window.launchTrainingMediaRegistry) ? window.launchTrainingMediaRegistry : [];
-      return domMedia.concat(registry).filter(function (media, index, list) { return media && list.indexOf(media) === index; });
-    }
-    function currentMedia() {
-      var active = visibleSlide();
-      var mediaList = allMedia();
-      var playing = mediaList.find(function (media) { return !media.paused && !media.ended; });
-      var activeMedia = active.querySelector ? active.querySelector("audio, video") : null;
-      return playing || activeMedia || mediaList[0] || null;
-    }
-    function setButtonState() {
-      button.textContent = paused ? "▶ Resume" : "⏸ Pause";
-      button.setAttribute("aria-pressed", paused ? "true" : "false");
-      button.title = paused ? "Resume the current narration" : "Pause the current narration";
-    }
-    function pauseTraining() {
-      paused = true;
-      resumeTarget = currentMedia();
-      document.body.classList.add("training-paused");
-      if ("speechSynthesis" in window && window.speechSynthesis.speaking && !window.speechSynthesis.paused) { window.launchTrainingSpeechPaused = true; window.speechSynthesis.pause(); }
-      allMedia().forEach(function (media) { if (!media.paused && !media.ended) { if (media.dataset) media.dataset.trainingPaused = "true"; media.pause(); } });
-      setButtonState();
-    }
-    function resumeTraining() {
-      paused = false;
-      document.body.classList.remove("training-paused");
-      setButtonState();
-      if ("speechSynthesis" in window && window.launchTrainingSpeechPaused) { window.launchTrainingSpeechPaused = false; window.speechSynthesis.resume(); }
-      var target = resumeTarget || currentMedia();
-      allMedia().forEach(function (media) { if (media.dataset) delete media.dataset.trainingPaused; });
-      if (target && typeof target.play === "function" && !target.ended) target.play().catch(function () {});
-    }
-    button.addEventListener("click", function () { paused ? resumeTraining() : pauseTraining(); });
-    document.addEventListener("play", function (event) { if (paused && event.target && event.target.matches && event.target.matches("audio, video")) window.setTimeout(function () { event.target.pause(); }, 0); }, true);
-    document.addEventListener("click", function (event) { if (!paused) return; var blockedButton = event.target.closest && event.target.closest("#next, #nextBtn, #speak, #playNarrationBtn"); if (blockedButton) { event.preventDefault(); event.stopImmediatePropagation(); } }, true);
-    setButtonState();
-  });
-})();
+(function(){"use strict";function ready(cb){document.readyState==="loading"?document.addEventListener("DOMContentLoaded",cb):cb()}
+ready(function(){var b=document.getElementById("pauseTrainingBtn");if(!b)return;var paused=false,resumeTarget=null;
+function visible(){return document.querySelector(".slide.active")||document}
+function allMedia(){var dom=[].slice.call(document.querySelectorAll("audio, video"));var reg=Array.isArray(window.launchTrainingMediaRegistry)?window.launchTrainingMediaRegistry:[];return dom.concat(reg).filter(function(m,i,l){return m&&l.indexOf(m)===i})}
+function current(){var a=visible(),list=allMedia(),playing=list.find(function(m){return !m.paused&&!m.ended});var active=a.querySelector?a.querySelector("audio, video"):null;return playing||active||list[0]||null}
+function set(){b.textContent=paused?"▶ Resume":"⏸ Pause";b.setAttribute("aria-pressed",paused?"true":"false");b.title=paused?"Resume the current narration":"Pause the current narration"}
+function pause(){paused=true;resumeTarget=current();document.body.classList.add("training-paused");if("speechSynthesis" in window&&window.speechSynthesis.speaking&&!window.speechSynthesis.paused){window.launchTrainingSpeechPaused=true;window.speechSynthesis.pause()}allMedia().forEach(function(m){if(!m.paused&&!m.ended){if(m.dataset)m.dataset.trainingPaused="true";m.pause()}});set()}
+function resume(){paused=false;document.body.classList.remove("training-paused");set();if("speechSynthesis" in window&&window.launchTrainingSpeechPaused){window.launchTrainingSpeechPaused=false;window.speechSynthesis.resume()}var t=resumeTarget||current();allMedia().forEach(function(m){if(m.dataset)delete m.dataset.trainingPaused});if(t&&typeof t.play==="function"&&!t.ended)t.play().catch(function(){})}
+b.addEventListener("click",function(){paused?resume():pause()});
+document.addEventListener("play",function(e){if(paused&&e.target&&e.target.matches&&e.target.matches("audio, video"))setTimeout(function(){e.target.pause()},0)},true);
+document.addEventListener("click",function(e){if(!paused)return;var x=e.target.closest&&e.target.closest("#next,#nextBtn,#speak,#playNarrationBtn");if(x){e.preventDefault();e.stopImmediatePropagation()}},true);
+set()})})();
 </script>
 
 </body></html>
