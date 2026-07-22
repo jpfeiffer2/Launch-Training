@@ -223,15 +223,309 @@
 
 
 
+
+
+/* Day 3 Slide 7 - communication standard */
+.d3s7{background:#06090b;color:#fff;overflow:hidden}
+.d3s7:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 16% 18%,rgba(108,194,74,.22),transparent 24%),radial-gradient(circle at 82% 18%,rgba(242,230,0,.12),transparent 24%),linear-gradient(135deg,#050607 0%,#0d1416 48%,#1d2918 100%)}
+.d3s7:after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:46px 46px;opacity:.33;mask-image:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.90))}
+.d3s7-wrap{position:absolute;z-index:3;inset:58px 40px 34px;display:grid;grid-template-columns:.78fr 1.22fr;gap:24px;align-items:stretch}
+.d3s7-copy{display:flex;flex-direction:column;justify-content:center;min-height:0}
+.d3s7-kicker{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:var(--y);text-transform:uppercase;letter-spacing:1.3px;font-weight:1000;font-size:.8rem;margin-bottom:18px}
+.d3s7-kicker:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--g);box-shadow:0 0 0 8px rgba(108,194,74,.12)}
+.d3s7 h1{margin:0;color:#fff;font-size:clamp(2.45rem,4.65vw,4.3rem);line-height:.9;letter-spacing:-2px}
+.d3s7 h1 span{display:block;color:var(--y)}
+.d3s7-sub{margin-top:12px;max-width:420px;color:#eef2f5;font-size:.97rem;line-height:1.2;font-weight:840}
+.d3s7-avoid{margin-top:18px;max-width:430px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:16px 16px 14px;box-shadow:0 18px 42px rgba(0,0,0,.22)}
+.d3s7-avoid h3{margin:0 0 10px;color:#ffb1bd;font-size:.96rem;letter-spacing:1px;text-transform:uppercase;line-height:1.1}
+.d3s7-avoid ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.d3s7-avoid li{position:relative;background:rgba(65,18,28,.62);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:10px 12px 10px 38px;color:#fff;font-size:.84rem;line-height:1.12;font-weight:840}
+.d3s7-avoid li:before{content:"";position:absolute;left:13px;top:50%;transform:translateY(-50%);width:12px;height:12px;border-radius:50%;background:#ff9cae}
+.d3s7-board{position:relative;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:30px;padding:17px;box-shadow:0 22px 54px rgba(0,0,0,.30);display:grid;grid-template-rows:auto 1fr auto auto;gap:13px;min-height:100%}
+.d3s7-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.d3s7-top h3{margin:0;color:#fff;font-size:1.16rem;line-height:1.05}
+.d3s7-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.18);color:var(--y);font-size:.74rem;font-weight:1000;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.d3s7-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;align-items:stretch}
+.d3s7-card{background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.10);border-radius:22px;padding:16px 14px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);display:flex;flex-direction:column;justify-content:center;min-height:170px}
+.d3s7-num{width:40px;height:40px;border-radius:14px;background:#090d0f;display:grid;place-items:center;color:var(--y);font-size:1rem;font-weight:1000;margin-bottom:13px;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.d3s7-card h4{margin:0 0 9px;color:#b9ff92;font-size:1rem;line-height:1.02;letter-spacing:1px;text-transform:uppercase}
+.d3s7-card p{margin:0;color:#fff;font-size:.86rem;line-height:1.14;font-weight:840}
+.d3s7-examples{background:rgba(8,11,13,.72);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:13px}
+.d3s7-examples h4{margin:0 0 10px;color:var(--y);font-size:.83rem;letter-spacing:1px;text-transform:uppercase}
+.d3s7-example-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.d3s7-example-grid div{background:rgba(255,255,255,.07);border-radius:13px;padding:9px 10px;color:#fff;font-size:.76rem;line-height:1.1;font-weight:820}
+.d3s7-takeaway{background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.14);border-left:9px solid var(--g);border-radius:18px;padding:10px 14px;color:#fff;font-size:.86rem;line-height:1.14;font-weight:1000;box-shadow:0 14px 32px rgba(0,0,0,.24)}
+.d3s7-takeaway span{color:var(--y)}
+@media(max-width:900px){.d3s7-wrap{grid-template-columns:1fr;gap:18px;inset:58px 28px 34px}.d3s7 h1{font-size:3rem}.d3s7-sub,.d3s7-avoid{max-width:none}.d3s7-cards,.d3s7-example-grid{grid-template-columns:1fr}.d3s7-copy{justify-content:flex-start}}
+
+
+
+/* Day 3 Slide 8 - repeat rule breakers */
+.d3s8{background:#06090b;color:#fff;overflow:hidden}
+.d3s8:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 16% 18%,rgba(108,194,74,.22),transparent 24%),radial-gradient(circle at 82% 18%,rgba(242,230,0,.12),transparent 24%),linear-gradient(135deg,#050607 0%,#0d1416 48%,#1d2918 100%)}
+.d3s8:after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:46px 46px;opacity:.33;mask-image:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.90))}
+.d3s8-wrap{position:absolute;z-index:3;inset:58px 40px 34px;display:grid;grid-template-columns:.78fr 1.22fr;gap:24px;align-items:stretch}
+.d3s8-copy{display:flex;flex-direction:column;justify-content:center;min-height:0}
+.d3s8-kicker{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:var(--y);text-transform:uppercase;letter-spacing:1.3px;font-weight:1000;font-size:.8rem;margin-bottom:18px}
+.d3s8-kicker:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--g);box-shadow:0 0 0 8px rgba(108,194,74,.12)}
+.d3s8 h1{margin:0;color:#fff;font-size:clamp(2.55rem,4.75vw,4.4rem);line-height:.9;letter-spacing:-2px}
+.d3s8 h1 span{display:block;color:var(--y)}
+.d3s8-sub{margin-top:12px;max-width:420px;color:#eef2f5;font-size:.97rem;line-height:1.2;font-weight:840}
+.d3s8-loop{margin-top:18px;max-width:430px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:16px 16px 14px;box-shadow:0 18px 42px rgba(0,0,0,.22)}
+.d3s8-loop h3{margin:0 0 10px;color:#b9ff92;font-size:.96rem;letter-spacing:1px;text-transform:uppercase;line-height:1.1}
+.d3s8-loop p{margin:0;color:#fff;font-size:.85rem;line-height:1.17;font-weight:840}
+.d3s8-loop ul{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px}
+.d3s8-loop li{position:relative;background:rgba(8,11,13,.72);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:9px 10px 9px 36px;color:#fff;font-size:.8rem;line-height:1.1;font-weight:830}
+.d3s8-loop li:before{content:"";position:absolute;left:13px;top:50%;transform:translateY(-50%);width:12px;height:12px;border-radius:50%;background:var(--y)}
+.d3s8-board{position:relative;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:30px;padding:17px;box-shadow:0 22px 54px rgba(0,0,0,.30);display:grid;grid-template-rows:auto 1fr auto auto;gap:13px;min-height:100%}
+.d3s8-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.d3s8-top h3{margin:0;color:#fff;font-size:1.16rem;line-height:1.05}
+.d3s8-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.18);color:var(--y);font-size:.74rem;font-weight:1000;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.d3s8-steps{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;align-items:stretch}
+.d3s8-step{background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.10);border-radius:22px;padding:16px 14px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);display:flex;flex-direction:column;justify-content:center;min-height:148px}
+.d3s8-num{width:40px;height:40px;border-radius:14px;background:#090d0f;display:grid;place-items:center;color:var(--y);font-size:1rem;font-weight:1000;margin-bottom:12px;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.d3s8-step h4{margin:0 0 8px;color:#b9ff92;font-size:.98rem;line-height:1.02;letter-spacing:1px;text-transform:uppercase}
+.d3s8-step p{margin:0;color:#fff;font-size:.84rem;line-height:1.14;font-weight:840}
+.d3s8-escalate{background:rgba(8,11,13,.72);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:13px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.d3s8-escalate div{background:rgba(255,255,255,.07);border-radius:14px;padding:10px 12px;color:#fff;font-size:.78rem;line-height:1.1;font-weight:820}
+.d3s8-escalate b{display:block;color:var(--y);text-transform:uppercase;letter-spacing:1px;font-size:.74rem;margin-bottom:5px}
+.d3s8-takeaway{background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.14);border-left:9px solid var(--g);border-radius:18px;padding:10px 14px;color:#fff;font-size:.86rem;line-height:1.14;font-weight:1000;box-shadow:0 14px 32px rgba(0,0,0,.24)}
+.d3s8-takeaway span{color:var(--y)}
+@media(max-width:900px){.d3s8-wrap{grid-template-columns:1fr;gap:18px;inset:58px 28px 34px}.d3s8 h1{font-size:3rem}.d3s8-sub,.d3s8-loop{max-width:none}.d3s8-steps,.d3s8-escalate{grid-template-columns:1fr}.d3s8-copy{justify-content:flex-start}}
+
+
+
+/* Day 3 Slide 9 - parent pressure */
+.d3s9{background:#06090b;color:#fff;overflow:hidden}
+.d3s9:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 16% 18%,rgba(108,194,74,.22),transparent 24%),radial-gradient(circle at 82% 18%,rgba(242,230,0,.13),transparent 24%),linear-gradient(135deg,#050607 0%,#0d1416 48%,#1d2818 100%)}
+.d3s9:after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:46px 46px;opacity:.33;mask-image:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.90))}
+.d3s9-wrap{position:absolute;z-index:3;inset:56px 40px 30px;display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:stretch}
+.d3s9-copy{display:flex;flex-direction:column;justify-content:flex-start;min-height:0}
+.d3s9-kicker{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:var(--y);text-transform:uppercase;letter-spacing:1.3px;font-weight:1000;font-size:.8rem;margin-bottom:18px}
+.d3s9-kicker:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--g);box-shadow:0 0 0 8px rgba(108,194,74,.12)}
+.d3s9 h1{margin:0;color:#fff;font-size:clamp(2.15rem,4.2vw,3.8rem);line-height:.9;letter-spacing:-2px}
+.d3s9 h1 span{display:block;color:var(--y)}
+.d3s9-sub{margin-top:12px;max-width:430px;color:#eef2f5;font-size:.95rem;line-height:1.18;font-weight:840}
+.d3s9-scene{position:relative;margin-top:16px;flex:1;min-height:0;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:28px;padding:16px;box-shadow:0 22px 54px rgba(0,0,0,.30);display:grid;grid-template-rows:auto 1fr auto;gap:12px}
+.d3s9-scene-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.d3s9-scene-top h3{margin:0;color:#fff;font-size:1.04rem;line-height:1.05}
+.d3s9-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.18);color:var(--y);font-size:.72rem;font-weight:1000;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.d3s9-stage{position:relative;background:rgba(8,11,13,.72);border:1px solid rgba(255,255,255,.10);border-radius:22px;padding:16px 14px;display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;min-height:220px}
+.d3s9-person{display:grid;justify-items:center;gap:10px}
+.d3s9-person .avatar{width:78px;height:78px;border-radius:22px;background:linear-gradient(180deg,#20292d,#0d1113);border:1px solid rgba(255,255,255,.10);position:relative}
+.d3s9-person .avatar:before{content:"";position:absolute;left:50%;top:17px;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;background:#fff;opacity:.86}
+.d3s9-person .avatar:after{content:"";position:absolute;left:50%;top:40px;transform:translateX(-50%);width:34px;height:24px;border-radius:16px 16px 10px 10px;background:#fff;opacity:.86}
+.d3s9-person.monitor .avatar{box-shadow:0 0 0 4px rgba(108,194,74,.18)}
+.d3s9-person.parent .avatar{box-shadow:0 0 0 4px rgba(255,123,123,.16)}
+.d3s9-person .label{font-size:.8rem;font-weight:950;letter-spacing:1px;text-transform:uppercase}
+.d3s9-person.monitor .label{color:#b9ff92}
+.d3s9-person.parent .label{color:#ffadad}
+.d3s9-bubble{max-width:175px;border-radius:18px;padding:10px 12px;font-size:.77rem;line-height:1.12;font-weight:840}
+.d3s9-person.monitor .d3s9-bubble{background:rgba(20,55,18,.76);border:1px solid rgba(185,255,146,.22);color:#fff}
+.d3s9-person.parent .d3s9-bubble{background:rgba(72,18,26,.78);border:1px solid rgba(255,173,173,.18);color:#fff}
+.d3s9-tag{position:relative;align-self:stretch;display:grid;place-items:center;min-width:95px}
+.d3s9-tag:before{content:"";position:absolute;width:3px;height:100%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.18),transparent)}
+.d3s9-tag span{display:inline-block;padding:12px 10px;border-radius:18px;background:linear-gradient(180deg,var(--y),#c9db00);color:#111;font-size:1rem;font-weight:1000;letter-spacing:1.5px;text-transform:uppercase;transform:rotate(-8deg);box-shadow:0 12px 28px rgba(0,0,0,.28)}
+.d3s9-mini{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.d3s9-mini div{background:rgba(8,11,13,.76);border:1px solid rgba(255,255,255,.10);border-radius:15px;padding:10px 11px;color:#fff;font-size:.78rem;line-height:1.12;font-weight:835}
+.d3s9-mini b{display:block;color:var(--y);font-size:.73rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+.d3s9-board{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:30px;padding:16px;box-shadow:0 22px 54px rgba(0,0,0,.30);display:grid;grid-template-rows:auto 1fr auto;gap:12px}
+.d3s9-board-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.d3s9-board-top h3{margin:0;color:#fff;font-size:1.14rem;line-height:1.05}
+.d3s9-lanes{display:grid;grid-template-rows:1fr 1fr;gap:12px}
+.d3s9-lane{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-radius:22px;padding:14px 14px 12px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;min-height:0}
+.d3s9-lane .num{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:#090d0f;color:var(--y);font-size:1rem;font-weight:1000;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.d3s9-lane.calm .num{box-shadow:0 0 0 4px rgba(108,194,74,.12),0 0 0 1px rgba(255,255,255,.08)}
+.d3s9-lane.angry .num{box-shadow:0 0 0 4px rgba(255,123,123,.12),0 0 0 1px rgba(255,255,255,.08)}
+.d3s9-lane h4{margin:0;color:#fff;font-size:1.02rem;line-height:1.02}
+.d3s9-lane .strap{margin-top:5px;color:#b8ff91;font-size:.76rem;letter-spacing:1px;text-transform:uppercase;font-weight:1000}
+.d3s9-lane.angry .strap{color:#ffb1b1}
+.d3s9-quote{margin-top:10px;background:rgba(8,11,13,.80);border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:9px 11px;color:#fff;font-size:.79rem;line-height:1.12;font-weight:835}
+.d3s9-quote.good{border-left:6px solid var(--g)}
+.d3s9-quote.warn{border-left:6px solid #ff8f8f}
+.d3s9-lane ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
+.d3s9-lane li{position:relative;padding-left:18px;color:#dfe5e8;font-size:.75rem;line-height:1.1;font-weight:820}
+.d3s9-lane li:before{content:"";position:absolute;left:0;top:.42em;width:9px;height:9px;border-radius:50%;background:var(--y)}
+.d3s9-takeaway{background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.14);border-left:9px solid var(--g);border-radius:18px;padding:11px 14px;color:#fff;font-size:.86rem;line-height:1.14;font-weight:1000;box-shadow:0 14px 32px rgba(0,0,0,.24)}
+.d3s9-takeaway span{color:var(--y)}
+@media(max-width:900px){.d3s9-wrap{grid-template-columns:1fr;gap:18px;inset:56px 28px 30px}.d3s9 h1{font-size:3rem}.d3s9-sub{max-width:none}.d3s9-stage{grid-template-columns:1fr;min-height:auto}.d3s9-tag{min-width:unset;min-height:74px}.d3s9-mini{grid-template-columns:1fr}.d3s9-lanes{grid-template-rows:auto;grid-template-columns:1fr}.d3s9-lane{grid-template-columns:1fr}}
+
+
+
+/* Day 3 Slide 9 sizing correction - compact layout */
+.d3s9-wrap{position:absolute;z-index:3;inset:46px 38px 36px;display:grid;grid-template-columns:.78fr 1.22fr;gap:24px;align-items:stretch;overflow:hidden}
+.d3s9-copy,.d3s9-board{min-height:0;overflow:hidden}
+.d3s9-kicker{padding:8px 14px;font-size:.75rem;margin-bottom:13px}
+.d3s9 h1{font-size:clamp(2.4rem,4vw,3.62rem);line-height:.88;letter-spacing:-2px;margin:0 0 9px}
+.d3s9 h1 span{display:block;color:var(--y)}
+.d3s9-sub{margin:0;max-width:390px;font-size:.91rem;line-height:1.12;font-weight:900}
+.d3s9-scene{margin-top:13px;flex:1;min-height:0;max-height:300px;padding:13px;border-radius:24px;grid-template-rows:auto 112px auto auto;gap:9px;overflow:hidden}
+.d3s9-scene-top h3{font-size:.98rem}
+.d3s9-chip{padding:7px 11px;font-size:.67rem}
+.d3s9-stage.compact{min-height:0;height:112px;padding:11px;grid-template-columns:1fr 86px 1fr;gap:10px;align-items:center}
+.d3s9-person{gap:5px}
+.d3s9-person .avatar{width:58px;height:58px;border-radius:17px}
+.d3s9-person .avatar:before{top:12px;width:17px;height:17px}
+.d3s9-person .avatar:after{top:31px;width:27px;height:19px}
+.d3s9-person .label{font-size:.74rem}
+.d3s9-bubble{display:none}
+.d3s9-tag{min-width:84px;align-self:center}
+.d3s9-tag:before{height:112px}
+.d3s9-tag span{padding:9px 10px;border-radius:16px;font-size:.86rem;letter-spacing:1px}
+.d3s9-say{background:rgba(8,11,13,.82);border-left:7px solid var(--g);border-radius:15px;padding:9px 11px;color:#fff;font-size:.81rem;line-height:1.08;font-weight:1000}
+.d3s9-mini.single{display:block}
+.d3s9-mini.single div{font-size:.76rem;line-height:1.1;padding:8px 10px}
+.d3s9-board{padding:15px;border-radius:28px;grid-template-rows:auto 1fr auto;gap:11px;max-height:100%}
+.d3s9-board-top h3{font-size:1.1rem}
+.d3s9-lanes{display:grid;grid-template-rows:1fr 1fr;gap:11px;min-height:0}
+.d3s9-lane{padding:12px 14px;grid-template-columns:42px 1fr;gap:12px;align-items:start;min-height:0;overflow:hidden;border-radius:21px}
+.d3s9-lane .num{width:40px;height:40px;border-radius:14px}
+.d3s9-lane h4{font-size:1.05rem;margin:0}
+.d3s9-lane .strap{font-size:.72rem;margin-top:4px}
+.d3s9-quote{margin-top:7px;padding:8px 10px;border-radius:14px;font-size:.78rem;line-height:1.07}
+.d3s9-lane ul{margin-top:7px;gap:5px}
+.d3s9-lane li{font-size:.74rem;line-height:1.07;padding-left:16px}
+.d3s9-lane li:before{width:8px;height:8px}
+.d3s9-takeaway{padding:10px 14px;font-size:.85rem;line-height:1.07;border-radius:17px}
+
+
+/* Day 3 Slide 9 sizing refinement */
+.d3s9-wrap{grid-template-columns:.79fr 1.21fr;inset:46px 38px 34px}
+.d3s9 h1{font-size:clamp(2.18rem,3.55vw,3.18rem);line-height:.88;letter-spacing:-1.8px;margin:0 0 8px;max-width:340px}
+.d3s9-sub{max-width:410px;font-size:.96rem;line-height:1.07;font-weight:900}
+.d3s9-scene{margin-top:12px;max-height:276px;padding:12px;border-radius:24px;grid-template-rows:auto 100px auto auto;gap:8px}
+.d3s9-scene-top h3{font-size:.96rem}
+.d3s9-chip{padding:7px 11px;font-size:.69rem}
+.d3s9-stage.compact{height:100px;padding:10px;grid-template-columns:1fr 78px 1fr;gap:8px}
+.d3s9-person .avatar{width:54px;height:54px;border-radius:16px}
+.d3s9-person .avatar:before{top:11px;width:16px;height:16px}
+.d3s9-person .avatar:after{top:29px;width:25px;height:17px}
+.d3s9-person .label{font-size:.72rem}
+.d3s9-tag{min-width:78px}
+.d3s9-tag:before{height:100px}
+.d3s9-tag span{padding:9px 10px;border-radius:15px;font-size:.82rem;letter-spacing:.8px}
+.d3s9-say{padding:8px 10px;font-size:.79rem;line-height:1.05;border-radius:14px}
+.d3s9-mini.single div{font-size:.73rem;line-height:1.05;padding:7px 10px}
+.d3s9-mini.single b{font-size:.71rem;margin-bottom:3px}
+.d3s9-board{padding:17px 18px;border-radius:28px;gap:12px}
+.d3s9-board-top h3{font-size:1.22rem}
+.d3s9-lanes{gap:12px}
+.d3s9-lane{padding:16px 17px 14px;grid-template-columns:44px 1fr;gap:14px;border-radius:22px}
+.d3s9-lane .num{width:42px;height:42px;font-size:1.02rem}
+.d3s9-lane h4{font-size:1.14rem;line-height:1}
+.d3s9-lane .strap{font-size:.8rem;margin-top:5px}
+.d3s9-quote{margin-top:9px;padding:10px 12px;border-radius:15px;font-size:.84rem;line-height:1.08}
+.d3s9-lane ul{margin-top:9px;gap:7px}
+.d3s9-lane li{font-size:.82rem;line-height:1.08;padding-left:17px}
+.d3s9-lane li:before{width:8px;height:8px;top:.4em}
+.d3s9-takeaway{padding:11px 14px;font-size:.92rem;line-height:1.08}
+
+
+
+/* Day 3 Slide 10 - details matter */
+.d3s10{background:#06090b;color:#fff;overflow:hidden}
+.d3s10:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 16% 18%,rgba(108,194,74,.22),transparent 24%),radial-gradient(circle at 84% 18%,rgba(242,230,0,.14),transparent 24%),linear-gradient(135deg,#050607 0%,#0d1416 48%,#1c2818 100%)}
+.d3s10:after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:46px 46px;opacity:.32;mask-image:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.90))}
+.d3s10-wrap{position:absolute;z-index:3;inset:50px 40px 36px;display:grid;grid-template-columns:.82fr 1.18fr;gap:24px;align-items:stretch;overflow:hidden}
+.d3s10-left,.d3s10-board{min-height:0;overflow:hidden}
+.d3s10-left{display:flex;flex-direction:column;justify-content:flex-start}
+.d3s10-kicker{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;padding:9px 15px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:var(--y);text-transform:uppercase;letter-spacing:1.25px;font-weight:1000;font-size:.77rem;margin-bottom:14px}
+.d3s10-kicker:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--g);box-shadow:0 0 0 8px rgba(108,194,74,.12)}
+.d3s10 h1{margin:0;color:#fff;font-size:clamp(2.7rem,4.45vw,4.12rem);line-height:.88;letter-spacing:-2.2px;max-width:400px}
+.d3s10 h1 span{display:block;color:var(--y)}
+.d3s10-sub{margin:12px 0 0;max-width:430px;color:#eef2f5;font-size:.96rem;line-height:1.12;font-weight:870}
+.d3s10-facts{margin-top:18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:28px;padding:16px;box-shadow:0 22px 54px rgba(0,0,0,.30);display:grid;gap:13px;flex:1;max-height:306px}
+.d3s10-stamp{position:relative;background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.11);border-radius:22px;min-height:112px;display:grid;place-items:center;overflow:hidden}
+.d3s10-stamp:before{content:"FACTS ONLY";display:inline-block;color:#111;background:linear-gradient(180deg,var(--y),#c9db00);padding:14px 22px;border-radius:18px;font-size:1.55rem;font-weight:1000;letter-spacing:1.5px;transform:rotate(-7deg);box-shadow:0 14px 30px rgba(0,0,0,.32)}
+.d3s10-stamp:after{content:"What you saw • What you heard • What you did";position:absolute;bottom:10px;left:14px;right:14px;text-align:center;color:#dfe5e8;font-size:.78rem;font-weight:900;letter-spacing:.2px}
+.d3s10-nos{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.d3s10-no{background:rgba(8,11,13,.76);border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:11px 8px;text-align:center;color:#fff;font-size:.82rem;line-height:1.08;font-weight:1000}
+.d3s10-no b{display:block;color:#ffb1b1;text-transform:uppercase;font-size:.72rem;letter-spacing:1px;margin-bottom:5px}
+.d3s10-board{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:30px;padding:17px;box-shadow:0 22px 54px rgba(0,0,0,.30);display:grid;grid-template-rows:auto 1fr auto;gap:13px}
+.d3s10-board-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.d3s10-board-top h3{margin:0;color:#fff;font-size:1.24rem;line-height:1.05}
+.d3s10-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.18);color:var(--y);font-size:.70rem;font-weight:1000;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.d3s10-grid{display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:1fr 1fr;gap:12px;min-height:0}
+.d3s10-card{position:relative;background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.10);border-radius:22px;padding:15px 14px 13px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);display:flex;flex-direction:column;justify-content:flex-start;min-height:0}
+.d3s10-card:nth-child(1),.d3s10-card:nth-child(2),.d3s10-card:nth-child(3){grid-column:span 2}
+.d3s10-card:nth-child(4),.d3s10-card:nth-child(5){grid-column:span 3}
+.d3s10-icon{width:42px;height:42px;border-radius:14px;background:#090d0f;display:grid;place-items:center;color:var(--y);font-size:1.05rem;font-weight:1000;margin-bottom:12px;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.d3s10-card h4{margin:0 0 8px;color:#b9ff92;font-size:1.05rem;line-height:1.02;letter-spacing:.5px;text-transform:uppercase}
+.d3s10-card p{margin:0;color:#fff;font-size:.86rem;line-height:1.13;font-weight:840}
+.d3s10-card strong{color:var(--y);font-weight:1000}
+.d3s10-takeaway{background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.14);border-left:9px solid var(--g);border-radius:18px;padding:11px 14px;color:#fff;font-size:.94rem;line-height:1.1;font-weight:1000;box-shadow:0 14px 32px rgba(0,0,0,.24)}
+.d3s10-takeaway span{color:var(--y)}
+@media(max-width:900px){.d3s10-wrap{grid-template-columns:1fr;gap:18px;inset:50px 28px 36px}.d3s10 h1{font-size:3.1rem}.d3s10-sub{max-width:none}.d3s10-grid{grid-template-columns:1fr;grid-template-rows:auto}.d3s10-card:nth-child(n){grid-column:auto}.d3s10-nos{grid-template-columns:1fr}}
+
+
+/* Day 3 remaining slides - compact final pass */
+.d3rem{background:#06090b;color:#fff;overflow:hidden}
+.d3rem:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 17% 18%,rgba(108,194,74,.22),transparent 25%),radial-gradient(circle at 86% 18%,rgba(242,230,0,.14),transparent 24%),linear-gradient(135deg,#050607 0%,#0d1416 48%,#1c2818 100%)}
+.d3rem:after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:46px 46px;opacity:.30;mask-image:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.88))}
+.d3rem-wrap{position:absolute;z-index:3;inset:48px 40px 34px;display:grid;grid-template-columns:.82fr 1.18fr;gap:24px;align-items:stretch;overflow:hidden}
+.d3rem-left,.d3rem-board{min-height:0;overflow:hidden}
+.d3rem-left{display:flex;flex-direction:column;justify-content:flex-start}
+.d3rem-kicker{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:var(--y);text-transform:uppercase;letter-spacing:1.15px;font-weight:1000;font-size:.75rem;margin-bottom:13px}
+.d3rem-kicker:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--g);box-shadow:0 0 0 8px rgba(108,194,74,.12)}
+.d3rem h1{margin:0 0 10px;color:#fff;font-size:clamp(2.25rem,3.75vw,3.5rem);line-height:.88;letter-spacing:-1.8px}
+.d3rem h1 span{display:block;color:var(--y)}
+.d3rem-sub{margin:0;color:#eef2f5;font-size:.96rem;line-height:1.11;font-weight:870;max-width:420px}
+.d3rem-focus{margin-top:15px;background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.16);border-radius:24px;padding:15px;box-shadow:0 18px 42px rgba(0,0,0,.24)}
+.d3rem-focus h3{margin:0 0 9px;color:#b9ff92;font-size:.94rem;line-height:1.05;text-transform:uppercase;letter-spacing:1px}
+.d3rem-focus p{margin:0;color:#fff;font-size:.83rem;line-height:1.16;font-weight:850}
+.d3rem-focus ul{list-style:none;margin:11px 0 0;padding:0;display:grid;gap:7px}
+.d3rem-focus li{position:relative;padding-left:18px;color:#dfe5e8;font-size:.79rem;line-height:1.11;font-weight:825}
+.d3rem-focus li:before{content:"";position:absolute;left:0;top:.36em;width:9px;height:9px;border-radius:50%;background:var(--y)}
+.d3rem-board{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:30px;padding:17px;box-shadow:0 22px 54px rgba(0,0,0,.30);display:grid;grid-template-rows:auto 1fr auto;gap:13px}
+.d3rem-board-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.d3rem-board-top h3{margin:0;color:#fff;font-size:1.18rem;line-height:1.04}
+.d3rem-chip{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:999px;background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.18);color:var(--y);font-size:.69rem;font-weight:1000;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.d3rem-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;min-height:0}
+.d3rem-card{background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.10);border-radius:20px;padding:13px 13px 12px;min-height:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)}
+.d3rem-card h4{margin:0 0 7px;color:#b9ff92;font-size:.98rem;line-height:1.02;text-transform:uppercase;letter-spacing:.85px}
+.d3rem-card p{margin:0;color:#fff;font-size:.83rem;line-height:1.12;font-weight:820}
+.d3rem-takeaway{background:rgba(8,11,13,.82);border:1px solid rgba(255,255,255,.14);border-left:9px solid var(--g);border-radius:18px;padding:10px 14px;color:#fff;font-size:.90rem;line-height:1.10;font-weight:1000;box-shadow:0 14px 32px rgba(0,0,0,.24)}
+.d3rem-takeaway span{color:var(--y)}
+.d3rem-five{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;min-height:0}
+.d3rem-iconcard{background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.10);border-radius:20px;padding:13px 10px 12px;text-align:center;display:grid;align-content:center;gap:8px;min-height:0}
+.d3rem-iconcard .big{font-size:1.8rem;line-height:1}
+.d3rem-iconcard h4{margin:0;color:#b9ff92;font-size:.78rem;line-height:1.02;text-transform:uppercase;letter-spacing:.85px}
+.d3rem-iconcard p{margin:0;color:#fff;font-size:.72rem;line-height:1.08;font-weight:820}
+.d3rem-reset{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;min-height:0}
+.d3rem-reset .d3rem-card{display:grid;grid-template-rows:auto auto 1fr;align-content:start;min-height:132px}
+.d3rem-num{width:38px;height:38px;border-radius:14px;background:#090d0f;color:var(--y);display:grid;place-items:center;font-size:1rem;font-weight:1000;margin-bottom:9px;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.d3challenge .d3rem-wrap{grid-template-columns:.76fr 1.24fr}
+.d3scenario-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;min-height:0}
+.d3scenario{position:relative;background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.10);border-radius:20px;padding:13px 13px 12px;display:grid;grid-template-rows:auto 1fr auto;gap:8px;min-height:0}
+.d3scenario .tag{display:inline-flex;align-self:start;justify-self:start;padding:6px 9px;border-radius:999px;background:rgba(242,230,0,.14);color:var(--y);font-size:.66rem;font-weight:1000;letter-spacing:1px;text-transform:uppercase}
+.d3scenario h4{margin:0;color:#fff;font-size:.94rem;line-height:1.05}
+.d3scenario p{margin:0;color:#b9ff92;font-size:.78rem;line-height:1.09;font-weight:900}
+.d3standard .d3rem-board{grid-template-rows:auto 1fr}
+.d3standard-grid{display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:14px;min-height:0}
+.d3standard-card{background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.10);border-radius:24px;padding:18px 16px;display:grid;align-content:center;justify-items:start;gap:8px;min-height:0}
+.d3standard-card .symbol{width:46px;height:46px;border-radius:16px;background:#090d0f;color:var(--y);display:grid;place-items:center;font-size:1.25rem;font-weight:1000;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.d3standard-card h4{margin:0;color:#b9ff92;font-size:1.05rem;line-height:1.02;text-transform:uppercase;letter-spacing:.9px}
+.d3standard-card p{margin:0;color:#fff;font-size:.86rem;line-height:1.12;font-weight:820}
+.d3complete .d3rem-wrap{grid-template-columns:1fr 1fr}
+.d3complete-mark{margin-top:18px;flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:30px;display:grid;place-items:center;min-height:0;box-shadow:0 22px 54px rgba(0,0,0,.30)}
+.d3complete-mark .check{width:178px;height:178px;border-radius:44px;background:linear-gradient(180deg,var(--y),#c9db00);color:#111;display:grid;place-items:center;font-size:6rem;font-weight:1000;box-shadow:0 20px 55px rgba(0,0,0,.28),0 0 0 10px rgba(108,194,74,.18)}
+.d3complete-list{display:grid;grid-template-rows:repeat(3,1fr);gap:13px;min-height:0}
+.d3complete-step{background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.10);border-radius:22px;padding:16px;display:grid;grid-template-columns:44px 1fr;gap:13px;align-items:center;min-height:0}
+.d3complete-step .num{width:44px;height:44px;border-radius:15px;background:#090d0f;color:var(--y);display:grid;place-items:center;font-size:1.02rem;font-weight:1000;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.d3complete-step h4{margin:0 0 5px;color:#b9ff92;font-size:1.02rem;line-height:1.02;text-transform:uppercase;letter-spacing:.9px}
+.d3complete-step p{margin:0;color:#fff;font-size:.86rem;line-height:1.11;font-weight:820}
+@media(max-width:900px){.d3rem-wrap,.d3challenge .d3rem-wrap,.d3complete .d3rem-wrap{grid-template-columns:1fr;inset:48px 28px 34px}.d3rem-grid,.d3rem-reset,.d3scenario-grid,.d3standard-grid,.d3rem-five{grid-template-columns:1fr}.d3rem h1{font-size:3rem}}
+
+
+/* Day 3 remaining slides validation tweak */
+.d3rem h1{line-height:.92}
+.d3rem h1 span{line-height:.92}
+
 .portal-nav-links{display:flex;gap:10px;align-items:center;flex-wrap:wrap}</style><script id="launch-training-media-tracker">
 (function(){if(window.launchTrainingMediaRegistry)return;window.launchTrainingMediaRegistry=[];var N=window.Audio;window.Audio=function(){var m=new(Function.prototype.bind.apply(N,[null].concat(Array.prototype.slice.call(arguments))))();window.launchTrainingMediaRegistry.push(m);return m};window.Audio.prototype=N.prototype})();
 </script>
 <style id="launch-training-pause-style">
-.pause-training-btn{border:0;border-radius:999px;padding:12px 18px;background:#f2e600;color:#111820;font-weight:900;cursor:pointer}
-.pause-training-btn[aria-pressed="true"]{background:#fff;color:#111820}
-body.training-paused .slide.active{outline:4px solid rgba(242,230,0,.75);outline-offset:4px}
-body.training-paused #next,body.training-paused #nextBtn{pointer-events:none;opacity:.55}
-body.training-paused *{animation-play-state:paused!important}
+.pause-training-btn{border:0;border-radius:999px;padding:12px 18px;background:#f2e600;color:#111820;font-weight:900;cursor:pointer}.pause-training-btn[aria-pressed="true"]{background:#fff;color:#111820}body.training-paused .slide.active{outline:4px solid rgba(242,230,0,.75);outline-offset:4px}body.training-paused #next,body.training-paused #nextBtn{pointer-events:none;opacity:.55}body.training-paused *{animation-play-state:paused!important}
 </style>
 
   <style>html{display:none}html.portal-authenticated{display:block}</style>
@@ -247,9 +541,7 @@ body.training-paused *{animation-play-state:paused!important}
         const portalBase = modulePosition >= 0 ? currentPath.slice(0, modulePosition + 1) : "/";
         const returnPath = currentPath + window.location.search + window.location.hash;
         window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
-      } else {
-        document.documentElement.classList.add("portal-authenticated");
-      }
+      } else { document.documentElement.classList.add("portal-authenticated"); }
     })();
   </script>
 
@@ -505,194 +797,301 @@ body.training-paused *{animation-play-state:paused!important}
   </div>
 </div>
 </section>
-<section class="slide hero" data-narration="Planning placeholder for Day 3 slide 7: When You Find a Problem Mid-Shift. Purpose: Reinforce what to do when a safety issue appears after the park has already opened." data-slide="7">
-<div class="bg-soft"></div>
+<section class="slide d3s7" data-narration="When you need help during a shift, communication needs to be clear and specific. Do not just say, I need help, or, there is a problem. Leadership needs to know where to go, what is happening, and what kind of support is needed. A good call gives three things: the location, the issue, and the need. Start with the location. Say the attraction or area clearly, such as Main Court, Dodgeball, Stunt Bag, Launch N Dunk, or the seating area. Then explain the issue briefly. For example, a guest is refusing to follow rules, a pad has shifted, there is bodily fluid in the area, or equipment appears damaged. Finally, say what you need. You may need a supervisor, a manager, cleaning support, maintenance support, or a Code Blue response. Keep the message calm, short, and professional. Do not give unnecessary details over the radio, especially if the situation involves an injury or something sensitive. Clear communication gets the right help to the right place faster." data-slide="7">
 <div class="bar"></div>
-<div class="header">
-<div><div aria-hidden="true" class="eyebrow slide-label-hidden"></div></div>
-<div class="pill">Mid-Shift Issue</div>
+<div class="d3s7-wrap">
+  <div class="d3s7-copy">
+    <div class="d3s7-kicker">Call early and clearly</div>
+    <h1>Communicate <span>Clearly</span></h1>
+    <p class="d3s7-sub">When something needs leadership support, give information the team can act on quickly.</p>
+    <div class="d3s7-avoid">
+      <h3>Do not be vague</h3>
+      <ul>
+        <li>“Someone needs help.”</li>
+        <li>“There is a problem.”</li>
+        <li>“Can a manager come here?”</li>
+      </ul>
+    </div>
+  </div>
+  <div class="d3s7-board" aria-label="Clear radio communication standard">
+    <div class="d3s7-top">
+      <h3>Give the information leadership needs</h3>
+      <div class="d3s7-pill">Location + issue + need</div>
+    </div>
+    <div class="d3s7-cards">
+      <div class="d3s7-card"><div class="d3s7-num">1</div><h4>Where?</h4><p>Give the exact attraction or area.</p></div>
+      <div class="d3s7-card"><div class="d3s7-num">2</div><h4>What?</h4><p>Briefly explain what is happening.</p></div>
+      <div class="d3s7-card"><div class="d3s7-num">3</div><h4>Need?</h4><p>Say what support is needed.</p></div>
+    </div>
+    <div class="d3s7-examples">
+      <h4>Good examples</h4>
+      <div class="d3s7-example-grid">
+        <div>“Supervisor needed at Main Court. Pad has shifted.”</div>
+        <div>“Manager needed at Dodgeball. Guest refusing rules.”</div>
+        <div>“Bodily fluids near Launch N Dunk. Area is closed.”</div>
+        <div>“Code Blue at Stunt Bag. Leadership needed immediately.”</div>
+      </div>
+    </div>
+    <div class="d3s7-takeaway">Clear communication gets the <span>right help to the right place faster.</span></div>
+  </div>
 </div>
-<div class="content">
-<div>
-<div class="kicker">Use the response standard</div>
-<h1>When You Find a Problem Mid-Shift</h1>
-<p class="sub">Connect Day 3 floor coverage back to the Day 2 response standard.</p>
-</div>
-<div class="callout">
-<h3>Purpose</h3>
-<p>Reinforce what to do when a safety issue appears after the park has already opened.</p>
-<ul class="big-list"><li>Stop play if the area is unsafe.</li><li>Keep guests away and call leadership.</li><li>Support the response and wait for clearance before reopening.</li></ul>
-</div>
-</div>
-<div class="narration"><strong>Planning Placeholder:</strong> Slide 7 topic and purpose only. Final visual design and narration pending.</div>
 </section>
-<section class="slide hero" data-narration="Planning placeholder for Day 3 slide 8: Communication Standard. Purpose: Preserve the useful walkie/calling-for-help content from the original Day 3 placeholders." data-slide="8">
-<div class="bg-soft"></div>
+<section class="slide d3s8" data-narration="Most guests will follow the rules once they are reminded. But sometimes a guest keeps doing the same unsafe behavior after you have already corrected them. That is when the situation changes. As an Attraction Monitor, you should not get stuck repeating the same warning over and over while the unsafe behavior continues. Start by correcting the guest clearly. Tell them what rule is being broken and what they need to do differently. Then watch to make sure the behavior actually changes. If the guest continues breaking the rule, you may need to pause them from the attraction or remove them from play according to your park’s process. If the guest is refusing to listen, arguing, being disrespectful, or creating a safety concern, call leadership. The goal is not to win an argument. The goal is to keep the attraction safe. Repeated rule breaking is not just annoying. It is unsafe." data-slide="8">
 <div class="bar"></div>
-<div class="header">
-<div><div aria-hidden="true" class="eyebrow slide-label-hidden"></div></div>
-<div class="pill">Communication</div>
+<div class="d3s8-wrap">
+  <div class="d3s8-copy">
+    <div class="d3s8-kicker">Repeat behavior</div>
+    <h1>Repeat Rule <span>Breakers</span></h1>
+    <p class="d3s8-sub">A guest who keeps ignoring the rules becomes a safety concern.</p>
+    <div class="d3s8-loop">
+      <h3>Do not get stuck in a loop</h3>
+      <p>One reminder may be education. Repeated reminders mean the situation needs a firmer response.</p>
+      <ul>
+        <li>Correct the rule clearly.</li>
+        <li>Watch for behavior change.</li>
+        <li>Escalate if it continues.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="d3s8-board" aria-label="Repeat rule breaker response steps">
+    <div class="d3s8-top">
+      <h3>Change the response when behavior repeats</h3>
+      <div class="d3s8-pill">Safety concern</div>
+    </div>
+    <div class="d3s8-steps">
+      <div class="d3s8-step"><div class="d3s8-num">1</div><h4>Correct clearly</h4><p>State the rule and what needs to change.</p></div>
+      <div class="d3s8-step"><div class="d3s8-num">2</div><h4>Watch for change</h4><p>Confirm the unsafe behavior actually stops.</p></div>
+      <div class="d3s8-step"><div class="d3s8-num">3</div><h4>Pause or remove</h4><p>Follow park process if the guest keeps breaking rules.</p></div>
+      <div class="d3s8-step"><div class="d3s8-num">4</div><h4>Call leadership</h4><p>Escalate repeated, defiant, or unsafe behavior.</p></div>
+    </div>
+    <div class="d3s8-escalate">
+      <div><b>Do not argue</b>The goal is not to win a debate with the guest.</div>
+      <div><b>Stay focused</b>The goal is to keep the attraction safe.</div>
+    </div>
+    <div class="d3s8-takeaway">Repeated rule breaking is not just annoying — <span>it is unsafe.</span></div>
+  </div>
 </div>
-<div class="content">
-<div>
-<div class="kicker">Call early and clearly</div>
-<h1>Communication Standard</h1>
-<p class="sub">Clear communication helps leadership respond quickly and correctly.</p>
-</div>
-<div class="callout">
-<h3>Purpose</h3>
-<p>Preserve the useful walkie/calling-for-help content from the original Day 3 placeholders.</p>
-<ul class="big-list"><li>Use exact locations and keep radio calls short.</li><li>Say where you are, what happened, and what you need.</li><li>Ask for support when one monitor cannot safely manage the area.</li></ul>
-</div>
-</div>
-<div class="narration"><strong>Planning Placeholder:</strong> Slide 8 topic and purpose only. Final visual design and narration pending.</div>
 </section>
-<section class="slide hero" data-narration="Planning placeholder for Day 3 slide 9: Repeat Rule Breakers. Purpose: Teach judgment around guests who continue unsafe behavior after correction." data-slide="9">
-<div class="bg-soft"></div>
+<section class="slide d3s9" data-narration="Parents can sometimes be more difficult to deal with than the jumpers themselves. Many parents are quick to defend their child, even when the child is the one creating the safety concern. Some parents may not believe their child broke a rule, ignored direction, or acted unsafely. That can put Attraction Monitors in a difficult position, especially because many Attraction Monitors are teenagers. An angry adult can quickly become aggressive, confrontational, or bullying toward a younger team member. If a parent approaches calmly with a simple question or concern, the Attraction Monitor should speak with them respectfully and answer what they can. But if the parent approaches angry, aggressive, disrespectful, or confrontational, the monitor should not argue, fight back, or try to prove their point. Instead, call leadership immediately. A good response is, ‘I understand. I’m going to have a manager come speak with you,’ or ‘Management is on the way now.’ Once leadership is called, the monitor should stay calm, keep the attraction controlled, and allow management to handle the conversation. The key point is this: Attraction Monitors enforce safety, but they should not be expected to handle aggressive adults alone." data-slide="9">
 <div class="bar"></div>
-<div class="header">
-<div><div aria-hidden="true" class="eyebrow slide-label-hidden"></div></div>
-<div class="pill">Rule Enforcement</div>
+<div class="d3s9-wrap">
+  <div class="d3s9-copy">
+    <div class="d3s9-kicker">Parent escalation</div>
+    <h1>Parent Pressure <span>Tag Out</span></h1>
+    <p class="d3s9-sub">Calm questions are okay. Angry confrontation needs leadership.</p>
+    <div class="d3s9-scene">
+      <div class="d3s9-scene-top">
+        <h3>Real-world pressure</h3>
+        <div class="d3s9-chip">Do not argue</div>
+      </div>
+      <div class="d3s9-stage compact">
+        <div class="d3s9-person monitor">
+          <div class="avatar"></div>
+          <div class="label">Monitor</div>
+        </div>
+        <div class="d3s9-tag"><span>Tag Out</span></div>
+        <div class="d3s9-person parent">
+          <div class="avatar"></div>
+          <div class="label">Parent</div>
+        </div>
+      </div>
+      <div class="d3s9-say">“I understand. Management is on the way now.”</div>
+      <div class="d3s9-mini single">
+        <div><b>Key point</b>Teenage monitors should not be expected to handle aggressive adults alone.</div>
+      </div>
+    </div>
+  </div>
+  <div class="d3s9-board" aria-label="How to respond to calm versus aggressive parents">
+    <div class="d3s9-board-top">
+      <h3>Know the difference</h3>
+      <div class="d3s9-chip">Stay professional</div>
+    </div>
+    <div class="d3s9-lanes">
+      <div class="d3s9-lane calm">
+        <div class="num">1</div>
+        <div>
+          <h4>Calm Parent</h4>
+          <div class="strap">Answer briefly</div>
+          <div class="d3s9-quote good">“That rule is for safety.”</div>
+          <ul>
+            <li>Speak respectfully.</li>
+            <li>Keep the focus on safety.</li>
+            <li>Get a manager if requested.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="d3s9-lane angry">
+        <div class="num">2</div>
+        <div>
+          <h4>Aggressive Parent</h4>
+          <div class="strap">Call leadership</div>
+          <div class="d3s9-quote warn">“Management is on the way now.”</div>
+          <ul>
+            <li>Do not debate or defend.</li>
+            <li>Do not match their tone.</li>
+            <li>Let management handle it.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="d3s9-takeaway">You enforce safety. <span>Leadership handles aggressive adults.</span></div>
+  </div>
 </div>
-<div class="content">
-<div>
-<div class="kicker">Repeat behavior</div>
-<h1>Repeat Rule Breakers</h1>
-<p class="sub">Repeated unsafe behavior needs escalation, not endless warnings.</p>
-</div>
-<div class="callout">
-<h3>Purpose</h3>
-<p>Teach judgment around guests who continue unsafe behavior after correction.</p>
-<ul class="big-list"><li>One correction may be education; repeated behavior becomes a pattern.</li><li>Call leadership when a guest continues unsafe behavior.</li><li>Do not physically remove a guest yourself.</li></ul>
-</div>
-</div>
-<div class="narration"><strong>Planning Placeholder:</strong> Slide 9 topic and purpose only. Final visual design and narration pending.</div>
 </section>
-<section class="slide hero" data-narration="Planning placeholder for Day 3 slide 10: Upset Guests or Parents. Purpose: Keep the original angry-parent/escalation concept and make it specific to attraction monitoring." data-slide="10">
-<div class="bg-soft"></div>
+<section class="slide d3s10" data-narration="When something happens during your shift, leadership may need information from you afterward. This does not mean you are responsible for completing the full incident report by yourself. But as the Attraction Monitor working the area, your observations can be very important. The key is to stick to facts. Be ready to explain where it happened, about when it happened, what you saw, who was involved, and what action you took. For example, did you stop play? Did you call leadership? Did you keep guests back? Did you see the guest fall, or did you arrive after it happened? That difference matters. Do not guess. Do not blame. Do not exaggerate. Do not say something happened if you did not actually see it. If you are unsure, it is okay to say, ‘I did not see that part,’ or ‘I arrived after it happened.’ Accurate details help leadership understand what happened and complete the report properly. Your job is to report what you saw, what you heard, and what you did." data-slide="10">
 <div class="bar"></div>
-<div class="header">
-<div><div aria-hidden="true" class="eyebrow slide-label-hidden"></div></div>
-<div class="pill">Guest Escalation</div>
+<div class="d3s10-wrap">
+  <div class="d3s10-left">
+    <div class="d3s10-kicker">Incident awareness</div>
+    <h1>Details <span>Matter</span></h1>
+    <p class="d3s10-sub">After something happens, leadership may need your observations to complete the report accurately.</p>
+    <div class="d3s10-facts">
+      <div class="d3s10-stamp" aria-label="Facts only"></div>
+      <div class="d3s10-nos">
+        <div class="d3s10-no"><b>No</b>Guessing</div>
+        <div class="d3s10-no"><b>No</b>Blaming</div>
+        <div class="d3s10-no"><b>No</b>Exaggerating</div>
+      </div>
+    </div>
+  </div>
+  <div class="d3s10-board" aria-label="Replay board for accurate incident details">
+    <div class="d3s10-board-top">
+      <h3>Replay board</h3>
+      <div class="d3s10-chip">Stick to facts</div>
+    </div>
+    <div class="d3s10-grid">
+      <div class="d3s10-card"><div class="d3s10-icon">1</div><h4>Where?</h4><p>Exact attraction, court, lane, or area.</p></div>
+      <div class="d3s10-card"><div class="d3s10-icon">2</div><h4>When?</h4><p>Approximate time or part of the shift.</p></div>
+      <div class="d3s10-card"><div class="d3s10-icon">3</div><h4>What?</h4><p>What you <strong>saw</strong> or <strong>heard</strong>, not guesses.</p></div>
+      <div class="d3s10-card"><div class="d3s10-icon">4</div><h4>Who?</h4><p>Guests, parents, team members, or leadership involved.</p></div>
+      <div class="d3s10-card"><div class="d3s10-icon">5</div><h4>Your Action?</h4><p>Stopped play, called leadership, cleared the area, or kept guests back.</p></div>
+    </div>
+    <div class="d3s10-takeaway">Report what you saw, what you heard, and what you did. <span>Do not fill in the blanks.</span></div>
+  </div>
 </div>
-<div class="content">
-<div>
-<div class="kicker">Stay calm</div>
-<h1>Upset Guests or Parents</h1>
-<p class="sub">An upset guest should not cause the monitor to lose control of the attraction or zone.</p>
-</div>
-<div class="callout">
-<h3>Purpose</h3>
-<p>Keep the original angry-parent/escalation concept and make it specific to attraction monitoring.</p>
-<ul class="big-list"><li>Stay calm and professional.</li><li>Briefly explain the safety reason without arguing.</li><li>Call leadership early and keep monitoring your assigned area.</li></ul>
-</div>
-</div>
-<div class="narration"><strong>Planning Placeholder:</strong> Slide 10 topic and purpose only. Final visual design and narration pending.</div>
 </section>
-<section class="slide hero" data-narration="Planning placeholder for Day 3 slide 11: Incident Reports and Details. Purpose: Preserve incident-report awareness without re-teaching the full injury-response process." data-slide="11">
-<div class="bg-soft"></div>
+<section class="slide d3rem" data-narration="Other emergencies can happen during a shift, even if they are not common. Your job is not to solve every emergency by yourself. Your job is to recognize that something is serious, call leadership immediately, keep guests away from danger, and follow direction. If a guest appears to have a serious injury or medical emergency, that is a Code Blue. If a child is missing, that is a Code Adam. Fire alarms, fights, threats, equipment failure, or anything that makes the attraction unsafe should also be escalated right away. Do not ignore it because you are unsure. Do not try to handle it alone. When in doubt, call leadership early." data-slide="11">
 <div class="bar"></div>
-<div class="header">
-<div><div aria-hidden="true" class="eyebrow slide-label-hidden"></div></div>
-<div class="pill">Documentation</div>
+<div class="d3rem-wrap">
+  <div class="d3rem-left">
+    <div class="d3rem-kicker">Emergency awareness</div>
+    <h1>When Something <span>Feels Serious</span></h1>
+    <p class="d3rem-sub">You are not expected to solve every emergency. You are expected to recognize it and call for help quickly.</p>
+    <div class="d3rem-focus">
+      <h3>Your role</h3>
+      <p>Act early, keep the area controlled, and follow leadership direction.</p>
+      <ul>
+        <li>Call leadership immediately.</li>
+        <li>Use Code Blue or Code Adam when needed.</li>
+        <li>Keep guests away from danger.</li>
+        <li>Do not handle it alone.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="d3rem-board" aria-label="Emergency awareness red flags">
+    <div class="d3rem-board-top">
+      <h3>Red flags to escalate</h3>
+      <div class="d3rem-chip">Call early</div>
+    </div>
+    <div class="d3rem-five">
+      <div class="d3rem-iconcard"><div class="big">!</div><h4>Code Blue</h4><p>Serious injury or medical emergency.</p></div>
+      <div class="d3rem-iconcard"><div class="big">?</div><h4>Code Adam</h4><p>Missing child. Alert leadership right away.</p></div>
+      <div class="d3rem-iconcard"><div class="big">⚑</div><h4>Alarm / Fire</h4><p>Follow park emergency direction.</p></div>
+      <div class="d3rem-iconcard"><div class="big">↯</div><h4>Fight / Threat</h4><p>Do not step into conflict alone.</p></div>
+      <div class="d3rem-iconcard"><div class="big">✕</div><h4>Equipment Issue</h4><p>Stop use if unsafe.</p></div>
+    </div>
+    <div class="d3rem-takeaway">If it feels serious, <span>call leadership immediately.</span></div>
+  </div>
 </div>
-<div class="content">
-<div>
-<div class="kicker">Details matter</div>
-<h1>Incident Reports and Details</h1>
-<p class="sub">Accurate details help leadership understand what happened after the moment is over.</p>
-</div>
-<div class="callout">
-<h3>Purpose</h3>
-<p>Preserve incident-report awareness without re-teaching the full injury-response process.</p>
-<ul class="big-list"><li>You may be asked for names, time, location, attraction, and what you observed.</li><li>Do not guess, exaggerate, or fill in details you did not see.</li><li>Report what you saw, heard, or were told.</li></ul>
-</div>
-</div>
-<div class="narration"><strong>Planning Placeholder:</strong> Slide 11 topic and purpose only. Final visual design and narration pending.</div>
 </section>
-<section class="slide hero" data-narration="Planning placeholder for Day 3 slide 12: Other Emergency Awareness. Purpose: Collapse several original emergency placeholders into one awareness slide instead of separate full slides." data-slide="12">
-<div class="bg-soft"></div>
+<section class="slide d3rem" data-narration="At the end of your shift, your area should not be left messy, unsafe, or confusing for the next team member. End of shift reset means leaving the attraction ready for the next monitor and the next group of guests. Clean up trash, return items where they belong, check for obvious issues, and tell leadership if something still needs attention. Do not walk away from a problem and assume the next person will notice it. A clean reset helps the park run smoother and keeps safety from slipping between shifts." data-slide="12">
 <div class="bar"></div>
-<div class="header">
-<div><div aria-hidden="true" class="eyebrow slide-label-hidden"></div></div>
-<div class="pill">Emergency Awareness</div>
+<div class="d3rem-wrap">
+  <div class="d3rem-left">
+    <div class="d3rem-kicker">End of shift</div>
+    <h1>Reset <span>Your Area</span></h1>
+    <p class="d3rem-sub">Leave the attraction ready for the next monitor and the next group of guests.</p>
+    <div class="d3rem-focus">
+      <h3>Do not just walk away</h3>
+      <p>Your replacement should not inherit a messy area, hidden issue, or unanswered safety concern.</p>
+      <ul>
+        <li>Clean what you can.</li>
+        <li>Report what needs leadership.</li>
+        <li>Leave the area ready.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="d3rem-board" aria-label="End of shift reset checklist">
+    <div class="d3rem-board-top">
+      <h3>Close your zone properly</h3>
+      <div class="d3rem-chip">Area reset</div>
+    </div>
+    <div class="d3rem-reset">
+      <div class="d3rem-card"><div class="d3rem-num">1</div><h4>Clean</h4><p>Remove trash, debris, and obvious mess.</p></div>
+      <div class="d3rem-card"><div class="d3rem-num">2</div><h4>Return</h4><p>Put attraction items back where they belong.</p></div>
+      <div class="d3rem-card"><div class="d3rem-num">3</div><h4>Check</h4><p>Look for anything damaged, loose, or unsafe.</p></div>
+      <div class="d3rem-card"><div class="d3rem-num">4</div><h4>Report</h4><p>Tell leadership about unresolved issues.</p></div>
+      <div class="d3rem-card"><div class="d3rem-num">5</div><h4>Handoff</h4><p>Tell the next monitor what they need to know.</p></div>
+      <div class="d3rem-card"><div class="d3rem-num">6</div><h4>Ready</h4><p>Leave the area guest-ready and controlled.</p></div>
+    </div>
+    <div class="d3rem-takeaway">A strong shift ends with a <span>clean, safe handoff.</span></div>
+  </div>
 </div>
-<div class="content">
-<div>
-<div class="kicker">Follow leadership direction</div>
-<h1>Other Emergency Awareness</h1>
-<p class="sub">Some situations require park-wide leadership direction.</p>
-</div>
-<div class="callout">
-<h3>Purpose</h3>
-<p>Collapse several original emergency placeholders into one awareness slide instead of separate full slides.</p>
-<ul class="big-list"><li>Examples include missing child/Code Adam, fire or evacuation, utility outage, severe weather, or a suspicious package/threat.</li><li>Stay calm, communicate clearly, and follow leadership direction.</li><li>Do not investigate or act outside your role.</li></ul>
-</div>
-</div>
-<div class="narration"><strong>Planning Placeholder:</strong> Slide 12 topic and purpose only. Final visual design and narration pending.</div>
 </section>
-<section class="slide hero" data-narration="Planning placeholder for Day 3 slide 13: End-of-Shift Cleaning and Area Reset. Purpose: Make it clear that Attraction Monitors are responsible for leaving their assigned area clean, reset, and ready for the next shift or next business day." data-slide="13">
-<div class="bg-soft"></div>
+<section class="slide d3rem d3challenge" data-narration="Before completing Day 3, think through a few quick floor situations. If a pad shifts while guests are jumping, stop use and call leadership. If a parent becomes aggressive, tag out and let management handle the conversation. If the same guest keeps breaking a rule, pause the behavior and escalate instead of repeating endless warnings. If you find bodily fluids or another unsafe mess, keep guests away and call for the correct support. The goal is not to memorize a perfect script. The goal is to make safe decisions quickly." data-slide="13">
 <div class="bar"></div>
-<div class="header">
-<div><div aria-hidden="true" class="eyebrow slide-label-hidden"></div></div>
-<div class="pill">Area Ownership</div>
+<div class="d3rem-wrap">
+  <div class="d3rem-left">
+    <div class="d3rem-kicker">Floor challenge</div>
+    <h1>What Would <span>You Do?</span></h1>
+    <p class="d3rem-sub">The right response usually starts with the same idea: protect guests first, then get the right help.</p>
+    <div class="d3rem-focus">
+      <h3>Think like a monitor</h3>
+      <p>This is not about having the perfect wording. It is about choosing the safe next action.</p>
+      <ul>
+        <li>Stop unsafe use.</li>
+        <li>Call leadership early.</li>
+        <li>Stay calm and controlled.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="d3rem-board" aria-label="Final readiness challenge scenarios">
+    <div class="d3rem-board-top">
+      <h3>Quick scenarios</h3>
+      <div class="d3rem-chip">Choose action</div>
+    </div>
+    <div class="d3scenario-grid">
+      <div class="d3scenario"><div class="tag">Scenario</div><h4>A pad shifts while guests are jumping.</h4><p>Stop use. Protect the area. Call leadership.</p></div>
+      <div class="d3scenario"><div class="tag">Scenario</div><h4>A parent gets aggressive about a rule.</h4><p>Tag out. Management handles the confrontation.</p></div>
+      <div class="d3scenario"><div class="tag">Scenario</div><h4>A guest ignores repeated corrections.</h4><p>Pause play and escalate the pattern.</p></div>
+      <div class="d3scenario"><div class="tag">Scenario</div><h4>You find bodily fluids in the attraction.</h4><p>Keep guests away and call for support.</p></div>
+    </div>
+    <div class="d3rem-takeaway">Safe decisions are made <span>early, calmly, and clearly.</span></div>
+  </div>
 </div>
-<div class="content">
-<div>
-<div class="kicker">Clean, reset, and report</div>
-<h1>End-of-Shift Cleaning and Area Reset</h1>
-<p class="sub">A strong monitor helps maintain the area, not just watch it.</p>
-</div>
-<div class="callout">
-<h3>Purpose</h3>
-<p>Make it clear that Attraction Monitors are responsible for leaving their assigned area clean, reset, and ready for the next shift or next business day.</p>
-<ul class="big-list"><li>Wipe down pads and equipment in the assigned area.</li><li>Vacuum floors and remove trash, loose items, and debris.</li><li>Additional duties vary by park and may include restrooms, seating areas, trash cans, tables, benches, or other guest areas.</li><li>Follow local closing duties and report damaged or unsafe items instead of just cleaning around them.</li></ul>
-</div>
-</div>
-<div class="narration"><strong>Planning Placeholder:</strong> Slide 13 topic and purpose only. Final visual design and narration pending.</div>
 </section>
-<section class="slide hero" data-narration="Planning placeholder for Day 3 slide 14: Final Floor Readiness Challenge. Purpose: Use a final scenario to test multi-area awareness, prioritization, communication, and escalation." data-slide="14">
-<div class="bg-soft"></div>
+<section class="slide d3rem d3complete" data-narration="You have completed Day 3 of Attraction Monitor training. Before working independently, make sure you complete any required trainer review, park-specific sign-off, or final questions with leadership. Every park may have slightly different attractions, procedures, and expectations, so use your leadership team as your local source of direction. As you start working the floor, remember the main standard. Stay alert, communicate clearly, engage guests safely, and ask for help when you need it. Training gives you the foundation. Your choices on the floor are what keep guests safe." data-slide="14">
 <div class="bar"></div>
-<div class="header">
-<div><div aria-hidden="true" class="eyebrow slide-label-hidden"></div></div>
-<div class="pill">Final Scenario</div>
+<div class="d3rem-wrap">
+  <div class="d3rem-left">
+    <div class="d3rem-kicker">Training completion</div>
+    <h1>Day 3 <span>Complete</span></h1>
+    <p class="d3rem-sub">You have the foundation. Now finish your local sign-off and keep learning on the floor.</p>
+    <div class="d3complete-mark"><div class="check">✓</div></div>
+  </div>
+  <div class="d3rem-board" aria-label="Day 3 completion next steps">
+    <div class="d3rem-board-top">
+      <h3>Before working independently</h3>
+      <div class="d3rem-chip">Next steps</div>
+    </div>
+    <div class="d3complete-list">
+      <div class="d3complete-step"><div class="num">1</div><div><h4>Review Locally</h4><p>Go over park-specific attractions, rules, and procedures.</p></div></div>
+      <div class="d3complete-step"><div class="num">2</div><div><h4>Ask Questions</h4><p>Clear up anything you are unsure about before taking a zone.</p></div></div>
+      <div class="d3complete-step"><div class="num">3</div><div><h4>Get Signed Off</h4><p>Complete any final trainer or leadership requirements.</p></div></div>
+    </div>
+    <div class="d3rem-takeaway">Training starts the standard. <span>Your choices protect the floor.</span></div>
+  </div>
 </div>
-<div class="content">
-<div>
-<div class="kicker">Readiness challenge</div>
-<h1>Final Floor Readiness Challenge</h1>
-<p class="sub">Apply the full Day 3 mindset to a realistic floor-coverage scenario.</p>
-</div>
-<div class="callout">
-<h3>Purpose</h3>
-<p>Use a final scenario to test multi-area awareness, prioritization, communication, and escalation.</p>
-<ul class="big-list"><li>Scenario should involve a slow or mixed-coverage floor assignment.</li><li>Include more than one issue competing for attention.</li><li>Correct mindset: stay calm, prioritize safety, control the area, communicate early, and call leadership when needed.</li></ul>
-</div>
-</div>
-<div class="narration"><strong>Planning Placeholder:</strong> Slide 14 topic and purpose only. Final visual design and narration pending.</div>
-</section>
-<section class="slide hero" data-narration="Planning placeholder for Day 3 slide 15: Day 3 Next Steps and Training Completion. Purpose: End Day 3 with the same workflow standard used in earlier days." data-slide="15">
-<div class="bg-soft"></div>
-<div class="bar"></div>
-<div class="header">
-<div><div aria-hidden="true" class="eyebrow slide-label-hidden"></div></div>
-<div class="pill">Next Steps</div>
-</div>
-<div class="content">
-<div>
-<div class="kicker">Training completion path</div>
-<h1>Day 3 Next Steps and Training Completion</h1>
-<p class="sub">Close the training and direct the trainee into checklist, floor training, and final exam.</p>
-</div>
-<div class="callout">
-<h3>Purpose</h3>
-<p>End Day 3 with the same workflow standard used in earlier days.</p>
-<ul class="big-list"><li>Return to the Day 3 menu and print the Day 3 checklist.</li><li>Complete floor training with trainer or leadership.</li><li>Return to complete the Day 3 exam, submit/download the exam record, and follow leadership direction for final approval.</li></ul>
-</div>
-</div>
-<div class="narration"><strong>Planning Placeholder:</strong> Slide 15 topic and purpose only. Final visual design and narration pending.</div>
 </section></div><div class="controls"><div class="portal-nav-links"><a class="home-link" href="./index.html">← Day Menu</a><a class="home-link" href="../../../index.html">Training Portal</a></div><div class="control-group"><button class="navbtn" id="prev">Back</button><button class="speak" id="speak">Play Narration</button><button class="pause-training-btn" id="pauseTrainingBtn" type="button" aria-pressed="false">⏸ Pause</button><button aria-disabled="true" class="primary" disabled id="next">Next</button></div></div></main><script>
 const slides=[...document.querySelectorAll('.slide')];
 let idx=0;
@@ -703,7 +1102,7 @@ const maxPlayedTime=new Map();
 const cur=document.getElementById('cur'),prev=document.getElementById('prev'),next=document.getElementById('next'),speak=document.getElementById('speak');
 const total=document.getElementById('total');
 if(total) total.textContent=slides.length;
-const recordedNarration={0:'../audio/day3_slide1.m4a',1:'../audio/day3_slide2.m4a',2:'../audio/day3_slide3.m4a',3:'../audio/day3_slide4.m4a',4:'../audio/day3_slide5.m4a',5:'../audio/day3_slide6.m4a'};
+const recordedNarration={0:'../audio/day3_slide1.m4a',1:'../audio/day3_slide2.m4a',2:'../audio/day3_slide3.m4a',3:'../audio/day3_slide4.m4a',4:'../audio/day3_slide5.m4a',5:'../audio/day3_slide6.m4a',6:'../audio/day3_slide7.m4a',7:'../audio/day3_slide8.m4a',8:'../audio/day3_slide9.m4a',9:'../audio/day3_slide10.m4a',10:'../audio/day3_slide11.m4a',11:'../audio/day3_slide12.m4a',12:'../audio/day3_slide13.m4a',13:'../audio/day3_slide14.m4a'};
 const audioPlayer=new Audio();
 audioPlayer.preload='auto';
 function hasRecordedAudio(index=idx){return Object.prototype.hasOwnProperty.call(recordedNarration,index);}
@@ -810,18 +1209,7 @@ document.addEventListener('keydown',(e)=>{
 });
 show(0,false);
 </script><script id="launch-training-pause-script">
-(function(){"use strict";function ready(cb){document.readyState==="loading"?document.addEventListener("DOMContentLoaded",cb):cb()}
-ready(function(){var b=document.getElementById("pauseTrainingBtn");if(!b)return;var paused=false,resumeTarget=null;
-function visible(){return document.querySelector(".slide.active")||document}
-function allMedia(){var dom=[].slice.call(document.querySelectorAll("audio, video"));var reg=Array.isArray(window.launchTrainingMediaRegistry)?window.launchTrainingMediaRegistry:[];return dom.concat(reg).filter(function(m,i,l){return m&&l.indexOf(m)===i})}
-function current(){var a=visible(),list=allMedia(),playing=list.find(function(m){return !m.paused&&!m.ended});var active=a.querySelector?a.querySelector("audio, video"):null;return playing||active||list[0]||null}
-function set(){b.textContent=paused?"▶ Resume":"⏸ Pause";b.setAttribute("aria-pressed",paused?"true":"false");b.title=paused?"Resume the current narration":"Pause the current narration"}
-function pause(){paused=true;resumeTarget=current();document.body.classList.add("training-paused");if("speechSynthesis" in window&&window.speechSynthesis.speaking&&!window.speechSynthesis.paused){window.launchTrainingSpeechPaused=true;window.speechSynthesis.pause()}allMedia().forEach(function(m){if(!m.paused&&!m.ended){if(m.dataset)m.dataset.trainingPaused="true";m.pause()}});set()}
-function resume(){paused=false;document.body.classList.remove("training-paused");set();if("speechSynthesis" in window&&window.launchTrainingSpeechPaused){window.launchTrainingSpeechPaused=false;window.speechSynthesis.resume()}var t=resumeTarget||current();allMedia().forEach(function(m){if(m.dataset)delete m.dataset.trainingPaused});if(t&&typeof t.play==="function"&&!t.ended)t.play().catch(function(){})}
-b.addEventListener("click",function(){paused?resume():pause()});
-document.addEventListener("play",function(e){if(paused&&e.target&&e.target.matches&&e.target.matches("audio, video"))setTimeout(function(){e.target.pause()},0)},true);
-document.addEventListener("click",function(e){if(!paused)return;var x=e.target.closest&&e.target.closest("#next,#nextBtn,#speak,#playNarrationBtn");if(x){e.preventDefault();e.stopImmediatePropagation()}},true);
-set()})})();
+(function(){"use strict";function ready(cb){document.readyState==="loading"?document.addEventListener("DOMContentLoaded",cb):cb()}ready(function(){var b=document.getElementById("pauseTrainingBtn");if(!b)return;var paused=false,resumeTarget=null;function visible(){return document.querySelector(".slide.active")||document}function allMedia(){var dom=[].slice.call(document.querySelectorAll("audio, video"));var reg=Array.isArray(window.launchTrainingMediaRegistry)?window.launchTrainingMediaRegistry:[];return dom.concat(reg).filter(function(m,i,l){return m&&l.indexOf(m)===i})}function current(){var a=visible(),list=allMedia(),playing=list.find(function(m){return !m.paused&&!m.ended});var active=a.querySelector?a.querySelector("audio, video"):null;return playing||active||list[0]||null}function set(){b.textContent=paused?"▶ Resume":"⏸ Pause";b.setAttribute("aria-pressed",paused?"true":"false");b.title=paused?"Resume the current narration":"Pause the current narration"}function pause(){paused=true;resumeTarget=current();document.body.classList.add("training-paused");if("speechSynthesis" in window&&window.speechSynthesis.speaking&&!window.speechSynthesis.paused){window.launchTrainingSpeechPaused=true;window.speechSynthesis.pause()}allMedia().forEach(function(m){if(!m.paused&&!m.ended){if(m.dataset)m.dataset.trainingPaused="true";m.pause()}});set()}function resume(){paused=false;document.body.classList.remove("training-paused");set();if("speechSynthesis" in window&&window.launchTrainingSpeechPaused){window.launchTrainingSpeechPaused=false;window.speechSynthesis.resume()}var t=resumeTarget||current();allMedia().forEach(function(m){if(m.dataset)delete m.dataset.trainingPaused});if(t&&typeof t.play==="function"&&!t.ended)t.play().catch(function(){})}b.addEventListener("click",function(){paused?resume():pause()});document.addEventListener("play",function(e){if(paused&&e.target&&e.target.matches&&e.target.matches("audio, video"))setTimeout(function(){e.target.pause()},0)},true);document.addEventListener("click",function(e){if(!paused)return;var x=e.target.closest&&e.target.closest("#next,#nextBtn,#speak,#playNarrationBtn");if(x){e.preventDefault();e.stopImmediatePropagation()}},true);set()})})();
 </script>
 
 </body></html>
