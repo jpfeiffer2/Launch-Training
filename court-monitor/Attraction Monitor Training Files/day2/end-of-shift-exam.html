@@ -30,7 +30,7 @@
 <div class="header"><div><h1>Day 2 Attraction Monitor Training Exam</h1><p>30 questions: 25 Day 2 questions plus 5 randomized Day 1 review questions.</p></div><div class="random-badge">Randomized Questions + Answers</div></div>
 <div class="content">
 <p class="summary-note">A score of 80% or higher is required to pass. Questions and answer choices randomize each time the exam is opened.</p>
-<div class="meta-card"><div class="meta-grid"><div class="field"><label>Employee Name</label><input id="employee" /></div><div class="field"><label>Trainer Name</label><input id="trainer" /></div><div class="field"><label>Park Location</label><input id="park" /></div></div></div>
+<div class="meta-card"><div class="meta-grid"><div class="field"><label>Employee Name</label><input id="employee" / required></div><div class="field"><label>Trainer Name</label><input id="trainer" /></div><div class="field"><label>Park Location</label><input id="park" / required></div></div></div>
 <div class="toolbar"><div class="progress-wrap"><div class="progress-box">30 questions</div><div class="answered-box" id="answered">0 of 30 answered</div></div><div><a class="button dark2" href="./index.html">Back to Day Menu</a><a class="button dark2" href="../../../index.html">Training Portal</a></div></div>
 <form id="exam"></form>
 <div class="actions exam-submit-row"><button class="yellow" id="submit" type="button">Submit Exam</button></div>
@@ -85,6 +85,14 @@ function renderAll(){
   updateAnswered();
 }
 document.getElementById('submit').addEventListener('click',()=>{
+  const launchRequiredExamInfo=[{el:employee,label:'Employee Name'},{el:park,label:'Park Location'}];
+  for(const item of launchRequiredExamInfo){
+    if(!item.el || !item.el.value.trim()){
+      alert('Please enter '+item.label+' before submitting.');
+      if(item.el && item.el.focus) item.el.focus();
+      return;
+    }
+  }
   const missing=QUESTIONS.map((_,i)=>i).filter(i=>responses[i]===undefined);
   document.querySelectorAll('.question-card').forEach(card=>card.classList.remove('unanswered'));
   if(missing.length){
@@ -118,6 +126,15 @@ document.getElementById('submit').addEventListener('click',()=>{
   const records=JSON.parse(localStorage.getItem(key)||'[]');
   records.push(rec);
   localStorage.setItem(key,JSON.stringify(records));
+  launchTrainingSubmitExamRecord({
+    name: employee.value,
+    parkLocation: park.value,
+    trainingProgram: 'Court Monitor',
+    examDay: 'Day 2 Exam',
+    score: `${correct}/${QUESTIONS.length}`,
+    percentage: `${score}%`,
+    missedQuestions: details.filter(d => !d.isCorrect).map((d, index) => `Q${details.indexOf(d) + 1}: ${d.question} | Correct: ${d.correctAnswer}`).join(' | ') || 'None'
+  });
   const result=document.getElementById('result');
   result.className='result '+(pass?'pass':'fail');
   result.style.display='block';
@@ -126,5 +143,45 @@ document.getElementById('submit').addEventListener('click',()=>{
 });
 renderAll();
 </script>
+
+<script id="launch-google-sheets-exam-records">
+(function() {
+  if (window.launchTrainingSubmitExamRecord) return;
+
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycbzKjtjFU8msyHtWcK7ziV3ewSvQcW5AKcVtEAkAjMSe0srGBheWSUA7XLrLTR8inYyo-w/exec";
+  const SECRET = "JonathanPfeiffer";
+
+  function clean(value) {
+    return String(value == null ? '' : value).trim();
+  }
+
+  window.launchTrainingSubmitExamRecord = function(payload) {
+    try {
+      const record = Object.assign({}, payload || {});
+      record.secret = SECRET;
+      record.name = clean(record.name);
+      record.parkLocation = clean(record.parkLocation);
+      record.trainingProgram = clean(record.trainingProgram);
+      record.examDay = clean(record.examDay);
+      record.score = clean(record.score);
+      record.percentage = clean(record.percentage);
+      record.missedQuestions = clean(record.missedQuestions || 'None') || 'None';
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(record),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Google Sheets exam record submission failed.', error);
+      });
+    } catch (error) {
+      console.warn('Google Sheets exam record submission could not be prepared.', error);
+    }
+  };
+})();
+</script>
+
 </body>
 </html>

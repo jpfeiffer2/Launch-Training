@@ -34,7 +34,7 @@
 <body><div class="page"><header><h1>Day 3 End of Shift Exam</h1><p>50 randomized questions: 10 from Day 1, 10 from Day 2, and 30 from Day 3.</p></header><div class="content">
 <div class="top-nav"><a class="btn-dark" href="index.html">Back to Day 3 Menu</a><a class="btn-dark" href="../../../index.html">Training Portal</a><a class="btn-yellow" href="exam-records.html">Saved Exam Records</a></div>
 <div class="records-note"><strong>Manager note:</strong> This exam pulls 10 random questions from Day 1, 10 random questions from Day 2, and includes 30 Day 3 questions. The full 50-question exam randomizes each time it is launched. Saved records store full question text, selected answer, correct answer, and score.</div>
-<div class="meta"><label>Employee Name<input id="employeeName" type="text"></label><label>Date<input id="quizDate" type="date"></label><label>Trainer / Manager<input id="trainerName" type="text"></label></div>
+<div class="meta"><label>Employee Name<input id="employeeName" type="text"></label><label>Park Location<input id="parkLocation" type="text"></label><label>Date<input id="quizDate" type="date"></label><label>Trainer / Manager<input id="trainerName" type="text"></label></div>
 <div id="validationBox" class="validation"></div><form id="quizForm"></form><div class="buttons"><button type="button" class="btn-dark" onclick="gradeQuiz()">Submit Exam</button><button type="button" class="btn-yellow" onclick="resetQuiz()">Reset</button><button id="printBtn" type="button" class="btn-dark" style="display:none" onclick="window.print()">Print Result</button></div>
 <div id="resultBox" class="result"><div class="stamp" id="stamp"></div><h2>Exam Result</h2><div class="summary"><div><b>Employee</b><br><span id="summaryEmployee"></span></div><div><b>Date</b><br><span id="summaryDate"></span></div><div><b>Trainer</b><br><span id="summaryTrainer"></span></div><div><b>Score</b><br><span id="summaryScore"></span></div><div><b>Percent</b><br><span id="summaryPercent"></span></div></div><p id="statement"></p><div id="missedQuestions"></div></div>
 </div></div>
@@ -50,12 +50,65 @@ const optionLabels=['A','B','C','D'];
 let questions = shuffleQuestions([...takeRandom(day1QuestionPool,10), ...takeRandom(day2QuestionPool,10), ...day3Questions]);
 function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function renderQuiz(){const form=document.getElementById('quizForm');form.innerHTML=questions.map((q,index)=>`<div class="question"><div class="q-label">Question ${index+1}</div><h3>${escapeHtml(q.text)}</h3><div class="options">${optionLabels.filter(k=>q.options[k]!==undefined).map(k=>`<label><input type="radio" name="q${q.id}" value="${k}"> <span>${k}. ${escapeHtml(q.options[k])}</span></label>`).join('')}</div></div>`).join('');}
-function getEmployee(){return {employeeName:document.getElementById('employeeName').value.trim(),quizDate:document.getElementById('quizDate').value,trainerName:document.getElementById('trainerName').value.trim()};}
-function validateQuiz(){const e=getEmployee();const errors=[];if(!e.employeeName)errors.push('Employee Name is required.');if(!e.quizDate)errors.push('Date is required.');if(!e.trainerName)errors.push('Trainer/Manager is required.');const unanswered=questions.filter(q=>!document.querySelector(`input[name="q${q.id}"]:checked`));if(unanswered.length)errors.push(`${unanswered.length} question(s) unanswered.`);const box=document.getElementById('validationBox');if(errors.length){box.style.display='block';box.innerHTML='<strong>Please complete the following before submitting:</strong><ul>'+errors.map(x=>`<li>${x}</li>`).join('')+'</ul>';box.scrollIntoView({behavior:'smooth',block:'center'});return false;}box.style.display='none';return true;}
+function getEmployee(){return {employeeName:document.getElementById('employeeName').value.trim(),parkLocation:document.getElementById('parkLocation').value.trim(),quizDate:document.getElementById('quizDate').value,trainerName:document.getElementById('trainerName').value.trim()};}
+function validateQuiz(){const e=getEmployee();const errors=[];if(!e.employeeName)errors.push('Employee Name is required.');if(!e.parkLocation)errors.push('Park Location is required.');if(!e.quizDate)errors.push('Date is required.');if(!e.trainerName)errors.push('Trainer/Manager is required.');const unanswered=questions.filter(q=>!document.querySelector(`input[name="q${q.id}"]:checked`));if(unanswered.length)errors.push(`${unanswered.length} question(s) unanswered.`);const box=document.getElementById('validationBox');if(errors.length){box.style.display='block';box.innerHTML='<strong>Please complete the following before submitting:</strong><ul>'+errors.map(x=>`<li>${x}</li>`).join('')+'</ul>';box.scrollIntoView({behavior:'smooth',block:'center'});return false;}box.style.display='none';return true;}
 function getRecords(){try{return JSON.parse(localStorage.getItem(storageKey)||'[]')}catch(e){return []}}
 function saveRecord(record){const records=getRecords();records.unshift(record);localStorage.setItem(storageKey,JSON.stringify(records));}
-function gradeQuiz(){if(!validateQuiz())return;let score=0;const missed=[];const responses=[];questions.forEach((q,index)=>{const selected=document.querySelector(`input[name="q${q.id}"]:checked`);const userAnswer=selected?selected.value:null;const response={displayNumber:index+1,originalId:q.id,questionText:q.text,selectedAnswer:userAnswer,selectedText:userAnswer?q.options[userAnswer]:'',correctAnswer:q.answer,correctText:q.options[q.answer],isCorrect:userAnswer===q.answer};responses.push(response);if(response.isCorrect)score++;else missed.push({id:index+1,originalId:q.id,text:q.text,selected:userAnswer?`${userAnswer}. ${q.options[userAnswer]}`:'No answer selected',correct:`${q.answer}. ${q.options[q.answer]}`});});const total=questions.length;const percent=Math.round(score/total*100);const passed=percent>=passingPercent;const employee=getEmployee();const record={score,total,percent,passed,missed,responses,employee,submittedAt:new Date().toISOString()};saveRecord(record);showRecord(record);}
+function gradeQuiz(){if(!validateQuiz())return;let score=0;const missed=[];const responses=[];questions.forEach((q,index)=>{const selected=document.querySelector(`input[name="q${q.id}"]:checked`);const userAnswer=selected?selected.value:null;const response={displayNumber:index+1,originalId:q.id,questionText:q.text,selectedAnswer:userAnswer,selectedText:userAnswer?q.options[userAnswer]:'',correctAnswer:q.answer,correctText:q.options[q.answer],isCorrect:userAnswer===q.answer};responses.push(response);if(response.isCorrect)score++;else missed.push({id:index+1,originalId:q.id,text:q.text,selected:userAnswer?`${userAnswer}. ${q.options[userAnswer]}`:'No answer selected',correct:`${q.answer}. ${q.options[q.answer]}`});});const total=questions.length;const percent=Math.round(score/total*100);const passed=percent>=passingPercent;const employee=getEmployee();const record={score,total,percent,passed,missed,responses,employee,submittedAt:new Date().toISOString()};saveRecord(record);submitCentralExamRecord(record);showRecord(record);}
+function submitCentralExamRecord(record) {
+      launchTrainingSubmitExamRecord({
+        name: record.employee && record.employee.employeeName,
+        parkLocation: record.employee && record.employee.parkLocation,
+        trainingProgram: 'Cashier',
+        examDay: 'Day 3 Exam',
+        score: `${record.score}/${record.total}`,
+        percentage: `${record.percent}%`,
+        missedQuestions: record.missed && record.missed.length
+          ? record.missed.map(m => `Q${m.id}: ${m.text} | Correct: ${m.correct}`).join(' | ')
+          : 'None'
+      });
+    }
 function showRecord(record){document.getElementById('resultBox').style.display='block';document.getElementById('stamp').textContent=record.passed?'PASS':'FAIL';document.getElementById('summaryEmployee').textContent=record.employee.employeeName;document.getElementById('summaryDate').textContent=record.employee.quizDate;document.getElementById('summaryTrainer').textContent=record.employee.trainerName;document.getElementById('summaryScore').textContent=`${record.score} / ${record.total}`;document.getElementById('summaryPercent').textContent=`${record.percent}%`;document.getElementById('statement').innerHTML=record.passed?`<strong>${escapeHtml(record.employee.employeeName)}</strong> has successfully completed the Launch Family Entertainment Day 3 Cashier Training exam.`:`<strong>${escapeHtml(record.employee.employeeName)}</strong> scored below the ${passingPercent}% passing threshold. Please review missed topics and retest.`;document.getElementById('missedQuestions').innerHTML=record.missed.length?'<h3>Missed Questions</h3>'+record.missed.map(m=>`<div class="missed-item"><strong>Q${m.id}:</strong> ${escapeHtml(m.text)}<br><strong>Selected answer:</strong> ${escapeHtml(m.selected||'Not recorded')}<br><strong>Correct answer:</strong> ${escapeHtml(m.correct)}</div>`).join(''):'<p><strong>Perfect score — no missed questions.</strong></p>';document.getElementById('printBtn').style.display='inline-block';document.getElementById('resultBox').scrollIntoView({behavior:'smooth',block:'start'});}
 function resetQuiz(){document.getElementById('quizForm').reset();document.getElementById('resultBox').style.display='none';document.getElementById('validationBox').style.display='none';document.getElementById('printBtn').style.display='none';}
 renderQuiz();
-</script></body></html>
+</script>
+<script id="launch-google-sheets-exam-records">
+(function() {
+  if (window.launchTrainingSubmitExamRecord) return;
+
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycbzKjtjFU8msyHtWcK7ziV3ewSvQcW5AKcVtEAkAjMSe0srGBheWSUA7XLrLTR8inYyo-w/exec";
+  const SECRET = "JonathanPfeiffer";
+
+  function clean(value) {
+    return String(value == null ? '' : value).trim();
+  }
+
+  window.launchTrainingSubmitExamRecord = function(payload) {
+    try {
+      const record = Object.assign({}, payload || {});
+      record.secret = SECRET;
+      record.name = clean(record.name);
+      record.parkLocation = clean(record.parkLocation);
+      record.trainingProgram = clean(record.trainingProgram);
+      record.examDay = clean(record.examDay);
+      record.score = clean(record.score);
+      record.percentage = clean(record.percentage);
+      record.missedQuestions = clean(record.missedQuestions || 'None') || 'None';
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(record),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Google Sheets exam record submission failed.', error);
+      });
+    } catch (error) {
+      console.warn('Google Sheets exam record submission could not be prepared.', error);
+    }
+  };
+})();
+</script>
+
+</body></html>

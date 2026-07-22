@@ -17,7 +17,7 @@ body{background:linear-gradient(180deg,#f8fafb,#f2f5f7);color:#1f2328;line-heigh
     })();
   </script>
 
-</head><body><div class="page-shell"><div class="container"><div class="brand-topbar"></div><div class="header"><h1>Final Attraction Monitor Training Exam</h1><p>50 randomized questions · randomized answer order</p></div><div class="content"><div class="exam-note"><strong>Exam build:</strong> 10 random Day 1 questions, 10 random Day 2 questions, and all 30 Day 3 questions. Questions and answers reshuffle each time the exam starts.</div><div class="meta-card"><div class="meta-grid"><div class="field"><label>Employee Name</label><input id="employee" /></div><div class="field"><label>Trainer Name</label><input id="trainer" /></div><div class="field"><label>Park Location</label><input id="park" /></div></div></div><div class="toolbar"><div class="progress-box" id="progress">Question 1</div><div><a class="button dark2" href="./index.html">Back to Day Menu</a><a class="button dark2" href="../../../index.html">Training Portal</a></div></div><form id="exam"></form><div class="actions"><button class="dark2" id="prev" type="button">Back</button><button class="primary" id="next" type="button">Next</button><button class="yellow" id="submit" type="button" style="display:none">Submit Exam</button></div><div class="result" id="result"></div></div></div></div>
+</head><body><div class="page-shell"><div class="container"><div class="brand-topbar"></div><div class="header"><h1>Final Attraction Monitor Training Exam</h1><p>50 randomized questions · randomized answer order</p></div><div class="content"><div class="exam-note"><strong>Exam build:</strong> 10 random Day 1 questions, 10 random Day 2 questions, and all 30 Day 3 questions. Questions and answers reshuffle each time the exam starts.</div><div class="meta-card"><div class="meta-grid"><div class="field"><label>Employee Name</label><input id="employee" / required></div><div class="field"><label>Trainer Name</label><input id="trainer" /></div><div class="field"><label>Park Location</label><input id="park" / required></div></div></div><div class="toolbar"><div class="progress-box" id="progress">Question 1</div><div><a class="button dark2" href="./index.html">Back to Day Menu</a><a class="button dark2" href="../../../index.html">Training Portal</a></div></div><form id="exam"></form><div class="actions"><button class="dark2" id="prev" type="button">Back</button><button class="primary" id="next" type="button">Next</button><button class="yellow" id="submit" type="button" style="display:none">Submit Exam</button></div><div class="result" id="result"></div></div></div></div>
 <script src="../question-banks/day1-question-bank.js"></script>
 <script src="../question-banks/day2-question-bank.js"></script>
 <script src="../question-banks/day3-question-bank.js"></script>
@@ -32,5 +32,62 @@ function escapeHtml(value){return String(value).replace(/[&<>'"]/g,c=>({'&':'&am
 const QUESTIONS=buildQuestionSet();let idx=0;const answers={};const form=document.getElementById('exam'),progress=document.getElementById('progress');
 function render(){const q=QUESTIONS[idx];progress.innerHTML=`Question ${idx+1} of ${QUESTIONS.length}<span class="source-pill">${escapeHtml(q.source)}</span>`;form.innerHTML=`<div class="question-card"><div class="question-text">${idx+1}. ${escapeHtml(q.question)}</div><div class="answers">${q.answers.map((a,i)=>`<label class="answer"><input type="radio" name="q" value="${i}" ${answers[idx]===i?'checked':''}> <strong>${String.fromCharCode(65+i)}.</strong> <span>${escapeHtml(a)}</span></label>`).join('')}</div></div>`;form.querySelectorAll('input').forEach(inp=>inp.onchange=()=>answers[idx]=Number(inp.value));document.getElementById('prev').disabled=idx===0;document.getElementById('next').style.display=idx===QUESTIONS.length-1?'none':'inline-block';document.getElementById('submit').style.display=idx===QUESTIONS.length-1?'inline-block':'none'}
 document.getElementById('prev').onclick=()=>{if(idx>0){idx--;render()}};document.getElementById('next').onclick=()=>{if(answers[idx]===undefined){alert('Please select an answer before continuing.');return}if(idx<QUESTIONS.length-1){idx++;render()}};
-document.getElementById('submit').onclick=()=>{if(answers[idx]===undefined){alert('Please select an answer before submitting.');return}let correct=0,review=[];QUESTIONS.forEach((q,i)=>{if(answers[i]===q.correct) correct++; else review.push(`<div class="wrong"><strong>Question ${i+1} (${escapeHtml(q.source)}):</strong> ${escapeHtml(q.question)}<br>Your answer: ${escapeHtml(q.answers[answers[i]]||'No answer')}<br>Correct answer: ${escapeHtml(q.answers[q.correct])}</div>`)});let score=Math.round(correct/QUESTIONS.length*100);let pass=score>=80;let rec={date:new Date().toLocaleString(),employee:employee.value,trainer:trainer.value,park:park.value,day:'final',score,correct,total:QUESTIONS.length};let key='courtMonitorExamRecords';let records=JSON.parse(localStorage.getItem(key)||'[]');records.push(rec);localStorage.setItem(key,JSON.stringify(records));const r=document.getElementById('result');r.className='result '+(pass?'pass':'fail');r.style.display='block';r.innerHTML=`<h2>${pass?'PASS':'NEEDS REVIEW'} · ${score}%</h2><p>${correct} of ${QUESTIONS.length} correct. This result has been saved to local exam records on this computer.</p><div class="actions"><button onclick="window.print()" class="yellow">Print Result</button><a class="button dark2" href="./exam-records.html">View Exam Records</a></div><div class="review">${review.join('')}</div>`;window.scrollTo(0,document.body.scrollHeight)};render();
-</script></body></html>
+document.getElementById('submit').onclick=()=>{  const launchRequiredExamInfo=[{el:employee,label:'Employee Name'},{el:park,label:'Park Location'}];
+  for(const item of launchRequiredExamInfo){
+    if(!item.el || !item.el.value.trim()){
+      alert('Please enter '+item.label+' before submitting.');
+      if(item.el && item.el.focus) item.el.focus();
+      return;
+    }
+  }
+if(answers[idx]===undefined){alert('Please select an answer before submitting.');return}let correct=0,review=[];QUESTIONS.forEach((q,i)=>{if(answers[i]===q.correct) correct++; else review.push(`<div class="wrong"><strong>Question ${i+1} (${escapeHtml(q.source)}):</strong> ${escapeHtml(q.question)}<br>Your answer: ${escapeHtml(q.answers[answers[i]]||'No answer')}<br>Correct answer: ${escapeHtml(q.answers[q.correct])}</div>`)});let score=Math.round(correct/QUESTIONS.length*100);let pass=score>=80;let rec={date:new Date().toLocaleString(),employee:employee.value,trainer:trainer.value,park:park.value,day:'final',score,correct,total:QUESTIONS.length};let key='courtMonitorExamRecords';let records=JSON.parse(localStorage.getItem(key)||'[]');records.push(rec);localStorage.setItem(key,JSON.stringify(records));
+  launchTrainingSubmitExamRecord({
+    name: employee.value,
+    parkLocation: park.value,
+    trainingProgram: 'Court Monitor',
+    examDay: 'Day 3 Exam',
+    score: `${correct}/${QUESTIONS.length}`,
+    percentage: `${score}%`,
+    missedQuestions: review.length ? review.map(item => item.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim()).join(' | ') : 'None'
+  });const r=document.getElementById('result');r.className='result '+(pass?'pass':'fail');r.style.display='block';r.innerHTML=`<h2>${pass?'PASS':'NEEDS REVIEW'} · ${score}%</h2><p>${correct} of ${QUESTIONS.length} correct. This result has been saved to local exam records on this computer.</p><div class="actions"><button onclick="window.print()" class="yellow">Print Result</button><a class="button dark2" href="./exam-records.html">View Exam Records</a></div><div class="review">${review.join('')}</div>`;window.scrollTo(0,document.body.scrollHeight)};render();
+</script>
+<script id="launch-google-sheets-exam-records">
+(function() {
+  if (window.launchTrainingSubmitExamRecord) return;
+
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycbzKjtjFU8msyHtWcK7ziV3ewSvQcW5AKcVtEAkAjMSe0srGBheWSUA7XLrLTR8inYyo-w/exec";
+  const SECRET = "JonathanPfeiffer";
+
+  function clean(value) {
+    return String(value == null ? '' : value).trim();
+  }
+
+  window.launchTrainingSubmitExamRecord = function(payload) {
+    try {
+      const record = Object.assign({}, payload || {});
+      record.secret = SECRET;
+      record.name = clean(record.name);
+      record.parkLocation = clean(record.parkLocation);
+      record.trainingProgram = clean(record.trainingProgram);
+      record.examDay = clean(record.examDay);
+      record.score = clean(record.score);
+      record.percentage = clean(record.percentage);
+      record.missedQuestions = clean(record.missedQuestions || 'None') || 'None';
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(record),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Google Sheets exam record submission failed.', error);
+      });
+    } catch (error) {
+      console.warn('Google Sheets exam record submission could not be prepared.', error);
+    }
+  };
+})();
+</script>
+
+</body></html>

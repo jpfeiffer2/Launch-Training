@@ -867,6 +867,10 @@
               <input type="text" id="employeeName" />
             </div>
             <div class="field">
+              <label for="parkLocation">Park Location</label>
+              <input type="text" id="parkLocation" />
+            </div>
+            <div class="field">
               <label for="quizDate">Date</label>
               <input type="date" id="quizDate" />
             </div>
@@ -1131,6 +1135,7 @@
     function getEmployeeData() {
       return {
         employeeName: document.getElementById('employeeName').value.trim(),
+        parkLocation: document.getElementById('parkLocation').value.trim(),
         quizDate: document.getElementById('quizDate').value,
         trainerName: document.getElementById('trainerName').value.trim()
       };
@@ -1145,6 +1150,7 @@
       document.querySelectorAll('.question').forEach(q => q.classList.remove('unanswered'));
 
       if (!employee.employeeName) errors.push('Employee Name is required.');
+      if (!employee.parkLocation) errors.push('Park Location is required.');
       if (!employee.quizDate) errors.push('Date is required.');
       if (!employee.trainerName) errors.push('Trainer/Manager is required.');
 
@@ -1284,11 +1290,27 @@
 
       lastScoreState = record;
       saveExamRecord(record);
+      submitCentralExamRecord(record);
 
       resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
       document.getElementById('printCertBtn').style.display = 'inline-block';
       const returnBtn = document.getElementById('returnMenuBtn');
       if (returnBtn) returnBtn.style.display = 'inline-block';
+    }
+
+
+    function submitCentralExamRecord(record) {
+      launchTrainingSubmitExamRecord({
+        name: record.employee && record.employee.employeeName,
+        parkLocation: record.employee && record.employee.parkLocation,
+        trainingProgram: 'Cashier',
+        examDay: 'Day 1 Exam',
+        score: `${record.score}/${record.total}`,
+        percentage: `${record.percent}%`,
+        missedQuestions: record.missed && record.missed.length
+          ? record.missed.map(m => `Q${m.id}: ${m.text} | Correct: ${m.correct}`).join(' | ')
+          : 'None'
+      });
     }
 
     function updateCertificate() {} // merged into gradeQuiz
@@ -1475,5 +1497,45 @@
       lockEmployeeName();
     }, { once: true });
   </script>
+
+<script id="launch-google-sheets-exam-records">
+(function() {
+  if (window.launchTrainingSubmitExamRecord) return;
+
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycbzKjtjFU8msyHtWcK7ziV3ewSvQcW5AKcVtEAkAjMSe0srGBheWSUA7XLrLTR8inYyo-w/exec";
+  const SECRET = "JonathanPfeiffer";
+
+  function clean(value) {
+    return String(value == null ? '' : value).trim();
+  }
+
+  window.launchTrainingSubmitExamRecord = function(payload) {
+    try {
+      const record = Object.assign({}, payload || {});
+      record.secret = SECRET;
+      record.name = clean(record.name);
+      record.parkLocation = clean(record.parkLocation);
+      record.trainingProgram = clean(record.trainingProgram);
+      record.examDay = clean(record.examDay);
+      record.score = clean(record.score);
+      record.percentage = clean(record.percentage);
+      record.missedQuestions = clean(record.missedQuestions || 'None') || 'None';
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(record),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Google Sheets exam record submission failed.', error);
+      });
+    } catch (error) {
+      console.warn('Google Sheets exam record submission could not be prepared.', error);
+    }
+  };
+})();
+</script>
+
 </body>
 </html>
