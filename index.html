@@ -6,6 +6,17 @@
   <meta name="description" content="Launch Family Entertainment employee training portal">
   <title>Launch Training Portal</title>
   <link rel="stylesheet" href="shared/css/portal.css">
+
+<style id="portal-role-badge-removal">
+  .role-badge,
+  .training-role-badge,
+  .course-initial,
+  .card-initial,
+  .module-initial {
+    display: none !important;
+  }
+</style>
+
 </head>
 <body>
   <section class="login-gate" id="login-gate" aria-labelledby="login-title" hidden>
@@ -68,7 +79,6 @@
             <div class="card-media">
               <img src="shared/images/cashier-training.jpg" alt="Launch employee at the guest check-in counter">
               <span class="status status--available">Available</span>
-              <span class="program-code" aria-hidden="true">C</span>
             </div>
             <div class="card-content">
               <p class="card-kicker">Front Desk &amp; Guest Experience</p>
@@ -84,8 +94,7 @@
           <a class="program-card program-card--active" href="court-monitor/" aria-label="Open Court Monitor Training Version 1.1.1">
             <div class="card-media">
               <img src="shared/images/court-monitor-training.jpg" alt="Guest using a Launch trampoline attraction">
-              <span class="status status--testing">Testing</span>
-              <span class="program-code" aria-hidden="true">CM</span>
+              <span class="status status--testing">Beta Testing</span>
             </div>
             <div class="card-content">
               <p class="card-kicker">Safety &amp; Attraction Operations</p>
