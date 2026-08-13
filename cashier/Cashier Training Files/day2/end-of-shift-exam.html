@@ -29,6 +29,188 @@
       }
     })();
   </script>
+
+<style id="launch-standard-certificate-style">
+  .result-certificate.launch-standard-certificate,
+  .result-certificate {
+    margin-top: 26px;
+    border: 3px solid var(--launch-green, #56b947);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  }
+  .cert-header {
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+    border-bottom: 4px solid var(--launch-yellow, #f2e600);
+    padding: 22px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .cert-header-left { color: #fff; }
+  .cert-org {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: var(--launch-yellow, #f2e600);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .cert-title-line {
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .cert-subtitle {
+    font-size: 0.8rem;
+    color: #c8ced3;
+    margin-top: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .cert-stamp {
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    padding: 10px 22px;
+    border-radius: 10px;
+    border: 3px solid;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .cert-stamp.stamp-pass {
+    color: #198754;
+    border-color: #198754;
+    background: rgba(25,135,84,0.08);
+  }
+  .cert-stamp.stamp-fail {
+    color: #c92a2a;
+    border-color: #c92a2a;
+    background: rgba(201,42,42,0.08);
+  }
+  .cert-info-row {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #e3e8ee;
+  }
+  .cert-info-field {
+    flex: 1;
+    padding: 14px 20px;
+    border-right: 1px solid #e3e8ee;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+  .cert-info-field:last-child { border-right: none; }
+  .cert-info-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #777;
+    font-weight: bold;
+  }
+  .cert-info-value {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #111;
+    word-break: break-word;
+  }
+  .cert-score-value {
+    font-size: 1.2rem;
+    color: var(--launch-green-dark, #26731f);
+  }
+  .cert-statement {
+    padding: 18px 28px;
+    font-size: 0.97rem;
+    color: #444;
+    border-bottom: 1px solid #e3e8ee;
+    line-height: 1.6;
+  }
+  .cert-missed {
+    padding: 0 28px;
+    border-bottom: 1px solid #e3e8ee;
+  }
+  .cert-missed .wrong,
+  .cert-missed .missed-item {
+    margin: 10px 0;
+    padding: 12px 14px;
+    background: #fff8e8;
+    border-left: 4px solid #f0ad4e;
+    border-radius: 8px;
+  }
+  .cert-sig-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 24px 28px 20px;
+  }
+  .cert-sig-block { display: flex; flex-direction: column; gap: 6px; }
+  .cert-sig-line { border-bottom: 1.5px solid #444; min-height: 36px; }
+  .cert-sig-label { font-size: 0.78rem; color: #666; letter-spacing: 0.5px; }
+  .cert-actions {
+    padding: 12px 28px 16px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    border-top: 1px solid #e3e8ee;
+    background: #fafcfd;
+  }
+  .cert-actions button,
+  .cert-actions a {
+    border: none;
+    display: inline-block;
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-weight: 900;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .cert-actions button { color: #fff; background: #111820; }
+  .cert-actions a { color: #111820; background: var(--launch-yellow, #f2e600); }
+  @media (max-width: 860px) {
+    .cert-header,
+    .cert-info-row { display: block; }
+    .cert-stamp { display: inline-block; margin-top: 14px; }
+    .cert-info-field { border-right: 0; border-bottom: 1px solid #e3e8ee; }
+    .cert-sig-row { grid-template-columns: 1fr; gap: 24px; }
+  }
+  @media print {
+    body { background: #fff !important; padding: 0 !important; }
+    .header, header, .meta, .meta-card, .toolbar, .validation, .validation-box,
+    #validationBox, #quizForm, .buttons, .top-nav, .pre-exam-nav, .records-note,
+    .pdf-note, .footer-note, .brand-topbar, #answered, #progress, #exam,
+    #prev, #next, #submit, .question-card, .question, .no-print, .cert-actions {
+      display: none !important;
+    }
+    .page, .page-shell, .container, .content, main {
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      background: #fff !important;
+    }
+    #resultBox, #result, .result-certificate {
+      display: block !important;
+      border: 2px solid #333 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      margin: 0 !important;
+    }
+    .cert-header, .cert-stamp {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .cert-missed { border-bottom: none; }
+  }
+</style>
+
 </head><body><div class="page"><header><h1>Day 2 Cashier Training Exam</h1><p>Launch culture, guest experience, professional appearance, wristbands, cash handling, and escalation.</p></header><main><div class="top-nav"><a class="btn btn-outline" href="index.html">Return to Day 2 Main Menu</a><a class="btn btn-outline" href="../../../index.html">Training Portal</a></div><div class="meta"><div><label>Employee Name<input type="text" id="employeeName"></label></div><div><label>Park Location<input type="text" id="parkLocation"></label></div><div><label>Date<input type="date" id="quizDate"></label></div><div><label>Trainer/Manager<input type="text" id="trainerName"></label></div></div><div class="progress-box">All 35 questions visible</div><div id="validationBox" class="validation"></div><form id="quizForm"></form><div class="buttons"><button type="button" class="btn btn-primary" onclick="gradeQuiz()">Submit Quiz</button><button type="button" class="btn btn-secondary" onclick="resetQuiz()">Reset</button><button type="button" class="btn btn-dark" id="printBtn" onclick="window.print()" style="display:none;">Print / Save Exam Record</button><button type="button" class="btn btn-outline" id="returnBtn" onclick="location.href='index.html'" style="display:none;">Return to Day 2 Main Menu</button></div><div class="records-note">Completed exams are automatically saved in this browser after submission. Manager recovery is available from the Day 2 Exam Records page.</div><section id="resultBox" class="result"><div class="cert-head"><div><h2>Launch Family Entertainment</h2><div>Day 2 Cashier Training Record</div></div><div class="stamp" id="stamp">PASS</div></div><div class="cert-body"><div class="summary"><div class="cell"><small>Employee</small><strong id="summaryEmployee">—</strong></div><div class="cell"><small>Date</small><strong id="summaryDate">—</strong></div><div class="cell"><small>Trainer</small><strong id="summaryTrainer">—</strong></div><div class="cell"><small>Score</small><strong id="summaryScore">—</strong></div><div class="cell"><small>Percent</small><strong id="summaryPercent">—</strong></div></div><p id="statement"></p><div id="missedQuestions"></div><div class="signatures"><div class="sig">Trainer / Manager Signature</div><div class="sig">Employee Signature</div></div></div></section></main></div><script>
 const passingPercent = 80;
 const storageKey = 'launch_cashier_day2_exam_records_v1';
@@ -58,7 +240,41 @@ function submitCentralExamRecord(record) {
           : 'None'
       });
     }
-function showRecord(record){document.getElementById('resultBox').style.display='block';const stamp=document.getElementById('stamp');stamp.textContent=record.passed?'PASS':'FAIL';document.getElementById('summaryEmployee').textContent=record.employee.employeeName;document.getElementById('summaryDate').textContent=record.employee.quizDate;document.getElementById('summaryTrainer').textContent=record.employee.trainerName;document.getElementById('summaryScore').textContent=`${record.score} / ${record.total}`;document.getElementById('summaryPercent').textContent=`${record.percent}%`;document.getElementById('statement').innerHTML=record.passed?`<strong>${escapeHtml(record.employee.employeeName)}</strong> has successfully completed the Launch Family Entertainment Day 2 Cashier Training exam.`:`<strong>${escapeHtml(record.employee.employeeName)}</strong> scored below the ${passingPercent}% passing threshold. Please review missed topics and retest.`;document.getElementById('missedQuestions').innerHTML=record.missed.length?'<h3>Missed Questions</h3>'+record.missed.map(m=>`<div class="missed-item"><strong>Q${m.id}:</strong> ${escapeHtml(m.text)}<br><strong>Selected answer:</strong> ${escapeHtml(m.selected||"Not recorded")}<br><strong>Correct answer:</strong> ${escapeHtml(m.correct)}</div>`).join(''):'<p><strong>Perfect score — no missed questions.</strong></p>';document.getElementById('printBtn').style.display='inline-block';document.getElementById('returnBtn').style.display='inline-block';document.getElementById('resultBox').scrollIntoView({behavior:'smooth',block:'start'});}
+function showRecord(record) {
+      const resultBox = document.getElementById('resultBox');
+      resultBox.className = 'result result-certificate launch-standard-certificate ' + (record.passed ? 'pass' : 'fail');
+      resultBox.style.display = 'block';
+
+      const missedHtml = (record.missed && record.missed.length)
+        ? '<h3 style="margin:16px 0 8px">Missed Questions</h3>' + record.missed.map(function(m) {
+            return '<div class="missed-item"><div><strong>Q' + window.launchEscapeHtml(m.id) + ':</strong> ' + window.launchEscapeHtml(m.text) + '</div><div><strong>Selected answer:</strong> ' + window.launchEscapeHtml(m.selected || 'Not recorded') + '</div><div><strong>Correct answer:</strong> ' + window.launchEscapeHtml(m.correct) + '</div></div>';
+          }).join('')
+        : '<p style="padding:14px 0"><strong>&#10003; Perfect score — no missed questions.</strong></p>';
+
+      resultBox.innerHTML = window.launchRenderStandardExamCertificate({
+        status: record.passed ? 'PASS' : 'FAIL',
+        trainingTitle: 'DAY 2 CASHIER TRAINING',
+        statementTitle: 'Day 2 Cashier Training',
+        employeeName: record.employee && record.employee.employeeName,
+        parkLocation: record.employee && record.employee.parkLocation,
+        date: record.employee && record.employee.quizDate,
+        trainerName: record.employee && record.employee.trainerName,
+        scoreText: record.score + ' / ' + record.total,
+        percentText: record.percent + '%',
+        passed: record.passed,
+        passingPercent: passingPercent,
+        missedHtml: missedHtml
+      });
+
+      const printBtn = document.getElementById('printBtn') || document.getElementById('printCertBtn');
+      if (printBtn) printBtn.style.display = 'inline-block';
+
+      const returnBtn = document.getElementById('returnBtn') || document.getElementById('returnMenuBtn');
+      if (returnBtn) returnBtn.style.display = 'inline-block';
+
+      resultBox.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
 function resetQuiz(){document.getElementById('quizForm').reset();document.getElementById('resultBox').style.display='none';document.getElementById('validationBox').style.display='none';document.getElementById('printBtn').style.display='none';document.getElementById('returnBtn').style.display='none';}
 renderQuiz();
 </script>
@@ -97,6 +313,109 @@ renderQuiz();
     } catch (error) {
       console.warn('Google Sheets exam record submission could not be prepared.', error);
     }
+  };
+})();
+</script>
+
+
+<script id="launch-standard-certificate-script">
+(function () {
+  if (window.launchRenderStandardExamCertificate) return;
+
+  function escapeHtml(value) {
+    return String(value == null ? "" : value).replace(/[&<>"']/g, function (char) {
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[char];
+    });
+  }
+
+  window.launchEscapeHtml = escapeHtml;
+
+  window.launchRenderStandardExamCertificate = function (data) {
+    data = data || {};
+
+    const passed = !!data.passed;
+    const stampText = data.status || (passed ? "PASS" : "FAIL");
+    const stampClass = passed ? "stamp-pass" : "stamp-fail";
+    const employeeName = data.employeeName || "—";
+    const parkLocation = data.parkLocation || "—";
+    const dateText = data.date || new Date().toLocaleDateString();
+    const trainerName = data.trainerName || "—";
+    const scoreText = data.scoreText || "—";
+    const percentText = data.percentText || "—";
+    const trainingTitle = data.trainingTitle || "TRAINING ASSESSMENT";
+    const passingPercent = data.passingPercent || 80;
+
+    const statement = passed
+      ? `<strong>${escapeHtml(employeeName)}</strong> has successfully completed the Launch Family Entertainment ${escapeHtml(data.statementTitle || trainingTitle)} assessment with a score of <strong>${escapeHtml(scoreText)} (${escapeHtml(percentText)})</strong>. Passing threshold: ${passingPercent}%.`
+      : `<strong>${escapeHtml(employeeName)}</strong> completed the Launch Family Entertainment ${escapeHtml(data.statementTitle || trainingTitle)} assessment with a score of <strong>${escapeHtml(scoreText)} (${escapeHtml(percentText)})</strong> — below the ${passingPercent}% passing threshold. Please review missed questions below and retest.`;
+
+    const missedHtml = data.missedHtml || '<p style="padding:14px 0"><strong>&#10003; Perfect score — no missed questions.</strong></p>';
+    const recordsLink = data.recordsHref
+      ? `<a href="${escapeHtml(data.recordsHref)}">View Exam Records</a>`
+      : "";
+
+    return `
+      <div class="cert-header">
+        <div class="cert-header-left">
+          <div class="cert-org">LAUNCH FAMILY ENTERTAINMENT</div>
+          <div class="cert-title-line">${escapeHtml(trainingTitle)}</div>
+          <div class="cert-subtitle">Training Assessment Record</div>
+        </div>
+        <div class="cert-stamp ${stampClass}">${escapeHtml(stampText)}</div>
+      </div>
+
+      <div class="cert-info-row">
+        <div class="cert-info-field">
+          <span class="cert-info-label">Employee Name</span>
+          <span class="cert-info-value">${escapeHtml(employeeName)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Park Location</span>
+          <span class="cert-info-value">${escapeHtml(parkLocation)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Date</span>
+          <span class="cert-info-value">${escapeHtml(dateText)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Trainer / Manager</span>
+          <span class="cert-info-value">${escapeHtml(trainerName)}</span>
+        </div>
+        <div class="cert-info-field cert-score-field">
+          <span class="cert-info-label">Score</span>
+          <span class="cert-info-value cert-score-value">${escapeHtml(scoreText)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Percentage</span>
+          <span class="cert-info-value">${escapeHtml(percentText)}</span>
+        </div>
+      </div>
+
+      <div class="cert-statement">${statement}</div>
+      <div class="missed cert-missed">${missedHtml}</div>
+
+      <div class="cert-sig-row">
+        <div class="cert-sig-block">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-label">Trainer / Manager Signature</div>
+        </div>
+        <div class="cert-sig-block">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-label">Employee Signature</div>
+        </div>
+      </div>
+
+      <div class="cert-actions no-print">
+        <button type="button" onclick="window.print()">&#128438; Print / Save as PDF</button>
+        ${recordsLink}
+      </div>
+    `;
   };
 })();
 </script>
