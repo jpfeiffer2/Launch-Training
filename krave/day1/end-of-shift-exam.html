@@ -1,0 +1,2120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Krave Day 1 Exam · Version 34</title>
+  <style>
+    :root {
+      --launch-green: #6cc24a;
+      --launch-green-dark: #4da62d;
+      --launch-yellow: #f2e600;
+      --launch-black: #0a0a0a;
+      --launch-white: #ffffff;
+      --launch-gray-100: #f5f7f8;
+      --launch-gray-200: #e5eaee;
+      --launch-gray-300: #cfd8df;
+      --launch-gray-700: #495057;
+      --launch-blue: #1f6feb;
+      --pass-bg: #edf9ee;
+      --pass-border: #89c997;
+      --fail-bg: #fff1f1;
+      --fail-border: #e3a1a1;
+      --warning-bg: #fff8e6;
+      --warning-border: #f0c36d;
+      --shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #f8fafb 0%, #f2f5f7 100%);
+      color: #1f2328;
+      line-height: 1.5;
+    }
+
+    .page-shell {
+      max-width: 1080px;
+      margin: 24px auto;
+      padding: 0 16px 40px;
+    }
+
+    .container {
+      background: var(--launch-white);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid var(--launch-gray-200);
+    }
+
+    .brand-topbar {
+      height: 10px;
+      background: linear-gradient(90deg, var(--launch-green) 0%, var(--launch-yellow) 100%);
+    }
+
+    .header {
+      background: #ffffff;
+      color: #111;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 4px solid var(--launch-yellow);
+    }
+
+
+    .exam-logo {
+      max-width: 290px;
+      height: auto;
+      display: block;
+      margin: 0 auto 14px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 1.25rem;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      color: #111;
+    }
+
+    .header-divider {
+      width: 1px;
+      height: 24px;
+      background: rgba(0,0,0,0.18);
+      flex-shrink: 0;
+    }
+
+    .header p {
+      margin: 0;
+      color: #666;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .content {
+      padding: 24px;
+    }
+
+    .meta-card,
+    .toolbar,
+    .result,
+    .certificate,
+    .validation-box {
+      border: 1px solid var(--launch-gray-200);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .meta-card {
+      padding: 18px;
+      margin-bottom: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfcfc 100%);
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #20262d;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 11px 12px;
+      font-size: 1rem;
+      border: 1px solid var(--launch-gray-300);
+      border-radius: 10px;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      background: #fff;
+    }
+
+    .field input:focus {
+      outline: none;
+      border-color: var(--launch-green);
+      box-shadow: 0 0 0 3px rgba(108, 194, 74, 0.15);
+    }
+
+    .toolbar {
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      background: #fafcfd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .toolbar-left,
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .progress-box {
+      font-weight: bold;
+      color: #1f2328;
+      background: #fff;
+      border: 1px solid var(--launch-gray-200);
+      border-radius: 999px;
+      padding: 8px 12px;
+    }
+
+    .mode-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.96rem;
+      color: #2b3137;
+      background: #fff;
+      border: 1px solid var(--launch-gray-200);
+      border-radius: 999px;
+      padding: 8px 12px;
+    }
+
+    .validation-box {
+      display: none;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      background: var(--warning-bg);
+      border-color: var(--warning-border);
+      color: #6b4f10;
+    }
+
+    .validation-box strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .validation-box ul {
+      margin: 8px 0 0 20px;
+      padding: 0;
+    }
+
+    .question {
+      margin: 18px 0;
+      padding: 20px;
+      border: 1px solid var(--launch-gray-200);
+      border-radius: 16px;
+      background: linear-gradient(180deg, #ffffff 0%, #fcfcfd 100%);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .question.hidden {
+      display: none;
+    }
+
+    .question-number {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(108, 194, 74, 0.12);
+      color: var(--launch-green-dark);
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .question h3 {
+      margin: 0 0 14px 0;
+      font-size: 1.1rem;
+      color: #161b22;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .options label {
+      display: block;
+      padding: 12px 14px;
+      border: 1px solid var(--launch-gray-200);
+      border-radius: 12px;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .options label:hover {
+      border-color: var(--launch-green);
+      background: #f8fdf5;
+    }
+
+    .options input {
+      margin-right: 10px;
+      transform: scale(1.05);
+    }
+
+    .question.unanswered {
+      border-color: #e3a1a1;
+      box-shadow: 0 0 0 3px rgba(201, 42, 42, 0.08);
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 0.98rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.05s ease, opacity 0.15s ease, background 0.15s ease;
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    button:hover {
+      opacity: 0.95;
+    }
+
+    .btn-primary {
+      background: var(--launch-green);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--launch-green-dark);
+    }
+
+    .btn-secondary {
+      background: #59636e;
+      color: #fff;
+    }
+
+    .btn-dark {
+      background: var(--launch-black);
+      color: #fff;
+    }
+
+    .btn-yellow {
+      background: var(--launch-yellow);
+      color: #111;
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: #1f2328;
+      border: 1px solid var(--launch-gray-300);
+    }
+
+    .result {
+      display: none;
+      margin-top: 26px;
+      padding: 20px;
+    }
+
+    .result.pass {
+      background: var(--pass-bg);
+      border-color: var(--pass-border);
+    }
+
+    .result.fail {
+      background: var(--fail-bg);
+      border-color: var(--fail-border);
+    }
+
+    .result h2 {
+      margin-top: 0;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 16px 0 6px;
+    }
+
+    .score-card {
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .score-card .label {
+      display: block;
+      font-size: 0.9rem;
+      color: #55606b;
+      margin-bottom: 4px;
+    }
+
+    .score-card .value {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #111;
+    }
+
+    .missed {
+      margin-top: 18px;
+    }
+
+    .missed-item {
+      margin: 10px 0;
+      padding: 12px 14px;
+      background: #fff8e8;
+      border-left: 4px solid #f0ad4e;
+      border-radius: 8px;
+    }
+
+    /* ── Printable Certificate ───────────────────────── */
+    .result-certificate {
+      margin-top: 26px;
+      border: 3px solid var(--launch-green);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    }
+
+    .cert-header {
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+      border-bottom: 4px solid var(--launch-yellow);
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .cert-header-left {
+      color: #fff;
+    }
+
+    .cert-org {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      color: var(--launch-yellow);
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .cert-title-line {
+      font-size: 1.6rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .cert-subtitle {
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: 4px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .cert-stamp {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 4px;
+      padding: 10px 22px;
+      border-radius: 10px;
+      border: 3px solid;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .cert-stamp.stamp-pass {
+      color: #198754;
+      border-color: #198754;
+      background: rgba(25,135,84,0.08);
+    }
+
+    .cert-stamp.stamp-fail {
+      color: #c92a2a;
+      border-color: #c92a2a;
+      background: rgba(201,42,42,0.08);
+    }
+
+    .cert-info-row {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--launch-gray-200);
+    }
+
+    .cert-info-field {
+      flex: 1;
+      padding: 14px 20px;
+      border-right: 1px solid var(--launch-gray-200);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .cert-info-field:last-child {
+      border-right: none;
+    }
+
+    .cert-info-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      font-weight: bold;
+    }
+
+    .cert-info-value {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #111;
+    }
+
+    .cert-score-value {
+      font-size: 1.2rem;
+      color: var(--launch-green-dark);
+    }
+
+    .cert-statement {
+      padding: 18px 28px;
+      font-size: 0.97rem;
+      color: #444;
+      border-bottom: 1px solid var(--launch-gray-200);
+      line-height: 1.6;
+    }
+
+    .cert-missed {
+      padding: 0 28px;
+      border-bottom: 1px solid var(--launch-gray-200);
+    }
+
+    .cert-sig-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 24px 28px 20px;
+    }
+
+    .cert-sig-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .cert-sig-line {
+      border-bottom: 1.5px solid #444;
+      min-height: 36px;
+    }
+
+    .cert-sig-label {
+      font-size: 0.78rem;
+      color: #666;
+      letter-spacing: 0.5px;
+    }
+
+    .cert-actions {
+      padding: 12px 28px 16px;
+      display: flex;
+      gap: 12px;
+      border-top: 1px solid var(--launch-gray-200);
+      background: #fafcfd;
+    }
+
+    .status-pass {
+      color: #198754;
+      font-weight: bold;
+    }
+
+    .status-fail {
+      color: #c92a2a;
+      font-weight: bold;
+    }
+
+    .signature-area {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      margin-top: 38px;
+      text-align: left;
+    }
+
+    .signature-line {
+      border-top: 1px solid #666;
+      padding-top: 8px;
+      min-height: 42px;
+    }
+
+    .footer-note {
+      margin-top: 10px;
+      color: #66707a;
+      font-size: 0.94rem;
+    }
+
+    .pdf-note {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #f7fbff;
+      border: 1px solid #cfe0ff;
+      color: #294b80;
+    }
+
+
+    .saved-records {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border: 1px solid var(--launch-gray-200);
+      border-radius: 14px;
+      background: #fbfcfd;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    }
+
+    .saved-records-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--launch-gray-200);
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+    }
+
+    .saved-records h2 {
+      margin: 0 0 4px;
+      font-size: 1.25rem;
+      color: #111;
+    }
+
+    .saved-records p {
+      margin: 0;
+      color: #5f6b76;
+      font-size: 0.92rem;
+    }
+
+    .saved-records-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .saved-record-item {
+      display: grid;
+      grid-template-columns: 1.2fr .9fr .7fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--launch-gray-200);
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .record-main {
+      font-weight: 800;
+      color: #111;
+    }
+
+    .record-sub {
+      color: #65707a;
+      font-size: 0.86rem;
+      margin-top: 2px;
+    }
+
+    .record-score {
+      font-weight: 900;
+      color: var(--launch-green-dark);
+    }
+
+    .record-fail {
+      color: #c92a2a;
+    }
+
+    .record-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+
+    .pre-exam-nav {
+      display: flex;
+      justify-content: flex-start;
+      margin: 12px 0 18px;
+    }
+
+    @media (max-width: 860px) {
+      .saved-records-head,
+      .saved-record-item {
+        display: block;
+      }
+
+      .record-actions {
+        justify-content: flex-start;
+        margin-top: 10px;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .meta-grid,
+      .score-grid,
+      .signature-area {
+        grid-template-columns: 1fr;
+      }
+
+      .content {
+        padding: 16px;
+      }
+
+      .header {
+        padding: 20px 16px 18px;
+      }
+
+      .header h1 {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* Tablet mode: fit everything on screen */
+    body.tablet-mode {
+      overflow: hidden;
+      height: 100dvh;
+    }
+
+    body.tablet-mode .page-shell {
+      margin: 0;
+      padding: 0;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body.tablet-mode .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border-radius: 0;
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    body.tablet-mode .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 12px 16px;
+      min-height: 0;
+    }
+
+    body.tablet-mode .meta-card {
+      margin-bottom: 10px;
+      padding: 12px;
+      flex-shrink: 0;
+    }
+
+    body.tablet-mode .toolbar {
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      flex-shrink: 0;
+    }
+
+    body.tablet-mode #quizForm {
+      flex: 1;
+      overflow-y: auto;
+      min-height: 0;
+    }
+
+    body.tablet-mode .question {
+      margin: 0;
+      padding: 16px;
+      border-radius: 12px;
+    }
+
+    body.tablet-mode .options label {
+      padding: 10px 12px;
+    }
+
+    body.tablet-mode .buttons {
+      margin-top: 10px;
+      padding-bottom: 6px;
+      flex-shrink: 0;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .page-shell {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+      }
+
+      .header,
+      .meta-card,
+      .toolbar,
+      .validation-box,
+      #quizForm,
+      .buttons,
+      .footer-note,
+      .pdf-note,
+      .no-print {
+        display: none !important;
+      }
+
+      .result-certificate {
+        display: block !important;
+        border: 2px solid #333;
+        border-radius: 0;
+        box-shadow: none;
+        margin: 0;
+      }
+
+      .cert-header {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cert-stamp {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .cert-missed {
+        border-bottom: none;
+      }
+
+      .brand-topbar {
+        display: none;
+      }
+    }
+  </style>
+<style id="launch-standard-certificate-style">
+  .result-certificate.launch-standard-certificate,
+  .result-certificate {
+    margin-top: 26px;
+    border: 3px solid var(--launch-green, #56b947);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  }
+  .cert-header {
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+    border-bottom: 4px solid var(--launch-yellow, #f2e600);
+    padding: 22px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .cert-header-left { color: #fff; }
+  .cert-org {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: var(--launch-yellow, #f2e600);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .cert-title-line {
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .cert-subtitle {
+    font-size: 0.8rem;
+    color: #c8ced3;
+    margin-top: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .cert-stamp {
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    padding: 10px 22px;
+    border-radius: 10px;
+    border: 3px solid;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .cert-stamp.stamp-pass {
+    color: #198754;
+    border-color: #198754;
+    background: rgba(25,135,84,0.08);
+  }
+  .cert-stamp.stamp-fail {
+    color: #c92a2a;
+    border-color: #c92a2a;
+    background: rgba(201,42,42,0.08);
+  }
+  .cert-info-row {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #e3e8ee;
+  }
+  .cert-info-field {
+    flex: 1;
+    padding: 14px 20px;
+    border-right: 1px solid #e3e8ee;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+  .cert-info-field:last-child { border-right: none; }
+  .cert-info-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #777;
+    font-weight: bold;
+  }
+  .cert-info-value {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #111;
+    word-break: break-word;
+  }
+  .cert-score-value {
+    font-size: 1.2rem;
+    color: var(--launch-green-dark, #26731f);
+  }
+  .cert-statement {
+    padding: 18px 28px;
+    font-size: 0.97rem;
+    color: #444;
+    border-bottom: 1px solid #e3e8ee;
+    line-height: 1.6;
+  }
+  .cert-missed {
+    padding: 0 28px;
+    border-bottom: 1px solid #e3e8ee;
+  }
+  .cert-missed .wrong,
+  .cert-missed .missed-item {
+    margin: 10px 0;
+    padding: 12px 14px;
+    background: #fff8e8;
+    border-left: 4px solid #f0ad4e;
+    border-radius: 8px;
+  }
+  .cert-sig-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 24px 28px 20px;
+  }
+  .cert-sig-block { display: flex; flex-direction: column; gap: 6px; }
+  .cert-sig-line { border-bottom: 1.5px solid #444; min-height: 36px; }
+  .cert-sig-label { font-size: 0.78rem; color: #666; letter-spacing: 0.5px; }
+  .cert-actions {
+    padding: 12px 28px 16px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    border-top: 1px solid #e3e8ee;
+    background: #fafcfd;
+  }
+  .cert-actions button,
+  .cert-actions a {
+    border: none;
+    display: inline-block;
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-weight: 900;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .cert-actions button { color: #fff; background: #111820; }
+  .cert-actions a { color: #111820; background: var(--launch-yellow, #f2e600); }
+  @media (max-width: 860px) {
+    .cert-header,
+    .cert-info-row { display: block; }
+    .cert-stamp { display: inline-block; margin-top: 14px; }
+    .cert-info-field { border-right: 0; border-bottom: 1px solid #e3e8ee; }
+    .cert-sig-row { grid-template-columns: 1fr; gap: 24px; }
+  }
+  @media print {
+    body { background: #fff !important; padding: 0 !important; }
+    .header, header, .meta, .meta-card, .toolbar, .validation, .validation-box,
+    #validationBox, #quizForm, .buttons, .top-nav, .pre-exam-nav, .records-note,
+    .pdf-note, .footer-note, .brand-topbar, #answered, #progress, #exam,
+    #prev, #next, #submit, .question-card, .question, .no-print, .cert-actions {
+      display: none !important;
+    }
+    .page, .page-shell, .container, .content, main {
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      background: #fff !important;
+    }
+    #resultBox, #result, .result-certificate {
+      display: block !important;
+      border: 2px solid #333 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      margin: 0 !important;
+    }
+    .cert-header, .cert-stamp {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .cert-missed { border-bottom: none; }
+  }
+</style>
+
+
+<style id="launch-portal-auth-style">
+  html { display: none; }
+  html.portal-authenticated { display: block; }
+</style>
+<script id="launch-portal-auth-script">
+  (() => {
+    const storageKey = "launchTrainingUnlockedUntil";
+    const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+
+    if (unlockedUntil <= Date.now()) {
+      localStorage.removeItem(storageKey);
+
+      const currentPath = window.location.pathname;
+      const marker = "/Launch-Training/";
+      const markerPosition = currentPath.indexOf(marker);
+      let portalBase = markerPosition >= 0
+        ? currentPath.slice(0, markerPosition + marker.length)
+        : "/";
+
+      const moduleMarkers = ["/cashier/", "/court-monitor/", "/party-host/", "/krave/"];
+      for (const moduleMarker of moduleMarkers) {
+        const modulePosition = currentPath.indexOf(moduleMarker);
+        if (modulePosition >= 0) {
+          portalBase = currentPath.slice(0, modulePosition + 1) || "/";
+          break;
+        }
+      }
+
+      const returnPath = currentPath + window.location.search + window.location.hash;
+      window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
+    } else {
+      document.documentElement.classList.add("portal-authenticated");
+    }
+  })();
+</script>
+
+</head>
+<body>
+  <div class="page-shell">
+    <div class="container">
+      <div class="brand-topbar"></div>
+
+      <div class="header">
+        <img class="exam-logo" src="../assets/launch-family-entertainment-logo.png" alt="Launch Family Entertainment">
+        <h1>Day 1 Krave Training Exam</h1>
+        <div class="header-divider"></div>
+        <p>System-wide employee training assessment &bull; Required-answer validation &bull; Print-ready completion record</p>
+      </div>
+
+      <div class="content">
+        <div class="meta-card">
+          <div class="meta-grid">
+            <div class="field">
+              <label for="employeeName">Employee Name</label>
+              <input type="text" id="employeeName" />
+            </div>
+            <div class="field">
+              <label for="parkLocation">Park Location</label>
+              <input type="text" id="parkLocation" />
+            </div>
+            <div class="field">
+              <label for="quizDate">Date</label>
+              <input type="date" id="quizDate" />
+            </div>
+            <div class="field">
+              <label for="trainerName">Trainer/Manager</label>
+              <input type="text" id="trainerName" />
+            </div>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <div class="toolbar-left">
+            <div class="progress-box" id="progressBox">All 30 questions visible</div>
+          </div>
+
+          <div class="toolbar-right"><strong>Version 34</strong></div>
+        </div>
+
+        <div class="pre-exam-nav no-print"><button type="button" class="btn-outline" id="preExamReturnMenuBtn" onclick="window.location.href='index.html'">Return to Day 1 Main Menu</button><button type="button" class="btn-outline" onclick="window.location.href='../index.html'">Krave Training Home</button><button type="button" class="btn-outline" onclick="window.location.href='../../index.html'">Training Portal</button><button type="button" class="btn-outline" onclick="window.location.href='#savedExamRecords'">View Exam Records</button></div>
+
+        <div id="validationBox" class="validation-box"></div>
+
+        <form id="quizForm"></form>
+
+        <div class="buttons">
+          <button type="button" class="btn-primary" onclick="gradeQuiz()">Submit Quiz</button>
+          <button type="button" class="btn-secondary" onclick="resetQuiz()">Reset</button>
+          <button type="button" class="btn-dark" id="printCertBtn" onclick="printResultSheet()" style="display:none;">&#128438; Print / Save Exam Record</button>
+          <button type="button" class="btn-outline" id="returnMenuBtn" onclick="window.location.href='index.html'" style="display:none;">Return to Day 1 Main Menu</button><button type="button" class="btn-outline" onclick="window.location.href='../index.html'">Krave Training Home</button><button type="button" class="btn-outline" onclick="window.location.href='#savedExamRecords'">View Exam Records</button>
+        </div>
+
+
+        
+        <div id="resultBox" class="result-certificate" style="display:none;">
+          <!-- Certificate Header -->
+          <div class="cert-header">
+            <div class="cert-header-left">
+              <div class="cert-org">LAUNCH FAMILY ENTERTAINMENT</div>
+              <div class="cert-title-line">DAY 1 KRAVE TRAINING</div>
+              <div class="cert-subtitle">Training Assessment Record</div>
+            </div>
+            <div class="cert-stamp" id="certStamp">PASS</div>
+          </div>
+
+          <!-- Employee Info Row -->
+          <div class="cert-info-row">
+            <div class="cert-info-field">
+              <span class="cert-info-label">Employee Name</span>
+              <span class="cert-info-value" id="summaryEmployee">—</span>
+            </div>
+            <div class="cert-info-field">
+              <span class="cert-info-label">Date</span>
+              <span class="cert-info-value" id="certDate">—</span>
+            </div>
+            <div class="cert-info-field">
+              <span class="cert-info-label">Trainer / Manager</span>
+              <span class="cert-info-value" id="certTrainer">—</span>
+            </div>
+            <div class="cert-info-field cert-score-field">
+              <span class="cert-info-label">Score</span>
+              <span class="cert-info-value cert-score-value" id="summaryScore">—</span>
+            </div>
+            <div class="cert-info-field">
+              <span class="cert-info-label">Percentage</span>
+              <span class="cert-info-value" id="summaryPercent">—</span>
+            </div>
+          </div>
+
+          <!-- Completion Statement -->
+          <div class="cert-statement" id="certStatement"></div>
+
+          <!-- Missed Questions (screen only) -->
+          <div id="missedQuestions" class="missed cert-missed"></div>
+
+          <!-- Signature Row -->
+          <div class="cert-sig-row">
+            <div class="cert-sig-block">
+              <div class="cert-sig-line"></div>
+              <div class="cert-sig-label">Trainer / Manager Signature</div>
+            </div>
+            <div class="cert-sig-block">
+              <div class="cert-sig-line"></div>
+              <div class="cert-sig-label">Employee Signature</div>
+            </div>
+          </div>
+
+          <!-- Print action bar -->
+          <div class="cert-actions no-print">
+            <button type="button" class="btn-dark" onclick="printResultSheet()">&#128438; Print / Save as PDF</button>
+          </div>
+        </div>
+
+        <section class="saved-records no-print" id="savedExamRecords">
+          <div class="saved-records-head">
+            <div>
+              <h2>Saved Day 1 Exam Records</h2>
+              <p>Records completed from this exam file are stored in this browser for manager recovery and reprinting.</p>
+            </div>
+            <button type="button" class="btn-outline" onclick="renderSavedRecords()">Refresh Records</button>
+          </div>
+          <div class="saved-records-list" id="savedRecordsList"></div>
+        </section>
+
+        <div class="pdf-note">
+          After submission, print or save the exam record as a PDF and return to the Day 1 Main Menu.
+        </div>
+
+        <div class="footer-note">
+          Passing score is set to 80%. All questions and employee details must be completed before submission.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const passingPercent = 80;
+    let currentQuestionIndex = 0;
+    let isSingleQuestionMode = false;
+    let lastScoreState = null;
+
+    const questionBank = [
+      {
+        id: 1,
+        text: "During a busy period, a teammate asks for help while you are completing required safety checks at your station. Which response best reflects the Launch Vision and Core Values?",
+        choices: [
+          "Skip the remaining checks so the teammate's order can be completed faster.",
+          "Stay focused only on your station and avoid getting involved in another employee's work.",
+          "Complete the required checks correctly, communicate with the teammate, and safely assist when you are able.",
+          "Stop all food preparation until a manager assigns every task again."
+        ],
+        correct: "Complete the required checks correctly, communicate with the teammate, and safely assist when you are able."
+      },
+      {
+        id: 2,
+        text: "You notice that a prepared product has the wrong use-or-discard time on its label. What best demonstrates transparency?",
+        choices: [
+          "Quietly replace the label and continue without telling anyone.",
+          "Tell the trainer or Manager on Duty, correct the label and any related record, and make sure the product is still safe to use.",
+          "Move the product to the front so it will be used before anyone notices.",
+          "Leave a note for the next shift because the product has already been labeled."
+        ],
+        correct: "Tell the trainer or Manager on Duty, correct the label and any related record, and make sure the product is still safe to use."
+      },
+      {
+        id: 3,
+        text: "You begin vomiting during a Krave shift. What should you do?",
+        choices: [
+          "Finish the order you are preparing, sanitize the station, and then report it.",
+          "Move to a non-food task and report the illness at the end of the shift.",
+          "Stop working immediately and report the illness to the Manager on Duty.",
+          "Wash your hands, put on two pairs of gloves, and continue if you feel able."
+        ],
+        correct: "Stop working immediately and report the illness to the Manager on Duty."
+      },
+      {
+        id: 4,
+        text: "Your vomiting symptoms ended at 8:00 p.m. last night, and you are scheduled to work at noon today. What should you do?",
+        choices: [
+          "Report for the shift because the symptoms stopped before you went to sleep.",
+          "Work as scheduled if you wear gloves and avoid tasting food.",
+          "Contact the manager before the shift and do not return until you have been symptom-free for the required 24 hours and are cleared according to procedure.",
+          "Work only on cleaning tasks until 8:00 p.m., then return to food preparation."
+        ],
+        correct: "Contact the manager before the shift and do not return until you have been symptom-free for the required 24 hours and are cleared according to procedure."
+      },
+      {
+        id: 5,
+        text: "You have a small cut on your hand or wrist. What is required before you handle food?",
+        choices: [
+          "A single-use glove is sufficient as long as the cut is not actively bleeding.",
+          "A regular bandage is sufficient if you avoid ready-to-eat foods.",
+          "Cover it with a clean, water-resistant bandage and then wear a single-use glove.",
+          "Wrap it in a paper towel before putting on a glove."
+        ],
+        correct: "Cover it with a clean, water-resistant bandage and then wear a single-use glove."
+      },
+      {
+        id: 6,
+        text: "The designated handwashing sink is blocked by stored boxes when you need to wash your hands. What should you do?",
+        choices: [
+          "Wash your hands in the three-bay sink and return to work.",
+          "Restore access to the handwashing sink and notify the trainer or manager if it cannot be made available immediately.",
+          "Use hand sanitizer and put on gloves until the sink is available.",
+          "Use the produce-preparation sink as long as no food is in it."
+        ],
+        correct: "Restore access to the handwashing sink and notify the trainer or manager if it cannot be made available immediately."
+      },
+      {
+        id: 7,
+        text: "Which sequence correctly describes proper handwashing in Krave?",
+        choices: [
+          "Wet hands and forearms, apply soap, scrub for at least 20 seconds, rinse, dry with a single-use towel, and use the towel to turn off a manual faucet.",
+          "Wet hands, scrub for 20 seconds, apply soap, rinse, and let hands air dry.",
+          "Apply soap to dry hands, scrub for 10 seconds, rinse, and dry on a clean towel kept at the station.",
+          "Rinse hands and forearms, apply sanitizer, and dry them on your apron before putting on gloves."
+        ],
+        correct: "Wet hands and forearms, apply soap, scrub for at least 20 seconds, rinse, dry with a single-use towel, and use the towel to turn off a manual faucet."
+      },
+      {
+        id: 8,
+        text: "You stop preparing food to use the POS while wearing gloves. What must happen before you return to the order?",
+        choices: [
+          "Discard the gloves, wash and dry your hands, put on new gloves, and reset any contaminated equipment or surfaces as needed.",
+          "Wipe the gloves with a sanitizer towel and put on a second pair.",
+          "Sanitize the outside of the gloves and continue the same order.",
+          "Replace the gloves without washing because the food itself was not touched."
+        ],
+        correct: "Discard the gloves, wash and dry your hands, put on new gloves, and reset any contaminated equipment or surfaces as needed."
+      },
+      {
+        id: 9,
+        text: "You finish cutting prepared vegetables and move to another food-preparation task. Your gloves still look clean. What should you do?",
+        choices: [
+          "Continue wearing the gloves because both tasks involve food.",
+          "Replace the gloves without washing your hands.",
+          "Wash and sanitize the gloves before starting the new task.",
+          "Discard the gloves, wash and dry your hands, and put on a new pair."
+        ],
+        correct: "Discard the gloves, wash and dry your hands, and put on a new pair."
+      },
+      {
+        id: 10,
+        text: "A teammate uses bare hands to place prepared bell peppers on a pizza. What is the correct response?",
+        choices: [
+          "Allow the order to continue if the teammate washed immediately before starting.",
+          "Stop the task, report the bare-hand contact, discard the affected food according to procedure, and restart with washed hands and an approved barrier such as gloves or utensils.",
+          "Cook the pizza for an extra minute to correct the handling mistake.",
+          "Move the peppers with tongs and continue because only one ingredient was touched."
+        ],
+        correct: "Stop the task, report the bare-hand contact, discard the affected food according to procedure, and restart with washed hands and an approved barrier such as gloves or utensils."
+      },
+      {
+        id: 11,
+        text: "A cleaning bucket has been placed in the food-preparation sink just before you need to rinse fresh peppers. What should happen first?",
+        choices: [
+          "Rinse the peppers in the three-bay sink instead.",
+          "Remove the bucket and rinse the peppers immediately because the sink looks clean.",
+          "Restore the food-preparation sink for food use, clean and sanitize it properly, and then prepare the peppers using the approved process.",
+          "Soak the peppers in sanitizer so the condition of the sink no longer matters."
+        ],
+        correct: "Restore the food-preparation sink for food use, clean and sanitize it properly, and then prepare the peppers using the approved process."
+      },
+      {
+        id: 12,
+        text: "Which process correctly prepares fresh produce for use?",
+        choices: [
+          "Inspect it, rinse it under cool running water, dry it, and use clean and sanitized tools with the approved green cutting board.",
+          "Soak it in sanitizer, dry it, and use whichever cutting board is closest.",
+          "Wash it with dish soap, rinse it, and place it directly into a storage container.",
+          "Cut it first, then rinse the pieces after preparation is complete."
+        ],
+        correct: "Inspect it, rinse it under cool running water, dry it, and use clean and sanitized tools with the approved green cutting board."
+      },
+      {
+        id: 13,
+        text: "Your phone is lying on a food-preparation surface, and you move it with a gloved hand. What should you do before continuing food preparation?",
+        choices: [
+          "Change gloves and continue because the phone did not touch the food.",
+          "Wipe the phone area with sanitizer and keep the same gloves.",
+          "Discard the gloves, wash your hands, clean and sanitize the affected surface, and put on new gloves.",
+          "Cover the area with a clean pan liner and continue the order."
+        ],
+        correct: "Discard the gloves, wash your hands, clean and sanitize the affected surface, and put on new gloves."
+      },
+      {
+        id: 14,
+        text: "What temperature must cold-held TCS food maintain?",
+        choices: [
+          "32°F or below",
+          "41°F or below",
+          "45°F or below",
+          "50°F or below"
+        ],
+        correct: "41°F or below"
+      },
+      {
+        id: 15,
+        text: "A prep cooler display reads 38°F, but the actual product temperature is 44°F. What should you do?",
+        choices: [
+          "Record 38°F because the cooler display is the official reading.",
+          "Average the readings and record 41°F.",
+          "Treat the 44°F product as unsafe or questionable, stop using it, report it, and record the actual product temperature.",
+          "Move the product to the freezer and mark the check as passed."
+        ],
+        correct: "Treat the 44°F product as unsafe or questionable, stop using it, report it, and record the actual product temperature."
+      },
+      {
+        id: 16,
+        text: "A hot-held TCS item measures 132°F. What is the correct response?",
+        choices: [
+          "Serve it quickly before it cools further.",
+          "Do not serve it; notify the Manager on Duty, record the actual temperature, and follow the approved corrective action.",
+          "Increase the holding-unit setting and record 135°F without checking again.",
+          "Mix it with a hotter batch until the average temperature reaches 135°F."
+        ],
+        correct: "Do not serve it; notify the Manager on Duty, record the actual temperature, and follow the approved corrective action."
+      },
+      {
+        id: 17,
+        text: "The timer has finished and chicken tenders look browned, but the thickest tender measures 158°F. What should you do?",
+        choices: [
+          "Serve them because Krave uses ready-to-eat products and the timer finished.",
+          "Serve them because color and cook time together confirm doneness.",
+          "Move them to the heat lamp until the thermometer reaches 165°F.",
+          "Continue the approved cooking process and recheck until the product reaches 165°F."
+        ],
+        correct: "Continue the approved cooking process and recheck until the product reaches 165°F."
+      },
+      {
+        id: 18,
+        text: "You find a frozen product that is soft and has begun thawing. What should you do?",
+        choices: [
+          "Keep it out of the freezer, notify the appropriate person, and use it only if the approved procedure allows.",
+          "Return it to the freezer if the package is still sealed.",
+          "Refreeze it and apply a new use-or-discard label.",
+          "Use it if the color and smell appear normal."
+        ],
+        correct: "Keep it out of the freezer, notify the appropriate person, and use it only if the approved procedure allows."
+      },
+      {
+        id: 19,
+        text: "Which method gives a reliable internal food-temperature reading?",
+        choices: [
+          "Clean and sanitize the probe, place it in the thickest part of the product, wait for the reading to stabilize, and record the actual temperature.",
+          "Touch the probe to the outside of the product and record the first number shown.",
+          "Check the equipment display and use that number as the product temperature.",
+          "Insert the probe between two products so one reading represents the entire batch."
+        ],
+        correct: "Clean and sanitize the probe, place it in the thickest part of the product, wait for the reading to stabilize, and record the actual temperature."
+      },
+      {
+        id: 20,
+        text: "Which information belongs on a complete label for an opened, thawed, or prepared food item?",
+        choices: [
+          "Product name; opened, thawed, or prepared date and time; use-or-discard date and time; and employee initials.",
+          "Product name, use-or-discard date, and manager signature only.",
+          "Product name, preparation date, and employee initials; times are only needed for hot food.",
+          "Product name and the date the original case arrived at the park."
+        ],
+        correct: "Product name; opened, thawed, or prepared date and time; use-or-discard date and time; and employee initials."
+      },
+      {
+        id: 21,
+        text: "Prepared bell peppers have an approved 72-hour shelf life. They are prepared at 2:00 p.m. on Monday. What use-or-discard time belongs on the label?",
+        choices: [
+          "Wednesday at 2:00 p.m.",
+          "Thursday at 2:00 p.m.",
+          "Saturday at 2:00 p.m.",
+          "The following Monday at 2:00 p.m."
+        ],
+        correct: "Thursday at 2:00 p.m."
+      },
+      {
+        id: 22,
+        text: "A prepared item combines ingredients labeled for Tuesday at 4:00 p.m., Wednesday at 10:00 a.m., and Thursday at 9:00 a.m. Which use-or-discard time belongs on the finished item?",
+        choices: [
+          "Tuesday at 4:00 p.m.",
+          "Wednesday at 10:00 a.m.",
+          "Thursday at 9:00 a.m.",
+          "The time the ingredients were combined, plus 168 hours."
+        ],
+        correct: "Tuesday at 4:00 p.m."
+      },
+      {
+        id: 23,
+        text: "Two containers hold the same prepared product. One has an earlier use-or-discard time, but the newer container is easier to reach. What should you do?",
+        choices: [
+          "Use the newer container first because it is already at the front.",
+          "Combine both containers and apply the newer label.",
+          "Rotate the earlier container forward and use it first, as long as it is still within its approved shelf life.",
+          "Use whichever container looks fuller."
+        ],
+        correct: "Rotate the earlier container forward and use it first, as long as it is still within its approved shelf life."
+      },
+      {
+        id: 24,
+        text: "A working container is nearly empty and a freshly prepared batch is ready. What should you do?",
+        choices: [
+          "Top off the older product and keep the newer label.",
+          "Use or discard the remaining older product according to procedure, then place the new batch in a clean, sanitized container with its own complete label.",
+          "Mix the batches and use the earlier date without cleaning the container.",
+          "Transfer the older product onto the new batch so it will be used first."
+        ],
+        correct: "Use or discard the remaining older product according to procedure, then place the new batch in a clean, sanitized container with its own complete label."
+      },
+      {
+        id: 25,
+        text: "During the opening line check, sanitizer is outside its approved range and two prepared products have incomplete labels. Everything else appears ready. What should you do?",
+        choices: [
+          "Sign the line check as complete and correct the issues after opening.",
+          "Record acceptable values so service can begin on time.",
+          "Correct or report the issues before service, record what you actually find, and do not mark the affected checks complete until standards are met.",
+          "Remove the sanitizer and unlabeled products from view, then begin service."
+        ],
+        correct: "Correct or report the issues before service, record what you actually find, and do not mark the affected checks complete until standards are met."
+      },
+      {
+        id: 26,
+        text: "A food item must be discarded because its label is missing or its approved time has expired. What should you do?",
+        choices: [
+          "Discard it quietly so the shift is not delayed.",
+          "Set it aside, notify the trainer or Manager on Duty, and discard and record the waste according to the park's procedure.",
+          "Relabel it with the current time if the product still looks acceptable.",
+          "Offer it to employees so it does not count as waste."
+        ],
+        correct: "Set it aside, notify the trainer or Manager on Duty, and discard and record the waste according to the park's procedure."
+      },
+      {
+        id: 27,
+        text: "Which sequence correctly describes the three-bay sink process?",
+        choices: [
+          "Scrape, wash in detergent solution, rinse, sanitize at the approved tested concentration, and air dry.",
+          "Rinse, wash, sanitize, and towel dry so items return to service quickly.",
+          "Wash, sanitize, rinse, and stack the items while they are still wet.",
+          "Scrape, wash, rinse, and air dry; sanitizer is only required at closing."
+        ],
+        correct: "Scrape, wash in detergent solution, rinse, sanitize at the approved tested concentration, and air dry."
+      },
+      {
+        id: 28,
+        text: "A food-contact surface still has visible cheese and grease on it. An employee sprays sanitizer and wipes it once. What should happen next?",
+        choices: [
+          "Apply more sanitizer and continue wiping until the residue is less visible.",
+          "Fully clean the surface to remove the soil, then sanitize it using the approved procedure.",
+          "Dry the surface with a clean towel and return it to service.",
+          "Cover the surface with a liner and clean it at the end of the shift."
+        ],
+        correct: "Fully clean the surface to remove the soil, then sanitize it using the approved procedure."
+      },
+      {
+        id: 29,
+        text: "Which dry-storage placement meets the Krave standard?",
+        choices: [
+          "Food is stored at least six inches off the floor and eighteen inches from exterior walls.",
+          "Food is stored eighteen inches off the floor and six inches from exterior walls.",
+          "Sealed cases may sit on the floor if they are used within one shift.",
+          "Food may touch an exterior wall when the shelf is at least four inches off the floor."
+        ],
+        correct: "Food is stored at least six inches off the floor and eighteen inches from exterior walls."
+      },
+      {
+        id: 30,
+        text: "You find a container of cleaner stored on a shelf above packaged food in dry storage. What should you do?",
+        choices: [
+          "Leave it in place if the cap is closed tightly.",
+          "Move the food to a lower shelf and continue using both items.",
+          "Separate and relocate the chemical to its approved storage area, inspect the food for possible contamination, and report any questionable product.",
+          "Place the cleaner inside a cardboard box so it is no longer visible."
+        ],
+        correct: "Separate and relocate the chemical to its approved storage area, inspect the food for possible contamination, and report any questionable product."
+      }
+    ];
+
+    function shuffleItems(items) {
+      const shuffled = [...items];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
+    function buildExamQuestions() {
+      return shuffleItems(questionBank).map(question => ({
+        ...question,
+        choices: shuffleItems(question.choices)
+      }));
+    }
+
+    let questions = buildExamQuestions();
+
+
+    function renderQuiz() {
+      const form = document.getElementById('quizForm');
+      form.innerHTML = '';
+
+      questions.forEach((q, index) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        div.id = `question-${index}`;
+
+        const labels = ['A', 'B', 'C', 'D'];
+        let optionsHtml = '';
+        q.choices.forEach((choice, choiceIndex) => {
+          optionsHtml += `
+            <label>
+              <input type="radio" name="q${q.id}" value="${choiceIndex}" onchange="clearQuestionWarning(${index})">
+              ${labels[choiceIndex]}. ${choice}
+            </label>
+          `;
+        });
+
+        div.innerHTML = `
+          <div class="question-number">Question ${index + 1}</div>
+          <h3>${q.text}</h3>
+          <div class="options">${optionsHtml}</div>
+        `;
+
+        form.appendChild(div);
+      });
+
+      updateQuestionVisibility();
+    }
+
+    function toggleMode() {
+      isSingleQuestionMode = document.getElementById('singleQuestionMode').checked;
+      document.body.classList.toggle('tablet-mode', isSingleQuestionMode);
+      updateQuestionVisibility();
+    }
+
+    function showSingleQuestionMode() {
+      const modeToggle = document.getElementById('singleQuestionMode');
+      if (modeToggle) modeToggle.checked = true;
+      isSingleQuestionMode = true;
+      document.body.classList.add('tablet-mode');
+      updateQuestionVisibility();
+    }
+
+    function showAllQuestions() {
+      const modeToggle = document.getElementById('singleQuestionMode');
+      if (modeToggle) modeToggle.checked = false;
+      isSingleQuestionMode = false;
+      document.body.classList.remove('tablet-mode');
+      updateQuestionVisibility();
+    }
+
+    function updateQuestionVisibility() {
+      const progressBox = document.getElementById('progressBox');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      questions.forEach((_, index) => {
+        const qEl = document.getElementById(`question-${index}`);
+        if (!qEl) return;
+
+        if (isSingleQuestionMode) {
+          qEl.classList.toggle('hidden', index !== currentQuestionIndex);
+        } else {
+          qEl.classList.remove('hidden');
+        }
+      });
+
+      if (isSingleQuestionMode) {
+        progressBox.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+        if (prevBtn) prevBtn.style.display = 'inline-block';
+        if (nextBtn) nextBtn.style.display = 'inline-block';
+      } else {
+        progressBox.textContent = `All ${questions.length} questions visible`;
+        if (prevBtn) prevBtn.style.display = 'none';
+        if (nextBtn) nextBtn.style.display = 'none';
+      }
+    }
+
+    function nextQuestion() {
+      if (!isSingleQuestionMode) return;
+      if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        updateQuestionVisibility();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function prevQuestion() {
+      if (!isSingleQuestionMode) return;
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        updateQuestionVisibility();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function clearQuestionWarning(index) {
+      const qEl = document.getElementById(`question-${index}`);
+      if (qEl) qEl.classList.remove('unanswered');
+    }
+
+    function getEmployeeData() {
+      return {
+        employeeName: document.getElementById('employeeName').value.trim(),
+        parkLocation: document.getElementById('parkLocation').value.trim(),
+        quizDate: document.getElementById('quizDate').value,
+        trainerName: document.getElementById('trainerName').value.trim()
+      };
+    }
+
+    function validateQuiz() {
+      const validationBox = document.getElementById('validationBox');
+      const employee = getEmployeeData();
+      const errors = [];
+      const unanswered = [];
+
+      document.querySelectorAll('.question').forEach(q => q.classList.remove('unanswered'));
+
+      if (!employee.employeeName) errors.push('Employee Name is required.');
+      if (!employee.parkLocation) errors.push('Park Location is required.');
+      if (!employee.quizDate) errors.push('Date is required.');
+      if (!employee.trainerName) errors.push('Trainer/Manager is required.');
+
+      questions.forEach((q, index) => {
+        const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
+        if (!selected) {
+          unanswered.push(index + 1);
+          const qEl = document.getElementById(`question-${index}`);
+          if (qEl) qEl.classList.add('unanswered');
+        }
+      });
+
+      if (unanswered.length) {
+        errors.push(`All questions must be answered before submission. Missing: ${unanswered.join(', ')}`);
+      }
+
+      if (errors.length) {
+        validationBox.style.display = 'block';
+        validationBox.innerHTML = `
+          <strong>Please complete the following before submitting:</strong>
+          <ul>
+            ${errors.map(err => `<li>${err}</li>`).join('')}
+          </ul>
+        `;
+
+        if (unanswered.length) {
+          const firstMissingIndex = unanswered[0] - 1;
+          if (firstMissingIndex !== -1 && isSingleQuestionMode) {
+            currentQuestionIndex = firstMissingIndex;
+            updateQuestionVisibility();
+          }
+          const firstMissing = document.getElementById(`question-${firstMissingIndex}`);
+          if (firstMissing) firstMissing.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          validationBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        return false;
+      }
+
+      validationBox.style.display = 'none';
+      validationBox.innerHTML = '';
+      return true;
+    }
+
+    function calculateResults() {
+      let score = 0;
+      const total = questions.length;
+      const missed = [];
+      const responses = [];
+
+      questions.forEach((q, index) => {
+        const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
+        const labels = ['A', 'B', 'C', 'D'];
+        const selectedIndex = selected ? Number(selected.value) : -1;
+        const selectedText = selectedIndex >= 0 ? q.choices[selectedIndex] : '';
+        const correctIndex = q.choices.indexOf(q.correct);
+        const response = {
+          displayNumber: index + 1,
+          originalId: q.id,
+          questionText: q.text,
+          selectedAnswer: selectedIndex >= 0 ? labels[selectedIndex] : null,
+          selectedText,
+          correctAnswer: correctIndex >= 0 ? labels[correctIndex] : null,
+          correctText: q.correct,
+          isCorrect: selectedText === q.correct
+        };
+        responses.push(response);
+
+        if (response.isCorrect) {
+          score++;
+        } else {
+          missed.push({
+            id: index + 1,
+            originalId: q.id,
+            text: q.text,
+            selected: selectedIndex >= 0 ? `${labels[selectedIndex]}. ${selectedText}` : 'No answer selected',
+            correct: `${labels[correctIndex]}. ${q.correct}`
+          });
+        }
+      });
+
+      const percent = Math.round((score / total) * 100);
+      const passed = percent >= passingPercent;
+      const employee = getEmployeeData();
+
+      lastScoreState = { score, total, percent, passed, missed, responses, employee };
+      return lastScoreState;
+    }
+
+    function gradeQuiz() {
+      if (!validateQuiz()) return;
+
+      const { score, total, percent, passed, missed, employee } = calculateResults();
+
+      const resultBox = document.getElementById('resultBox');
+      resultBox.style.display = 'block';
+
+      const record = {
+        score,
+        total,
+        percent,
+        passed,
+        missed,
+        employee,
+        submittedAt: new Date().toISOString()
+      };
+
+      lastScoreState = record;
+      showResultRecord(record);
+      saveExamRecord(record);
+      submitCentralExamRecord(record);
+
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('printCertBtn').style.display = 'inline-block';
+      const returnBtn = document.getElementById('returnMenuBtn');
+      if (returnBtn) returnBtn.style.display = 'inline-block';
+    }
+
+
+    function submitCentralExamRecord(record) {
+      launchTrainingSubmitExamRecord({
+        name: record.employee && record.employee.employeeName,
+        parkLocation: record.employee && record.employee.parkLocation,
+        trainingProgram: 'Krave',
+        examDay: 'Day 1 Exam',
+        score: `${record.score}/${record.total}`,
+        percentage: `${record.percent}%`,
+        missedQuestions: record.missed && record.missed.length
+          ? record.missed.map(m => `Q${m.id}: ${m.text} | Correct: ${m.correct}`).join(' | ')
+          : 'None'
+      });
+    }
+
+    function updateCertificate() {} // merged into gradeQuiz
+
+    function printResultSheet() {
+      if (!lastScoreState) {
+        gradeQuiz();
+        if (!lastScoreState) return;
+      }
+      window.print();
+    }
+
+    const examRecordStorageKey = 'launch_krave_day1_exam_records_v1';
+
+    function getSavedExamRecords() {
+      try {
+        return JSON.parse(localStorage.getItem(examRecordStorageKey) || '[]');
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function saveExamRecord(record) {
+      const records = getSavedExamRecords();
+      records.unshift(record);
+      localStorage.setItem(examRecordStorageKey, JSON.stringify(records));
+      renderSavedRecords();
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, function(char) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        }[char];
+      });
+    }
+
+    function formatTimestamp(timestamp) {
+      try {
+        return new Date(timestamp).toLocaleString();
+      } catch (error) {
+        return timestamp || '';
+      }
+    }
+
+    function renderSavedRecords() {
+      const list = document.getElementById('savedRecordsList');
+      if (!list) return;
+
+      const records = getSavedExamRecords();
+
+      if (!records.length) {
+        list.innerHTML = 'No saved exam records yet.';
+        return;
+      }
+
+      list.innerHTML = records.map((record, index) => {
+        const resultClass = record.passed ? 'record-score' : 'record-score record-fail';
+        const resultText = record.passed ? 'PASS' : 'FAIL';
+
+        return `
+          <div class="saved-record-item">
+            <div>
+              <div class="record-main">${escapeHtml(record.employee.employeeName || 'Unnamed Employee')}</div>
+              <div class="record-sub">Submitted: ${escapeHtml(formatTimestamp(record.submittedAt))}</div>
+            </div>
+            <div>
+              <div><strong>Date:</strong> ${escapeHtml(record.employee.quizDate || '')}</div>
+              <div class="record-sub"><strong>Trainer:</strong> ${escapeHtml(record.employee.trainerName || '')}</div>
+            </div>
+            <div class="${resultClass}">
+              ${resultText}<br>${record.score}/${record.total} (${record.percent}%)
+            </div>
+            <div class="record-actions">
+              <button type="button" class="btn-outline" onclick="loadSavedRecord(${index})">View</button>
+              <button type="button" class="btn-dark" onclick="printSavedRecord(${index})">Print</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function showResultRecord(record) {
+      const resultBox = document.getElementById('resultBox');
+      resultBox.className = 'result result-certificate launch-standard-certificate ' + (record.passed ? 'pass' : 'fail');
+      resultBox.style.display = 'block';
+
+      const missedHtml = (record.missed && record.missed.length)
+        ? '<h3 style="margin:16px 0 8px">Missed Questions</h3>' + record.missed.map(function(m) {
+            return '<div class="missed-item"><div><strong>Q' + window.launchEscapeHtml(m.id) + ':</strong> ' + window.launchEscapeHtml(m.text) + '</div><div><strong>Selected answer:</strong> ' + window.launchEscapeHtml(m.selected || 'Not recorded') + '</div><div><strong>Correct answer:</strong> ' + window.launchEscapeHtml(m.correct) + '</div></div>';
+          }).join('')
+        : '<p style="padding:14px 0"><strong>&#10003; Perfect score — no missed questions.</strong></p>';
+
+      resultBox.innerHTML = window.launchRenderStandardExamCertificate({
+        status: record.passed ? 'PASS' : 'FAIL',
+        trainingTitle: 'DAY 1 KRAVE TRAINING',
+        statementTitle: 'Day 1 Krave Training',
+        employeeName: record.employee && record.employee.employeeName,
+        parkLocation: record.employee && record.employee.parkLocation,
+        date: record.employee && record.employee.quizDate,
+        trainerName: record.employee && record.employee.trainerName,
+        scoreText: record.score + ' / ' + record.total,
+        percentText: record.percent + '%',
+        passed: record.passed,
+        passingPercent: passingPercent,
+        missedHtml: missedHtml,
+        recordsHref: '#savedExamRecords'
+      });
+
+      const printBtn = document.getElementById('printBtn') || document.getElementById('printCertBtn');
+      if (printBtn) printBtn.style.display = 'inline-block';
+
+      const returnBtn = document.getElementById('returnBtn') || document.getElementById('returnMenuBtn');
+      if (returnBtn) returnBtn.style.display = 'inline-block';
+
+      resultBox.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+
+    function loadSavedRecord(index) {
+      const records = getSavedExamRecords();
+      const record = records[index];
+      if (!record) return;
+      showResultRecord(record);
+      document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function printSavedRecord(index) {
+      const records = getSavedExamRecords();
+      const record = records[index];
+      if (!record) return;
+      showResultRecord(record);
+      window.print();
+    }
+
+
+    function lockEmployeeName() {
+      const field = document.getElementById('employeeName');
+      if (!field.disabled) {
+        field.disabled = true;
+        field.style.background = '#f0f0f0';
+        field.style.color = '#555';
+        field.title = 'Employee name is locked once the quiz has started. Use Reset to start over.';
+      }
+    }
+
+    function resetQuiz() {
+      document.getElementById('quizForm').reset();
+      const nameField = document.getElementById('employeeName');
+      nameField.disabled = false;
+      nameField.style.background = '';
+      nameField.style.color = '';
+      nameField.title = '';
+      nameField.value = '';
+      document.getElementById('quizDate').value = '';
+      document.getElementById('parkLocation').value = '';
+      document.getElementById('trainerName').value = '';
+      document.getElementById('resultBox').style.display = 'none';
+      document.getElementById('validationBox').style.display = 'none';
+      document.getElementById('validationBox').innerHTML = '';
+      const missedQuestions = document.getElementById('missedQuestions');
+      if (missedQuestions) missedQuestions.innerHTML = '';
+      document.getElementById('printCertBtn').style.display = 'none';
+      const returnBtn = document.getElementById('returnMenuBtn');
+      if (returnBtn) returnBtn.style.display = 'none';
+      document.querySelectorAll('.question').forEach(q => q.classList.remove('unanswered'));
+      lastScoreState = null;
+      currentQuestionIndex = 0;
+      questions = buildExamQuestions();
+      renderQuiz();
+      document.getElementById('quizForm').addEventListener('change', lockEmployeeName, { once: true });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    renderQuiz();
+    updateQuestionVisibility();
+    renderSavedRecords();
+
+    // Lock employee name on first radio selection
+    document.getElementById('quizForm').addEventListener('change', function() {
+      lockEmployeeName();
+    }, { once: true });
+  </script>
+
+<script id="launch-google-sheets-exam-records">
+(function() {
+  if (window.launchTrainingSubmitExamRecord) return;
+
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycbzKjtjFU8msyHtWcK7ziV3ewSvQcW5AKcVtEAkAjMSe0srGBheWSUA7XLrLTR8inYyo-w/exec";
+  const SECRET = "JonathanPfeiffer";
+
+  function clean(value) {
+    return String(value == null ? '' : value).trim();
+  }
+
+  window.launchTrainingSubmitExamRecord = function(payload) {
+    try {
+      const record = Object.assign({}, payload || {});
+      record.secret = SECRET;
+      record.name = clean(record.name);
+      record.parkLocation = clean(record.parkLocation);
+      record.trainingProgram = clean(record.trainingProgram);
+      record.examDay = clean(record.examDay);
+      record.score = clean(record.score);
+      record.percentage = clean(record.percentage);
+      record.missedQuestions = clean(record.missedQuestions || 'None') || 'None';
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(record),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Google Sheets exam record submission failed.', error);
+      });
+    } catch (error) {
+      console.warn('Google Sheets exam record submission could not be prepared.', error);
+    }
+  };
+})();
+</script>
+
+
+<script id="launch-standard-certificate-script">
+(function () {
+  if (window.launchRenderStandardExamCertificate) return;
+
+  function escapeHtml(value) {
+    return String(value == null ? "" : value).replace(/[&<>"']/g, function (char) {
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[char];
+    });
+  }
+
+  window.launchEscapeHtml = escapeHtml;
+
+  window.launchRenderStandardExamCertificate = function (data) {
+    data = data || {};
+
+    const passed = !!data.passed;
+    const stampText = data.status || (passed ? "PASS" : "FAIL");
+    const stampClass = passed ? "stamp-pass" : "stamp-fail";
+    const employeeName = data.employeeName || "—";
+    const parkLocation = data.parkLocation || "—";
+    const dateText = data.date || new Date().toLocaleDateString();
+    const trainerName = data.trainerName || "—";
+    const scoreText = data.scoreText || "—";
+    const percentText = data.percentText || "—";
+    const trainingTitle = data.trainingTitle || "TRAINING ASSESSMENT";
+    const passingPercent = data.passingPercent || 80;
+
+    const statement = passed
+      ? `<strong>${escapeHtml(employeeName)}</strong> has successfully completed the Launch Family Entertainment ${escapeHtml(data.statementTitle || trainingTitle)} assessment with a score of <strong>${escapeHtml(scoreText)} (${escapeHtml(percentText)})</strong>. Passing threshold: ${passingPercent}%.`
+      : `<strong>${escapeHtml(employeeName)}</strong> completed the Launch Family Entertainment ${escapeHtml(data.statementTitle || trainingTitle)} assessment with a score of <strong>${escapeHtml(scoreText)} (${escapeHtml(percentText)})</strong> — below the ${passingPercent}% passing threshold. Please review missed questions below and retest.`;
+
+    const missedHtml = data.missedHtml || '<p style="padding:14px 0"><strong>&#10003; Perfect score — no missed questions.</strong></p>';
+    const recordsLink = data.recordsHref
+      ? `<a href="${escapeHtml(data.recordsHref)}">View Exam Records</a>`
+      : "";
+
+    return `
+      <div class="cert-header">
+        <div class="cert-header-left">
+          <div class="cert-org">LAUNCH FAMILY ENTERTAINMENT</div>
+          <div class="cert-title-line">${escapeHtml(trainingTitle)}</div>
+          <div class="cert-subtitle">Training Assessment Record</div>
+        </div>
+        <div class="cert-stamp ${stampClass}">${escapeHtml(stampText)}</div>
+      </div>
+
+      <div class="cert-info-row">
+        <div class="cert-info-field">
+          <span class="cert-info-label">Employee Name</span>
+          <span class="cert-info-value">${escapeHtml(employeeName)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Park Location</span>
+          <span class="cert-info-value">${escapeHtml(parkLocation)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Date</span>
+          <span class="cert-info-value">${escapeHtml(dateText)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Trainer / Manager</span>
+          <span class="cert-info-value">${escapeHtml(trainerName)}</span>
+        </div>
+        <div class="cert-info-field cert-score-field">
+          <span class="cert-info-label">Score</span>
+          <span class="cert-info-value cert-score-value">${escapeHtml(scoreText)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Percentage</span>
+          <span class="cert-info-value">${escapeHtml(percentText)}</span>
+        </div>
+      </div>
+
+      <div class="cert-statement">${statement}</div>
+      <div class="missed cert-missed">${missedHtml}</div>
+
+      <div class="cert-sig-row">
+        <div class="cert-sig-block">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-label">Trainer / Manager Signature</div>
+        </div>
+        <div class="cert-sig-block">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-label">Employee Signature</div>
+        </div>
+      </div>
+
+      <div class="cert-actions no-print">
+        <button type="button" onclick="window.print()">&#128438; Print / Save as PDF</button>
+        ${recordsLink}
+      </div>
+    `;
+  };
+})();
+</script>
+
+</body>
+</html>

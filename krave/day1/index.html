@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Day 1 Krave Training · Version 34</title>
+  <style>
+    :root{--green:#6cc24a;--green-dark:#4da62d;--yellow:#f2e600;--ink:#101418;--muted:#505a64}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#070707,#1c1c1c 55%,#2d341f);color:#111}
+    .shell{width:min(1000px,100%)}
+    .nav{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+    .nav a{display:inline-block;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#fff;text-decoration:none;font-weight:900}
+    .hero{margin-bottom:22px;color:#fff}
+    .hero h1{margin:0;font-size:clamp(2.1rem,5vw,4rem);letter-spacing:-2px}
+    .hero p{max-width:850px;margin:8px 0 0;color:#cfd7df;line-height:1.45}
+    .version{display:inline-block;margin-top:10px;padding:6px 10px;border-radius:999px;background:var(--yellow);color:#000;font-size:.75rem;font-weight:900;text-transform:uppercase;letter-spacing:1px}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .card{min-height:285px;display:flex;flex-direction:column;overflow:hidden;border-radius:22px;background:#fff;box-shadow:0 18px 50px rgba(0,0,0,.22);text-decoration:none;color:#111}
+    .strip{height:10px;background:linear-gradient(90deg,var(--green),var(--yellow))}
+    .body{display:flex;flex:1;flex-direction:column;gap:12px;padding:26px}
+    .eyebrow{font-size:.78rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--green-dark)}
+    .card h2{margin:0;font-size:2rem;color:var(--ink)}
+    .card p{margin:0;line-height:1.45;color:var(--muted)}
+    .button{margin-top:auto;padding:13px 15px;border-radius:999px;background:var(--ink);color:var(--yellow);text-align:center;font-weight:900}
+    .disabled{opacity:.63;cursor:not-allowed}
+    .disabled .button{background:#59636e;color:#fff}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+  </style>
+
+<style id="launch-portal-auth-style">
+  html { display: none; }
+  html.portal-authenticated { display: block; }
+</style>
+<script id="launch-portal-auth-script">
+  (() => {
+    const storageKey = "launchTrainingUnlockedUntil";
+    const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+
+    if (unlockedUntil <= Date.now()) {
+      localStorage.removeItem(storageKey);
+
+      const currentPath = window.location.pathname;
+      const marker = "/Launch-Training/";
+      const markerPosition = currentPath.indexOf(marker);
+      let portalBase = markerPosition >= 0
+        ? currentPath.slice(0, markerPosition + marker.length)
+        : "/";
+
+      const moduleMarkers = ["/cashier/", "/court-monitor/", "/party-host/", "/krave/"];
+      for (const moduleMarker of moduleMarkers) {
+        const modulePosition = currentPath.indexOf(moduleMarker);
+        if (modulePosition >= 0) {
+          portalBase = currentPath.slice(0, modulePosition + 1) || "/";
+          break;
+        }
+      }
+
+      const returnPath = currentPath + window.location.search + window.location.hash;
+      window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
+    } else {
+      document.documentElement.classList.add("portal-authenticated");
+    }
+  })();
+</script>
+
+</head>
+<body>
+  <main class="shell">
+    <nav class="nav">
+      <a href="../index.html">← Krave Training Home</a>
+      <a href="../../index.html">Training Portal</a>
+      <a href="./end-of-shift-exam.html#savedExamRecords">View Day 1 Exam Records</a>
+    </nav>
+    <header class="hero">
+      <h1>Day 1 Krave Training</h1>
+      <p>Begin with the online training, complete the standardized checklist with a trainer, and then take the Day 1 exam.</p>
+      <span class="version">Version 34 · Day 1 Beta · Slides 1–16 + Checklist + Exam</span>
+    </header>
+
+    <section class="grid" aria-label="Day 1 training steps">
+      <a class="card" href="./online-training.html">
+        <div class="strip"></div>
+        <div class="body">
+          <div class="eyebrow">Step 1 · Available</div>
+          <h2>Online Training</h2>
+          <p>Review the Day 1 culture and food-safety foundations with recorded narration and synchronized visual emphasis.</p>
+          <div class="button">Open Slides 1–16</div>
+        </div>
+      </a>
+
+      <a class="card" href="./checklist.html">
+        <div class="strip"></div>
+        <div class="body">
+          <div class="eyebrow">Step 2 · Available</div>
+          <h2>Hands-On Checklist</h2>
+          <p>Print the standardized Day 1 checklist and complete each food-safety task with a trainer during the supervised shift.</p>
+          <div class="button">Open Checklist</div>
+        </div>
+      </a>
+
+      <a class="card" href="./end-of-shift-exam.html">
+        <div class="strip"></div>
+        <div class="body">
+          <div class="eyebrow">Step 3 · Available</div>
+          <h2>Day 1 Exam</h2>
+          <p>Complete the 30-question Day 1 assessment. Questions and answer choices randomize every time the exam opens.</p>
+          <div class="button">Open Day 1 Exam</div>
+        </div>
+      </a>
+    </section>
+  </main>
+</body>
+</html>

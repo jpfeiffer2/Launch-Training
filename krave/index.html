@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Krave Training · Version 34</title>
+  <style>
+    :root{--green:#6cc24a;--green-dark:#4da62d;--yellow:#f2e600;--ink:#101418;--muted:#515b66;--line:#e5eaee}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at top left,rgba(108,194,74,.22),transparent 32%),linear-gradient(135deg,#070707,#171717 52%,#2d341f);color:#111}
+    .shell{width:min(1100px,100%)}
+    .portal-link{display:inline-block;margin-bottom:18px;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;text-decoration:none;font-weight:900;border:1px solid rgba(255,255,255,.22)}
+    .top{display:flex;align-items:center;gap:16px;margin-bottom:22px;color:#fff}
+    .logo{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#111;border:3px solid var(--green);color:var(--yellow);font-weight:900;box-shadow:0 0 0 3px rgba(242,230,0,.16)}
+    .top h1{margin:0;font-size:clamp(2rem,4vw,3.3rem);letter-spacing:-1px}
+    .top p{margin:5px 0 0;color:#cfd7df}
+    .version{display:inline-block;margin-top:8px;padding:6px 10px;border-radius:999px;background:var(--yellow);color:#000;font-size:.75rem;font-weight:900;text-transform:uppercase;letter-spacing:1px}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .card{min-height:270px;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:0 18px 50px rgba(0,0,0,.2);text-decoration:none;color:#111}
+    .strip{height:10px;background:linear-gradient(90deg,var(--green),var(--yellow))}
+    .body{display:flex;flex:1;flex-direction:column;gap:12px;padding:24px}
+    .eyebrow{font-size:.78rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--green-dark)}
+    .card h2{margin:0;font-size:2rem;color:var(--ink)}
+    .card p{margin:0;line-height:1.45;color:var(--muted)}
+    .button{margin-top:auto;padding:12px 14px;border-radius:999px;background:var(--ink);color:var(--yellow);text-align:center;font-weight:900}
+    .disabled{opacity:.63;cursor:not-allowed}
+    .disabled .button{background:#59636e;color:#fff}
+    @media(max-width:800px){.grid{grid-template-columns:1fr}.top{align-items:flex-start}.logo{flex:0 0 auto}}
+  </style>
+
+<style id="launch-portal-auth-style">
+  html { display: none; }
+  html.portal-authenticated { display: block; }
+</style>
+<script id="launch-portal-auth-script">
+  (() => {
+    const storageKey = "launchTrainingUnlockedUntil";
+    const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+
+    if (unlockedUntil <= Date.now()) {
+      localStorage.removeItem(storageKey);
+
+      const currentPath = window.location.pathname;
+      const marker = "/Launch-Training/";
+      const markerPosition = currentPath.indexOf(marker);
+      let portalBase = markerPosition >= 0
+        ? currentPath.slice(0, markerPosition + marker.length)
+        : "/";
+
+      const moduleMarkers = ["/cashier/", "/court-monitor/", "/party-host/", "/krave/"];
+      for (const moduleMarker of moduleMarkers) {
+        const modulePosition = currentPath.indexOf(moduleMarker);
+        if (modulePosition >= 0) {
+          portalBase = currentPath.slice(0, modulePosition + 1) || "/";
+          break;
+        }
+      }
+
+      const returnPath = currentPath + window.location.search + window.location.hash;
+      window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
+    } else {
+      document.documentElement.classList.add("portal-authenticated");
+    }
+  })();
+</script>
+
+</head>
+<body>
+  <main class="shell">
+    <a class="portal-link" href="../index.html">← Training Portal</a>
+    <header class="top">
+      <div class="logo">L</div>
+      <div>
+        <h1>Launch Krave Training</h1>
+        <p>Online training portal · Day 1 beta is available</p>
+        <span class="version">Version 34</span>
+      </div>
+    </header>
+
+    <section class="grid" aria-label="Krave training days">
+      <a class="card" href="./day1/index.html">
+        <div class="strip"></div>
+        <div class="body">
+          <div class="eyebrow">Beta Testing</div>
+          <h2>Day 1</h2>
+          <p>Launch culture, Krave responsibilities, and the food-safety foundations used during every shift.</p>
+          <div class="button">Open Day 1</div>
+        </div>
+      </a>
+
+      <article class="card disabled" aria-disabled="true">
+        <div class="strip"></div>
+        <div class="body">
+          <div class="eyebrow">Not Yet Available</div>
+          <h2>Day 2</h2>
+          <p>Day 2 will be added after Day 1 training, checklist, and exam content are approved.</p>
+          <div class="button">Not Yet Available</div>
+        </div>
+      </article>
+
+      <article class="card disabled" aria-disabled="true">
+        <div class="strip"></div>
+        <div class="body">
+          <div class="eyebrow">Not Yet Available</div>
+          <h2>Day 3</h2>
+          <p>Day 3 and the cumulative final exam will be developed after the earlier days are complete.</p>
+          <div class="button">Not Yet Available</div>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

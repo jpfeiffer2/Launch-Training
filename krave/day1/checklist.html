@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krave Day 1 - Trainer Checklist · Version 34</title>
+  <style>
+    :root {
+      --launch-green:#6cc24a;
+      --launch-yellow:#f2e600;
+      --ink:#111820;
+      --muted:#4b5563;
+      --line:#dfe5ea;
+      --soft:#f7fbf5;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      padding:28px;
+      background:linear-gradient(135deg,#101410,#1c2418);
+      color:var(--ink);
+      font-family:Arial,Helvetica,sans-serif;
+    }
+    .page {
+      max-width:980px;
+      margin:0 auto;
+      overflow:hidden;
+      border-radius:22px;
+      background:#fff;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+    header {
+      padding:28px 34px 22px;
+      border-top:8px solid var(--launch-green);
+      border-bottom:1px solid var(--line);
+    }
+    .eyebrow {
+      margin-bottom:8px;
+      color:#2d9a22;
+      font-size:.82rem;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+    h1 { margin:0; font-size:2.35rem; letter-spacing:-.04em; }
+    .sub { margin-top:8px; color:var(--muted); font-size:1rem; line-height:1.4; }
+    .actions {
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:18px 34px;
+      border-bottom:1px solid var(--line);
+      background:#f8fafc;
+    }
+    button,.button {
+      display:inline-block;
+      padding:12px 20px;
+      border:0;
+      border-radius:999px;
+      font-size:.95rem;
+      font-weight:900;
+      text-decoration:none;
+      cursor:pointer;
+    }
+    .print { background:var(--launch-yellow); color:#000; }
+    .back { background:#111820; color:#fff; }
+    main { padding:24px 34px 34px; }
+    .trainer-direction {
+      margin-bottom:18px;
+      padding:13px 15px;
+      border:2px solid var(--launch-yellow);
+      border-radius:14px;
+      background:#fff8dc;
+      font-weight:800;
+      line-height:1.4;
+    }
+    .info-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+      margin-bottom:22px;
+    }
+    .field { min-height:58px; padding:10px 12px; border:1px solid var(--line); border-radius:12px; }
+    .field label {
+      display:block;
+      margin-bottom:10px;
+      color:var(--muted);
+      font-size:.72rem;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .line { height:20px; border-bottom:1px solid #9ca3af; }
+    section { margin-bottom:16px; overflow:hidden; border:1px solid var(--line); border-radius:16px; }
+    .section-head {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:12px 16px;
+      background:#111820;
+      color:#fff;
+      font-weight:900;
+    }
+    .section-head span { color:var(--launch-yellow); font-size:.82rem; letter-spacing:.08em; text-transform:uppercase; }
+    .rows { padding:8px 14px 12px; }
+    .row {
+      display:grid;
+      grid-template-columns:26px 1fr 95px 95px;
+      gap:10px;
+      align-items:start;
+      padding:10px 0;
+      border-bottom:1px solid #eef2f4;
+      font-size:.92rem;
+      line-height:1.3;
+    }
+    .row:last-child { border-bottom:0; }
+    .box { width:20px; height:20px; margin-top:1px; border:2px solid #111820; border-radius:4px; }
+    .initial-line { height:24px; border-bottom:1px solid #9ca3af; }
+    .small-label {
+      margin-top:3px;
+      color:var(--muted);
+      font-size:.62rem;
+      font-weight:800;
+      letter-spacing:.07em;
+      text-transform:uppercase;
+    }
+    .notes-area { margin-top:18px; padding:14px; border:1px solid var(--line); border-radius:16px; }
+    .notes-lines { height:70px; margin-top:10px; background:repeating-linear-gradient(#fff,#fff 29px,#cbd5e1 30px); }
+    .signatures { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:60px; }
+    .sig { padding-top:8px; border-top:2px solid #111820; color:#374151; font-weight:800; }
+    .footer-note {
+      margin-top:18px;
+      padding:12px 14px;
+      border:2px solid var(--launch-yellow);
+      border-radius:14px;
+      background:#fff8dc;
+      font-weight:800;
+      line-height:1.35;
+    }
+    @media(max-width:720px) {
+      body { padding:12px; }
+      header,.actions,main { padding-left:18px; padding-right:18px; }
+      .info-grid { grid-template-columns:1fr; }
+      .row { grid-template-columns:24px 1fr 68px 68px; font-size:.84rem; }
+      .section-head { align-items:flex-start; flex-direction:column; gap:4px; }
+    }
+    @media print {
+      body { padding:0; background:#fff; }
+      .page { max-width:none; border-radius:0; box-shadow:none; }
+      .actions { display:none; }
+      header { padding:18px 24px 14px; }
+      h1 { font-size:1.9rem; }
+      main { padding:16px 24px; }
+      .trainer-direction,.info-grid,.footer-note,.notes-area,.signatures { break-inside:avoid; page-break-inside:avoid; }
+      section { break-inside:auto; page-break-inside:auto; }
+      .section-head,.row { break-inside:avoid; page-break-inside:avoid; }
+      .row { grid-template-columns:24px 1fr 80px 80px; padding:7px 0; font-size:.82rem; }
+      .section-head { print-color-adjust:exact; -webkit-print-color-adjust:exact; }
+      .notes-area { margin-top:8px; padding:8px 10px; }
+      .notes-area strong { font-size:.78rem; }
+      .notes-lines { height:34px; margin-top:6px; background:repeating-linear-gradient(#fff,#fff 16px,#cbd5e1 17px); }
+      .signatures { margin-top:34px; gap:24px; }
+      .sig { min-height:42px; font-size:.82rem; }
+    }
+  </style>
+
+<style id="launch-portal-auth-style">
+  html { display: none; }
+  html.portal-authenticated { display: block; }
+</style>
+<script id="launch-portal-auth-script">
+  (() => {
+    const storageKey = "launchTrainingUnlockedUntil";
+    const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+
+    if (unlockedUntil <= Date.now()) {
+      localStorage.removeItem(storageKey);
+
+      const currentPath = window.location.pathname;
+      const marker = "/Launch-Training/";
+      const markerPosition = currentPath.indexOf(marker);
+      let portalBase = markerPosition >= 0
+        ? currentPath.slice(0, markerPosition + marker.length)
+        : "/";
+
+      const moduleMarkers = ["/cashier/", "/court-monitor/", "/party-host/", "/krave/"];
+      for (const moduleMarker of moduleMarkers) {
+        const modulePosition = currentPath.indexOf(moduleMarker);
+        if (modulePosition >= 0) {
+          portalBase = currentPath.slice(0, modulePosition + 1) || "/";
+          break;
+        }
+      }
+
+      const returnPath = currentPath + window.location.search + window.location.hash;
+      window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
+    } else {
+      document.documentElement.classList.add("portal-authenticated");
+    }
+  })();
+</script>
+
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="eyebrow">Krave Day 1 · Version 34</div>
+      <h1>Trainer Hands-On Checklist</h1>
+      <div class="sub">Use this checklist after the online module and during the trainee's supervised shift. Day 1 reinforces the food-safety foundation that supports recipe and service training on Days 2 and 3.</div>
+    </header>
+
+    <div class="actions">
+      <button class="print" onclick="window.print()">Print / Save as PDF</button>
+      <a class="button back" href="index.html">Back to Day 1 Menu</a>
+      <a class="button back" href="../index.html">Krave Training Home</a>
+      <a class="button back" href="../../index.html">Training Portal</a>
+    </div>
+
+    <main>
+      <div class="trainer-direction">Trainer: demonstrate and coach each task, then observe the trainee perform it. Do not initial an item based only on a verbal answer. Use your park's approved local procedure wherever the checklist identifies a local standard.</div>
+
+      <div class="info-grid">
+        <div class="field"><label>Trainee Name</label><div class="line"></div></div>
+        <div class="field"><label>Trainer Name</label><div class="line"></div></div>
+        <div class="field"><label>Date</label><div class="line"></div></div>
+      </div>
+
+      <section>
+        <div class="section-head">Launch Culture &amp; Shift Readiness <span>Foundation</span></div>
+        <div class="rows">
+          <div class="row"><div class="box"></div><div>Connects the Launch vision—Create Awesome Memories—to a Krave shift by preparing food safely, following standards, supporting teammates, and caring for guests.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Demonstrates Launch Core Values by following the approved standard, communicating concerns honestly, accepting coaching, and helping teammates safely.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Arrives shift-ready in the approved Krave uniform with required hair restraint, personal hygiene, non-slip closed-toe shoes, and park-required protective equipment.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Reports illness, symptoms, cuts, sores, or other conditions to the Manager on Duty before handling food and follows the manager's direction.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">Handwashing &amp; Task Changes <span>Personal Hygiene</span></div>
+        <div class="rows">
+          <div class="row"><div class="box"></div><div>Locates the designated handwashing sink and confirms it is accessible and stocked with running water, approved hand soap, and an approved drying supply.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Demonstrates the complete handwashing process: wet, soap, scrub hands and arms for 20 seconds, rinse, dry, and protect clean hands when turning off a manual faucet.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Washes hands at required times, including before food preparation, handling clean equipment, or putting on gloves and after contamination risks such as POS, phones, trash, cleaning chemicals, soiled items, personal contact, eating, drinking, or glove removal.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Completes a trainer-assigned task-change scenario by stopping, washing correctly, resetting the station as needed, and returning with clean hands and new gloves when required.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">Ready-to-Eat Food &amp; Cross-Contamination <span>Control Every Touch</span></div>
+        <div class="rows">
+          <div class="row"><div class="box"></div><div>Protects ready-to-eat food from bare-hand contact by using clean single-use gloves, tongs, a spatula, or another approved utensil.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Demonstrates the glove sequence—wash and dry hands, put on new gloves, use them for one task, discard them when the task changes or they become torn, dirty, or contaminated, then wash before re-gloving.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Prepares fresh produce using the approved process: inspect, rinse under cool running water, dry completely, and use clean, sanitized tools and the approved green cutting board—never soap or chemical cleaners.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Recognizes realistic Krave contamination risks—including unwashed produce, hands or gloves, POS, phones, trash, cleaning tools, personal contact, and unclean food-contact equipment—and completes the correct stop, clean, sanitize, wash, and re-glove response.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">Time &amp; Temperature Control <span>Verify—Do Not Guess</span></div>
+        <div class="rows">
+          <div class="row"><div class="box"></div><div>Locates the required thermometers and demonstrates how to clean and sanitize a probe thermometer before and after use.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Checks and records actual equipment and product temperatures using the correct thermometer and location rather than relying on appearance, a timer, or an outside display.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Applies the Day 1 standards: cold-held TCS food at 41°F or below, hot-held TCS food at 135°F or above, frozen products kept frozen, and chicken tenders verified at 165°F before serving.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Stops and notifies the Manager on Duty about an unsafe or questionable result, records the issue, and follows the approved corrective-action and disposal procedure without guessing or quietly returning the product to storage.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">Labels, Shelf Life &amp; FIFO <span>Control the Clock</span></div>
+        <div class="rows">
+          <div class="row"><div class="box"></div><div>Completes a product label with the product name; opened, thawed, or prepared date and time; use-or-discard date and time; and employee initials before storage.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Uses the approved recipe or shelf-life guide to calculate the exact use-or-discard date and time from the recorded opened, thawed, or prepared timestamp. Understands that 168 hours is only the general maximum, a shorter product-specific standard controls, and the earliest date and time controls when ingredients are combined.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Rotates product using FIFO with the earliest use-or-discard date and time positioned for first use; keeps labels visible and never tops off or combines differently dated batches.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Identifies missing, incomplete, expired, damaged, or questionable product; removes it from use, tells a manager, and follows the park's approved waste-recording and disposal procedure.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">Opening Line Check <span>Inspect Before Service</span></div>
+        <div class="rows">
+          <div class="row"><div class="box"></div><div>Reviews today's expected business—including scheduled parties, events, groups, and large food orders—so the team can prepare the correct food and supplies.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Completes the required equipment and actual product temperature checks and records the item or unit checked with the temperature actually found.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Physically verifies sanitation, product readiness, approved recipes, cooking equipment, printer or KDS, smallwares, serving supplies, uniforms and protective equipment, food-contact surfaces, and floors.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Records corrective actions and selects the final opening status that accurately reflects what was found; does not mark an item as passing without checking and involves the Manager on Duty when needed.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">Cleaning, Sanitizing &amp; Local Support Procedures <span>Reset the Station</span></div>
+        <div class="rows">
+          <div class="row"><div class="box"></div><div>Locates the park's approved cleaning supplies and chemicals and confirms they are labeled, secured, and physically separated from food and food-contact items.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Locates clean towels, mops, brooms, and dustpans and identifies which tools are approved for each cleaning task.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Identifies the park's designated location or process for used towels, dirty mop water, and other soiled cleaning materials without contaminating food-preparation or handwashing areas.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Properly prepares the three-compartment sink: cleans the sink and drainboards, removes or pre-rinses food soil, and sets separate basins for washing, rinsing, and sanitizing according to posted and product instructions.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Uses only the approved sanitizer and correct test strip, verifies the solution is within the required range for that product, and corrects or reports a failed result instead of guessing or adding extra chemical.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Demonstrates the full warewashing sequence—wash, rinse, sanitize for the required contact time, then air-dry completely on the clean drainboard or rack; never towel-dries sanitized items.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Demonstrates the park's approved food-contact surface and wiping-cloth procedure, including cleaning before sanitizing and storing wiping cloths correctly when applicable.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Demonstrates the park's approved local trash-handling procedure, including the disposal location, safe response to leaks or spills, and required handwashing, glove change, and station reset before returning to food work.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">Dry Storage <span>Protect It Before Prep</span></div>
+        <div class="rows">
+          <div class="row"><div class="box"></div><div>Maintains dry storage clean, dry, well ventilated, protected from heat, moisture, and direct sunlight, and generally between 50°F and 70°F.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Stores food at least six inches off the floor and at least eighteen inches from exterior walls—never directly on the floor, even temporarily.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Keeps containers closed, labels and dates visible, chemicals physically separated from food, and products arranged for FIFO rotation.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+          <div class="row"><div class="box"></div><div>Inspects for torn, leaking, damaged, expired, or questionable products and for pest, moisture, odor, shelving, or building concerns; moves questionable product to the designated area and reports concerns immediately.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div>
+        </div>
+      </section>
+
+      <div class="notes-area">
+        <strong>Trainer Notes / Questions / Follow-Up Items</strong>
+        <div class="notes-lines"></div>
+      </div>
+
+      <div class="signatures">
+        <div class="sig">Trainer / Manager Signature</div>
+        <div class="sig">Trainee Signature</div>
+      </div>
+
+      <div class="footer-note">Completion standard: both the trainer and trainee initial each item only after demonstration, practice, and coaching are complete. Any item needing more practice must be revisited before the Day 1 exam.</div>
+    </main>
+  </div>
+</body>
+</html>
