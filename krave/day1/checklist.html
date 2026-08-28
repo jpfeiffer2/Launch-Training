@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Krave Day 1 - Trainer Checklist · Version 34</title>
+  <title>Krave Day 1 - Trainer Checklist</title>
   <style>
     :root {
       --launch-green:#6cc24a;
@@ -47,7 +47,6 @@
     .actions {
       display:flex;
       gap:12px;
-      flex-wrap:wrap;
       padding:18px 34px;
       border-bottom:1px solid var(--line);
       background:#f8fafc;
@@ -65,15 +64,6 @@
     .print { background:var(--launch-yellow); color:#000; }
     .back { background:#111820; color:#fff; }
     main { padding:24px 34px 34px; }
-    .trainer-direction {
-      margin-bottom:18px;
-      padding:13px 15px;
-      border:2px solid var(--launch-yellow);
-      border-radius:14px;
-      background:#fff8dc;
-      font-weight:800;
-      line-height:1.4;
-    }
     .info-grid {
       display:grid;
       grid-template-columns:1fr 1fr 1fr;
@@ -126,7 +116,7 @@
       text-transform:uppercase;
     }
     .notes-area { margin-top:18px; padding:14px; border:1px solid var(--line); border-radius:16px; }
-    .notes-lines { height:70px; margin-top:10px; background:repeating-linear-gradient(#fff,#fff 29px,#cbd5e1 30px); }
+    .notes-lines { height:40px; margin-top:10px; background:repeating-linear-gradient(#fff,#fff 29px,#cbd5e1 30px); }
     .signatures { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:60px; }
     .sig { padding-top:8px; border-top:2px solid #111820; color:#374151; font-weight:800; }
     .footer-note {
@@ -152,7 +142,7 @@
       header { padding:18px 24px 14px; }
       h1 { font-size:1.9rem; }
       main { padding:16px 24px; }
-      .trainer-direction,.info-grid,.footer-note,.notes-area,.signatures { break-inside:avoid; page-break-inside:avoid; }
+      .info-grid,.footer-note,.notes-area,.signatures { break-inside:avoid; page-break-inside:avoid; }
       section { break-inside:auto; page-break-inside:auto; }
       .section-head,.row { break-inside:avoid; page-break-inside:avoid; }
       .row { grid-template-columns:24px 1fr 80px 80px; padding:7px 0; font-size:.82rem; }
@@ -205,21 +195,17 @@
 <body>
   <div class="page">
     <header>
-      <div class="eyebrow">Krave Day 1 · Version 34</div>
-      <h1>Trainer Hands-On Checklist</h1>
-      <div class="sub">Use this checklist after the online module and during the trainee's supervised shift. Day 1 reinforces the food-safety foundation that supports recipe and service training on Days 2 and 3.</div>
+      <div class="eyebrow">Krave Day 1</div>
+      <h1>Trainer Floor Checklist</h1>
+      <div class="sub">Use this checklist after the online module and before the end-of-shift exam. Trainer should observe, demonstrate, and confirm each item with the trainee.</div>
     </header>
 
     <div class="actions">
       <button class="print" onclick="window.print()">Print / Save as PDF</button>
-      <a class="button back" href="index.html">Back to Day 1 Menu</a>
-      <a class="button back" href="../index.html">Krave Training Home</a>
-      <a class="button back" href="../../index.html">Training Portal</a>
+      <a class="button back" href="index.html">Back to Day 1 Menu</a><a class="button back" href="../../index.html">Training Portal</a>
     </div>
 
     <main>
-      <div class="trainer-direction">Trainer: demonstrate and coach each task, then observe the trainee perform it. Do not initial an item based only on a verbal answer. Use your park's approved local procedure wherever the checklist identifies a local standard.</div>
-
       <div class="info-grid">
         <div class="field"><label>Trainee Name</label><div class="line"></div></div>
         <div class="field"><label>Trainer Name</label><div class="line"></div></div>
