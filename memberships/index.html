@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Membership Training · Launch Training Portal</title>
+
+  <style>
+    :root{--g:#6cc24a;--gd:#4da62d;--y:#f2e600;--ink:#101418;--muted:#5b6570;--line:#e5eaee;--shadow:0 18px 50px rgba(0,0,0,.18)}
+    *{box-sizing:border-box} body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at top left,rgba(108,194,74,.22),transparent 32%),linear-gradient(135deg,#070707,#171717 52%,#2d341f);color:#111}
+    .shell{width:min(1100px,100%)} .nav{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+    .nav a{display:inline-block;color:#fff;text-decoration:none;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);padding:10px 16px;border-radius:999px;font-weight:900}
+    .hero{color:#fff;margin-bottom:22px}.hero h1{margin:0;font-size:clamp(2.1rem,5vw,4rem);letter-spacing:-2px;color:#fff}.hero p{max-width:920px;margin:8px 0 0;color:#cfd7df;line-height:1.45}
+    .status-pill{display:inline-block;margin-top:12px;padding:7px 12px;border-radius:999px;background:var(--y);color:#000;font-size:.74rem;font-weight:900;text-transform:uppercase;letter-spacing:1px}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.grid-five{grid-template-columns:repeat(5,minmax(0,1fr))}
+    .card{min-height:255px;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:var(--shadow);text-decoration:none;color:#111}.card.disabled{opacity:.66;cursor:not-allowed}
+    .strip{height:10px;background:linear-gradient(90deg,var(--g),var(--y))}.body{display:flex;flex:1;flex-direction:column;gap:12px;padding:24px}.eyebrow{font-size:.78rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--gd)}
+    h2{margin:0;font-size:1.85rem;color:var(--ink)}p{line-height:1.45}.card p{margin:0;color:var(--muted)}.button{margin-top:auto;padding:12px 14px;border-radius:999px;background:var(--ink);color:var(--y);text-align:center;font-weight:900}.muted-button{background:#59636e;color:#fff}
+    .notice{margin-top:22px;background:#fff8dc;border:2px solid var(--y);border-radius:18px;padding:16px 18px;font-weight:800;line-height:1.45;color:#111820}
+    @media(max-width:1050px){.grid-five{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:760px){body{padding:16px}.grid,.grid-five{grid-template-columns:1fr}.hero h1{letter-spacing:-1px}}
+  </style>
+
+
+<style id="launch-portal-auth-style">
+  html { display: none; }
+  html.portal-authenticated { display: block; }
+</style>
+<script id="launch-portal-auth-script">
+  (() => {
+    const storageKey = "launchTrainingUnlockedUntil";
+    const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+    if (unlockedUntil <= Date.now()) {
+      localStorage.removeItem(storageKey);
+      const currentPath = window.location.pathname;
+      const marker = "/Launch-Training/";
+      const markerPosition = currentPath.indexOf(marker);
+      let portalBase = markerPosition >= 0 ? currentPath.slice(0, markerPosition + marker.length) : "/";
+      const moduleMarkers = ["/cashier/", "/court-monitor/", "/party-host/", "/krave/", "/memberships/"];
+      for (const moduleMarker of moduleMarkers) {
+        const modulePosition = currentPath.indexOf(moduleMarker);
+        if (modulePosition >= 0) { portalBase = currentPath.slice(0, modulePosition + 1) || "/"; break; }
+      }
+      const returnPath = currentPath + window.location.search + window.location.hash;
+      window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
+    } else {
+      document.documentElement.classList.add("portal-authenticated");
+    }
+  })();
+</script>
+
+</head>
+<body>
+  <main class="shell">
+    <nav class="nav"><a href="../index.html">← Training Portal</a></nav>
+    <header class="hero">
+      <h1>Membership Training</h1>
+      <p>Park-specific supplemental training for team members who need to understand membership options, pricing, FAQs, and sales expectations.</p>
+      <span class="status-pill">Supplemental · Park-Specific</span>
+    </header>
+    <section class="grid grid-five" aria-label="Choose membership training park">
+      <a class="card" href="./warwick/">
+        <div class="strip"></div>
+        <div class="body">
+          <div class="eyebrow">Park-Specific</div>
+          <h2>Warwick</h2>
+          <p>Supplemental membership training for this park's current membership options, pricing, and guest FAQs.</p>
+          <div class="button">Open Warwick</div>
+        </div>
+      </a>
+      <a class="card" href="./herndon/">
+        <div class="strip"></div>
+        <div class="body">
+          <div class="eyebrow">Park-Specific</div>
+          <h2>Herndon</h2>
+          <p>Supplemental membership training for this park's current membership options, pricing, and guest FAQs.</p>
+          <div class="button">Open Herndon</div>
+        </div>
+      </a>
+      <a class="card" href="./ann-arbor/">
+        <div class="strip"></div>
+        <div class="body">
+          <div class="eyebrow">Park-Specific</div>
+          <h2>Ann Arbor</h2>
+          <p>Supplemental membership training for this park's current membership options, pricing, and guest FAQs.</p>
+          <div class="button">Open Ann Arbor</div>
+        </div>
+      </a>
+      <a class="card" href="./asheville/">
+        <div class="strip"></div>
+        <div class="body">
+          <div class="eyebrow">Park-Specific</div>
+          <h2>Asheville</h2>
+          <p>Supplemental membership training for this park's current membership options, pricing, and guest FAQs.</p>
+          <div class="button">Open Asheville</div>
+        </div>
+      </a>
+      <a class="card" href="./dearborn/">
+        <div class="strip"></div>
+        <div class="body">
+          <div class="eyebrow">Park-Specific</div>
+          <h2>Dearborn</h2>
+          <p>Supplemental membership training for this park's current membership options, pricing, and guest FAQs.</p>
+          <div class="button">Open Dearborn</div>
+        </div>
+      </a>
+    </section>
+    <div class="notice">These modules supplement role training. A team member may complete Cashier, Court Monitor, Krave, or Party Host training first, then complete the membership module for their specific park.</div>
+  </main>
+
+</body>
+</html>
