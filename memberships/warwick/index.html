@@ -16,7 +16,7 @@
     .hero h1{margin:0;font-size:clamp(2.1rem,5vw,4rem);letter-spacing:-2px;color:#fff}
     .hero p{max-width:920px;margin:8px 0 0;color:#cfd7df;line-height:1.45}
     .status-pill{display:inline-block;margin-top:12px;padding:7px 12px;border-radius:999px;background:var(--y);color:#000;font-size:.74rem;font-weight:900;text-transform:uppercase;letter-spacing:1px}
-    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.grid-five{grid-template-columns:repeat(5,minmax(0,1fr))}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.two-card-grid{grid-template-columns:repeat(2,minmax(0,360px));justify-content:center}.grid-five{grid-template-columns:repeat(5,minmax(0,1fr))}
     .card{min-height:255px;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:var(--shadow);text-decoration:none;color:#111}
     .card.disabled{opacity:.66;cursor:not-allowed}
     .strip{height:10px;background:linear-gradient(90deg,var(--g),var(--y))}
@@ -67,7 +67,7 @@
       <h1>Warwick Membership Training</h1>
       <p>Park-specific supplemental training covering Warwick membership value, pricing, inclusions, guest questions, POS steps, and sales expectations.</p>
     </header>
-    <section class="grid" aria-label="Warwick membership training steps">
+    <section class="grid two-card-grid" aria-label="Warwick membership training steps">
       <a class="card" href="./online-training.html">
         <div class="strip"></div>
         <div class="body">
@@ -84,15 +84,6 @@
           <h2>Membership Exam</h2>
           <p>Complete the Warwick membership assessment after finishing the online training.</p>
           <div class="button">Start Exam</div>
-        </div>
-      </a>
-      <a class="card" href="./exam-records.html">
-        <div class="strip"></div>
-        <div class="body">
-          <div class="eyebrow">Records</div>
-          <h2>Exam Records</h2>
-          <p>View or print Warwick membership exam records saved in this browser.</p>
-          <div class="button">Open Records</div>
         </div>
       </a>
     </section>
