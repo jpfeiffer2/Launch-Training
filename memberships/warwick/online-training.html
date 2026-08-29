@@ -398,15 +398,16 @@
     }
 
     function update6(t){const d=dur(5),p=Math.min(1,Math.max(0,t/d)),s=slides[5];s.style.setProperty('--progress',String(p));document.getElementById('bg6').style.transform='scale('+(1.01+p*.028).toFixed(4)+') translate3d('+(-p*.20).toFixed(3)+'%,0,0)';
-      // Narration landmarks from the supplied 42.944-second audio, aligned to sentence pauses:
-      // 0-6.2 setup; 6.37-12.64 Passes/Retail + add membership; 13.03-18.32 waiver;
-      // 18.85-22.38 checkbox setup; 22.83-27.38 paying customer is member;
-      // 27.81-37.88 paying customer is not member; 38.33-42.64 click OK.
-      show('s6Intro',t<6.20);document.getElementById('s6Intro').classList.toggle('retired',t>=6.20);show('s6Roadmap',t>=2.75&&t<6.20);
-      show('s6Basic',t>=6.20&&t<13.00);const a=document.getElementById('s6Step1'),b=document.getElementById('s6Step2');a.classList.toggle('visible',t>=6.20&&t<13.00);b.classList.toggle('visible',t>=6.20&&t<13.00);a.classList.toggle('current',t>=6.20&&t<9.20);b.classList.toggle('current',t>=9.20&&t<13.00);const addEl=document.getElementById('s6Add'); if(addEl) addEl.classList.toggle('current',t>=9.20&&t<13.00);
-      show('s6Waiver',t>=13.00&&t<18.75);
-      show('s6Primary',t>=18.75&&t<38.10);const yes=document.getElementById('s6Yes'),no=document.getElementById('s6No');yes.classList.toggle('visible',t>=18.75&&t<38.10);no.classList.toggle('visible',t>=18.75&&t<38.10);yes.classList.toggle('current',t>=22.75&&t<27.75);no.classList.toggle('current',t>=27.75&&t<38.10);
-      show('s6Final',t>=38.10);
+      // Refined against the actual 42.936-second Slide 6 audio.
+      // Primary silence/scene boundaries measured at approximately:
+      // 6.35 POS start; 9.24 Add Membership emphasis; 13.00 waiver;
+      // 18.84 primary-member setup; 22.82 paying customer is member;
+      // 27.80 paying customer is not a member; 38.31 click OK.
+      show('s6Intro',t<6.35);document.getElementById('s6Intro').classList.toggle('retired',t>=6.35);show('s6Roadmap',t>=2.75&&t<6.35);
+      show('s6Basic',t>=6.35&&t<13.00);const a=document.getElementById('s6Step1'),b=document.getElementById('s6Step2');a.classList.toggle('visible',t>=6.35&&t<13.00);b.classList.toggle('visible',t>=6.35&&t<13.00);a.classList.toggle('current',t>=6.35&&t<9.24);b.classList.toggle('current',t>=9.24&&t<13.00);const addEl=document.getElementById('s6Add'); if(addEl) addEl.classList.toggle('current',t>=9.24&&t<13.00);
+      show('s6Waiver',t>=13.00&&t<18.84);
+      show('s6Primary',t>=18.84&&t<38.31);const yes=document.getElementById('s6Yes'),no=document.getElementById('s6No');yes.classList.toggle('visible',t>=18.84&&t<38.31);no.classList.toggle('visible',t>=18.84&&t<38.31);yes.classList.toggle('current',t>=22.82&&t<27.80);no.classList.toggle('current',t>=27.80&&t<38.31);
+      show('s6Final',t>=38.31);
     }
 
     function update7(t){const d=dur(6),p=Math.min(1,Math.max(0,t/d)),s=slides[6];s.style.setProperty('--progress',String(p));document.getElementById('bg7').style.transform='scale('+(1.01+p*.028).toFixed(4)+') translate3d('+(-p*.20).toFixed(3)+'%,0,0)';
