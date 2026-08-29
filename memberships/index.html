@@ -16,7 +16,7 @@
     .hero h1{margin:0;font-size:clamp(2.1rem,5vw,4rem);letter-spacing:-2px;color:#fff}
     .hero p{max-width:920px;margin:8px 0 0;color:#cfd7df;line-height:1.45}
     .status-pill{display:inline-block;margin-top:12px;padding:7px 12px;border-radius:999px;background:var(--y);color:#000;font-size:.74rem;font-weight:900;text-transform:uppercase;letter-spacing:1px}
-    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.grid-five{grid-template-columns:repeat(5,minmax(0,1fr))}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.grid-five{grid-template-columns:repeat(5,minmax(0,1fr))}.two-card-grid{grid-template-columns:repeat(2,minmax(0,360px));justify-content:center}
     .card{min-height:255px;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:var(--shadow);text-decoration:none;color:#111}
     .card.disabled{opacity:.66;cursor:not-allowed}
     .strip{height:10px;background:linear-gradient(90deg,var(--g),var(--y))}
@@ -24,7 +24,7 @@
     h2{margin:0;font-size:1.85rem;color:var(--ink)}p{line-height:1.45}.card p{margin:0;color:var(--muted)}
     .button{margin-top:auto;padding:12px 14px;border-radius:999px;background:var(--ink);color:var(--y);text-align:center;font-weight:900}.muted-button{background:#59636e;color:#fff}
     .notice{margin-top:22px;background:#fff8dc;border:2px solid var(--y);border-radius:18px;padding:16px 18px;font-weight:800;line-height:1.45;color:#111820}
-    @media(max-width:1050px){.grid-five{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:760px){body{padding:16px}.grid,.grid-five{grid-template-columns:1fr}.hero h1{letter-spacing:-1px}}
+    @media(max-width:1050px){.grid-five{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:760px){body{padding:16px}.grid,.grid-five,.two-card-grid{grid-template-columns:1fr}.hero h1{letter-spacing:-1px}}
   </style>
 
 
@@ -92,15 +92,15 @@
           <div class="button muted-button">Not Yet Available</div>
         </div>
       </article>
-      <article class="card disabled" aria-disabled="true">
+      <a class="card" href="./asheville/">
         <div class="strip"></div>
         <div class="body">
-          <div class="eyebrow">Content Pending</div>
+          <div class="eyebrow">Available</div>
           <h2>Asheville</h2>
-          <p>This park-specific membership training will be added once the approved content is provided.</p>
-          <div class="button muted-button">Not Yet Available</div>
+          <p>Asheville membership training and exam are ready for website testing.</p>
+          <div class="button">Open Asheville</div>
         </div>
-      </article>
+      </a>
       <article class="card disabled" aria-disabled="true">
         <div class="strip"></div>
         <div class="body">

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Asheville Membership Exam Records</title>
+<style>
+:root{--green:#6cc24a;--green-dark:#4ca52d;--yellow:#f2e600;--ink:#15191c;--muted:#5d6870;--line:#dfe5e9}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:linear-gradient(135deg,#101410,#1c2418);line-height:1.45;padding:28px}
+.page{max-width:1120px;margin:0 auto;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 18px 55px rgba(0,0,0,.35)}
+header{padding:28px 34px 22px;border-top:8px solid var(--green);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;align-items:center}
+.eyebrow{color:#2d9a22;font-weight:900;letter-spacing:.18em;text-transform:uppercase;font-size:.82rem;margin-bottom:8px}
+h1{margin:0;font-size:2.35rem;letter-spacing:-.04em}.sub{margin-top:8px;color:var(--muted);font-size:1rem}
+.button{display:inline-block;border:0;border-radius:999px;padding:12px 18px;font-weight:900;text-decoration:none;cursor:pointer;background:#111820;color:#fff}.button-yellow{background:var(--yellow);color:#000}
+main{padding:26px 34px 34px}.records-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}.records-list{display:grid;gap:12px}
+.record{display:grid;grid-template-columns:1.3fr 1fr .75fr auto;gap:14px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:14px;background:#fbfcfd}
+.record-main{font-weight:900}.record-sub{color:var(--muted);font-size:.9rem}.score{font-weight:900;color:#198754}.score.fail{color:#c92a2a}.actions{display:flex;gap:8px;flex-wrap:wrap}
+.empty{padding:20px;border:1px dashed #cbd5dc;border-radius:14px;background:#fbfcfd;color:var(--muted);font-weight:800}.notice{margin-top:18px;background:#fff8dc;border:2px solid var(--yellow);border-radius:14px;padding:12px 14px;font-weight:800}
+.record-print{display:none;margin-top:24px;border:3px solid var(--green);border-radius:16px;overflow:hidden}.cert-head{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:22px 24px;background:#0b0d0f;color:#fff;border-bottom:7px solid var(--green)}.cert-org{font-size:.78rem;letter-spacing:1.8px;font-weight:900;color:var(--yellow)}.cert-title{font-size:1.8rem;font-weight:1000;margin-top:3px}.cert-sub{color:#cbd4da;font-size:.9rem}.stamp{min-width:95px;text-align:center;padding:12px 15px;border:3px solid currentColor;border-radius:14px;font-size:1.25rem;font-weight:1000}.stamp.pass{color:var(--green)}.stamp.fail{color:#ff7777}.cert-grid{display:grid;grid-template-columns:1.25fr .9fr .9fr 1.1fr .75fr .75fr;border-bottom:1px solid var(--line)}.cert-field{padding:14px 16px;border-right:1px solid var(--line)}.cert-field:last-child{border-right:0}.cert-label{display:block;color:#6b757b;text-transform:uppercase;font-size:.66rem;font-weight:900;letter-spacing:.7px}.cert-value{display:block;margin-top:4px;font-weight:1000}.statement{padding:20px 24px;background:#fbfcfd}.missed{padding:0 24px 20px}.missed-item{padding:12px 14px;margin:8px 0;border-radius:11px;border:1px solid #efd0d0;background:#fff8f8}.signatures{display:grid;grid-template-columns:1fr 1fr;gap:34px;padding:26px 24px 30px}.sigline{border-top:1px solid #555;padding-top:6px;color:#666;font-size:.78rem;text-align:center}
+@media(max-width:800px){body{padding:12px}header{display:block}.record{grid-template-columns:1fr}.cert-grid{grid-template-columns:1fr}.cert-field{border-right:0;border-bottom:1px solid var(--line)}}
+@media print{body{background:#fff;padding:0}.page{box-shadow:none;border-radius:0}.records-toolbar,.records-list,.notice,header .button,button,.no-print{display:none!important}header{display:none}.record-print{display:block!important;border:2px solid #333;border-radius:0;margin:0}.page,main{max-width:none;margin:0;padding:0}}
+</style>
+
+<style id="launch-portal-auth-style">
+  html { display: none; }
+  html.portal-authenticated { display: block; }
+</style>
+<script id="launch-portal-auth-script">
+  (() => {
+    const storageKey = "launchTrainingUnlockedUntil";
+    const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+    if (unlockedUntil <= Date.now()) {
+      localStorage.removeItem(storageKey);
+      const currentPath = window.location.pathname;
+      const marker = "/Launch-Training/";
+      const markerPosition = currentPath.indexOf(marker);
+      let portalBase = markerPosition >= 0 ? currentPath.slice(0, markerPosition + marker.length) : "/";
+      const moduleMarkers = ["/cashier/", "/court-monitor/", "/party-host/", "/krave/", "/memberships/"];
+      for (const moduleMarker of moduleMarkers) {
+        const modulePosition = currentPath.indexOf(moduleMarker);
+        if (modulePosition >= 0) { portalBase = currentPath.slice(0, modulePosition + 1) || "/"; break; }
+      }
+      const returnPath = currentPath + window.location.search + window.location.hash;
+      window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
+    } else {
+      document.documentElement.classList.add("portal-authenticated");
+    }
+  })();
+</script>
+
+</head>
+<body>
+<div class="page">
+<header>
+  <div><div class="eyebrow">Asheville Membership Training</div><h1>Exam Records</h1><div class="sub">Completed Asheville membership exam records saved in this browser.</div></div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="button" href="index.html">Membership Home</a><a class="button" href="../../index.html">Training Portal</a><a class="button" href="membership-exam.html">Open Exam</a></div>
+</header>
+<main>
+  <div class="records-toolbar"><div><strong>Saved Records</strong><div class="record-sub">Use this page for manager recovery if an employee closes the exam before printing.</div></div><button class="button button-yellow" onclick="renderRecords()">Refresh Records</button></div>
+  <div id="recordsList" class="records-list"></div>
+  <div class="notice">Records are stored in this browser's local storage. Google Sheets submissions are sent when the exam is submitted from the exam page.</div>
+  <div id="recordPrint" class="record-print"></div>
+</main>
+</div>
+<script>
+const STORAGE_KEY='launch_asheville_membership_exam_records_v1';
+const PASSING_PERCENT=80;
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function readRecords(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch(e){return[]}}
+function fmt(ts){try{return new Date(ts).toLocaleString()}catch(e){return ts||''}}
+function renderRecords(){
+  const list=document.getElementById('recordsList');const recs=readRecords();
+  if(!recs.length){list.innerHTML='<div class="empty">No saved Asheville membership exam records found in this browser.</div>';return}
+  list.innerHTML=recs.map((r,i)=>`<div class="record"><div><div class="record-main">${esc(r.employee||'Unnamed Employee')}</div><div class="record-sub">Submitted: ${esc(fmt(r.submittedAt))}</div></div><div><strong>Date:</strong> ${esc(r.date||'')}<div class="record-sub"><strong>Trainer:</strong> ${esc(r.trainer||'')}</div></div><div class="score ${r.passed?'':'fail'}">${r.passed?'PASS':'FAIL'}<br>${esc(r.score)}/${esc(r.total)} (${esc(r.percent)}%)</div><div class="actions"><button class="button" onclick="viewRecord(${i})">View / Print</button></div></div>`).join('');
+}
+function buildRecordHtml(r){
+  const missed=r.missed&&r.missed.length?r.missed.map(m=>`<div class="missed-item"><strong>Q${esc(m.number)}: ${esc(m.text)}</strong><div>Selected answer: ${esc(m.selected||'No answer')}</div></div>`).join(''):'<p><strong>Perfect score — no missed questions.</strong></p>';
+  return `<div class="cert-head"><div><div class="cert-org">LAUNCH FAMILY ENTERTAINMENT</div><div class="cert-title">ASHEVILLE MEMBERSHIP TRAINING</div><div class="cert-sub">Training Assessment Record</div></div><div class="stamp ${r.passed?'pass':'fail'}">${r.passed?'PASS':'FAIL'}</div></div><div class="cert-grid"><div class="cert-field"><span class="cert-label">Employee</span><span class="cert-value">${esc(r.employee||'')}</span></div><div class="cert-field"><span class="cert-label">Park</span><span class="cert-value">Asheville</span></div><div class="cert-field"><span class="cert-label">Date</span><span class="cert-value">${esc(r.date||'')}</span></div><div class="cert-field"><span class="cert-label">Trainer / Manager</span><span class="cert-value">${esc(r.trainer||'')}</span></div><div class="cert-field"><span class="cert-label">Score</span><span class="cert-value">${esc(r.score)} / ${esc(r.total)}</span></div><div class="cert-field"><span class="cert-label">Percentage</span><span class="cert-value">${esc(r.percent)}%</span></div></div><div class="statement"><strong>${esc(r.employee||'Employee')}</strong> ${r.passed?'successfully completed':'completed'} the Asheville Membership Training assessment with a score of <strong>${esc(r.score)}/${esc(r.total)} (${esc(r.percent)}%)</strong>${r.passed?'.':`, below the ${PASSING_PERCENT}% passing threshold.`}</div><div class="missed">${missed}</div><div class="signatures"><div class="sigline">Trainer / Manager Signature</div><div class="sigline">Employee Signature</div></div>`;
+}
+function viewRecord(i){const r=readRecords()[i];if(!r)return;const box=document.getElementById('recordPrint');box.innerHTML=buildRecordHtml(r);box.style.display='block';box.scrollIntoView({behavior:'smooth',block:'start'});}
+renderRecords();
+</script>
+</body>
+</html>
