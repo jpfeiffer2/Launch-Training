@@ -90,7 +90,7 @@
 </head>
 <body>
 <div class="shell"><main class="panel"><div class="brandbar"></div>
-<header class="header"><img src="assets/launch-family-entertainment-logo.png" alt="Launch Family Entertainment"><div class="header-title"><h1>Asheville Membership Exam</h1><p>Supplemental membership assessment · 18 randomized questions · 80% passing score</p></div><span class="ver">Version 18</span></header>
+<header class="header"><img src="assets/launch-family-entertainment-logo.png" alt="Launch Family Entertainment"><div class="header-title"><h1>Asheville Membership Exam</h1><p>Supplemental membership assessment · 18 randomized questions · 80% passing score</p></div></header>
 <div class="content">
 <section class="meta">
 <div class="field"><label for="employeeName">Employee Name</label><input id="employeeName" autocomplete="name"></div>
@@ -160,7 +160,7 @@ function showResult(rec){
   result.scrollIntoView({behavior:'smooth',block:'start'});
 }
 function renderRecords(){const list=document.getElementById('recordsList'),recs=readRecords();list.innerHTML=recs.length?recs.map(r=>`<div class="record"><div><strong>${esc(r.employee)}</strong><small>${esc(r.date)} · Trainer: ${esc(r.trainer)} · ${new Date(r.submittedAt).toLocaleString()}</small></div><div class="${r.passed?'badge-pass':'badge-fail'}">${r.passed?'PASS':'FAIL'} · ${r.score}/${r.total} (${r.percent}%)</div></div>`).join(''):'<div class="record"><div>No saved exam records yet.</div></div>'}
-submitBtn.addEventListener('click',()=>{if(!validate())return;const m=meta(),s=scoreExam(),rec={...m,...s,submittedAt:new Date().toISOString(),version:1};saveRecord(rec);submitCentralExamRecord(rec);showResult(rec);renderRecords()});
+submitBtn.addEventListener('click',()=>{if(!validate())return;const m=meta(),s=scoreExam(),rec={...m,...s,submittedAt:new Date().toISOString()};saveRecord(rec);submitCentralExamRecord(rec);showResult(rec);renderRecords()});
 resetBtn.addEventListener('click',()=>{if(!confirm('Reset this exam and reshuffle all questions and answers?'))return;form.reset();result.className='result';printBtn.style.display='none';validation.classList.remove('show');renderExam();window.scrollTo({top:0,behavior:'smooth'})});
 printBtn.addEventListener('click',()=>window.print());document.getElementById('refreshRecords').addEventListener('click',renderRecords);document.getElementById('quizDate').value=today();renderExam();renderRecords();
 })();
