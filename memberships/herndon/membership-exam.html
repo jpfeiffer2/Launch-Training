@@ -87,6 +87,27 @@
   })();
 </script>
 
+
+<style id="launch-park-location-dropdown-style">
+  #parkLocation,
+  #park {
+    width: 100%;
+    padding: 10px 11px;
+    border: 1px solid #cdd6dc;
+    border-radius: 9px;
+    background: #fff;
+    color: #111820;
+    font: inherit;
+    min-height: 42px;
+  }
+  #parkLocation:focus,
+  #park:focus {
+    outline: none;
+    border-color: #6cc24a;
+    box-shadow: 0 0 0 3px rgba(108,194,74,.16);
+  }
+</style>
+
 </head>
 <body>
 <div class="shell"><main class="panel"><div class="brandbar"></div>
@@ -94,7 +115,7 @@
 <div class="content">
 <section class="meta">
 <div class="field"><label for="employeeName">Employee Name</label><input id="employeeName" autocomplete="name"></div>
-<div class="field"><label for="parkLocation">Park Location</label><input id="parkLocation" value="Herndon" readonly></div>
+<div class="field"><label for="parkLocation">Park Location</label><select id="parkLocation" required><option value="">Select Park Location</option><option value="Ann Arbor">Ann Arbor</option><option value="Arlington">Arlington</option><option value="Asheville">Asheville</option><option value="Brooklyn">Brooklyn</option><option value="Clearwater">Clearwater</option><option value="Columbus">Columbus</option><option value="Cumming">Cumming</option><option value="Dearborn">Dearborn</option><option value="Denton">Denton</option><option value="Deptford">Deptford</option><option value="Doral">Doral</option><option value="Framingham">Framingham</option><option value="Gurnee">Gurnee</option><option value="Herndon" selected>Herndon</option><option value="Jackson">Jackson</option><option value="Jeffersonville">Jeffersonville</option><option value="Lansing">Lansing</option><option value="Leominster">Leominster</option><option value="Lewisville">Lewisville</option><option value="Little Ferry">Little Ferry</option><option value="Manchester">Manchester</option><option value="Methuen">Methuen</option><option value="North Attleboro">North Attleboro</option><option value="Norwood">Norwood</option><option value="Novi">Novi</option><option value="Orlando">Orlando</option><option value="Pensacola">Pensacola</option><option value="PG County">PG County</option><option value="Prattville">Prattville</option><option value="Queens">Queens</option><option value="Raleigh">Raleigh</option><option value="Richmond">Richmond</option><option value="Riverdale">Riverdale</option><option value="Warwick">Warwick</option><option value="West Houston">West Houston</option><option value="Westborough">Westborough</option><option value="Woburn">Woburn</option></select></div>
 <div class="field"><label for="quizDate">Date</label><input id="quizDate" type="date"></div>
 <div class="field"><label for="trainerName">Trainer/Manager</label><input id="trainerName"></div>
 </section>

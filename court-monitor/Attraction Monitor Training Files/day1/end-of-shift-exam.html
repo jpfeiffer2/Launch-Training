@@ -206,13 +206,34 @@
   }
 </style>
 
+
+<style id="launch-park-location-dropdown-style">
+  #parkLocation,
+  #park {
+    width: 100%;
+    padding: 10px 11px;
+    border: 1px solid #cdd6dc;
+    border-radius: 9px;
+    background: #fff;
+    color: #111820;
+    font: inherit;
+    min-height: 42px;
+  }
+  #parkLocation:focus,
+  #park:focus {
+    outline: none;
+    border-color: #6cc24a;
+    box-shadow: 0 0 0 3px rgba(108,194,74,.16);
+  }
+</style>
+
 </head>
 <body>
 <div class="page-shell"><div class="container"><div class="brand-topbar"></div>
 <div class="header"><div><h1>Day 1 Attraction Monitor Training Exam</h1><p>30 questions covering the complete Day 1 online and hands-on training objectives.</p></div></div>
 <div class="content">
 <p class="summary-note">A score of 80% or higher is required to pass.</p>
-<div class="meta-card"><div class="meta-grid"><div class="field"><label>Employee Name</label><input id="employee" / required></div><div class="field"><label>Trainer Name</label><input id="trainer" /></div><div class="field"><label>Park Location</label><input id="park" / required></div></div></div>
+<div class="meta-card"><div class="meta-grid"><div class="field"><label>Employee Name</label><input id="employee" / required></div><div class="field"><label>Trainer Name</label><input id="trainer" /></div><div class="field"><label>Park Location</label><select id="park" required><option value="">Select Park Location</option><option value="Ann Arbor">Ann Arbor</option><option value="Arlington">Arlington</option><option value="Asheville">Asheville</option><option value="Brooklyn">Brooklyn</option><option value="Clearwater">Clearwater</option><option value="Columbus">Columbus</option><option value="Cumming">Cumming</option><option value="Dearborn">Dearborn</option><option value="Denton">Denton</option><option value="Deptford">Deptford</option><option value="Doral">Doral</option><option value="Framingham">Framingham</option><option value="Gurnee">Gurnee</option><option value="Herndon">Herndon</option><option value="Jackson">Jackson</option><option value="Jeffersonville">Jeffersonville</option><option value="Lansing">Lansing</option><option value="Leominster">Leominster</option><option value="Lewisville">Lewisville</option><option value="Little Ferry">Little Ferry</option><option value="Manchester">Manchester</option><option value="Methuen">Methuen</option><option value="North Attleboro">North Attleboro</option><option value="Norwood">Norwood</option><option value="Novi">Novi</option><option value="Orlando">Orlando</option><option value="Pensacola">Pensacola</option><option value="PG County">PG County</option><option value="Prattville">Prattville</option><option value="Queens">Queens</option><option value="Raleigh">Raleigh</option><option value="Richmond">Richmond</option><option value="Riverdale">Riverdale</option><option value="Warwick">Warwick</option><option value="West Houston">West Houston</option><option value="Westborough">Westborough</option><option value="Woburn">Woburn</option></select></div></div></div>
 <div class="toolbar"><div class="progress-wrap"><div class="progress-box">30 questions</div><div class="answered-box" id="answered">0 of 30 answered</div></div><div><a class="button dark2" href="./index.html">Back to Day Menu</a><a class="button dark2" href="../../../index.html">Training Portal</a></div></div>
 <form id="exam"></form>
 <div class="actions exam-submit-row"><button class="yellow" id="submit" type="button">Submit Exam</button></div>
