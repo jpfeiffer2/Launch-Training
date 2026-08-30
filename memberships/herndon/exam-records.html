@@ -63,7 +63,7 @@ main{padding:26px 34px 34px}.records-toolbar{display:flex;align-items:center;jus
 </main>
 </div>
 <script>
-const STORAGE_KEY='launch_herndon_membership_exam_records_v1';
+const STORAGE_KEY='launch_herndon_membership_exam_records_v3';
 const PASSING_PERCENT=80;
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function readRecords(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch(e){return[]}}
