@@ -737,19 +737,26 @@ linear-gradient(135deg,#050807,#111817 58%,#1c2a19)}
     const bg=document.getElementById('s3Photo');if(bg)bg.style.transform='scale('+(1.015+p*.025).toFixed(4)+') translate3d('+(p*.20).toFixed(3)+'%,0,0)';
 
     /*
-      Slide 3 retimed from detected narration pause boundaries.
-      Method: audio was analyzed for natural pauses, then transitions were moved
-      to the later pause boundary so the visual does not lead the spoken content.
+      Slide 3 retimed to exact user-supplied cue points.
+      NOW vs LATER scene intentionally eliminated.
+      Opening: 0:00
+      Purchased Gift Card / Use It Now: 0:11
+      Bonus Value / January 1: 0:19
+      $30 + $5 Example: 0:28
+      Keep the Bonus Value Pass: 0:38
+      Purchase Location: 0:47
+      Use Anywhere After Loaded: 0:55
+      Final Recap: 1:00
     */
-    showEl('s3Opening',t<12.960);
-    showEl('s3Separate',t>=12.960&&t<20.200);
-    showEl('s3Gift',t>=20.200&&t<28.480);
-    showEl('s3Bonus',t>=28.480&&t<36.940);
-    showEl('s3Example',t>=36.940&&t<44.530);
-    showEl('s3Pass',t>=44.530&&t<50.850);
-    showEl('s3Location',t>=50.850&&t<56.560);
-    showEl('s3Anywhere',t>=56.560&&t<59.910);
-    showEl('s3Final',t>=59.910);
+    showEl('s3Opening',t<11.000);
+    showEl('s3Separate',false);
+    showEl('s3Gift',t>=11.000&&t<19.000);
+    showEl('s3Bonus',t>=19.000&&t<28.000);
+    showEl('s3Example',t>=28.000&&t<38.000);
+    showEl('s3Pass',t>=38.000&&t<47.000);
+    showEl('s3Location',t>=47.000&&t<55.000);
+    showEl('s3Anywhere',t>=55.000&&t<60.000);
+    showEl('s3Final',t>=60.000);
     if(started&&i===2&&!complete[2])audioStatus.textContent=(audio3.paused?'Paused · ':'Narration · ')+fmt(t)+' / '+fmt(d);
   }
   function update4(t){
