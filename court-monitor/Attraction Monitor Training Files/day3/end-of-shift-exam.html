@@ -251,7 +251,11 @@ if(answers[idx]===undefined){alert('Please select an answer before submitting.')
     examDay: 'Day 3 Exam',
     score: `${correct}/${QUESTIONS.length}`,
     percentage: `${score}%`,
-    missedQuestions: review.length ? review.map(item => item.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim()).join(' | ') : 'None'
+    missedQuestions: QUESTIONS.map((q, qIndex) => {
+      if (answers[qIndex] === q.correct) return '';
+      const selectedText = answers[qIndex] !== undefined ? q.answers[answers[qIndex]] : 'No answer';
+      return `Q${qIndex + 1}: ${q.question} | Selected: ${selectedText || 'No answer'} | Correct: ${q.answers[q.correct]}`;
+    }).filter(Boolean).join(' | ') || 'None'
   });const r=document.getElementById('result');r.className='result result-certificate launch-standard-certificate '+(pass?'pass':'fail');r.style.display='block';r.innerHTML = window.launchRenderStandardExamCertificate({
     status: pass ? 'PASS' : 'NEEDS REVIEW',
     trainingTitle: 'DAY 3 COURT MONITOR TRAINING',

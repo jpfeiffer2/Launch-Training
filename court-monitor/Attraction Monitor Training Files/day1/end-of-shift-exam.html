@@ -327,7 +327,7 @@ document.getElementById('submit').addEventListener('click',()=>{
     examDay: 'Day 1 Exam',
     score: `${correct}/${QUESTIONS.length}`,
     percentage: `${score}%`,
-    missedQuestions: details.filter(d => !d.isCorrect).map((d, index) => `Q${details.indexOf(d) + 1}: ${d.question} | Correct: ${d.correctAnswer}`).join(' | ') || 'None'
+    missedQuestions: details.filter(d => !d.isCorrect).map((d, index) => `Q${details.indexOf(d) + 1}: ${d.question} | Selected: ${d.selectedAnswer || 'No answer'} | Correct: ${d.correctAnswer}`).join(' | ') || 'None'
   });
   const result=document.getElementById('result');
   result.className='result result-certificate launch-standard-certificate '+(pass?'pass':'fail');

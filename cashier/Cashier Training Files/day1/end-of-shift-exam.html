@@ -1526,7 +1526,7 @@
         score: `${record.score}/${record.total}`,
         percentage: `${record.percent}%`,
         missedQuestions: record.missed && record.missed.length
-          ? record.missed.map(m => `Q${m.id}: ${m.text} | Correct: ${m.correct}`).join(' | ')
+          ? record.missed.map(m => `Q${m.id}: ${m.text} | Selected: ${m.selected || 'No answer'} | Correct: ${m.correct}`).join(' | ')
           : 'None'
       });
     }
