@@ -737,23 +737,24 @@ linear-gradient(135deg,#050807,#111817 58%,#1c2a19)}
     const bg=document.getElementById('s3Photo');if(bg)bg.style.transform='scale('+(1.015+p*.025).toFixed(4)+') translate3d('+(p*.20).toFixed(3)+'%,0,0)';
 
     /*
-      Slide 3 retimed to exact user-supplied cue points.
+      Slide 3 retimed to exact user-supplied cue points, then adjusted earlier by 1.5 seconds
+      for the first four content scenes.
       NOW vs LATER scene intentionally eliminated.
       Opening: 0:00
-      Purchased Gift Card / Use It Now: 0:11
-      Bonus Value / January 1: 0:19
-      $30 + $5 Example: 0:28
-      Keep the Bonus Value Pass: 0:38
+      Purchased Gift Card / Use It Now: 0:09.5
+      Bonus Value / January 1: 0:17.5
+      $30 + $5 Example: 0:26.5
+      Keep the Bonus Value Pass: 0:36.5
       Purchase Location: 0:47
       Use Anywhere After Loaded: 0:55
       Final Recap: 1:00
     */
-    showEl('s3Opening',t<11.000);
+    showEl('s3Opening',t<9.500);
     showEl('s3Separate',false);
-    showEl('s3Gift',t>=11.000&&t<19.000);
-    showEl('s3Bonus',t>=19.000&&t<28.000);
-    showEl('s3Example',t>=28.000&&t<38.000);
-    showEl('s3Pass',t>=38.000&&t<47.000);
+    showEl('s3Gift',t>=9.500&&t<17.500);
+    showEl('s3Bonus',t>=17.500&&t<26.500);
+    showEl('s3Example',t>=26.500&&t<36.500);
+    showEl('s3Pass',t>=36.500&&t<47.000);
     showEl('s3Location',t>=47.000&&t<55.000);
     showEl('s3Anywhere',t>=55.000&&t<60.000);
     showEl('s3Final',t>=60.000);
@@ -886,34 +887,43 @@ linear-gradient(135deg,#050807,#111817 58%,#1c2a19)}
     slides[7].style.setProperty('--narration-progress',String(p));
 
     /*
-      Slide 8 retimed from detected narration pause boundaries.
-      The first half is preserved because it was reported as correct.
-      The second-half scene changes now occur at later natural pauses:
-      confuse -> multi -> routing -> no-lucky -> final.
+      Slide 8 retimed to exact user-supplied cue points.
+      Uses the actual Slide 8 scene IDs:
+      s8Opening, s8Confirm, s8Gift, s8Bonus, s8Confuse, s8Multi, s8Routing, s8NoLucky, s8Final.
+      Opening / online orders / several emails: 0:00
+      Order confirmation email: 0:08
+      Gift card email: 0:15
+      Bonus value email: 0:24
+      Two details that confuse guests: 0:33
+      Multiple emails can still equal $50: 0:37
+      Purchaser vs recipient routing: 0:48
+      No Lucky Launcher Prize Ticket online: 0:54
+      Final separate messages recap: 1:02
     */
-    showEl('s8Opening',t<6.890);
-    showEl('s8Confirm',t>=6.890&&t<15.060);
-    showEl('s8Gift',t>=15.060&&t<23.410);
-    showEl('s8Bonus',t>=23.410&&t<29.880);
-    showEl('s8Confuse',t>=29.880&&t<35.050);
-    showEl('s8Multi',t>=35.050&&t<52.840);
-    showEl('s8Routing',t>=52.840&&t<57.950);
-    showEl('s8NoLucky',t>=57.950&&t<63.770);
-    showEl('s8Final',t>=63.770);
 
-    document.getElementById('s8NoNumber')?.classList.toggle('current',t>=9.505&&t<15.060);
-    document.getElementById('s8GiftDetail')?.classList.toggle('current',t>=15.060&&t<23.410);
-    document.getElementById('s8Immediate')?.classList.toggle('current',t>=20.930&&t<23.410);
+    showEl('s8Opening',t<8.000);
+    showEl('s8Confirm',t>=8.000&&t<15.000);
+    showEl('s8Gift',t>=15.000&&t<24.000);
+    showEl('s8Bonus',t>=24.000&&t<33.000);
+    showEl('s8Confuse',t>=33.000&&t<37.000);
+    showEl('s8Multi',t>=37.000&&t<48.000);
+    showEl('s8Routing',t>=48.000&&t<54.000);
+    showEl('s8NoLucky',t>=54.000&&t<62.000);
+    showEl('s8Final',t>=62.000);
 
-    document.getElementById('s8Source125')?.classList.toggle('current',t>=35.050&&t<37.840);
-    document.getElementById('s8Chip1')?.classList.toggle('current',t>=37.840&&t<43.710);
-    document.getElementById('s8Chip2')?.classList.toggle('current',t>=43.710&&t<46.200);
-    document.getElementById('s8Chip3')?.classList.toggle('current',t>=46.200&&t<48.770);
-    document.getElementById('s8Total50')?.classList.toggle('current',t>=48.770&&t<52.840);
+    document.getElementById('s8NoNumber')?.classList.toggle('current',t>=9.505&&t<15.000);
+    document.getElementById('s8GiftDetail')?.classList.toggle('current',t>=15.000&&t<24.000);
+    document.getElementById('s8Immediate')?.classList.toggle('current',t>=20.930&&t<24.000);
 
-    document.getElementById('s8FinalConfirm')?.classList.toggle('current',t>=63.770&&t<65.000);
-    document.getElementById('s8FinalGift')?.classList.toggle('current',t>=65.000&&t<66.200);
-    document.getElementById('s8FinalBonus')?.classList.toggle('current',t>=66.200);
+    document.getElementById('s8Source125')?.classList.toggle('current',t>=37.000&&t<39.500);
+    document.getElementById('s8Chip1')?.classList.toggle('current',t>=39.500&&t<42.000);
+    document.getElementById('s8Chip2')?.classList.toggle('current',t>=42.000&&t<44.750);
+    document.getElementById('s8Chip3')?.classList.toggle('current',t>=44.750&&t<46.750);
+    document.getElementById('s8Total50')?.classList.toggle('current',t>=46.750&&t<48.000);
+
+    document.getElementById('s8FinalConfirm')?.classList.toggle('current',t>=62.000&&t<64.000);
+    document.getElementById('s8FinalGift')?.classList.toggle('current',t>=64.000&&t<65.800);
+    document.getElementById('s8FinalBonus')?.classList.toggle('current',t>=65.800);
 
     if(started&&i===7&&!complete[7])audioStatus.textContent=(audio8.paused?'Paused · ':'Narration · ')+fmt(t)+' / '+fmt(d);
   }
