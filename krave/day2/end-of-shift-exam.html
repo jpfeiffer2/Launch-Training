@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Krave Day 1 Exam</title>
+  <title>Krave Day 2 Exam</title>
   <style>
     :root {
       --launch-green: #6cc24a;
@@ -998,6 +998,9 @@
 </style>
 
 
+
+
+
 <style id="launch-portal-auth-style">
   html { display: none; }
   html.portal-authenticated { display: block; }
@@ -1034,7 +1037,6 @@
   })();
 </script>
 
-
 <style id="launch-park-location-dropdown-style">
   #parkLocation,
   #park {
@@ -1054,7 +1056,6 @@
     box-shadow: 0 0 0 3px rgba(108,194,74,.16);
   }
 </style>
-
 </head>
 <body>
   <div class="page-shell">
@@ -1063,7 +1064,7 @@
 
       <div class="header">
         <img class="exam-logo" src="../assets/launch-family-entertainment-logo.png" alt="Launch Family Entertainment">
-        <h1>Day 1 Krave Training Exam</h1>
+        <h1>Day 2 Krave Training Exam</h1>
         <div class="header-divider"></div>
         <p>System-wide employee training assessment &bull; Required-answer validation &bull; Print-ready completion record</p>
       </div>
@@ -1092,13 +1093,13 @@
 
         <div class="toolbar">
           <div class="toolbar-left">
-            <div class="progress-box" id="progressBox">All 30 questions visible</div>
+            <div class="progress-box" id="progressBox">All 25 questions visible</div>
           </div>
 
           <div class="toolbar-right"></div>
         </div>
 
-        <div class="pre-exam-nav no-print"><button type="button" class="btn-outline" id="preExamReturnMenuBtn" onclick="window.location.href='index.html'">Return to Day 1 Main Menu</button><button type="button" class="btn-outline" onclick="window.location.href='../index.html'">Krave Training Home</button><button type="button" class="btn-outline" onclick="window.location.href='../../index.html'">Training Portal</button><button type="button" class="btn-outline" onclick="window.location.href='#savedExamRecords'">View Exam Records</button></div>
+        <div class="pre-exam-nav no-print"><button type="button" class="btn-outline" id="preExamReturnMenuBtn" onclick="window.location.href='index.html'">Return to Day 2 Main Menu</button><button type="button" class="btn-outline" onclick="window.location.href='../index.html'">Krave Training Home</button><button type="button" class="btn-outline" onclick="window.location.href='../../index.html'">Training Portal</button><button type="button" class="btn-outline" onclick="window.location.href='#savedExamRecords'">View Exam Records</button></div>
 
         <div id="validationBox" class="validation-box"></div>
 
@@ -1108,7 +1109,7 @@
           <button type="button" class="btn-primary" onclick="gradeQuiz()">Submit Quiz</button>
           <button type="button" class="btn-secondary" onclick="resetQuiz()">Reset</button>
           <button type="button" class="btn-dark" id="printCertBtn" onclick="printResultSheet()" style="display:none;">&#128438; Print / Save Exam Record</button>
-          <button type="button" class="btn-outline" id="returnMenuBtn" onclick="window.location.href='index.html'" style="display:none;">Return to Day 1 Main Menu</button><button type="button" class="btn-outline" onclick="window.location.href='../index.html'">Krave Training Home</button><button type="button" class="btn-outline" onclick="window.location.href='#savedExamRecords'">View Exam Records</button>
+          <button type="button" class="btn-outline" id="returnMenuBtn" onclick="window.location.href='index.html'" style="display:none;">Return to Day 2 Main Menu</button><button type="button" class="btn-outline" onclick="window.location.href='../index.html'">Krave Training Home</button><button type="button" class="btn-outline" onclick="window.location.href='#savedExamRecords'">View Exam Records</button>
         </div>
 
 
@@ -1118,7 +1119,7 @@
           <div class="cert-header">
             <div class="cert-header-left">
               <div class="cert-org">LAUNCH FAMILY ENTERTAINMENT</div>
-              <div class="cert-title-line">DAY 1 KRAVE TRAINING</div>
+              <div class="cert-title-line">DAY 2 KRAVE TRAINING</div>
               <div class="cert-subtitle">Training Assessment Record</div>
             </div>
             <div class="cert-stamp" id="certStamp">PASS</div>
@@ -1175,7 +1176,7 @@
         <section class="saved-records no-print" id="savedExamRecords">
           <div class="saved-records-head">
             <div>
-              <h2>Saved Day 1 Exam Records</h2>
+              <h2>Saved Day 2 Exam Records</h2>
               <p>Records completed from this exam file are stored in this browser for manager recovery and reprinting.</p>
             </div>
             <button type="button" class="btn-outline" onclick="renderSavedRecords()">Refresh Records</button>
@@ -1184,7 +1185,7 @@
         </section>
 
         <div class="pdf-note">
-          After submission, print or save the exam record as a PDF and return to the Day 1 Main Menu.
+          After submission, print or save the exam record as a PDF and return to the Day 2 Main Menu.
         </div>
 
         <div class="footer-note">
@@ -1201,337 +1202,282 @@
     let lastScoreState = null;
 
     const questionBank = [
-      {
-        id: 1,
-        text: "During a busy period, a teammate asks for help while you are completing required safety checks at your station. Which response best reflects the Launch Vision and Core Values?",
-        choices: [
-          "Skip the remaining checks so the teammate's order can be completed faster.",
-          "Stay focused only on your station and avoid getting involved in another employee's work.",
-          "Complete the required checks correctly, communicate with the teammate, and safely assist when you are able.",
-          "Stop all food preparation until a manager assigns every task again."
-        ],
-        correct: "Complete the required checks correctly, communicate with the teammate, and safely assist when you are able."
-      },
-      {
-        id: 2,
-        text: "You notice that a prepared product has the wrong use-or-discard time on its label. What best demonstrates transparency?",
-        choices: [
-          "Quietly replace the label and continue without telling anyone.",
-          "Tell the trainer or Manager on Duty, correct the label and any related record, and make sure the product is still safe to use.",
-          "Move the product to the front so it will be used before anyone notices.",
-          "Leave a note for the next shift because the product has already been labeled."
-        ],
-        correct: "Tell the trainer or Manager on Duty, correct the label and any related record, and make sure the product is still safe to use."
-      },
-      {
-        id: 3,
-        text: "You begin vomiting during a Krave shift. What should you do?",
-        choices: [
-          "Finish the order you are preparing, sanitize the station, and then report it.",
-          "Move to a non-food task and report the illness at the end of the shift.",
-          "Stop working immediately and report the illness to the Manager on Duty.",
-          "Wash your hands, put on two pairs of gloves, and continue if you feel able."
-        ],
-        correct: "Stop working immediately and report the illness to the Manager on Duty."
-      },
-      {
-        id: 4,
-        text: "Your vomiting symptoms ended at 8:00 p.m. last night, and you are scheduled to work at noon today. What should you do?",
-        choices: [
-          "Report for the shift because the symptoms stopped before you went to sleep.",
-          "Work as scheduled if you wear gloves and avoid tasting food.",
-          "Contact the manager before the shift and do not return until you have been symptom-free for the required 24 hours and are cleared according to procedure.",
-          "Work only on cleaning tasks until 8:00 p.m., then return to food preparation."
-        ],
-        correct: "Contact the manager before the shift and do not return until you have been symptom-free for the required 24 hours and are cleared according to procedure."
-      },
-      {
-        id: 5,
-        text: "You have a small cut on your hand or wrist. What is required before you handle food?",
-        choices: [
-          "A single-use glove is sufficient as long as the cut is not actively bleeding.",
-          "A regular bandage is sufficient if you avoid ready-to-eat foods.",
-          "Cover it with a clean, water-resistant bandage and then wear a single-use glove.",
-          "Wrap it in a paper towel before putting on a glove."
-        ],
-        correct: "Cover it with a clean, water-resistant bandage and then wear a single-use glove."
-      },
-      {
-        id: 6,
-        text: "The designated handwashing sink is blocked by stored boxes when you need to wash your hands. What should you do?",
-        choices: [
-          "Wash your hands in the three-bay sink and return to work.",
-          "Restore access to the handwashing sink and notify the trainer or manager if it cannot be made available immediately.",
-          "Use hand sanitizer and put on gloves until the sink is available.",
-          "Use the produce-preparation sink as long as no food is in it."
-        ],
-        correct: "Restore access to the handwashing sink and notify the trainer or manager if it cannot be made available immediately."
-      },
-      {
-        id: 7,
-        text: "Which sequence correctly describes proper handwashing in Krave?",
-        choices: [
-          "Wet hands and forearms, apply soap, scrub for at least 20 seconds, rinse, dry with a single-use towel, and use the towel to turn off a manual faucet.",
-          "Wet hands, scrub for 20 seconds, apply soap, rinse, and let hands air dry.",
-          "Apply soap to dry hands, scrub for 10 seconds, rinse, and dry on a clean towel kept at the station.",
-          "Rinse hands and forearms, apply sanitizer, and dry them on your apron before putting on gloves."
-        ],
-        correct: "Wet hands and forearms, apply soap, scrub for at least 20 seconds, rinse, dry with a single-use towel, and use the towel to turn off a manual faucet."
-      },
-      {
-        id: 8,
-        text: "You stop preparing food to use the POS while wearing gloves. What must happen before you return to the order?",
-        choices: [
-          "Discard the gloves, wash and dry your hands, put on new gloves, and reset any contaminated equipment or surfaces as needed.",
-          "Wipe the gloves with a sanitizer towel and put on a second pair.",
-          "Sanitize the outside of the gloves and continue the same order.",
-          "Replace the gloves without washing because the food itself was not touched."
-        ],
-        correct: "Discard the gloves, wash and dry your hands, put on new gloves, and reset any contaminated equipment or surfaces as needed."
-      },
-      {
-        id: 9,
-        text: "You finish cutting prepared vegetables and move to another food-preparation task. Your gloves still look clean. What should you do?",
-        choices: [
-          "Continue wearing the gloves because both tasks involve food.",
-          "Replace the gloves without washing your hands.",
-          "Wash and sanitize the gloves before starting the new task.",
-          "Discard the gloves, wash and dry your hands, and put on a new pair."
-        ],
-        correct: "Discard the gloves, wash and dry your hands, and put on a new pair."
-      },
-      {
-        id: 10,
-        text: "A teammate uses bare hands to place prepared bell peppers on a pizza. What is the correct response?",
-        choices: [
-          "Allow the order to continue if the teammate washed immediately before starting.",
-          "Stop the task, report the bare-hand contact, discard the affected food according to procedure, and restart with washed hands and an approved barrier such as gloves or utensils.",
-          "Cook the pizza for an extra minute to correct the handling mistake.",
-          "Move the peppers with tongs and continue because only one ingredient was touched."
-        ],
-        correct: "Stop the task, report the bare-hand contact, discard the affected food according to procedure, and restart with washed hands and an approved barrier such as gloves or utensils."
-      },
-      {
-        id: 11,
-        text: "A cleaning bucket has been placed in the food-preparation sink just before you need to rinse fresh peppers. What should happen first?",
-        choices: [
-          "Rinse the peppers in the three-bay sink instead.",
-          "Remove the bucket and rinse the peppers immediately because the sink looks clean.",
-          "Restore the food-preparation sink for food use, clean and sanitize it properly, and then prepare the peppers using the approved process.",
-          "Soak the peppers in sanitizer so the condition of the sink no longer matters."
-        ],
-        correct: "Restore the food-preparation sink for food use, clean and sanitize it properly, and then prepare the peppers using the approved process."
-      },
-      {
-        id: 12,
-        text: "Which process correctly prepares fresh produce for use?",
-        choices: [
-          "Inspect it, rinse it under cool running water, dry it, and use clean and sanitized tools with the approved green cutting board.",
-          "Soak it in sanitizer, dry it, and use whichever cutting board is closest.",
-          "Wash it with dish soap, rinse it, and place it directly into a storage container.",
-          "Cut it first, then rinse the pieces after preparation is complete."
-        ],
-        correct: "Inspect it, rinse it under cool running water, dry it, and use clean and sanitized tools with the approved green cutting board."
-      },
-      {
-        id: 13,
-        text: "Your phone is lying on a food-preparation surface, and you move it with a gloved hand. What should you do before continuing food preparation?",
-        choices: [
-          "Change gloves and continue because the phone did not touch the food.",
-          "Wipe the phone area with sanitizer and keep the same gloves.",
-          "Discard the gloves, wash your hands, clean and sanitize the affected surface, and put on new gloves.",
-          "Cover the area with a clean pan liner and continue the order."
-        ],
-        correct: "Discard the gloves, wash your hands, clean and sanitize the affected surface, and put on new gloves."
-      },
-      {
-        id: 14,
-        text: "What temperature must cold-held TCS food maintain?",
-        choices: [
-          "32°F or below",
-          "41°F or below",
-          "45°F or below",
-          "50°F or below"
-        ],
-        correct: "41°F or below"
-      },
-      {
-        id: 15,
-        text: "A prep cooler display reads 38°F, but the actual product temperature is 44°F. What should you do?",
-        choices: [
-          "Record 38°F because the cooler display is the official reading.",
-          "Average the readings and record 41°F.",
-          "Treat the 44°F product as unsafe or questionable, stop using it, report it, and record the actual product temperature.",
-          "Move the product to the freezer and mark the check as passed."
-        ],
-        correct: "Treat the 44°F product as unsafe or questionable, stop using it, report it, and record the actual product temperature."
-      },
-      {
-        id: 16,
-        text: "A hot-held TCS item measures 132°F. What is the correct response?",
-        choices: [
-          "Serve it quickly before it cools further.",
-          "Do not serve it; notify the Manager on Duty, record the actual temperature, and follow the approved corrective action.",
-          "Increase the holding-unit setting and record 135°F without checking again.",
-          "Mix it with a hotter batch until the average temperature reaches 135°F."
-        ],
-        correct: "Do not serve it; notify the Manager on Duty, record the actual temperature, and follow the approved corrective action."
-      },
-      {
-        id: 17,
-        text: "The timer has finished and chicken tenders look browned, but the thickest tender measures 158°F. What should you do?",
-        choices: [
-          "Serve them because Krave uses ready-to-eat products and the timer finished.",
-          "Serve them because color and cook time together confirm doneness.",
-          "Move them to the heat lamp until the thermometer reaches 165°F.",
-          "Continue the approved cooking process and recheck until the product reaches 165°F."
-        ],
-        correct: "Continue the approved cooking process and recheck until the product reaches 165°F."
-      },
-      {
-        id: 18,
-        text: "You find a frozen product that is soft and has begun thawing. What should you do?",
-        choices: [
-          "Keep it out of the freezer, notify the appropriate person, and use it only if the approved procedure allows.",
-          "Return it to the freezer if the package is still sealed.",
-          "Refreeze it and apply a new use-or-discard label.",
-          "Use it if the color and smell appear normal."
-        ],
-        correct: "Keep it out of the freezer, notify the appropriate person, and use it only if the approved procedure allows."
-      },
-      {
-        id: 19,
-        text: "Which method gives a reliable internal food-temperature reading?",
-        choices: [
-          "Clean and sanitize the probe, place it in the thickest part of the product, wait for the reading to stabilize, and record the actual temperature.",
-          "Touch the probe to the outside of the product and record the first number shown.",
-          "Check the equipment display and use that number as the product temperature.",
-          "Insert the probe between two products so one reading represents the entire batch."
-        ],
-        correct: "Clean and sanitize the probe, place it in the thickest part of the product, wait for the reading to stabilize, and record the actual temperature."
-      },
-      {
-        id: 20,
-        text: "Which information belongs on a complete label for an opened, thawed, or prepared food item?",
-        choices: [
-          "Product name; opened, thawed, or prepared date and time; use-or-discard date and time; and employee initials.",
-          "Product name, use-or-discard date, and manager signature only.",
-          "Product name, preparation date, and employee initials; times are only needed for hot food.",
-          "Product name and the date the original case arrived at the park."
-        ],
-        correct: "Product name; opened, thawed, or prepared date and time; use-or-discard date and time; and employee initials."
-      },
-      {
-        id: 21,
-        text: "Prepared bell peppers have an approved 72-hour shelf life. They are prepared at 2:00 p.m. on Monday. What use-or-discard time belongs on the label?",
-        choices: [
-          "Wednesday at 2:00 p.m.",
-          "Thursday at 2:00 p.m.",
-          "Saturday at 2:00 p.m.",
-          "The following Monday at 2:00 p.m."
-        ],
-        correct: "Thursday at 2:00 p.m."
-      },
-      {
-        id: 22,
-        text: "A prepared item combines ingredients labeled for Tuesday at 4:00 p.m., Wednesday at 10:00 a.m., and Thursday at 9:00 a.m. Which use-or-discard time belongs on the finished item?",
-        choices: [
-          "Tuesday at 4:00 p.m.",
-          "Wednesday at 10:00 a.m.",
-          "Thursday at 9:00 a.m.",
-          "The time the ingredients were combined, plus 168 hours."
-        ],
-        correct: "Tuesday at 4:00 p.m."
-      },
-      {
-        id: 23,
-        text: "Two containers hold the same prepared product. One has an earlier use-or-discard time, but the newer container is easier to reach. What should you do?",
-        choices: [
-          "Use the newer container first because it is already at the front.",
-          "Combine both containers and apply the newer label.",
-          "Rotate the earlier container forward and use it first, as long as it is still within its approved shelf life.",
-          "Use whichever container looks fuller."
-        ],
-        correct: "Rotate the earlier container forward and use it first, as long as it is still within its approved shelf life."
-      },
-      {
-        id: 24,
-        text: "A working container is nearly empty and a freshly prepared batch is ready. What should you do?",
-        choices: [
-          "Top off the older product and keep the newer label.",
-          "Use or discard the remaining older product according to procedure, then place the new batch in a clean, sanitized container with its own complete label.",
-          "Mix the batches and use the earlier date without cleaning the container.",
-          "Transfer the older product onto the new batch so it will be used first."
-        ],
-        correct: "Use or discard the remaining older product according to procedure, then place the new batch in a clean, sanitized container with its own complete label."
-      },
-      {
-        id: 25,
-        text: "During the opening line check, sanitizer is outside its approved range and two prepared products have incomplete labels. Everything else appears ready. What should you do?",
-        choices: [
-          "Sign the line check as complete and correct the issues after opening.",
-          "Record acceptable values so service can begin on time.",
-          "Correct or report the issues before service, record what you actually find, and do not mark the affected checks complete until standards are met.",
-          "Remove the sanitizer and unlabeled products from view, then begin service."
-        ],
-        correct: "Correct or report the issues before service, record what you actually find, and do not mark the affected checks complete until standards are met."
-      },
-      {
-        id: 26,
-        text: "A food item must be discarded because its label is missing or its approved time has expired. What should you do?",
-        choices: [
-          "Discard it quietly so the shift is not delayed.",
-          "Set it aside, notify the trainer or Manager on Duty, and discard and record the waste according to the park's procedure.",
-          "Relabel it with the current time if the product still looks acceptable.",
-          "Offer it to employees so it does not count as waste."
-        ],
-        correct: "Set it aside, notify the trainer or Manager on Duty, and discard and record the waste according to the park's procedure."
-      },
-      {
-        id: 27,
-        text: "Which sequence correctly describes the three-bay sink process?",
-        choices: [
-          "Scrape, wash in detergent solution, rinse, sanitize at the approved tested concentration, and air dry.",
-          "Rinse, wash, sanitize, and towel dry so items return to service quickly.",
-          "Wash, sanitize, rinse, and stack the items while they are still wet.",
-          "Scrape, wash, rinse, and air dry; sanitizer is only required at closing."
-        ],
-        correct: "Scrape, wash in detergent solution, rinse, sanitize at the approved tested concentration, and air dry."
-      },
-      {
-        id: 28,
-        text: "A food-contact surface still has visible cheese and grease on it. An employee sprays sanitizer and wipes it once. What should happen next?",
-        choices: [
-          "Apply more sanitizer and continue wiping until the residue is less visible.",
-          "Fully clean the surface to remove the soil, then sanitize it using the approved procedure.",
-          "Dry the surface with a clean towel and return it to service.",
-          "Cover the surface with a liner and clean it at the end of the shift."
-        ],
-        correct: "Fully clean the surface to remove the soil, then sanitize it using the approved procedure."
-      },
-      {
-        id: 29,
-        text: "Which dry-storage placement meets the Krave standard?",
-        choices: [
-          "Food is stored at least six inches off the floor and eighteen inches from exterior walls.",
-          "Food is stored eighteen inches off the floor and six inches from exterior walls.",
-          "Sealed cases may sit on the floor if they are used within one shift.",
-          "Food may touch an exterior wall when the shelf is at least four inches off the floor."
-        ],
-        correct: "Food is stored at least six inches off the floor and eighteen inches from exterior walls."
-      },
-      {
-        id: 30,
-        text: "You find a container of cleaner stored on a shelf above packaged food in dry storage. What should you do?",
-        choices: [
-          "Leave it in place if the cap is closed tightly.",
-          "Move the food to a lower shelf and continue using both items.",
-          "Separate and relocate the chemical to its approved storage area, inspect the food for possible contamination, and report any questionable product.",
-          "Place the cleaner inside a cardboard box so it is no longer visible."
-        ],
-        correct: "Separate and relocate the chemical to its approved storage area, inspect the food for possible contamination, and report any questionable product."
-      }
-    ];
+  {
+    "id": 1,
+    "text": "You find two approved cooking methods in a recipe. What should you do?",
+    "choices": [
+      "Use the preparation steps from whichever method is faster and the cooking steps for your equipment.",
+      "Follow the complete approved method that matches your equipment.",
+      "Use the first method because it appears before the alternative.",
+      "Follow whichever method another employee remembers using."
+    ],
+    "correct": "Follow the complete approved method that matches your equipment."
+  },
+  {
+    "id": 2,
+    "text": "A guest orders a specialty pizza, but one listed ingredient is unavailable. What is the best next step?",
+    "choices": [
+      "Leave it off and tell the guest when the pizza is served.",
+      "Replace it with a similar topping in the same quantity.",
+      "Increase another topping to preserve the total portion.",
+      "Ask the trainer or manager how to proceed before preparing it."
+    ],
+    "correct": "Ask the trainer or manager how to proceed before preparing it."
+  },
+  {
+    "id": 3,
+    "text": "Dough was pulled for refrigerated thawing Monday at 10 a.m. Which label correctly reflects its standard preparation and use window?",
+    "choices": [
+      "Ready Thursday at 10 a.m.; discard the following Monday at 10 a.m.",
+      "Ready Wednesday at 10 a.m.; discard the following Monday at 10 a.m.",
+      "Ready Thursday at 10 a.m.; discard the following Thursday at 10 a.m.",
+      "Ready Monday at 10 a.m.; discard Thursday at 10 a.m."
+    ],
+    "correct": "Ready Thursday at 10 a.m.; discard the following Monday at 10 a.m."
+  },
+  {
+    "id": 4,
+    "text": "One dough batch is within its discard deadline but has thawed for only 48 hours. Another has completed 72 hours of refrigerated thawing and remains within its deadline. Which should you use?",
+    "choices": [
+      "The 48-hour batch because its remaining shelf life is longer.",
+      "Either batch, provided the dough feels soft enough.",
+      "The fully thawed batch that remains within its deadline.",
+      "The 48-hour batch after leaving it beside the warm press."
+    ],
+    "correct": "The fully thawed batch that remains within its deadline."
+  },
+  {
+    "id": 5,
+    "text": "The first dough ball in an advance-preparation batch is pressed at 11 a.m. More are added at noon. The original dough expiration is later than that evening. What is the batch’s latest room-temperature use-or-discard time?",
+    "choices": [
+      "6 p.m., six hours after the final addition.",
+      "5 p.m., six hours after the first dough ball was pressed.",
+      "The original dough expiration, because it controls all holding.",
+      "Six hours after the first pizza from the batch is ordered."
+    ],
+    "correct": "5 p.m., six hours after the first dough ball was pressed."
+  },
+  {
+    "id": 6,
+    "text": "Dough’s original discard deadline is 2 p.m. It is pressed at 11 a.m. for advance preparation. Which deadline controls?",
+    "choices": [
+      "2 p.m.; pressing does not extend the original expiration.",
+      "5 p.m.; pressing starts a new six-hour use window.",
+      "Closing time, provided the dough remains covered.",
+      "2 p.m. the next day, provided the batch receives a new label."
+    ],
+    "correct": "2 p.m.; pressing does not extend the original expiration."
+  },
+  {
+    "id": 7,
+    "text": "The DM-18 is not set for the dough size you need. What should you do?",
+    "choices": [
+      "Change only the thickness adjustment.",
+      "Use the existing setup and compensate by stretching more.",
+      "Copy the settings another employee uses for that size.",
+      "Ask the trainer or manager to confirm the correct setup."
+    ],
+    "correct": "Ask the trainer or manager to confirm the correct setup."
+  },
+  {
+    "id": 8,
+    "text": "Which preparation matches the taught DM-18 process?",
+    "choices": [
+      "Two sprays on the lower plate only; center the dough and press.",
+      "One spray on each plate; rotate the dough after pressing.",
+      "Two sprays on each interior plate; center the dough and rotate it once clockwise.",
+      "Two sprays on the dough; place it near the front edge of the lower plate."
+    ],
+    "correct": "Two sprays on each interior plate; center the dough and rotate it once clockwise."
+  },
+  {
+    "id": 9,
+    "text": "The press cycle is underway. Which action completes the process correctly?",
+    "choices": [
+      "Keep hands clear, wait for the beep, and raise the press fully before removing the dough.",
+      "Lift the handle when the dough appears wide enough.",
+      "Begin removing the dough as the upper plate starts rising.",
+      "Repeat the cycle before checking whether the dough needs further preparation."
+    ],
+    "correct": "Keep hands clear, wait for the beep, and raise the press fully before removing the dough."
+  },
+  {
+    "id": 10,
+    "text": "After pressing, how should the dough be placed and finished?",
+    "choices": [
+      "Either side down, then dock before stretching.",
+      "Upper-plate contact side up, then stretch and dock.",
+      "Upper-plate contact side down, then dock only the center.",
+      "Upper-plate contact side down, then stretch evenly and dock the entire surface."
+    ],
+    "correct": "Upper-plate contact side down, then stretch evenly and dock the entire surface."
+  },
+  {
+    "id": 11,
+    "text": "You are preparing dough using the taught cut-resistant glove procedure. What is the correct sequence after washing and drying your hands?",
+    "choices": [
+      "Cut-resistant glove, then disposable glove.",
+      "Disposable glove, cut-resistant glove, then another disposable glove.",
+      "Two disposable gloves, then the cut-resistant glove.",
+      "Cut-resistant glove alone, provided it is clean."
+    ],
+    "correct": "Disposable glove, cut-resistant glove, then another disposable glove."
+  },
+  {
+    "id": 12,
+    "text": "You loaded a Large Pepperoni Pizza into the upper chamber. Before starting, what must you confirm?",
+    "choices": [
+      "That either chamber is running a large-pizza program.",
+      "That the lower touchscreen section displays Large Pepperoni Pizza.",
+      "That the controls for the loaded chamber select Large Pepperoni Pizza.",
+      "That Large Cheese Pizza is selected because both recipes use the same base."
+    ],
+    "correct": "That the controls for the loaded chamber select Large Pepperoni Pizza."
+  },
+  {
+    "id": 13,
+    "text": "The exact pizza program you need is missing from the screen. What should you do?",
+    "choices": [
+      "Ask for help before starting the cooking cycle.",
+      "Select the closest pizza program and watch the result.",
+      "Use manual cooking with the time from a similar pizza.",
+      "Choose the correct size even if the topping name differs."
+    ],
+    "correct": "Ask for help before starting the cooking cycle."
+  },
+  {
+    "id": 14,
+    "text": "A cook cycle has finished. Which removal method follows the training?",
+    "choices": [
+      "Pull the screen forward by hand, then slide the paddle underneath.",
+      "Slide the paddle through a partly opened door to limit heat loss.",
+      "Remove the pizza with the paddle and retrieve the screen separately by hand.",
+      "Open the correct door carefully and remove the pizza and screen with the paddle, keeping hands and face clear."
+    ],
+    "correct": "Open the correct door carefully and remove the pizza and screen with the paddle, keeping hands and face clear."
+  },
+  {
+    "id": 15,
+    "text": "You are checking measured ingredients for one Large Cheese Pizza. Which set matches the recipe?",
+    "choices": [
+      "6 ounces sauce, 6 ounces mozzarella, six shakes of seasoning.",
+      "6 ounces sauce, 10 ounces mozzarella, six shakes of seasoning.",
+      "2 ounces sauce, 10 ounces mozzarella, three shakes of seasoning.",
+      "6 ounces sauce, 10 ounces mozzarella, three shakes of seasoning."
+    ],
+    "correct": "6 ounces sauce, 10 ounces mozzarella, six shakes of seasoning."
+  },
+  {
+    "id": 16,
+    "text": "A Large Cheese Pizza has the correct ingredient amounts, but cheese covers the exposed crust. What should happen before cooking?",
+    "choices": [
+      "Add sauce beneath the cheese so the edge cooks evenly.",
+      "Cook it and trim the affected edge afterward.",
+      "Correct the placement and restore the recipe’s ¼–½ inch crust border.",
+      "Leave it because accurate ingredient weights are the main requirement."
+    ],
+    "correct": "Correct the placement and restore the recipe’s ¼–½ inch crust border."
+  },
+  {
+    "id": 17,
+    "text": "A Large Pepperoni Pizza has 25 pepperoni slices, but most are grouped on one side. What correction is needed?",
+    "choices": [
+      "Redistribute the 25 slices evenly while keeping them off the exposed crust.",
+      "Add slices to the uncovered side until the pizza looks balanced.",
+      "Remove slices from the crowded side without replacing them elsewhere.",
+      "No correction; the required count has been met."
+    ],
+    "correct": "Redistribute the 25 slices evenly while keeping them off the exposed crust."
+  },
+  {
+    "id": 18,
+    "text": "Your park offers small pizzas. A teammate suggests halving every Large Cheese Pizza ingredient amount to make a small one. How should you respond?",
+    "choices": [
+      "Agree, but retain the large pizza’s seasoning amount.",
+      "Agree, provided the smaller screen is used.",
+      "Halve the sauce and cheese, then judge the remaining ingredients by appearance.",
+      "Use the small recipe’s specified portions; it is not simply half the large recipe."
+    ],
+    "correct": "Use the small recipe’s specified portions; it is not simply half the large recipe."
+  },
+  {
+    "id": 19,
+    "text": "You are transferring newly opened RTU pizza sauce. Which setup is correct?",
+    "choices": [
+      "Deep one-half pan and a serving spoon; cover after the preparation rush.",
+      "Original opened can and a fitted cover; refrigerate between orders.",
+      "Clean, sanitized rubber spatula and deep one-third pans; cover promptly.",
+      "Deep one-third pans; add water before transferring to improve spreading."
+    ],
+    "correct": "Clean, sanitized rubber spatula and deep one-third pans; cover promptly."
+  },
+  {
+    "id": 20,
+    "text": "One sauce can is opened at 9 a.m. and divided into two pans. The second pan is not used until the next day. How should its shelf-life information be handled?",
+    "choices": [
+      "Start its seven-day clock when that pan is first used.",
+      "Keep the same opening and discard information as the first pan.",
+      "Start its clock when it is placed at the preparation station.",
+      "Give it a later discard deadline because it remained covered."
+    ],
+    "correct": "Keep the same opening and discard information as the first pan."
+  },
+  {
+    "id": 21,
+    "text": "A refrigerated sauce pan is nearly empty, and a newer batch is ready. What is the correct approach?",
+    "choices": [
+      "Keep the batches separate and wash and sanitize the emptied pan before refilling it.",
+      "Add the newer sauce and retain the older label.",
+      "Add the newer sauce and replace the label with the newer date.",
+      "Combine them in another pan so the preparation pan can be cleaned."
+    ],
+    "correct": "Keep the batches separate and wash and sanitize the emptied pan before refilling it."
+  },
+  {
+    "id": 22,
+    "text": "A Large Cheese Pizza completes the correct program, but its crust is unevenly baked. What is the best response?",
+    "choices": [
+      "Serve it if the cheese is melted.",
+      "Increase the oven temperature for the next order.",
+      "Run another program before deciding whether to report it.",
+      "Hold it from service and tell the manager which program ran and what failed the quality check."
+    ],
+    "correct": "Hold it from service and tell the manager which program ran and what failed the quality check."
+  },
+  {
+    "id": 23,
+    "text": "A large pizza is ready for a party order. Which finish matches the training?",
+    "choices": [
+      "Four equal slices on the large wooden paddle.",
+      "Eight equal slices on the approved party pizza tray.",
+      "Eight equal slices on the small wooden paddle.",
+      "Four equal slices in a to-go box."
+    ],
+    "correct": "Eight equal slices on the approved party pizza tray."
+  },
+  {
+    "id": 24,
+    "text": "You deliver a QR order to a bowling lane. The guest asks for napkins. What should you do?",
+    "choices": [
+      "Explain where the napkin station is so they can choose how many they need.",
+      "Ask them to collect napkins when they return their dishes.",
+      "Get the napkins for them and ask whether they need anything else.",
+      "Direct them to the nearest employee responsible for the guest area."
+    ],
+    "correct": "Get the napkins for them and ask whether they need anything else."
+  },
+  {
+    "id": 25,
+    "text": "A finished pizza is dropped before handoff. Which waste entry best supports an accurate record?",
+    "choices": [
+      "Date/time, employee initials, food type, portions lost, handling-loss reason, and helpful comments.",
+      "Date/time and “pizza waste,” leaving the cause blank until the end of the shift.",
+      "The replacement pizza’s ingredients, recorded as additional preparation.",
+      "The total estimated daily waste, with no separate record of this incident."
+    ],
+    "correct": "Date/time, employee initials, food type, portions lost, handling-loss reason, and helpful comments."
+  }
+];
 
     function shuffleItems(items) {
       const shuffled = [...items];
@@ -1768,7 +1714,7 @@
     function gradeQuiz() {
       if (!validateQuiz()) return;
 
-      const { score, total, percent, passed, missed, employee } = calculateResults();
+      const { score, total, percent, passed, missed, responses, employee } = calculateResults();
 
       const resultBox = document.getElementById('resultBox');
       resultBox.style.display = 'block';
@@ -1780,6 +1726,7 @@
         passed,
         missed,
         employee,
+        responses,
         submittedAt: new Date().toISOString()
       };
 
@@ -1796,11 +1743,12 @@
 
 
     function submitCentralExamRecord(record) {
-      launchTrainingSubmitExamRecord({
+      if (typeof window.launchTrainingSubmitExamRecord !== "function") return;
+      window.launchTrainingSubmitExamRecord({
         name: record.employee && record.employee.employeeName,
         parkLocation: record.employee && record.employee.parkLocation,
         trainingProgram: 'Krave',
-        examDay: 'Day 1 Exam',
+        examDay: 'Day 2 Exam',
         score: `${record.score}/${record.total}`,
         percentage: `${record.percent}%`,
         missedQuestions: record.missed && record.missed.length
@@ -1819,7 +1767,7 @@
       window.print();
     }
 
-    const examRecordStorageKey = 'launch_krave_day1_exam_records_v1';
+    const examRecordStorageKey = 'launch_krave_day2_exam_records_v1';
 
     function getSavedExamRecords() {
       try {
@@ -1906,8 +1854,8 @@
 
       resultBox.innerHTML = window.launchRenderStandardExamCertificate({
         status: record.passed ? 'PASS' : 'FAIL',
-        trainingTitle: 'DAY 1 KRAVE TRAINING',
-        statementTitle: 'Day 1 Krave Training',
+        trainingTitle: 'DAY 2 KRAVE TRAINING',
+        statementTitle: 'Day 2 Krave Training',
         employeeName: record.employee && record.employee.employeeName,
         parkLocation: record.employee && record.employee.parkLocation,
         date: record.employee && record.employee.quizDate,
@@ -1985,6 +1933,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    window.addEventListener("pageshow", event => { if (event.persisted) resetQuiz(); });
     renderQuiz();
     updateQuestionVisibility();
     renderSavedRecords();
@@ -1995,44 +1944,7 @@
     }, { once: true });
   </script>
 
-<script id="launch-google-sheets-exam-records">
-(function() {
-  if (window.launchTrainingSubmitExamRecord) return;
 
-  const ENDPOINT = "https://script.google.com/macros/s/AKfycbzKjtjFU8msyHtWcK7ziV3ewSvQcW5AKcVtEAkAjMSe0srGBheWSUA7XLrLTR8inYyo-w/exec";
-  const SECRET = "JonathanPfeiffer";
-
-  function clean(value) {
-    return String(value == null ? '' : value).trim();
-  }
-
-  window.launchTrainingSubmitExamRecord = function(payload) {
-    try {
-      const record = Object.assign({}, payload || {});
-      record.secret = SECRET;
-      record.name = clean(record.name);
-      record.parkLocation = clean(record.parkLocation);
-      record.trainingProgram = clean(record.trainingProgram);
-      record.examDay = clean(record.examDay);
-      record.score = clean(record.score);
-      record.percentage = clean(record.percentage);
-      record.missedQuestions = clean(record.missedQuestions || 'None') || 'None';
-
-      fetch(ENDPOINT, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(record),
-        keepalive: true
-      }).catch(function(error) {
-        console.warn('Google Sheets exam record submission failed.', error);
-      });
-    } catch (error) {
-      console.warn('Google Sheets exam record submission could not be prepared.', error);
-    }
-  };
-})();
-</script>
 
 
 <script id="launch-standard-certificate-script">

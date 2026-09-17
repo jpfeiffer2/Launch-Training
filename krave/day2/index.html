@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Day 2 Krave Training</title>
+  <style>
+    :root{--g:#6cc24a;--gd:#4da62d;--y:#f2e600;--ink:#101418;--muted:#5b6570;--line:#e5eaee;--shadow:0 18px 50px rgba(0,0,0,.18)}
+    *{box-sizing:border-box}
+    body{min-height:100vh;margin:0;display:grid;place-items:center;padding:24px;font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at top left,rgba(108,194,74,.22),transparent 32%),linear-gradient(135deg,#070707,#171717 52%,#2d341f);color:#111}
+    .shell{width:min(960px,100%)}
+    .nav{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+    .back{display:inline-block;color:#fff;text-decoration:none;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);padding:10px 14px;border-radius:999px;font-weight:900}
+    .hero{color:#fff;margin-bottom:22px}
+    .hero h1{margin:0;color:#fff;font-size:clamp(2.1rem,5vw,4rem);letter-spacing:-2px}
+    .hero p{max-width:850px;margin:10px 0 0;color:#cfd7df;line-height:1.45}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{min-height:280px;display:flex;flex-direction:column;overflow:hidden;border-radius:22px;background:#fff;box-shadow:var(--shadow);text-decoration:none;color:#111}
+    .strip{height:10px;background:linear-gradient(90deg,var(--g),var(--y))}
+    .body{padding:26px;display:flex;flex:1;flex-direction:column;gap:12px}
+    .eyebrow{color:var(--gd);font-size:.78rem;font-weight:900;letter-spacing:2px;text-transform:uppercase}
+    .card h2{margin:0;color:var(--ink);font-size:2rem}
+    .card p{margin:0;color:#505a64;line-height:1.45}
+    .button{margin-top:auto;padding:12px 18px;border-radius:999px;background:var(--ink);color:var(--y);font-weight:900;text-align:center}
+    .disabled{opacity:.64;cursor:not-allowed}
+    .disabled .button{background:#59636e;color:#fff}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+  </style>
+
+<style id="launch-portal-auth-style">
+  html { display: none; }
+  html.portal-authenticated { display: block; }
+</style>
+<script id="launch-portal-auth-script">
+  (() => {
+    const storageKey = "launchTrainingUnlockedUntil";
+    const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+
+    if (unlockedUntil <= Date.now()) {
+      localStorage.removeItem(storageKey);
+
+      const currentPath = window.location.pathname;
+      const marker = "/Launch-Training/";
+      const markerPosition = currentPath.indexOf(marker);
+      let portalBase = markerPosition >= 0
+        ? currentPath.slice(0, markerPosition + marker.length)
+        : "/";
+
+      const moduleMarkers = ["/cashier/", "/court-monitor/", "/party-host/", "/krave/"];
+      for (const moduleMarker of moduleMarkers) {
+        const modulePosition = currentPath.indexOf(moduleMarker);
+        if (modulePosition >= 0) {
+          portalBase = currentPath.slice(0, modulePosition + 1) || "/";
+          break;
+        }
+      }
+
+      const returnPath = currentPath + window.location.search + window.location.hash;
+      window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
+    } else {
+      document.documentElement.classList.add("portal-authenticated");
+    }
+  })();
+</script>
+</head>
+<body>
+  <main class="shell">
+    <nav class="nav" aria-label="Training navigation">
+      <a class="back" href="../index.html">← Krave Training Home</a>
+      <a class="back" href="../../index.html">Training Portal</a>
+      <a class="back" href="./end-of-shift-exam.html#savedExamRecords">Exam Records</a>
+    </nav>
+    <header class="hero">
+      <h1>Day 2 Krave Training</h1>
+      <p>Recipe-book navigation, required pizza preparation, and safe, consistent use of the DoughXpress DM-18 and TurboChef Double Batch oven.</p>
+    </header>
+    <section class="grid" aria-label="Day 2 training steps">
+      <a class="card" href="./online-training.html">
+        <div class="strip"></div>
+        <div class="body">
+          <div class="eyebrow">Step 1</div>
+          <h2>Online Training</h2>
+          <p>Complete 16 narrated slides covering recipe-book use, equipment, pizza preparation, ingredient handling, quality checks, and service.</p>
+          <div class="button">Start Online Training</div>
+        </div>
+      </a>
+      <a class="card" href="./checklist.html">
+        <div class="strip"></div>
+        <div class="body">
+          <div class="eyebrow">Step 2</div>
+          <h2>Print Today's Checklist</h2>
+          <p>Print the checklist for trainer-led practice, including both required large pizzas and five spaces for other large pizzas offered at this park.</p>
+          <div class="button">Open Checklist</div>
+        </div>
+      </a>
+      <a class="card" href="./end-of-shift-exam.html">
+        <div class="strip"></div>
+        <div class="body">
+          <div class="eyebrow">Step 3</div>
+          <h2>End-of-Shift Exam</h2>
+          <p>Complete the 25-question exam after trainer-led practice. Passing score: 80%.</p>
+          <div class="button">Start Exam</div>
+        </div>
+      </a>
+    </section>
+  </main>
+</body>
+</html>

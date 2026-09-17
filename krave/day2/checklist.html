@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krave Day 2 - Trainer Checklist</title>
+  <style>
+    :root {
+      --launch-green:#6cc24a;
+      --launch-yellow:#f2e600;
+      --ink:#111820;
+      --muted:#4b5563;
+      --line:#dfe5ea;
+      --soft:#f7fbf5;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      padding:28px;
+      background:linear-gradient(135deg,#101410,#1c2418);
+      color:var(--ink);
+      font-family:Arial,Helvetica,sans-serif;
+    }
+    .page {
+      max-width:980px;
+      margin:0 auto;
+      overflow:hidden;
+      border-radius:22px;
+      background:#fff;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+    header {
+      padding:28px 34px 22px;
+      border-top:8px solid var(--launch-green);
+      border-bottom:1px solid var(--line);
+    }
+    .eyebrow {
+      margin-bottom:8px;
+      color:#2d9a22;
+      font-size:.82rem;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+    h1 { margin:0; font-size:2.35rem; letter-spacing:-.04em; }
+    .sub { margin-top:8px; color:var(--muted); font-size:1rem; line-height:1.4; }
+    .actions {
+      display:flex;
+      gap:12px;
+      padding:18px 34px;
+      border-bottom:1px solid var(--line);
+      background:#f8fafc;
+    }
+    button,.button {
+      display:inline-block;
+      padding:12px 20px;
+      border:0;
+      border-radius:999px;
+      font-size:.95rem;
+      font-weight:900;
+      text-decoration:none;
+      cursor:pointer;
+    }
+    .print { background:var(--launch-yellow); color:#000; }
+    .back { background:#111820; color:#fff; }
+    main { padding:24px 34px 34px; }
+    .info-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+      margin-bottom:22px;
+    }
+    .field { min-height:58px; padding:10px 12px; border:1px solid var(--line); border-radius:12px; }
+    .field label {
+      display:block;
+      margin-bottom:10px;
+      color:var(--muted);
+      font-size:.72rem;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .line { height:20px; border-bottom:1px solid #9ca3af; }
+    section { margin-bottom:16px; overflow:hidden; border:1px solid var(--line); border-radius:16px; }
+    .section-head {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:12px 16px;
+      background:#111820;
+      color:#fff;
+      font-weight:900;
+    }
+    .section-head span { color:var(--launch-yellow); font-size:.82rem; letter-spacing:.08em; text-transform:uppercase; }
+    .rows { padding:8px 14px 12px; }
+    .row {
+      display:grid;
+      grid-template-columns:26px 1fr 95px 95px;
+      gap:10px;
+      align-items:start;
+      padding:10px 0;
+      border-bottom:1px solid #eef2f4;
+      font-size:.92rem;
+      line-height:1.3;
+    }
+    .row:last-child { border-bottom:0; }
+    .box { width:20px; height:20px; margin-top:1px; border:2px solid #111820; border-radius:4px; }
+    .initial-line { height:24px; border-bottom:1px solid #9ca3af; }
+    .small-label {
+      margin-top:3px;
+      color:var(--muted);
+      font-size:.62rem;
+      font-weight:800;
+      letter-spacing:.07em;
+      text-transform:uppercase;
+    }
+    .notes-area { margin-top:18px; padding:14px; border:1px solid var(--line); border-radius:16px; }
+    .notes-lines { height:40px; margin-top:10px; background:repeating-linear-gradient(#fff,#fff 29px,#cbd5e1 30px); }
+    .signatures { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:60px; }
+    .sig { padding-top:8px; border-top:2px solid #111820; color:#374151; font-weight:800; }
+    .footer-note {
+      margin-top:18px;
+      padding:12px 14px;
+      border:2px solid var(--launch-yellow);
+      border-radius:14px;
+      background:#fff8dc;
+      font-weight:800;
+      line-height:1.35;
+    }
+    @media(max-width:720px) {
+      body { padding:12px; }
+      header,.actions,main { padding-left:18px; padding-right:18px; }
+      .info-grid { grid-template-columns:1fr; }
+      .row { grid-template-columns:24px 1fr 68px 68px; font-size:.84rem; }
+      .section-head { align-items:flex-start; flex-direction:column; gap:4px; }
+    }
+    @media print {
+      body { padding:0; background:#fff; }
+      .page { max-width:none; border-radius:0; box-shadow:none; }
+      .actions { display:none; }
+      header { padding:18px 24px 14px; }
+      h1 { font-size:1.9rem; }
+      main { padding:16px 24px; }
+      .info-grid,.footer-note,.notes-area,.signatures { break-inside:avoid; page-break-inside:avoid; }
+      section { break-inside:auto; page-break-inside:auto; }
+      .section-head,.row { break-inside:avoid; page-break-inside:avoid; }
+      .row { grid-template-columns:24px 1fr 80px 80px; padding:7px 0; font-size:.82rem; }
+      .section-head { print-color-adjust:exact; -webkit-print-color-adjust:exact; }
+      .notes-area { margin-top:8px; padding:8px 10px; }
+      .notes-area strong { font-size:.78rem; }
+      .notes-lines { height:34px; margin-top:6px; background:repeating-linear-gradient(#fff,#fff 16px,#cbd5e1 17px); }
+      .signatures { margin-top:34px; gap:24px; }
+      .sig { min-height:42px; font-size:.82rem; }
+    }
+  </style>
+
+
+
+
+<style id="launch-portal-auth-style">
+  html { display: none; }
+  html.portal-authenticated { display: block; }
+</style>
+<script id="launch-portal-auth-script">
+  (() => {
+    const storageKey = "launchTrainingUnlockedUntil";
+    const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+
+    if (unlockedUntil <= Date.now()) {
+      localStorage.removeItem(storageKey);
+
+      const currentPath = window.location.pathname;
+      const marker = "/Launch-Training/";
+      const markerPosition = currentPath.indexOf(marker);
+      let portalBase = markerPosition >= 0
+        ? currentPath.slice(0, markerPosition + marker.length)
+        : "/";
+
+      const moduleMarkers = ["/cashier/", "/court-monitor/", "/party-host/", "/krave/"];
+      for (const moduleMarker of moduleMarkers) {
+        const modulePosition = currentPath.indexOf(moduleMarker);
+        if (modulePosition >= 0) {
+          portalBase = currentPath.slice(0, modulePosition + 1) || "/";
+          break;
+        }
+      }
+
+      const returnPath = currentPath + window.location.search + window.location.hash;
+      window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
+    } else {
+      document.documentElement.classList.add("portal-authenticated");
+    }
+  })();
+</script>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="eyebrow">Krave Day 2</div>
+      <h1>Trainer Floor Checklist</h1>
+      <div class="sub">Use this checklist after the online module and before the end-of-shift exam. Trainer should observe, demonstrate, and confirm each item with the trainee.</div>
+    </header>
+
+    <div class="actions">
+      <button class="print" onclick="window.print()">Print / Save as PDF</button>
+      <a class="button back" href="index.html">Back to Day 2 Menu</a><a class="button back" href="../../index.html">Training Portal</a>
+    </div>
+
+    <main>
+      <div class="info-grid">
+        <div class="field"><label>Trainee Name</label><div class="line"></div></div>
+        <div class="field"><label>Trainer Name</label><div class="line"></div></div>
+        <div class="field"><label>Date</label><div class="line"></div></div>
+      </div>
+
+<section><div class="section-head">Recipe Book &amp; Shift Readiness<span>Prepare</span></div><div class="rows"><div class="row"><div class="box"></div><div>Uses the current recipe for the exact pizza, size, equipment, portions, and serving method; asks about unclear steps or unavailable ingredients.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Maintains Day 1 hygiene and station standards; plans quantities with the trainer using expected demand and eligible inventory.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section>
+<section><div class="section-head">Dough Handling<span>Verify the Clock</span></div><div class="rows"><div class="row"><div class="box"></div><div>Bags and separates batches; labels pull, ready, and discard dates/times plus initials. Explains 72-hour refrigerated thaw within the seven-day total life.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Selects the oldest fully thawed, in-date batch. Labels advance-prepped dough from the first ball pressed: six hours maximum, without extending original expiration or resetting the clock.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section>
+<section><div class="section-head">DoughXpress DM-18<span>Demonstrate</span></div><div class="rows"><div class="row"><div class="box"></div><div>Confirms the press is ready for the dough size; identifies heat and pinch hazards and leaves all settings unchanged.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Washes and dries hands; uses disposable, cut-resistant, then outer disposable gloves. Applies two garlic butter sprays to each interior plate and centers and rotates the dough once clockwise.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Keeps hands clear, lowers and locks the lever, waits for the beep, and raises fully before removal. Transfers upper-plate side down, stretches evenly, and docks thoroughly.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section>
+<section><div class="section-head">TurboChef Double Batch<span>Demonstrate</span></div><div class="rows"><div class="row"><div class="box"></div><div>Confirms readiness and matches chamber, door, and exact recipe program. Loads and removes pizza plus screen through the open door with the paddle, keeping hands and face clear.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Runs the full cycle with the door closed; checks the finished pizza. Stops and reports equipment problems or unacceptable results without changing settings.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section>
+<section><div class="section-head">Required Large Pizzas<span>Every Park</span></div><div class="rows"><div class="row"><div class="box"></div><div>Prepares Large Cheese Pizza using the recipe book: measures portions, builds evenly, cooks safely on the exact program, checks quality, and cuts and serves correctly.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Prepares Large Pepperoni Pizza using the recipe book: measures portions, distributes toppings evenly, cooks safely on the exact program, checks quality, and cuts and serves correctly.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section>
+<section><div class="section-head">Additional Large Pizzas Offered at This Park<span>Practice</span></div><div class="rows"><p>Choose other large pizzas sold at this park. For each, observe recipe use, portions, preparation, cooking, quality, and presentation. Leave unused spaces blank.</p><div class="row"><div class="box"></div><div><strong>Large pizza 1</strong><div class="line"></div><div class="small-label">Pizza name</div><div class="line"></div><div class="small-label">Trainer notes / follow-up</div></div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div><strong>Large pizza 2</strong><div class="line"></div><div class="small-label">Pizza name</div><div class="line"></div><div class="small-label">Trainer notes / follow-up</div></div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div><strong>Large pizza 3</strong><div class="line"></div><div class="small-label">Pizza name</div><div class="line"></div><div class="small-label">Trainer notes / follow-up</div></div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div><strong>Large pizza 4</strong><div class="line"></div><div class="small-label">Pizza name</div><div class="line"></div><div class="small-label">Trainer notes / follow-up</div></div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div><strong>Large pizza 5</strong><div class="line"></div><div class="small-label">Pizza name</div><div class="line"></div><div class="small-label">Trainer notes / follow-up</div></div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section>
+<section><div class="section-head">Ready-to-Use Sauce<span>Prepare & Store</span></div><div class="rows"><div class="row"><div class="box"></div><div>Cleans and sanitizes the can top, opener, and tools; transfers unmodified RTU sauce with a rubber spatula into deep one-third pans, then covers and labels.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Keeps the seven-day clock from can opening on every pan; refrigerates, rotates eligible stock, avoids topping off, and washes and sanitizes pans before refilling.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section>
+<section><div class="section-head">Service &amp; Shift Follow-Through<span>Finish</span></div><div class="rows"><div class="row"><div class="box"></div><div>Uses clean cutting equipment and the correct serving item: large pizza eight slices, small four; appropriate wooden paddle, party tray, or to-go box.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Checks the order and presentation; follows local pickup or delivery procedures. Asks what guests need and gets the items for them.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Reports shortages early and records waste with date/time, initials, food, portions, reason, and comments. Reviews questions and practices skills needing further coaching.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section>
+<div class="notes-area">
+        <strong>Trainer Notes / Questions / Follow-Up Items</strong>
+        <div class="notes-lines"></div>
+      </div>
+
+      <div class="signatures">
+        <div class="sig">Trainer / Manager Signature</div>
+        <div class="sig">Trainee Signature</div>
+      </div>
+
+      <div class="footer-note">Completion standard: both the trainer and trainee initial each item only after demonstration, practice, and coaching are complete. Any item needing more practice must be revisited before the Day 2 exam.</div>
+    </main>
+  </div>
+</body>
+</html>

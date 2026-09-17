@@ -1,0 +1,1254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Krave Day 2 Online Training</title>
+  <style>
+    :root{--green:#6cc24a;--green-dark:#4da62d;--yellow:#f2e600;--ink:#080b0d;--progress:0;--workflow-progress:0;--shadow:0 22px 60px rgba(0,0,0,.34)}
+    *{box-sizing:border-box}
+    html,body{height:100%;overflow:hidden}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at 18% 15%,rgba(108,194,74,.33),transparent 26%),radial-gradient(circle at 85% 20%,rgba(242,230,0,.18),transparent 28%),linear-gradient(135deg,#050606,#13191c 52%,#243119);color:#fff}
+    button,a{font:inherit}
+    .deck{height:100vh;width:100vw;display:flex;flex-direction:column;padding:20px;gap:13px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-shrink:0}
+    .brand{display:flex;align-items:center;gap:14px;min-width:0}
+    .brand img{width:174px;max-height:54px;object-fit:contain;background:#fff;border-radius:8px;padding:5px 8px}
+    .brand-title strong{display:block;font-size:1rem;letter-spacing:1px;text-transform:uppercase}
+    .brand-title span{display:block;margin-top:3px;color:#cdd5dd;font-size:.86rem}
+    .top-actions{display:flex;align-items:center;gap:10px}
+    .top-link,.slide-counter{padding:9px 13px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.12);color:#fff;text-decoration:none;font-weight:900;white-space:nowrap}
+    .version{border-color:var(--yellow);background:var(--yellow);color:#000}
+    .stage{flex:1;min-height:0;display:grid;place-items:center;overflow:hidden}
+    .slide{display:none;width:min(1180px,calc(100vw - 44px),calc((100vh - 172px) * 1.7778));aspect-ratio:16/9;max-height:calc(100vh - 172px);position:relative;overflow:hidden;border-radius:24px;background:#050706;box-shadow:var(--shadow);isolation:isolate}
+    .slide.active{display:block}
+    .scene{position:absolute;z-index:-7;inset:-2%;width:104%;height:104%;object-fit:cover;object-position:center;transform:scale(1.018);filter:saturate(.94) contrast(1.04);will-change:transform,filter}
+    .shade{position:absolute;z-index:-6;inset:0;background:linear-gradient(90deg,rgba(1,3,2,.98) 0%,rgba(1,3,2,.92) 31%,rgba(1,3,2,.55) 47%,rgba(1,3,2,.06) 69%),linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.42))}
+    .shade:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 40%,rgba(108,194,74,.17),transparent 29%),radial-gradient(circle at 83% 88%,rgba(242,230,0,.1),transparent 28%);mix-blend-mode:screen}
+    .motion-sweep{position:absolute;z-index:-4;top:-12%;bottom:-12%;left:-25%;width:22%;opacity:0;background:linear-gradient(90deg,transparent,rgba(108,194,74,.19),rgba(242,230,0,.1),transparent);filter:blur(12px);transform:skewX(-12deg);pointer-events:none}
+    body.training-started .motion-sweep{opacity:1;animation:sweep 11s ease-in-out infinite}
+    .color-strip{position:absolute;z-index:10;inset:0 0 auto;height:10px;background:rgba(255,255,255,.16)}
+    .color-strip:after{content:"";display:block;width:100%;height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--green));transform:scaleX(var(--progress));transform-origin:left center;box-shadow:0 0 18px rgba(108,194,74,.55)}
+    .module-label{position:absolute;z-index:6;left:4.5%;top:6%;display:flex;align-items:center;gap:9px;color:var(--green);font-size:.74rem;font-weight:1000;letter-spacing:2.2px;text-transform:uppercase}
+    .module-label:before{content:"";width:34px;height:5px;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--yellow))}
+    .copy-stage{position:absolute;z-index:5;left:4.5%;top:14%;bottom:25%;width:49%;}
+    .copy-scene{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;opacity:0;transform:translateY(18px) scale(.985);filter:blur(4px);pointer-events:none;transition:opacity .52s ease,transform .52s cubic-bezier(.2,.75,.25,1),filter .52s ease}
+    .copy-scene.is-visible{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+    .kicker{color:var(--green);font-size:.76rem;font-weight:1000;letter-spacing:1.9px;text-transform:uppercase}
+    .headline{max-width:610px;margin:7px 0 0;color:#fff;font-size:clamp(3rem,5.1vw,5.2rem);font-weight:1000;line-height:.88;letter-spacing:-4px;text-transform:uppercase;text-shadow:0 10px 32px rgba(0,0,0,.74)}
+    .headline span{display:block;color:var(--yellow)}
+    .support{max-width:520px;margin:16px 0 0;color:#eef5f0;font-size:clamp(1rem,1.45vw,1.2rem);font-weight:850;line-height:1.35;text-shadow:0 5px 20px rgba(0,0,0,.78)}
+    .safety-lock{display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:10px 13px;border:1px solid rgba(108,194,74,.68);border-left:7px solid var(--green);border-radius:13px;background:rgba(0,0,0,.55);font-size:.78rem;font-weight:1000;text-transform:uppercase;backdrop-filter:blur(8px)}
+    .safety-lock:before{content:"✓";width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:var(--green);color:#061006}
+    .equipment-lockup{width:min(555px,100%);display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px}
+    .source-book{grid-row:span 2;min-height:126px;display:flex;flex-direction:column;justify-content:center;padding:16px;border:1px solid rgba(242,230,0,.68);border-left:8px solid var(--yellow);border-radius:16px;background:rgba(0,0,0,.66);box-shadow:0 14px 34px rgba(0,0,0,.32);font-size:.76rem;font-weight:1000;text-transform:uppercase;backdrop-filter:blur(9px)}
+    .source-book strong{display:block;margin-bottom:7px;color:var(--yellow);font-size:1.13rem}
+    .equipment{min-height:58px;display:flex;align-items:center;padding:10px 12px;border:1px solid rgba(108,194,74,.55);border-radius:14px;background:rgba(0,0,0,.58);font-size:.72rem;font-weight:1000;line-height:1.15;text-transform:uppercase;backdrop-filter:blur(8px)}
+    .equipment:before{content:"";flex:0 0 auto;width:11px;height:11px;margin-right:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(108,194,74,.12)}
+    .guesswork{margin-top:17px;padding:11px 15px;border:1px solid rgba(242,230,0,.62);border-radius:999px;background:rgba(0,0,0,.58);color:#fff;font-size:.78rem;font-weight:1000;letter-spacing:1px;text-transform:uppercase}
+    .guesswork b{color:var(--yellow)}
+    .workflow{position:absolute;z-index:7;left:4.5%;right:4.5%;bottom:4.5%;padding:13px 14px 12px;border:1px solid rgba(255,255,255,.18);border-radius:18px;background:rgba(2,6,4,.77);box-shadow:0 18px 42px rgba(0,0,0,.36);backdrop-filter:blur(11px);opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.75,.25,1)}
+    .workflow.is-visible{opacity:1;transform:translateY(0)}
+    .workflow-title{display:flex;justify-content:space-between;gap:14px;margin-bottom:9px;color:#d7e0da;font-size:.59rem;font-weight:1000;letter-spacing:1.4px;text-transform:uppercase}
+    .workflow-title strong{color:var(--yellow)}
+    .workflow-line{position:absolute;left:7%;right:7%;top:54px;height:5px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden}
+    .workflow-line:after{content:"";display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--green),var(--yellow));transform:scaleX(var(--workflow-progress));transform-origin:left center;box-shadow:0 0 14px rgba(242,230,0,.5)}
+    .workflow-nodes{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+    .workflow-node{min-height:58px;display:flex;flex-direction:column;justify-content:center;align-items:center;border:1px solid rgba(255,255,255,.18);border-radius:13px;background:rgba(7,12,9,.9);color:#aeb9b1;font-size:.62rem;font-weight:1000;line-height:1.1;text-align:center;text-transform:uppercase;transition:color .3s ease,border-color .3s ease,background .3s ease,transform .3s ease,box-shadow .3s ease}
+    .workflow-node:before{content:attr(data-step);width:24px;height:24px;display:grid;place-items:center;margin-bottom:5px;border:1px solid rgba(255,255,255,.27);border-radius:50%;background:#111;color:#fff;font-size:.66rem}
+    .workflow-node.is-current{z-index:2;transform:translateY(-4px);border-color:var(--yellow);background:linear-gradient(145deg,rgba(108,194,74,.21),rgba(13,18,15,.94));color:#fff;box-shadow:0 10px 26px rgba(0,0,0,.38),0 0 0 3px rgba(242,230,0,.1)}
+    .workflow-node.is-current:before{border-color:var(--yellow);background:var(--yellow);color:#050706}
+    .workflow-node.is-complete{border-color:rgba(108,194,74,.62);color:#e7f8e2}
+    .workflow-node.is-complete:before{content:"✓";border-color:var(--green);background:var(--green);color:#061006}
+    .handoff{width:min(540px,100%);margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .handoff span{min-height:74px;display:flex;flex-direction:column;justify-content:center;padding:11px;border:1px solid rgba(255,255,255,.22);border-radius:14px;background:rgba(0,0,0,.62);font-size:.7rem;font-weight:1000;line-height:1.1;text-align:center;text-transform:uppercase;backdrop-filter:blur(8px)}
+    .handoff span:before{content:attr(data-step);width:24px;height:24px;display:grid;place-items:center;margin:0 auto 7px;border-radius:50%;background:var(--green);color:#061006}
+    [data-highlight-start]{transition:opacity .3s ease,transform .3s ease,border-color .3s ease,background .3s ease,box-shadow .3s ease}
+    [data-highlight-start].is-current{transform:translateY(-3px);border-color:var(--yellow);background:linear-gradient(145deg,rgba(108,194,74,.2),rgba(0,0,0,.7));box-shadow:0 10px 26px rgba(0,0,0,.36),0 0 0 3px rgba(242,230,0,.12)}
+    [data-highlight-start].is-complete{border-color:rgba(108,194,74,.62)}
+    .handoff span.is-current:before{background:var(--yellow);color:#050706}
+    .handoff span.is-complete:before{content:"✓";background:var(--green);color:#061006}
+    .closing-lock{margin-top:15px;color:#fff;font-size:.83rem;font-weight:1000;letter-spacing:.8px;text-transform:uppercase}
+    .closing-lock b{color:var(--yellow)}
+    .narration-progress{position:absolute;z-index:9;left:0;right:0;bottom:0;height:8px;background:rgba(255,255,255,.14)}
+    .narration-progress span{display:block;width:100%;height:100%;background:linear-gradient(90deg,var(--green),var(--yellow));transform:scaleX(var(--progress));transform-origin:left center}
+    .pause-indicator{position:absolute;z-index:12;right:18px;top:22px;padding:8px 11px;border:1px solid rgba(242,230,0,.5);border-radius:999px;background:rgba(0,0,0,.68);color:var(--yellow);font-size:.64rem;font-weight:1000;letter-spacing:1px;text-transform:uppercase;opacity:0;transform:translateY(-7px);transition:opacity .3s ease,transform .3s ease}
+    body.training-paused .pause-indicator{opacity:1;transform:translateY(0)}
+    .controls{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-shrink:0}
+    .portal-nav{display:flex;align-items:center;gap:10px}
+    .home-link{padding:10px 15px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.12);color:#fff;text-decoration:none;font-weight:900;white-space:nowrap}
+    .control-area{display:flex;align-items:center;gap:14px}
+    .audio-status{min-width:185px;color:#d5dde5;font-size:.78rem;font-weight:800;text-align:right}
+    .control-group{display:flex;gap:9px}
+    .control{padding:11px 17px;border:0;border-radius:999px;font-weight:1000;cursor:pointer}
+    .control:disabled{cursor:not-allowed;opacity:.38}
+    .control.back{background:#eef2f4;color:#111}
+    .control.audio{background:var(--green);color:#071009}
+    .control.pause{background:var(--yellow);color:#050706}
+    .control.next{background:#fff;color:#111}
+    .control.next:not(:disabled){background:var(--yellow);box-shadow:0 0 0 4px rgba(242,230,0,.12)}
+    .start-overlay{position:fixed;z-index:100;inset:0;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 24% 20%,rgba(108,194,74,.28),transparent 30%),linear-gradient(135deg,rgba(2,5,3,.98),rgba(19,25,28,.98) 55%,rgba(45,52,31,.98))}
+    .start-card{width:min(680px,100%);padding:34px;border:1px solid rgba(255,255,255,.18);border-radius:25px;background:rgba(7,10,8,.92);box-shadow:0 24px 70px rgba(0,0,0,.46)}
+    .start-card .eyebrow{color:var(--green);font-size:.75rem;font-weight:1000;letter-spacing:2px;text-transform:uppercase}
+    .start-card h2{margin:8px 0 0;color:#fff;font-size:clamp(2.4rem,6vw,4.2rem);line-height:.95;letter-spacing:-3px}
+    .start-card p{margin:17px 0 0;color:#d7e0da;font-size:1.04rem;line-height:1.5}
+    .start-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+    .start-actions button,.start-actions a{padding:12px 16px;border:0;border-radius:999px;text-decoration:none;font-weight:1000;cursor:pointer}
+    .start-primary{background:var(--yellow);color:#000}
+    .start-dark{border:1px solid rgba(255,255,255,.22)!important;background:#151b18;color:#fff}
+    .small-note{margin-top:15px;color:#aeb9b1;font-size:.76rem;font-weight:800}
+    .recipe-slide .shade{background:linear-gradient(90deg,rgba(1,3,2,.98) 0%,rgba(1,3,2,.93) 35%,rgba(1,3,2,.48) 57%,rgba(1,3,2,.08) 78%),linear-gradient(180deg,rgba(0,0,0,.07),rgba(0,0,0,.46))}
+    .recipe-slide .scene{object-position:center}
+    .recipe-scan-line{position:absolute;z-index:2;left:51%;right:2%;top:22%;height:2px;opacity:0;background:linear-gradient(90deg,transparent,rgba(242,230,0,.8),rgba(108,194,74,.55),transparent);box-shadow:0 0 18px rgba(242,230,0,.42);pointer-events:none}
+    body.training-started .recipe-slide.active .recipe-scan-line{opacity:.42;animation:recipeScan 9s ease-in-out infinite}
+    .book-focus{position:absolute;z-index:3;right:4.6%;bottom:10.2%;width:44%;height:24%;border:2px solid rgba(242,230,0,.7);border-radius:18px;opacity:0;transform:scale(.97);box-shadow:0 0 0 6px rgba(242,230,0,.08),0 0 34px rgba(108,194,74,.24);pointer-events:none;transition:opacity .5s ease,transform .65s cubic-bezier(.2,.75,.25,1)}
+    .book-focus:after{content:"RECIPE IN USE";position:absolute;right:12px;top:-15px;padding:7px 10px;border-radius:999px;background:var(--yellow);color:#050706;font-size:.6rem;font-weight:1000;letter-spacing:1px}
+    .book-focus.is-visible{opacity:1;transform:scale(1);animation:bookPulse 3.4s ease-in-out infinite}
+    .recipe-copy{position:absolute;z-index:6;left:4.5%;right:4.5%;top:13%;bottom:5.5%}
+    .recipe-scene{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;opacity:0;transform:translateX(-18px) scale(.988);filter:blur(4px);pointer-events:none;transition:opacity .5s ease,transform .58s cubic-bezier(.2,.75,.25,1),filter .5s ease}
+    .recipe-scene.is-visible{opacity:1;transform:translateX(0) scale(1);filter:blur(0)}
+    .recipe-kicker{color:var(--green);font-size:.76rem;font-weight:1000;letter-spacing:2px;text-transform:uppercase}
+    .recipe-headline{max-width:610px;margin:7px 0 0;color:#fff;font-size:clamp(2.7rem,4.7vw,4.8rem);font-weight:1000;line-height:.89;letter-spacing:-3.5px;text-transform:uppercase;text-shadow:0 10px 30px rgba(0,0,0,.76)}
+    .recipe-headline span{display:block;color:var(--yellow)}
+    .recipe-support{max-width:550px;margin:14px 0 0;color:#eef5f0;font-size:clamp(1rem,1.35vw,1.15rem);font-weight:820;line-height:1.4;text-shadow:0 4px 18px rgba(0,0,0,.84)}
+    .truth-anchor{margin-top:15px;padding:10px 16px;border-left:7px solid var(--yellow);border-radius:12px;background:rgba(2,7,4,.82);color:#fff;font-size:1rem;font-weight:1000;text-transform:uppercase;box-shadow:0 14px 34px rgba(0,0,0,.3);backdrop-filter:blur(8px)}
+    .truth-anchor.is-current{border-color:var(--yellow);background:linear-gradient(90deg,rgba(242,230,0,.24),rgba(2,7,4,.86));box-shadow:0 0 0 3px rgba(242,230,0,.13),0 16px 38px rgba(0,0,0,.35)}
+    .variable-field{width:min(570px,52%);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:13px}
+    .variable-chip{min-height:47px;display:flex;align-items:center;padding:10px 13px;border:1px solid rgba(255,255,255,.19);border-radius:13px;background:rgba(2,7,4,.75);color:#d2dbd5;font-size:.875rem;font-weight:1000;text-transform:uppercase;backdrop-filter:blur(8px);overflow-wrap:anywhere}
+    .variable-chip:before{content:"";width:10px;height:10px;flex:0 0 auto;margin-right:9px;border-radius:50%;background:#67716a}
+    .variable-chip.is-current{color:#fff;border-color:var(--yellow);background:rgba(24,31,16,.9);transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.36),0 0 0 3px rgba(242,230,0,.1)}
+    .variable-chip.is-current:before{background:var(--yellow);box-shadow:0 0 0 5px rgba(242,230,0,.12)}
+    .variable-chip.is-complete:before{background:var(--green)}
+    .memory-warning{margin-top:10px;padding:10px 14px;border:1px solid rgba(255,89,89,.68);border-radius:12px;background:rgba(67,8,13,.82);color:#fff;font-size:.875rem;font-weight:1000;text-transform:uppercase;opacity:0;transform:translateX(-13px);transition:opacity .3s ease,transform .3s ease}
+    .memory-warning.is-current,.memory-warning.is-complete{opacity:1;transform:translateX(0)}
+    .recipe-map{position:relative;width:min(620px,58%);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px;padding:14px;border:1px solid rgba(255,255,255,.2);border-left:8px solid var(--yellow);border-radius:18px;background:rgba(246,249,246,.94);box-shadow:0 20px 48px rgba(0,0,0,.4)}
+    .recipe-map:after{content:"";position:absolute;left:14px;right:14px;top:10px;height:3px;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--yellow));transform-origin:left;animation:pageScanner 5.5s ease-in-out infinite}
+    .recipe-zone{position:relative;min-height:73px;display:flex;align-items:center;padding:13px 13px 13px 48px;border:2px solid #d9dfda;border-radius:13px;background:#fff;color:#26302a;font-size:.875rem;font-weight:1000;line-height:1.15;text-transform:uppercase;overflow-wrap:anywhere;transition:transform .3s ease,border-color .3s ease,background .3s ease,box-shadow .3s ease}
+    .recipe-zone:before{content:attr(data-step);position:absolute;left:13px;width:25px;height:25px;display:grid;place-items:center;border-radius:50%;background:#26302a;color:#fff;font-size:.72rem}
+    .recipe-zone.is-current{z-index:2;transform:translateY(-4px) scale(1.02);border-color:var(--yellow);background:#fbfff7;box-shadow:0 10px 26px rgba(0,0,0,.2),0 0 0 4px rgba(242,230,0,.19)}
+    .recipe-zone.is-current:before{background:var(--yellow);color:#050706}
+    .recipe-zone.is-complete{border-color:var(--green)}
+    .recipe-zone.is-complete:before{content:"✓";background:var(--green);color:#061006}
+    .method-map{width:min(630px,59%);display:grid;grid-template-columns:1fr 46px 1fr;grid-template-areas:"root arrow route" "methods methods methods" "warning warning warning";gap:10px;margin-top:16px;padding:15px;border:1px solid rgba(255,255,255,.19);border-radius:18px;background:rgba(2,7,4,.79);backdrop-filter:blur(10px);box-shadow:0 20px 46px rgba(0,0,0,.38)}
+    .method-root,.method-route{min-height:62px;display:flex;align-items:center;justify-content:center;padding:11px;border:1px solid rgba(255,255,255,.22);border-radius:13px;background:#0b130e;color:#fff;font-size:.875rem;font-weight:1000;text-align:center;text-transform:uppercase;overflow-wrap:anywhere}
+    .method-root{grid-area:root}
+    .method-arrow{grid-area:arrow;display:grid;place-items:center;color:var(--yellow);font-size:2rem;font-weight:1000}
+    .method-route{grid-area:route;border-color:rgba(108,194,74,.6)}
+    .method-options{grid-area:methods;display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .method-option{min-height:54px;display:grid;place-items:center;padding:10px;border:1px solid rgba(108,194,74,.43);border-radius:12px;background:rgba(108,194,74,.1);color:#e9f7e5;font-size:.875rem;font-weight:1000;text-align:center;text-transform:uppercase;overflow-wrap:anywhere}
+    .method-options.is-current .method-option{border-color:var(--yellow);background:linear-gradient(145deg,rgba(108,194,74,.22),rgba(7,13,9,.92));box-shadow:0 0 0 3px rgba(242,230,0,.08)}
+    .method-route.is-current{transform:translateY(-3px);border-color:var(--yellow);background:rgba(108,194,74,.2);box-shadow:0 10px 26px rgba(0,0,0,.34),0 0 0 3px rgba(242,230,0,.11)}
+    .no-mix{grid-area:warning;padding:10px 12px;border:1px solid rgba(255,91,91,.58);border-radius:12px;background:rgba(70,8,13,.77);color:#ffd9d9;font-size:.875rem;font-weight:1000;text-align:center;text-transform:uppercase;overflow-wrap:anywhere}
+    .no-mix.is-current{transform:translateY(-3px);border-color:#ff5f69;background:rgba(91,9,16,.92);box-shadow:0 0 0 4px rgba(255,68,79,.12)}
+    .sequence-board{width:min(730px,69%);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:17px;padding:13px;border:1px solid rgba(255,255,255,.2);border-radius:18px;background:rgba(2,7,4,.8);box-shadow:0 20px 46px rgba(0,0,0,.38);backdrop-filter:blur(9px)}
+    .sequence-item{min-height:92px;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:10px;border:1px solid rgba(255,255,255,.18);border-radius:13px;background:#0b130e;color:#b9c4bc;font-size:.875rem;font-weight:1000;line-height:1.12;text-align:center;text-transform:uppercase;overflow-wrap:anywhere}
+    .sequence-item:before{content:attr(data-step);width:27px;height:27px;display:grid;place-items:center;margin-bottom:8px;border-radius:50%;background:#28312b;color:#fff}
+    .sequence-item.is-current{transform:translateY(-5px);border-color:var(--yellow);background:linear-gradient(145deg,rgba(108,194,74,.24),rgba(7,13,9,.94));color:#fff;box-shadow:0 12px 27px rgba(0,0,0,.36),0 0 0 3px rgba(242,230,0,.1)}
+    .sequence-item.is-current:before{background:var(--yellow);color:#050706}
+    .sequence-item.is-complete{border-color:rgba(108,194,74,.62);color:#e8f7e4}
+    .sequence-item.is-complete:before{content:"✓";background:var(--green);color:#061006}
+    .equipment-finish{margin-top:14px;padding:9px 13px;border-left:7px solid var(--yellow);border-radius:11px;background:rgba(2,7,4,.82);font-size:.875rem;font-weight:1000;text-transform:uppercase}
+    .equipment-finish.is-current{transform:translateY(-3px);box-shadow:0 0 0 3px rgba(242,230,0,.11),0 12px 27px rgba(0,0,0,.36)}
+    .service-runway{width:min(745px,70%);display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:17px;padding:13px;border:1px solid rgba(255,255,255,.2);border-radius:18px;background:rgba(2,7,4,.82);backdrop-filter:blur(9px);box-shadow:0 20px 46px rgba(0,0,0,.38)}
+    .service-detail{min-height:72px;display:grid;place-items:center;padding:8px;border:1px solid rgba(255,255,255,.18);border-radius:12px;background:#0b130e;color:#aeb9b1;font-size:.875rem;font-weight:1000;line-height:1.08;text-align:center;text-transform:uppercase;overflow-wrap:anywhere}
+    .service-detail.is-current{transform:translateY(-5px);border-color:var(--yellow);background:rgba(108,194,74,.21);color:#fff;box-shadow:0 11px 25px rgba(0,0,0,.34),0 0 0 3px rgba(242,230,0,.1)}
+    .service-detail.is-complete{border-color:rgba(108,194,74,.56);color:#e8f7e4}
+    .service-standard{margin-top:11px;color:var(--yellow);font-size:.875rem;font-weight:1000;letter-spacing:1px;text-transform:uppercase}
+    .alert-row{width:min(690px,65%);display:grid;grid-template-columns:1fr 1fr 1.35fr;gap:9px;margin-top:17px}
+    .alert-token{min-height:64px;display:grid;place-items:center;padding:10px;border:1px solid rgba(255,91,91,.56);border-radius:13px;background:rgba(66,8,12,.79);color:#ffdada;font-size:.875rem;font-weight:1000;line-height:1.12;text-align:center;text-transform:uppercase;overflow-wrap:anywhere}
+    .alert-token.is-current,.alert-token.is-complete{border-color:#ff6069;background:rgba(91,9,16,.93);color:#fff;box-shadow:0 0 0 3px rgba(255,68,79,.1)}
+    .stop-action{width:min(690px,65%);display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}
+    .stop-ask,.never-guess{min-height:67px;display:grid;place-items:center;padding:10px;border-radius:13px;font-size:1rem;font-weight:1000;text-align:center;text-transform:uppercase}
+    .stop-ask{border:1px solid rgba(242,230,0,.7);background:rgba(242,230,0,.12);color:var(--yellow)}
+    .never-guess{border:1px solid rgba(255,91,91,.62);background:rgba(66,8,12,.83);color:#ffd9d9}
+    .stop-ask.is-current,.never-guess.is-current{transform:translateY(-4px) scale(1.02);box-shadow:0 12px 28px rgba(0,0,0,.38),0 0 0 4px rgba(242,230,0,.1)}
+    .never-guess.is-current{box-shadow:0 12px 28px rgba(0,0,0,.38),0 0 0 4px rgba(255,68,79,.12)}
+    .final-lock{width:min(690px,65%);margin-top:10px;padding:11px 14px;border:1px solid rgba(108,194,74,.58);border-left:8px solid var(--green);border-radius:13px;background:rgba(2,18,7,.82);color:#e9f8e5;font-size:.875rem;font-weight:1000;line-height:1.25;text-align:center;text-transform:uppercase}
+    .final-lock.is-current,.final-lock.is-complete{transform:translateY(-3px);border-color:var(--green);background:rgba(10,45,15,.91);box-shadow:0 12px 28px rgba(0,0,0,.38),0 0 0 4px rgba(108,194,74,.12)}
+    .equipment-slide .shade{background:linear-gradient(90deg,rgba(1,3,2,.98) 0%,rgba(1,3,2,.91) 30%,rgba(1,3,2,.48) 49%,rgba(1,3,2,.06) 72%),linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.46))}
+    .equipment-slide .scene{object-position:center}
+    .press-slide .scene-frame{opacity:0;transition:opacity .72s ease;will-change:opacity,transform}
+    .press-slide .scene-frame.is-visible{opacity:1}
+    .oven-slide .scene-frame{opacity:0;transition:opacity .72s ease;will-change:opacity,transform}
+    .oven-slide .scene-frame.is-visible{opacity:1}
+    .lesson-sequence{position:absolute;z-index:6;left:4.5%;right:4.5%;top:12%;bottom:5.5%}
+    .lesson-panel{position:absolute;inset:0 auto 0 0;width:min(650px,59%);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;opacity:0;transform:translateX(-22px) scale(.985);filter:blur(4px);pointer-events:none;transition:opacity .48s ease,transform .58s cubic-bezier(.2,.75,.25,1),filter .48s ease}
+    .lesson-panel.is-visible{opacity:1;transform:translateX(0) scale(1);filter:blur(0)}
+    .lesson-kicker{color:var(--green);font-size:.76rem;font-weight:1000;letter-spacing:2px;text-transform:uppercase}
+    .lesson-title{max-width:620px;margin:7px 0 0;color:#fff;font-size:clamp(2.65rem,4.55vw,4.75rem);font-weight:1000;line-height:.89;letter-spacing:-3.6px;text-transform:uppercase;text-shadow:0 10px 30px rgba(0,0,0,.78)}
+    .lesson-title span{display:block;color:var(--yellow)}
+    .lesson-title.compact{font-size:clamp(2.35rem,4vw,4.15rem);line-height:.92}
+    .lesson-support{max-width:560px;margin:14px 0 0;color:#eef5f0;font-size:clamp(.97rem,1.3vw,1.12rem);font-weight:840;line-height:1.38;text-shadow:0 4px 18px rgba(0,0,0,.86)}
+    .signal-row{width:min(600px,100%);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:16px}
+    .signal-card{min-height:68px;display:flex;align-items:center;justify-content:center;padding:11px;border:1px solid rgba(255,255,255,.2);border-radius:13px;background:rgba(2,8,5,.79);color:#c5cec8;font-size:.76rem;font-weight:1000;line-height:1.12;text-align:center;text-transform:uppercase;backdrop-filter:blur(8px)}
+    .signal-card.is-current{color:#fff;border-color:var(--yellow);background:linear-gradient(145deg,rgba(108,194,74,.23),rgba(4,10,6,.92));box-shadow:0 11px 26px rgba(0,0,0,.36),0 0 0 3px rgba(242,230,0,.1)}
+    .signal-card.is-complete{color:#e8f7e4;border-color:rgba(108,194,74,.62)}
+    .safety-scan{position:absolute;z-index:4;right:2.5%;top:9%;width:43%;height:78%;border:1px solid rgba(108,194,74,.5);border-radius:20px;opacity:0;overflow:hidden;pointer-events:none;box-shadow:inset 0 0 40px rgba(4,18,8,.18),0 0 0 5px rgba(108,194,74,.05);transition:opacity .45s ease,transform .5s ease;transform:scale(.985)}
+    .safety-scan.is-visible{opacity:1;transform:scale(1)}
+    .safety-scan:before{content:"";position:absolute;left:0;right:0;top:-12%;height:3px;background:linear-gradient(90deg,transparent,var(--yellow),var(--green),transparent);box-shadow:0 0 20px rgba(242,230,0,.72);animation:equipmentScan 3.8s ease-in-out infinite}
+    .safety-scan:after{content:"EQUIPMENT CHECK";position:absolute;right:12px;top:12px;padding:7px 10px;border-radius:999px;background:rgba(1,7,3,.82);color:var(--green);font-size:.56rem;font-weight:1000;letter-spacing:1.2px}
+    .hazard-focus{position:absolute;z-index:5;opacity:0;border:2px solid var(--yellow);border-radius:18px;pointer-events:none;box-shadow:0 0 0 6px rgba(242,230,0,.08),0 0 28px rgba(242,230,0,.26);transition:opacity .4s ease,transform .5s cubic-bezier(.2,.75,.25,1);transform:scale(.96)}
+    .hazard-focus.is-visible{opacity:1;transform:scale(1);animation:hazardPulse 2.4s ease-in-out infinite}
+    .hazard-focus span{position:absolute;padding:7px 10px;border-radius:999px;background:#070b08;color:#fff;font-size:.59rem;font-weight:1000;letter-spacing:.7px;text-transform:uppercase;white-space:nowrap}
+    .dm-hazards{right:1.8%;top:18%;width:27%;height:66%}
+    .dm-hazards span:first-child{left:-9px;top:17%;border:1px solid #ffca3a;color:#ffec9b}
+    .dm-hazards span:last-child{left:-26px;bottom:21%;border:1px solid #ff6570;color:#ffd4d7}
+    .oven-hazards{right:12.5%;top:8%;width:27%;height:58%;border-color:#ff6570;box-shadow:0 0 0 6px rgba(255,75,86,.08),0 0 28px rgba(255,75,86,.22)}
+    .oven-hazards span:first-child{left:12px;top:12px;border:1px solid #ff6570;color:#ffd4d7}
+    .oven-hazards span:last-child{right:12px;bottom:12px;border:1px solid var(--yellow);color:#fff6a1}
+    .boundary-board{width:min(610px,100%);display:grid;grid-template-columns:1.25fr .75fr;gap:10px;margin-top:17px}
+    .approved-lane,.locked-lane{min-height:104px;padding:14px;border-radius:15px;background:rgba(2,8,5,.82);backdrop-filter:blur(9px)}
+    .approved-lane{border:1px solid rgba(108,194,74,.62);border-left:8px solid var(--green)}
+    .locked-lane{border:1px solid rgba(255,90,99,.62);border-left:8px solid #ff555f}
+    .approved-lane strong,.locked-lane strong{display:block;margin-bottom:8px;font-size:.7rem;letter-spacing:1px;text-transform:uppercase}
+    .approved-lane strong{color:var(--green)}
+    .locked-lane strong{color:#ff8d94}
+    .approved-lane span,.locked-lane span{display:block;color:#fff;font-size:.86rem;font-weight:1000;line-height:1.25;text-transform:uppercase}
+    .locked-lane.is-current{border-color:#ff6570;background:rgba(70,8,13,.91);box-shadow:0 0 0 4px rgba(255,68,79,.11)}
+    .warning-radar{width:min(610px,100%);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px;padding:12px;border:1px solid rgba(255,88,98,.52);border-radius:17px;background:rgba(55,6,11,.77);backdrop-filter:blur(9px)}
+    .warning-radar span{min-height:54px;display:grid;place-items:center;padding:9px;border:1px solid rgba(255,255,255,.16);border-radius:11px;background:rgba(11,8,8,.72);color:#cfc8c8;font-size:.71rem;font-weight:1000;line-height:1.12;text-align:center;text-transform:uppercase}
+    .warning-radar span.is-current{color:#fff;border-color:#ff6570;background:rgba(105,9,18,.92);box-shadow:0 0 0 3px rgba(255,68,79,.1)}
+    .stop-lock{margin-top:16px;padding:13px 20px;border:2px solid var(--yellow);border-radius:16px;background:rgba(3,10,5,.9);color:#fff;font-size:1.16rem;font-weight:1000;letter-spacing:.5px;text-transform:uppercase;box-shadow:0 15px 36px rgba(0,0,0,.4),0 0 0 6px rgba(242,230,0,.08)}
+    .stop-lock b{color:var(--yellow)}
+    .clock-board{width:min(600px,100%);display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+    .clock-card{min-height:104px;display:flex;flex-direction:column;justify-content:center;padding:13px 15px;border:1px solid rgba(255,255,255,.2);border-radius:15px;background:rgba(2,8,5,.82);backdrop-filter:blur(9px)}
+    .clock-card strong{color:var(--yellow);font-size:1.65rem;line-height:1}
+    .clock-card span{margin-top:6px;color:#fff;font-size:.72rem;font-weight:1000;line-height:1.18;text-transform:uppercase}
+    .clock-card.is-current{border-color:var(--yellow);transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.38),0 0 0 4px rgba(242,230,0,.1)}
+    .hygiene-bar{width:min(600px,100%);margin-top:10px;padding:11px 14px;border-left:7px solid var(--green);border-radius:12px;background:rgba(2,18,7,.83);color:#fff;font-size:.78rem;font-weight:1000;text-transform:uppercase}
+    .preset-lock{width:min(590px,100%);display:grid;grid-template-columns:1fr auto;gap:13px;align-items:center;margin-top:17px;padding:15px 17px;border:1px solid rgba(242,230,0,.58);border-left:8px solid var(--yellow);border-radius:16px;background:rgba(3,9,5,.84);backdrop-filter:blur(9px)}
+    .preset-lock strong{display:block;color:var(--yellow);font-size:.77rem;letter-spacing:1px;text-transform:uppercase}
+    .preset-lock span{display:block;margin-top:5px;color:#fff;font-size:.94rem;font-weight:1000;line-height:1.2;text-transform:uppercase}
+    .preset-icon{width:50px;height:50px;display:grid;place-items:center;border:2px solid var(--yellow);border-radius:50%;color:var(--yellow);font-size:1.45rem;box-shadow:0 0 0 6px rgba(242,230,0,.07)}
+    .setting-row{width:min(590px,100%);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:10px}
+    .setting-row span{min-height:48px;display:grid;place-items:center;padding:8px;border:1px solid rgba(255,88,98,.5);border-radius:11px;background:rgba(65,7,12,.78);color:#ffd6d9;font-size:.66rem;font-weight:1000;text-align:center;text-transform:uppercase}
+    .spray-board{width:min(600px,100%);display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+    .spray-count{min-height:100px;display:flex;align-items:center;gap:13px;padding:13px 15px;border:1px solid rgba(108,194,74,.5);border-radius:15px;background:rgba(2,10,5,.82);backdrop-filter:blur(8px)}
+    .spray-count strong{flex:0 0 auto;width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:var(--yellow);color:#050706;font-size:1.35rem;box-shadow:0 0 0 6px rgba(242,230,0,.08)}
+    .spray-count span{color:#fff;font-size:.76rem;font-weight:1000;line-height:1.15;text-transform:uppercase}
+    .place-rotate{width:min(600px,100%);margin-top:10px;padding:11px 14px;border:1px solid rgba(255,255,255,.21);border-left:7px solid var(--green);border-radius:12px;background:rgba(1,8,4,.83);color:#fff;font-size:.77rem;font-weight:1000;text-transform:uppercase}
+    .press-cycle{position:relative;width:min(650px,100%);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:17px;padding-top:9px}
+    .press-cycle:before{content:"";position:absolute;left:4%;right:4%;top:0;height:3px;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--yellow));transform-origin:left;animation:cycleSweep 3.2s ease-in-out infinite}
+    .cycle-step{min-height:82px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9px;border:1px solid rgba(255,255,255,.19);border-radius:12px;background:rgba(2,8,5,.82);color:#c4cec7;font-size:.65rem;font-weight:1000;line-height:1.1;text-align:center;text-transform:uppercase}
+    .cycle-step:before{content:attr(data-step);width:25px;height:25px;display:grid;place-items:center;margin-bottom:7px;border-radius:50%;background:#26302a;color:#fff}
+    .cycle-step.is-current{color:#fff;border-color:var(--yellow);background:rgba(31,39,14,.92);box-shadow:0 10px 24px rgba(0,0,0,.36),0 0 0 3px rgba(242,230,0,.09)}
+    .cycle-step.is-current:before{background:var(--yellow);color:#050706}
+    .cycle-step.is-complete{color:#e7f7e3;border-color:rgba(108,194,74,.58)}
+    .cycle-step.is-complete:before{content:"✓";background:var(--green);color:#061006}
+    .screen-pair{width:min(610px,100%);display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+    .screen-choice{min-height:108px;padding:14px;border:1px solid rgba(255,255,255,.2);border-radius:15px;background:rgba(2,8,5,.82);backdrop-filter:blur(8px)}
+    .screen-choice strong{display:block;color:var(--yellow);font-size:1.7rem;line-height:1}
+    .screen-choice span{display:block;margin-top:7px;color:#fff;font-size:.72rem;font-weight:1000;line-height:1.16;text-transform:uppercase}
+    .screen-choice.is-current{border-color:var(--yellow);transform:translateY(-4px);box-shadow:0 12px 27px rgba(0,0,0,.38),0 0 0 4px rgba(242,230,0,.1)}
+    .face-down{width:min(610px,100%);margin-top:10px;padding:11px 14px;border-left:7px solid var(--green);border-radius:12px;background:rgba(2,18,7,.83);color:#fff;font-size:.76rem;font-weight:1000;text-transform:uppercase}
+    .finish-pair{width:min(600px,100%);display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+    .finish-pair span{min-height:88px;display:grid;place-items:center;padding:12px;border:1px solid rgba(108,194,74,.52);border-radius:14px;background:rgba(2,15,6,.84);color:#e9f8e5;font-size:.8rem;font-weight:1000;text-align:center;text-transform:uppercase}
+    .problem-row{width:min(620px,100%);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:16px}
+    .problem-row span{min-height:62px;display:grid;place-items:center;padding:9px;border:1px solid rgba(255,88,98,.5);border-radius:12px;background:rgba(65,7,12,.78);color:#ffd6d9;font-size:.68rem;font-weight:1000;line-height:1.08;text-align:center;text-transform:uppercase}
+    .oven-meter{width:min(600px,100%);margin-top:17px;padding:13px 15px;border:1px solid rgba(255,255,255,.2);border-radius:15px;background:rgba(2,8,5,.83);backdrop-filter:blur(8px)}
+    .oven-meter strong{display:flex;justify-content:space-between;gap:12px;color:#fff;font-size:.73rem;text-transform:uppercase}
+    .oven-meter strong b{color:var(--yellow)}
+    .heat-track{height:9px;margin-top:10px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden}
+    .heat-track:after{content:"";display:block;width:100%;height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),#ff7a40);transform-origin:left;animation:heatBuild 3.2s ease-in-out infinite}
+    .chamber-board{width:min(590px,100%);display:grid;grid-template-columns:1fr 44px 1fr;align-items:center;gap:9px;margin-top:16px}
+    .chamber-card{min-height:100px;display:flex;flex-direction:column;justify-content:center;padding:13px;border:1px solid rgba(108,194,74,.52);border-radius:14px;background:rgba(2,10,5,.84);text-align:center}
+    .chamber-card strong{color:var(--green);font-size:.73rem;letter-spacing:1px;text-transform:uppercase}
+    .chamber-card span{margin-top:7px;color:#fff;font-size:.84rem;font-weight:1000;text-transform:uppercase}
+    .independent-mark{display:grid;place-items:center;color:var(--yellow);font-size:1.55rem;font-weight:1000}
+    .oven-focus{position:absolute;z-index:5;right:4%;width:35%;opacity:0;border:2px solid var(--yellow);border-radius:14px;pointer-events:none;box-shadow:0 0 0 6px rgba(242,230,0,.07),0 0 25px rgba(242,230,0,.2);transition:opacity .4s ease,transform .5s ease;transform:scale(.97)}
+    .oven-focus.is-visible{opacity:1;transform:scale(1);animation:hazardPulse 2.6s ease-in-out infinite}
+    .oven-focus span{position:absolute;left:12px;top:10px;padding:6px 9px;border-radius:999px;background:rgba(1,7,3,.88);color:var(--yellow);font-size:.56rem;font-weight:1000;letter-spacing:1px;text-transform:uppercase}
+    .oven-focus.top{top:12%;height:29%}
+    .oven-focus.bottom{top:43%;height:28%;border-color:var(--green);box-shadow:0 0 0 6px rgba(108,194,74,.07),0 0 25px rgba(108,194,74,.2)}
+    .oven-focus.bottom span{color:var(--green)}
+    .program-choice{width:min(600px,100%);display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+    .program-button{min-height:112px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:13px;border:2px solid rgba(255,255,255,.18);border-radius:16px;background:rgba(2,8,5,.85);color:#fff;text-align:center;text-transform:uppercase;backdrop-filter:blur(8px)}
+    .program-button strong{color:var(--yellow);font-size:1.04rem}
+    .program-button span{margin-top:7px;color:#cfd8d2;font-size:.69rem;font-weight:1000}
+    .program-button.is-current{transform:translateY(-5px) scale(1.02);border-color:var(--yellow);background:linear-gradient(145deg,rgba(108,194,74,.24),rgba(3,10,6,.94));box-shadow:0 12px 29px rgba(0,0,0,.4),0 0 0 5px rgba(242,230,0,.09)}
+    .program-button.is-complete{border-color:rgba(108,194,74,.62)}
+    .no-change-grid{width:min(610px,100%);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:16px}
+    .no-change-grid span{min-height:64px;display:flex;align-items:center;padding:11px 12px;border:1px solid rgba(255,88,98,.52);border-radius:12px;background:rgba(66,7,12,.8);color:#ffd8da;font-size:.72rem;font-weight:1000;text-transform:uppercase}
+    .no-change-grid span:before{content:"×";width:25px;height:25px;display:grid;place-items:center;flex:0 0 auto;margin-right:9px;border-radius:50%;background:#ff5560;color:#fff;font-size:1.05rem}
+    .no-change-grid span.is-current{color:#fff;border-color:#ff6570;background:rgba(102,9,17,.94);box-shadow:0 0 0 4px rgba(255,68,79,.11)}
+    .quality-grid{width:min(650px,100%);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:16px}
+    .quality-card{min-height:94px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:11px;border:1px solid rgba(108,194,74,.48);border-radius:14px;background:rgba(2,13,5,.84);color:#d9e4dc;font-size:.7rem;font-weight:1000;line-height:1.14;text-align:center;text-transform:uppercase}
+    .quality-card:before{content:"✓";width:28px;height:28px;display:grid;place-items:center;margin-bottom:7px;border-radius:50%;background:#2c382f;color:#fff}
+    .quality-card.is-current{transform:translateY(-5px);color:#fff;border-color:var(--yellow);background:rgba(31,40,14,.93);box-shadow:0 11px 27px rgba(0,0,0,.38),0 0 0 4px rgba(242,230,0,.09)}
+    .quality-card.is-current:before{background:var(--yellow);color:#050706}
+    .quality-card.is-complete{color:#ebf8e7;border-color:var(--green)}
+    .quality-card.is-complete:before{background:var(--green);color:#061006}
+    .manager-action{width:min(610px,100%);margin-top:16px;padding:14px 16px;border:1px solid rgba(255,88,98,.64);border-left:9px solid #ff5560;border-radius:14px;background:rgba(70,7,13,.87);color:#fff;font-size:.88rem;font-weight:1000;line-height:1.25;text-transform:uppercase;backdrop-filter:blur(8px)}
+    .manager-action b{color:#ff9da3}
+    .final-standard{width:min(640px,100%);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:17px}
+    .final-standard span{min-height:76px;display:grid;place-items:center;padding:11px;border:1px solid rgba(108,194,74,.54);border-radius:14px;background:rgba(2,15,6,.87);color:#fff;font-size:.73rem;font-weight:1000;text-align:center;text-transform:uppercase}
+    .final-standard span:nth-child(2){border-color:rgba(242,230,0,.65);color:var(--yellow)}
+    body.training-paused .safety-scan:before,body.training-paused .hazard-focus,body.training-paused .press-cycle:before,body.training-paused .heat-track:after,body.training-paused .oven-focus{animation-play-state:paused}
+    @keyframes sweep{0%{transform:translateX(-20%) skewX(-12deg)}46%,100%{transform:translateX(680%) skewX(-12deg)}}
+    @keyframes recipeScan{0%,100%{transform:translateY(-55px);opacity:.12}50%{transform:translateY(320px);opacity:.52}}
+    @keyframes bookPulse{0%,100%{box-shadow:0 0 0 6px rgba(242,230,0,.07),0 0 25px rgba(108,194,74,.18)}50%{box-shadow:0 0 0 10px rgba(242,230,0,.11),0 0 44px rgba(108,194,74,.33)}}
+    @keyframes pageScanner{0%,100%{transform:scaleX(.12);opacity:.45}50%{transform:scaleX(1);opacity:1}}
+    @keyframes equipmentScan{0%,100%{transform:translateY(0);opacity:.18}50%{transform:translateY(510px);opacity:.95}}
+    @keyframes hazardPulse{0%,100%{filter:brightness(.93)}50%{filter:brightness(1.28)}}
+    @keyframes cycleSweep{0%,100%{transform:scaleX(.08);opacity:.4}50%{transform:scaleX(1);opacity:1}}
+    @keyframes heatBuild{0%{transform:scaleX(.12)}72%,100%{transform:scaleX(1)}}
+    @media(max-width:900px){.brand-title{display:none}.top-link{display:none}.copy-stage{left:3.5%;top:10%;bottom:28%;width:59%}.module-label{left:3.5%;top:4%}.headline{font-size:clamp(2.4rem,7vw,4rem)}.support{font-size:.8rem}.equipment-lockup{gap:6px;margin-top:10px}.source-book{min-height:97px;font-size:.58rem}.source-book strong{font-size:.85rem}.equipment{min-height:45px;font-size:.52rem}.workflow{left:3.5%;right:3.5%;padding:9px}.workflow-title{font-size:.45rem}.workflow-line{top:43px}.workflow-nodes{gap:5px}.workflow-node{min-height:47px;font-size:.45rem}.workflow-node:before{width:19px;height:19px;font-size:.52rem}.handoff{gap:5px;margin-top:10px}.handoff span{min-height:53px;padding:7px;font-size:.48rem}.handoff span:before{width:19px;height:19px;margin-bottom:4px}.recipe-copy{left:3.5%;right:3.5%;top:8%;bottom:4%}.recipe-headline{font-size:clamp(2.1rem,6.5vw,3.7rem)}.recipe-support{font-size:.76rem;max-width:48%}.variable-field,.recipe-map,.method-map,.sequence-board,.service-runway,.alert-row,.stop-action,.final-lock{width:62%;max-width:none}.recipe-map{gap:5px;padding:9px}.recipe-zone{min-height:55px;padding:8px 8px 8px 37px;font-size:.56rem}.recipe-zone:before{left:8px;width:21px;height:21px}.method-map{gap:6px;padding:9px}.method-root,.method-route{min-height:47px;font-size:.54rem}.method-options{gap:5px}.method-option{min-height:39px;font-size:.49rem}.no-mix{font-size:.49rem}.sequence-board{gap:5px;padding:8px}.sequence-item{min-height:67px;font-size:.49rem}.service-runway{gap:4px;padding:8px}.service-detail{min-height:53px;font-size:.43rem}.alert-token{min-height:47px;font-size:.52rem}.stop-ask,.never-guess{min-height:50px;font-size:.7rem}.final-lock{font-size:.49rem}.memory-warning{font-size:.55rem}.book-focus{right:3%;bottom:8%;width:42%;height:22%}.audio-status{display:none}.home-link:first-child{display:none}}
+    @media(max-width:900px){.lesson-sequence{left:3.5%;right:3.5%;top:8%;bottom:3%}.lesson-panel{width:63%}.lesson-title{font-size:clamp(2rem,6.3vw,3.45rem)}.lesson-title.compact{font-size:clamp(1.8rem,5.7vw,3.05rem)}.lesson-support{font-size:.7rem;margin-top:8px}.signal-row,.warning-radar,.quality-grid{gap:5px;margin-top:9px}.signal-card{min-height:48px;padding:7px;font-size:.49rem}.safety-scan{right:1.5%;width:39%;height:72%}.hazard-focus span{font-size:.43rem}.boundary-board,.clock-board,.spray-board,.screen-pair,.finish-pair,.program-choice{gap:6px;margin-top:9px}.approved-lane,.locked-lane{min-height:76px;padding:9px}.approved-lane span,.locked-lane span{font-size:.56rem}.warning-radar{padding:7px}.warning-radar span{min-height:39px;font-size:.46rem}.stop-lock{margin-top:9px;padding:9px 12px;font-size:.72rem}.clock-card{min-height:77px;padding:8px}.clock-card strong,.screen-choice strong{font-size:1.05rem}.clock-card span,.screen-choice span{font-size:.48rem}.hygiene-bar,.place-rotate,.face-down{margin-top:6px;padding:8px;font-size:.5rem}.preset-lock{margin-top:9px;padding:9px}.preset-lock span{font-size:.58rem}.preset-icon{width:34px;height:34px;font-size:.9rem}.setting-row{gap:4px;margin-top:6px}.setting-row span{min-height:35px;font-size:.43rem}.spray-count{min-height:70px;padding:8px}.spray-count strong{width:35px;height:35px;font-size:.9rem}.spray-count span{font-size:.48rem}.press-cycle{gap:4px;margin-top:9px}.cycle-step{min-height:58px;padding:5px;font-size:.42rem}.cycle-step:before{width:19px;height:19px;margin-bottom:4px}.screen-choice{min-height:76px;padding:8px}.finish-pair span{min-height:58px;font-size:.48rem}.problem-row{gap:4px;margin-top:9px}.problem-row span{min-height:43px;font-size:.43rem}.oven-meter{margin-top:9px;padding:8px}.chamber-board{margin-top:9px;gap:5px}.chamber-card{min-height:72px;padding:8px}.chamber-card strong{font-size:.47rem}.chamber-card span{font-size:.54rem}.program-button{min-height:78px;padding:8px}.program-button strong{font-size:.68rem}.program-button span{font-size:.45rem}.no-change-grid{gap:5px;margin-top:9px}.no-change-grid span{min-height:44px;padding:7px;font-size:.47rem}.no-change-grid span:before{width:19px;height:19px;font-size:.75rem}.quality-card{min-height:64px;padding:7px;font-size:.45rem}.quality-card:before{width:20px;height:20px;margin-bottom:4px}.manager-action{margin-top:9px;padding:9px;font-size:.57rem}.final-standard{gap:5px;margin-top:9px}.final-standard span{min-height:52px;padding:7px;font-size:.48rem}}
+  
+    /* Large Cheese Pizza: overhead recipe demonstration */
+    .pizza-build{container-type:inline-size;background:radial-gradient(ellipse at 65% 50%,#223219,#080d0b 68%)}
+    .pizza-build .module-label{font-size:1.05cqw;top:5%;}
+    .pizza-worktop{position:absolute;left:3.5%;top:15%;width:43%;aspect-ratio:1;overflow:hidden;border-radius:50%;border:2px solid #677866;box-shadow:0 0 0 9px #ffffff08,0 20px 40px #0009}
+    .pizza-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .28s linear;}
+    .pizza-photo.is-visible{opacity:1}
+    .pizza-pane{position:absolute;left:51%;right:4%;top:16%;bottom:15%;opacity:0;transform:translateX(18px);transition:opacity .18s,transform .3s;pointer-events:none;display:flex;flex-direction:column;justify-content:center}
+    .pizza-pane.is-visible{opacity:1;transform:none}
+    .pizza-pane .eyeline{color:var(--green);letter-spacing:.15em;text-transform:uppercase;font-size:1.05cqw;font-weight:900}
+    .pizza-pane h2{font-size:4.1cqw;line-height:1.02;text-transform:uppercase;letter-spacing:-.12cqw;margin:1.1cqw 0 1.6cqw}
+    .pizza-pane h2 em{font-style:normal;color:var(--yellow)}
+    .pizza-pane p{font-size:1.65cqw;line-height:1.35;margin:.6cqw 0;color:#e4ece5}
+    .pizza-measure{display:flex;align-items:baseline;gap:1cqw;color:var(--yellow);margin:.4cqw 0 1.2cqw}
+    .pizza-measure b{font-size:8cqw;line-height:1;font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.3cqw}
+    .pizza-measure span{font-weight:900;font-size:2cqw;text-transform:uppercase}
+    .pizza-note{padding:1cqw 1.2cqw;border-left:.45cqw solid var(--green);background:#142316;border-radius:.7cqw;font-size:1.4cqw;line-height:1.35;margin-top:1cqw}
+    .pizza-note.warn{border-color:#ff6975;background:#37131a}
+    .pizza-recipe-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7cqw;margin:1cqw 0}
+    .pizza-recipe-grid div,.pizza-serve{border:1px solid #68835f;border-radius:.8cqw;padding:1cqw;font-size:1.35cqw;font-weight:700;background:#101a12}
+    .pizza-recipe-grid b{color:var(--yellow);font-size:2.2cqw;display:block}
+    .pizza-program{border:2px solid var(--yellow);background:#263915;padding:1.5cqw;border-radius:1cqw;font-size:2.4cqw;line-height:1.2;font-weight:900;color:var(--yellow);text-align:center}
+    .pizza-serve{margin:.45cqw 0;}
+    .pizza-route{position:absolute;left:4.5%;right:4.5%;bottom:5%;display:flex;gap:.5cqw}
+    .pizza-route span{flex:1;padding:.9cqw .5cqw;border-top:3px solid #3d4d41;color:#aeb9b1;font-size:1.04cqw;text-align:center;text-transform:uppercase;font-weight:900}
+    .pizza-route .is-current{color:var(--yellow);border-color:var(--yellow);background:#223318;transform:none;box-shadow:none}
+    .pizza-route .is-complete{color:#b5de9e;border-color:var(--green)}
+    .pizza-guide{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .2s;pointer-events:none}
+    .pizza-guide.is-visible{opacity:1}
+    .pizza-guide circle,.pizza-guide path,.pizza-guide line{fill:none;stroke:var(--yellow);stroke-width:1.1;filter:drop-shadow(0 1px 2px #000)}
+    .pizza-guide .trace{stroke-dasharray:5 3;animation:pizza-trace 9s linear infinite}
+    .pizza-build .pizza-cut{stroke-width:.65;stroke:#fff;stroke-dasharray:2 1}
+    body.training-paused .pizza-build *{animation-play-state:paused!important}
+    @keyframes pizza-trace{to{stroke-dashoffset:-80}}
+    @media(prefers-reduced-motion:reduce){.pizza-build *{animation:none!important;transition:none!important}}
+
+
+    .recipe-book-view{position:absolute;inset:12% 3.5% 14%;z-index:8;display:grid;grid-template-columns:30% 1fr;gap:3%;background:#09100c;opacity:0;pointer-events:none;transition:opacity .18s}
+    .recipe-book-view.is-visible{opacity:1;pointer-events:auto}
+    .recipe-book-page{width:100%;height:100%;object-fit:contain;object-position:center;filter:drop-shadow(0 8px 15px #0008)}
+    .recipe-book-detail{min-width:0;min-height:0;display:flex;flex-direction:column;gap:1cqw}
+    .recipe-book-detail h2{margin:0;font-size:2.5cqw;line-height:1.1;color:var(--yellow)}
+    .recipe-book-zoom{position:relative;min-height:0;flex:1}
+    .recipe-book-crop{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:left center;opacity:0;transition:opacity .15s}
+    .recipe-book-crop.is-visible{opacity:1}
+    .recipe-book-reminder{font-size:1.3cqw;line-height:1.3;border-left:4px solid var(--green);padding:.7cqw 1cqw;background:#1b2b1a;margin:0}
+
+    #slide7 .pizza-worktop{left:auto;right:3.5%}
+    #slide7 .pizza-pane{left:4.5%;right:51%}
+    .pepperoni-piece{position:absolute;width:11.5%;height:11.5%;object-fit:contain;opacity:0;transform:translate(-50%,-50%) rotate(var(--turn)) scale(1.3);transition:opacity .12s,transform .22s;filter:drop-shadow(0 1px 1px #411a1266)}
+    .pepperoni-piece.is-visible{opacity:1;transform:translate(-50%,-50%) rotate(var(--turn)) scale(1)}
+    .pep-count{position:relative;display:inline-block;width:2.1em;height:1em;vertical-align:bottom}
+    .pep-count i{font-style:normal;position:absolute;inset:0;opacity:0}
+    .pep-count i.is-visible{opacity:1}
+    .pep-count-label{font-size:1.5cqw;color:#a9bcae}
+    #slide7 .pizza-guide{z-index:3}
+
+.new-slide{container-type:inline-size;background:radial-gradient(ellipse at 90% 10%,#344526,#08120c 65%)}
+.new-slide .chapter{position:absolute;top:5%;left:5%;color:#78cb45;letter-spacing:.16em;text-transform:uppercase;font-size:1.05cqw;font-weight:900;z-index:7}
+.new-slide .beat{position:absolute;inset:12% 5% 8%;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .25s,transform .35s;display:grid;grid-template-columns:1fr 1fr;gap:4%;align-items:center}
+.new-slide .beat.is-visible{opacity:1;visibility:visible;transform:none}
+.new-slide h2{font-size:4cqw;line-height:1.03;margin:0 0 1.5cqw;text-transform:uppercase;letter-spacing:-.035em}
+.new-slide h2 em{color:#eff500;font-style:normal}
+.new-slide p{font-size:1.65cqw;line-height:1.4;margin:1cqw 0;color:#e2eadd}
+.new-slide .kicker{color:#78cb45;font-size:1.2cqw;font-weight:900;text-transform:uppercase;letter-spacing:.12em;margin-bottom:1.2cqw}
+.new-slide .visual{position:relative;height:100%;min-height:0;border-radius:1.8cqw;overflow:hidden;background:#101d12;display:flex;align-items:center;justify-content:center}
+.new-slide img[src*="recipe-ingredients"],.new-slide img[src*="recipe-equipment"]{object-fit:contain!important;background:#fff}
+.new-slide .photo{width:100%;height:100%;object-fit:cover;transform:scale(calc(1 + var(--progress)*.04));}
+.new-slide .document{height:100%;width:100%;object-fit:contain;background:white}
+.new-slide .tag{padding:1.1cqw 1.3cqw;border-left:.4cqw solid #eff500;background:#152416;font-size:1.5cqw;line-height:1.35;margin-top:1.1cqw;border-radius:.6cqw}
+.new-slide .cards{display:grid;gap:1cqw;width:100%}
+.new-slide .card{padding:1.4cqw;background:#19291a;border:1px solid #63715c;border-radius:1cqw;font-size:1.6cqw;line-height:1.25}
+.new-slide .card b{display:block;color:#eff500;font-size:2.5cqw;margin-bottom:.4cqw}
+.new-slide .card.is-current{border-color:#f3f900;background:#34491c;box-shadow:0 0 0 2px #eff50055}
+.new-slide .card.is-complete{border-color:#69bc45}
+.new-slide .wide{grid-template-columns:1fr;align-content:center}
+.new-slide .wide h2{max-width:95%}
+.new-slide .wide .cards{grid-template-columns:repeat(3,1fr)}
+.new-slide .wide .visual{display:none}
+.new-slide .reverse .copy{order:2}
+.new-slide .reverse .visual{order:1}
+.new-slide .big-number{font-size:11cqw;line-height:1;font-weight:950;color:#eff500;letter-spacing:-.06em}
+.new-slide .number-unit{font-size:2.2cqw;color:white;text-transform:uppercase;margin-top:1cqw}
+.new-slide .clockface{width:29cqw;height:29cqw;border:1cqw solid #75c33d;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:0 0 0 1cqw #253727}
+.new-slide .timeline{display:flex;gap:1.3cqw;margin:2cqw 0}.new-slide .timeline .card{flex:1}
+.new-slide .timeline .card b{font-size:3.8cqw}.new-slide .recipe-mini{width:44%;height:90%;object-fit:contain;box-shadow:0 1cqw 3cqw #0009;margin:0 1%}
+.new-slide .label{background:#f6f3df;color:#14220f;width:90%;padding:2cqw;border-radius:1cqw;transform:rotate(-2deg);font-size:1.65cqw;line-height:1.4;box-shadow:0 1cqw 3cqw #0008}
+.new-slide .label strong{font-size:2.5cqw;display:block;border-bottom:3px solid #18251a;padding-bottom:1cqw;margin-bottom:1cqw}
+.new-slide .label div{padding:.6cqw 0;border-bottom:1px solid #bcc5b3}
+.new-slide .pizza-circle{position:relative;width:30cqw;height:30cqw;border-radius:50%;background:#bb7836;box-shadow:0 1cqw 3cqw #0007;overflow:hidden}
+.new-slide .pizza-circle img{width:100%;height:100%;object-fit:cover}
+.new-slide .cut-line{position:absolute;left:8%;right:8%;top:50%;height:.35cqw;background:#f4ff19;transform:rotate(var(--angle));box-shadow:0 0 6px #111}
+.new-slide .receipt{width:90%;background:#f5f4e8;color:#182517;padding:2cqw;font-size:1.7cqw;line-height:1.4;border-top:.6cqw solid #75c33d}
+.new-slide .receipt b{display:block;font-size:2.6cqw;margin-bottom:1cqw}.new-slide .receipt div{padding:.65cqw 0;border-bottom:1px dashed #909980}
+.new-slide .floating-caption{position:absolute;bottom:5%;left:5%;right:5%;padding:1cqw;background:#051109e8;border-radius:1cqw;color:white;font-size:1.6cqw}
+.new-slide .rail{position:absolute;bottom:3%;left:5%;right:5%;display:flex;gap:.5cqw}
+.new-slide .rail span{height:.4cqw;flex:1;background:#40513a;border-radius:9px}.new-slide .rail .is-current{background:#eff500}.new-slide .rail .is-complete{background:#6bbd43}
+body.training-paused .new-slide *{animation-play-state:paused!important}
+
+.new-slide .product-photo{object-fit:contain;background:#fff;transform:none!important}
+.new-slide .paddle-pair{display:grid;grid-template-columns:1fr 1fr;width:100%;height:100%;gap:1cqw;background:#fff;color:#142211;padding:1cqw;align-items:center}
+.new-slide .paddle-pair figure{margin:0;min-width:0}.new-slide .paddle-pair img{width:100%;height:26cqw;object-fit:contain}.new-slide figcaption{text-align:center;font-size:1.55cqw;font-weight:bold}
+.new-slide .readiness{width:92%;text-align:center;display:grid;gap:1.3cqw}.new-slide .readiness div{padding:1.5cqw;background:#263d20;border:1px solid #76c744;border-radius:1cqw;font-size:1.75cqw;font-weight:bold}.new-slide .readiness b{font-size:2.8cqw;color:#eef500}.new-slide .readiness strong{font-size:1.6cqw}
+.new-slide .handoff-choices{display:grid;gap:2cqw;width:90%}.new-slide .handoff-choices div{border:2px solid #7ac542;padding:2cqw;border-radius:1cqw}.new-slide .handoff-choices b{display:block;color:#eef500;font-size:3cqw}.new-slide .handoff-choices span{font-size:1.7cqw}
+.new-slide .recipe-duo{display:flex;align-items:center;width:100%;height:100%;gap:1cqw;padding:1cqw;background:#e3e8d9}.new-slide .recipe-duo img{width:48%;height:100%;object-fit:contain}
+.new-slide .compact-card{padding:1cqw;font-size:1.4cqw}.new-slide .compact-card b{font-size:1.9cqw}
+#slide10 .beat:nth-child(5) .cards .card{padding:1cqw;font-size:1.3cqw}#slide10 .beat:nth-child(5) .cards .card b{font-size:1.8cqw}
+
+/* Product comparison: 22-inch small paddle / 24-inch large paddle. */
+#slide14 .paddle-pair figure:nth-child(2) img{width:91.666667%;display:block;margin-inline:auto}
+#slide14 .paddle-pair figcaption .paddle-size{display:block;margin-top:.6cqw;font-size:1.2cqw;font-weight:500;line-height:1.35;color:#40513b}
+</style>
+
+<style id="launch-portal-auth-style">
+  html { display: none; }
+  html.portal-authenticated { display: block; }
+</style>
+<script id="launch-portal-auth-script">
+  (() => {
+    const storageKey = "launchTrainingUnlockedUntil";
+    const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+
+    if (unlockedUntil <= Date.now()) {
+      localStorage.removeItem(storageKey);
+
+      const currentPath = window.location.pathname;
+      const marker = "/Launch-Training/";
+      const markerPosition = currentPath.indexOf(marker);
+      let portalBase = markerPosition >= 0
+        ? currentPath.slice(0, markerPosition + marker.length)
+        : "/";
+
+      const moduleMarkers = ["/cashier/", "/court-monitor/", "/party-host/", "/krave/"];
+      for (const moduleMarker of moduleMarkers) {
+        const modulePosition = currentPath.indexOf(moduleMarker);
+        if (modulePosition >= 0) {
+          portalBase = currentPath.slice(0, modulePosition + 1) || "/";
+          break;
+        }
+      }
+
+      const returnPath = currentPath + window.location.search + window.location.hash;
+      window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
+    } else {
+      document.documentElement.classList.add("portal-authenticated");
+    }
+  })();
+</script>
+</head>
+<body>
+  <div class="start-overlay" id="startOverlay">
+    <div class="start-card">
+      <div class="eyebrow">Day 2 Online Training</div>
+      <h2>From Recipe to Service</h2>
+      <p>Today builds on Day 1 food safety and introduces the approved process for preparing consistent Krave food.</p>
+      <div class="start-actions">
+        <button class="start-primary" type="button" id="startButton">Start Day 2 Training</button>
+        <button class="start-dark" type="button" id="fullscreenButton">Full Screen</button>
+        <a class="start-dark" href="./index.html">Day 2 Menu</a>
+        <a class="start-dark" href="../index.html">Krave Training Home</a>
+      </div>
+      <div class="small-note">Narration must finish before Next becomes available.</div>
+    </div>
+  </div>
+
+  <main class="deck">
+    <header class="topbar">
+      <div class="brand">
+        <img src="../assets/launch-family-entertainment-logo.png" alt="Launch Family Entertainment">
+        <div class="brand-title"><strong>Krave Training</strong><span>Day 2: Recipe Execution &amp; Required Pizza Standards</span></div>
+      </div>
+      <div class="top-actions">
+        <a class="top-link" href="./index.html">Day 2 Menu</a>
+        <a class="top-link" href="../../index.html">Training Portal</a>
+        <span class="slide-counter" id="slideCounter">Slide 1 / 16</span>
+        
+      </div>
+    </header>
+
+    <div class="stage">
+      <section class="slide active" data-slide-index="0" data-audio="audio/Krave Day 2 Slide 1.m4a" data-duration="46.656" data-narration="Welcome to Day 2 of Krave Training. Yesterday, you built the food-safety habits that must remain part of every Krave shift. Today, you will put those standards into action as you learn how Krave food is prepared safely and consistently. You will learn how to use the recipe book as your source of truth, safely operate the DM-18 dough press and TurboChef Double Batch oven, and prepare Launch’s required cheese and pepperoni pizzas. The goal is not to rely on memory or guesswork. You will learn to find the correct recipe, measure every ingredient, follow the approved equipment process, inspect the finished product, and serve it correctly. Your online training will introduce the process. You will then practice these skills with a trainer before completing the Day 2 exam.">
+        <img class="scene" src="../assets/krave-day2-slide1-production.png" alt="A trainer coaches a new Krave employee through the recipe-to-service pizza workflow in a back-of-house kitchen">
+        <div class="shade" aria-hidden="true"></div>
+        <div class="motion-sweep" aria-hidden="true"></div>
+        <div class="color-strip" aria-hidden="true"></div>
+        <div class="pause-indicator">Training Paused</div>
+        <div class="module-label">Day 2 · Recipe to Service</div>
+
+        <div class="copy-stage">
+          <section class="copy-scene" data-show-at="0" data-hide-at="15.15">
+            <div class="kicker">Welcome to Day 2</div>
+            <h1 class="headline">From Recipe<span>To Service</span></h1>
+            <p class="support">Put yesterday’s food-safety foundation into action through safe, consistent preparation.</p>
+            <div class="safety-lock" data-highlight-start="2.86" data-highlight-end="8.18">Food safety stays with every step</div>
+          </section>
+
+          <section class="copy-scene" data-show-at="15.15" data-hide-at="26.99">
+            <div class="kicker">Use the Approved Process</div>
+            <h2 class="headline">Your Source<span>Of Truth</span></h2>
+            <div class="equipment-lockup">
+              <div class="source-book" data-highlight-start="16.08" data-highlight-end="17.82"><strong>Krave Recipe Book</strong>Find the current approved recipe before preparation begins.</div>
+              <div class="equipment" data-highlight-start="18.09" data-highlight-end="21.00">DoughXpress DM-18</div>
+              <div class="equipment" data-highlight-start="21.26" data-highlight-end="22.78">TurboChef Double Batch</div>
+            </div>
+            <div class="guesswork" data-highlight-start="23.32" data-highlight-end="26.60"><b>Required focus:</b> Cheese + Pepperoni Pizza</div>
+          </section>
+
+          <section class="copy-scene" data-show-at="26.99" data-hide-at="39.42">
+            <div class="kicker">Consistency Is a Process</div>
+            <h2 class="headline">No Memory.<span>No Guesswork.</span></h2>
+            <p class="support">Use the recipe, measure every ingredient, follow the approved equipment process, inspect the result, and serve it correctly.</p>
+          </section>
+
+          <section class="copy-scene" data-show-at="39.42" data-hide-at="46.756">
+            <div class="kicker">Your Day 2 Path</div>
+            <h2 class="headline">Learn It.<span>Then Do It.</span></h2>
+            <div class="handoff">
+              <span data-step="1" data-highlight-start="39.42" data-highlight-end="41.88">Learn Online</span>
+              <span data-step="2" data-highlight-start="42.28" data-highlight-end="44.47">Practice With a Trainer</span>
+              <span data-step="3" data-highlight-start="44.47" data-highlight-end="46.32">Complete the Exam</span>
+            </div>
+            <div class="closing-lock"><b>Safe.</b> Consistent. Ready to serve.</div>
+          </section>
+        </div>
+
+        <div class="workflow" data-show-at="30.26" data-hide-at="39.42" aria-label="Approved recipe workflow">
+          <div class="workflow-title"><span>The Krave Workflow</span><strong>One Connected Process</strong></div>
+          <div class="workflow-line" aria-hidden="true"></div>
+          <div class="workflow-nodes">
+            <div class="workflow-node" data-step="1" data-workflow-start="30.86" data-workflow-end="32.13">Find</div>
+            <div class="workflow-node" data-step="2" data-workflow-start="32.50" data-workflow-end="33.87">Measure</div>
+            <div class="workflow-node" data-step="3" data-workflow-start="34.25" data-workflow-end="35.95">Follow</div>
+            <div class="workflow-node" data-step="4" data-workflow-start="36.16" data-workflow-end="37.57">Inspect</div>
+            <div class="workflow-node" data-step="5" data-workflow-start="37.77" data-workflow-end="39.03">Serve</div>
+          </div>
+        </div>
+
+        <div class="narration-progress" aria-hidden="true"><span></span></div>
+      </section>
+
+      <section class="slide recipe-slide" data-slide-index="1" data-audio="audio/Krave Day 2 Slide 2.m4a" data-duration="80.232" data-narration="The Krave Prep and Recipe Book is your source of truth whenever you prepare or serve a Krave item. Even if you have made an item many times, do not rely only on memory. Recipes can differ by product size, available equipment, portion, or serving method. Before beginning, find the exact item and confirm that you are using the correct recipe and order size. Review the ingredients and measurements so every portion is accurate. Next, gather the listed tools and equipment and read through the directions before starting. Some recipes provide more than one approved cooking method. Follow the directions for the equipment being used at your location. Do not combine steps from different methods or substitute your own process. Continue through the entire recipe, including cook settings or times, required temperature checks, finished-product standards, and serving instructions. The recipe is not finished when the food leaves the equipment. The correct basket, liner, appropriately sized wooden paddle, sauce, portion, and presentation are also part of the standard. If a recipe is missing, unclear, or does not match the equipment or ingredients available, stop and ask your trainer or manager. Never guess. Using the current approved recipe protects food safety, consistency, and the guest’s experience.">
+        <img class="scene" src="../assets/krave-day2-slide2-recipe-book.png" alt="A properly uniformed teenage Krave employee uses the recipe book at a clean back-of-house prep station">
+        <div class="shade" aria-hidden="true"></div>
+        <div class="motion-sweep" aria-hidden="true"></div>
+        <div class="recipe-scan-line" aria-hidden="true"></div>
+        <div class="color-strip" aria-hidden="true"></div>
+        <div class="pause-indicator">Training Paused</div>
+        <div class="module-label">Day 2 · Recipe Book</div>
+        <div class="book-focus" data-show-at="0" data-hide-at="16.08" aria-hidden="true"></div>
+
+        <div class="recipe-copy">
+          <section class="recipe-scene" data-show-at="0" data-hide-at="16.08">
+            <div class="recipe-kicker">The Krave Prep &amp; Recipe Book</div>
+            <h2 class="recipe-headline">The Book Is<span>The Standard</span></h2>
+            <p class="recipe-support">Use the current approved recipe whenever you prepare or serve a Krave item.</p>
+            <div class="truth-anchor" data-highlight-start="2.26" data-highlight-end="5.35">Your source of truth</div>
+            <div class="memory-warning" data-highlight-start="8.17" data-highlight-end="9.96">Do not rely only on memory</div>
+            <div class="variable-field" aria-label="Ways recipes can differ">
+              <div class="variable-chip" data-highlight-start="11.48" data-highlight-end="12.29">Product Size</div>
+              <div class="variable-chip" data-highlight-start="12.45" data-highlight-end="13.42">Available Equipment</div>
+              <div class="variable-chip" data-highlight-start="13.71" data-highlight-end="14.33">Portion</div>
+              <div class="variable-chip" data-highlight-start="14.89" data-highlight-end="15.65">Serving Method</div>
+            </div>
+          </section>
+
+          <section class="recipe-scene" data-show-at="16.08" data-hide-at="32.25">
+            <div class="recipe-kicker">Scan the Recipe Before Prep</div>
+            <h2 class="recipe-headline">Read It Before<span>You Start</span></h2>
+            <div class="recipe-map" aria-label="Four sections to review before beginning">
+              <div class="recipe-zone" data-step="1" data-highlight-start="17.40" data-highlight-end="21.96">Exact Item + Order Size</div>
+              <div class="recipe-zone" data-step="2" data-highlight-start="22.35" data-highlight-end="26.46">Ingredients + Measurements</div>
+              <div class="recipe-zone" data-step="3" data-highlight-start="27.61" data-highlight-end="29.76">Listed Tools + Equipment</div>
+              <div class="recipe-zone" data-step="4" data-highlight-start="29.99" data-highlight-end="31.87">Read All Directions</div>
+            </div>
+          </section>
+
+          <section class="recipe-scene" data-show-at="32.25" data-hide-at="43.49">
+            <div class="recipe-kicker">Approved Cooking Methods</div>
+            <h2 class="recipe-headline">Choose One<span>Approved Path</span></h2>
+            <div class="method-map" aria-label="Use the recipe method for the equipment at your location">
+              <div class="method-root">Current Recipe</div>
+              <div class="method-arrow" aria-hidden="true">→</div>
+              <div class="method-route" data-highlight-start="35.75" data-highlight-end="38.81">Use the Method for Your Equipment</div>
+              <div class="method-options" data-highlight-start="32.25" data-highlight-end="35.32">
+                <div class="method-option">Approved Method A</div>
+                <div class="method-option">Approved Method B</div>
+              </div>
+              <div class="no-mix" data-highlight-start="39.21" data-highlight-end="43.10">Do not mix methods or substitute your own process</div>
+            </div>
+          </section>
+
+          <section class="recipe-scene" data-show-at="43.49" data-hide-at="52.78">
+            <div class="recipe-kicker">Continue Through the Entire Recipe</div>
+            <h2 class="recipe-headline">Read Through<span>The Finish</span></h2>
+            <div class="sequence-board" aria-label="Recipe finish sequence">
+              <div class="sequence-item" data-step="1" data-highlight-start="45.95" data-highlight-end="47.48">Cook Settings or Times</div>
+              <div class="sequence-item" data-step="2" data-highlight-start="47.87" data-highlight-end="49.19">Temperature Checks</div>
+              <div class="sequence-item" data-step="3" data-highlight-start="49.44" data-highlight-end="50.62">Finished-Product Standards</div>
+              <div class="sequence-item" data-step="4" data-highlight-start="50.86" data-highlight-end="52.34">Serving Instructions</div>
+            </div>
+          </section>
+
+          <section class="recipe-scene" data-show-at="52.78" data-hide-at="64.79">
+            <div class="recipe-kicker">Preparation Does Not End at the Equipment</div>
+            <h2 class="recipe-headline">Service Is Part<span>Of the Recipe</span></h2>
+            <div class="equipment-finish" data-highlight-start="52.78" data-highlight-end="56.01">The recipe is not finished when food leaves the equipment</div>
+            <div class="service-runway" aria-label="Serving details are part of the standard">
+              <div class="service-detail" data-highlight-start="56.86" data-highlight-end="57.36">Basket</div>
+              <div class="service-detail" data-highlight-start="57.60" data-highlight-end="58.08">Liner</div>
+              <div class="service-detail" data-highlight-start="58.42" data-highlight-end="60.27">Wooden Paddle</div>
+              <div class="service-detail" data-highlight-start="60.44" data-highlight-end="60.97">Sauce</div>
+              <div class="service-detail" data-highlight-start="61.19" data-highlight-end="61.71">Portion</div>
+              <div class="service-detail" data-highlight-start="62.01" data-highlight-end="62.91">Presentation</div>
+            </div>
+            <div class="service-standard">Every detail is part of the standard.</div>
+          </section>
+
+          <section class="recipe-scene" data-show-at="64.79" data-hide-at="80.332">
+            <div class="recipe-kicker">When the Recipe Does Not Line Up</div>
+            <h2 class="recipe-headline">Stop. Ask.<span>Never Guess.</span></h2>
+            <div class="alert-row" aria-label="Reasons to stop and ask">
+              <div class="alert-token" data-highlight-start="64.99" data-highlight-end="66.22">Recipe Missing</div>
+              <div class="alert-token" data-highlight-start="66.40" data-highlight-end="67.03">Recipe Unclear</div>
+              <div class="alert-token" data-highlight-start="67.57" data-highlight-end="70.13">Does Not Match Equipment or Ingredients</div>
+            </div>
+            <div class="stop-action">
+              <div class="stop-ask" data-highlight-start="70.53" data-highlight-end="72.64">Stop + Ask a Trainer or Manager</div>
+              <div class="never-guess" data-highlight-start="73.04" data-highlight-end="73.87">Never Guess</div>
+            </div>
+            <div class="final-lock" data-highlight-start="74.27" data-highlight-end="79.88">Current Approved Recipe = Food Safety + Consistency + Guest Experience</div>
+          </section>
+        </div>
+
+        <div class="narration-progress" aria-hidden="true"><span></span></div>
+      </section>
+
+      <section class="slide equipment-slide safety-equipment-slide" data-slide-index="2" data-audio="audio/Krave Day 2 Slide 3.m4a" data-duration="74.952" data-narration="Before operating any piece of Krave equipment, confirm that you have been trained on that equipment and understand the approved process. Begin by making sure the work area is clean, dry, uncluttered, and ready for safe operation. The DoughXpress DM-18 contains heated plates and a moving press arm. This creates both hot-surface and pinch-point hazards. The TurboChef Double Batch oven has extremely hot doors, cooking chambers, screens, and food. Always use the designated tools, keep your hands and face away from hot openings, and never reach into equipment while it is operating. Your responsibility is to follow the approved process—not to repair, reprogram, or experiment with the equipment. Do not change the dough press temperature, time, thickness setting, or stored presets. Do not change the TurboChef temperature or programmed cook settings. If you notice damage, an error message, smoke, an unusual sound, a problem with a door or handle, or results that suddenly do not meet the standard, stop using the equipment and notify your trainer or manager. When something does not appear right, stop and ask. Protecting yourself and your teammates always comes before completing the order.">
+        <img class="scene" src="../assets/krave-day2-slide3-equipment-safety.png" alt="A properly uniformed teenage Krave employee reviews the DoughXpress press and TurboChef oven with a trainer in a clean back-of-house kitchen">
+        <div class="shade" aria-hidden="true"></div>
+        <div class="motion-sweep" aria-hidden="true"></div>
+        <div class="color-strip" aria-hidden="true"></div>
+        <div class="pause-indicator">Training Paused</div>
+        <div class="module-label">Day 2 · Equipment Safety</div>
+        <div class="safety-scan" data-show-at="7.56" data-hide-at="36.86" aria-hidden="true"></div>
+        <div class="hazard-focus dm-hazards" data-show-at="13.98" data-hide-at="23.02" aria-hidden="true"><span>Hot Surface</span><span>Pinch Point</span></div>
+        <div class="hazard-focus oven-hazards" data-show-at="23.02" data-hide-at="36.86" aria-hidden="true"><span>Extreme Heat</span><span>Use the Tool</span></div>
+
+        <div class="lesson-sequence">
+          <section class="lesson-panel" data-show-at="0" data-hide-at="13.98">
+            <div class="lesson-kicker">Before You Operate</div>
+            <h2 class="lesson-title">Trained.<span>Ready. Safe.</span></h2>
+            <p class="lesson-support">Confirm your training, use the approved process, and prepare a safe work area.</p>
+            <div class="signal-row" aria-label="Pre-operation checks">
+              <div class="signal-card" data-highlight-start="2.84" data-highlight-end="4.62">Trained on This Equipment</div>
+              <div class="signal-card" data-highlight-start="5.36" data-highlight-end="6.92">Approved Process Understood</div>
+              <div class="signal-card" data-highlight-start="7.56" data-highlight-end="13.48">Clean · Dry · Uncluttered</div>
+            </div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="13.98" data-hide-at="23.02">
+            <div class="lesson-kicker">DoughXpress DM-18</div>
+            <h2 class="lesson-title">Hot Plates.<span>Moving Arm.</span></h2>
+            <div class="signal-row" aria-label="Dough press hazards">
+              <div class="signal-card" data-highlight-start="16.66" data-highlight-end="17.40">Heated Plates</div>
+              <div class="signal-card" data-highlight-start="17.90" data-highlight-end="18.96">Moving Press Arm</div>
+              <div class="signal-card" data-highlight-start="20.30" data-highlight-end="22.42">Hot + Pinch Hazards</div>
+            </div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="23.02" data-hide-at="36.86">
+            <div class="lesson-kicker">TurboChef Double Batch</div>
+            <h2 class="lesson-title compact">Extreme Heat.<span>Keep Clear.</span></h2>
+            <div class="signal-row" aria-label="TurboChef safety actions">
+              <div class="signal-card" data-highlight-start="23.02" data-highlight-end="28.56">Doors · Chambers · Screens · Food</div>
+              <div class="signal-card" data-highlight-start="28.56" data-highlight-end="30.68">Use Designated Tools</div>
+              <div class="signal-card" data-highlight-start="31.14" data-highlight-end="36.24">Hands + Face Clear · Never Reach In</div>
+            </div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="36.86" data-hide-at="53.26">
+            <div class="lesson-kicker">Your Operator Boundary</div>
+            <h2 class="lesson-title compact">Operate.<span>Do Not Alter.</span></h2>
+            <div class="boundary-board">
+              <div class="approved-lane" data-highlight-start="36.86" data-highlight-end="40.24"><strong>Your Responsibility</strong><span>Follow the Approved Process</span></div>
+              <div class="locked-lane" data-highlight-start="40.24" data-highlight-end="43.58"><strong>Not Your Role</strong><span>Repair · Reprogram · Experiment</span></div>
+            </div>
+            <div class="setting-row" aria-label="Settings employees must not change">
+              <span data-highlight-start="44.24" data-highlight-end="45.88">Press Temperature</span>
+              <span data-highlight-start="46.24" data-highlight-end="46.62">Time</span>
+              <span data-highlight-start="47.50" data-highlight-end="47.88">Thickness</span>
+              <span data-highlight-start="48.20" data-highlight-end="49.16">Presets</span>
+            </div>
+            <div class="manager-action" data-highlight-start="49.86" data-highlight-end="53.26"><b>TurboChef:</b> Do not change temperature or programmed cook settings.</div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="53.26" data-hide-at="67.18">
+            <div class="lesson-kicker">Recognize a Problem</div>
+            <h2 class="lesson-title compact">Know the<span>Warning Signs.</span></h2>
+            <div class="warning-radar" aria-label="Equipment warning signs">
+              <span data-highlight-start="54.38" data-highlight-end="54.78">Damage</span>
+              <span data-highlight-start="55.14" data-highlight-end="55.80">Error Message</span>
+              <span data-highlight-start="56.52" data-highlight-end="56.54">Smoke</span>
+              <span data-highlight-start="56.86" data-highlight-end="57.78">Unusual Sound</span>
+              <span data-highlight-start="58.28" data-highlight-end="59.96">Door or Handle Problem</span>
+              <span data-highlight-start="60.72" data-highlight-end="62.98">Results Miss the Standard</span>
+            </div>
+            <div class="manager-action" data-highlight-start="63.56" data-highlight-end="66.60"><b>Stop using it.</b> Notify your trainer or manager.</div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="67.18" data-hide-at="75.052">
+            <div class="lesson-kicker">When It Does Not Look Right</div>
+            <h2 class="lesson-title">Stop.<span>Then Ask.</span></h2>
+            <div class="stop-lock" data-highlight-start="67.18" data-highlight-end="69.94"><b>Stop + Ask</b> before continuing.</div>
+            <p class="lesson-support" data-highlight-start="70.46" data-highlight-end="74.44">Protect people before completing the order.</p>
+          </section>
+        </div>
+
+        <div class="narration-progress" aria-hidden="true"><span></span></div>
+      </section>
+
+      <section class="slide equipment-slide press-slide" data-slide-index="3" data-audio="audio/Krave Day 2 Slide 4.m4a" data-duration="92.976" data-narration="The DoughXpress DM-18 gives every pizza dough ball a consistent start—but only when the approved process is followed. First, confirm that the dough has completed its full seventy-two-hour refrigerated thaw and remains within the seven-day life shown on its label. Wash and dry your hands, and follow the glove requirements in the recipe. The dough press should already be turned on, warmed, and set for the appropriate dough size. These settings are established by trained leadership. Do not change the temperature, time, presets, or thickness control. With the press open, apply exactly two sprays of garlic butter spray to the upper plate and two sprays to the lower plate. Place one fully thawed dough ball in the center of the lower plate and rotate it once clockwise. Keep your hands clear, then lower the lever completely until it locks into place. Wait for the press to beep, indicating that the cycle is complete. Raise the lever fully and carefully remove the dough. Place the side that contacted the upper plate face down in the center of a clean ten-inch screen for a small pizza or a clean sixteen-inch screen for a large pizza. Gently work the dough outward until it evenly covers the screen. Then dock the entire surface gently and thoroughly to help prevent large air pockets while cooking. Never press frozen dough, force the handle, or adjust the settings to correct a problem. If the dough sticks, tears, presses unevenly, or does not meet the standard, stop and ask your trainer or manager for assistance.">
+        <img class="scene scene-frame" data-show-at="0" data-hide-at="35.10" src="../assets/krave-day2-slide4-open.png" alt="A properly uniformed teenage Krave employee stands on the operating side of an open DM-18 dough press">
+        <img class="scene scene-frame" data-show-at="34.60" data-hide-at="42.54" src="../assets/krave-day2-slide4-spray.png" alt="The employee applies garlic butter spray to the open upper and lower dough press plates">
+        <img class="scene scene-frame" data-show-at="42.04" data-hide-at="48.16" src="../assets/krave-day2-slide4-place.png" alt="The employee centers and rotates a thawed dough ball on the lower press plate">
+        <img class="scene scene-frame" data-show-at="47.66" data-hide-at="60.84" src="../assets/krave-day2-slide4-pressing.png" alt="The closed DM-18 presses the dough while the employee waits with hands clear">
+        <img class="scene scene-frame" data-show-at="60.34" data-hide-at="73.68" src="../assets/krave-day2-slide4-stretch.png" alt="The employee gently stretches pressed dough outward across a clean round pizza screen">
+        <img class="scene scene-frame" data-show-at="73.18" data-hide-at="93.076" src="../assets/krave-day2-slide4-dock.png" alt="The employee thoroughly docks pizza dough on a clean round pizza screen">
+        <div class="shade" aria-hidden="true"></div>
+        <div class="motion-sweep" aria-hidden="true"></div>
+        <div class="color-strip" aria-hidden="true"></div>
+        <div class="pause-indicator">Training Paused</div>
+        <div class="module-label">Day 2 · DoughXpress DM-18</div>
+
+        <div class="lesson-sequence">
+          <section class="lesson-panel" data-show-at="0" data-hide-at="7.90">
+            <div class="lesson-kicker">One Approved Process</div>
+            <h2 class="lesson-title compact">Consistent Dough<span>Starts Here.</span></h2>
+            <p class="lesson-support">The DM-18 creates a consistent start only when every approved step is followed.</p>
+          </section>
+
+          <section class="lesson-panel" data-show-at="7.90" data-hide-at="20.86">
+            <div class="lesson-kicker">Confirm Before Pressing</div>
+            <h2 class="lesson-title compact">Dough Must<span>Be Ready.</span></h2>
+            <div class="clock-board">
+              <div class="clock-card" data-highlight-start="10.44" data-highlight-end="12.80"><strong>72 Hours</strong><span>Full Refrigerated Thaw</span></div>
+              <div class="clock-card" data-highlight-start="13.38" data-highlight-end="16.04"><strong>7 Days</strong><span>Within Labeled Life</span></div>
+            </div>
+            <div class="hygiene-bar" data-highlight-start="16.86" data-highlight-end="20.30">Wash + Dry Hands · Follow Recipe Glove Requirements</div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="20.86" data-hide-at="34.60">
+            <div class="lesson-kicker">Leadership Sets the Press</div>
+            <h2 class="lesson-title compact">Ready Means<span>Preset.</span></h2>
+            <div class="preset-lock" data-highlight-start="20.86" data-highlight-end="29.06"><div><strong>Before You Begin</strong><span>On · Warmed · Correct Dough Size</span></div><div class="preset-icon" aria-hidden="true">🔒</div></div>
+            <div class="setting-row" aria-label="Do not change press settings">
+              <span data-highlight-start="29.06" data-highlight-end="30.86">Temperature</span>
+              <span data-highlight-start="31.22" data-highlight-end="31.64">Time</span>
+              <span data-highlight-start="32.10" data-highlight-end="32.34">Presets</span>
+              <span data-highlight-start="33.02" data-highlight-end="34.04">Thickness</span>
+            </div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="34.60" data-hide-at="47.66">
+            <div class="lesson-kicker">Prepare the Plates</div>
+            <h2 class="lesson-title compact">Two Sprays.<span>Top + Bottom.</span></h2>
+            <div class="spray-board">
+              <div class="spray-count" data-highlight-start="34.60" data-highlight-end="39.34"><strong>2</strong><span>Garlic Butter Sprays<br>Upper Plate</span></div>
+              <div class="spray-count" data-highlight-start="39.34" data-highlight-end="41.54"><strong>2</strong><span>Garlic Butter Sprays<br>Lower Plate</span></div>
+            </div>
+            <div class="place-rotate" data-highlight-start="42.04" data-highlight-end="47.10">One Fully Thawed Dough Ball · Center It · Rotate Once Clockwise</div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="47.66" data-hide-at="60.34">
+            <div class="lesson-kicker">Run One Safe Cycle</div>
+            <h2 class="lesson-title">Clear. Lock.<span>Wait for Beep.</span></h2>
+            <div class="press-cycle" aria-label="Dough press cycle">
+              <div class="cycle-step" data-step="1" data-highlight-start="47.66" data-highlight-end="48.64">Hands Clear</div>
+              <div class="cycle-step" data-step="2" data-highlight-start="49.10" data-highlight-end="50.56">Lever Down</div>
+              <div class="cycle-step" data-step="3" data-highlight-start="50.56" data-highlight-end="51.96">Lock</div>
+              <div class="cycle-step" data-step="4" data-highlight-start="52.56" data-highlight-end="56.40">Wait for Beep</div>
+              <div class="cycle-step" data-step="5" data-highlight-start="56.40" data-highlight-end="59.84">Raise + Remove</div>
+            </div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="60.34" data-hide-at="73.18">
+            <div class="lesson-kicker">Transfer to a Clean Screen</div>
+            <h2 class="lesson-title compact">Upper-Plate Side<span>Faces Down.</span></h2>
+            <div class="screen-pair">
+              <div class="screen-choice" data-highlight-start="64.02" data-highlight-end="66.08"><strong>10″</strong><span>Small Pizza Screen</span></div>
+              <div class="screen-choice" data-highlight-start="66.54" data-highlight-end="69.00"><strong>16″</strong><span>Large Pizza Screen</span></div>
+            </div>
+            <div class="face-down" data-highlight-start="60.34" data-highlight-end="64.36">Place the Side That Contacted the Upper Plate Face Down</div>
+            <div class="place-rotate" data-highlight-start="69.48" data-highlight-end="72.70">Work Dough Outward Until It Evenly Covers the Screen</div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="73.18" data-hide-at="78.94">
+            <div class="lesson-kicker">Finish the Dough</div>
+            <h2 class="lesson-title">Shape.<span>Then Dock.</span></h2>
+            <div class="finish-pair">
+              <span data-highlight-start="69.48" data-highlight-end="72.70">Evenly Cover the Screen</span>
+              <span data-highlight-start="73.18" data-highlight-end="78.38">Dock Gently + Thoroughly</span>
+            </div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="78.94" data-hide-at="93.076">
+            <div class="lesson-kicker">Do Not Compensate for a Problem</div>
+            <h2 class="lesson-title compact">Problem?<span>Stop + Ask.</span></h2>
+            <div class="problem-row">
+              <span data-highlight-start="78.94" data-highlight-end="80.18">Frozen Dough</span>
+              <span data-highlight-start="80.50" data-highlight-end="81.34">Force Handle</span>
+              <span data-highlight-start="81.66" data-highlight-end="83.86">Alter Settings</span>
+              <span data-highlight-start="83.86" data-highlight-end="89.12">Sticks · Tears · Uneven · Misses Standard</span>
+            </div>
+            <div class="stop-lock" data-highlight-start="89.74" data-highlight-end="92.32"><b>Stop + Ask</b> your trainer or manager for assistance.</div>
+          </section>
+        </div>
+
+        <div class="narration-progress" aria-hidden="true"><span></span></div>
+      </section>
+
+      <section class="slide equipment-slide oven-slide" data-slide-index="4" data-audio="audio/Krave Day 2 Slide 5.m4a" data-duration="113.544" data-narration="The TurboChef Double Batch oven cooks food rapidly by circulating extremely hot air at high speed. Because it cooks so quickly, selecting the correct programmed recipe and handling the oven safely are essential. Before cooking, confirm that the oven has completed its warm-up process and is ready for use. The upper and lower cooking chambers operate independently. Each chamber is designed to hold one pizza up to sixteen inches. Pay close attention to which door you open and which section of the touchscreen controls that chamber. Use the pizza paddle to place the prepared pizza and its screen into the correct cooking chamber. Keep your hands and face clear of the hot door and oven opening. Once the pizza is loaded, use the recipe book to identify and select the exact program shown on the touchscreen. The available pizza programs include Small Cheese Pizza, Small Pepperoni Pizza, Large Cheese Pizza, and Large Pepperoni Pizza. Never choose a program based only on the pizza's size. Match both the size and the recipe. Allow the complete cooking cycle to run with the door closed. Do not change the oven temperature, edit a programmed recipe, switch to manual cooking, or open the door during the cycle. The approved program controls the time and airflow needed to produce a consistent result. When the cycle finishes, open the correct door carefully and use the pizza paddle to remove the pizza and its screen. Confirm that the cheese is fully melted and lightly golden, the crust is evenly baked, and the pepperoni is properly heated when included. If the finished pizza does not meet the standard, or if the oven displays an alert or error, stop and notify your trainer or manager. Do not attempt to correct the problem by changing the oven settings. The correct recipe program, safe handling, and a careful final inspection work together to produce a consistent Krave pizza.">
+        <img class="scene scene-frame" data-show-at="0" data-hide-at="27.16" src="../assets/krave-day2-slide5-ready.png" alt="A countertop TurboChef Double Batch oven at realistic scale with both chambers closed and ready">
+        <img class="scene scene-frame" data-show-at="26.76" data-hide-at="42.35" src="../assets/krave-day2-slide5-load.png" alt="A properly uniformed employee loads one 16-inch screened pizza into the upper chamber with a pizza peel">
+        <img class="scene scene-frame" data-show-at="41.95" data-hide-at="62.40" src="../assets/krave-day2-slide5-program.png" alt="The employee selects an approved programmed recipe on the Double Batch touchscreen">
+        <img class="scene scene-frame" data-show-at="62.00" data-hide-at="78.42" src="../assets/krave-day2-slide5-cycle.png" alt="The employee waits safely while the Double Batch completes its closed-door cooking cycle">
+        <img class="scene scene-frame" data-show-at="78.02" data-hide-at="94.29" src="../assets/krave-day2-slide5-inspect.png" alt="The employee removes and inspects a cooked 16-inch pizza using a pizza peel">
+        <img class="scene scene-frame" data-show-at="93.89" data-hide-at="106.14" src="../assets/krave-day2-slide5-alert.png" alt="The employee stops and seeks help after the Double Batch displays an alert">
+        <img class="scene scene-frame" data-show-at="105.74" data-hide-at="113.644" src="../assets/krave-day2-slide5-inspect.png" alt="A finished pizza is removed for final inspection">
+        <div class="shade" aria-hidden="true"></div>
+        <div class="motion-sweep" aria-hidden="true"></div>
+        <div class="color-strip" aria-hidden="true"></div>
+        <div class="pause-indicator">Training Paused</div>
+        <div class="module-label">Day 2 · TurboChef Double Batch</div>
+
+        <div class="lesson-sequence">
+          <section class="lesson-panel" data-show-at="0" data-hide-at="12.86">
+            <div class="lesson-kicker">TurboChef Double Batch</div>
+            <h2 class="lesson-title compact">Rapid Heat<span>Requires Control.</span></h2>
+            <p class="lesson-support">Extremely hot air cooks at high speed. Correct programming and safe handling are essential.</p>
+            <div class="oven-meter" data-highlight-start="0.10" data-highlight-end="12.45"><strong><span>High-Speed Air</span><b>Extremely Hot</b></strong><div class="heat-track" aria-hidden="true"></div></div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="12.86" data-hide-at="26.76">
+            <div class="lesson-kicker">Before Loading</div>
+            <h2 class="lesson-title compact">Ready +<span>Independent.</span></h2>
+            <div class="chamber-board">
+              <div class="chamber-card" data-highlight-start="12.86" data-highlight-end="18.25"><strong>Oven Status</strong><span>Warm-Up Complete · Ready</span></div>
+              <div class="independent-mark" aria-hidden="true">≠</div>
+              <div class="chamber-card" data-highlight-start="18.65" data-highlight-end="22.08"><strong>Two Chambers</strong><span>Operate Independently</span></div>
+            </div>
+            <div class="face-down" data-highlight-start="22.48" data-highlight-end="26.35">Each Chamber Holds One Pizza Up to 16 Inches</div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="26.76" data-hide-at="41.95">
+            <div class="lesson-kicker">Load the Correct Chamber</div>
+            <h2 class="lesson-title compact">Match the Door<span>To the Screen.</span></h2>
+            <div class="signal-row" aria-label="Safe TurboChef loading">
+              <div class="signal-card" data-highlight-start="26.76" data-highlight-end="31.82">Match Door + Touchscreen Section</div>
+              <div class="signal-card" data-highlight-start="32.23" data-highlight-end="37.16">Use Pizza Paddle · Pizza + Screen</div>
+              <div class="signal-card" data-highlight-start="37.54" data-highlight-end="41.55">Hands + Face Clear</div>
+            </div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="41.95" data-hide-at="62.00">
+            <div class="lesson-kicker">Follow the Recipe</div>
+            <h2 class="lesson-title compact">Choose the<span>Exact Program.</span></h2>
+            <div class="program-choice">
+              <div class="program-button" data-highlight-start="50.33" data-highlight-end="51.44"><strong>Small Cheese Pizza</strong><span>Select the Exact Recipe Title</span></div>
+              <div class="program-button" data-highlight-start="51.69" data-highlight-end="53.06"><strong>Small Pepperoni Pizza</strong><span>Select the Exact Recipe Title</span></div>
+              <div class="program-button" data-highlight-start="53.28" data-highlight-end="54.36"><strong>Large Cheese Pizza</strong><span>Select the Exact Recipe Title</span></div>
+              <div class="program-button" data-highlight-start="54.62" data-highlight-end="55.96"><strong>Large Pepperoni Pizza</strong><span>Select the Exact Recipe Title</span></div>
+            </div>
+            <div class="face-down" data-highlight-start="56.38" data-highlight-end="61.59">Match Both the Pizza Size and the Recipe</div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="62.00" data-hide-at="78.02">
+            <div class="lesson-kicker">The Program Controls the Result</div>
+            <h2 class="lesson-title compact">Run It.<span>Do Not Improvise.</span></h2>
+            <div class="face-down" data-highlight-start="62.00" data-highlight-end="64.99">Run the Complete Cycle · Keep the Door Closed</div>
+            <div class="no-change-grid" aria-label="Actions employees must not take">
+              <span data-highlight-start="65.39" data-highlight-end="67.03">Change Temperature</span>
+              <span data-highlight-start="67.47" data-highlight-end="68.75">Edit Programmed Recipe</span>
+              <span data-highlight-start="69.12" data-highlight-end="70.64">Use Manual Cooking</span>
+              <span data-highlight-start="70.64" data-highlight-end="72.36">Open During Cycle</span>
+            </div>
+            <div class="preset-lock" data-highlight-start="72.74" data-highlight-end="77.62"><div><strong>Approved Program</strong><span>Controls Time + Airflow for Consistency</span></div><div class="preset-icon" aria-hidden="true">✓</div></div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="78.02" data-hide-at="93.89">
+            <div class="lesson-kicker">When the Cycle Ends</div>
+            <h2 class="lesson-title compact">Remove.<span>Then Inspect.</span></h2>
+            <div class="face-down" data-highlight-start="78.02" data-highlight-end="84.84">Open the Correct Door Carefully · Remove Pizza + Screen With the Pizza Paddle</div>
+            <div class="quality-grid" aria-label="Finished pizza quality checks">
+              <div class="quality-card" data-highlight-start="85.22" data-highlight-end="88.50">Cheese Melted + Lightly Golden</div>
+              <div class="quality-card" data-highlight-start="88.95" data-highlight-end="90.76">Crust Evenly Baked</div>
+              <div class="quality-card" data-highlight-start="90.98" data-highlight-end="93.50">Pepperoni Properly Heated</div>
+            </div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="93.89" data-hide-at="105.74">
+            <div class="lesson-kicker">When the Result Is Wrong</div>
+            <h2 class="lesson-title compact">Stop.<span>Notify a Manager.</span></h2>
+            <div class="warning-radar" aria-label="Reasons to stop">
+              <span data-highlight-start="93.89" data-highlight-end="96.10">Pizza Misses Standard</span>
+              <span data-highlight-start="96.47" data-highlight-end="98.76">Alert or Error</span>
+              <span data-highlight-start="99.19" data-highlight-end="101.72">Stop + Notify</span>
+            </div>
+            <div class="manager-action" data-highlight-start="102.09" data-highlight-end="105.32"><b>Do not correct it</b> by changing oven settings.</div>
+          </section>
+
+          <section class="lesson-panel" data-show-at="105.74" data-hide-at="113.644">
+            <div class="lesson-kicker">Three Parts of a Consistent Pizza</div>
+            <h2 class="lesson-title compact">Follow the<span>Whole Standard.</span></h2>
+            <div class="final-standard">
+              <span data-highlight-start="105.74" data-highlight-end="107.16">Correct Recipe Program</span>
+              <span data-highlight-start="107.53" data-highlight-end="108.39">Safe Handling</span>
+              <span data-highlight-start="108.98" data-highlight-end="110.53">Final Inspection</span>
+            </div>
+          </section>
+        </div>
+
+        <div class="narration-progress" aria-hidden="true"><span></span></div>
+      </section>
+<section class="slide pizza-build" id="slide6" aria-label="Large Cheese Pizza" data-audio="./audio/krave-day2-slide6.m4a" data-duration="127.896"><div class="color-strip"></div><div class="pause-indicator">Training Paused</div><div class="module-label">Day 2 · Large Cheese Pizza</div><div class="pizza-worktop">
+<img class="pizza-photo" src="../assets/day2-slide6-baked.jpg" alt="Large cheese pizza: baked stage" data-show-at="0" data-hide-at="21.68">
+<img class="pizza-photo" src="../assets/day2-slide6-dough.jpg" alt="Large cheese pizza: dough stage" data-show-at="21.68" data-hide-at="39.22">
+<img class="pizza-photo" src="../assets/day2-slide6-sauce.jpg" alt="Large cheese pizza: sauce stage" data-show-at="39.22" data-hide-at="53.14">
+<img class="pizza-photo" src="../assets/day2-slide6-cheese.jpg" alt="Large cheese pizza: cheese stage" data-show-at="53.14" data-hide-at="67.12">
+<img class="pizza-photo" src="../assets/day2-slide6-seasoned.jpg" alt="Large cheese pizza: seasoned stage" data-show-at="67.12" data-hide-at="94.26">
+<img class="pizza-photo" src="../assets/day2-slide6-baked.jpg" alt="Large cheese pizza: baked stage" data-show-at="94.26" data-hide-at="129">
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="30.44" data-hide-at="35.2"><line x1="7" y1="50" x2="93" y2="50"/><path d="M7 47v6M93 47v6"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="35.2" data-hide-at="39.22"><circle class="trace" cx="50" cy="50" r="35"/><circle class="trace" cx="50" cy="50" r="19"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="45.12" data-hide-at="48.16"><path class="trace" d="M50 50c8 -8 17 4 10 12s-30 6-30-13 34-31 49-9 0 48-28 47"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="48.16" data-hide-at="53.14"><circle class="trace" cx="50" cy="50" r="40"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="58.02" data-hide-at="61.2"><path d="M22 24L39 41m-8 0h8v-8M78 76L61 59m0 8v-8h8"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="63.36" data-hide-at="66.46"><circle class="trace" cx="50" cy="50" r="41"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="76.4" data-hide-at="79.64"><circle class="trace" cx="50" cy="50" r="41"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="115.76" data-hide-at="129"><line class="pizza-cut" x1="9" y1="50" x2="91" y2="50" transform="rotate(0 50 50)"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="116.04" data-hide-at="129"><line class="pizza-cut" x1="9" y1="50" x2="91" y2="50" transform="rotate(45 50 50)"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="116.3" data-hide-at="129"><line class="pizza-cut" x1="9" y1="50" x2="91" y2="50" transform="rotate(90 50 50)"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="116.46" data-hide-at="129"><line class="pizza-cut" x1="9" y1="50" x2="91" y2="50" transform="rotate(135 50 50)"/></svg>
+</div>
+<section class="pizza-pane" data-show-at="0" data-hide-at="8.48"><div class="eyeline">Required in every park</div><h2>Large<br><em>Cheese Pizza.</em></h2><p>One recipe every Krave employee must prepare consistently.</p></section>
+<section class="pizza-pane" data-show-at="8.48" data-hide-at="21.68"><div class="eyeline">Start with the recipe book</div><h2>Confirm.<br><em>Then build.</em></h2><div class="pizza-recipe-grid"><div data-highlight-start="14.06" data-highlight-end="14.92">Ingredients</div><div data-highlight-start="14.92" data-highlight-end="15.78">Portions</div><div data-highlight-start="15.78" data-highlight-end="16.8">Equipment</div><div data-highlight-start="16.8" data-highlight-end="18.12">Oven program</div></div><div class="pizza-note ">Never estimate portions or rely only on memory.</div></section>
+<section class="pizza-pane" data-show-at="21.68" data-hide-at="29.22"><div class="eyeline">Prepare the foundation</div><h2>One large<br><em>dough ball.</em></h2><p>Fully thawed and within its approved use window.</p><div class="pizza-note ">Use the dough preparation process you just learned.</div></section>
+<section class="pizza-pane" data-show-at="29.22" data-hide-at="39.22"><div class="eyeline">Screen · Stretch · Dock</div><h2>An even<br><em>foundation.</em></h2><div class="pizza-measure"><b>16</b><span>inch screen</span></div><p>Clean screen. Gently stretch to cover it evenly.</p><div class="pizza-note ">Dock the entire surface to help prevent large air pockets.</div></section>
+<section class="pizza-pane" data-show-at="39.22" data-hide-at="48.16"><div class="eyeline">Ready-to-use pizza sauce</div><h2>Measure.<br><em>Spread outward.</em></h2><div class="pizza-measure"><b>6</b><span>ounces</span></div><p>Use the six-ounce spoodle. Start in the center and spread in a circular motion.</p></section>
+<section class="pizza-pane" data-show-at="48.16" data-hide-at="53.14"><div class="eyeline">Leave room for the crust</div><h2>Keep a<br><em>consistent border.</em></h2><div class="pizza-measure"><b>¼–½</b><span>inch</span></div><p>Leave this border around the entire edge.</p></section>
+<section class="pizza-pane" data-show-at="53.14" data-hide-at="67.12"><div class="eyeline">Shredded mozzarella</div><h2>Outside edge.<br><em>Work inward.</em></h2><div class="pizza-measure"><b>10</b><span>ounces</span></div><p>Cover the sauce evenly.</p><div class="pizza-note ">Keep cheese off the exposed crust.</div></section>
+<section class="pizza-pane" data-show-at="67.12" data-hide-at="73"><div class="eyeline">Italian seasoning</div><h2>Finish<br><em>evenly.</em></h2><div class="pizza-measure"><b>6</b><span>even shakes</span></div><p>Distribute across the cheese.</p></section>
+<section class="pizza-pane" data-show-at="73" data-hide-at="83.68"><div class="eyeline">Before cooking</div><h2>Pause.<br><em>Inspect the build.</em></h2><div class="pizza-recipe-grid"><div data-highlight-start="76.4" data-highlight-end="78.32">Even round shape</div><div data-highlight-start="78.32" data-highlight-end="79.64">Consistent crust border</div><div data-highlight-start="79.64" data-highlight-end="81.84">Sauce + cheese coverage</div><div data-highlight-start="81.84" data-highlight-end="83.68">Clean edges</div></div></section>
+<section class="pizza-pane" data-show-at="83.68" data-hide-at="94.26"><div class="eyeline">TurboChef Double Batch</div><h2>The correct<br><em>recipe program.</em></h2><p>Use the pizza paddle to load the pizza and screen into the correct chamber.</p><div class="pizza-program" data-highlight-start="88.64" data-highlight-end="94.26">Large Cheese Pizza</div><div class="pizza-note ">Allow the full cooking cycle to finish.</div></section>
+<section class="pizza-pane" data-show-at="94.26" data-hide-at="104.9"><div class="eyeline">After the full cycle</div><h2>Remove.<br><em>Check quality.</em></h2><p>Remove pizza and screen with the pizza paddle.</p><div class="pizza-serve" data-highlight-start="98.90" data-highlight-end="102.28">Cheese melted + lightly golden</div><div class="pizza-serve" data-highlight-start="102.28" data-highlight-end="104.90">Crust evenly baked</div></section>
+<section class="pizza-pane" data-show-at="104.9" data-hide-at="111.74"><div class="eyeline">Does not meet the recipe standard?</div><h2>Stop.<br><em>Notify a manager.</em></h2><div class="pizza-note warn">Do not change oven settings.</div></section>
+<section class="pizza-pane" data-show-at="111.74" data-hide-at="118.4"><div class="eyeline">Clean, food-safe cutting surface</div><h2>Cut<br><em>equally.</em></h2><div class="pizza-measure"><b>8</b><span>equal slices</span></div><p>Transfer the pizza to the cutting surface before slicing.</p></section>
+<section class="pizza-pane" data-show-at="118.4" data-hide-at="129"><div class="eyeline">Serve immediately</div><h2>The right<br><em>presentation.</em></h2><div class="pizza-serve" data-highlight-start="118.4" data-highlight-end="122.16">Approved large wooden serving paddle</div><div class="pizza-serve" data-highlight-start="122.16" data-highlight-end="125.14">Black party pizza tray · parties & events</div><div class="pizza-serve" data-highlight-start="125.14" data-highlight-end="129">To-go box · when appropriate</div></section>
+<section class="recipe-book-view" data-show-at="8.48" data-hide-at="21.68" aria-label="Actual first page of the Large Cheese Pizza recipe">
+<img class="recipe-book-page" src="../assets/large-cheese-recipe-page.png" alt="Large Cheese Pizza recipe, first page, from the Launch recipe book">
+<div class="recipe-book-detail"><h2>Open the Large Cheese Pizza recipe.</h2>
+<div class="recipe-book-zoom">
+<img class="recipe-book-crop" data-show-at="8.48" data-hide-at="15.78" src="../assets/large-cheese-recipe-ingredients.png" alt="Recipe ingredients and measurements: one large dough ball, 6 ounces RTU sauce, 4 sprays garlic butter, 10 ounces mozzarella and 6 shakes Italian seasoning">
+<img class="recipe-book-crop" data-show-at="15.78" data-hide-at="21.68" src="../assets/large-cheese-recipe-equipment.png" alt="Tools and equipment listed in the actual recipe book">
+</div><p class="recipe-book-reminder">Confirm ingredients, portions, equipment, and oven program.<br>Never estimate portions or rely only on memory.</p></div></section><div class="pizza-route">
+<span data-highlight-start="0" data-highlight-end="21.68">Recipe</span>
+<span data-highlight-start="21.68" data-highlight-end="39.22">Dough</span>
+<span data-highlight-start="39.22" data-highlight-end="53.14">Sauce</span>
+<span data-highlight-start="53.14" data-highlight-end="67.12">Cheese</span>
+<span data-highlight-start="67.12" data-highlight-end="73">Season</span>
+<span data-highlight-start="73" data-highlight-end="83.68">Inspect</span>
+<span data-highlight-start="83.68" data-highlight-end="94.26">Cook</span>
+<span data-highlight-start="94.26" data-highlight-end="129">Finish</span>
+</div><div class="narration-progress" aria-hidden="true"><span></span></div></section>
+<section class="slide pizza-build" id="slide7" aria-label="Large Pepperoni Pizza" data-audio="./audio/krave-day2-slide7.m4a" data-duration="149.184"><div class="color-strip"></div><div class="pause-indicator">Training Paused</div><div class="module-label">Day 2 · Large Pepperoni Pizza</div><div class="pizza-worktop">
+<img class="pizza-photo" src="../assets/day2-slide6-baked.jpg" alt="Pizza baked stage" data-show-at="0" data-hide-at="25.88">
+<img class="pizza-photo" src="../assets/day2-slide6-dough.jpg" alt="Pizza dough stage" data-show-at="25.88" data-hide-at="42.56">
+<img class="pizza-photo" src="../assets/day2-slide6-sauce.jpg" alt="Pizza sauce stage" data-show-at="42.56" data-hide-at="53.24">
+<img class="pizza-photo" src="../assets/day2-slide6-cheese.jpg" alt="Pizza cheese stage" data-show-at="53.24" data-hide-at="78.74">
+<img class="pizza-photo" src="../assets/day2-slide6-seasoned.jpg" alt="Pizza seasoned stage" data-show-at="78.74" data-hide-at="104.98">
+<img class="pizza-photo" src="../assets/day2-slide6-baked.jpg" alt="Pizza baked stage" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="1" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:50.000%;top:50.000%;--turn:0deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="1" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:50.000%;top:50.000%;--turn:0deg" data-show-at="62.24" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="1" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:50.000%;top:50.000%;--turn:0deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="2" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:65.706%;top:56.506%;--turn:47deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="2" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:65.706%;top:56.506%;--turn:47deg" data-show-at="62.54" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="2" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:65.706%;top:56.506%;--turn:47deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="3" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:56.506%;top:65.706%;--turn:94deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="3" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:56.506%;top:65.706%;--turn:94deg" data-show-at="62.84" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="3" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:56.506%;top:65.706%;--turn:94deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="4" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:43.494%;top:65.706%;--turn:141deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="4" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:43.494%;top:65.706%;--turn:141deg" data-show-at="63.14" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="4" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:43.494%;top:65.706%;--turn:141deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="5" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:34.294%;top:56.506%;--turn:188deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="5" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:34.294%;top:56.506%;--turn:188deg" data-show-at="63.44" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="5" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:34.294%;top:56.506%;--turn:188deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="6" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:34.294%;top:43.494%;--turn:235deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="6" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:34.294%;top:43.494%;--turn:235deg" data-show-at="63.74" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="6" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:34.294%;top:43.494%;--turn:235deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="7" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:43.494%;top:34.294%;--turn:282deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="7" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:43.494%;top:34.294%;--turn:282deg" data-show-at="64.04" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="7" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:43.494%;top:34.294%;--turn:282deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="8" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:56.506%;top:34.294%;--turn:329deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="8" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:56.506%;top:34.294%;--turn:329deg" data-show-at="64.34" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="8" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:56.506%;top:34.294%;--turn:329deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="9" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:65.706%;top:43.494%;--turn:16deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="9" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:65.706%;top:43.494%;--turn:16deg" data-show-at="64.64" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="9" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:65.706%;top:43.494%;--turn:16deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="10" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:82.000%;top:50.000%;--turn:63deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="10" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:82.000%;top:50.000%;--turn:63deg" data-show-at="64.94" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="10" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:82.000%;top:50.000%;--turn:63deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="11" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:79.564%;top:62.246%;--turn:110deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="11" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:79.564%;top:62.246%;--turn:110deg" data-show-at="65.24" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="11" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:79.564%;top:62.246%;--turn:110deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="12" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:72.627%;top:72.627%;--turn:157deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="12" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:72.627%;top:72.627%;--turn:157deg" data-show-at="65.54" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="12" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:72.627%;top:72.627%;--turn:157deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="13" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:62.246%;top:79.564%;--turn:204deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="13" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:62.246%;top:79.564%;--turn:204deg" data-show-at="65.84" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="13" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:62.246%;top:79.564%;--turn:204deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="14" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:50.000%;top:82.000%;--turn:251deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="14" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:50.000%;top:82.000%;--turn:251deg" data-show-at="66.14" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="14" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:50.000%;top:82.000%;--turn:251deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="15" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:37.754%;top:79.564%;--turn:298deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="15" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:37.754%;top:79.564%;--turn:298deg" data-show-at="66.44" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="15" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:37.754%;top:79.564%;--turn:298deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="16" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:27.373%;top:72.627%;--turn:345deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="16" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:27.373%;top:72.627%;--turn:345deg" data-show-at="66.74" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="16" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:27.373%;top:72.627%;--turn:345deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="17" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:20.436%;top:62.246%;--turn:32deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="17" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:20.436%;top:62.246%;--turn:32deg" data-show-at="67.04" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="17" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:20.436%;top:62.246%;--turn:32deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="18" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:18.000%;top:50.000%;--turn:79deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="18" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:18.000%;top:50.000%;--turn:79deg" data-show-at="67.34" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="18" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:18.000%;top:50.000%;--turn:79deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="19" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:20.436%;top:37.754%;--turn:126deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="19" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:20.436%;top:37.754%;--turn:126deg" data-show-at="67.64" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="19" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:20.436%;top:37.754%;--turn:126deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="20" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:27.373%;top:27.373%;--turn:173deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="20" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:27.373%;top:27.373%;--turn:173deg" data-show-at="67.94" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="20" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:27.373%;top:27.373%;--turn:173deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="21" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:37.754%;top:20.436%;--turn:220deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="21" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:37.754%;top:20.436%;--turn:220deg" data-show-at="68.24" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="21" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:37.754%;top:20.436%;--turn:220deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="22" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:50.000%;top:18.000%;--turn:267deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="22" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:50.000%;top:18.000%;--turn:267deg" data-show-at="68.54" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="22" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:50.000%;top:18.000%;--turn:267deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="23" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:62.246%;top:20.436%;--turn:314deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="23" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:62.246%;top:20.436%;--turn:314deg" data-show-at="68.84" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="23" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:62.246%;top:20.436%;--turn:314deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="24" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:72.627%;top:27.373%;--turn:1deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="24" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:72.627%;top:27.373%;--turn:1deg" data-show-at="69.14" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="24" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:72.627%;top:27.373%;--turn:1deg" data-show-at="104.98" data-hide-at="151">
+<img class="pepperoni-piece" data-piece="25" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:79.564%;top:37.754%;--turn:48deg" data-show-at="0" data-hide-at="25.88">
+<img class="pepperoni-piece" data-piece="25" src="../assets/pepperoni.png" alt="" aria-hidden="true" style="left:79.564%;top:37.754%;--turn:48deg" data-show-at="69.44" data-hide-at="104.98">
+<img class="pepperoni-piece" data-piece="25" src="../assets/pepperoni-heated.png" alt="" aria-hidden="true" style="left:79.564%;top:37.754%;--turn:48deg" data-show-at="104.98" data-hide-at="151">
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="38.44" data-hide-at="40.56"><line x1="7" y1="50" x2="93" y2="50"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="40.56" data-hide-at="42.56"><circle class="trace" cx="50" cy="50" r="30"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="49.02" data-hide-at="53.24"><circle class="trace" cx="50" cy="50" r="41"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="75.9" data-hide-at="78.74"><circle class="trace" cx="50" cy="50" r="40"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="88.62" data-hide-at="91.14"><circle class="trace" cx="50" cy="50" r="40"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="126.6" data-hide-at="151"><line class="pizza-cut" x1="9" y1="50" x2="91" y2="50" transform="rotate(0 50 50)"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="126.86" data-hide-at="151"><line class="pizza-cut" x1="9" y1="50" x2="91" y2="50" transform="rotate(45 50 50)"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="127.26" data-hide-at="151"><line class="pizza-cut" x1="9" y1="50" x2="91" y2="50" transform="rotate(90 50 50)"/></svg>
+<svg class="pizza-guide" viewBox="0 0 100 100" aria-hidden="true" data-show-at="127.42" data-hide-at="151"><line class="pizza-cut" x1="9" y1="50" x2="91" y2="50" transform="rotate(135 50 50)"/></svg>
+</div>
+<section class="pizza-pane" data-show-at="0" data-hide-at="13.04"><div class="eyeline">Required in every park</div><h2>Large<br><em>Pepperoni Pizza.</em></h2><p>The same foundation. An additional topping to portion and distribute correctly.</p></section>
+<section class="pizza-pane" data-show-at="13.04" data-hide-at="25.88"><div class="eyeline">Use the recipe book</div><h2>Confirm<br><em>the recipe.</em></h2><p>Check ingredients, portions, equipment, and oven program.</p></section>
+<section class="pizza-pane" data-show-at="25.88" data-hide-at="36.34"><div class="eyeline">Prepare the dough</div><h2>One large<br><em>dough ball.</em></h2><p>Fully thawed and within its approved use window.</p><div class="pizza-note ">Follow the established dough press settings.</div></section>
+<section class="pizza-pane" data-show-at="36.34" data-hide-at="42.56"><div class="eyeline">Stretch + dock</div><h2>An even<br><em>foundation.</em></h2><div class="pizza-measure"><b>16</b><span>inch screen</span></div><p>Stretch evenly across a clean screen. Dock the entire surface.</p></section>
+<section class="pizza-pane" data-show-at="42.56" data-hide-at="53.24"><div class="eyeline">Ready-to-use pizza sauce</div><h2>Measure.<br><em>Spread evenly.</em></h2><div class="pizza-measure"><b>6</b><span>ounces</span></div><p>Use the six-ounce spoodle.</p><div class="pizza-note ">Leave a consistent ¼–½ inch crust border.</div></section>
+<section class="pizza-pane" data-show-at="53.24" data-hide-at="61.94"><div class="eyeline">Shredded mozzarella</div><h2>Outside edge.<br><em>Work inward.</em></h2><div class="pizza-measure"><b>10</b><span>ounces</span></div><div class="pizza-note ">Keep cheese off the exposed crust.</div></section>
+<section class="pizza-pane" data-show-at="61.94" data-hide-at="78.74"><div class="eyeline">Count each slice</div><h2>Exactly<br><em>25 slices.</em></h2><div class="pizza-measure"><b><span class="pep-count"><i data-show-at="61.94" data-hide-at="62.24">0</i><i data-show-at="62.24" data-hide-at="62.54">1</i><i data-show-at="62.54" data-hide-at="62.84">2</i><i data-show-at="62.84" data-hide-at="63.14">3</i><i data-show-at="63.14" data-hide-at="63.44">4</i><i data-show-at="63.44" data-hide-at="63.74">5</i><i data-show-at="63.74" data-hide-at="64.04">6</i><i data-show-at="64.04" data-hide-at="64.34">7</i><i data-show-at="64.34" data-hide-at="64.64">8</i><i data-show-at="64.64" data-hide-at="64.94">9</i><i data-show-at="64.94" data-hide-at="65.24">10</i><i data-show-at="65.24" data-hide-at="65.54">11</i><i data-show-at="65.54" data-hide-at="65.84">12</i><i data-show-at="65.84" data-hide-at="66.14">13</i><i data-show-at="66.14" data-hide-at="66.44">14</i><i data-show-at="66.44" data-hide-at="66.74">15</i><i data-show-at="66.74" data-hide-at="67.04">16</i><i data-show-at="67.04" data-hide-at="67.34">17</i><i data-show-at="67.34" data-hide-at="67.64">18</i><i data-show-at="67.64" data-hide-at="67.94">19</i><i data-show-at="67.94" data-hide-at="68.24">20</i><i data-show-at="68.24" data-hide-at="68.54">21</i><i data-show-at="68.54" data-hide-at="68.84">22</i><i data-show-at="68.84" data-hide-at="69.14">23</i><i data-show-at="69.14" data-hide-at="69.44">24</i><i data-show-at="69.44" data-hide-at="78.74">25</i></span></b><span>of 25 placed</span></div><p>Distribute evenly across the cheese.</p><div class="pizza-note ">Avoid bunching and large gaps. Keep pepperoni off the crust.</div></section>
+<section class="pizza-pane" data-show-at="78.74" data-hide-at="82.94"><div class="eyeline">Italian seasoning</div><h2>Finish<br><em>evenly.</em></h2><div class="pizza-measure"><b>6</b><span>even shakes</span></div><p>Distribute across the pizza.</p></section>
+<section class="pizza-pane" data-show-at="82.94" data-hide-at="94.52"><div class="eyeline">Before loading the oven</div><h2>Check.<br><em>Then correct.</em></h2><div class="pizza-serve" data-highlight-start="85.6" data-highlight-end="87">25 pepperoni slices</div><div class="pizza-serve" data-highlight-start="87" data-highlight-end="88.62">Even topping coverage</div><div class="pizza-serve" data-highlight-start="88.62" data-highlight-end="91.14">Consistent, clean crust border</div><div class="pizza-note ">Correct preparation issues before cooking.</div></section>
+<section class="pizza-pane" data-show-at="94.52" data-hide-at="104.98"><div class="eyeline">TurboChef Double Batch</div><h2>Select the<br><em>exact program.</em></h2><p>Load pizza + screen into the correct chamber using the pizza paddle.</p><div class="pizza-program" data-highlight-start="99.52" data-highlight-end="104.98">Large Pepperoni Pizza</div><div class="pizza-note ">Allow the full cooking cycle to finish.</div></section>
+<section class="pizza-pane" data-show-at="104.98" data-hide-at="115.9"><div class="eyeline">Remove with the pizza paddle</div><h2>Inspect<br><em>the result.</em></h2><div class="pizza-serve" data-highlight-start="109.48" data-highlight-end="111.88">Cheese fully melted</div><div class="pizza-serve" data-highlight-start="111.88" data-highlight-end="113.66">Pepperoni heated</div><div class="pizza-serve" data-highlight-start="113.66" data-highlight-end="115.9">Crust evenly baked</div></section>
+<section class="pizza-pane" data-show-at="115.9" data-hide-at="122.58"><div class="eyeline">Does not meet the recipe standard?</div><h2>Stop.<br><em>Notify a manager.</em></h2><div class="pizza-note warn">Do not change oven settings.</div></section>
+<section class="pizza-pane" data-show-at="122.58" data-hide-at="129.3"><div class="eyeline">Clean, food-safe cutting surface</div><h2>Cut<br><em>equally.</em></h2><div class="pizza-measure"><b>8</b><span>equal slices</span></div><p>Transfer to the cutting surface before slicing.</p></section>
+<section class="pizza-pane" data-show-at="129.3" data-hide-at="141.38"><div class="eyeline">Serve immediately</div><h2>Use the right<br><em>serving item.</em></h2><div class="pizza-serve" data-highlight-start="129.3" data-highlight-end="134.38">Approved large wooden serving paddle</div><div class="pizza-serve" data-highlight-start="134.38" data-highlight-end="137.44">Black party pizza tray · parties & events</div><div class="pizza-serve" data-highlight-start="137.44" data-highlight-end="141.38">To-go box · carryout or guest request</div></section>
+<section class="pizza-pane" data-show-at="141.38" data-hide-at="151"><div class="eyeline">Consistency is the goal</div><h2>The standard.<br><em>Every time.</em></h2><div class="pizza-serve" data-highlight-start="143.1" data-highlight-end="144.36">Correct portions</div><div class="pizza-serve" data-highlight-start="144.36" data-highlight-end="146.22">Evenly distributed toppings</div><div class="pizza-serve" data-highlight-start="146.22" data-highlight-end="151">Properly prepared pizza</div></section>
+<section class="recipe-book-view" data-show-at="13.04" data-hide-at="25.88" aria-label="Actual first page of the Large Pepperoni Pizza recipe"><img class="recipe-book-page" src="../assets/large-pepperoni-recipe-page.png" alt="First page of Large Pepperoni Pizza recipe"><div class="recipe-book-detail"><h2>Open the Large Pepperoni Pizza recipe.</h2><div class="recipe-book-zoom"><img class="recipe-book-crop" data-show-at="13.04" data-hide-at="20.08" src="../assets/large-pepperoni-recipe-ingredients.png" alt="Actual recipe ingredients and measurements"><img class="recipe-book-crop" data-show-at="20.08" data-hide-at="25.88" src="../assets/large-pepperoni-recipe-equipment.png" alt="Actual recipe tools and equipment"></div><p class="recipe-book-reminder">Confirm ingredients, measurements, equipment, and oven program.<br>Similar recipes are not a reason to skip the book.</p></div></section><div class="pizza-route">
+<span data-highlight-start="0" data-highlight-end="25.88">Recipe</span>
+<span data-highlight-start="25.88" data-highlight-end="42.56">Dough</span>
+<span data-highlight-start="42.56" data-highlight-end="61.94">Base</span>
+<span data-highlight-start="61.94" data-highlight-end="78.74">Pepperoni</span>
+<span data-highlight-start="78.74" data-highlight-end="82.94">Season</span>
+<span data-highlight-start="82.94" data-highlight-end="94.52">Check</span>
+<span data-highlight-start="94.52" data-highlight-end="104.98">Cook</span>
+<span data-highlight-start="104.98" data-highlight-end="151">Finish</span>
+</div><div class="narration-progress" aria-hidden="true"><span></span></div></section>
+<section aria-label="Dough thawing + use window" class="slide new-slide" data-audio="./audio/krave-day2-slide8.m4a" data-duration="84.816" id="slide8"><div class="color-strip"></div><div class="pause-indicator">Training Paused</div><div class="chapter">Day 2 · Dough thawing + use window</div><div class="beat" data-hide-at="8.98" data-show-at="0"><div class="copy"><div class="kicker">Before the prep table</div><h2>Ready starts<br/><em>in storage.</em></h2><p>Properly thawed. Clearly labeled. Within its approved window.</p></div><div class="visual"><img alt="dough-storage.jpg" class="photo" src="../assets/dough-storage.jpg"/></div></div><div class="beat" data-hide-at="22.7" data-show-at="8.98"><div class="copy"><div class="kicker">One total life</div><h2><em>7 days.</em></h2><div class="timeline"><div class="card"><b>72 hours</b>Refrigerated thaw</div><div class="card"><b>4 days</b>Use window after thawing</div></div><div class="tag">The clock starts when frozen dough is pulled.</div></div><div class="visual"><img alt="Actual recipe-book page" class="document" src="../assets/recipe-page-6.jpg"/></div></div><div class="beat reverse" data-hide-at="37.62" data-show-at="22.7"><div class="copy"><div class="kicker">Protect each batch</div><h2><em>Bag. Separate.</em></h2><p>Individually bag each dough ball. Use clean food-safe pans or trays.</p><div class="tag">Keep different pull dates and times separate.</div></div><div class="visual"><img alt="practice label" class="photo" src="../assets/practice-label.jpg"/></div></div><div class="beat" data-hide-at="46.3" data-show-at="37.62"><div class="copy"><div class="kicker">Trace the full window</div><h2><em>Label every batch.</em></h2><p>Record dates <strong>and times</strong>, plus employee initials.</p></div><div class="visual"><div class="label"><strong>DOUGH · BATCH LABEL</strong><div>Pull date + time</div><div>Ready-for-use date + time</div><div>Use-or-discard date + time</div><div>Employee initials</div></div></div></div><div class="beat wide" data-hide-at="59.84" data-show-at="46.3"><div class="copy"><div class="kicker">Example · Monday pull</div><h2><em>One continuous clock.</em></h2><div class="cards"><div class="card" data-highlight-end="49.52" data-highlight-start="47.36"><b>MON · 10 a.m.</b>Pull for refrigerated thawing</div><div class="card" data-highlight-end="53.98" data-highlight-start="49.52"><b>THU · 10 a.m.</b>Ready after 72 hours</div><div class="card" data-highlight-end="59.84" data-highlight-start="53.98"><b>NEXT MON · 10 a.m.</b>Seven-day discard deadline</div></div><div class="tag">Thawing does not start a new seven-day clock.</div></div><div class="visual"></div></div><div class="beat" data-hide-at="71.62" data-show-at="59.84"><div class="copy"><div class="kicker">Check both ends</div><h2><em>Ready AND in date.</em></h2><div class="cards"><div class="card"><b>Thaw complete?</b>Within the final discard date does not automatically mean ready.</div><div class="card"><b>Oldest eligible batch</b>Use a batch that meets both requirements.</div></div></div><div class="visual"><div class="readiness"><div>THAW COMPLETE?</div><b>AND</b><div>WITHIN DISCARD TIME?</div><strong>Both checks must pass.</strong></div></div></div><div class="beat" data-hide-at="86.816" data-show-at="71.62"><div class="copy"><div class="kicker">Unclear label?</div><h2><em>Stop. Ask.</em></h2><p>Involve your trainer or manager.</p><div class="tag">Never guess the pull time or relabel to extend life.</div></div><div class="visual"><div class="label"><strong>DO NOT GUESS</strong><div>Missing or unclear history</div><div>Cannot verify thaw completion</div><div>Cannot verify discard deadline</div></div></div></div><div class="rail"><span data-highlight-end="8.98" data-highlight-start="0"></span><span data-highlight-end="22.7" data-highlight-start="8.98"></span><span data-highlight-end="37.62" data-highlight-start="22.7"></span><span data-highlight-end="46.3" data-highlight-start="37.62"></span><span data-highlight-end="59.84" data-highlight-start="46.3"></span><span data-highlight-end="71.62" data-highlight-start="59.84"></span><span data-highlight-end="86.816" data-highlight-start="71.62"></span></div><div class="narration-progress"><span></span></div></section>
+<section aria-label="High-volume dough preparation" class="slide new-slide" data-audio="./audio/krave-day2-slide9.m4a" data-duration="94.32" id="slide9"><div class="color-strip"></div><div class="pause-indicator">Training Paused</div><div class="chapter">Day 2 · High-volume dough preparation</div><div class="beat" data-hide-at="10.66" data-show-at="0"><div class="copy"><div class="kicker">Plan for demand</div><h2>Prepare ahead.<br/><em>Stay in control.</em></h2><p>Press, stretch, and dock for expected demand.</p></div><div class="visual"><img alt="dough-rack.jpg" class="photo" src="../assets/dough-rack.jpg"/></div></div><div class="beat" data-hide-at="21.64" data-show-at="10.66"><div class="copy"><div class="kicker">Start with eligible dough</div><h2><em>Plan the quantity.</em></h2><p>Use fully thawed dough within its approved window.</p><div class="tag">Follow the shift’s planned quantities—not available rack space.</div></div><div class="visual"><img alt="Actual recipe-book page" class="document" src="../assets/recipe-page-8.jpg"/></div></div><div class="beat wide" data-hide-at="34.84" data-show-at="21.64"><div class="copy"><div class="kicker">Required glove sequence</div><h2><em>Protect your hands.</em></h2><div class="cards"><div class="card" data-highlight-end="29.76" data-highlight-start="27.5"><b>1 · Disposable glove</b>After washing and drying hands</div><div class="card" data-highlight-end="31.48" data-highlight-start="29.76"><b>2 · Cut-resistant glove</b>Over the first disposable glove</div><div class="card" data-highlight-end="34.84" data-highlight-start="31.48"><b>3 · Disposable glove</b>Over the cut-resistant glove</div></div></div><div class="visual"></div></div><div class="beat" data-hide-at="46.12" data-show-at="34.84"><div class="copy"><div class="kicker">Already set up</div><h2><em>Confirm. Do not adjust.</em></h2><p>Ask your trainer or manager if the press is not ready for the required dough size.</p></div><div class="visual"><img alt="krave-day2-slide4-open.png" class="photo" src="../assets/krave-day2-slide4-open.png"/></div></div><div class="beat" data-hide-at="51.38" data-show-at="46.12"><div class="copy"><div class="kicker">Use the approved process</div><h2><em>Two sprays. Each plate.</em></h2><p>Follow the pressing process practiced earlier.</p></div><div class="visual"><img alt="krave-day2-slide4-spray.png" class="photo" src="../assets/krave-day2-slide4-spray.png"/></div></div><div class="beat" data-hide-at="58.74" data-show-at="51.38"><div class="copy"><div class="kicker">After pressing</div><h2><em>Stretch. Then dock.</em></h2><p>Place the side that contacted the upper plate face down on the approved screen or pan.</p></div><div class="visual"><img alt="krave-day2-slide4-stretch.png" class="photo" src="../assets/krave-day2-slide4-stretch.png"/></div></div><div class="beat" data-hide-at="61.16" data-show-at="58.74"><div class="copy"><div class="kicker">Cover the whole surface</div><h2><em>Dock evenly.</em></h2><p>Finish preparing the dough before placing it on the designated rack.</p></div><div class="visual"><img alt="krave-day2-slide4-dock.png" class="photo" src="../assets/krave-day2-slide4-dock.png"/></div></div><div class="beat" data-hide-at="70.68" data-show-at="61.16"><div class="copy"><div class="kicker">First dough ball pressed</div><h2><em>Start the batch clock.</em></h2><p>Complete the batch time label immediately.</p></div><div class="visual"><img alt="Identify each batch clearly." class="photo" src="../assets/dough-rack.jpg"/><div class="floating-caption">Identify each batch clearly.</div></div></div><div class="beat" data-hide-at="80.48" data-show-at="70.68"><div class="copy"><div class="kicker">Room-temperature limit</div><h2><em>No more than 6 hours.</em></h2><p>Example: 11 a.m. start → 5 p.m. use-or-discard deadline.</p></div><div class="visual"><div class="clockface"><div class="big-number">6</div><div class="number-unit">hours maximum</div></div></div></div><div class="beat wide" data-hide-at="96.32" data-show-at="80.48"><div class="copy"><div class="kicker">No fresh start</div><h2><em>The original clock stays.</em></h2><div class="cards"><div class="card"><b>Later additions</b>Do not restart the batch clock.</div><div class="card"><b>Original expiration</b>The six-hour limit never extends it.</div><div class="card"><b>Clear batch labels</b>Never give older dough a new start time.</div></div></div><div class="visual"></div></div><div class="rail"><span data-highlight-end="10.66" data-highlight-start="0"></span><span data-highlight-end="21.64" data-highlight-start="10.66"></span><span data-highlight-end="34.84" data-highlight-start="21.64"></span><span data-highlight-end="46.12" data-highlight-start="34.84"></span><span data-highlight-end="51.38" data-highlight-start="46.12"></span><span data-highlight-end="58.74" data-highlight-start="51.38"></span><span data-highlight-end="61.16" data-highlight-start="58.74"></span><span data-highlight-end="70.68" data-highlight-start="61.16"></span><span data-highlight-end="80.48" data-highlight-start="70.68"></span><span data-highlight-end="96.32" data-highlight-start="80.48"></span></div><div class="narration-progress"><span></span></div></section>
+<section aria-label="Ready-to-use pizza sauce" class="slide new-slide" data-audio="./audio/krave-day2-slide10.m4a" data-duration="89.544" id="slide10"><div class="color-strip"></div><div class="pause-indicator">Training Paused</div><div class="chapter">Day 2 · Ready-to-use pizza sauce</div><div class="beat" data-hide-at="6.66" data-show-at="0"><div class="copy"><div class="kicker">Ready to use</div><h2><em>Nothing to add.</em></h2><p>No added water, seasonings, or other ingredients.</p></div><div class="visual"><img alt="sauce inspect" class="photo" src="../assets/sauce-inspect.jpg"/></div></div><div class="beat" data-hide-at="19.04" data-show-at="6.66"><div class="copy"><div class="kicker">Prepare safely</div><h2><em>Hands. Can. Opener.</em></h2><div class="cards"><div class="card" data-highlight-end="12.28" data-highlight-start="8.26"><b>Clean hands + gloves</b>Wash, dry, and put on clean food-safety gloves.</div><div class="card" data-highlight-end="15.74" data-highlight-start="12.28"><b>Inspect the can</b>Clean and sanitize its top.</div><div class="card" data-highlight-end="19.04" data-highlight-start="15.74"><b>Check the opener</b>Clean and sanitized before use.</div></div></div><div class="visual"><img alt="sauce inspect" class="photo" src="../assets/sauce-inspect.jpg" style="object-position:55% 35%;transform:scale(1.12)"/></div></div><div class="beat reverse" data-hide-at="32.18" data-show-at="19.04"><div class="copy"><div class="kicker">Transfer with care</div><h2><em>Use the correct pans.</em></h2><p>Clean, sanitized rubber spatula and deep one-third pans.</p><div class="tag">Scrape the sides and bottom to avoid waste.</div></div><div class="visual"><img alt="sauce transfer" class="photo product-photo" src="../assets/sauce-transfer.jpg"/></div></div><div class="beat" data-hide-at="40.08" data-show-at="32.18"><div class="copy"><div class="kicker">Protect the sauce</div><h2><em>Cover immediately.</em></h2><p>Use a fitted lid or approved food-safe cover.</p><div class="tag">Do not store opened sauce in the original can.</div></div><div class="visual"><img alt="sauce cover" class="photo product-photo" src="../assets/sauce-cover.jpg"/></div></div><div class="beat" data-hide-at="52.32" data-show-at="40.08"><div class="copy"><div class="kicker">Every pan gets a label</div><h2><em>Keep its history.</em></h2><p>The seven-day shelf life starts when the can opens.</p></div><div class="visual"><div class="label"><strong>READY-TO-USE PIZZA SAUCE</strong><div>Product name</div><div>Opening date + time</div><div>Use-or-discard date + time</div><div>Employee initials</div></div></div></div><div class="beat" data-hide-at="62.88" data-show-at="52.32"><div class="copy"><div class="kicker">Same can. Same clock.</div><h2><em>No reset.</em></h2><p>Transfer does not restart shelf life.</p><div class="tag">Every pan from the same can uses the same opening and discard information.</div></div><div class="visual"><img alt="Actual recipe-book page" class="document" src="../assets/recipe-page-10.jpg"/></div></div><div class="beat" data-hide-at="70.7" data-show-at="62.88"><div class="copy"><div class="kicker">Keep it refrigerated</div><h2><em>Cold holding continues.</em></h2><p>Covered pans stay refrigerated. Sauce on the preparation table stays under approved refrigerated cold holding.</p></div><div class="visual"><img alt="sauce cold" class="photo" src="../assets/sauce-cold.jpg"/></div></div><div class="beat reverse" data-hide-at="91.544" data-show-at="70.7"><div class="copy"><div class="kicker">Use the oldest eligible pan</div><h2><em>Never top off.</em></h2><p>Do not combine differently dated batches.</p><div class="tag">Wash and sanitize an empty pan before refilling.</div></div><div class="visual"><div class="readiness"><div>OLDEST ELIGIBLE PAN FIRST</div><b>Never top off</b><div>Do not mix differently dated batches.</div><strong>Empty pan → wash + sanitize → refill</strong></div></div></div><div class="rail"><span data-highlight-end="6.66" data-highlight-start="0"></span><span data-highlight-end="19.04" data-highlight-start="6.66"></span><span data-highlight-end="32.18" data-highlight-start="19.04"></span><span data-highlight-end="40.08" data-highlight-start="32.18"></span><span data-highlight-end="52.32" data-highlight-start="40.08"></span><span data-highlight-end="62.88" data-highlight-start="52.32"></span><span data-highlight-end="70.7" data-highlight-start="62.88"></span><span data-highlight-end="91.544" data-highlight-start="70.7"></span></div><div class="narration-progress"><span></span></div></section>
+<section aria-label="Small pizzas · their own recipes" class="slide new-slide" data-audio="./audio/krave-day2-slide11b.m4a" data-duration="95.616" id="slide11"><div class="color-strip"></div><div class="pause-indicator">Training Paused</div><div class="chapter">Day 2 · Small pizzas · their own recipes</div><div class="beat" data-hide-at="15.4" data-show-at="0"><div class="copy"><div class="kicker">Read. Do not estimate.</div><h2>Small pizza.<br/><em>Its own recipe.</em></h2><p>Size changes the portions, equipment, and cooking program.</p></div><div class="visual"><img alt="Small Cheese Pizza recipe" class="recipe-mini" src="../assets/recipe-page-48.jpg"/><img alt="Small Pepperoni Pizza recipe" class="recipe-mini" src="../assets/recipe-page-50.jpg"/></div></div><div class="beat" data-hide-at="31.18" data-show-at="15.4"><div class="copy"><div class="kicker">Start with the small dough</div><h2><em>A 10-inch screen.</em></h2><p>Fully thawed dough, prepared using the approved process.</p><div class="tag">Press not ready? Ask your trainer. Do not change settings.</div></div><div class="visual"><div class="clockface"><div class="big-number">10″</div><div class="number-unit">clean pizza screen</div></div></div></div><div class="beat" data-hide-at="41.92" data-show-at="31.18"><div class="copy"><div class="kicker">Small Cheese Pizza</div><h2><em>Measure the sauce.</em></h2><p>Two ounces of ready-to-use sauce, using a two-ounce spoodle.</p><div class="tag">Keep a ¼–½ inch crust border.</div></div><div class="visual"><img alt="Preparation detail · keep the exposed crust clear." class="photo" src="../assets/day2-slide6-sauce.jpg"/><div class="floating-caption">Preparation detail · keep the exposed crust clear.</div></div></div><div class="beat" data-hide-at="48.64" data-show-at="41.92"><div class="copy"><div class="kicker">Small Cheese Pizza</div><h2><em>6 ounces of cheese.</em></h2><p>Distribute shredded mozzarella evenly.</p><div class="tag">Keep cheese off the exposed crust.</div></div><div class="visual"><img alt="day2-slide6-cheese.jpg" class="photo" src="../assets/day2-slide6-cheese.jpg"/></div></div><div class="beat" data-hide-at="51.52" data-show-at="48.64"><div class="copy"><div class="kicker">Italian seasoning</div><h2><em>3 even shakes.</em></h2><p>Finish the small cheese pizza evenly.</p></div><div class="visual"><img alt="Actual recipe-book page" class="document" src="../assets/recipe-page-48.jpg"/></div></div><div class="beat" data-hide-at="65.84" data-show-at="51.52"><div class="copy"><div class="kicker">Small Pepperoni Pizza</div><h2><em>Exactly 12 slices.</em></h2><p>Same two ounces of sauce and six ounces of cheese.</p><div class="tag">Spread pepperoni evenly, keep it off the crust, then add three shakes of seasoning.</div></div><div class="visual"><img alt="Actual recipe-book page" class="document" src="../assets/recipe-page-50.jpg"/></div></div><div class="beat wide" data-hide-at="75.98" data-show-at="65.84"><div class="copy"><div class="kicker">Match the pizza you made</div><h2><em>Choose the exact program.</em></h2><div class="cards"><div class="card" data-highlight-end="68.28" data-highlight-start="66.76"><b>Small Cheese Pizza</b>For the small cheese recipe</div><div class="card" data-highlight-end="75.98" data-highlight-start="68.28"><b>Small Pepperoni Pizza</b>For the small pepperoni recipe</div></div><div class="tag">Complete the full cycle. Inspect the finished product.</div></div><div class="visual"></div></div><div class="beat" data-hide-at="78.92" data-show-at="75.98"><div class="copy"><div class="kicker">Finish accurately</div><h2><em>4 equal slices.</em></h2><p>Make every portion even.</p></div><div class="visual"><div class="clockface"><div class="big-number">4</div><div class="number-unit">equal slices</div></div></div></div><div class="beat" data-hide-at="82.38" data-show-at="78.92"><div class="copy"><div class="kicker">Approved serving item</div><h2>Small wooden<br/><em>serving paddle.</em></h2><p>Use the approved small paddle.</p></div><div class="visual"><img alt="Approved serving item" class="photo product-photo" src="../assets/wpp-1222.jpg"/></div></div><div class="beat" data-hide-at="86.76" data-show-at="82.38"><div class="copy"><div class="kicker">Carryout or guest request</div><h2>Small<br/><em>to-go box.</em></h2><p>Use a small to-go box for carryout or when requested by the guest.</p></div><div class="visual"><img alt="Carryout or guest request" class="photo product-photo" src="../assets/small-box.jpg"/></div></div><div class="beat" data-hide-at="98" data-show-at="86.76"><div class="copy"><div class="kicker">Each size has its own recipe</div><h2>Read.<br/><em>Measure.</em></h2><p>The small recipe is not simply half of the large recipe.</p></div><div class="visual"><img alt="Each size has its own recipe" class="photo product-photo" src="../assets/recipe-page-48.jpg"/></div></div><div class="rail"><span data-highlight-end="15.4" data-highlight-start="0"></span><span data-highlight-end="31.18" data-highlight-start="15.4"></span><span data-highlight-end="41.92" data-highlight-start="31.18"></span><span data-highlight-end="48.64" data-highlight-start="41.92"></span><span data-highlight-end="51.52" data-highlight-start="48.64"></span><span data-highlight-end="65.84" data-highlight-start="51.52"></span><span data-highlight-end="75.98" data-highlight-start="65.84"></span><span data-highlight-end="78.92" data-highlight-start="75.98"></span><span data-highlight-end="82.38" data-highlight-start="78.92"></span><span data-highlight-end="86.76" data-highlight-start="82.38"></span><span data-highlight-end="98" data-highlight-start="86.76"></span></div><div class="narration-progress"><span></span></div></section>
+<section aria-label="Use the book for every pizza" class="slide new-slide" data-audio="./audio/krave-day2-slide12.m4a" data-duration="89.808" id="slide12"><div class="color-strip"></div><div class="pause-indicator">Training Paused</div><div class="chapter">Day 2 · Use the book for every pizza</div><div class="beat" data-hide-at="16.46" data-show-at="0"><div class="copy"><div class="kicker">Your reference for every order</div><h2><em>Find the exact recipe.</em></h2><p>Match pizza name, size, and specified crust variation.</p><div class="tag">Read the entire recipe before beginning.</div></div><div class="visual"><img alt="krave-day2-slide2-recipe-book.png" class="photo" src="../assets/krave-day2-slide2-recipe-book.png"/></div></div><div class="beat" data-hide-at="27.02" data-show-at="16.46"><div class="copy"><div class="kicker">Ingredients + measurements</div><h2><em>Check every portion.</em></h2><p>Specialty recipes may change the sauce, toppings, and finishing steps.</p></div><div class="visual"><img alt="large-pepperoni-recipe-ingredients.png" class="photo" src="../assets/large-pepperoni-recipe-ingredients.png"/></div></div><div class="beat reverse" data-hide-at="38.52" data-show-at="27.02"><div class="copy"><div class="kicker">Tools + sequence</div><h2><em>Follow the order.</em></h2><p>Confirm equipment, when ingredients are added, cooking, finishing, and serving.</p></div><div class="visual"><img alt="large-pepperoni-recipe-equipment.png" class="photo" src="../assets/large-pepperoni-recipe-equipment.png"/></div></div><div class="beat wide" data-hide-at="44.72" data-show-at="38.52"><div class="copy"><div class="kicker">Similar is not identical</div><h2><em>Do not carry over assumptions.</em></h2><div class="cards"><div class="card"><b>Sauce</b>Not every pizza starts with red sauce.</div><div class="card"><b>Toppings</b>Portions can differ by recipe.</div><div class="card"><b>Finishing</b>Some ingredients are added later.</div></div></div><div class="visual"></div></div><div class="beat" data-hide-at="58.32" data-show-at="44.72"><div class="copy"><div class="kicker">Each topping has a standard</div><h2><em>Check its prep recipe.</em></h2><p>Use peppers, mushrooms, and other prepared toppings that were prepared and labeled correctly.</p></div><div class="visual"><img alt="krave-prep-station.jpg" class="photo" src="../assets/krave-prep-station.jpg"/></div></div><div class="beat" data-hide-at="71.76" data-show-at="58.32"><div class="copy"><div class="kicker">Confirm your park’s menu</div><h2><em>Available here?</em></h2><p>Your trainer identifies the approved local offerings.</p><div class="tag">A recipe in the book does not automatically mean your park sells it.</div></div><div class="visual"><img alt="practice question" class="photo" src="../assets/practice-question.jpg"/></div></div><div class="beat" data-hide-at="91.808" data-show-at="71.76"><div class="copy"><div class="kicker">Missing ingredient? Unclear order?</div><h2><em>Stop and ask.</em></h2><p>Ask your trainer or manager.</p><div class="tag">Do not invent substitutions or change portions to make an order work.</div></div><div class="visual"><img alt="practice label" class="photo" src="../assets/practice-label.jpg"/></div></div><div class="rail"><span data-highlight-end="16.46" data-highlight-start="0"></span><span data-highlight-end="27.02" data-highlight-start="16.46"></span><span data-highlight-end="38.52" data-highlight-start="27.02"></span><span data-highlight-end="44.72" data-highlight-start="38.52"></span><span data-highlight-end="58.32" data-highlight-start="44.72"></span><span data-highlight-end="71.76" data-highlight-start="58.32"></span><span data-highlight-end="91.808" data-highlight-start="71.76"></span></div><div class="narration-progress"><span></span></div></section>
+<section aria-label="Quality checks + decisions" class="slide new-slide" data-audio="./audio/krave-day2-slide13.m4a" data-duration="83.664" id="slide13"><div class="color-strip"></div><div class="pause-indicator">Training Paused</div><div class="chapter">Day 2 · Quality checks + decisions</div><div class="beat" data-hide-at="16.24" data-show-at="0"><div class="copy"><div class="kicker">Throughout the process</div><h2>Check early.<br/><em>Correct early.</em></h2><p>Before cooking: dough shape, crust border, portions, and topping distribution.</p></div><div class="visual"><img alt="day2-slide6-seasoned.jpg" class="photo" src="../assets/day2-slide6-seasoned.jpg"/></div></div><div class="beat" data-hide-at="27.86" data-show-at="16.24"><div class="copy"><div class="kicker">Large Pepperoni Pizza</div><h2><em>Count AND placement.</em></h2><p>Twenty-five slices grouped on one side still fail the standard.</p><div class="tag">Spread the slices evenly before cooking.</div></div><div class="visual"><div class="receipt"><b>PRE-COOK CHECK</b><div>25 slices ✓</div><div>Even distribution?</div><div>Correct before cooking.</div></div></div></div><div class="beat" data-hide-at="38.5" data-show-at="27.86"><div class="copy"><div class="kicker">Check the exposed crust</div><h2><em>Clean up the border.</em></h2><p>Cheese on the exposed crust needs correction before loading.</p><div class="tag">Correct ingredient totals do not replace correct placement.</div></div><div class="visual"><img alt="day2-slide6-cheese.jpg" class="photo" src="../assets/day2-slide6-cheese.jpg"/></div></div><div class="beat" data-hide-at="48.4" data-show-at="38.5"><div class="copy"><div class="kicker">Before starting</div><h2><em>Chamber + exact program.</em></h2><p>Missing program or unsure of the selection?</p><div class="tag">Ask for help before starting.</div></div><div class="visual"><img alt="krave-day2-slide5-program.png" class="photo" src="../assets/krave-day2-slide5-program.png"/></div></div><div class="beat wide" data-hide-at="60.08" data-show-at="48.4"><div class="copy"><div class="kicker">Inspect the result</div><h2><em>Does it meet the recipe?</em></h2><div class="cards"><div class="card" data-highlight-end="56.26" data-highlight-start="54.68"><b>Cheese</b>Melted</div><div class="card" data-highlight-end="57.8" data-highlight-start="56.26"><b>Crust</b>Evenly baked</div><div class="card" data-highlight-end="60.08" data-highlight-start="57.8"><b>Pepperoni</b>Heated, where applicable</div></div></div><div class="visual"></div></div><div class="beat" data-hide-at="69.3" data-show-at="60.08"><div class="copy"><div class="kicker">Does not meet the standard?</div><h2><em>Stop. Notify a manager.</em></h2><p>Do not serve an unacceptable result because it is busy.</p><div class="tag">Do not experiment with oven settings.</div></div><div class="visual"><img alt="uneven pizza" class="photo product-photo" src="../assets/uneven-pizza.jpg"/></div></div><div class="beat" data-hide-at="85.664" data-show-at="69.3"><div class="copy"><div class="kicker">Give useful information</div><h2><em>Say what happened.</em></h2><p>“This large cheese pizza completed the Large Cheese Pizza program, but the crust is not evenly baked.”</p></div><div class="visual"><img alt="uneven pizza" class="photo product-photo" src="../assets/uneven-pizza.jpg"/></div></div><div class="rail"><span data-highlight-end="16.24" data-highlight-start="0"></span><span data-highlight-end="27.86" data-highlight-start="16.24"></span><span data-highlight-end="38.5" data-highlight-start="27.86"></span><span data-highlight-end="48.4" data-highlight-start="38.5"></span><span data-highlight-end="60.08" data-highlight-start="48.4"></span><span data-highlight-end="69.3" data-highlight-start="60.08"></span><span data-highlight-end="85.664" data-highlight-start="69.3"></span></div><div class="narration-progress"><span></span></div></section>
+<section aria-label="Cutting + presentation + handoff" class="slide new-slide" data-audio="./audio/krave-day2-slide14.m4a" data-duration="82.968" id="slide14"><div class="color-strip"></div><div class="pause-indicator">Training Paused</div><div class="chapter">Day 2 · Cutting + presentation + handoff</div><div class="beat" data-hide-at="17.16" data-show-at="0"><div class="copy"><div class="kicker">A clean, accurate finish</div><h2>Protect<br/><em>the finished food.</em></h2><p>Transfer to a clean, food-safe cutting surface. Use clean equipment.</p></div><div class="visual"><img alt="day2-slide6-baked.jpg" class="photo" src="../assets/day2-slide6-baked.jpg"/></div></div><div class="beat" data-hide-at="20.58" data-show-at="17.16"><div class="copy"><div class="kicker">Large pizza</div><h2><em>8 equal slices.</em></h2><p>Take time to make every portion even.</p></div><div class="visual"><div class="pizza-circle"><img alt="Pizza with equal-slice cutting guide" src="../assets/day2-slide6-baked.jpg"/><span class="cut-line" style="--angle:0deg"></span><span class="cut-line" style="--angle:45deg"></span><span class="cut-line" style="--angle:90deg"></span><span class="cut-line" style="--angle:135deg"></span></div></div></div><div class="beat reverse" data-hide-at="28.02" data-show-at="20.58"><div class="copy"><div class="kicker">Small pizza</div><h2><em>4 equal slices.</em></h2><p>Consistent portions for the guest.</p></div><div class="visual"><div class="pizza-circle"><img alt="Pizza with equal-slice cutting guide" src="../assets/day2-slide6-baked.jpg"/><span class="cut-line" style="--angle:0deg"></span><span class="cut-line" style="--angle:90deg"></span></div></div></div><div class="beat" data-hide-at="39.7" data-show-at="28.02"><div class="copy"><div class="kicker">Match the order</div><h2><em>The right serving item.</em></h2><div class="cards"><div class="card" data-highlight-end="35.58" data-highlight-start="31.08"><b>Large pizza</b>Approved large wooden paddle</div><div class="card" data-highlight-end="39.7" data-highlight-start="35.58"><b>Small pizza</b>Approved small wooden paddle</div></div></div><div class="visual"><div class="paddle-pair"><figure><img alt="Actual Winco WPP-1424 large wooden paddle" src="../assets/wpp-1424.jpg"/><figcaption>Large wooden paddle<span class="paddle-size">14 × 15-inch blade<br>24 inches overall</span></figcaption></figure><figure><img alt="Actual Winco WPP-1222 small wooden paddle" src="../assets/wpp-1222.jpg"/><figcaption>Small wooden paddle<span class="paddle-size">12 × 13-inch blade<br>22 inches overall</span></figcaption></figure></div></div></div><div class="beat reverse" data-hide-at="47.48" data-show-at="39.7"><div class="copy"><div class="kicker">Parties + carryout</div><h2><em>Choose appropriately.</em></h2><div class="cards"><div class="card"><b>Parties &amp; events</b>Approved party pizza tray</div><div class="card"><b>Carryout / guest request</b>To-go box</div></div></div><div class="visual"><img alt="small box" class="photo product-photo" src="../assets/small-box.jpg"/></div></div><div class="beat wide" data-hide-at="60.12" data-show-at="47.48"><div class="copy"><div class="kicker">Final order check</div><h2><em>Ready to hand off?</em></h2><div class="cards"><div class="card" data-highlight-end="52.86" data-highlight-start="50.24"><b>Correct item + size</b>Match the order.</div><div class="card" data-highlight-end="53.96" data-highlight-start="52.86"><b>Cut correctly</b>Even slices.</div><div class="card" data-highlight-end="60.12" data-highlight-start="53.96"><b>Presented neatly</b>Serve immediately.</div></div></div><div class="visual"></div></div><div class="beat" data-hide-at="70.48" data-show-at="60.12"><div class="copy"><div class="kicker">Follow your location’s system</div><h2><em>Pickup or delivery.</em></h2><div class="cards"><div class="card" data-highlight-end="63.28" data-highlight-start="60.92"><b>Buzzer pickup</b>Guests return for their food.</div><div class="card" data-highlight-end="70.48" data-highlight-start="63.28"><b>QR ordering</b>Deliver to the table or bowling lane.</div></div></div><div class="visual"><div class="handoff-choices"><div><b>BUZZER</b><span>Guest pickup</span></div><div><b>QR ORDER</b><span>Table / bowling lane delivery</span></div></div></div></div><div class="beat" data-hide-at="84.968" data-show-at="70.48"><div class="copy"><div class="kicker">Care continues at handoff</div><h2><em>Ask. Then get it.</em></h2><p>Ask guests what they need and readily bring available items to them.</p><div class="tag">Napkins or utensils? Help obtain them—do not just point.</div></div><div class="visual"><img alt="guest help" class="photo" src="../assets/guest-help.jpg"/></div></div><div class="rail"><span data-highlight-end="17.16" data-highlight-start="0"></span><span data-highlight-end="20.58" data-highlight-start="17.16"></span><span data-highlight-end="28.02" data-highlight-start="20.58"></span><span data-highlight-end="39.7" data-highlight-start="28.02"></span><span data-highlight-end="47.48" data-highlight-start="39.7"></span><span data-highlight-end="60.12" data-highlight-start="47.48"></span><span data-highlight-end="70.48" data-highlight-start="60.12"></span><span data-highlight-end="84.968" data-highlight-start="70.48"></span></div><div class="narration-progress"><span></span></div></section>
+<section aria-label="Prepare for demand + record waste" class="slide new-slide" data-audio="./audio/krave-day2-slide15.m4a" data-duration="85.488" id="slide15"><div class="color-strip"></div><div class="pause-indicator">Training Paused</div><div class="chapter">Day 2 · Prepare for demand + record waste</div><div class="beat" data-hide-at="11.34" data-show-at="0"><div class="copy"><div class="kicker">Prepare with purpose</div><h2>Meet demand.<br/><em>Limit waste.</em></h2><p>Use your park’s food preparation guide and trainer direction.</p></div><div class="visual"><img alt="dough-rack.jpg" class="photo" src="../assets/dough-rack.jpg"/></div></div><div class="beat wide" data-hide-at="17.88" data-show-at="11.34"><div class="copy"><div class="kicker">Build the shift plan</div><h2><em>Know what is coming.</em></h2><div class="cards"><div class="card"><b>Expected traffic</b>Prepare for forecast demand.</div><div class="card"><b>Parties + groups</b>Account for scheduled orders.</div><div class="card"><b>Usable stock</b>Include what is already on hand.</div></div></div><div class="visual"></div></div><div class="beat" data-hide-at="30.48" data-show-at="17.88"><div class="copy"><div class="kicker">Check before making more</div><h2><em>Use what is eligible.</em></h2><p>Verify labels, use windows, and condition.</p><div class="tag">Use the oldest eligible product first.</div></div><div class="visual"><img alt="dough-storage.jpg" class="photo" src="../assets/dough-storage.jpg"/></div></div><div class="beat reverse" data-hide-at="39.28" data-show-at="30.48"><div class="copy"><div class="kicker">Busy does not mean unlimited</div><h2><em>Limits still apply.</em></h2><p>Dough, sauce, and toppings keep their own holding and shelf-life limits.</p></div><div class="visual"><img alt="sauce cold" class="photo" src="../assets/sauce-cold.jpg"/></div></div><div class="beat" data-hide-at="51.68" data-show-at="39.28"><div class="copy"><div class="kicker">Speak up early</div><h2><em>Give the team time.</em></h2><div class="cards"><div class="card"><b>Dough not fully thawed?</b>Tell your trainer before it is needed.</div><div class="card"><b>Ingredient running low?</b>Communicate while there is time to respond.</div></div></div><div class="visual"><img alt="practice question" class="photo" src="../assets/practice-question.jpg"/></div></div><div class="beat" data-hide-at="65.66" data-show-at="51.68"><div class="copy"><div class="kicker">Record actual waste</div><h2><em>Keep the full picture.</em></h2><p>Follow the food waste logging process.</p></div><div class="visual"><div class="receipt"><b>FOOD WASTE RECORD</b><div>Date + time · Employee initials</div><div>Food type · Number of portions</div><div>Reason for loss</div><div>Helpful comments</div></div></div></div><div class="beat wide" data-hide-at="87.488" data-show-at="65.66"><div class="copy"><div class="kicker">Different causes. Accurate records.</div><h2><em>Tell the truth.</em></h2><div class="cards"><div class="card" data-highlight-end="69.1" data-highlight-start="67.8"><b>Expired dough</b>Shelf-life loss</div><div class="card" data-highlight-end="71.22" data-highlight-start="69.1"><b>Incorrectly prepared pizza</b>Preparation error</div><div class="card" data-highlight-end="87.488" data-highlight-start="71.22"><b>Dropped finished order</b>Handling loss</div></div><div class="tag">Never hide waste or serve unacceptable food to avoid logging a loss.</div></div><div class="visual"></div></div><div class="rail"><span data-highlight-end="11.34" data-highlight-start="0"></span><span data-highlight-end="17.88" data-highlight-start="11.34"></span><span data-highlight-end="30.48" data-highlight-start="17.88"></span><span data-highlight-end="39.28" data-highlight-start="30.48"></span><span data-highlight-end="51.68" data-highlight-start="39.28"></span><span data-highlight-end="65.66" data-highlight-start="51.68"></span><span data-highlight-end="87.488" data-highlight-start="65.66"></span></div><div class="narration-progress"><span></span></div></section>
+<section aria-label="From online learning to practice" class="slide new-slide" data-audio="./audio/krave-day2-slide16.m4a" data-duration="89.016" id="slide16"><div class="color-strip"></div><div class="pause-indicator">Training Paused</div><div class="chapter">Day 2 · From online learning to practice</div><div class="beat" data-hide-at="16.7" data-show-at="0"><div class="copy"><div class="kicker">Day 2 online training</div><h2>Foundation.<br/><em>Then application.</em></h2><p>Day 1: food-safety habits.<br/>Day 2: recipes, equipment, pizza preparation, and presentation.</p></div><div class="visual"><img alt="practice measure" class="photo" src="../assets/practice-measure.jpg"/></div></div><div class="beat" data-hide-at="21.14" data-show-at="16.7"><div class="copy"><div class="kicker">Work with your trainer</div><h2><em>Put it into practice.</em></h2><p>Use today’s checklist for structured hands-on practice.</p></div><div class="visual"><img alt="practice coach" class="photo" src="../assets/practice-coach.jpg"/></div></div><div class="beat" data-hide-at="28.66" data-show-at="21.14"><div class="copy"><div class="kicker">Show what you know</div><h2><em>Read. Check. Measure.</em></h2><div class="cards"><div class="card compact-card"><b>Recipe + labels</b>Find the correct standard and eligible ingredients.</div><div class="card compact-card"><b>Portions</b>Measure accurately.</div><div class="card compact-card"><b>Dough windows</b>Explain thawing and use deadlines.</div></div></div><div class="visual"><img alt="practice label" class="photo" src="../assets/practice-label.jpg"/></div></div><div class="beat" data-hide-at="36.52" data-show-at="28.66"><div class="copy"><div class="kicker">Safe equipment operation</div><h2><em>Demonstrate the process.</em></h2><p>Practice the dough press without changing settings and safe TurboChef loading and unloading.</p></div><div class="visual"><img alt="krave-day2-slide4-open.png" class="photo" src="../assets/krave-day2-slide4-open.png"/></div></div><div class="beat" data-hide-at="48.84" data-show-at="36.52"><div class="copy"><div class="kicker">Required in every park</div><h2><em>Large cheese + pepperoni.</em></h2><p>Prepare both with your trainer.</p><div class="tag">Even dough · accurate portions · distribution · exact program · quality check</div></div><div class="visual"><div class="recipe-duo"><img alt="Large Cheese Pizza recipe" src="../assets/large-cheese-recipe-page.png"/><img alt="Large Pepperoni Pizza recipe" src="../assets/large-pepperoni-recipe-page.png"/></div></div></div><div class="beat reverse" data-hide-at="67.86" data-show-at="48.84"><div class="copy"><div class="kicker">Your park. Your questions.</div><h2><em>Watch. Then practice.</em></h2><p>Ask for a demonstration when a step is unclear.</p><div class="tag">One successful attempt is not the same as consistent readiness.</div></div><div class="visual"><img alt="practice question" class="photo" src="../assets/practice-question.jpg"/></div></div><div class="beat" data-hide-at="71.1" data-show-at="67.86"><div class="copy"><div class="kicker">Complete the sequence</div><h2><em>Practice → Day 2 exam.</em></h2><p>Complete the exam after the hands-on portion.</p></div><div class="visual"><div class="readiness"><div>ONLINE TRAINING</div><b>↓</b><div>TRAINER PRACTICE</div><b>↓</b><div>DAY 2 EXAM</div></div></div></div><div class="beat wide" data-hide-at="81.34" data-show-at="71.1"><div class="copy"><div class="kicker">Coming next</div><h2><em>Expand your skills.</em></h2><div class="cards"><div class="card"><b>AutoFry + recipes</b>Additional Krave food preparation</div><div class="card"><b>Order coordination</b>Keep the kitchen working together.</div><div class="card"><b>Service + closing</b>Support the complete shift.</div></div></div><div class="visual"></div></div><div class="beat" data-hide-at="91.016" data-show-at="81.34"><div class="copy"><div class="kicker">The standard continues</div><h2><em>Every Krave shift.</em></h2><p>Work safely. Follow the recipe.<br/>Communicate clearly. Ask for help.</p></div><div class="visual"><img alt="guest help" class="photo" src="../assets/guest-help.jpg"/></div></div><div class="rail"><span data-highlight-end="16.7" data-highlight-start="0"></span><span data-highlight-end="21.14" data-highlight-start="16.7"></span><span data-highlight-end="28.66" data-highlight-start="21.14"></span><span data-highlight-end="36.52" data-highlight-start="28.66"></span><span data-highlight-end="48.84" data-highlight-start="36.52"></span><span data-highlight-end="67.86" data-highlight-start="48.84"></span><span data-highlight-end="71.1" data-highlight-start="67.86"></span><span data-highlight-end="81.34" data-highlight-start="71.1"></span><span data-highlight-end="91.016" data-highlight-start="81.34"></span></div><div class="narration-progress"><span></span></div></section>
+
+    </div>
+
+    <footer class="controls">
+      <div class="portal-nav">
+        <a class="home-link" href="./index.html">← Day 2 Menu</a>
+        <a class="home-link" href="../index.html">Krave Training Home</a>
+      </div>
+      <div class="control-area">
+        <div class="audio-status" id="audioStatus" aria-live="polite">Ready to begin</div>
+        <div class="control-group">
+          <button class="control back" type="button" id="backButton" disabled>Back</button>
+          <button class="control audio" type="button" id="playButton" disabled>Play Narration</button>
+          <button class="control pause" type="button" id="pauseButton" disabled>⏸ Pause</button>
+          <button class="control next" type="button" id="nextButton" disabled title="Complete the narration to continue">Next</button>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <audio id="narration" preload="auto"></audio>
+  <script>
+    (function(){
+      "use strict";
+      const overlay=document.getElementById("startOverlay");
+      const startButton=document.getElementById("startButton");
+      const fullscreenButton=document.getElementById("fullscreenButton");
+      const playButton=document.getElementById("playButton");
+      const pauseButton=document.getElementById("pauseButton");
+      const backButton=document.getElementById("backButton");
+      const nextButton=document.getElementById("nextButton");
+      const audioStatus=document.getElementById("audioStatus");
+      const slideCounter=document.getElementById("slideCounter");
+      const narration=document.getElementById("narration");
+      const slides=[...document.querySelectorAll(".slide")];
+      const completedSlides=new Set();
+      let currentIndex=0;
+      let started=false;
+
+      function currentSlide(){return slides[currentIndex];}
+      function durationFor(index){const fallback=Number(slides[index].dataset.duration||0);return index===currentIndex&&Number.isFinite(narration.duration)&&narration.duration>0?narration.duration:fallback;}
+      function isCurrentComplete(){return completedSlides.has(currentIndex);}
+      function formatTime(seconds){const value=Math.max(0,Math.round(seconds));return Math.floor(value/60)+":"+String(value%60).padStart(2,"0");}
+      function toggleFullScreen(){if(!document.fullscreenElement){document.documentElement.requestFullscreen().catch(function(){});}else{document.exitFullscreen().catch(function(){});}}
+
+      function updateVisuals(time){
+        const slide=currentSlide();
+        const duration=durationFor(currentIndex);
+        const progress=Math.min(1,Math.max(0,time/duration));
+        slide.style.setProperty("--progress",String(progress));
+        slide.querySelectorAll("[data-show-at]").forEach(function(element){
+          const showAt=Number(element.dataset.showAt||0);
+          const hideAt=Number(element.dataset.hideAt||duration);
+          element.classList.toggle("is-visible",time>=showAt&&time<hideAt);
+        });
+        slide.querySelectorAll(".scene").forEach(function(scene,index){
+          const drift=index%2===0?-1:1;
+          scene.style.transform="scale("+(1.018+progress*.034).toFixed(4)+") translate3d("+(drift*progress*.22).toFixed(3)+"%,"+(-progress*.09).toFixed(3)+"%,0)";
+        });
+        slide.querySelectorAll("[data-highlight-start]").forEach(function(element){
+          const start=Number(element.dataset.highlightStart||0);
+          const end=Number(element.dataset.highlightEnd||duration);
+          element.classList.toggle("is-current",time>=start&&time<end);
+          element.classList.toggle("is-complete",time>=end);
+        });
+        let workflowProgress=0;
+        const workflowNodes=[...slide.querySelectorAll("[data-workflow-start]")];
+        workflowNodes.forEach(function(element,index){
+          const start=Number(element.dataset.workflowStart||0);
+          const end=Number(element.dataset.workflowEnd||duration);
+          element.classList.toggle("is-current",time>=start&&time<end);
+          element.classList.toggle("is-complete",time>=end);
+          if(time>=end){workflowProgress=(index+1)/workflowNodes.length;}else if(time>=start){workflowProgress=(index+(time-start)/(end-start))/workflowNodes.length;}
+        });
+        slide.style.setProperty("--workflow-progress",String(Math.min(1,workflowProgress)));
+        if(started&&!isCurrentComplete()){audioStatus.textContent=(narration.paused?"Paused · ":"Narration · ")+formatTime(time)+" / "+formatTime(duration);}
+      }
+
+      function setPlayingState(){
+        document.body.classList.toggle("training-paused",started&&!isCurrentComplete()&&narration.paused&&narration.currentTime>0);
+        pauseButton.textContent=narration.paused?"▶ Resume":"⏸ Pause";
+        playButton.textContent=narration.paused?(narration.currentTime>0?"Continue Narration":"Play Narration"):"Narration Playing";
+      }
+
+      function setControls(){
+        slideCounter.textContent="Slide "+(currentIndex+1)+" / "+slides.length;
+        if(!started){backButton.disabled=true;playButton.disabled=true;pauseButton.disabled=true;nextButton.disabled=true;return;}
+        backButton.disabled=currentIndex===0;
+        playButton.disabled=false;
+        if(isCurrentComplete()){
+          pauseButton.disabled=true;
+          playButton.textContent="Replay Narration";
+          nextButton.disabled=false;
+          nextButton.textContent=currentIndex===slides.length-1?"Return to Day 2 Menu":"Next Slide";
+          nextButton.title="Slide "+(currentIndex+1)+" complete";
+          audioStatus.textContent="Slide "+(currentIndex+1)+" complete ✓";
+        }else{
+          pauseButton.disabled=false;
+          nextButton.disabled=true;
+          nextButton.textContent="Next";
+          nextButton.title="Complete the narration to continue";
+          setPlayingState();
+        }
+      }
+
+      function loadCurrentAudio(){narration.pause();narration.src=currentSlide().dataset.audio;narration.load();}
+      async function playNarration(restart){
+        if(restart){completedSlides.delete(currentIndex);narration.currentTime=0;updateVisuals(0);setControls();}
+        try{await narration.play();setPlayingState();}catch(error){audioStatus.textContent="Audio could not start. Select Play Narration.";playButton.disabled=false;}
+      }
+      function startTraining(){started=true;overlay.style.display="none";document.body.classList.add("training-started");updateVisuals(0);setControls();playNarration(false);}
+      function completeCurrentSlide(){completedSlides.add(currentIndex);document.body.classList.remove("training-paused");updateVisuals(durationFor(currentIndex));setControls();}
+      function showSlide(index,autoPlay){
+        narration.pause();
+        slides[currentIndex].classList.remove("active");
+        currentIndex=index;
+        slides[currentIndex].classList.add("active");
+        document.body.classList.remove("training-paused");
+        loadCurrentAudio();
+        updateVisuals(isCurrentComplete()?durationFor(currentIndex):0);
+        setControls();
+        if(autoPlay&&!isCurrentComplete()){playNarration(false);}
+      }
+      function advance(){
+        if(!isCurrentComplete()){return;}
+        if(currentIndex<slides.length-1){showSlide(currentIndex+1,true);}else{window.location.href="./index.html";}
+      }
+      function forceAdvanceForTesting(){
+        started=true;
+        overlay.style.display="none";
+        document.body.classList.add("training-started");
+        narration.pause();
+        completedSlides.add(currentIndex);
+        updateVisuals(durationFor(currentIndex));
+        if(currentIndex<slides.length-1){showSlide(currentIndex+1,true);}else{completeCurrentSlide();}
+      }
+
+      startButton.addEventListener("click",startTraining);
+      fullscreenButton.addEventListener("click",toggleFullScreen);
+      playButton.addEventListener("click",function(){if(isCurrentComplete()||narration.ended){playNarration(true);}else{playNarration(false);}});
+      pauseButton.addEventListener("click",function(){if(narration.paused){playNarration(false);}else{narration.pause();setPlayingState();}});
+      backButton.addEventListener("click",function(){if(currentIndex>0){showSlide(currentIndex-1,false);}});
+      nextButton.addEventListener("click",advance);
+      narration.addEventListener("loadedmetadata",function(){updateVisuals(narration.currentTime||0);});
+      narration.addEventListener("timeupdate",function(){updateVisuals(narration.currentTime||0);});
+      narration.addEventListener("play",setPlayingState);
+      narration.addEventListener("pause",setPlayingState);
+      narration.addEventListener("ended",completeCurrentSlide);
+      narration.addEventListener("error",function(){audioStatus.textContent="Narration file could not be loaded.";playButton.disabled=false;pauseButton.disabled=true;});
+      document.addEventListener("keydown",function(event){
+        if(event.ctrlKey&&event.shiftKey&&event.key.toLowerCase()==="f"){event.preventDefault();forceAdvanceForTesting();return;}
+        if(!event.ctrlKey&&!event.shiftKey&&event.key.toLowerCase()==="f"){event.preventDefault();toggleFullScreen();return;}
+        if((event.key==="ArrowRight"||event.key===" ")&&!nextButton.disabled&&overlay.style.display==="none"){event.preventDefault();advance();return;}
+        if(event.key==="ArrowLeft"&&!backButton.disabled&&overlay.style.display==="none"){event.preventDefault();showSlide(currentIndex-1,false);}
+      });
+      loadCurrentAudio();updateVisuals(0);setControls();
+    })();
+  </script>
+</body>
+</html>
