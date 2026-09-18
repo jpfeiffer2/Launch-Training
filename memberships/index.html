@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Membership Training · Launch Training Portal</title>
+  <title>Park-Specific Membership Training · Launch Training Portal</title>
 
   <style>
     :root{--g:#6cc24a;--gd:#4da62d;--y:#f2e600;--ink:#101418;--muted:#5b6570;--line:#e5eaee;--shadow:0 18px 50px rgba(0,0,0,.18)}
@@ -55,14 +55,48 @@
   })();
 </script>
 
+
+<style id="park-specific-membership-gate-style">
+#parkSpecificMembershipGate{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 18% 15%,rgba(108,194,74,.20),transparent 30%),rgba(4,7,5,.96)}
+#parkSpecificMembershipGate[hidden]{display:none!important}
+.park-gate-card{width:min(520px,94vw);background:#fff;color:#111820;border-radius:22px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.18)}
+.park-gate-strip{height:10px;background:linear-gradient(90deg,#6cc24a,#f2e600)}
+.park-gate-body{padding:28px}.park-gate-eyebrow{color:#4da62d;text-transform:uppercase;letter-spacing:1.6px;font-weight:900;font-size:.78rem}
+.park-gate-card h2{margin:8px 0 10px;font-size:2rem}.park-gate-card p{margin:0 0 18px;color:#59636e;line-height:1.5}
+.park-gate-form{display:grid;gap:12px}.park-gate-form label{font-weight:900;font-size:.85rem}
+.park-gate-form input{width:100%;min-height:46px;border:1px solid #cbd5dc;border-radius:10px;padding:10px 12px;font:inherit}
+.park-gate-form input:focus{outline:none;border-color:#6cc24a;box-shadow:0 0 0 3px rgba(108,194,74,.16)}
+.park-gate-form button{border:0;border-radius:999px;padding:12px 18px;font-weight:900;cursor:pointer;background:#111820;color:#f2e600}
+#parkSpecificMembershipGateError{min-height:20px;color:#b42318;font-size:.86rem;font-weight:800}
+.park-gate-back{display:inline-block;margin-top:14px;color:#111820;font-weight:900}
+</style>
 </head>
 <body>
+
+<div id="parkSpecificMembershipGate" aria-modal="true" role="dialog" aria-labelledby="parkSpecificMembershipGateTitle">
+  <div class="park-gate-card">
+    <div class="park-gate-strip"></div>
+    <div class="park-gate-body">
+      <div class="park-gate-eyebrow">Additional Access Required</div>
+      <h2 id="parkSpecificMembershipGateTitle">Park-Specific Membership Training</h2>
+      <p>Enter your park-specific membership training password to continue.</p>
+      <form class="park-gate-form" id="parkSpecificMembershipGateForm">
+        <label for="parkSpecificMembershipPassword">Password</label>
+        <input id="parkSpecificMembershipPassword" type="password" autocomplete="current-password" required>
+        <button type="submit">Unlock Park-Specific Training</button>
+        <div id="parkSpecificMembershipGateError" aria-live="polite"></div>
+      </form>
+      <a class="park-gate-back" href="../index.html">← Return to Training Portal</a>
+    </div>
+  </div>
+</div>
+
   <main class="shell">
     <nav class="nav"><a href="../index.html">← Training Portal</a></nav>
     <header class="hero">
-      <h1>Membership Training</h1>
-      <p>Park-specific supplemental training for team members who need to understand membership options, pricing, FAQs, and sales expectations.</p>
-      <span class="status-pill">Supplemental · Park-Specific</span>
+      <h1>Park-Specific Membership Training</h1>
+      <p>Password-protected park-specific supplemental training for Warwick, Herndon, Ann Arbor, Asheville, and Dearborn.</p>
+      <span class="status-pill">Supplemental · Park-Specific · Password Required</span>
     </header>
     <section class="grid grid-five" aria-label="Choose membership training park">
       <a class="card" href="./warwick/">
@@ -111,8 +145,49 @@
         </div>
       </a>
     </section>
-    <div class="notice">These modules supplement role training. Team members should complete their assigned core role training first, then complete the membership module for their specific park.</div>
+    <div class="notice">These modules are customized for specific parks. Use the Generic Membership Training unless your park has directed you to complete one of these park-specific modules.</div>
   </main>
+
+
+<script id="park-specific-membership-gate-script">
+(function () {
+  const storageKey = "launchParkSpecificMembershipUnlockedUntil";
+  const unlockHours = 8;
+  const accepted = ["herndon", "warwick", "annarbor", "dearborn", "asheville"];
+  const gate = document.getElementById("parkSpecificMembershipGate");
+  const form = document.getElementById("parkSpecificMembershipGateForm");
+  const input = document.getElementById("parkSpecificMembershipPassword");
+  const error = document.getElementById("parkSpecificMembershipGateError");
+
+  function isUnlocked() {
+    return Number(localStorage.getItem(storageKey) || 0) > Date.now();
+  }
+
+  function unlock() {
+    localStorage.setItem(storageKey, String(Date.now() + (unlockHours * 60 * 60 * 1000)));
+    gate.hidden = true;
+  }
+
+  if (isUnlocked()) {
+    gate.hidden = true;
+  } else {
+    gate.hidden = false;
+    window.setTimeout(function () { input.focus(); }, 0);
+  }
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const value = String(input.value || "").trim().toLowerCase();
+    if (accepted.indexOf(value) !== -1) {
+      error.textContent = "";
+      unlock();
+      return;
+    }
+    error.textContent = "Password not recognized. Please try again.";
+    input.select();
+  });
+})();
+</script>
 
 </body>
 </html>

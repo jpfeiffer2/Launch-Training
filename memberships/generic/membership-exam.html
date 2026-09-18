@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Launch Membership Exam</title>
+<style>
+:root{--green:#6cc24a;--green-dark:#4ca52d;--yellow:#f2e600;--ink:#15191c;--muted:#5d6870;--line:#dfe5e9;--bg:#f3f6f7;--pass:#eaf7ed;--fail:#fff0f0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:linear-gradient(180deg,#f8fafb,#eef2f4);line-height:1.45}
+.shell{width:min(1080px,94vw);margin:24px auto 50px}.panel{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 12px 36px rgba(0,0,0,.08);overflow:hidden}.brandbar{height:10px;background:linear-gradient(90deg,var(--green),var(--yellow))}.header{display:flex;align-items:center;gap:18px;padding:18px 24px;border-bottom:1px solid var(--line)}.header img{width:185px}.header-title{flex:1}.header h1{margin:0;font-size:1.55rem}.header p{margin:3px 0 0;color:var(--muted);font-size:.9rem}.ver{padding:8px 11px;border-radius:999px;background:var(--yellow);font-weight:900;font-size:.82rem}.content{padding:24px}
+.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:18px;border:1px solid var(--line);border-radius:15px;background:#fbfcfd}.field label{display:block;font-weight:800;font-size:.82rem;margin-bottom:5px}.field input{width:100%;padding:10px 11px;border:1px solid #cdd6dc;border-radius:9px;font:inherit}.field input[readonly]{background:#eef6ea;font-weight:900;color:#245714}.field input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(108,194,74,.14)}
+.toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:18px 0;padding:12px 14px;border:1px solid var(--line);border-radius:13px;background:#f9fbfc}.toolbar strong{font-size:.9rem}.navbtn{appearance:none;border:1px solid #cbd3d8;background:#fff;padding:9px 12px;border-radius:9px;font-weight:800;cursor:pointer;text-decoration:none;color:#20262a}.navbtn:hover{border-color:var(--green)}
+.validation{display:none;margin:0 0 16px;padding:13px 15px;border:1px solid #efc35f;background:#fff8e5;border-radius:12px;color:#664c0f}.validation.show{display:block}
+.question{margin:16px 0;padding:19px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(180deg,#fff,#fcfdfe)}.qnum{display:inline-flex;padding:5px 9px;border-radius:999px;background:rgba(108,194,74,.14);color:var(--green-dark);font-size:.82rem;font-weight:900}.question h3{margin:10px 0 13px;font-size:1.08rem;line-height:1.35}.options{display:grid;gap:9px}.option{display:grid;grid-template-columns:28px 28px minmax(0,1fr);gap:10px;align-items:start;padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:#fff;cursor:pointer}.option:hover{border-color:#9dc98b;background:#fbfff9}.option input{margin-top:3px}.option span:last-child{display:block;line-height:1.45;word-break:normal;overflow-wrap:anywhere}.letter{font-weight:1000;color:#3c474d;display:block;line-height:1.2}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:1000;cursor:pointer}.primary{background:var(--green);color:#071007}.secondary{background:#293238;color:#fff}.outline{background:#fff;border:1px solid #cbd3d8;color:#20262a}
+.result{display:none;margin-top:24px;border:1px solid var(--line);border-radius:18px;overflow:hidden}.result.show{display:block}.cert-head{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:22px 24px;background:#0b0d0f;color:#fff;border-bottom:7px solid var(--green)}.cert-org{font-size:.78rem;letter-spacing:1.8px;font-weight:900;color:var(--green)}.cert-title{font-size:1.8rem;font-weight:1000;margin-top:3px}.cert-sub{color:#cbd4da;font-size:.9rem}.stamp{min-width:95px;text-align:center;padding:12px 15px;border:3px solid currentColor;border-radius:14px;font-size:1.25rem;font-weight:1000}.result.pass .stamp{color:var(--green)}.result.fail .stamp{color:#ff7777}
+.cert-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr .8fr .8fr;border-bottom:1px solid var(--line)}.cert-field{padding:14px 16px;border-right:1px solid var(--line)}.cert-field:last-child{border-right:0}.cert-label{display:block;color:#6b757b;text-transform:uppercase;font-size:.66rem;font-weight:900;letter-spacing:.7px}.cert-value{display:block;margin-top:4px;font-weight:1000}.statement{padding:20px 24px;background:#fbfcfd}.missed{padding:0 24px 20px}.missed h3{margin:0 0 10px}.missed-item{padding:12px 14px;margin:8px 0;border-radius:11px;border:1px solid #efd0d0;background:#fff8f8}.missed-item strong{display:block;margin-bottom:4px}.signatures{display:grid;grid-template-columns:1fr 1fr;gap:34px;padding:26px 24px 30px}.sigline{border-top:1px solid #555;padding-top:6px;color:#666;font-size:.78rem;text-align:center}
+.records{margin-top:26px;border-top:1px solid var(--line);padding-top:22px}.records-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.records-list{display:grid;gap:9px;margin-top:12px}.record{display:flex;justify-content:space-between;gap:14px;padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:#fbfcfd}.record small{display:block;color:#6c767c;margin-top:2px}.badge-pass{color:#2f7920;font-weight:1000}.badge-fail{color:#a33;font-weight:1000}.footer-note{margin-top:18px;color:#6a747b;font-size:.82rem;text-align:center}
+@media(max-width:850px){.meta{grid-template-columns:1fr 1fr}.cert-grid{grid-template-columns:1fr 1fr}.cert-field{border-bottom:1px solid var(--line)}.header{align-items:flex-start;flex-wrap:wrap}.header img{width:160px}}@media(max-width:560px){.meta{grid-template-columns:1fr}.content{padding:14px}.cert-grid{grid-template-columns:1fr}.record{flex-direction:column}}
+@media print{body{background:#fff}.shell{width:100%;margin:0}.panel{box-shadow:none;border:0}.header,.meta,.toolbar,.validation,#quizForm,.actions,.records,.footer-note{display:none!important}.content{padding:0}.result{display:block!important;border:0;margin:0}.cert-head{-webkit-print-color-adjust:exact;print-color-adjust:exact}.missed{display:none}.signatures{padding-top:40px}}
+</style>
+
+<style id="launch-park-location-dropdown-style">
+#parkLocation{width:100%;padding:10px 11px;border:1px solid #cdd6dc;border-radius:9px;background:#fff;color:#111820;font:inherit;min-height:42px}
+#parkLocation:focus{outline:none;border-color:#6cc24a;box-shadow:0 0 0 3px rgba(108,194,74,.16)}
+</style>
+
+<script id="launch-google-sheets-exam-records">
+(function() {
+  if (window.launchTrainingSubmitExamRecord) return;
+
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycbzKjtjFU8msyHtWcK7ziV3ewSvQcW5AKcVtEAkAjMSe0srGBheWSUA7XLrLTR8inYyo-w/exec";
+  const SECRET = "JonathanPfeiffer";
+
+  function clean(value) {
+    return String(value == null ? '' : value).trim();
+  }
+
+  window.launchTrainingSubmitExamRecord = function(payload) {
+    try {
+      const record = Object.assign({}, payload || {});
+      record.secret = SECRET;
+      record.name = clean(record.name);
+      record.parkLocation = clean(record.parkLocation);
+      record.trainingProgram = clean(record.trainingProgram);
+      record.examDay = clean(record.examDay);
+      record.score = clean(record.score);
+      record.percentage = clean(record.percentage);
+      record.missedQuestions = clean(record.missedQuestions || 'None') || 'None';
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(record),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Google Sheets exam record submission failed.', error);
+      });
+    } catch (error) {
+      console.warn('Google Sheets exam record submission could not be prepared.', error);
+    }
+  };
+})();
+</script>
+
+<style id="launch-standard-certificate-style">
+  .result-certificate.launch-standard-certificate,
+  .result-certificate {
+    margin-top: 26px;
+    border: 3px solid var(--launch-green, #56b947);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  }
+  .cert-header {
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+    border-bottom: 4px solid var(--launch-yellow, #f2e600);
+    padding: 22px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .cert-header-left { color: #fff; }
+  .cert-org {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: var(--launch-yellow, #f2e600);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .cert-title-line {
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .cert-subtitle {
+    font-size: 0.8rem;
+    color: #c8ced3;
+    margin-top: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .cert-stamp {
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    padding: 10px 22px;
+    border-radius: 10px;
+    border: 3px solid;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .cert-stamp.stamp-pass {
+    color: #198754;
+    border-color: #198754;
+    background: rgba(25,135,84,0.08);
+  }
+  .cert-stamp.stamp-fail {
+    color: #c92a2a;
+    border-color: #c92a2a;
+    background: rgba(201,42,42,0.08);
+  }
+  .cert-info-row {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #e3e8ee;
+  }
+  .cert-info-field {
+    flex: 1;
+    padding: 14px 20px;
+    border-right: 1px solid #e3e8ee;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+  .cert-info-field:last-child { border-right: none; }
+  .cert-info-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #777;
+    font-weight: bold;
+  }
+  .cert-info-value {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #111;
+    word-break: break-word;
+  }
+  .cert-score-value {
+    font-size: 1.2rem;
+    color: var(--launch-green-dark, #26731f);
+  }
+  .cert-statement {
+    padding: 18px 28px;
+    font-size: 0.97rem;
+    color: #444;
+    border-bottom: 1px solid #e3e8ee;
+    line-height: 1.6;
+  }
+  .cert-missed {
+    padding: 0 28px;
+    border-bottom: 1px solid #e3e8ee;
+  }
+  .cert-missed .wrong,
+  .cert-missed .missed-item {
+    margin: 10px 0;
+    padding: 12px 14px;
+    background: #fff8e8;
+    border-left: 4px solid #f0ad4e;
+    border-radius: 8px;
+  }
+  .cert-sig-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 24px 28px 20px;
+  }
+  .cert-sig-block { display: flex; flex-direction: column; gap: 6px; }
+  .cert-sig-line { border-bottom: 1.5px solid #444; min-height: 36px; }
+  .cert-sig-label { font-size: 0.78rem; color: #666; letter-spacing: 0.5px; }
+  .cert-actions {
+    padding: 12px 28px 16px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    border-top: 1px solid #e3e8ee;
+    background: #fafcfd;
+  }
+  .cert-actions button,
+  .cert-actions a {
+    border: none;
+    display: inline-block;
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-weight: 900;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .cert-actions button { color: #fff; background: #111820; }
+  .cert-actions a { color: #111820; background: var(--launch-yellow, #f2e600); }
+  @media (max-width: 860px) {
+    .cert-header,
+    .cert-info-row { display: block; }
+    .cert-stamp { display: inline-block; margin-top: 14px; }
+    .cert-info-field { border-right: 0; border-bottom: 1px solid #e3e8ee; }
+    .cert-sig-row { grid-template-columns: 1fr; gap: 24px; }
+  }
+  @media print {
+    body { background: #fff !important; padding: 0 !important; }
+    .header, header, .meta, .meta-card, .toolbar, .validation, .validation-box,
+    #validationBox, #quizForm, .buttons, .top-nav, .pre-exam-nav, .records-note,
+    .pdf-note, .footer-note, .brand-topbar, #answered, #progress, #exam,
+    #prev, #next, #submit, .question-card, .question, .no-print, .cert-actions {
+      display: none !important;
+    }
+    .page, .page-shell, .container, .content, main {
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      background: #fff !important;
+    }
+    #resultBox, #result, .result-certificate {
+      display: block !important;
+      border: 2px solid #333 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      margin: 0 !important;
+    }
+    .cert-header, .cert-stamp {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .cert-missed { border-bottom: none; }
+  }
+</style>
+
+<style id="launch-portal-auth-style">
+  html { display: none; }
+  html.portal-authenticated { display: block; }
+</style>
+<script id="launch-portal-auth-script">
+  (() => {
+    const storageKey = "launchTrainingUnlockedUntil";
+    const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+    if (unlockedUntil <= Date.now()) {
+      localStorage.removeItem(storageKey);
+      const currentPath = window.location.pathname;
+      const marker = "/Launch-Training/";
+      const markerPosition = currentPath.indexOf(marker);
+      let portalBase = markerPosition >= 0 ? currentPath.slice(0, markerPosition + marker.length) : "/";
+      const moduleMarkers = ["/cashier/", "/court-monitor/", "/party-host/", "/krave/", "/memberships/"];
+      for (const moduleMarker of moduleMarkers) {
+        const modulePosition = currentPath.indexOf(moduleMarker);
+        if (modulePosition >= 0) { portalBase = currentPath.slice(0, modulePosition + 1) || "/"; break; }
+      }
+      const returnPath = currentPath + window.location.search + window.location.hash;
+      window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
+    } else {
+      document.documentElement.classList.add("portal-authenticated");
+    }
+  })();
+</script>
+</head>
+<body>
+<div class="shell"><main class="panel"><div class="brandbar"></div>
+<header class="header"><img alt="Launch Family Entertainment" src="assets/launch-family-entertainment-logo.png"/><div class="header-title"><h1>Launch Membership Exam</h1><p>Generic membership assessment · 18 randomized questions · 80% passing score</p></div></header>
+<div class="content">
+<section class="meta">
+<div class="field"><label for="employeeName">Employee Name</label><input autocomplete="name" id="employeeName"/></div>
+<div class="field"><label for="parkLocation">Park Location</label><select id="parkLocation" required><option value="">Select Park Location</option><option value="Ann Arbor">Ann Arbor</option><option value="Arlington">Arlington</option><option value="Asheville">Asheville</option><option value="Brooklyn">Brooklyn</option><option value="Clearwater">Clearwater</option><option value="Columbus">Columbus</option><option value="Cumming">Cumming</option><option value="Dearborn">Dearborn</option><option value="Denton">Denton</option><option value="Deptford">Deptford</option><option value="Doral">Doral</option><option value="Framingham">Framingham</option><option value="Gurnee">Gurnee</option><option value="Herndon">Herndon</option><option value="Jackson">Jackson</option><option value="Jeffersonville">Jeffersonville</option><option value="Lansing">Lansing</option><option value="Leominster">Leominster</option><option value="Lewisville">Lewisville</option><option value="Little Ferry">Little Ferry</option><option value="Manchester">Manchester</option><option value="Methuen">Methuen</option><option value="North Attleboro">North Attleboro</option><option value="Norwood">Norwood</option><option value="Novi">Novi</option><option value="Orlando">Orlando</option><option value="Pensacola">Pensacola</option><option value="PG County">PG County</option><option value="Prattville">Prattville</option><option value="Queens">Queens</option><option value="Raleigh">Raleigh</option><option value="Richmond">Richmond</option><option value="Riverdale">Riverdale</option><option value="Warwick">Warwick</option><option value="West Houston">West Houston</option><option value="Westborough">Westborough</option><option value="Woburn">Woburn</option></select></div>
+<div class="field"><label for="quizDate">Date</label><input id="quizDate" type="date"/></div>
+<div class="field"><label for="trainerName">Trainer/Manager</label><input id="trainerName"/></div>
+</section>
+<div class="toolbar"><div><strong id="progressText">18 questions · all required</strong></div><div style="display:flex;gap:8px;flex-wrap:wrap"><a class="navbtn" href="index.html">Membership Home</a><a class="navbtn" href="exam-records.html">Exam Records</a></div></div>
+<div class="validation" id="validation"></div>
+<form id="quizForm"></form>
+<div class="actions"><button class="btn primary" id="submitBtn" type="button">Submit Exam</button><button class="btn secondary" id="resetBtn" type="button">Reset</button><button class="btn outline" id="printBtn" style="display:none" type="button">Print / Save Certificate</button><a class="btn outline" href="index.html" style="text-decoration:none">Return Home</a></div>
+<section class="result result-certificate launch-standard-certificate" id="result"></section>
+<section class="records" id="savedRecords"><div class="records-head"><div><h2 style="margin:0">Saved Membership Exam Records</h2><p style="margin:4px 0 0;color:#68737a">Completed exams are stored locally in this browser.</p></div><button class="btn outline" id="refreshRecords" type="button">Refresh</button></div><div class="records-list" id="recordsList"></div></section>
+<div class="footer-note">Every exam launch independently randomizes question order and answer-choice order. All 18 questions and all employee fields are required before submission. Missed questions show the selected answer and correct answer for coaching and review.</div>
+</div></main></div>
+<script>
+(()=>{
+'use strict';
+const PASSING_PERCENT=80;
+const STORAGE_KEY='launch_generic_membership_exam_records_v1';
+const questions=[{"id":"local_offer","text":"Before recommending a membership, which information should a cashier know for their park?","choices":["Only the monthly membership price, because benefits are the same at every Launch.","The current admission pricing, monthly membership price, approved benefits, important limitations, and approved membership terms.","Only the admission price and the number of attractions in the building.","The membership price and whatever benefits other Launch parks currently offer."],"correct":"The current admission pricing, monthly membership price, approved benefits, important limitations, and approved membership terms."},{"id":"included","text":"A guest asks what the membership includes, but the cashier is unsure whether a particular attraction is part of the local offer. What should the cashier do?","choices":["Include the attraction in the explanation if another Launch park offers it.","Tell the guest it is probably included and correct the answer later if necessary.","Explain only the approved local benefits and confirm the uncertain detail before giving the guest an answer.","Avoid discussing benefits and focus only on the monthly price."],"correct":"Explain only the approved local benefits and confirm the uncertain detail before giving the guest an answer."},{"id":"salesflow","text":"Which sequence represents the four-step membership sales approach taught in the training?","choices":["Present → Recommend → Compare → Confirm","Compare → Present → Confirm → Recommend","Present → Compare → Recommend → Confirm","Recommend → Compare → Present → Confirm"],"correct":"Present → Compare → Recommend → Confirm"},{"id":"close","text":"A cashier explains the membership, compares the local offer, and asks, “Would you like to make today’s visit a membership?” The guest hesitates for a moment. What should the cashier do?","choices":["Immediately repeat the price comparison.","Continue listing benefits so there is no awkward silence.","Explain the commitment before the guest answers.","Stop talking and give the guest an opportunity to respond."],"correct":"Stop talking and give the guest an opportunity to respond."},{"id":"primary","text":"A mother is purchasing memberships for her children but is not becoming a member herself. What should the cashier do with “Add Primary to Membership”?","choices":["Select it because she is the person paying for the transaction.","Leave it unchecked because the paying customer is not becoming a member.","Select it because a parent must be attached to every child’s membership.","Leave it unchecked only if she is paying with something other than a credit card."],"correct":"Leave it unchecked because the paying customer is not becoming a member."},{"id":"agreement","text":"The Membership Agreement appears during a sale. Which procedure is correct?","choices":["Review the important sections with the guest, then have the cashier check the required boxes and select Submit.","Turn the POS toward the guest so they can review the agreement, check the required boxes themselves, and select Submit.","Ask the guest whether they accept the agreement, then select Submit for them if they verbally agree.","Turn the POS toward the guest for review, then turn it back so the cashier can complete the acknowledgements."],"correct":"Turn the POS toward the guest so they can review the agreement, check the required boxes themselves, and select Submit."},{"id":"noncredit","text":"A guest purchases a membership but pays for the transaction with something other than a credit card. What additional step should the cashier expect?","choices":["The guest must change the entire transaction to a credit-card payment.","The POS will prompt for a tokenized credit card to support the membership’s automatic renewal.","The membership can be completed without a card, but the guest will have to provide one at their next visit.","The cashier should complete the purchase normally and ask a manager to add a renewal card later."],"correct":"The POS will prompt for a tokenized credit card to support the membership’s automatic renewal."},{"id":"online","text":"A guest purchased admission online before arriving and now asks to become a member. What should the cashier do?","choices":["Automatically apply the value of the online ticket toward the membership.","Sell a new membership and promise the online ticket will be refunded automatically.","Get a manager and follow the park’s approved local process for handling the online ticket.","Tell the guest online admissions can never be converted to memberships."],"correct":"Get a manager and follow the park’s approved local process for handling the online ticket."},{"id":"checkinstart","text":"An existing member arrives to use their membership. Which sequence correctly starts the check-in?","choices":["Passes → Membership → select the member’s waiver","Admissions → Membership Check In → select the actual member’s waiver","Admissions → regular admission → apply the membership as a discount","Retail → Membership Check In → search for the person who originally paid for the membership"],"correct":"Admissions → Membership Check In → select the actual member’s waiver"},{"id":"redeem","text":"The available membership pass appears after the cashier selects the member’s waiver. What should happen before the cashier clicks OK?","choices":["Confirm that the actual member checking in and the correct membership are displayed.","Confirm that the person who originally paid for the membership is present.","Change the number selected to match everyone in the guest’s party.","Confirm the guest has a valid payment card stored before redeeming the visit."],"correct":"Confirm that the actual member checking in and the correct membership are displayed."},{"id":"socks_check","text":"An existing member says, “I’m a member, so I don’t need to show my socks, right?” What should the cashier do?","choices":["Allow the check-in because membership includes all required participation equipment.","Ask to see the guest’s Launch socks because members are still required to have them.","Ask whether they own Launch socks, but do not require them to show the socks.","Complete the check-in and let the court staff verify socks later."],"correct":"Ask to see the guest’s Launch socks because members are still required to have them."},{"id":"socks_missing","text":"A member does not have their Launch socks with them. What is the correct response?","choices":["Allow other branded grip socks because the guest already has an active membership.","Complete the membership check-in and tell the guest to purchase Launch socks on their next visit.","Advise the guest that Launch socks are required and they will need to purchase a pair before participating.","Ask a manager to waive the sock requirement because the guest is already paying monthly."],"correct":"Advise the guest that Launch socks are required and they will need to purchase a pair before participating."},{"id":"zero","text":"After the membership pass has been redeemed, what should the cashier verify before selecting “Complete The Order”?","choices":["The guest’s membership balance shows the monthly membership price.","The Membership Check In ticket has been reduced to $0.00.","The original admission ticket has been removed from the guest’s history.","The membership expiration date has been extended by one month."],"correct":"The Membership Check In ticket has been reduced to $0.00."},{"id":"notzero","text":"The cashier redeems a membership pass, but the Membership Check In ticket does not reduce to $0.00. What should the cashier do?","choices":["Manually discount the remaining amount to zero and complete the transaction.","Complete the order and have a manager correct it afterward.","Charge the guest the remaining balance and explain that the membership may need to update.","Stop the transaction and get a manager before continuing."],"correct":"Stop the transaction and get a manager before continuing."},{"id":"commitment","text":"A guest asks about the membership commitment, recurring billing, or cancellation terms. What should the cashier do?","choices":["Give a standard commitment length even if you have not confirmed the local terms.","Explain the park’s approved commitment, billing, and cancellation information accurately.","Tell the guest there is never a commitment because the membership is billed monthly.","Avoid discussing terms and ask the guest to sign the agreement first."],"correct":"Explain the park’s approved commitment, billing, and cancellation information accurately."},{"id":"sharing","text":"A parent asks whether two children can alternate using one membership since they usually visit on different days. What should the cashier explain?","choices":["They can share it as long as only one child uses the membership on any given day.","They can share it if both children are attached to the same family waiver.","Memberships are assigned to individual guests, so each child who wants membership access needs their own membership.","They can share the membership, but both children need their own Launch socks."],"correct":"Memberships are assigned to individual guests, so each child who wants membership access needs their own membership."},{"id":"value_objection","text":"A guest says, “I’m not sure the membership is worth it.” Which response best follows the generic Launch training?","choices":["“One visit always pays for the membership, no matter what our local prices are.”","“Let me compare today’s admission option with our current monthly membership price and explain the approved benefits so you can decide which option makes sense for you.”","“The membership is the better choice for every guest because it always includes more attractions.”","“If you are unsure, regular admission is always the safer option.”"],"correct":"“Let me compare today’s admission option with our current monthly membership price and explain the approved benefits so you can decide which option makes sense for you.”"},{"id":"objection_method","text":"A guest raises a concern about the membership. Which response best follows the Acknowledge → Clarify → Close method?","choices":["Correct the guest’s concern immediately, explain the membership value again, and ask for the sale.","Acknowledge the concern, determine what the guest is actually worried about, answer that concern accurately, and then give the guest a clear choice.","Clarify the membership terms first, acknowledge the concern afterward, and then ask a manager to close the sale.","Acknowledge the concern and continue providing benefits until the guest is comfortable enough to agree."],"correct":"Acknowledge the concern, determine what the guest is actually worried about, answer that concern accurately, and then give the guest a clear choice."}];
+const form=document.getElementById('quizForm'),validation=document.getElementById('validation'),result=document.getElementById('result'),submitBtn=document.getElementById('submitBtn'),resetBtn=document.getElementById('resetBtn'),printBtn=document.getElementById('printBtn');
+let rendered=[];
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function today(){const d=new Date(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${d.getFullYear()}-${m}-${day}`}
+function renderExam(){rendered=shuffle(questions).map(q=>({...q,choices:shuffle(q.choices)}));form.innerHTML=rendered.map((q,i)=>`<article class="question" data-qid="${esc(q.id)}"><span class="qnum">Question ${i+1}</span><h3>${esc(q.text)}</h3><div class="options">${q.choices.map((c,j)=>`<label class="option"><input type="radio" name="q_${esc(q.id)}" value="${esc(c)}"><span class="letter">${String.fromCharCode(65+j)}</span><span>${esc(c)}</span></label>`).join('')}</div></article>`).join('');document.getElementById('progressText').textContent=`${rendered.length} questions · all required`}
+function meta(){return{employee:document.getElementById('employeeName').value.trim(),park:document.getElementById('parkLocation').value.trim(),date:document.getElementById('quizDate').value,trainer:document.getElementById('trainerName').value.trim()}}
+function validate(){const m=meta(),errs=[];if(!m.employee)errs.push('Employee Name is required.');if(!m.park)errs.push('Park Location is required.');if(!m.date)errs.push('Date is required.');if(!m.trainer)errs.push('Trainer/Manager is required.');const unanswered=rendered.filter(q=>!form.querySelector(`input[name="q_${CSS.escape(q.id)}"]:checked`));if(unanswered.length)errs.push(`${unanswered.length} question${unanswered.length===1?' is':'s are'} unanswered.`);if(errs.length){validation.innerHTML='<strong>Please complete the following:</strong><ul>'+errs.map(e=>`<li>${esc(e)}</li>`).join('')+'</ul>';validation.classList.add('show');validation.scrollIntoView({behavior:'smooth',block:'center'});return false}validation.classList.remove('show');return true}
+function scoreExam(){let score=0;const missed=[];rendered.forEach((q,i)=>{const selected=form.querySelector(`input[name="q_${CSS.escape(q.id)}"]:checked`)?.value||'';if(selected===q.correct)score++;else missed.push({number:i+1,text:q.text,selected,correct:q.correct})});const total=rendered.length,percent=Math.round(score/total*100),passed=percent>=PASSING_PERCENT;return{score,total,percent,passed,missed}}
+function saveRecord(rec){try{const all=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');all.unshift(rec);localStorage.setItem(STORAGE_KEY,JSON.stringify(all.slice(0,100)))}catch(e){}}
+function readRecords(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch(e){return[]}}
+function showResult(rec){
+  result.className='result result-certificate launch-standard-certificate show '+(rec.passed?'pass':'fail');
+  const missedHtml=rec.missed && rec.missed.length
+    ? '<h3 style="margin:16px 0 8px">Missed Questions</h3>'+rec.missed.map(m=>`<div class="missed-item"><div><strong>Q${window.launchEscapeHtml(m.number)}:</strong> ${window.launchEscapeHtml(m.text)}</div><div><strong>Selected answer:</strong> ${window.launchEscapeHtml(m.selected||'No answer')}</div><div><strong>Correct answer:</strong> ${window.launchEscapeHtml(m.correct)}</div></div>`).join('')
+    : '<p style="padding:14px 0"><strong>&#10003; Perfect score — no missed questions.</strong></p>';
+  result.innerHTML=window.launchRenderStandardExamCertificate({
+    status:rec.passed?'PASS':'FAIL',
+    trainingTitle:'MEMBERSHIP TRAINING',
+    statementTitle:'Membership Training',
+    employeeName:rec.employee,
+    parkLocation:rec.park,
+    date:rec.date,
+    trainerName:rec.trainer,
+    scoreText:`${rec.score} / ${rec.total}`,
+    percentText:`${rec.percent}%`,
+    passed:rec.passed,
+    passingPercent:PASSING_PERCENT,
+    missedHtml:missedHtml,
+    recordsHref:'exam-records.html'
+  });
+  printBtn.style.display='none';
+  result.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function renderRecords(){const list=document.getElementById('recordsList'),recs=readRecords();list.innerHTML=recs.length?recs.map(r=>`<div class="record"><div><strong>${esc(r.employee)}</strong><small>${esc(r.date)} · Park: ${esc(r.park||'—')} · Trainer: ${esc(r.trainer)} · ${new Date(r.submittedAt).toLocaleString()}</small></div><div class="${r.passed?'badge-pass':'badge-fail'}">${r.passed?'PASS':'FAIL'} · ${r.score}/${r.total} (${r.percent}%)</div></div>`).join(''):'<div class="record"><div>No saved exam records yet.</div></div>'}
+submitBtn.addEventListener('click',()=>{
+  if(!validate())return;
+  const m=meta(),s=scoreExam(),rec={...m,...s,submittedAt:new Date().toISOString()};
+  saveRecord(rec);
+  if(window.launchTrainingSubmitExamRecord){
+    window.launchTrainingSubmitExamRecord({
+      name:rec.employee,
+      parkLocation:rec.park,
+      trainingProgram:'Membership Training',
+      examDay:'Generic Membership Exam',
+      score:`${rec.score} / ${rec.total}`,
+      percentage:`${rec.percent}%`,
+      missedQuestions:rec.missed && rec.missed.length
+        ? rec.missed.map(x=>`Q${x.number}: ${x.text} | Selected: ${x.selected || 'No answer'} | Correct: ${x.correct}`).join(' | ')
+        : 'None'
+    });
+  }
+  showResult(rec);
+  renderRecords();
+});
+resetBtn.addEventListener('click',()=>{if(!confirm('Reset this exam and reshuffle all questions and answers?'))return;form.reset();result.className='result';printBtn.style.display='none';validation.classList.remove('show');renderExam();window.scrollTo({top:0,behavior:'smooth'})});
+printBtn.addEventListener('click',()=>window.print());document.getElementById('refreshRecords').addEventListener('click',renderRecords);document.getElementById('quizDate').value=today();renderExam();renderRecords();
+})();
+</script>
+<script id="launch-standard-certificate-script">
+(function () {
+  if (window.launchRenderStandardExamCertificate) return;
+
+  function escapeHtml(value) {
+    return String(value == null ? "" : value).replace(/[&<>"']/g, function (char) {
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[char];
+    });
+  }
+
+  window.launchEscapeHtml = escapeHtml;
+
+  window.launchRenderStandardExamCertificate = function (data) {
+    data = data || {};
+
+    const passed = !!data.passed;
+    const stampText = data.status || (passed ? "PASS" : "FAIL");
+    const stampClass = passed ? "stamp-pass" : "stamp-fail";
+    const employeeName = data.employeeName || "—";
+    const parkLocation = data.parkLocation || "—";
+    const dateText = data.date || new Date().toLocaleDateString();
+    const trainerName = data.trainerName || "—";
+    const scoreText = data.scoreText || "—";
+    const percentText = data.percentText || "—";
+    const trainingTitle = data.trainingTitle || "TRAINING ASSESSMENT";
+    const passingPercent = data.passingPercent || 80;
+
+    const statement = passed
+      ? `<strong>${escapeHtml(employeeName)}</strong> has successfully completed the Launch Family Entertainment ${escapeHtml(data.statementTitle || trainingTitle)} assessment with a score of <strong>${escapeHtml(scoreText)} (${escapeHtml(percentText)})</strong>. Passing threshold: ${passingPercent}%.`
+      : `<strong>${escapeHtml(employeeName)}</strong> completed the Launch Family Entertainment ${escapeHtml(data.statementTitle || trainingTitle)} assessment with a score of <strong>${escapeHtml(scoreText)} (${escapeHtml(percentText)})</strong> — below the ${passingPercent}% passing threshold. Please review missed questions below and retest.`;
+
+    const missedHtml = data.missedHtml || '<p style="padding:14px 0"><strong>&#10003; Perfect score — no missed questions.</strong></p>';
+    const recordsLink = data.recordsHref
+      ? `<a href="${escapeHtml(data.recordsHref)}">View Exam Records</a>`
+      : "";
+
+    return `
+      <div class="cert-header">
+        <div class="cert-header-left">
+          <div class="cert-org">LAUNCH FAMILY ENTERTAINMENT</div>
+          <div class="cert-title-line">${escapeHtml(trainingTitle)}</div>
+          <div class="cert-subtitle">Training Assessment Record</div>
+        </div>
+        <div class="cert-stamp ${stampClass}">${escapeHtml(stampText)}</div>
+      </div>
+
+      <div class="cert-info-row">
+        <div class="cert-info-field">
+          <span class="cert-info-label">Employee Name</span>
+          <span class="cert-info-value">${escapeHtml(employeeName)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Park Location</span>
+          <span class="cert-info-value">${escapeHtml(parkLocation)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Date</span>
+          <span class="cert-info-value">${escapeHtml(dateText)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Trainer / Manager</span>
+          <span class="cert-info-value">${escapeHtml(trainerName)}</span>
+        </div>
+        <div class="cert-info-field cert-score-field">
+          <span class="cert-info-label">Score</span>
+          <span class="cert-info-value cert-score-value">${escapeHtml(scoreText)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Percentage</span>
+          <span class="cert-info-value">${escapeHtml(percentText)}</span>
+        </div>
+      </div>
+
+      <div class="cert-statement">${statement}</div>
+      <div class="missed cert-missed">${missedHtml}</div>
+
+      <div class="cert-sig-row">
+        <div class="cert-sig-block">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-label">Trainer / Manager Signature</div>
+        </div>
+        <div class="cert-sig-block">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-label">Employee Signature</div>
+        </div>
+      </div>
+
+      <div class="cert-actions no-print">
+        <button type="button" onclick="window.print()">&#128438; Print / Save as PDF</button>
+        ${recordsLink}
+      </div>
+    `;
+  };
+})();
+</script>
+</body></html>

@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Membership Exam Records</title>
+<style>
+:root{--green:#6cc24a;--yellow:#f2e600;--ink:#15191c;--muted:#5d6870;--line:#dfe5e9}*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:linear-gradient(135deg,#101410,#1c2418);line-height:1.45;padding:28px}
+.page{max-width:1120px;margin:0 auto;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 18px 55px rgba(0,0,0,.35)}
+header{padding:28px 34px 22px;border-top:8px solid var(--green);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;align-items:center}
+.eyebrow{color:#2d9a22;font-weight:900;letter-spacing:.18em;text-transform:uppercase;font-size:.82rem;margin-bottom:8px}h1{margin:0;font-size:2.35rem;letter-spacing:-.04em}.sub{margin-top:8px;color:var(--muted);font-size:1rem}
+.nav{display:flex;gap:8px;flex-wrap:wrap}.button{display:inline-block;border:0;border-radius:999px;padding:12px 18px;font-weight:900;text-decoration:none;cursor:pointer;background:#111820;color:#fff}.button-yellow{background:var(--yellow);color:#000}
+main{padding:26px 34px 34px}.records-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}.records-list{display:grid;gap:12px}
+.record{display:grid;grid-template-columns:1.3fr 1fr .75fr auto;gap:14px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:14px;background:#fbfcfd}
+.record-main{font-weight:900}.record-sub{color:var(--muted);font-size:.9rem}.score{font-weight:900;color:#198754}.score.fail{color:#c92a2a}.actions{display:flex;gap:8px;flex-wrap:wrap}
+.empty{padding:20px;border:1px dashed #cbd5dc;border-radius:14px;background:#fbfcfd;color:var(--muted);font-weight:800}.record-print{display:none;margin-top:24px}
+@media(max-width:800px){body{padding:12px}header{display:block}.nav{margin-top:14px}.record{grid-template-columns:1fr}}
+@media print{body{background:#fff;padding:0}.page{box-shadow:none;border-radius:0}header,.records-toolbar,.records-list,.no-print{display:none!important}main{padding:0}.record-print{display:block!important;margin:0}}
+</style>
+<style id="launch-standard-certificate-style">
+  .result-certificate.launch-standard-certificate,
+  .result-certificate {
+    margin-top: 26px;
+    border: 3px solid var(--launch-green, #56b947);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  }
+  .cert-header {
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+    border-bottom: 4px solid var(--launch-yellow, #f2e600);
+    padding: 22px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .cert-header-left { color: #fff; }
+  .cert-org {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: var(--launch-yellow, #f2e600);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .cert-title-line {
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .cert-subtitle {
+    font-size: 0.8rem;
+    color: #c8ced3;
+    margin-top: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .cert-stamp {
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    padding: 10px 22px;
+    border-radius: 10px;
+    border: 3px solid;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .cert-stamp.stamp-pass {
+    color: #198754;
+    border-color: #198754;
+    background: rgba(25,135,84,0.08);
+  }
+  .cert-stamp.stamp-fail {
+    color: #c92a2a;
+    border-color: #c92a2a;
+    background: rgba(201,42,42,0.08);
+  }
+  .cert-info-row {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #e3e8ee;
+  }
+  .cert-info-field {
+    flex: 1;
+    padding: 14px 20px;
+    border-right: 1px solid #e3e8ee;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+  .cert-info-field:last-child { border-right: none; }
+  .cert-info-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #777;
+    font-weight: bold;
+  }
+  .cert-info-value {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #111;
+    word-break: break-word;
+  }
+  .cert-score-value {
+    font-size: 1.2rem;
+    color: var(--launch-green-dark, #26731f);
+  }
+  .cert-statement {
+    padding: 18px 28px;
+    font-size: 0.97rem;
+    color: #444;
+    border-bottom: 1px solid #e3e8ee;
+    line-height: 1.6;
+  }
+  .cert-missed {
+    padding: 0 28px;
+    border-bottom: 1px solid #e3e8ee;
+  }
+  .cert-missed .wrong,
+  .cert-missed .missed-item {
+    margin: 10px 0;
+    padding: 12px 14px;
+    background: #fff8e8;
+    border-left: 4px solid #f0ad4e;
+    border-radius: 8px;
+  }
+  .cert-sig-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 24px 28px 20px;
+  }
+  .cert-sig-block { display: flex; flex-direction: column; gap: 6px; }
+  .cert-sig-line { border-bottom: 1.5px solid #444; min-height: 36px; }
+  .cert-sig-label { font-size: 0.78rem; color: #666; letter-spacing: 0.5px; }
+  .cert-actions {
+    padding: 12px 28px 16px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    border-top: 1px solid #e3e8ee;
+    background: #fafcfd;
+  }
+  .cert-actions button,
+  .cert-actions a {
+    border: none;
+    display: inline-block;
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-weight: 900;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .cert-actions button { color: #fff; background: #111820; }
+  .cert-actions a { color: #111820; background: var(--launch-yellow, #f2e600); }
+  @media (max-width: 860px) {
+    .cert-header,
+    .cert-info-row { display: block; }
+    .cert-stamp { display: inline-block; margin-top: 14px; }
+    .cert-info-field { border-right: 0; border-bottom: 1px solid #e3e8ee; }
+    .cert-sig-row { grid-template-columns: 1fr; gap: 24px; }
+  }
+  @media print {
+    body { background: #fff !important; padding: 0 !important; }
+    .header, header, .meta, .meta-card, .toolbar, .validation, .validation-box,
+    #validationBox, #quizForm, .buttons, .top-nav, .pre-exam-nav, .records-note,
+    .pdf-note, .footer-note, .brand-topbar, #answered, #progress, #exam,
+    #prev, #next, #submit, .question-card, .question, .no-print, .cert-actions {
+      display: none !important;
+    }
+    .page, .page-shell, .container, .content, main {
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      background: #fff !important;
+    }
+    #resultBox, #result, .result-certificate {
+      display: block !important;
+      border: 2px solid #333 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      margin: 0 !important;
+    }
+    .cert-header, .cert-stamp {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .cert-missed { border-bottom: none; }
+  }
+</style>
+<style id="launch-portal-auth-style">
+  html { display: none; }
+  html.portal-authenticated { display: block; }
+</style>
+<script id="launch-portal-auth-script">
+  (() => {
+    const storageKey = "launchTrainingUnlockedUntil";
+    const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+    if (unlockedUntil <= Date.now()) {
+      localStorage.removeItem(storageKey);
+      const currentPath = window.location.pathname;
+      const marker = "/Launch-Training/";
+      const markerPosition = currentPath.indexOf(marker);
+      let portalBase = markerPosition >= 0 ? currentPath.slice(0, markerPosition + marker.length) : "/";
+      const moduleMarkers = ["/cashier/", "/court-monitor/", "/party-host/", "/krave/", "/memberships/"];
+      for (const moduleMarker of moduleMarkers) {
+        const modulePosition = currentPath.indexOf(moduleMarker);
+        if (modulePosition >= 0) { portalBase = currentPath.slice(0, modulePosition + 1) || "/"; break; }
+      }
+      const returnPath = currentPath + window.location.search + window.location.hash;
+      window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
+    } else {
+      document.documentElement.classList.add("portal-authenticated");
+    }
+  })();
+</script>
+</head>
+<body>
+<div class="page">
+<header><div><div class="eyebrow">Generic Membership Training</div><h1>Exam Records</h1><div class="sub">Completed membership exams saved locally in this browser.</div></div>
+<div class="nav"><a class="button" href="index.html">Membership Home</a><a class="button button-yellow" href="../../index.html">Training Portal</a></div></header>
+<main><div class="records-toolbar"><strong id="recordCount">0 saved records</strong><button class="button no-print" id="refreshBtn" type="button">Refresh</button></div>
+<div class="records-list" id="recordsList"></div><div class="record-print result-certificate launch-standard-certificate" id="recordPrint"></div></main>
+</div>
+<script>
+(function(){
+'use strict';
+const STORAGE_KEY='launch_generic_membership_exam_records_v1';
+function esc(value){return String(value==null?'':value).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function records(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch(e){return[]}}
+function missedHtml(record){return record.missed&&record.missed.length?'<h3 style="margin:16px 0 8px">Missed Questions</h3>'+record.missed.map(function(m){return '<div class="missed-item"><div><strong>Q'+esc(m.number)+':</strong> '+esc(m.text)+'</div><div><strong>Selected answer:</strong> '+esc(m.selected||'No answer')+'</div><div><strong>Correct answer:</strong> '+esc(m.correct)+'</div></div>'}).join(''):'<p style="padding:14px 0"><strong>&#10003; Perfect score — no missed questions.</strong></p>'}
+function show(index,printNow){const record=records()[index];if(!record)return;const box=document.getElementById('recordPrint');box.style.display='block';box.innerHTML=window.launchRenderStandardExamCertificate({status:record.passed?'PASS':'FAIL',trainingTitle:'MEMBERSHIP TRAINING',statementTitle:'Membership Training',employeeName:record.employee,parkLocation:record.park,date:record.date,trainerName:record.trainer,scoreText:record.score+' / '+record.total,percentText:record.percent+'%',passed:record.passed,passingPercent:80,missedHtml:missedHtml(record),recordsHref:'exam-records.html'});box.scrollIntoView({behavior:'smooth',block:'start'});if(printNow)window.setTimeout(function(){window.print()},50)}
+function render(){const list=records();document.getElementById('recordCount').textContent=list.length+' saved record'+(list.length===1?'':'s');const target=document.getElementById('recordsList');if(!list.length){target.innerHTML='<div class="empty">No saved Generic Membership Exam records are available in this browser.</div>';return}target.innerHTML=list.map(function(r,i){return '<div class="record"><div><div class="record-main">'+esc(r.employee)+'</div><div class="record-sub">'+esc(r.date||'—')+' · '+esc(r.park||'—')+' · Trainer: '+esc(r.trainer||'—')+'</div></div><div class="record-sub">'+esc(new Date(r.submittedAt).toLocaleString())+'</div><div class="score '+(r.passed?'':'fail')+'">'+(r.passed?'PASS':'FAIL')+' · '+esc(r.score)+'/'+esc(r.total)+' ('+esc(r.percent)+'%)</div><div class="actions"><button class="button" type="button" data-view="'+i+'">View</button><button class="button button-yellow" type="button" data-print="'+i+'">Print</button></div></div>'}).join('');target.querySelectorAll('[data-view]').forEach(function(btn){btn.addEventListener('click',function(){show(Number(btn.dataset.view),false)})});target.querySelectorAll('[data-print]').forEach(function(btn){btn.addEventListener('click',function(){show(Number(btn.dataset.print),true)})})}
+document.getElementById('refreshBtn').addEventListener('click',render);render();
+})();
+</script>
+<script id="launch-standard-certificate-script">
+(function () {
+  if (window.launchRenderStandardExamCertificate) return;
+
+  function escapeHtml(value) {
+    return String(value == null ? "" : value).replace(/[&<>"']/g, function (char) {
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[char];
+    });
+  }
+
+  window.launchEscapeHtml = escapeHtml;
+
+  window.launchRenderStandardExamCertificate = function (data) {
+    data = data || {};
+
+    const passed = !!data.passed;
+    const stampText = data.status || (passed ? "PASS" : "FAIL");
+    const stampClass = passed ? "stamp-pass" : "stamp-fail";
+    const employeeName = data.employeeName || "—";
+    const parkLocation = data.parkLocation || "—";
+    const dateText = data.date || new Date().toLocaleDateString();
+    const trainerName = data.trainerName || "—";
+    const scoreText = data.scoreText || "—";
+    const percentText = data.percentText || "—";
+    const trainingTitle = data.trainingTitle || "TRAINING ASSESSMENT";
+    const passingPercent = data.passingPercent || 80;
+
+    const statement = passed
+      ? `<strong>${escapeHtml(employeeName)}</strong> has successfully completed the Launch Family Entertainment ${escapeHtml(data.statementTitle || trainingTitle)} assessment with a score of <strong>${escapeHtml(scoreText)} (${escapeHtml(percentText)})</strong>. Passing threshold: ${passingPercent}%.`
+      : `<strong>${escapeHtml(employeeName)}</strong> completed the Launch Family Entertainment ${escapeHtml(data.statementTitle || trainingTitle)} assessment with a score of <strong>${escapeHtml(scoreText)} (${escapeHtml(percentText)})</strong> — below the ${passingPercent}% passing threshold. Please review missed questions below and retest.`;
+
+    const missedHtml = data.missedHtml || '<p style="padding:14px 0"><strong>&#10003; Perfect score — no missed questions.</strong></p>';
+    const recordsLink = data.recordsHref
+      ? `<a href="${escapeHtml(data.recordsHref)}">View Exam Records</a>`
+      : "";
+
+    return `
+      <div class="cert-header">
+        <div class="cert-header-left">
+          <div class="cert-org">LAUNCH FAMILY ENTERTAINMENT</div>
+          <div class="cert-title-line">${escapeHtml(trainingTitle)}</div>
+          <div class="cert-subtitle">Training Assessment Record</div>
+        </div>
+        <div class="cert-stamp ${stampClass}">${escapeHtml(stampText)}</div>
+      </div>
+
+      <div class="cert-info-row">
+        <div class="cert-info-field">
+          <span class="cert-info-label">Employee Name</span>
+          <span class="cert-info-value">${escapeHtml(employeeName)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Park Location</span>
+          <span class="cert-info-value">${escapeHtml(parkLocation)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Date</span>
+          <span class="cert-info-value">${escapeHtml(dateText)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Trainer / Manager</span>
+          <span class="cert-info-value">${escapeHtml(trainerName)}</span>
+        </div>
+        <div class="cert-info-field cert-score-field">
+          <span class="cert-info-label">Score</span>
+          <span class="cert-info-value cert-score-value">${escapeHtml(scoreText)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Percentage</span>
+          <span class="cert-info-value">${escapeHtml(percentText)}</span>
+        </div>
+      </div>
+
+      <div class="cert-statement">${statement}</div>
+      <div class="missed cert-missed">${missedHtml}</div>
+
+      <div class="cert-sig-row">
+        <div class="cert-sig-block">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-label">Trainer / Manager Signature</div>
+        </div>
+        <div class="cert-sig-block">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-label">Employee Signature</div>
+        </div>
+      </div>
+
+      <div class="cert-actions no-print">
+        <button type="button" onclick="window.print()">&#128438; Print / Save as PDF</button>
+        ${recordsLink}
+      </div>
+    `;
+  };
+})();
+</script>
+</body></html>
