@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prize Ticket Redemption Exam</title>
+<style>
+:root{--g:#6cc24a;--gd:#4da62d;--y:#f2e600;--ink:#101518;--muted:#5b6670;--line:#e2e7ea;--red:#c63d3d;--green:#318a2c}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#07100a,#161b1e 55%,#24341b);color:#111}.wrap{width:min(1040px,94vw);margin:0 auto;padding:26px 0 60px}.nav{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.nav a{color:#fff;text-decoration:none;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:9px 13px;font-weight:900}.hero{color:#fff;margin:18px 0 20px}.brandmark{display:inline-block;background:#fff;border-radius:8px;padding:7px 12px;margin-bottom:18px}.brandmark img{display:block;width:185px;height:auto}.hero .eyebrow{color:var(--g);text-transform:uppercase;letter-spacing:2px;font-size:.76rem;font-weight:1000}.hero h1{font-size:clamp(2.3rem,5vw,4rem);letter-spacing:-2px;margin:7px 0}.hero p{color:#d4dce1;line-height:1.45;font-weight:700;max-width:800px}.panel{background:#fff;border-radius:20px;box-shadow:0 22px 58px rgba(0,0,0,.28);overflow:hidden;margin-top:18px}.strip{height:9px;background:linear-gradient(90deg,var(--g),var(--y))}.panel-body{padding:24px}.meta-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.2fr;gap:13px}.field label{display:block;font-size:.74rem;text-transform:uppercase;letter-spacing:1px;color:#55616a;font-weight:900;margin-bottom:6px}.field input,.field select{width:100%;padding:11px 12px;border:1px solid #cfd7dc;border-radius:10px;background:#fff;font:inherit;font-weight:700}.exam-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:22px}.exam-head h2{margin:0}.pill{background:#edf6e9;color:#225d1d;border:1px solid #b8dbaa;border-radius:999px;padding:7px 10px;font-weight:900;font-size:.78rem}.question{margin-top:16px;border:1px solid var(--line);border-radius:17px;padding:18px;background:#fff}.qnum{display:inline-block;color:var(--gd);font-size:.72rem;text-transform:uppercase;letter-spacing:1px;font-weight:1000}.question h3{font-size:1.05rem;line-height:1.4;margin:7px 0 13px}.options{display:grid;gap:8px}.option{display:grid;grid-template-columns:25px 27px 1fr;align-items:start;gap:8px;padding:11px 12px;border:1px solid #d9e1e5;border-radius:12px;cursor:pointer;line-height:1.38;font-weight:700}.option:hover{background:#f6faf4;border-color:#add49d}.option input{margin-top:3px}.letter{width:25px;height:25px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#edf1f3;font-size:.75rem;font-weight:1000}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.actions button{border:0;border-radius:999px;padding:11px 16px;font:inherit;font-weight:1000;cursor:pointer}.submit{background:var(--g);color:#101510}.reset{background:#222a2e;color:#fff}.print{background:var(--y);color:#111;display:none}.validation{display:none;background:#fff3f3;border:1px solid #e5aaaa;color:#7b2020;border-radius:13px;padding:12px 14px;margin-top:13px;font-weight:700}.validation.show{display:block}.validation ul{margin:7px 0 0;padding-left:20px}.result{display:none;margin-top:22px;border-radius:17px;padding:18px;border:1px solid}.result.show{display:block}.result.pass{background:#eef9ea;border-color:#a5d895}.result.fail{background:#fff2f2;border-color:#dfa0a0}.result-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.stamp{font-size:1.6rem;font-weight:1000}.pass .stamp{color:#2d7e27}.fail .stamp{color:#a32828}.score-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:13px}.scorebox{background:rgba(255,255,255,.72);border-radius:10px;padding:10px}.scorebox small{display:block;text-transform:uppercase;letter-spacing:.8px;color:#657078;font-weight:900;font-size:.66rem}.scorebox strong{display:block;margin-top:3px}.statement{font-weight:800;line-height:1.45;margin-top:13px}.missed h3{font-size:.94rem;margin:15px 0 7px}.missed-item{border-top:1px solid rgba(0,0,0,.12);padding:9px 0;font-size:.86rem;line-height:1.4}.missed-item div{margin-top:4px;color:#5b6670}.certificate{display:none;background:#fff;border:8px solid #111;outline:3px solid var(--g);outline-offset:-16px;border-radius:3px;padding:44px;text-align:center;margin-top:25px}.certificate.show{display:block}.certificate img{width:195px}.certificate .cert-sub{text-transform:uppercase;letter-spacing:3px;font-size:.77rem;font-weight:1000;color:#5c666d;margin-top:24px}.certificate .cert-title{font-size:2.1rem;line-height:1.05;font-weight:1000;margin:9px 0 24px}.certificate .cert-name{font-size:2rem;font-weight:1000;border-bottom:2px solid #111;display:inline-block;min-width:60%;padding:0 20px 5px}.certificate p{line-height:1.5;font-weight:700;color:#4d5860}.certificate .cert-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px;text-align:left}.certificate .cert-meta div{border-top:1px solid #9aa4ab;padding-top:7px;font-size:.85rem}.records{margin-top:20px}.record{display:flex;justify-content:space-between;gap:15px;border-top:1px solid #e3e8eb;padding:10px 0}.record small{display:block;color:#6a747c;margin-top:3px}.badge-pass{color:#247220;font-weight:1000}.badge-fail{color:#a22727;font-weight:1000}.source-note{font-size:.75rem;color:#647078;font-weight:700;margin-top:13px}
+@media(max-width:820px){.meta-grid{grid-template-columns:1fr 1fr}.score-grid{grid-template-columns:1fr 1fr}.certificate .cert-meta{grid-template-columns:1fr}.option{grid-template-columns:25px 25px 1fr}}
+@media(max-width:560px){.meta-grid,.score-grid{grid-template-columns:1fr}.panel-body{padding:17px}.certificate{padding:30px 20px}.record{display:block}.record>div:last-child{margin-top:5px}}
+@media print{body{background:#fff}.nav,.hero,.records,.meta-grid,.exam-head,.validation,#quizForm,.actions,.result,.panel>.strip,.source-note{display:none!important}.panel{box-shadow:none!important;border:0!important;margin:0!important;overflow:visible!important}.panel-body{padding:0!important}.certificate.show{display:block!important;margin:0!important}.certificate{page-break-inside:avoid;border-width:6px;outline-offset:-13px}}
+</style>
+
+<style id="launch-park-location-dropdown-style">
+#parkLocation{width:100%;padding:10px 11px;border:1px solid #cdd6dc;border-radius:9px;background:#fff;color:#111820;font:inherit;min-height:42px}
+#parkLocation:focus{outline:none;border-color:#6cc24a;box-shadow:0 0 0 3px rgba(108,194,74,.16)}
+</style>
+
+<style id="launch-standard-certificate-style">
+  .result-certificate.launch-standard-certificate,
+  .result-certificate {
+    margin-top: 26px;
+    border: 3px solid var(--launch-green, #56b947);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  }
+  .cert-header {
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+    border-bottom: 4px solid var(--launch-yellow, #f2e600);
+    padding: 22px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .cert-header-left { color: #fff; }
+  .cert-org {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: var(--launch-yellow, #f2e600);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .cert-title-line {
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .cert-subtitle {
+    font-size: 0.8rem;
+    color: #c8ced3;
+    margin-top: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .cert-stamp {
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    padding: 10px 22px;
+    border-radius: 10px;
+    border: 3px solid;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .cert-stamp.stamp-pass {
+    color: #198754;
+    border-color: #198754;
+    background: rgba(25,135,84,0.08);
+  }
+  .cert-stamp.stamp-fail {
+    color: #c92a2a;
+    border-color: #c92a2a;
+    background: rgba(201,42,42,0.08);
+  }
+  .cert-info-row {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #e3e8ee;
+  }
+  .cert-info-field {
+    flex: 1;
+    padding: 14px 20px;
+    border-right: 1px solid #e3e8ee;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+  .cert-info-field:last-child { border-right: none; }
+  .cert-info-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #777;
+    font-weight: bold;
+  }
+  .cert-info-value {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #111;
+    word-break: break-word;
+  }
+  .cert-score-value {
+    font-size: 1.2rem;
+    color: var(--launch-green-dark, #26731f);
+  }
+  .cert-statement {
+    padding: 18px 28px;
+    font-size: 0.97rem;
+    color: #444;
+    border-bottom: 1px solid #e3e8ee;
+    line-height: 1.6;
+  }
+  .cert-missed {
+    padding: 0 28px;
+    border-bottom: 1px solid #e3e8ee;
+  }
+  .cert-missed .wrong,
+  .cert-missed .missed-item {
+    margin: 10px 0;
+    padding: 12px 14px;
+    background: #fff8e8;
+    border-left: 4px solid #f0ad4e;
+    border-radius: 8px;
+  }
+  .cert-sig-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 24px 28px 20px;
+  }
+  .cert-sig-block { display: flex; flex-direction: column; gap: 6px; }
+  .cert-sig-line { border-bottom: 1.5px solid #444; min-height: 36px; }
+  .cert-sig-label { font-size: 0.78rem; color: #666; letter-spacing: 0.5px; }
+  .cert-actions {
+    padding: 12px 28px 16px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    border-top: 1px solid #e3e8ee;
+    background: #fafcfd;
+  }
+  .cert-actions button,
+  .cert-actions a {
+    border: none;
+    display: inline-block;
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-weight: 900;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .cert-actions button { color: #fff; background: #111820; }
+  .cert-actions a { color: #111820; background: var(--launch-yellow, #f2e600); }
+  @media (max-width: 860px) {
+    .cert-header,
+    .cert-info-row { display: block; }
+    .cert-stamp { display: inline-block; margin-top: 14px; }
+    .cert-info-field { border-right: 0; border-bottom: 1px solid #e3e8ee; }
+    .cert-sig-row { grid-template-columns: 1fr; gap: 24px; }
+  }
+  @media print {
+    body { background: #fff !important; padding: 0 !important; }
+    .header, header, .meta, .meta-card, .toolbar, .validation, .validation-box,
+    #validationBox, #quizForm, .buttons, .top-nav, .pre-exam-nav, .records-note,
+    .pdf-note, .footer-note, .brand-topbar, #answered, #progress, #exam,
+    #prev, #next, #submit, .question-card, .question, .no-print, .cert-actions {
+      display: none !important;
+    }
+    .page, .page-shell, .container, .content, main {
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      background: #fff !important;
+    }
+    #resultBox, #result, .result-certificate {
+      display: block !important;
+      border: 2px solid #333 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      margin: 0 !important;
+    }
+    .cert-header, .cert-stamp {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .cert-missed { border-bottom: none; }
+  }
+</style>
+
+<style id="launch-portal-auth-style">
+  html { display: none; }
+  html.portal-authenticated { display: block; }
+</style>
+<script id="launch-portal-auth-script">
+  (() => {
+    const storageKey = "launchTrainingUnlockedUntil";
+    const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+    if (unlockedUntil <= Date.now()) {
+      localStorage.removeItem(storageKey);
+      const currentPath = window.location.pathname;
+      const marker = "/Launch-Training/";
+      const markerPosition = currentPath.indexOf(marker);
+      let portalBase = markerPosition >= 0 ? currentPath.slice(0, markerPosition + marker.length) : "/";
+      const moduleMarkers = ["/cashier/", "/court-monitor/", "/party-host/", "/krave/", "/memberships/", "/holiday-gift-card/"];
+      for (const moduleMarker of moduleMarkers) {
+        const modulePosition = currentPath.indexOf(moduleMarker);
+        if (modulePosition >= 0) { portalBase = currentPath.slice(0, modulePosition + 1) || "/"; break; }
+      }
+      const returnPath = currentPath + window.location.search + window.location.hash;
+      window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
+    } else {
+      document.documentElement.classList.add("portal-authenticated");
+    }
+  })();
+</script>
+
+<script id="holiday-gift-card-section-auth-script">
+(() => {
+  const storageKey = "launchHolidayGiftCardUnlockedUntil";
+  const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+
+  if (unlockedUntil <= Date.now()) {
+    localStorage.removeItem(storageKey);
+    const currentPath = window.location.pathname + window.location.search + window.location.hash;
+    window.location.replace("../index.html?return=" + encodeURIComponent(currentPath));
+  } else {
+    document.documentElement.classList.add("holiday-gift-card-unlocked");
+  }
+})();
+</script>
+
+<script id="launch-google-sheets-exam-records">
+(function() {
+  if (window.launchTrainingSubmitExamRecord) return;
+
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycbzKjtjFU8msyHtWcK7ziV3ewSvQcW5AKcVtEAkAjMSe0srGBheWSUA7XLrLTR8inYyo-w/exec";
+  const SECRET = "JonathanPfeiffer";
+
+  function clean(value) {
+    return String(value == null ? '' : value).trim();
+  }
+
+  window.launchTrainingSubmitExamRecord = function(payload) {
+    try {
+      const record = Object.assign({}, payload || {});
+      record.secret = SECRET;
+      record.name = clean(record.name);
+      record.parkLocation = clean(record.parkLocation);
+      record.trainingProgram = clean(record.trainingProgram);
+      record.examDay = clean(record.examDay);
+      record.score = clean(record.score);
+      record.percentage = clean(record.percentage);
+      record.missedQuestions = clean(record.missedQuestions || 'None') || 'None';
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(record),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Launch Training Google Sheets submission failed:', error);
+      });
+    } catch (error) {
+      console.warn('Launch Training Google Sheets submission error:', error);
+    }
+  };
+})();
+</script>
+</head>
+<body>
+<main class="wrap">
+<nav class="nav">
+  <a href="index.html">← Prize Ticket Training Home</a>
+  <a href="online-training.html">Review Online Training</a>
+  <a href="exam-records.html">Exam Records</a>
+  <a href="prize-ticket-redemption-guide.pdf" target="_blank" rel="noopener">Prize Ticket SOP</a>
+  <a href="../index.html">Holiday Training Home</a>
+  <a href="../../index.html">Training Portal</a>
+</nav>
+<header class="hero"><div class="brandmark"><img src="assets/launch-logo.png" alt="Launch Family Entertainment"></div><div class="eyebrow">Supplemental Cashier Training</div><h1>Prize Ticket Redemption Exam</h1><p>Complete all questions. Question order and answer choices randomize each time the exam is loaded. A score of 80% or higher is required to pass.</p></header>
+<section class="panel"><div class="strip"></div><div class="panel-body">
+<div class="meta-grid"><div class="field"><label for="employeeName">Employee Name</label><input id="employeeName" autocomplete="name"></div><div class="field"><label for="parkLocation">Park Location</label><select id="parkLocation" required><option value="">Select Park Location</option></select></div><div class="field"><label for="quizDate">Date</label><input id="quizDate" type="date"></div><div class="field"><label for="trainerName">Trainer / Manager</label><input id="trainerName"></div></div>
+<div class="exam-head"><h2>Assessment</h2><span class="pill" id="progressText"></span></div><div class="validation" id="validation"></div><form id="quizForm"></form>
+<div class="actions"><button type="button" class="submit" id="submitBtn">Submit Exam</button><button type="button" class="reset" id="resetBtn">Reset &amp; Reshuffle</button><button type="button" class="print" id="printBtn" style="display:none">Print Certificate</button></div>
+
+<div class="result result-certificate launch-standard-certificate" id="result"></div>
+<div id="certificate" hidden></div>
+</div></section>
+
+<section class="panel records"><div class="strip"></div><div class="panel-body"><div class="exam-head"><h2>Local Exam Records</h2><button type="button" id="refreshRecords" style="border:none;border-radius:999px;background:#171d20;color:#fff;padding:8px 12px;font-weight:900;cursor:pointer">Refresh</button></div><div id="recordsList"></div></div></section>
+</main>
+<script>
+(()=>{
+'use strict';
+const PASSING_PERCENT=80, STORAGE_KEY='launchPrizeTicketExamRecordsV1';
+const parks=["Ann Arbor", "Arlington", "Asheville", "Brooklyn", "Clearwater", "Columbus", "Cumming", "Dearborn", "Denton", "Deptford", "Doral", "Framingham", "Gurnee", "Herndon", "Jackson", "Jeffersonville", "Lansing", "Leominster", "Lewisville", "Little Ferry", "Manchester", "Methuen", "North Attleboro", "Norwood", "Novi", "Orlando", "Pensacola", "PG County", "Prattville", "Queens", "Raleigh", "Richmond", "Riverdale", "Warwick", "West Houston", "Westborough", "Woburn"];
+const questions=[
+{id:'firststep',text:'A guest presents a Lucky Launch Prize Ticket for a 1 Hour Action Pass. What should you do first at the POS?',choices:['Ring in the normal 1 Hour Action Pass the guest actually won.','Select Customer Coupons before adding any item to the order.','Treat the Prize Ticket as a gift card and enter its value as payment.','Select Prize Action Pass Redeem from the opening sales screen.'],correct:'Ring in the normal 1 Hour Action Pass the guest actually won.'},
+{id:'afterend',text:'You have rung in the correct standard prize item and selected End Order. What is the next CenterEdge step?',choices:['Select Customer Coupons from the payment screen.','Complete the order before choosing any discount.','Select Old Gift Card and scan the Prize Ticket.','Void the item and use a manager discount instead.'],correct:'Select Customer Coupons from the payment screen.'},
+{id:'mapping',text:'Which set correctly matches each standard Prize Ticket to its CenterEdge Prize coupon?',choices:['30 Minute or 1 Hour Action Pass → Prize Action Pass Redeem; Arcade Card → Prize Arcade Card Redeem; Grip Socks → Prize Jump Socks Redeem.','30 Minute Action Pass → Prize Jump Socks Redeem; 1 Hour Action Pass → Prize Action Pass Redeem; Arcade Card → Prize Arcade Card Redeem.','30 Minute Action Pass → Prize Action Pass Redeem; 1 Hour Action Pass → Prize Arcade Card Redeem; Grip Socks → Prize Jump Socks Redeem.','30 Minute and 1 Hour Action Pass prizes require separate duration-specific Prize coupons; Arcade Card → Prize Arcade Card Redeem; Grip Socks → Prize Jump Socks Redeem.'],correct:'30 Minute or 1 Hour Action Pass → Prize Action Pass Redeem; Arcade Card → Prize Arcade Card Redeem; Grip Socks → Prize Jump Socks Redeem.'},
+{id:'authorization',text:'While redeeming a standard Prize Ticket, when should Manager Authorization occur?',choices:['After the appropriate Prize redemption coupon is selected, because these Prize coupons are configured to require Manager Authorization.','Before selecting Customer Coupons, because opening the coupon screen requires Manager Authorization.','Only after the order has been completed and the guest has already left.','Only for Arcade Card prizes; Action Pass and Grip Socks coupons never require authorization.'],correct:'After the appropriate Prize redemption coupon is selected, because these Prize coupons are configured to require Manager Authorization.'},
+{id:'notzero',text:'You apply a Prize discount, but the order still shows a balance for the prize item. What should you do?',choices:['Stop and confirm that the correct prize item and matching Prize discount were selected before completing the order.','Complete the transaction and refund the remaining amount afterward.','Ask the guest to pay the balance because the Prize Ticket only covers part of the item.','Use cash as a zero-dollar payment so CenterEdge will close the order.'],correct:'Stop and confirm that the correct prize item and matching Prize discount were selected before completing the order.'},
+{id:'separate',text:'A guest asks whether their Lucky Launch Prize Ticket is the same thing as the promotional gift card Bonus Value. Which explanation is correct?',choices:['They are separate promotions and the Prize Ticket follows its own redemption process.','They are the same value, but the guest may choose which one to redeem first.','The Prize Ticket is simply another physical form of the Bonus Value pass.','The Prize Ticket becomes Bonus Value automatically when it is scratched.'],correct:'They are separate promotions and the Prize Ticket follows its own redemption process.'},
+{id:'window',text:'A guest presents a Lucky Launch Prize Ticket on February 10, 2027. Is the ticket within the redemption window?',choices:['Yes. Prize Tickets may be redeemed January 1 through March 31, 2027.','No. Prize Tickets could only be redeemed during January 2027.','No. Prize Tickets expired when the holiday gift card promotion ended December 31, 2026.','Yes, but only if it is for the 1 Year Free Jump Pass.'],correct:'Yes. Prize Tickets may be redeemed January 1 through March 31, 2027.'},
+{id:'jeffersonville',text:'You are working at Jeffersonville and a guest asks which Lucky Launch prize types apply there. What is correct?',choices:['Jeffersonville uses only the 20 Credit Arcade Card Prize Ticket.','Jeffersonville uses the full prize pool except the 1 Year Free Jump Pass.','Jeffersonville uses only the Action Pass Prize Tickets.','Jeffersonville does not participate in Lucky Launch Prize Tickets.'],correct:'Jeffersonville uses only the 20 Credit Arcade Card Prize Ticket.'},
+{id:'yearsetup',text:'During the initial setup of a 1 Year Free Jump Pass, why is it critical to select the correct guest waiver?',choices:['The pass is attached to that customer profile for use on future visits.','The waiver determines which prize discount appears in Customer Coupons.','The waiver converts the Prize Ticket into a physical gift card.','The waiver is only needed to remove Manager Authorization from the transaction.'],correct:'The pass is attached to that customer profile for use on future visits.'},
+{id:'yearfuture',text:'A guest with a previously set up Prize 1 Year Jump Pass returns for another visit. Which sequence correctly describes the redemption?',choices:['Ring in the 1 Hour Action Pass, select the guest waiver, use the Prize 1 Year Jump Pass when CenterEdge displays it, click OK, and verify the admission is $0.','Ring in Prize 1 Year Jump Pass again, attach a new waiver, and complete another initial setup transaction.','Open Customer Coupons first, select Prize Action Pass Redeem, and then search for the guest after completing the order.','Scan the original Prize Ticket as a gift card payment and manually reduce the 1 Hour Action Pass to $0.'],correct:'Ring in the 1 Hour Action Pass, select the guest waiver, use the Prize 1 Year Jump Pass when CenterEdge displays it, click OK, and verify the admission is $0.'}
+];
+const parkSel=document.getElementById('parkLocation');parks.forEach(p=>{const o=document.createElement('option');o.value=p;o.textContent=p;parkSel.appendChild(o)});
+const form=document.getElementById('quizForm'),validation=document.getElementById('validation'),result=document.getElementById('result'),certificate=document.getElementById('certificate'),submitBtn=document.getElementById('submitBtn'),resetBtn=document.getElementById('resetBtn'),printBtn=document.getElementById('printBtn');let rendered=[];
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function today(){const d=new Date(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${d.getFullYear()}-${m}-${day}`}
+function renderExam(){rendered=shuffle(questions).map(q=>({...q,choices:shuffle(q.choices)}));form.innerHTML=rendered.map((q,i)=>`<article class="question"><span class="qnum">Question ${i+1}</span><h3>${esc(q.text)}</h3><div class="options">${q.choices.map((c,j)=>`<label class="option"><input type="radio" name="q_${esc(q.id)}" value="${esc(c)}"><span class="letter">${String.fromCharCode(65+j)}</span><span>${esc(c)}</span></label>`).join('')}</div></article>`).join('');document.getElementById('progressText').textContent=`${rendered.length} questions · all required`}
+function meta(){return{employee:document.getElementById('employeeName').value.trim(),park:parkSel.value,date:document.getElementById('quizDate').value,trainer:document.getElementById('trainerName').value.trim()}}
+function validate(){const m=meta(),errs=[];if(!m.employee)errs.push('Employee Name is required.');if(!m.park)errs.push('Park Location is required.');if(!m.date)errs.push('Date is required.');if(!m.trainer)errs.push('Trainer/Manager is required.');const unanswered=rendered.filter(q=>!form.querySelector(`input[name="q_${CSS.escape(q.id)}"]:checked`));if(unanswered.length)errs.push(`${unanswered.length} question${unanswered.length===1?' is':'s are'} unanswered.`);if(errs.length){validation.innerHTML='<strong>Please complete the following:</strong><ul>'+errs.map(e=>`<li>${esc(e)}</li>`).join('')+'</ul>';validation.classList.add('show');validation.scrollIntoView({behavior:'smooth',block:'center'});return false}validation.classList.remove('show');return true}
+function scoreExam(){let score=0;const missed=[];rendered.forEach((q,i)=>{const selected=form.querySelector(`input[name="q_${CSS.escape(q.id)}"]:checked`)?.value||'';if(selected===q.correct)score++;else missed.push({number:i+1,text:q.text,selected,correct:q.correct})});const total=rendered.length,percent=Math.round(score/total*100),passed=percent>=PASSING_PERCENT;return{score,total,percent,passed,missed}}
+function saveRecord(rec){try{const all=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');all.unshift(rec);localStorage.setItem(STORAGE_KEY,JSON.stringify(all.slice(0,100)))}catch(e){}}
+function readRecords(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch(e){return[]}}
+function showResult(rec){
+  result.className='result result-certificate launch-standard-certificate show '+(rec.passed?'pass':'fail');
+  const missedHtml=rec.missed && rec.missed.length
+    ? '<h3 style="margin:16px 0 8px">Missed Questions</h3>'+rec.missed.map(m=>`<div class="missed-item"><div><strong>Q${window.launchEscapeHtml(m.number)}:</strong> ${window.launchEscapeHtml(m.text)}</div><div><strong>Selected answer:</strong> ${window.launchEscapeHtml(m.selected||'No answer')}</div><div><strong>Correct answer:</strong> ${window.launchEscapeHtml(m.correct)}</div></div>`).join('')
+    : '<p style="padding:14px 0"><strong>&#10003; Perfect score — no missed questions.</strong></p>';
+
+  result.innerHTML=window.launchRenderStandardExamCertificate({
+    status:rec.passed?'PASS':'FAIL',
+    trainingTitle:'HOLIDAY PRIZE TICKET REDEMPTION',
+    statementTitle:'Holiday Prize Ticket Redemption Training',
+    employeeName:rec.employee,
+    parkLocation:rec.park,
+    date:rec.date,
+    trainerName:rec.trainer,
+    scoreText:`${rec.score} / ${rec.total}`,
+    percentText:`${rec.percent}%`,
+    passed:rec.passed,
+    passingPercent:PASSING_PERCENT,
+    missedHtml:missedHtml,
+    recordsHref:'exam-records.html'
+  });
+
+  printBtn.style.display='none';
+  result.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function renderRecords(){const recs=readRecords(),list=document.getElementById('recordsList');list.innerHTML=recs.length?recs.map(r=>`<div class="record"><div><strong>${esc(r.employee)} · ${esc(r.park)}</strong><small>${esc(r.date)} · Trainer: ${esc(r.trainer)} · ${new Date(r.submittedAt).toLocaleString()}</small></div><div class="${r.passed?'badge-pass':'badge-fail'}">${r.passed?'PASS':'FAIL'} · ${r.score}/${r.total} (${r.percent}%)</div></div>`).join(''):'<div class="record"><div>No saved exam records yet.</div></div>'}
+submitBtn.onclick=()=>{
+  if(!validate())return;
+  const rec={...meta(),...scoreExam(),submittedAt:new Date().toISOString()};
+  saveRecord(rec);
+
+  if(window.launchTrainingSubmitExamRecord){
+    window.launchTrainingSubmitExamRecord({
+      name:rec.employee,
+      parkLocation:rec.park,
+      trainingProgram:'Holiday Gift Card Training',
+      examDay:'Prize Ticket Redemption Exam',
+      score:`${rec.score} / ${rec.total}`,
+      percentage:`${rec.percent}%`,
+      missedQuestions:rec.missed && rec.missed.length
+        ? rec.missed.map(m=>`Q${m.number}: ${m.text} | Selected: ${m.selected || 'No answer'} | Correct: ${m.correct}`).join(' | ')
+        : 'None'
+    });
+  }
+
+  showResult(rec);
+  renderRecords();
+};
+resetBtn.onclick=()=>{
+  if(!confirm('Reset this exam and reshuffle all questions and answers?'))return;
+  form.reset();
+  result.className='result result-certificate launch-standard-certificate';
+  result.innerHTML='';
+  certificate.hidden=true;
+  printBtn.style.display='none';
+  validation.classList.remove('show');
+  renderExam();
+  document.getElementById('quizDate').value=today();
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+printBtn.onclick=()=>window.print();document.getElementById('refreshRecords').onclick=renderRecords;document.getElementById('quizDate').value=today();renderExam();renderRecords();
+})();
+</script>
+<script id="launch-standard-certificate-script">
+(function () {
+  if (window.launchRenderStandardExamCertificate) return;
+
+  function escapeHtml(value) {
+    return String(value == null ? "" : value).replace(/[&<>"']/g, function (char) {
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[char];
+    });
+  }
+
+  window.launchEscapeHtml = escapeHtml;
+
+  window.launchRenderStandardExamCertificate = function (data) {
+    data = data || {};
+
+    const passed = !!data.passed;
+    const stampText = data.status || (passed ? "PASS" : "FAIL");
+    const stampClass = passed ? "stamp-pass" : "stamp-fail";
+    const employeeName = data.employeeName || "—";
+    const parkLocation = data.parkLocation || "—";
+    const dateText = data.date || new Date().toLocaleDateString();
+    const trainerName = data.trainerName || "—";
+    const scoreText = data.scoreText || "—";
+    const percentText = data.percentText || "—";
+    const trainingTitle = data.trainingTitle || "TRAINING ASSESSMENT";
+    const passingPercent = data.passingPercent || 80;
+
+    const statement = passed
+      ? `<strong>${escapeHtml(employeeName)}</strong> has successfully completed the Launch Family Entertainment ${escapeHtml(data.statementTitle || trainingTitle)} assessment with a score of <strong>${escapeHtml(scoreText)} (${escapeHtml(percentText)})</strong>. Passing threshold: ${passingPercent}%.`
+      : `<strong>${escapeHtml(employeeName)}</strong> completed the Launch Family Entertainment ${escapeHtml(data.statementTitle || trainingTitle)} assessment with a score of <strong>${escapeHtml(scoreText)} (${escapeHtml(percentText)})</strong> — below the ${passingPercent}% passing threshold. Please review missed questions below and retest.`;
+
+    const missedHtml = data.missedHtml || '<p style="padding:14px 0"><strong>&#10003; Perfect score — no missed questions.</strong></p>';
+    const recordsLink = data.recordsHref
+      ? `<a href="${escapeHtml(data.recordsHref)}">View Exam Records</a>`
+      : "";
+
+    return `
+      <div class="cert-header">
+        <div class="cert-header-left">
+          <div class="cert-org">LAUNCH FAMILY ENTERTAINMENT</div>
+          <div class="cert-title-line">${escapeHtml(trainingTitle)}</div>
+          <div class="cert-subtitle">Training Assessment Record</div>
+        </div>
+        <div class="cert-stamp ${stampClass}">${escapeHtml(stampText)}</div>
+      </div>
+
+      <div class="cert-info-row">
+        <div class="cert-info-field">
+          <span class="cert-info-label">Employee Name</span>
+          <span class="cert-info-value">${escapeHtml(employeeName)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Park Location</span>
+          <span class="cert-info-value">${escapeHtml(parkLocation)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Date</span>
+          <span class="cert-info-value">${escapeHtml(dateText)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Trainer / Manager</span>
+          <span class="cert-info-value">${escapeHtml(trainerName)}</span>
+        </div>
+        <div class="cert-info-field cert-score-field">
+          <span class="cert-info-label">Score</span>
+          <span class="cert-info-value cert-score-value">${escapeHtml(scoreText)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Percentage</span>
+          <span class="cert-info-value">${escapeHtml(percentText)}</span>
+        </div>
+      </div>
+
+      <div class="cert-statement">${statement}</div>
+      <div class="missed cert-missed">${missedHtml}</div>
+
+      <div class="cert-sig-row">
+        <div class="cert-sig-block">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-label">Trainer / Manager Signature</div>
+        </div>
+        <div class="cert-sig-block">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-label">Employee Signature</div>
+        </div>
+      </div>
+
+      <div class="cert-actions no-print">
+        <button type="button" onclick="window.print()">&#128438; Print / Save as PDF</button>
+        ${recordsLink}
+      </div>
+    `;
+  };
+})();
+</script>
+</body>
+</html>

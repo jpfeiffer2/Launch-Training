@@ -54,6 +54,66 @@
   #holiday-gift-card-gate .holiday-error { min-height: 1.2em; margin: 10px 0 0; color: #ffb5b5; font-weight: 900; }
 </style>
 
+
+<style id="holiday-training-track-style">
+  .training-track {
+    margin: 24px 0 28px;
+    padding: 22px;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 24px;
+    background: rgba(255,255,255,.055);
+    box-shadow: 0 18px 46px rgba(0,0,0,.18);
+  }
+  .track-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 22px;
+    margin-bottom: 18px;
+  }
+  .track-heading h2 {
+    margin: 4px 0 5px;
+    color: #fff;
+    font-size: clamp(1.65rem,3vw,2.45rem);
+    letter-spacing: -1px;
+  }
+  .track-heading p {
+    margin: 0;
+    max-width: 780px;
+    color: #cfd7dc;
+    line-height: 1.45;
+    font-weight: 700;
+  }
+  .track-sop,
+  .track-home-link a {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 1000;
+    border-radius: 999px;
+  }
+  .track-sop {
+    flex: 0 0 auto;
+    padding: 11px 15px;
+    background: #f2e600;
+    color: #111;
+  }
+  .track-home-link {
+    margin-top: 14px;
+    text-align: right;
+  }
+  .track-home-link a {
+    padding: 9px 14px;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.2);
+    background: rgba(255,255,255,.08);
+  }
+  @media(max-width:760px) {
+    .training-track { padding: 16px; }
+    .track-heading { display: block; }
+    .track-sop { margin-top: 14px; }
+    .track-home-link { text-align: left; }
+  }
+</style>
 </head>
 <body>
 
@@ -76,14 +136,78 @@
   <div class="top"><img class="logo" src="assets/launch-family-entertainment-logo.png" alt="Launch Family Entertainment"><a class="sop-link" href="../index.html"><b>Training Portal</b></a><a class="sop-link" href="Gift_Card_Support_Process.pdf" target="_blank" rel="noopener"><span><b>Printable SOP:</b><br>Click here to print the SOP for issues with emailed gift cards.</span></a></div>
   <section class="hero">
     <div class="eyebrow">Q4 2026 Supplemental Training</div>
-    <h1>Holiday Gift Card <span>Sales Training</span></h1>
-    <p>Learn the 2026 Black Friday and holiday gift card offers, how to process in-store sales, how Bonus Value works, Lucky Launcher eligibility, online order basics, redemption, and guest support.</p>
+    <h1>Holiday Gift Card <span>Training</span></h1>
+    <p>Complete the Holiday Gift Card Sales Training and the Lucky Launch Prize Ticket Redemption Training from one supplemental Holiday training section.</p>
   </section>
+  
+<section class="training-track" aria-labelledby="gift-card-sales-heading">
+  <div class="track-heading">
+    <div>
+      <div class="eyebrow">Holiday Training · Track 1</div>
+      <h2 id="gift-card-sales-heading">Holiday Gift Card Sales Training</h2>
+      <p>Black Friday and holiday offers, in-store processing, Bonus Value, Lucky Launcher eligibility, online orders, redemption, and guest support.</p>
+    </div>
+  </div>
   <section class="cards">
-    <article class="card"><div class="strip"></div><div class="body"><div class="step">Step 1</div><h2>Online Training</h2><p>Complete the full 12-slide narrated gift card training session covering the holiday offers, in-store processing, Bonus Value, Lucky Launcher, online orders, redemption, and guest support.</p><a class="button" href="online-training.html">Start Online Training</a></div></article>
-    <article class="card"><div class="strip"></div><div class="body"><div class="step">Step 2</div><h2>Gift Card Exam</h2><p>Complete the randomized assessment covering the promotion, POS process, Bonus Value, Lucky Launcher, eGift cards, and support procedures.</p><a class="button" href="gift-card-exam.html">Start Exam</a></div></article>
+    <article class="card">
+      <div class="strip"></div>
+      <div class="body">
+        <div class="step">Step 1</div>
+        <h2>Online Training</h2>
+        <p>Complete the full 12-slide narrated gift card training session covering the holiday offers, in-store processing, Bonus Value, Lucky Launcher, online orders, redemption, and guest support.</p>
+        <a class="button" href="online-training.html">Start Online Training</a>
+      </div>
+    </article>
+    <article class="card">
+      <div class="strip"></div>
+      <div class="body">
+        <div class="step">Step 2</div>
+        <h2>Gift Card Exam</h2>
+        <p>Complete the randomized assessment covering the promotion, POS process, Bonus Value, Lucky Launcher, eGift cards, and support procedures.</p>
+        <a class="button" href="gift-card-exam.html">Start Exam</a>
+      </div>
+    </article>
   </section>
-  <div class="notice"><strong>Training scope:</strong> This is supplemental Q4 gift card training. It does not replace assigned Cashier Training or local manager coaching.</div>
+</section>
+
+<section class="training-track" aria-labelledby="prize-ticket-heading">
+  <div class="track-heading">
+    <div>
+      <div class="eyebrow">Holiday Training · Track 2</div>
+      <h2 id="prize-ticket-heading">Lucky Launch Prize Ticket Redemption</h2>
+      <p>Learn the CenterEdge process for standard Prize Ticket redemptions and the special 1 Year Free Jump Pass workflow.</p>
+    </div>
+    <a class="track-sop" href="prize-ticket-redemption/prize-ticket-redemption-guide.pdf" target="_blank" rel="noopener">
+      Printable Prize Ticket Redemption SOP
+    </a>
+  </div>
+  <section class="cards">
+    <article class="card">
+      <div class="strip"></div>
+      <div class="body">
+        <div class="step">Step 1</div>
+        <h2>Prize Ticket Training</h2>
+        <p>Complete the narrated 8-slide CenterEdge walkthrough for Lucky Launch Prize Ticket redemption.</p>
+        <a class="button" href="prize-ticket-redemption/online-training.html">Start Prize Ticket Training</a>
+      </div>
+    </article>
+    <article class="card">
+      <div class="strip"></div>
+      <div class="body">
+        <div class="step">Step 2</div>
+        <h2>Prize Ticket Exam</h2>
+        <p>Complete the randomized assessment covering standard prizes, $0 verification, the 1 Year Free Jump Pass, and redemption rules.</p>
+        <a class="button" href="prize-ticket-redemption/prize-ticket-exam.html">Start Prize Ticket Exam</a>
+      </div>
+    </article>
+  </section>
+  <div class="track-home-link">
+    <a href="prize-ticket-redemption/">Open the Prize Ticket Redemption training home</a>
+  </div>
+</section>
+
+<div class="notice">
+<strong>Training scope:</strong> This is supplemental Q4 gift card training. It does not replace assigned Cashier Training or local manager coaching.</div>
 </main>
 
 <script id="holiday-gift-card-password-script">
