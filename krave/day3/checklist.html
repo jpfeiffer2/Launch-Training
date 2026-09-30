@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krave Day 3 - Trainer Checklist</title>
+  <style>
+    :root {
+      --launch-green:#6cc24a;
+      --launch-yellow:#f2e600;
+      --ink:#111820;
+      --muted:#4b5563;
+      --line:#dfe5ea;
+      --soft:#f7fbf5;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      padding:28px;
+      background:linear-gradient(135deg,#101410,#1c2418);
+      color:var(--ink);
+      font-family:Arial,Helvetica,sans-serif;
+    }
+    .page {
+      max-width:980px;
+      margin:0 auto;
+      overflow:hidden;
+      border-radius:22px;
+      background:#fff;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+    header {
+      padding:28px 34px 22px;
+      border-top:8px solid var(--launch-green);
+      border-bottom:1px solid var(--line);
+    }
+    .eyebrow {
+      margin-bottom:8px;
+      color:#2d9a22;
+      font-size:.82rem;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+    h1 { margin:0; font-size:2.35rem; letter-spacing:-.04em; }
+    .sub { margin-top:8px; color:var(--muted); font-size:1rem; line-height:1.4; }
+    .actions {
+      display:flex;
+      gap:12px;
+      padding:18px 34px;
+      border-bottom:1px solid var(--line);
+      background:#f8fafc;
+    }
+    button,.button {
+      display:inline-block;
+      padding:12px 20px;
+      border:0;
+      border-radius:999px;
+      font-size:.95rem;
+      font-weight:900;
+      text-decoration:none;
+      cursor:pointer;
+    }
+    .print { background:var(--launch-yellow); color:#000; }
+    .back { background:#111820; color:#fff; }
+    main { padding:24px 34px 34px; }
+    .info-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+      margin-bottom:22px;
+    }
+    .field { min-height:58px; padding:10px 12px; border:1px solid var(--line); border-radius:12px; }
+    .field label {
+      display:block;
+      margin-bottom:10px;
+      color:var(--muted);
+      font-size:.72rem;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .line { height:20px; border-bottom:1px solid #9ca3af; }
+    section { margin-bottom:16px; overflow:hidden; border:1px solid var(--line); border-radius:16px; }
+    .section-head {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:12px 16px;
+      background:#111820;
+      color:#fff;
+      font-weight:900;
+    }
+    .section-head span { color:var(--launch-yellow); font-size:.82rem; letter-spacing:.08em; text-transform:uppercase; }
+    .rows { padding:8px 14px 12px; }
+    .row {
+      display:grid;
+      grid-template-columns:26px 1fr 95px 95px;
+      gap:10px;
+      align-items:start;
+      padding:10px 0;
+      border-bottom:1px solid #eef2f4;
+      font-size:.92rem;
+      line-height:1.3;
+    }
+    .row:last-child { border-bottom:0; }
+    .box { width:20px; height:20px; margin-top:1px; border:2px solid #111820; border-radius:4px; }
+    .initial-line { height:24px; border-bottom:1px solid #9ca3af; }
+    .small-label {
+      margin-top:3px;
+      color:var(--muted);
+      font-size:.62rem;
+      font-weight:800;
+      letter-spacing:.07em;
+      text-transform:uppercase;
+    }
+    .notes-area { margin-top:18px; padding:14px; border:1px solid var(--line); border-radius:16px; }
+    .notes-lines { height:40px; margin-top:10px; background:repeating-linear-gradient(#fff,#fff 29px,#cbd5e1 30px); }
+    .signatures { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:60px; }
+    .sig { padding-top:8px; border-top:2px solid #111820; color:#374151; font-weight:800; }
+    .footer-note {
+      margin-top:18px;
+      padding:12px 14px;
+      border:2px solid var(--launch-yellow);
+      border-radius:14px;
+      background:#fff8dc;
+      font-weight:800;
+      line-height:1.35;
+    }
+    @media(max-width:720px) {
+      body { padding:12px; }
+      header,.actions,main { padding-left:18px; padding-right:18px; }
+      .info-grid { grid-template-columns:1fr; }
+      .row { grid-template-columns:24px 1fr 68px 68px; font-size:.84rem; }
+      .section-head { align-items:flex-start; flex-direction:column; gap:4px; }
+    }
+    @media print {
+      body { padding:0; background:#fff; }
+      .page { max-width:none; border-radius:0; box-shadow:none; }
+      .actions { display:none; }
+      header { padding:18px 24px 14px; }
+      h1 { font-size:1.9rem; }
+      main { padding:16px 24px; }
+      .info-grid,.footer-note,.notes-area,.signatures { break-inside:avoid; page-break-inside:avoid; }
+      section { break-inside:auto; page-break-inside:auto; }
+      .section-head,.row { break-inside:avoid; page-break-inside:avoid; }
+      .row { grid-template-columns:24px 1fr 80px 80px; padding:7px 0; font-size:.82rem; }
+      .section-head { print-color-adjust:exact; -webkit-print-color-adjust:exact; }
+      .notes-area { margin-top:8px; padding:8px 10px; }
+      .notes-area strong { font-size:.78rem; }
+      .notes-lines { height:34px; margin-top:6px; background:repeating-linear-gradient(#fff,#fff 16px,#cbd5e1 17px); }
+      .signatures { margin-top:34px; gap:24px; }
+      .sig { min-height:42px; font-size:.82rem; }
+    }
+  </style>
+
+
+
+
+<style id="launch-portal-auth-style">
+  html { display: none; }
+  html.portal-authenticated { display: block; }
+</style>
+<script id="launch-portal-auth-script">
+  (() => {
+    const storageKey = "launchTrainingUnlockedUntil";
+    const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
+
+    if (unlockedUntil <= Date.now()) {
+      localStorage.removeItem(storageKey);
+
+      const currentPath = window.location.pathname;
+      const marker = "/Launch-Training/";
+      const markerPosition = currentPath.indexOf(marker);
+      let portalBase = markerPosition >= 0
+        ? currentPath.slice(0, markerPosition + marker.length)
+        : "/";
+
+      const moduleMarkers = ["/cashier/", "/court-monitor/", "/party-host/", "/krave/"];
+      for (const moduleMarker of moduleMarkers) {
+        const modulePosition = currentPath.indexOf(moduleMarker);
+        if (modulePosition >= 0) {
+          portalBase = currentPath.slice(0, modulePosition + 1) || "/";
+          break;
+        }
+      }
+
+      const returnPath = currentPath + window.location.search + window.location.hash;
+      window.location.replace(portalBase + "?return=" + encodeURIComponent(returnPath));
+    } else {
+      document.documentElement.classList.add("portal-authenticated");
+    }
+  })();
+</script>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="eyebrow">Krave Day 3</div>
+      <h1>Trainer Floor Checklist</h1>
+      <div class="sub">Use this checklist after the online module and before the cumulative final exam. Trainer should observe, demonstrate, and confirm each item with the trainee.</div>
+    </header>
+
+    <div class="actions">
+      <button class="print" onclick="window.print()">Print / Save as PDF</button>
+      <a class="button back" href="index.html">Back to Day 3 Menu</a><a class="button back" href="../../index.html">Training Portal</a>
+    </div>
+
+    <main>
+      <div class="info-grid">
+        <div class="field"><label>Trainee Name</label><div class="line"></div></div>
+        <div class="field"><label>Trainer Name</label><div class="line"></div></div>
+        <div class="field"><label>Date</label><div class="line"></div></div>
+      </div>
+
+<section><div class="section-head">Recipe &amp; Station Readiness<span>Prepare</span></div><div class="rows"><div class="row"><div class="box"></div><div>Identifies the recipes and responsibilities offered at this park; uses the exact item, portion, method, and serving instructions without combining recipes.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Maintains Day 1 hygiene, clean tools, safe ingredient storage, and labeling standards while preparing additional foods.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section>
+<section><div class="section-head">AutoFry MTI-40E<span>Demonstrate</span></div><div class="rows"><div class="row"><div class="box"></div><div>Identifies controls, entry chute, receiving basket, access door, and safety features. Completes startup and readiness checks with the trainer, including oil and installed components.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Checks the approved cooking selection, loads a measured portion through the entry chute, closes it, and starts the cycle safely.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Keeps the chute closed during draining and dispensing; waits for Ready before another batch and completes temperature, quality, and presentation checks.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Recognizes normal operation and reportable problems; stops and reports without reaching inside, bypassing safety devices, or changing programming.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section>
+<section><div class="section-head">Additional Food Preparation<span>Local Menu</span></div><div class="rows"><p>Practice applicable offerings. For items not sold or tasks not assigned, trainer marks N/A and notes the reason.</p><div class="row"><div class="box"></div><div>Prepares an applicable tender or nugget order using its own count, time, temperature check, sauces, and lined serving item. Record item: ____________________.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Prepares an applicable wing order with the correct count, measured sauce, coating method, dipping sauces, and presentation. Record item: ____________________.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Measures and prepares an applicable potato item using the correct regular, combo, loaded, or platter recipe. Record item: ____________________.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Uses a clean, sanitized probe correctly; verifies the required finished temperature and keeps unacceptable food from service while seeking direction.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Prepares another food sold at this park using its complete approved recipe, including ingredients added after cooking. Record item: ____________________.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>If assigned high-volume tender or wing preparation, follows the demonstrated method; verifies 165°F before holding, at least 135°F during holding, and the 20-minute limit without resetting or mixing batches.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section>
+<section><div class="section-head">Order Coordination &amp; Guest Care<span>Serve</span></div><div class="rows"><div class="row"><div class="box"></div><div>Reads the full order, coordinates equipment and items with teammates, communicates delays early, and checks the completed order before handoff.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Follows the local buzzer pickup or QR table/bowling-lane delivery procedure; confirms the correct destination.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Asks what guests need and gets available supplies for them; checks missing or incorrect items and seeks help within their authority.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section>
+<section><div class="section-head">Cleaning &amp; Closing<span>Finish</span></div><div class="rows"><div class="row"><div class="box"></div><div>Cleans before sanitizing with approved products, test strips, and contact time; uses wash, rinse, sanitize, air-dry for applicable items.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Locates and returns cleaning supplies; separates chemicals and dirty materials from food, follows local trash handling, and washes hands/changes gloves before food work.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Performs only assigned AutoFry shutdown/cleaning tasks; allows cooldown, follows the manual, dries parts, and leaves oil/maintenance/fire-system tasks to trained personnel.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Performs assigned TurboChef cleaning only after both chambers complete cooldown; protects sensitive surfaces and reinstalls clean components and a fully dry rear filter.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box"></div><div>Checks retained food eligibility and original deadlines, records waste and required temperatures, completes local closing checks, and reports unfinished tasks to the manager.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section>
+<div class="notes-area">
+        <strong>Trainer Notes / Questions / Follow-Up Items</strong>
+        <div class="notes-lines"></div>
+      </div>
+
+      <div class="signatures">
+        <div class="sig">Trainer / Manager Signature</div>
+        <div class="sig">Trainee Signature</div>
+      </div>
+
+      <div class="footer-note">Completion standard: both the trainer and trainee initial each item only after demonstration, practice, and coaching are complete, or mark N/A with a reason for locally inapplicable items. Any item needing more practice must be revisited before the cumulative final exam.</div>
+    </main>
+  </div>
+</body>
+</html>
