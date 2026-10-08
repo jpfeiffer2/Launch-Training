@@ -122,17 +122,7 @@
     font-weight: 1000;
     white-space: nowrap;
   }
-
-  .training-count-hero__subline {
-    margin-top: 12px;
-    color: #cbd8ce;
-    font-size: .88rem;
-    font-weight: 800;
-    letter-spacing: .02em;
-    text-transform: none;
-  }
-
-  .training-count-hero__photo {
+.training-count-hero__photo {
     position: absolute;
     z-index: 1;
     inset: 0 0 0 auto;
@@ -140,7 +130,7 @@
     background:
       linear-gradient(90deg, #092813 0%, rgba(9,40,19,.60) 20%, rgba(9,40,19,.05) 63%, rgba(0,0,0,.04) 100%),
       linear-gradient(0deg, rgba(0,30,12,.22), rgba(0,30,12,.22)),
-      url("shared/images/portal-hero.jpg") center / cover no-repeat;
+      url("shared/images/training-team-celebration-selected.jpg") center / cover no-repeat;
     opacity: .96;
   }
 
@@ -172,13 +162,7 @@
   .training-count-hero.is-loading .training-count-hero__number {
     opacity: .58;
   }
-
-  .training-count-hero.is-error .training-count-hero__subline::after {
-    content: " · Live count temporarily unavailable";
-    color: #f3d788;
-  }
-
-  @media (max-width: 1040px) {
+@media (max-width: 1040px) {
     .training-count-hero {
       grid-template-columns: 126px 1fr;
       min-height: 240px;
@@ -244,10 +228,7 @@
       opacity: .16;
       background-position: center;
     }
-    .training-count-hero__subline {
-      margin-top: 8px;
-    }
-  }
+}
 </style>
 
 
@@ -340,8 +321,7 @@
               <span>Launch Team Members</span>
               <span>Trained, <strong>Who’s Next?</strong></span>
             </div>
-            <div class="training-count-hero__subline">Unique team members are counted once per park using Employee Name + Park Location.</div>
-          </div>
+</div>
         </div>
 
         <div class="training-count-hero__photo" aria-hidden="true"></div>
