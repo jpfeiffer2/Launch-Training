@@ -16,14 +16,273 @@
     display: none !important;
   }
 </style>
+<style id="launch-training-counter-style">
+  .training-count-hero {
+    width: min(1240px, calc(100% - 40px));
+    min-height: 270px;
+    margin: 18px auto 0;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr) 31%;
+    align-items: center;
+    gap: 20px;
+    padding: 24px 26px;
+    border: 2px solid #62dc47;
+    border-radius: 28px;
+    color: #fff;
+    background:
+      radial-gradient(circle at 52% 0%, rgba(188,255,46,.16), transparent 35%),
+      linear-gradient(135deg, #07150b 0%, #092813 48%, #07140a 100%);
+    box-shadow:
+      0 24px 54px rgba(0,0,0,.24),
+      inset 0 0 40px rgba(73,210,58,.07);
+  }
 
+  .training-count-hero::before,
+  .training-count-hero::after {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    pointer-events: none;
+  }
 
-<style id="krave-beta-banner-style">
-.krave-beta-banner{width:min(1240px,calc(100% - 40px));margin:18px auto 0;padding:20px 24px;border:2px solid #6cc24a;border-radius:22px;color:#fff;background:radial-gradient(circle at 92% 18%,rgba(242,230,0,.18),transparent 28%),linear-gradient(135deg,#0d1510,#172719 58%,#1d321f);box-shadow:0 18px 45px rgba(0,0,0,.16);display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center}
-.krave-beta-banner__badge{min-width:118px;text-align:center;padding:10px 12px;border-radius:999px;background:#f2e600;color:#111820;font-size:.78rem;font-weight:1000;letter-spacing:1.2px;text-transform:uppercase}
-.krave-beta-banner h2{margin:0 0 5px;color:#fff;font-size:clamp(1.35rem,2.4vw,2rem);line-height:1.05;letter-spacing:-.5px}.krave-beta-banner p{margin:0;color:#dbe6df;line-height:1.45;font-weight:700}.krave-beta-banner a{color:#f2e600;font-weight:1000}.krave-beta-banner__cta{display:inline-block;white-space:nowrap;padding:12px 17px;border-radius:999px;text-decoration:none;background:#6cc24a;color:#071007!important;font-weight:1000}
-@media(max-width:820px){.krave-beta-banner{width:min(calc(100% - 24px),1240px);grid-template-columns:1fr;gap:12px;padding:18px}.krave-beta-banner__badge,.krave-beta-banner__cta{justify-self:start}.krave-beta-banner__badge{min-width:0}}
+  .training-count-hero::before {
+    left: -130px;
+    bottom: -170px;
+    background: rgba(108,194,74,.12);
+    border: 1px solid rgba(108,194,74,.26);
+  }
+
+  .training-count-hero::after {
+    right: 22%;
+    top: -210px;
+    background: rgba(242,230,0,.08);
+  }
+
+  .training-count-hero__icon {
+    position: relative;
+    z-index: 2;
+    width: 150px;
+    height: 150px;
+    display: grid;
+    place-items: center;
+    border-radius: 28px;
+    background: rgba(6,39,16,.76);
+    border: 1px solid rgba(129,246,90,.38);
+    box-shadow: inset 0 0 32px rgba(77,230,64,.12);
+  }
+
+  .training-count-hero__icon svg {
+    width: 108px;
+    height: 108px;
+    filter: drop-shadow(0 0 12px rgba(206,255,61,.28));
+  }
+
+  .training-count-hero__copy {
+    position: relative;
+    z-index: 2;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 22px;
+  }
+
+  .training-count-hero__number {
+    min-width: 230px;
+    font-size: clamp(5.2rem, 9vw, 8.6rem);
+    line-height: .82;
+    letter-spacing: -7px;
+    font-weight: 1000;
+    color: #f2e600;
+    text-shadow:
+      0 5px 0 #3fa62e,
+      0 10px 22px rgba(0,0,0,.34);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .training-count-hero__message {
+    min-width: 0;
+    text-transform: uppercase;
+    font-weight: 1000;
+    line-height: .95;
+    letter-spacing: -1.3px;
+    font-size: clamp(1.75rem, 3.15vw, 3.1rem);
+  }
+
+  .training-count-hero__message span {
+    display: block;
+  }
+
+  .training-count-hero__message strong {
+    color: #f2e600;
+    font-weight: 1000;
+    white-space: nowrap;
+  }
+
+  .training-count-hero__subline {
+    margin-top: 12px;
+    color: #cbd8ce;
+    font-size: .88rem;
+    font-weight: 800;
+    letter-spacing: .02em;
+    text-transform: none;
+  }
+
+  .training-count-hero__photo {
+    position: absolute;
+    z-index: 1;
+    inset: 0 0 0 auto;
+    width: 34%;
+    background:
+      linear-gradient(90deg, #092813 0%, rgba(9,40,19,.60) 20%, rgba(9,40,19,.05) 63%, rgba(0,0,0,.04) 100%),
+      linear-gradient(0deg, rgba(0,30,12,.22), rgba(0,30,12,.22)),
+      url("shared/images/portal-hero.jpg") center / cover no-repeat;
+    opacity: .96;
+  }
+
+  .training-count-hero__photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(102,255,71,.07), transparent 54%);
+  }
+
+  .training-count-confetti {
+    position: absolute;
+    z-index: 3;
+    width: 10px;
+    height: 22px;
+    border-radius: 2px;
+    background: #f2e600;
+    transform: rotate(28deg);
+    pointer-events: none;
+    opacity: .94;
+  }
+
+  .training-count-confetti.c1 { left: 17%; top: 16px; }
+  .training-count-confetti.c2 { left: 38%; bottom: 18px; background:#72ef43; transform:rotate(-28deg); }
+  .training-count-confetti.c3 { left: 58%; top: 20px; background:#72ef43; transform:rotate(42deg); }
+  .training-count-confetti.c4 { right: 28%; bottom: 28px; transform:rotate(65deg); }
+  .training-count-confetti.c5 { right: 7%; top: 22px; background:#72ef43; transform:rotate(-18deg); }
+
+  .training-count-hero.is-loading .training-count-hero__number {
+    opacity: .58;
+  }
+
+  .training-count-hero.is-error .training-count-hero__subline::after {
+    content: " · Live count temporarily unavailable";
+    color: #f3d788;
+  }
+
+  @media (max-width: 1040px) {
+    .training-count-hero {
+      grid-template-columns: 126px 1fr;
+      min-height: 240px;
+    }
+    .training-count-hero__icon {
+      width: 118px;
+      height: 118px;
+    }
+    .training-count-hero__icon svg {
+      width: 84px;
+      height: 84px;
+    }
+    .training-count-hero__copy {
+      gap: 17px;
+      padding-right: 18%;
+    }
+    .training-count-hero__number {
+      min-width: 190px;
+    }
+    .training-count-hero__photo {
+      width: 29%;
+      opacity: .58;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .training-count-hero {
+      width: min(calc(100% - 24px), 1240px);
+      grid-template-columns: 1fr;
+      gap: 12px;
+      min-height: 0;
+      padding: 22px 18px;
+      text-align: center;
+    }
+    .training-count-hero__icon {
+      width: 86px;
+      height: 86px;
+      margin: 0 auto;
+    }
+    .training-count-hero__icon svg {
+      width: 62px;
+      height: 62px;
+    }
+    .training-count-hero__copy {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding-right: 0;
+    }
+    .training-count-hero__number {
+      min-width: 0;
+      font-size: clamp(5rem, 25vw, 7rem);
+      letter-spacing: -5px;
+    }
+    .training-count-hero__message {
+      font-size: clamp(1.55rem, 7vw, 2.35rem);
+      letter-spacing: -.7px;
+    }
+    .training-count-hero__message strong {
+      white-space: normal;
+    }
+    .training-count-hero__photo {
+      width: 100%;
+      opacity: .16;
+      background-position: center;
+    }
+    .training-count-hero__subline {
+      margin-top: 8px;
+    }
+  }
 </style>
+
+
+<style id="report-issue-button-style">
+  .report-issue-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 10px 16px;
+    border: 1px solid rgba(255,255,255,.28);
+    border-radius: 999px;
+    background: #f2e600;
+    color: #111820;
+    text-decoration: none;
+    font-weight: 1000;
+    letter-spacing: .01em;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .report-issue-button:hover,
+  .report-issue-button:focus-visible {
+    background: #fff233;
+    box-shadow: 0 8px 20px rgba(0,0,0,.18);
+    transform: translateY(-1px);
+    outline: none;
+  }
+  @media (max-width: 700px) {
+    .report-issue-button {
+      min-height: 40px;
+      padding: 9px 13px;
+      font-size: .92rem;
+    }
+  }
+</style>
+
 </head>
 <body>
   <section class="login-gate" id="login-gate" aria-labelledby="login-title" hidden>
@@ -48,36 +307,46 @@
       <div class="header-inner">
         <img class="brand-logo" src="shared/images/launch-family-entertainment-logo.png" alt="Launch Family Entertainment">
         <div class="header-actions">
-          <span class="header-label">Employee Development</span>
-          <button class="lock-button" id="lock-portal" type="button">Lock Portal</button>
-        </div>
+            <span class="header-label">Employee Development</span>
+            <a class="report-issue-button" href="mailto:JPfeiffer@LaunchFamilyEntertainment.com?subject=Launch%20Training%20Portal%20Issue&body=Training%20Module%20%2F%20Day%3A%0D%0A%0D%0APlease%20describe%20the%20issue%3A%0D%0A">Report Issue</a>
+            <button class="lock-button" id="lock-portal" type="button">Lock Portal</button>
+          </div>
       </div>
     </header>
-
-    <section class="krave-beta-banner" aria-labelledby="krave-beta-banner-title">
-  <div class="krave-beta-banner__badge">Beta Testing</div>
-  <div><h2 id="krave-beta-banner-title">KRAVE TRAINING IS NOW OPEN FOR BETA TESTING</h2><p>Days 1, 2, and 3 are now available. Please have your teams begin utilizing Krave Training and provide feedback to <a href="mailto:JPfeiffer@LaunchFamilyEntertainment.com">JPfeiffer@LaunchFamilyEntertainment.com</a>.</p></div>
-  <a class="krave-beta-banner__cta" href="krave/">Open Krave Training →</a>
-</section>
 <main>
-      <section class="hero" aria-labelledby="portal-title">
-        <div class="hero-overlay"></div>
-        <div class="hero-accent hero-accent--green" aria-hidden="true"></div>
-        <div class="hero-accent hero-accent--yellow" aria-hidden="true"></div>
-        <div class="hero-content">
-          <p class="eyebrow">Launch Training Portal</p>
-          <h1 id="portal-title">Train to create <span>awesome memories.</span></h1>
-          <p class="hero-copy">Build the knowledge, confidence, and skills needed to deliver a safe, energetic, and memorable Launch experience.</p>
-          <a class="hero-button" href="#training-programs">Choose Your Training <span aria-hidden="true">↓</span></a>
-        </div>
-        <div class="hero-stats" aria-label="Training portal highlights">
-          <div><strong>3</strong><span>Programs Live</span></div>
-          <div><strong>3</strong><span>Training Days</span></div>
-          <div><strong>1</strong><span>Launch Standard</span></div>
-        </div>
-      </section>
+      <section class="training-count-hero is-loading" id="training-count-hero" aria-labelledby="training-count-title">
+        <span class="training-count-confetti c1" aria-hidden="true"></span>
+        <span class="training-count-confetti c2" aria-hidden="true"></span>
+        <span class="training-count-confetti c3" aria-hidden="true"></span>
+        <span class="training-count-confetti c4" aria-hidden="true"></span>
+        <span class="training-count-confetti c5" aria-hidden="true"></span>
 
-      <section class="program-section" id="training-programs" aria-labelledby="program-heading">
+        <div class="training-count-hero__icon" aria-hidden="true">
+          <svg viewBox="0 0 120 120" fill="none">
+            <circle cx="60" cy="33" r="15" stroke="#F2E600" stroke-width="7"/>
+            <circle cx="28" cy="47" r="11" stroke="#79EF45" stroke-width="6"/>
+            <circle cx="92" cy="47" r="11" stroke="#79EF45" stroke-width="6"/>
+            <path d="M34 93c2-20 11-31 26-31s24 11 26 31" stroke="#F2E600" stroke-width="7" stroke-linecap="round"/>
+            <path d="M9 91c1-15 7-24 19-24 7 0 12 3 16 9" stroke="#79EF45" stroke-width="6" stroke-linecap="round"/>
+            <path d="M111 91c-1-15-7-24-19-24-7 0-12 3-16 9" stroke="#79EF45" stroke-width="6" stroke-linecap="round"/>
+            <path d="M14 23l-8-8M32 13l-3-11M106 23l8-8M88 13l3-11" stroke="#F2E600" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <div class="training-count-hero__copy">
+          <div class="training-count-hero__number" id="trained-member-count" aria-live="polite">—</div>
+          <div>
+            <div class="training-count-hero__message" id="training-count-title">
+              <span>Launch Team Members</span>
+              <span>Trained, <strong>Who’s Next?</strong></span>
+            </div>
+            <div class="training-count-hero__subline">Unique team members are counted once per park using Employee Name + Park Location.</div>
+          </div>
+        </div>
+
+        <div class="training-count-hero__photo" aria-hidden="true"></div>
+      </section>
+<section class="program-section" id="training-programs" aria-labelledby="program-heading">
         <div class="section-heading">
           <div>
             <p class="eyebrow">Training Programs</p>
@@ -136,9 +405,20 @@
             </div>
           </article>
 
-          <a class="program-card program-card--active" href="krave/" aria-label="Open Krave Training beta testing, Days 1, 2, and 3">
-            <div class="card-media"><img src="shared/images/krave-training.jpg" alt="Launch team member preparing a guest beverage"><span class="status status--testing">Beta Testing</span></div>
-            <div class="card-content"><p class="card-kicker">Food &amp; Beverage</p><h3 id="krave-title">Krave Training</h3><p>Food safety, recipe execution, equipment operation, service standards, and kitchen closing. Days 1, 2, and 3 are available for beta testing.</p><div class="card-footer"><span>V1</span><span class="card-action">Open Training <span aria-hidden="true">→</span></span></div></div>
+          <a class="program-card program-card--active" href="krave/" aria-label="Open Krave Training, Days 1, 2, and 3">
+            <div class="card-media">
+              <img src="shared/images/krave-training.jpg" alt="Launch team member preparing a guest beverage">
+              <span class="status status--available">Available</span>
+            </div>
+            <div class="card-content">
+              <p class="card-kicker">Food &amp; Beverage</p>
+              <h3 id="krave-title">Krave Training</h3>
+              <p>Food safety, recipe execution, equipment operation, service standards, and kitchen closing. Days 1, 2, and 3 are available.</p>
+              <div class="card-footer">
+                <span>V2.1</span>
+                <span class="card-action">Open Training <span aria-hidden="true">→</span></span>
+              </div>
+            </div>
           </a>
         </div>
       </section>
@@ -242,6 +522,70 @@
       var errorMessage = document.getElementById("login-error");
       var lockButton = document.getElementById("lock-portal");
 
+
+      var TRAINING_STATS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzKjtjFU8msyHtWcK7ziV3ewSvQcW5AKcVtEAkAjMSe0srGBheWSUA7XLrLTR8inYyo-w/exec";
+      var TRAINING_COUNT_CACHE_KEY = "launchTrainingUniqueTeamMemberCount";
+      var trainingCountRequestStarted = false;
+
+      function setTrainingCount(value) {
+        var countElement = document.getElementById("trained-member-count");
+        var heroElement = document.getElementById("training-count-hero");
+        var numericValue = Number(value);
+
+        if (!countElement || !Number.isFinite(numericValue) || numericValue < 0) return false;
+
+        countElement.textContent = Math.floor(numericValue).toLocaleString("en-US");
+
+        if (heroElement) {
+          heroElement.classList.remove("is-loading", "is-error");
+        }
+
+        try {
+          window.localStorage.setItem(TRAINING_COUNT_CACHE_KEY, String(Math.floor(numericValue)));
+        } catch (error) { }
+
+        return true;
+      }
+
+      function loadTrainingCount() {
+        if (trainingCountRequestStarted) return;
+        trainingCountRequestStarted = true;
+
+        try {
+          var cachedCount = window.localStorage.getItem(TRAINING_COUNT_CACHE_KEY);
+          if (cachedCount !== null && cachedCount !== "") {
+            setTrainingCount(cachedCount);
+          }
+        } catch (error) { }
+
+        window.launchTrainingCountCallback = function (data) {
+          if (!data || data.status !== "success" || !setTrainingCount(data.uniqueTeamMembers)) {
+            var heroElement = document.getElementById("training-count-hero");
+            if (heroElement) heroElement.classList.add("is-error");
+          }
+
+          window.setTimeout(function () {
+            try { delete window.launchTrainingCountCallback; }
+            catch (error) { window.launchTrainingCountCallback = undefined; }
+          }, 0);
+        };
+
+        var script = document.createElement("script");
+        script.async = true;
+        script.src = TRAINING_STATS_ENDPOINT +
+          "?action=trainingCount&callback=launchTrainingCountCallback&_=" + Date.now();
+
+        script.onerror = function () {
+          var heroElement = document.getElementById("training-count-hero");
+          if (heroElement) {
+            heroElement.classList.remove("is-loading");
+            heroElement.classList.add("is-error");
+          }
+        };
+
+        document.head.appendChild(script);
+      }
+
       function getPortalBasePath() {
         var currentPath = window.location.pathname;
 
@@ -323,6 +667,7 @@
         gate.hidden = true;
         portal.hidden = false;
         document.body.classList.add("portal-unlocked");
+        loadTrainingCount();
       }
 
       function showLogin() {
