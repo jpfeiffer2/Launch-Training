@@ -17,218 +17,125 @@
   }
 </style>
 <style id="launch-training-counter-style">
-  .training-count-hero {
-    width: min(1240px, calc(100% - 40px));
-    min-height: 270px;
-    margin: 18px auto 0;
-    position: relative;
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: 170px minmax(0, 1fr) 31%;
-    align-items: center;
-    gap: 20px;
-    padding: 24px 26px;
-    border: 2px solid #62dc47;
-    border-radius: 28px;
-    color: #fff;
+  .training-count-hero{
+    width:min(1240px,calc(100% - 40px));
+    min-height:310px;
+    margin:18px auto 0;
+    position:relative;
+    overflow:hidden;
+    border:2px solid #62dc47;
+    border-radius:28px;
+    background:linear-gradient(135deg,#06170a 0%,#08270f 48%,#06150a 100%);
+    box-shadow:0 24px 54px rgba(0,0,0,.24);
+    color:#fff;
+  }
+
+  .training-count-hero__content{
+    position:relative;
+    z-index:3;
+    width:54%;
+    min-height:310px;
+    padding:26px 28px 24px 34px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+
+  .training-count-hero__number{
+    font-size:clamp(5.8rem,10vw,9.3rem);
+    line-height:.78;
+    letter-spacing:-7px;
+    font-weight:1000;
+    color:#f2e600;
+    text-shadow:0 6px 0 #58bf2f,0 12px 24px rgba(0,0,0,.34);
+    font-variant-numeric:tabular-nums;
+    margin-bottom:18px;
+  }
+
+  .training-count-hero__message{
+    text-transform:uppercase;
+    font-weight:1000;
+    line-height:.92;
+    letter-spacing:-1.5px;
+    font-size:clamp(1.85rem,3.4vw,3.25rem);
+  }
+
+  .training-count-hero__message span{display:block}
+  .training-count-hero__message strong{color:#f2e600;font-weight:1000}
+
+  .training-count-hero__photo{
+    position:absolute;
+    z-index:1;
+    inset:0 0 0 auto;
+    width:52%;
     background:
-      radial-gradient(circle at 52% 0%, rgba(188,255,46,.16), transparent 35%),
-      linear-gradient(135deg, #07150b 0%, #092813 48%, #07140a 100%);
-    box-shadow:
-      0 24px 54px rgba(0,0,0,.24),
-      inset 0 0 40px rgba(73,210,58,.07);
+      linear-gradient(90deg,#08270f 0%,rgba(8,39,15,.80) 8%,rgba(8,39,15,.28) 22%,rgba(8,39,15,0) 38%),
+      url("shared/images/training-team-approved-photo.jpg") center center / cover no-repeat;
   }
 
-  .training-count-hero::before,
-  .training-count-hero::after {
-    content: "";
-    position: absolute;
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    pointer-events: none;
+  .training-count-hero__photo::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,rgba(85,255,63,.035),rgba(0,0,0,.06));
   }
 
-  .training-count-hero::before {
-    left: -130px;
-    bottom: -170px;
-    background: rgba(108,194,74,.12);
-    border: 1px solid rgba(108,194,74,.26);
+  .training-count-confetti{
+    position:absolute;
+    z-index:4;
+    width:10px;
+    height:22px;
+    border-radius:2px;
+    background:#f2e600;
+    transform:rotate(28deg);
+    pointer-events:none;
+    opacity:.95;
+  }
+  .training-count-confetti.c1{left:3%;top:34px}
+  .training-count-confetti.c2{left:44%;bottom:28px;background:#72ef43;transform:rotate(-28deg)}
+  .training-count-confetti.c3{left:48%;top:22px;background:#72ef43;transform:rotate(42deg)}
+  .training-count-confetti.c4{right:6%;bottom:28px;transform:rotate(65deg)}
+  .training-count-confetti.c5{right:17%;top:24px;background:#72ef43;transform:rotate(-18deg)}
+
+  .training-count-hero.is-loading .training-count-hero__number{opacity:.58}
+
+  @media(max-width:900px){
+    .training-count-hero{min-height:270px}
+    .training-count-hero__content{width:58%;min-height:270px;padding:22px 22px 20px 26px}
+    .training-count-hero__photo{width:48%}
   }
 
-  .training-count-hero::after {
-    right: 22%;
-    top: -210px;
-    background: rgba(242,230,0,.08);
-  }
-
-  .training-count-hero__icon {
-    position: relative;
-    z-index: 2;
-    width: 150px;
-    height: 150px;
-    display: grid;
-    place-items: center;
-    border-radius: 28px;
-    background: rgba(6,39,16,.76);
-    border: 1px solid rgba(129,246,90,.38);
-    box-shadow: inset 0 0 32px rgba(77,230,64,.12);
-  }
-
-  .training-count-hero__icon svg {
-    width: 108px;
-    height: 108px;
-    filter: drop-shadow(0 0 12px rgba(206,255,61,.28));
-  }
-
-  .training-count-hero__copy {
-    position: relative;
-    z-index: 2;
-    min-width: 0;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 22px;
-  }
-
-  .training-count-hero__number {
-    min-width: 230px;
-    font-size: clamp(5.2rem, 9vw, 8.6rem);
-    line-height: .82;
-    letter-spacing: -7px;
-    font-weight: 1000;
-    color: #f2e600;
-    text-shadow:
-      0 5px 0 #3fa62e,
-      0 10px 22px rgba(0,0,0,.34);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .training-count-hero__message {
-    min-width: 0;
-    text-transform: uppercase;
-    font-weight: 1000;
-    line-height: .95;
-    letter-spacing: -1.3px;
-    font-size: clamp(1.75rem, 3.15vw, 3.1rem);
-  }
-
-  .training-count-hero__message span {
-    display: block;
-  }
-
-  .training-count-hero__message strong {
-    color: #f2e600;
-    font-weight: 1000;
-    white-space: nowrap;
-  }
-.training-count-hero__photo {
-    position: absolute;
-    z-index: 1;
-    inset: 0 0 0 auto;
-    width: 34%;
-    background:
-      linear-gradient(90deg, #092813 0%, rgba(9,40,19,.60) 20%, rgba(9,40,19,.05) 63%, rgba(0,0,0,.04) 100%),
-      linear-gradient(0deg, rgba(0,30,12,.22), rgba(0,30,12,.22)),
-      url("shared/images/training-team-celebration-selected.jpg") center / cover no-repeat;
-    opacity: .96;
-  }
-
-  .training-count-hero__photo::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(102,255,71,.07), transparent 54%);
-  }
-
-  .training-count-confetti {
-    position: absolute;
-    z-index: 3;
-    width: 10px;
-    height: 22px;
-    border-radius: 2px;
-    background: #f2e600;
-    transform: rotate(28deg);
-    pointer-events: none;
-    opacity: .94;
-  }
-
-  .training-count-confetti.c1 { left: 17%; top: 16px; }
-  .training-count-confetti.c2 { left: 38%; bottom: 18px; background:#72ef43; transform:rotate(-28deg); }
-  .training-count-confetti.c3 { left: 58%; top: 20px; background:#72ef43; transform:rotate(42deg); }
-  .training-count-confetti.c4 { right: 28%; bottom: 28px; transform:rotate(65deg); }
-  .training-count-confetti.c5 { right: 7%; top: 22px; background:#72ef43; transform:rotate(-18deg); }
-
-  .training-count-hero.is-loading .training-count-hero__number {
-    opacity: .58;
-  }
-@media (max-width: 1040px) {
-    .training-count-hero {
-      grid-template-columns: 126px 1fr;
-      min-height: 240px;
+  @media(max-width:700px){
+    .training-count-hero{
+      width:min(calc(100% - 24px),1240px);
+      min-height:0;
+      padding-top:210px;
     }
-    .training-count-hero__icon {
-      width: 118px;
-      height: 118px;
+    .training-count-hero__photo{
+      width:100%;
+      height:210px;
+      inset:0 0 auto 0;
+      background:
+        linear-gradient(180deg,rgba(6,21,10,.04) 0%,rgba(6,21,10,.68) 100%),
+        url("shared/images/training-team-approved-photo.jpg") center 32% / cover no-repeat;
     }
-    .training-count-hero__icon svg {
-      width: 84px;
-      height: 84px;
+    .training-count-hero__content{
+      width:100%;
+      min-height:0;
+      padding:22px 20px 24px;
+      text-align:center;
+      align-items:center;
     }
-    .training-count-hero__copy {
-      gap: 17px;
-      padding-right: 18%;
+    .training-count-hero__number{
+      font-size:clamp(5rem,25vw,7rem);
+      letter-spacing:-5px;
+      margin-bottom:15px;
     }
-    .training-count-hero__number {
-      min-width: 190px;
-    }
-    .training-count-hero__photo {
-      width: 29%;
-      opacity: .58;
+    .training-count-hero__message{
+      font-size:clamp(1.55rem,7vw,2.35rem);
+      letter-spacing:-.7px;
     }
   }
-
-  @media (max-width: 760px) {
-    .training-count-hero {
-      width: min(calc(100% - 24px), 1240px);
-      grid-template-columns: 1fr;
-      gap: 12px;
-      min-height: 0;
-      padding: 22px 18px;
-      text-align: center;
-    }
-    .training-count-hero__icon {
-      width: 86px;
-      height: 86px;
-      margin: 0 auto;
-    }
-    .training-count-hero__icon svg {
-      width: 62px;
-      height: 62px;
-    }
-    .training-count-hero__copy {
-      grid-template-columns: 1fr;
-      gap: 10px;
-      padding-right: 0;
-    }
-    .training-count-hero__number {
-      min-width: 0;
-      font-size: clamp(5rem, 25vw, 7rem);
-      letter-spacing: -5px;
-    }
-    .training-count-hero__message {
-      font-size: clamp(1.55rem, 7vw, 2.35rem);
-      letter-spacing: -.7px;
-    }
-    .training-count-hero__message strong {
-      white-space: normal;
-    }
-    .training-count-hero__photo {
-      width: 100%;
-      opacity: .16;
-      background-position: center;
-    }
-}
 </style>
 
 
@@ -302,26 +209,13 @@
         <span class="training-count-confetti c4" aria-hidden="true"></span>
         <span class="training-count-confetti c5" aria-hidden="true"></span>
 
-        <div class="training-count-hero__icon" aria-hidden="true">
-          <svg viewBox="0 0 120 120" fill="none">
-            <circle cx="60" cy="33" r="15" stroke="#F2E600" stroke-width="7"/>
-            <circle cx="28" cy="47" r="11" stroke="#79EF45" stroke-width="6"/>
-            <circle cx="92" cy="47" r="11" stroke="#79EF45" stroke-width="6"/>
-            <path d="M34 93c2-20 11-31 26-31s24 11 26 31" stroke="#F2E600" stroke-width="7" stroke-linecap="round"/>
-            <path d="M9 91c1-15 7-24 19-24 7 0 12 3 16 9" stroke="#79EF45" stroke-width="6" stroke-linecap="round"/>
-            <path d="M111 91c-1-15-7-24-19-24-7 0-12 3-16 9" stroke="#79EF45" stroke-width="6" stroke-linecap="round"/>
-            <path d="M14 23l-8-8M32 13l-3-11M106 23l8-8M88 13l3-11" stroke="#F2E600" stroke-width="6" stroke-linecap="round"/>
-          </svg>
-        </div>
-
-        <div class="training-count-hero__copy">
+        <div class="training-count-hero__content">
           <div class="training-count-hero__number" id="trained-member-count" aria-live="polite">—</div>
-          <div>
-            <div class="training-count-hero__message" id="training-count-title">
-              <span>Launch Team Members</span>
-              <span>Trained, <strong>Who’s Next?</strong></span>
-            </div>
-</div>
+          <div class="training-count-hero__message" id="training-count-title">
+            <span>Launch Team</span>
+            <span>Members Trained,</span>
+            <span><strong>Who’s Next?</strong></span>
+          </div>
         </div>
 
         <div class="training-count-hero__photo" aria-hidden="true"></div>
