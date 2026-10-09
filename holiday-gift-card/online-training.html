@@ -447,21 +447,6 @@ linear-gradient(135deg,#050807,#111817 58%,#1c2a19)}
     }
   })();
 </script>
-
-<script id="holiday-gift-card-section-auth-script">
-  (() => {
-    const storageKey = "launchHolidayGiftCardUnlockedUntil";
-    const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
-    if (unlockedUntil <= Date.now()) {
-      localStorage.removeItem(storageKey);
-      const currentPath = window.location.pathname + window.location.search + window.location.hash;
-      window.location.replace("index.html?return=" + encodeURIComponent(currentPath));
-    } else {
-      document.documentElement.classList.add("holiday-gift-card-unlocked");
-    }
-  })();
-</script>
-
 </head>
 <body>
 <div class="start-overlay" id="startOverlay"><div class="start-card"><img src="assets/launch-family-entertainment-logo.png" alt="Launch Family Entertainment"><h1>Holiday Gift Card Sales Training</h1><p>Q4 2026 Black Friday and holiday gift card offers. Complete all 12 narrated slides before moving on to the exam.</p><div class="start-actions"><button class="start" id="startBtn">Start Training</button><button class="full" id="startFull">Full Screen</button><a href="index.html">Training Home</a></div></div></div>

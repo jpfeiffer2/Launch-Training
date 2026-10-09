@@ -37,24 +37,6 @@
     }
   })();
 </script>
-
-<style id="holiday-gift-card-password-style">
-  html:not(.holiday-gift-card-unlocked) body > *:not(#holiday-gift-card-gate) { display: none !important; }
-  html.holiday-gift-card-unlocked #holiday-gift-card-gate { display: none !important; }
-  #holiday-gift-card-gate { min-height: 100vh; display: grid; place-items: center; padding: 24px; background: radial-gradient(circle at 12% 10%,rgba(108,194,74,.24),transparent 28%), radial-gradient(circle at 88% 8%,rgba(242,230,0,.12),transparent 24%), linear-gradient(135deg,#050606,#15191b 60%,#24311c); color: #fff; font-family: Arial, Helvetica, sans-serif; }
-  #holiday-gift-card-gate .holiday-gate-card { width: min(560px, 92vw); background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 24px; padding: 30px; box-shadow: 0 24px 70px rgba(0,0,0,.38); }
-  #holiday-gift-card-gate img { width: 190px; background: #fff; border-radius: 9px; padding: 7px 11px; margin-bottom: 22px; }
-  #holiday-gift-card-gate .eyebrow { color: #6cc24a; font-size: .76rem; font-weight: 1000; letter-spacing: 2px; text-transform: uppercase; margin: 0 0 8px; }
-  #holiday-gift-card-gate h1 { color: #fff; margin: 0 0 10px; font-size: clamp(2rem, 5vw, 3.6rem); line-height: .95; letter-spacing: -2px; }
-  #holiday-gift-card-gate h1 span { color: #f2e600; }
-  #holiday-gift-card-gate p { color: #d7dde1; line-height: 1.45; font-weight: 700; }
-  #holiday-gift-card-gate label { display: block; margin: 20px 0 6px; color: #e9eef1; font-weight: 900; }
-  #holiday-gift-card-gate input { width: 100%; padding: 13px 14px; border: 1px solid rgba(255,255,255,.28); border-radius: 12px; font: inherit; font-weight: 800; }
-  #holiday-gift-card-gate button { margin-top: 14px; border: none; border-radius: 999px; padding: 12px 18px; font: inherit; font-weight: 1000; cursor: pointer; background: #6cc24a; color: #061006; }
-  #holiday-gift-card-gate .holiday-error { min-height: 1.2em; margin: 10px 0 0; color: #ffb5b5; font-weight: 900; }
-</style>
-
-
 <style id="holiday-training-track-style">
   .training-track {
     margin: 24px 0 28px;
@@ -116,22 +98,6 @@
 </style>
 </head>
 <body>
-
-<section id="holiday-gift-card-gate" aria-labelledby="holiday-gift-card-gate-title">
-  <div class="holiday-gate-card">
-    <img src="assets/launch-family-entertainment-logo.png" alt="Launch Family Entertainment">
-    <p class="eyebrow">Restricted Supplemental Training</p>
-    <h1 id="holiday-gift-card-gate-title">Holiday Gift Card <span>Training</span></h1>
-    <p>Enter the Holiday Gift Card Training password to continue.</p>
-    <form id="holiday-gift-card-form">
-      <label for="holiday-gift-card-password">Password</label>
-      <input id="holiday-gift-card-password" type="password" autocomplete="current-password" required>
-      <button type="submit">Unlock Holiday Training</button>
-      <p class="holiday-error" id="holiday-gift-card-error" role="alert" aria-live="polite"></p>
-    </form>
-  </div>
-</section>
-
 <main class="shell">
   <div class="top"><img class="logo" src="assets/launch-family-entertainment-logo.png" alt="Launch Family Entertainment"><a class="sop-link" href="../index.html"><b>Training Portal</b></a><a class="sop-link" href="Gift_Card_Support_Process.pdf" target="_blank" rel="noopener"><span><b>Printable SOP:</b><br>Click here to print the SOP for issues with emailed gift cards.</span></a></div>
   <section class="hero">
@@ -206,43 +172,5 @@
 <div class="notice">
 <strong>Training scope:</strong> This is supplemental Q4 gift card training. It does not replace assigned Cashier Training or local manager coaching.</div>
 </main>
-
-<script id="holiday-gift-card-password-script">
-  (() => {
-    const storageKey = "launchHolidayGiftCardUnlockedUntil";
-    const password = "Christmas";
-    const durationMs = 8 * 60 * 60 * 1000;
-    const params = new URLSearchParams(window.location.search);
-    const returnPath = params.get("return") || "";
-    function isUnlocked() { return Number(localStorage.getItem(storageKey) || 0) > Date.now(); }
-    function unlock() {
-      localStorage.setItem(storageKey, String(Date.now() + durationMs));
-      document.documentElement.classList.add("holiday-gift-card-unlocked");
-      if (returnPath) window.location.href = returnPath;
-    }
-    if (isUnlocked()) {
-      document.documentElement.classList.add("holiday-gift-card-unlocked");
-      return;
-    }
-    localStorage.removeItem(storageKey);
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("holiday-gift-card-form");
-      const input = document.getElementById("holiday-gift-card-password");
-      const error = document.getElementById("holiday-gift-card-error");
-      if (!form || !input) return;
-      form.addEventListener("submit", event => {
-        event.preventDefault();
-        if (input.value === password) unlock();
-        else {
-          if (error) error.textContent = "Incorrect password. Please try again.";
-          input.value = "";
-          input.focus();
-        }
-      });
-      input.focus();
-    });
-  })();
-</script>
-
 </body>
 </html>

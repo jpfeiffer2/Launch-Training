@@ -80,21 +80,6 @@ button,a{font:inherit}
     }
   })();
 </script>
-
-<script id="holiday-gift-card-section-auth-script">
-(() => {
-  const storageKey = "launchHolidayGiftCardUnlockedUntil";
-  const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
-
-  if (unlockedUntil <= Date.now()) {
-    localStorage.removeItem(storageKey);
-    const currentPath = window.location.pathname + window.location.search + window.location.hash;
-    window.location.replace("../index.html?return=" + encodeURIComponent(currentPath));
-  } else {
-    document.documentElement.classList.add("holiday-gift-card-unlocked");
-  }
-})();
-</script>
 </head>
 <body>
 <div class="start-overlay" id="startOverlay"><div class="start-card"><img src="assets/launch-logo.png" alt="Launch Family Entertainment"><div class="kicker">Prize Ticket Redemption Training</div><h1>Begin Prize Ticket Training</h1><p>The narration controls the pace of each slide. Watch and listen as the CenterEdge redemption process is demonstrated step by step.</p><div class="start-actions"><button class="start-primary" id="startBtn" type="button">Start Training</button><button class="start-dark" id="startFull" type="button">Full Screen</button><a class="start-dark" href="index.html">Prize Ticket Training Home</a></div><div class="small-note">Narration must finish on each slide before Next becomes available.</div></div></div>

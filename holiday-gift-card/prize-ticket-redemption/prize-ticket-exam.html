@@ -224,22 +224,6 @@
     }
   })();
 </script>
-
-<script id="holiday-gift-card-section-auth-script">
-(() => {
-  const storageKey = "launchHolidayGiftCardUnlockedUntil";
-  const unlockedUntil = Number(localStorage.getItem(storageKey) || 0);
-
-  if (unlockedUntil <= Date.now()) {
-    localStorage.removeItem(storageKey);
-    const currentPath = window.location.pathname + window.location.search + window.location.hash;
-    window.location.replace("../index.html?return=" + encodeURIComponent(currentPath));
-  } else {
-    document.documentElement.classList.add("holiday-gift-card-unlocked");
-  }
-})();
-</script>
-
 <script id="launch-google-sheets-exam-records">
 (function() {
   if (window.launchTrainingSubmitExamRecord) return;
