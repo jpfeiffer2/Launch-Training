@@ -5,6 +5,7 @@
   const key = 'launch_certificate_pending_v1:' + location.pathname;
   let attemptId = null, busy = false, job = null, completed = false;
   let status, retry;
+  let automaticRetries = 0, retryTimer;
   const pause = ms => new Promise(resolve => setTimeout(resolve,ms));
   function panel() {
     if (status) return;
@@ -13,7 +14,7 @@
     box.style.cssText = 'margin:16px 0;padding:12px 16px;border:1px solid #6cc24a;border-radius:10px;background:#f5faf3;color:#215b20;font:15px Arial,sans-serif';
     status = document.createElement('span');status.setAttribute('aria-live','polite');
     retry = document.createElement('button');retry.type = 'button';retry.textContent = 'Retry saving exam';retry.hidden = true;
-    retry.style.cssText = 'margin-left:12px;padding:8px 12px;cursor:pointer';retry.onclick = () => {if(job)deliver(job);};
+    retry.style.cssText = 'margin-left:12px;padding:8px 12px;cursor:pointer';retry.onclick = () => {automaticRetries=0;if(job)deliver(job);};
     box.append(status,retry);
     const result = document.querySelector('#resultBox,#result');
     if (result) result.before(box);else document.body.appendChild(box);
@@ -53,17 +54,21 @@
   }
   function base64(bytes) {let text='';for(let i=0;i<bytes.length;i+=16000)text+=String.fromCharCode(...bytes.slice(i,i+16000));return btoa(text);}
   async function deliver(value) {
-    if(busy)return;busy = true;panel();retry.hidden = true;lockButtons();
+    if(busy)return;clearTimeout(retryTimer);busy = true;panel();retry.hidden = true;lockButtons();
     try {
       say('Saving your exam result. Please keep this page open.');
       await post(value.payload);await confirm(value.payload.submissionId,false);
       if(value.payload.passed) {
         say('Exam result saved. Preparing your certificate for management.');
+        let encoded = value.certificatePdfBase64;
+        if (!encoded) {
         const host = document.createElement('div');host.innerHTML = value.certificateHtml;
         const source = host.querySelector('#resultBox,#result');
         const bytes = await window.launchGenerateCertificatePdf(source);
-        const encoded = base64(bytes);
+        encoded = base64(bytes);
         if(encoded.length>2800000)throw Error('The exam is saved, but the certificate exceeds the attachment size limit.');
+        value.certificatePdfBase64 = encoded;saveJob(value);
+        }
         await post({...value.payload,certificatePdfBase64:encoded});
       }
       const response = await confirm(value.payload.submissionId,value.payload.passed);
@@ -72,8 +77,15 @@
       else if(delivery === 'Pending' || delivery === 'Sending')say('Exam result saved. Management notification is queued for automatic delivery.');
       else say('Exam result saved. Management notification needs attention (' + delivery + ').',true);
       try {localStorage.removeItem(key);}catch(_) {}
-      job = null;completed = true;
-    } catch(error) {say(error.message + ' Click Retry to finish the same attempt.',true);retry.hidden = false;}
+      job = null;completed = true;automaticRetries = 0;
+    } catch(error) {
+      retry.hidden = false;
+      if (automaticRetries < 3) {
+        const delay = [5000,15000,30000][automaticRetries++];
+        say(error.message + ' Retrying automatically. Please keep this page open.',true);
+        retryTimer = setTimeout(() => {if(job)deliver(job);},delay);
+      } else say(error.message + ' Click Retry to finish the same attempt.',true);
+    }
     finally {busy = false;}
   }
   window.launchTrainingSubmitExamRecord = function (payload) {
