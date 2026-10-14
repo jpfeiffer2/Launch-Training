@@ -1,3 +1,4 @@
+// Certificate upload retry update.
 (function () {
   'use strict';
   const config = window.LAUNCH_CERTIFICATE_CONFIG;
