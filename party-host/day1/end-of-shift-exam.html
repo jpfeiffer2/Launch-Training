@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Party Host Day 1 Exam</title>
+<style>
+:root{--g:#6cc24a;--y:#f2e600;--ink:#111820;--muted:#5e6870;--line:#dfe5e9}*{box-sizing:border-box}body{margin:0;padding:24px;background:#f4f6f7;font-family:Arial,Helvetica,sans-serif;color:var(--ink)}.page{max-width:1050px;margin:auto;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 16px 45px rgba(0,0,0,.12)}header{padding:24px 28px;border-top:8px solid var(--g);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;align-items:center}header img{width:190px}header h1{margin:0;font-size:2.25rem}header p{margin:6px 0 0;color:var(--muted)}.content{padding:26px 28px 34px}.meta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.field{display:grid;gap:6px}.field label{font-weight:900}.field input,.field select{min-height:42px;border:1px solid #cdd6dc;border-radius:9px;padding:9px 10px;font:inherit;background:#fff}.notice{margin-top:22px;padding:20px;border:2px dashed #cbd5dc;border-radius:14px;background:#fbfcfd;color:#67717a;font-weight:800;line-height:1.5}.nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.nav a{text-decoration:none;border-radius:999px;padding:10px 14px;background:#111820;color:#fff;font-weight:900}.nav a.yellow{background:var(--y);color:#111}#resultBox{display:none;margin-top:24px}@media(max-width:700px){.meta-grid{grid-template-columns:1fr}header{display:block}header img{margin-top:14px}}
+</style>
+<style id="launch-standard-certificate-style">
+  .result-certificate.launch-standard-certificate,
+  .result-certificate {
+    margin-top: 26px;
+    border: 3px solid var(--launch-green, #56b947);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  }
+  .cert-header {
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+    border-bottom: 4px solid var(--launch-yellow, #f2e600);
+    padding: 22px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .cert-header-left { color: #fff; }
+  .cert-org {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: var(--launch-yellow, #f2e600);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .cert-title-line {
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .cert-subtitle {
+    font-size: 0.8rem;
+    color: #c8ced3;
+    margin-top: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .cert-stamp {
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    padding: 10px 22px;
+    border-radius: 10px;
+    border: 3px solid;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .cert-stamp.stamp-pass {
+    color: #198754;
+    border-color: #198754;
+    background: rgba(25,135,84,0.08);
+  }
+  .cert-stamp.stamp-fail {
+    color: #c92a2a;
+    border-color: #c92a2a;
+    background: rgba(201,42,42,0.08);
+  }
+  .cert-info-row {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #e3e8ee;
+  }
+  .cert-info-field {
+    flex: 1;
+    padding: 14px 20px;
+    border-right: 1px solid #e3e8ee;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+  .cert-info-field:last-child { border-right: none; }
+  .cert-info-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #777;
+    font-weight: bold;
+  }
+  .cert-info-value {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #111;
+    word-break: break-word;
+  }
+  .cert-score-value {
+    font-size: 1.2rem;
+    color: var(--launch-green-dark, #26731f);
+  }
+  .cert-statement {
+    padding: 18px 28px;
+    font-size: 0.97rem;
+    color: #444;
+    border-bottom: 1px solid #e3e8ee;
+    line-height: 1.6;
+  }
+  .cert-missed {
+    padding: 0 28px;
+    border-bottom: 1px solid #e3e8ee;
+  }
+  .cert-missed .wrong,
+  .cert-missed .missed-item {
+    margin: 10px 0;
+    padding: 12px 14px;
+    background: #fff8e8;
+    border-left: 4px solid #f0ad4e;
+    border-radius: 8px;
+  }
+  .cert-sig-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 24px 28px 20px;
+  }
+  .cert-sig-block { display: flex; flex-direction: column; gap: 6px; }
+  .cert-sig-line { border-bottom: 1.5px solid #444; min-height: 36px; }
+  .cert-sig-label { font-size: 0.78rem; color: #666; letter-spacing: 0.5px; }
+  .cert-actions {
+    padding: 12px 28px 16px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    border-top: 1px solid #e3e8ee;
+    background: #fafcfd;
+  }
+  .cert-actions button,
+  .cert-actions a {
+    border: none;
+    display: inline-block;
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-weight: 900;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .cert-actions button { color: #fff; background: #111820; }
+  .cert-actions a { color: #111820; background: var(--launch-yellow, #f2e600); }
+  @media (max-width: 860px) {
+    .cert-header,
+    .cert-info-row { display: block; }
+    .cert-stamp { display: inline-block; margin-top: 14px; }
+    .cert-info-field { border-right: 0; border-bottom: 1px solid #e3e8ee; }
+    .cert-sig-row { grid-template-columns: 1fr; gap: 24px; }
+  }
+  @media print {
+    body { background: #fff !important; padding: 0 !important; }
+    .header, header, .meta, .meta-card, .toolbar, .validation, .validation-box,
+    #validationBox, #quizForm, .buttons, .top-nav, .pre-exam-nav, .records-note,
+    .pdf-note, .footer-note, .brand-topbar, #answered, #progress, #exam,
+    #prev, #next, #submit, .question-card, .question, .no-print, .cert-actions {
+      display: none !important;
+    }
+    .page, .page-shell, .container, .content, main {
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      background: #fff !important;
+    }
+    #resultBox, #result, .result-certificate {
+      display: block !important;
+      border: 2px solid #333 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      margin: 0 !important;
+    }
+    .cert-header, .cert-stamp {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .cert-missed { border-bottom: none; }
+  }
+</style>
+<style>
+[hidden]{display:none!important}.primary{border:0;border-radius:999px;background:#111820;color:#f2e600;padding:14px 22px;font:900 1rem Arial;cursor:pointer}.primary:disabled{opacity:.5}.question-card{min-width:0;margin:28px 0;padding:20px;border:1px solid #cdd6dc;border-radius:14px}.question-card legend{padding:0 8px;font-weight:800;font-size:1.13rem;line-height:1.5;max-width:100%}.question-number{display:block;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;color:#337d24;margin-bottom:8px}.answer{display:flex;gap:12px;align-items:flex-start;padding:14px;margin:8px 0;background:#f4f6f7;border:2px solid transparent;border-radius:10px;line-height:1.5;cursor:pointer}.answer:has(input:checked){border-color:#3d8b2c;background:#eef8e9}.answer input{flex:none;width:19px;height:19px;margin-top:3px;accent-color:#337d24}.answer span{min-width:0;overflow-wrap:anywhere}.progress-wrap{display:flex;gap:16px;align-items:center;flex-wrap:wrap}progress{accent-color:#337d24;flex:1;min-width:100px}#validationBox,#startStatus{color:#9b2020;font-weight:800}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #337d24;outline-offset:3px}.cert-missed p{line-height:1.5}.notice{font-weight:400}.cert-title-line{overflow-wrap:anywhere}
+@media(max-width:700px){body{padding:10px}.content{padding:20px 14px}header{padding:20px 14px}header h1{font-size:1.8rem}.question-card{padding:12px}.answer{padding:10px}.cert-header,.cert-statement{padding:18px}.cert-missed{padding:0 16px}}
+@media print{.meta-grid,#detailsForm{display:none!important}.missed-item,.cert-info-row,.cert-sig-row{break-inside:avoid}}
+</style><style id="party-host-initial-lock">html:not(.party-host-ready){visibility:hidden}</style>
+<script src="../access.js" defer></script>
+<script src="../exam-reporting.js" defer></script>
+</head><body><div class="page"><header><div><h1>Party Host Day 1 Exam</h1><p>30 questions · Pass with 27 correct (90%)</p></div><img src="../assets/launch-family-entertainment-logo.png" alt="Launch Family Entertainment"></header>
+<div class="content"><form id="detailsForm"><section class="meta-grid"><div class="field"><label for="employeeName">Employee Name</label><input id="employeeName" required maxlength="120" autocomplete="name"></div><div class="field"><label for="parkLocation">Park Location</label><select id="parkLocation" required><option value="">Select Park Location</option><option value="Ann Arbor">Ann Arbor</option><option value="Arlington">Arlington</option><option value="Asheville">Asheville</option><option value="Clearwater">Clearwater</option><option value="Columbus">Columbus</option><option value="Cumming">Cumming</option><option value="Dearborn">Dearborn</option><option value="Denton">Denton</option><option value="Deptford">Deptford</option><option value="Doral">Doral</option><option value="Framingham">Framingham</option><option value="Gurnee">Gurnee</option><option value="Herndon">Herndon</option><option value="Jackson">Jackson</option><option value="Jeffersonville">Jeffersonville</option><option value="Lansing">Lansing</option><option value="Leominster">Leominster</option><option value="Lewisville">Lewisville</option><option value="Little Ferry">Little Ferry</option><option value="Manchester">Manchester</option><option value="Methuen">Methuen</option><option value="North Attleboro">North Attleboro</option><option value="Norwood">Norwood</option><option value="Novi">Novi</option><option value="Orlando">Orlando</option><option value="Pensacola">Pensacola</option><option value="PG County">PG County</option><option value="Prattville">Prattville</option><option value="Queens">Queens</option><option value="Raleigh">Raleigh</option><option value="Richmond">Richmond</option><option value="Riverdale">Riverdale</option><option value="Warwick">Warwick</option><option value="West Houston">West Houston</option><option value="Westborough">Westborough</option><option value="Woburn">Woburn</option></select></div><div class="field"><label for="quizDate">Date</label><input id="quizDate" type="date" required></div><div class="field"><label for="trainerName">Trainer / Manager</label><input id="trainerName" required maxlength="120"></div></section>
+<div class="notice no-print">Complete the slideshow and supervised hands-on checklist before taking this exam. Select the best answer for each question. Questions and answer choices are shuffled on every attempt.</div>
+<p class="no-print records-note">Results are saved in this browser only.</p><p id="startStatus" role="alert"></p><button type="submit" class="primary">Start Exam</button></form>
+<form id="quizForm" hidden><h2 id="quizHeading" tabindex="-1">Day 1 Assessment</h2><div class="progress-wrap"><span id="answered" aria-live="polite"></span><progress id="progress" max="30" value="0" aria-label="Questions answered"></progress></div><div id="questions"></div><p id="validationBox" role="alert"></p><button id="submit" class="primary" type="submit">Submit Exam</button></form>
+<p id="saveStatus" class="no-print" role="status"></p><button id="retake" class="primary no-print" type="button" hidden>Start New Attempt</button>
+<div class="nav no-print"><a href="index.html">Return to Day 1 Main Menu</a><a class="yellow" href="exam-records.html">Exam Records</a></div><div id="resultBox" tabindex="-1" class="result-certificate launch-standard-certificate"></div></div></div>
+
+<script id="launch-standard-certificate-script">
+(function () {
+  if (window.launchRenderStandardExamCertificate) return;
+
+  function escapeHtml(value) {
+    return String(value == null ? "" : value).replace(/[&<>"']/g, function (char) {
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[char];
+    });
+  }
+
+  window.launchEscapeHtml = escapeHtml;
+
+  window.launchRenderStandardExamCertificate = function (data) {
+    data = data || {};
+
+    const passed = !!data.passed;
+    const stampText = data.status || (passed ? "PASS" : "FAIL");
+    const stampClass = passed ? "stamp-pass" : "stamp-fail";
+    const employeeName = data.employeeName || "—";
+    const parkLocation = data.parkLocation || "—";
+    const dateText = data.date || new Date().toLocaleDateString();
+    const trainerName = data.trainerName || "—";
+    const scoreText = data.scoreText || "—";
+    const percentText = data.percentText || "—";
+    const trainingTitle = data.trainingTitle || "TRAINING ASSESSMENT";
+    const passingPercent = data.passingPercent || 90;
+
+    const statement = passed
+      ? `<strong>${escapeHtml(employeeName)}</strong> has successfully completed the Launch Family Entertainment ${escapeHtml(data.statementTitle || trainingTitle)} assessment with a score of <strong>${escapeHtml(scoreText)} (${escapeHtml(percentText)})</strong>. Passing threshold: ${passingPercent}%.`
+      : `<strong>${escapeHtml(employeeName)}</strong> completed the Launch Family Entertainment ${escapeHtml(data.statementTitle || trainingTitle)} assessment with a score of <strong>${escapeHtml(scoreText)} (${escapeHtml(percentText)})</strong> — below the ${passingPercent}% passing threshold. Please review missed questions below and retest.`;
+
+    const missedHtml = data.missedHtml || '<p style="padding:14px 0"><strong>&#10003; Perfect score — no missed questions.</strong></p>';
+    const recordsLink = data.recordsHref
+      ? `<a href="${escapeHtml(data.recordsHref)}">View Exam Records</a>`
+      : "";
+
+    return `
+      <div class="cert-header">
+        <div class="cert-header-left">
+          <div class="cert-org">LAUNCH FAMILY ENTERTAINMENT</div>
+          <div class="cert-title-line">${escapeHtml(trainingTitle)}</div>
+          <div class="cert-subtitle">Training Assessment Record</div>
+        </div>
+        <div class="cert-stamp ${stampClass}">${escapeHtml(stampText)}</div>
+      </div>
+
+      <div class="cert-info-row">
+        <div class="cert-info-field">
+          <span class="cert-info-label">Employee Name</span>
+          <span class="cert-info-value">${escapeHtml(employeeName)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Park Location</span>
+          <span class="cert-info-value">${escapeHtml(parkLocation)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Date</span>
+          <span class="cert-info-value">${escapeHtml(dateText)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Trainer / Manager</span>
+          <span class="cert-info-value">${escapeHtml(trainerName)}</span>
+        </div>
+        <div class="cert-info-field cert-score-field">
+          <span class="cert-info-label">Score</span>
+          <span class="cert-info-value cert-score-value">${escapeHtml(scoreText)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Percentage</span>
+          <span class="cert-info-value">${escapeHtml(percentText)}</span>
+        </div>
+      </div>
+
+      <div class="cert-statement">${statement}</div>
+      <div class="missed cert-missed">${missedHtml}</div>
+
+      <div class="cert-sig-row">
+        <div class="cert-sig-block">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-label">Trainer / Manager Signature</div>
+        </div>
+        <div class="cert-sig-block">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-label">Employee Signature</div>
+        </div>
+      </div>
+
+      <div class="cert-actions no-print">
+        <button type="button" onclick="window.print()">&#128438; Print / Save as PDF</button>
+        ${recordsLink}
+      </div>
+    `;
+  };
+})();
+</script>
+<script>(function(){'use strict';
+const BANK=[{"id": "q01", "text": "Your party’s food arrives on time, the room is clean, and the schedule runs smoothly. However, you barely interact with the birthday child or parent. How should you assess your performance?", "correctId": "q01-a", "options": [{"id": "q01-a", "text": "The operational tasks went well, but you missed the personal connection that helps create awesome memories."}, {"id": "q01-b", "text": "You met the goal because the family received everything in its package."}, {"id": "q01-c", "text": "You met the goal unless the parent specifically requested more interaction."}, {"id": "q01-d", "text": "Personal connection matters only when something goes wrong."}]}, {"id": "q02", "text": "The birthday child wants to tell you about their favorite attraction while the parent asks when food will arrive. What is the best response?", "correctId": "q02-a", "options": [{"id": "q02-a", "text": "Acknowledge both, answer the parent’s timing question, and return your attention to the child’s excitement."}, {"id": "q02-b", "text": "Finish the conversation with the child and have the parent find the Event Coordinator."}, {"id": "q02-c", "text": "Focus on the parent because schedule questions take priority over engagement."}, {"id": "q02-d", "text": "Give both a quick answer and move on before the conversation affects your schedule."}]}, {"id": "q03", "text": "A birthday child is quiet and hesitant to participate. Which approach best supports engagement?", "correctId": "q03-a", "options": [{"id": "q03-a", "text": "Ask about their interests and offer an activity invitation that lets them join comfortably."}, {"id": "q03-b", "text": "Announce to the group that the birthday child needs encouragement."}, {"id": "q03-c", "text": "Choose the park’s most popular activity and explain why they should try it."}, {"id": "q03-d", "text": "Give them space for the rest of the party unless they approach you."}]}, {"id": "q04", "text": "Several parties are running at once. One host needs a food change, another needs a schedule adjustment, and a third has an attraction delay. Why should these updates flow through the Event Coordinator?", "correctId": "q04-a", "options": [{"id": "q04-a", "text": "The coordinator can account for how each change affects the other parties and teams."}, {"id": "q04-b", "text": "The coordinator replaces each host’s responsibility to follow up with their family."}, {"id": "q04-c", "text": "The coordinator’s role is to approve requests in the order they arrive."}, {"id": "q04-d", "text": "Using one person guarantees that every requested change can be accommodated."}]}, {"id": "q05", "text": "A family arrives while you are preparing its party space. What is the most appropriate approach to check-in?", "correctId": "q05-a", "options": [{"id": "q05-a", "text": "Follow the local process, with the Event Coordinator generally leading waiver verification and the participating guest count."}, {"id": "q05-b", "text": "Have the parent confirm that everyone has a waiver so you can keep preparing."}, {"id": "q05-c", "text": "Use the report’s forecasted count as the check-in count unless the parent corrects it."}, {"id": "q05-d", "text": "Begin your own separate check-in so the coordinator can focus on other parties."}]}, {"id": "q06", "text": "The party report forecasts 12 participating guests, but 10 participants check in along with six nonparticipating adults. How should you interpret the numbers?", "correctId": "q06-a", "options": [{"id": "q06-a", "text": "Twelve was the forecast; check-in establishes 10 actual participants, and the six adults do not become part of the participating count."}, {"id": "q06-b", "text": "The actual Group Size is 16 because everyone attending belongs to the party."}, {"id": "q06-c", "text": "The Group Size remains 12 because the report was prepared before arrival."}, {"id": "q06-d", "text": "The actual Group Size is 10, so you should independently adjust the booking and charges."}]}, {"id": "q07", "text": "You know the party’s package name and food order. What else must you confirm before you are ready to host it?", "correctId": "q07-a", "options": [{"id": "q07-a", "text": "Participating guest count, schedule, assigned space, included items, extras, and relevant notes."}, {"id": "q07-b", "text": "The package’s standard schedule, since that establishes the remaining details."}, {"id": "q07-c", "text": "The parent’s arrival time, since the coordinator manages the rest."}, {"id": "q07-d", "text": "The room number and checkout time, with other details confirmed as the party unfolds."}]}, {"id": "q08", "text": "A report shows one included cheese pizza, two included pepperoni pizzas, one additional cheese pizza, and two included drink pitchers. What is the planned food and drink quantity?", "correctId": "q08-a", "options": [{"id": "q08-a", "text": "Four pizzas and two pitchers."}, {"id": "q08-b", "text": "Three pizzas and two pitchers."}, {"id": "q08-c", "text": "Four pizzas and three pitchers."}, {"id": "q08-d", "text": "Three pizzas and three pitchers."}]}, {"id": "q09", "text": "The same type of item appears on more than one line of a party report. What should you do?", "correctId": "q09-a", "options": [{"id": "q09-a", "text": "Review the quantities and whether each line is included or added before determining the total."}, {"id": "q09-b", "text": "Use the first occurrence because later lines usually repeat the package details."}, {"id": "q09-c", "text": "Use the line with the highest quantity to avoid counting the item twice."}, {"id": "q09-d", "text": "Treat every repeated line as an additional purchase regardless of its column."}]}, {"id": "q10", "text": "The report and the parent’s understanding of the booking do not match. What is your best next step?", "correctId": "q10-a", "options": [{"id": "q10-a", "text": "Explain that you will confirm the details with the Event Coordinator, then return with verified information."}, {"id": "q10-b", "text": "Follow the report without further review because it is the written record."}, {"id": "q10-c", "text": "Follow the parent’s understanding to avoid disrupting the celebration."}, {"id": "q10-d", "text": "Offer a replacement benefit while the coordinator investigates."}]}, {"id": "q11", "text": "A parent expects room access during attraction time, but you have not confirmed whether their package includes it. What should you say?", "correctId": "q11-a", "options": [{"id": "q11-a", "text": "“Let me confirm your room-access arrangement so I can give you the correct plan.”"}, {"id": "q11-b", "text": "“You can use the room now, and we can adjust if another party needs it.”"}, {"id": "q11-c", "text": "“Party rooms are normally available throughout the visit.”"}, {"id": "q11-d", "text": "“You should plan on using the room only when food is served.”"}]}, {"id": "q12", "text": "A parent says, “We’ll open presents after cake.” What is the best response?", "correctId": "q12-a", "options": [{"id": "q12-a", "text": "Recommend taking presents home to open and explain how the remaining scheduled time affects the party’s next steps."}, {"id": "q12-b", "text": "Agree and delay the next scheduled activity if presents take longer than expected."}, {"id": "q12-c", "text": "Explain that opening presents at the park is prohibited."}, {"id": "q12-d", "text": "Leave the decision entirely to the parent without discussing the remaining time."}]}, {"id": "q13", "text": "Which sequence correctly identifies the five parts of the Rule of Five?", "correctId": "q13-a", "options": [{"id": "q13-a", "text": "The First Five, Every Five, Meal Plus Five, The Last Five, Five-Star Finish."}, {"id": "q13-b", "text": "The First Five, Every Five, Meal Plus Five, The Final Five, Five-Star Finish."}, {"id": "q13-c", "text": "The First Five, Every Five, Meal Check-In, The Last Five, Five-Star Finish."}, {"id": "q13-d", "text": "The First Five, Every Fifteen, Meal Plus Five, The Last Five, Five-Star Finish."}]}, {"id": "q14", "text": "During the first few minutes, the family has no questions and appears comfortable. What should you do?", "correctId": "q14-a", "options": [{"id": "q14-a", "text": "Introduce yourself, connect with the child and parent, and establish yourself as an accessible source of help."}, {"id": "q14-b", "text": "Give them space and introduce yourself when the first scheduled transition begins."}, {"id": "q14-c", "text": "Complete room preparation first, since a comfortable family does not need attention."}, {"id": "q14-d", "text": "Ask the coordinator to introduce you later so check-in stays consistent."}]}, {"id": "q15", "text": "Your last check-in was two minutes ago, and the parent now appears to be looking for help. What should you do?", "correctId": "q15-a", "options": [{"id": "q15-a", "text": "Respond now; approximately five-minute check-ins do not replace responding when help is needed."}, {"id": "q15-b", "text": "Wait until the five-minute point to keep your service routine consistent."}, {"id": "q15-c", "text": "Ask another host to check because you have already visited recently."}, {"id": "q15-d", "text": "Continue your current task unless the parent directly calls your name."}]}, {"id": "q16", "text": "The children are exploring different attractions during their scheduled attraction time. What best reflects the host’s role?", "correctId": "q16-a", "options": [{"id": "q16-a", "text": "Remain visible and accessible, make useful check-ins, and prepare for the next transition without continuously shadowing the group."}, {"id": "q16-b", "text": "Keep the children together and escort them through a fixed attraction sequence."}, {"id": "q16-c", "text": "Stay in the party room so the parent always knows one place to find you."}, {"id": "q16-d", "text": "Let the attraction team handle all contact until the group returns for food."}]}, {"id": "q17", "text": "About five minutes after food service begins, everyone appears to be eating. What makes your check-in useful?", "correctId": "q17-a", "options": [{"id": "q17-a", "text": "Confirm that the order and supplies meet the family’s needs and identify concerns or useful additions."}, {"id": "q17-b", "text": "Observe from the doorway and return only if someone signals you."}, {"id": "q17-c", "text": "Ask whether they are ready for cake so the room schedule stays on track."}, {"id": "q17-d", "text": "Begin clearing unused food to prepare for the next phase."}]}, {"id": "q18", "text": "The party is nearing its scheduled departure, and another party will use the space afterward. What should guide your final minutes?", "correctId": "q18-a", "options": [{"id": "q18-a", "text": "Help with belongings and the checkout process, communicate the next steps, and thank the child and parent while supporting an orderly departure."}, {"id": "q18-b", "text": "Prioritize clearing the room and let the coordinator handle any remaining family needs."}, {"id": "q18-c", "text": "Wait until the parent announces they are ready to leave before discussing checkout."}, {"id": "q18-d", "text": "Begin preparing the room around the family so the next party can enter promptly."}]}, {"id": "q19", "text": "A parent mentions an unresolved concern just as you are preparing to request feedback. What should you do first?", "correctId": "q19-a", "options": [{"id": "q19-a", "text": "Address the concern through the appropriate channel and follow through with the family."}, {"id": "q19-b", "text": "Request feedback first so the positive parts of the party remain fresh."}, {"id": "q19-c", "text": "Explain that the feedback form is the best place to document the concern."}, {"id": "q19-d", "text": "Ask for a rating of your service separately from the concern."}]}, {"id": "q20", "text": "A booked private laser tag experience follows the group’s time in the party room. How should you prepare?", "correctId": "q20-a", "options": [{"id": "q20-a", "text": "Confirm its reserved time and location and coordinate the transition with the Event Coordinator and attraction team using the local process."}, {"id": "q20-b", "text": "Send the group when it finishes eating because private activities can start when everyone is ready."}, {"id": "q20-c", "text": "Direct guests to the general laser tag queue and have them mention their party booking."}, {"id": "q20-d", "text": "Ask the parent to arrange the transition while you reset the room."}]}, {"id": "q21", "text": "At a park offering unlimited jumping after the party, why might wristbands be swapped during food and celebration time?", "correctId": "q21-a", "options": [{"id": "q21-a", "text": "The initial wristband identifies when the scheduled attraction period ends; the replacement supports the included post-party access."}, {"id": "q21-b", "text": "The replacement wristband extends the group’s reserved room time."}, {"id": "q21-c", "text": "Swapping bands allows guests to skip the scheduled return to the room."}, {"id": "q21-d", "text": "The replacement confirms that every guest has completed checkout individually."}]}, {"id": "q22", "text": "A parent requests another cheese pizza. Which response best demonstrates readiness to offer add-ons?", "correctId": "q22-a", "options": [{"id": "q22-a", "text": "Confirm the current local price and quantity with the parent, then route the request through the Event Coordinator."}, {"id": "q22-b", "text": "Submit the request through the coordinator and confirm the price when it arrives."}, {"id": "q22-c", "text": "Quote the price you remember from another park and verify it at checkout."}, {"id": "q22-d", "text": "Ask the parent to order at Krave so they can see the menu prices."}]}, {"id": "q23", "text": "Which add-on recommendation best reflects the service approach taught in Day 1?", "correctId": "q23-a", "options": [{"id": "q23-a", "text": "Notice a relevant need, explain an available option and its current local price, and let the parent decide."}, {"id": "q23-b", "text": "Recommend the highest-priced option to every party to maximize sales."}, {"id": "q23-c", "text": "Wait for the parent to request an addition before mentioning any options."}, {"id": "q23-d", "text": "Add a popular item to the order and ask for approval when it is delivered."}]}, {"id": "q24", "text": "You are preparing for your first hosting shift at this park. How should you use the checklist’s local pricing section?", "correctId": "q24-a", "options": [{"id": "q24-a", "text": "Record verified current prices for popular food, drink, and arcade items and practice answering common questions confidently."}, {"id": "q24-b", "text": "Record package prices only, since individual add-ons can be checked when requested."}, {"id": "q24-c", "text": "Copy prices from another location and note that they may vary."}, {"id": "q24-d", "text": "Leave it blank until a guest asks about each item."}]}, {"id": "q25", "text": "A parent approves an additional pizza shortly before scheduled food service. Which message gives the Event Coordinator the most useful information?", "correctId": "q25-a", "options": [{"id": "q25-a", "text": "“Party Table 3 approved one additional cheese pizza at the current local price. Food is scheduled in 20 minutes. Can you confirm the timing?”"}, {"id": "q25-b", "text": "“The parent at Table 3 wants more food. Can you check what the kitchen can do?”"}, {"id": "q25-c", "text": "“Please add a cheese pizza to the next party order. The parent has approved it.”"}, {"id": "q25-d", "text": "“Table 3 needs another pizza before they leave. Let me know if there is a problem.”"}]}, {"id": "q26", "text": "The Event Coordinator acknowledges your food-change request. What should happen next?", "correctId": "q26-a", "options": [{"id": "q26-a", "text": "Follow up on the confirmed timing or outcome and update the parent rather than assuming acknowledgment means completion."}, {"id": "q26-b", "text": "Tell the parent the change is complete because the message was received."}, {"id": "q26-c", "text": "Contact Krave directly to make sure the coordinator submitted it."}, {"id": "q26-d", "text": "Wait for the parent to mention the request again before checking its status."}]}, {"id": "q27", "text": "A scheduled attraction is delayed. The parent asks whether the party can stay in the room longer instead. What should you do?", "correctId": "q27-a", "options": [{"id": "q27-a", "text": "Share the situation with the Event Coordinator and return with a confirmed plan before promising a schedule change."}, {"id": "q27-b", "text": "Approve the extra room time if the next party has not arrived yet."}, {"id": "q27-c", "text": "Tell the parent the party must follow the original plan regardless of the delay."}, {"id": "q27-d", "text": "Offer extra jumping time as compensation without changing the room schedule."}]}, {"id": "q28", "text": "Cake time is approaching. Which plan best reflects Joey’s role?", "correctId": "q28-a", "options": [{"id": "q28-a", "text": "Coordinate Joey’s visit near cake time, with Joey helping lead Happy Birthday silently."}, {"id": "q28-b", "text": "Schedule Joey after presents so the visit becomes the final activity."}, {"id": "q28-c", "text": "Ask Joey to announce the birthday child’s name and lead the song aloud."}, {"id": "q28-d", "text": "Wait until the cake is served before checking whether Joey can visit."}]}, {"id": "q29", "text": "You notice a spill in a walkway while your party is enjoying attractions. What should you do?", "correctId": "q29-a", "options": [{"id": "q29-a", "text": "Respond promptly within your training and notify the appropriate team rather than waiting for your next check-in."}, {"id": "q29-b", "text": "Finish your next party check-in, then report the spill."}, {"id": "q29-c", "text": "Assume the attraction team has already noticed it."}, {"id": "q29-d", "text": "Ask a party guest to stand near it while you continue hosting."}]}, {"id": "q30", "text": "A parent asks whether a food item is safe for a guest with an allergy. You think you know the ingredients but are not certain. What should you do?", "correctId": "q30-a", "options": [{"id": "q30-a", "text": "Involve the Event Coordinator and use the park’s approved process to confirm the information without guessing or promising safety."}, {"id": "q30-b", "text": "Share your best understanding and let the parent decide whether that is sufficient."}, {"id": "q30-c", "text": "Ask Krave to remove the suspected ingredient and assure the parent the item is safe."}, {"id": "q30-d", "text": "Recommend a different item based on what other guests with allergies have ordered."}]}], KEY='launch_party_host_day1_exam_records_v1';
+const $=id=>document.getElementById(id), esc=window.launchEscapeHtml;
+let attempt=[],submitted=false;
+function randomInt(n){
+  if(window.crypto&&window.crypto.getRandomValues){
+    const a=new Uint32Array(1),limit=Math.floor(4294967296/n)*n;
+    do{window.crypto.getRandomValues(a);}while(a[0]>=limit);
+    return a[0]%n;
+  }
+  return Math.floor(Math.random()*n);
+}
+function shuffle(items,previous){
+  const a=items.slice();
+  do{for(let i=a.length-1;i>0;i--){const j=randomInt(i+1);[a[i],a[j]]=[a[j],a[i]];}}
+  while(previous&&a.every((x,i)=>x.id===previous[i].id));
+  return a;
+}
+const now=new Date();$('quizDate').value=[now.getFullYear(),String(now.getMonth()+1).padStart(2,'0'),String(now.getDate()).padStart(2,'0')].join('-');
+function start(){
+  if(!$('detailsForm').reportValidity())return;
+  if(!$('employeeName').value.trim()||!$('trainerName').value.trim()){
+    $('startStatus').textContent='Enter an employee name and trainer / manager name.';return;
+  }
+  const previous=attempt;
+  attempt=shuffle(BANK,previous.length?previous:null).map(q=>({...q,options:shuffle(q.options,previous.find(p=>p.id===q.id)?.options)}));
+  submitted=false;$('startStatus').textContent='';$('resultBox').style.display='none';$('retake').hidden=true;
+  $('detailsForm').hidden=true;$('quizForm').hidden=false;$('submit').disabled=false;
+  $('questions').innerHTML=attempt.map((q,i)=>`<fieldset class="question-card" data-question-id="${q.id}"><legend><span class="question-number">Question ${i+1} of ${attempt.length}</span>${esc(q.text)}</legend>${q.options.map((o,j)=>`<label class="answer"><input type="radio" name="${q.id}" value="${o.id}"><span><b>${String.fromCharCode(65+j)}.</b> ${esc(o.text)}</span></label>`).join('')}</fieldset>`).join('');
+  $('validationBox').textContent='';updateProgress();$('quizHeading').focus();
+}
+function updateProgress(){const count=$('questions').querySelectorAll('input:checked').length;$('answered').textContent=`${count} of ${attempt.length} answered`;$('progress').value=count;}
+$('detailsForm').addEventListener('submit',e=>{e.preventDefault();start();});
+$('questions').addEventListener('change',updateProgress);
+$('quizForm').addEventListener('submit',e=>{
+  e.preventDefault();if(submitted)return;
+  const answers=new FormData($('quizForm'));
+  const missing=attempt.filter(q=>!answers.has(q.id));
+  if(missing.length){$('validationBox').textContent=`Answer all 30 questions before submitting. ${missing.length} remaining.`;$('questions').querySelector(`[name="${missing[0].id}"]`).focus();return;}
+  submitted=true;$('submit').disabled=true;
+  const missed=attempt.flatMap((q,i)=>{
+    const selected=q.options.find(o=>o.id===answers.get(q.id)),correct=q.options.find(o=>o.id===q.correctId);
+    return selected.id===correct.id?[]:[{questionId:q.id,number:i+1,question:q.text,selected:selected.text,correct:correct.text}];
+  });
+  const score=30-missed.length,percent=score/30*100;
+  const record={employeeName:$('employeeName').value.trim(),parkLocation:$('parkLocation').value,date:$('quizDate').value,trainerName:$('trainerName').value.trim(),completedAt:new Date().toISOString(),program:'Party Host',day:1,score,total:30,percent,passed:score>=27,missed};
+  let saved=false;
+  try{const stored=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(stored))throw Error('Invalid records');stored.push(record);localStorage.setItem(KEY,JSON.stringify(stored));saved=true;}catch(error){}
+  // Send the same nine fields as the existing Cashier / Krave reporting integration.
+  // Local exam history and certificate rendering do not depend on network delivery.
+  if (typeof window.launchTrainingSubmitExamRecord === 'function') {
+    window.launchTrainingSubmitExamRecord({
+      name: record.employeeName,
+      parkLocation: record.parkLocation,
+      trainingProgram: 'Party Host',
+      examDay: `Day ${record.day} Exam`,
+      score: `${record.score}/${record.total}`,
+      percentage: `${Number(record.percent.toFixed(1))}%`,
+      missedQuestions: record.missed.length
+        ? record.missed.map(m => `Q${m.number}: ${m.question} | Selected: ${m.selected} | Correct: ${m.correct}`).join(' | ')
+        : 'None'
+    });
+  }
+  $('quizForm').hidden=true;
+  $('resultBox').innerHTML=window.launchRenderStandardExamCertificate(certificateData(record));
+  $('resultBox').style.display='block';$('resultBox').focus();
+  $('saveStatus').textContent=saved?'Result saved in this browser. Print or save your assessment record for your trainer.':'This browser could not save the result. Print or save your assessment record before leaving this page.';
+  $('retake').hidden=false;
+});
+function certificateData(r){return {...r,trainingTitle:'PARTY HOST — DAY 1',statementTitle:'Party Host Day 1',scoreText:`${r.score} / ${r.total}`,percentText:`${Number(r.percent.toFixed(1))}%`,passingPercent:90,recordsHref:'exam-records.html',missedHtml:r.missed.map(m=>`<div class="missed-item"><strong>Question ${m.number}: ${esc(m.question)}</strong><p><b>Your answer:</b> ${esc(m.selected)}</p><p><b>Correct answer:</b> ${esc(m.correct)}</p></div>`).join('')};}
+$('retake').addEventListener('click',start);
+})();
+</script></body></html>

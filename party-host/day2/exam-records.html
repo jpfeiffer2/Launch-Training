@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Party Host Day 2 Exam Records</title>
+<style>
+:root{--g:#6cc24a;--y:#f2e600;--ink:#111820;--muted:#5e6870;--line:#dfe5e9}*{box-sizing:border-box}body{margin:0;padding:24px;background:#111711;font-family:Arial,Helvetica,sans-serif}.page{max-width:1050px;margin:auto;background:#fff;border-radius:20px;overflow:hidden}header{padding:24px 28px;border-top:8px solid var(--g);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}header img{width:180px}header h1{margin:0}header p{margin:6px 0 0;color:var(--muted)}main{padding:28px}.nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.nav a{text-decoration:none;padding:10px 14px;border-radius:999px;background:#111820;color:#fff;font-weight:900}.empty{padding:22px;border:2px dashed #cbd5dc;border-radius:14px;background:#fbfcfd;color:#69737a;font-weight:800}
+</style>
+<style id="launch-standard-certificate-style">
+  .result-certificate.launch-standard-certificate,
+  .result-certificate {
+    margin-top: 26px;
+    border: 3px solid var(--launch-green, #56b947);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  }
+  .cert-header {
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+    border-bottom: 4px solid var(--launch-yellow, #f2e600);
+    padding: 22px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .cert-header-left { color: #fff; }
+  .cert-org {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: var(--launch-yellow, #f2e600);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .cert-title-line {
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .cert-subtitle {
+    font-size: 0.8rem;
+    color: #c8ced3;
+    margin-top: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .cert-stamp {
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    padding: 10px 22px;
+    border-radius: 10px;
+    border: 3px solid;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .cert-stamp.stamp-pass {
+    color: #198754;
+    border-color: #198754;
+    background: rgba(25,135,84,0.08);
+  }
+  .cert-stamp.stamp-fail {
+    color: #c92a2a;
+    border-color: #c92a2a;
+    background: rgba(201,42,42,0.08);
+  }
+  .cert-info-row {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #e3e8ee;
+  }
+  .cert-info-field {
+    flex: 1;
+    padding: 14px 20px;
+    border-right: 1px solid #e3e8ee;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+  .cert-info-field:last-child { border-right: none; }
+  .cert-info-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #777;
+    font-weight: bold;
+  }
+  .cert-info-value {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #111;
+    word-break: break-word;
+  }
+  .cert-score-value {
+    font-size: 1.2rem;
+    color: var(--launch-green-dark, #26731f);
+  }
+  .cert-statement {
+    padding: 18px 28px;
+    font-size: 0.97rem;
+    color: #444;
+    border-bottom: 1px solid #e3e8ee;
+    line-height: 1.6;
+  }
+  .cert-missed {
+    padding: 0 28px;
+    border-bottom: 1px solid #e3e8ee;
+  }
+  .cert-missed .wrong,
+  .cert-missed .missed-item {
+    margin: 10px 0;
+    padding: 12px 14px;
+    background: #fff8e8;
+    border-left: 4px solid #f0ad4e;
+    border-radius: 8px;
+  }
+  .cert-sig-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 24px 28px 20px;
+  }
+  .cert-sig-block { display: flex; flex-direction: column; gap: 6px; }
+  .cert-sig-line { border-bottom: 1.5px solid #444; min-height: 36px; }
+  .cert-sig-label { font-size: 0.78rem; color: #666; letter-spacing: 0.5px; }
+  .cert-actions {
+    padding: 12px 28px 16px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    border-top: 1px solid #e3e8ee;
+    background: #fafcfd;
+  }
+  .cert-actions button,
+  .cert-actions a {
+    border: none;
+    display: inline-block;
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-weight: 900;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .cert-actions button { color: #fff; background: #111820; }
+  .cert-actions a { color: #111820; background: var(--launch-yellow, #f2e600); }
+  @media (max-width: 860px) {
+    .cert-header,
+    .cert-info-row { display: block; }
+    .cert-stamp { display: inline-block; margin-top: 14px; }
+    .cert-info-field { border-right: 0; border-bottom: 1px solid #e3e8ee; }
+    .cert-sig-row { grid-template-columns: 1fr; gap: 24px; }
+  }
+  @media print {
+    body { background: #fff !important; padding: 0 !important; }
+    .header, header, .meta, .meta-card, .toolbar, .validation, .validation-box,
+    #validationBox, #quizForm, .buttons, .top-nav, .pre-exam-nav, .records-note,
+    .pdf-note, .footer-note, .brand-topbar, #answered, #progress, #exam,
+    #prev, #next, #submit, .question-card, .question, .no-print, .cert-actions {
+      display: none !important;
+    }
+    .page, .page-shell, .container, .content, main {
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      background: #fff !important;
+    }
+    #resultBox, #result, .result-certificate {
+      display: block !important;
+      border: 2px solid #333 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      margin: 0 !important;
+    }
+    .cert-header, .cert-stamp {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .cert-missed { border-bottom: none; }
+  }
+</style>
+<style>.record-row{border:1px solid #dfe5e9;border-radius:12px;margin:16px 0;padding:18px;display:flex;gap:16px;align-items:center;justify-content:space-between}.record-row button{background:#111820;color:#fff;border:0;border-radius:999px;padding:12px;font-weight:bold;cursor:pointer}.record-row p{line-height:1.5} @media(max-width:700px){body{padding:10px}header{display:block;padding:20px}header img{margin-top:16px}main{padding:16px}.record-row{display:block}.cert-title-line{overflow-wrap:anywhere}}@media print{#recordsList{display:none!important}#recordPrint{display:block!important;margin:0!important;border:0!important}}</style><style id="party-host-initial-lock">html:not(.party-host-ready){visibility:hidden}</style>
+<script src="../access.js" defer></script>
+</head><body><div class="page"><header><div><h1>Party Host Day 2 Exam Records</h1><p>Local browser records only.</p></div><img src="../assets/launch-family-entertainment-logo.png" alt="Launch Family Entertainment"></header><main><div class="nav no-print"><a href="index.html">Day 2 Home</a><a href="../index.html">Party Host Home</a></div><div id="recordsList" class="empty">No saved exam records yet.</div><div id="recordPrint" tabindex="-1" class="result-certificate launch-standard-certificate" style="display:none"></div></main></div>
+
+<script id="launch-standard-certificate-script">
+(function () {
+  if (window.launchRenderStandardExamCertificate) return;
+
+  function escapeHtml(value) {
+    return String(value == null ? "" : value).replace(/[&<>"']/g, function (char) {
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[char];
+    });
+  }
+
+  window.launchEscapeHtml = escapeHtml;
+
+  window.launchRenderStandardExamCertificate = function (data) {
+    data = data || {};
+
+    const passed = !!data.passed;
+    const stampText = data.status || (passed ? "PASS" : "FAIL");
+    const stampClass = passed ? "stamp-pass" : "stamp-fail";
+    const employeeName = data.employeeName || "—";
+    const parkLocation = data.parkLocation || "—";
+    const dateText = data.date || new Date().toLocaleDateString();
+    const trainerName = data.trainerName || "—";
+    const scoreText = data.scoreText || "—";
+    const percentText = data.percentText || "—";
+    const trainingTitle = data.trainingTitle || "TRAINING ASSESSMENT";
+    const passingPercent = data.passingPercent || 90;
+
+    const statement = passed
+      ? `<strong>${escapeHtml(employeeName)}</strong> has successfully completed the Launch Family Entertainment ${escapeHtml(data.statementTitle || trainingTitle)} assessment with a score of <strong>${escapeHtml(scoreText)} (${escapeHtml(percentText)})</strong>. Passing threshold: ${passingPercent}%.`
+      : `<strong>${escapeHtml(employeeName)}</strong> completed the Launch Family Entertainment ${escapeHtml(data.statementTitle || trainingTitle)} assessment with a score of <strong>${escapeHtml(scoreText)} (${escapeHtml(percentText)})</strong> — below the ${passingPercent}% passing threshold. Please review missed questions below and retest.`;
+
+    const missedHtml = data.missedHtml || '<p style="padding:14px 0"><strong>&#10003; Perfect score — no missed questions.</strong></p>';
+    const recordsLink = data.recordsHref
+      ? `<a href="${escapeHtml(data.recordsHref)}">View Exam Records</a>`
+      : "";
+
+    return `
+      <div class="cert-header">
+        <div class="cert-header-left">
+          <div class="cert-org">LAUNCH FAMILY ENTERTAINMENT</div>
+          <div class="cert-title-line">${escapeHtml(trainingTitle)}</div>
+          <div class="cert-subtitle">Training Assessment Record</div>
+        </div>
+        <div class="cert-stamp ${stampClass}">${escapeHtml(stampText)}</div>
+      </div>
+
+      <div class="cert-info-row">
+        <div class="cert-info-field">
+          <span class="cert-info-label">Employee Name</span>
+          <span class="cert-info-value">${escapeHtml(employeeName)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Park Location</span>
+          <span class="cert-info-value">${escapeHtml(parkLocation)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Date</span>
+          <span class="cert-info-value">${escapeHtml(dateText)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Trainer / Manager</span>
+          <span class="cert-info-value">${escapeHtml(trainerName)}</span>
+        </div>
+        <div class="cert-info-field cert-score-field">
+          <span class="cert-info-label">Score</span>
+          <span class="cert-info-value cert-score-value">${escapeHtml(scoreText)}</span>
+        </div>
+        <div class="cert-info-field">
+          <span class="cert-info-label">Percentage</span>
+          <span class="cert-info-value">${escapeHtml(percentText)}</span>
+        </div>
+      </div>
+
+      <div class="cert-statement">${statement}</div>
+      <div class="missed cert-missed">${missedHtml}</div>
+
+      <div class="cert-sig-row">
+        <div class="cert-sig-block">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-label">Trainer / Manager Signature</div>
+        </div>
+        <div class="cert-sig-block">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-label">Employee Signature</div>
+        </div>
+      </div>
+
+      <div class="cert-actions no-print">
+        <button type="button" onclick="window.print()">&#128438; Print / Save as PDF</button>
+        ${recordsLink}
+      </div>
+    `;
+  };
+})();
+</script>
+<script>(function(){'use strict';
+const target=document.getElementById('recordsList'),print=document.getElementById('recordPrint'),esc=window.launchEscapeHtml;
+let records=[];
+try{records=JSON.parse(localStorage.getItem('launch_party_host_day2_exam_records_v1')||'[]');if(!Array.isArray(records))throw Error('Invalid records');}
+catch(e){target.textContent='This browser could not load saved exam records.';return;}
+if(!records.length)return;
+target.className='';target.innerHTML=records.slice().reverse().map((r,i)=>`<article class="record-row"><div><strong>${esc(r.employeeName)}</strong><p>${esc(r.parkLocation)} · ${esc(r.date)} · ${esc(r.score)} / ${esc(r.total)} (${esc(Number(Number(r.percent).toFixed(1)))}%) · ${r.passed?'PASS':'FAIL'}</p></div><button type="button" data-index="${records.length-1-i}">View Assessment Record</button></article>`).join('');
+target.addEventListener('click',e=>{
+  const button=e.target.closest('[data-index]');if(!button)return;const r=records[Number(button.dataset.index)];
+  print.innerHTML=window.launchRenderStandardExamCertificate({...r,trainingTitle:'PARTY HOST — DAY 2',statementTitle:'Party Host Day 2',scoreText:`${r.score} / ${r.total}`,percentText:`${Number(Number(r.percent).toFixed(1))}%`,passingPercent:90,missedHtml:(r.missed||[]).map(m=>`<div class="missed-item"><strong>Question ${esc(m.number)}: ${esc(m.question)}</strong><p><b>Your answer:</b> ${esc(m.selected)}</p><p><b>Correct answer:</b> ${esc(m.correct)}</p></div>`).join('')});
+  print.style.display='block';print.focus();
+});
+})();
+</script></body></html>

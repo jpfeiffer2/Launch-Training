@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Day 3 Party Host Training</title>
+<style>
+:root{
+  --green:#69be45;
+  --yellow:#f4e800;
+  --ink:#111820;
+  --muted:#5f6870;
+  --card:#ffffff;
+  --dark:#111411;
+  --line:#dfe4e7;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#fff;
+  background:
+    radial-gradient(circle at 0 0,rgba(105,190,69,.16) 0,transparent 31%),
+    linear-gradient(110deg,#101210 0 64%,#252c1d 100%);
+}
+.page{
+  max-width:1120px;
+  margin:0 auto;
+  padding:62px 28px 72px;
+}
+.toplink{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 14px;
+  border:1px solid #3c4550;
+  border-radius:999px;
+  background:#171d22;
+  color:#fff;
+  text-decoration:none;
+  font-weight:800;
+  margin-bottom:20px;
+}
+.toplink:hover{background:#20272d}
+.hero{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-bottom:28px;
+}
+.brandmark{
+  width:58px;
+  height:58px;
+  border:2px solid var(--green);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:var(--yellow);
+  font-weight:950;
+  font-size:1.2rem;
+  flex:0 0 auto;
+}
+.hero-copy h1{
+  font-size:clamp(2.4rem,5vw,3.5rem);
+  line-height:1;
+  margin:0 0 8px;
+  letter-spacing:-1.8px;
+}
+.sub{
+  margin:0;
+  color:#d3d7dc;
+  font-size:1.02rem;
+  line-height:1.45;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+}
+.card{
+  position:relative;
+  overflow:hidden;
+  background:var(--card);
+  border-radius:18px;
+  padding:34px 24px 24px;
+  text-decoration:none;
+  color:var(--ink);
+  min-height:286px;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
+}
+.card:before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:10px;
+  background:linear-gradient(90deg,var(--green),var(--yellow));
+}
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 34px rgba(0,0,0,.25);
+}
+.step{
+  font-size:.78rem;
+  font-weight:950;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:#4cae31;
+  margin-bottom:12px;
+}
+.card h2{
+  font-size:2rem;
+  line-height:1.05;
+  margin:0 0 12px;
+  letter-spacing:-.4px;
+}
+.card p{
+  color:#667085;
+  font-size:1.01rem;
+  line-height:1.48;
+  margin:0 0 24px;
+}
+.open{
+  margin-top:auto;
+  display:block;
+  border-radius:999px;
+  background:#11161a;
+  color:var(--yellow);
+  text-align:center;
+  padding:12px 14px;
+  font-weight:950;
+}
+@media(max-width:850px){
+  .grid{grid-template-columns:1fr}
+  .page{padding:36px 18px 44px}
+  .hero{align-items:flex-start}
+  .hero-copy h1{font-size:2.5rem}
+}
+</style>
+<style id="party-host-initial-lock">html:not(.party-host-ready){visibility:hidden}</style>
+<script src="../access.js" defer></script>
+</head>
+<body>
+<main class="page">
+  <a class="toplink" href="../index.html">← Party Host Training Home</a>
+
+  <div class="hero">
+    <div class="brandmark" aria-hidden="true">L</div>
+    <div class="hero-copy">
+      <h1>Day 3 Party Host Training</h1>
+      <p class="sub">Complete the 14-slide online training, then practice with your trainer using the checklist. Then complete the 50-question Day 3 exam. A score of 90% is required to pass.</p>
+    </div>
+  </div>
+
+  <section class="grid" aria-label="Day 3 Party Host training steps">
+    <a class="card" href="online-training.html">
+      <div class="step">Step 1</div>
+      <h2>Online Training</h2>
+      <p>Apply ownership, family awareness, sound judgment, service recovery and confident follow-through.</p>
+      <div class="open">Start Online Training</div>
+    </a>
+
+    <a class="card" href="checklist.html"><div class="step">Step 2</div><h2>Trainer Checklist</h2><p>Print the checklist and demonstrate a complete party with your trainer.</p><div class="open">Open Checklist</div></a>
+
+    <a class="card" href="end-of-shift-exam.html"><div class="step">Step 3</div><h2>End-of-Shift Exam</h2><p>Apply your training in 50 questions: 30 from Day 3 and 10 each from Days 1 and 2. Pass with 45 correct (90%).</p><div class="open">Start Exam</div></a>
+  </section>
+</main>
+</body>
+</html>

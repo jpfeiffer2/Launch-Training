@@ -1,0 +1,1049 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Party Host Day 1 Online Training</title>
+<style>
+:root{--g:#6cc24a;--y:#f2e600;--ink:#111820;--muted:#aeb8b1;--panel:#162018}
+*{box-sizing:border-box}
+body{margin:0;background:#090b09;color:#fff;font-family:Arial,Helvetica,sans-serif;overflow:hidden}
+.deck{height:100vh;display:grid;grid-template-rows:auto 1fr auto}
+.topbar,.footer{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 18px;background:#121712}
+.topbar{border-bottom:1px solid #293229}.footer{border-top:1px solid #293229}
+.brand{display:flex;align-items:center;gap:12px}.brand img{height:38px;background:#fff;border-radius:6px;padding:4px 8px}.brand strong,.brand span{display:block}.brand span{font-size:.82rem;color:#aeb8b1}
+.top-actions,.controls,.home-links{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.link,.control{border:1px solid #3a453b;border-radius:999px;background:#171d18;color:#fff;text-decoration:none;padding:9px 12px;font-weight:900;font:inherit}.control{cursor:pointer}.control:disabled{opacity:.4;cursor:not-allowed}.control.audio{background:#273728}.control.pause{background:#3c3211}.control.next{background:var(--g);color:#071007}
+.stage{min-height:0;display:grid;place-items:center;padding:10px 18px;overflow:hidden}.slide-shell{height:min(calc(100vh - 170px),54vw,720px);height:min(calc(100dvh - 170px),54vw,720px);aspect-ratio:16/9;width:auto;max-width:96vw;position:relative}.slide{position:absolute;inset:0;border-radius:22px;overflow:hidden;background:radial-gradient(circle at 15% 18%,rgba(108,194,74,.24),transparent 30%),linear-gradient(145deg,#101611,#203023 62%,#121812);border:1px solid #344236;display:none;box-shadow:0 26px 70px rgba(0,0,0,.34)}.slide.active{display:block}
+.slide:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 0 62%,rgba(242,230,0,.055) 62% 100%);pointer-events:none;z-index:1}
+.slide-number{position:absolute;top:4.2%;right:4.2%;font-size:clamp(.7rem,1.1vw,.95rem);font-weight:900;letter-spacing:1.4px;text-transform:uppercase;color:#c7d1ca;opacity:.85;z-index:7}
+.logo-mark{position:absolute;left:4.5%;top:5.2%;width:17%;max-width:210px;background:#fff;border-radius:10px;padding:7px 11px;z-index:7}
+.scene{position:absolute;inset:0;padding:15% 7% 9%;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateY(16px) scale(.995);transition:opacity .45s ease,transform .45s ease;pointer-events:none;overflow:hidden}.scene.visible{opacity:1;transform:none}
+.scene > *{position:relative;z-index:3}
+.scene h1,.scene h2,.scene p{margin:0}.eyebrow{font-size:clamp(.72rem,1.15vw,1rem);font-weight:900;letter-spacing:2.2px;text-transform:uppercase;color:var(--g);margin-bottom:12px}.scene h1{font-size:clamp(2.3rem,5.1vw,5.1rem);line-height:.98;letter-spacing:-2.6px;max-width:940px}.scene h2{font-size:clamp(1.75rem,3.7vw,3.6rem);line-height:1.04;letter-spacing:-1.8px;max-width:980px}.scene p{font-size:clamp(1rem,1.55vw,1.38rem);line-height:1.4;color:#d7dfda;max-width:890px;margin-top:18px}.accent{color:var(--y)}
+.hero-lockup{max-width:980px}.hero-sub{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.pill{padding:8px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);font-size:clamp(.75rem,1.05vw,.95rem);font-weight:800;color:#e8eee9}
+.memory-panel{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center;width:100%}.memory-word{font-size:clamp(3.3rem,8.2vw,7.8rem);line-height:.85;font-weight:950;letter-spacing:-5px;color:var(--y)}.memory-note{font-size:clamp(1.05rem,1.55vw,1.45rem);line-height:1.42;color:#d9e1dc}.memory-note strong{color:#fff}
+.two-guests{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px;max-width:980px}.guest-card{padding:22px 24px;border-radius:18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14)}.guest-card strong{display:block;font-size:clamp(1.2rem,2vw,1.75rem);margin-bottom:6px}.guest-card span{color:#cad4ce;font-size:clamp(.9rem,1.2vw,1.05rem);line-height:1.35}
+.journey{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px;max-width:1040px}.journey-card{padding:20px 20px 18px;border-radius:18px;background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.14);min-height:126px}.journey-card .num{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--g);color:#071007;font-weight:950;margin-bottom:10px}.journey-card strong{display:block;font-size:clamp(1.05rem,1.55vw,1.35rem);margin-bottom:5px}.journey-card span{display:block;color:#cbd5cf;font-size:clamp(.78rem,1vw,.92rem);line-height:1.35}
+.skills{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px;max-width:980px}.skills span{padding:8px 12px;border-radius:10px;background:rgba(108,194,74,.12);border:1px solid rgba(108,194,74,.28);font-weight:800;color:#e7f3e3;font-size:clamp(.75rem,1vw,.92rem)}
+.final-focus{max-width:950px}.final-focus h2{font-size:clamp(2.2rem,4.6vw,4.7rem)}.focus-line{margin-top:26px;padding:18px 22px;border-left:7px solid var(--y);background:rgba(255,255,255,.07);font-size:clamp(1.1rem,1.7vw,1.5rem);font-weight:900;letter-spacing:.3px;max-width:820px}
+.pause-indicator{position:absolute;right:18px;top:18px;background:var(--y);color:#111;padding:8px 12px;border-radius:999px;font-weight:900;opacity:0;transition:opacity .2s;z-index:20}.slide.paused .pause-indicator{opacity:1}
+.progress{position:absolute;bottom:0;left:0;width:100%;height:7px;background:rgba(255,255,255,.12);z-index:30}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--g),var(--y))}
+.start-overlay{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:rgba(4,6,4,.96);padding:24px}.start-card{width:min(640px,95vw);background:#fff;color:#111;border-radius:24px;padding:30px;text-align:center}.start-card img{width:220px}.start-card p{color:#5f6870;line-height:1.5}.start-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}.start-actions button{border:0;border-radius:999px;padding:12px 18px;font-weight:900;cursor:pointer}.start{background:#111820;color:#f2e600}.fullscreen{background:#6cc24a}
+#audioStatus{min-width:230px;text-align:center;color:#d2dbd5;font-size:.92rem}
+.visual-bg{position:absolute;inset:0;z-index:0;opacity:.32;overflow:hidden}.visual-bg img{width:100%;height:100%;object-fit:cover;animation:kenburns 18s ease-in-out infinite alternate}.visual-bg:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,11,9,.72) 0 26%,rgba(9,11,9,.42) 42%,rgba(9,11,9,.72) 100%)}
+.photo-card{border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.16);box-shadow:0 18px 48px rgba(0,0,0,.32);background:rgba(255,255,255,.05);position:relative}.photo-card img{display:block;width:100%;height:100%;object-fit:cover}.photo-card.tall{height:min(43vh,390px)}.photo-card.medium{height:min(34vh,285px)}
+.story-layout,.training-layout,.closing-layout{display:grid;grid-template-columns:1.08fr .92fr;gap:34px;align-items:center;width:100%}
+.photo-stack{display:grid;gap:18px}.photo-caption{position:absolute;left:14px;bottom:12px;padding:7px 11px;border-radius:999px;background:rgba(17,24,32,.86);border:1px solid rgba(255,255,255,.12);font-size:.78rem;font-weight:900;letter-spacing:.6px;text-transform:uppercase}
+.training-side{display:grid;gap:18px}
+.closing-collage{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.08)}}
+@media(max-width:850px){.memory-panel,.story-layout,.training-layout,.closing-layout{grid-template-columns:1fr;gap:18px}.journey{grid-template-columns:1fr 1fr}.scene{padding-top:19%}.logo-mark{width:24%}.photo-card.tall,.photo-card.medium{height:230px}}
+@media(max-width:700px){.topbar,.footer{flex-direction:column;align-items:flex-start}.brand span{display:none}.stage{padding:8px}.journey{grid-template-columns:1fr}.two-guests{grid-template-columns:1fr}.scene{padding-top:23%}.scene h1{letter-spacing:-1.5px}.memory-word{letter-spacing:-3px}#audioStatus{text-align:left}.closing-collage{grid-template-columns:1fr}}
+
+/* V7: retain the V6 visual family; scale content to the actual slide. */
+.slide-shell{container-type:inline-size;max-width:1280px}
+.scene{padding:8% 6% 6%;justify-content:center}
+.scene .eyebrow{font-size:1.25cqw;margin-bottom:1.3cqw}
+.scene h1{font-size:8cqw;letter-spacing:-.3cqw}
+.scene h2{font-size:4.2cqw;letter-spacing:-.12cqw;line-height:1.08}
+.scene p{font-size:2.15cqw;margin-top:2cqw;line-height:1.35}
+.scene p strong{color:var(--y)}
+.slide-number{font-size:1.05cqw;top:3.5%;right:4%}
+.memory-panel,.story-layout{grid-template-columns:1.04fr .96fr;gap:4cqw}
+.memory-word{font-size:6.6cqw;letter-spacing:-.25cqw;line-height:.95;margin-top:2cqw}
+.photo-card.tall{height:38cqw;border-radius:1.8cqw}
+.photo-card img{object-position:center}
+.two-guests{gap:1.2cqw;margin-top:2cqw}
+.guest-card{padding:1.3cqw;border-radius:1.2cqw}
+.guest-card strong{font-size:1.6cqw;margin-bottom:.6cqw}
+.guest-card span{font-size:1.3cqw}
+.journey{width:100%;max-width:none;gap:1.5cqw;margin-top:2.5cqw;grid-template-columns:repeat(3,minmax(0,1fr))}
+.journey-card{padding:1.7cqw;min-height:0;border-radius:1.4cqw}
+.journey-card .num{width:3cqw;height:3cqw;font-size:1.6cqw;margin-bottom:1cqw}
+.journey-card strong{font-size:1.85cqw;line-height:1.15;margin-bottom:.7cqw}
+.journey-card span{font-size:1.3cqw}
+.skills{gap:.8cqw;margin-top:2cqw;max-width:none}
+.skills span{font-size:1.3cqw;padding:.9cqw 1.2cqw}
+.welcome-title{font-size:4.4cqw;font-weight:900;line-height:1.1;margin-top:1cqw;max-width:65%}
+.day-motif{position:absolute;right:5%;font-size:29cqw;font-weight:900;letter-spacing:-2cqw;line-height:1;color:rgba(108,194,74,.16);border-bottom:1cqw solid var(--y)}
+.hero-lockup{position:relative;z-index:4}
+.final-focus h2{font-size:5.4cqw;max-width:76%}
+.focus-line{padding:1.8cqw 2.2cqw;margin-top:3cqw;font-size:3.3cqw;line-height:1.35;border-left-width:.6cqw;background:transparent;max-width:82%}
+.closing-number{position:absolute;right:7%;bottom:12%;font-size:32cqw;color:rgba(108,194,74,.12);line-height:1;font-weight:900;z-index:1}
+[data-cue]{opacity:0;transform:translateY(8px);transition:opacity .3s ease,transform .3s ease}
+[data-cue].revealed{opacity:1;transform:none}
+.scene:not(.visible){visibility:hidden;transition:none}
+.slide.paused [data-cue],.slide.paused .scene{transition:none}
+@media(prefers-reduced-motion:reduce){.scene,[data-cue]{transition:none;transform:none}}
+@media(max-width:700px) and (orientation:portrait){
+ body{overflow:auto}.deck{height:auto;min-height:100dvh}.stage{padding:10px}
+ .slide-shell{width:100%!important;height:640px!important;aspect-ratio:auto;max-width:none}
+ .scene{padding:52px 22px 30px}.scene .eyebrow{font-size:11px;line-height:1.4;margin-bottom:14px}
+ .scene h1{font-size:64px}.scene h2,.final-focus h2{font-size:30px;max-width:100%;letter-spacing:-1px}
+ .scene p{font-size:18px;margin-top:15px}.slide-number{font-size:10px}
+ .memory-panel,.story-layout{grid-template-columns:1fr;gap:20px}
+ .memory-word{font-size:43px;margin-top:15px;letter-spacing:-1px}
+ .photo-card.tall{height:220px;border-radius:16px}
+ .story-layout .photo-card.tall{height:195px}.two-guests{grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+ .guest-card{padding:10px}.guest-card strong{font-size:15px}.guest-card span{font-size:12px}
+ .journey{grid-template-columns:1fr;gap:10px;margin-top:20px}
+ .journey-card{padding:12px 12px 12px 54px;position:relative}
+ .journey-card .num{position:absolute;left:12px;top:14px;width:28px;height:28px;font-size:16px}
+ .journey-card strong{font-size:18px}.journey-card span{font-size:13px}
+ .skills{gap:6px;margin-top:16px}.skills span{font-size:12px;padding:7px 9px}
+ .welcome-title{font-size:32px;max-width:100%;margin-top:20px}.day-motif{font-size:180px;bottom:75px;right:35px;letter-spacing:-10px}
+ .focus-line{font-size:25px;max-width:100%;margin-top:28px;padding:12px 16px;border-left-width:5px}
+ .closing-number{font-size:240px;bottom:50px}.footer{padding:14px}.topbar{padding:12px}
+}
+@media(max-height:520px) and (orientation:landscape){.topbar,.footer{padding:5px 12px}.brand img{height:28px}.brand span,.home-links{display:none}.link,.control{padding:6px 9px;font-size:12px}#audioStatus{min-width:120px;font-size:12px}.stage{padding:5px}.topbar,.footer{flex-direction:row;align-items:center}}
+
+
+/* V8: image-led scenes and angular accents informed by the live Krave and Attraction modules. */
+.slide{background:#080c0a;border-color:#2d3930}
+.slide:before{display:none}
+.scene{padding:7% 6% 6%}
+.photo-scene{background:#060a08}
+.scene.photo-scene .scene-photo{position:absolute;inset:0;z-index:0;height:100%;width:100%;border:0;border-radius:0;box-shadow:none;overflow:hidden;background:#0b110c;opacity:1;transform:none}
+.scene-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:65% 50%;will-change:transform}
+.scene-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,9,6,.98) 0%,rgba(3,9,6,.93) 27%,rgba(3,9,6,.72) 45%,rgba(3,9,6,.18) 69%,rgba(3,9,6,.06) 100%),linear-gradient(0deg,rgba(2,6,3,.4),transparent 35%);pointer-events:none}
+.photo-scene:after{content:"";position:absolute;left:0;top:0;width:32%;height:1.1cqw;clip-path:polygon(0 0,100% 0,94% 100%,0 100%);background:linear-gradient(90deg,var(--g),var(--y));z-index:5}
+.memory-panel,.story-layout{display:block;position:static}
+.memory-panel>div:first-child,.story-layout>div:first-child{position:relative;z-index:4;width:54%}
+.memory-panel h2{font-size:3.4cqw}
+.memory-word{font-size:6.8cqw;margin-top:2.2cqw;line-height:.97;text-shadow:0 2px 25px rgba(0,0,0,.3)}
+.scene .eyebrow{color:#8cdd68}
+.welcome-scene .hero-lockup{max-width:64%;padding-left:2cqw;border-left:.7cqw solid var(--y)}
+.welcome-scene h1{font-size:9.8cqw;line-height:.95}
+.welcome-title{max-width:100%;font-size:4.3cqw;margin-top:1.5cqw;line-height:1.08}
+.welcome-scene .scene-photo img{object-position:center 58%}
+.welcome-scene .scene-photo:after{background:linear-gradient(90deg,rgba(3,9,6,.96),rgba(3,9,6,.86) 34%,rgba(3,9,6,.18) 72%,rgba(3,9,6,.06)),linear-gradient(0deg,rgba(3,9,6,.25),transparent 50%)}
+.birthday-scene h2{font-size:4.8cqw;line-height:1.04}
+.birthday-scene p{font-size:2.2cqw;max-width:100%;margin-top:2.3cqw}
+.birthday-scene .two-guests{max-width:90%;margin-top:2.5cqw}
+.birthday-scene .guest-card{background:rgba(5,13,8,.58);border-color:rgba(140,221,104,.35);border-radius:.8cqw;border-top:3px solid var(--g)}
+.birthday-scene .guest-card span{color:#eff4ec}
+.birthday-scene .scene-photo img{object-position:center 58%}
+.training-scene{background:linear-gradient(135deg,#0d1710,#080d09 70%)}
+.training-scene:before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(115deg,transparent 0 77%,#69be45 77% 91%,#b6dd16 91%);pointer-events:none}
+.training-scene:after{content:"";position:absolute;left:0;bottom:0;height:1.2cqw;width:76%;background:var(--g);clip-path:polygon(0 0,100% 0,97% 100%,0 100%);pointer-events:none}
+.training-scene h2{font-size:4.7cqw;line-height:1.04}
+.training-scene .journey{gap:1.6cqw;margin-top:3cqw}
+.training-scene .journey-card{position:relative;background:rgba(7,13,9,.93);border:1px solid #45513f;border-top:.4cqw solid var(--g);border-radius:.8cqw;padding:1.8cqw 1.7cqw;box-shadow:0 12px 28px rgba(0,0,0,.2)}
+.training-scene .journey-card:nth-child(2){border-top-color:#abd63e}
+.training-scene .journey-card:nth-child(3){border-top-color:var(--y)}
+.training-scene .journey-card .num{border-radius:0;background:none;color:var(--g);width:auto;height:auto;display:block;font-size:4.4cqw;line-height:1;font-weight:950;margin-bottom:1.3cqw}
+.training-scene .journey-card:nth-child(2) .num{color:#abd63e}
+.training-scene .journey-card:nth-child(3) .num{color:var(--y)}
+.training-scene .journey-card strong{font-size:1.8cqw}
+.training-scene .skills span{background:rgba(5,11,7,.86);border-color:#61774f;color:#fff}
+.closing-scene{background:#080d09;max-width:none}
+.closing-scene:before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(115deg,transparent 0 72%,#69be45 72% 91%,#b6dd16 91%);pointer-events:none}
+.closing-scene:after{content:"";position:absolute;left:0;top:0;right:0;height:.8cqw;background:linear-gradient(90deg,var(--g),var(--y));pointer-events:none}
+.closing-scene h2{font-size:4.5cqw;max-width:69%;line-height:1.05}
+.closing-scene .focus-line{border:0;padding:0;max-width:71%;font-size:3.7cqw;line-height:1.25;margin-top:3cqw}
+.closing-number{right:4%;bottom:17%;font-size:27cqw;color:#10250c;text-shadow:none;z-index:1}
+.slide-number{padding:.5cqw .8cqw;background:rgba(0,0,0,.68);border-radius:99px;letter-spacing:.12cqw;color:#fff;top:3%;right:3%}
+@media(max-width:700px) and (orientation:portrait){
+ .scene{padding:55px 22px 32px}
+ .memory-panel>div:first-child,.story-layout>div:first-child{width:100%}
+ .scene-photo img{object-position:68% center!important}
+ .scene-photo:after{background:linear-gradient(180deg,rgba(3,9,6,.97) 0%,rgba(3,9,6,.91) 42%,rgba(3,9,6,.17) 76%,rgba(3,9,6,.22) 100%)}
+ .photo-scene{justify-content:flex-start}
+ .memories-scene .scene-photo img,.birthday-scene .scene-photo img{position:absolute;bottom:0;height:64%;object-position:50% 40%!important}
+ .photo-scene:after{height:7px;width:45%}
+ .memory-panel h2{font-size:25px}.memory-word{font-size:44px;margin-top:19px}
+ .welcome-scene{justify-content:center}
+ .welcome-scene .hero-lockup{max-width:100%;padding-left:18px;border-left-width:5px}
+ .welcome-scene h1{font-size:70px}.welcome-title{font-size:33px}
+ .welcome-scene .scene-photo:after{background:linear-gradient(90deg,rgba(3,9,6,.92),rgba(3,9,6,.67) 55%,rgba(3,9,6,.35))}
+ .birthday-scene h2{font-size:32px}.birthday-scene p{font-size:18px;margin-top:20px}
+ .birthday-scene .two-guests{max-width:100%;margin-top:20px}
+ .training-scene h2{font-size:30px}
+ .training-scene .journey{margin-top:20px;gap:12px}
+ .training-scene .journey-card{padding:13px 12px 13px 58px;border-top-width:3px;border-radius:7px}
+ .training-scene .journey-card .num{position:absolute;top:15px;left:14px;font-size:32px;width:auto;height:auto;margin:0}
+ .training-scene .journey-card strong{font-size:18px}.training-scene .journey-card{padding:20px 15px}.training-scene:after{height:8px}
+ .closing-scene h2{font-size:31px;max-width:100%}.closing-scene .focus-line{font-size:29px;max-width:100%;margin-top:32px}
+ .closing-scene:before{background:linear-gradient(155deg,transparent 0 68%,#69be45 68% 92%,#b6dd16 92%)}
+ .closing-number{font-size:205px;bottom:40px;right:20px}.closing-scene:after{height:6px}
+ .slide-number{padding:5px 10px;letter-spacing:1px}
+}
+
+
+/* V9: scenes follow the replacement narration and its phrase-level timestamps. */
+.scene-copy{width:55%;position:relative;z-index:4}
+.child-scene h2{font-size:6.3cqw;line-height:.97}
+.child-scene p{font-size:1.8cqw;margin-top:1.8cqw;color:#fff;max-width:90%}
+.celebration-lines{display:grid;gap:.9cqw;margin-top:2.3cqw;font-size:1.8cqw;color:#e5ece3}
+.celebration-lines strong{color:var(--y);font-size:2.1cqw}
+.family-scene h2{font-size:4.8cqw;line-height:1.05}
+.care-list{display:grid;gap:1.1cqw;margin-top:2.5cqw;max-width:77%}
+.care-list>div{display:flex;align-items:center;gap:1.2cqw;padding:1cqw 1.3cqw;background:rgba(3,12,6,.75);border-left:.3cqw solid var(--g);font-size:2.1cqw;font-weight:900;border-radius:.4cqw}
+.care-list>div>span{color:var(--g);font-size:2.3cqw}
+.personal-scene{background:#080d09}
+.personal-scene:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 0 76%,#69be45 76% 92%,#b6dd16 92%);pointer-events:none;z-index:0}
+.personal-scene:after{content:"";position:absolute;left:0;bottom:0;height:.8cqw;width:75%;background:var(--g);pointer-events:none}
+.personal-scene h2{font-size:5.6cqw}
+.personal-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2cqw;margin-top:3cqw;position:relative;z-index:3}
+.personal-steps>div{background:rgba(6,12,8,.93);border:1px solid #45523b;border-top:.4cqw solid var(--g);border-radius:.8cqw;padding:2cqw;min-height:14cqw}
+.personal-steps svg{width:5.5cqw;height:5.5cqw;fill:none;stroke:var(--g);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:1.5cqw}
+.personal-steps>div:nth-child(2){border-top-color:#abd63e}.personal-steps>div:nth-child(2) svg{stroke:#abd63e}
+.personal-steps>div:nth-child(3){border-top-color:var(--y)}.personal-steps>div:nth-child(3) svg{stroke:var(--y)}
+.personal-steps strong{display:block;font-size:2cqw;line-height:1.2}
+.memory-result{margin-top:2.4cqw;font-size:2.8cqw;color:var(--y);font-weight:900}
+.memories-scene .memory-word{font-size:6.4cqw;line-height:.97;margin-top:1.5cqw}
+.training-scene .journey{margin-top:2cqw}.training-scene .journey-card{padding:1.3cqw 1.7cqw}
+.training-scene .journey-card .num{font-size:3.6cqw;margin-bottom:1cqw}
+.training-scene h2{font-size:4.1cqw}
+.team-line{font-size:1.6cqw;font-weight:800;color:#dce9d5;margin-top:1.3cqw}
+@media(max-width:700px) and (orientation:portrait){
+ .child-scene,.family-scene{justify-content:flex-start}
+ .scene-copy{width:100%}
+ .child-scene .scene-photo img,.family-scene .scene-photo img{position:absolute;bottom:0;height:63%;object-position:75% center!important}
+ .child-scene h2{font-size:43px}.child-scene p{font-size:15px;max-width:100%;margin-top:14px}
+ .celebration-lines{font-size:15px;gap:8px;margin-top:17px}.celebration-lines strong{font-size:18px}
+ .family-scene h2{font-size:32px}.care-list{gap:8px;margin-top:20px;max-width:85%}
+ .care-list>div{gap:12px;padding:8px 12px;font-size:18px;border-left-width:3px}.care-list>div>span{font-size:20px}
+ .personal-scene h2{font-size:34px}.personal-steps{grid-template-columns:1fr;gap:12px;margin-top:22px}
+ .personal-steps>div{display:flex;align-items:center;gap:17px;padding:15px;min-height:0;border-top-width:3px;border-radius:7px}
+ .personal-steps svg{width:43px;height:43px;margin:0;flex:0 0 auto}.personal-steps strong{font-size:18px}
+ .memory-result{font-size:26px;margin-top:22px}.personal-scene:after{height:7px}
+ .memories-scene .memory-word{font-size:43px;margin-top:18px}
+ .training-scene h2{font-size:28px}.training-scene .journey{margin-top:16px}
+ .training-scene .journey-card{padding:12px 10px 12px 52px}.training-scene .journey-card .num{font-size:28px;margin:0}
+ .training-scene .journey-card strong{font-size:17px}.training-scene .skills{margin-top:13px;gap:5px}
+ .training-scene .skills span{font-size:11px;padding:6px 8px}.team-line{font-size:13px;margin-top:12px}
+}
+
+
+/* V10: subdued photographic atmosphere and phrase-sized narration packets. */
+.scene.photo-scene .scene-photo:after{background:linear-gradient(90deg,rgba(3,10,7,.94),rgba(3,10,7,.84) 48%,rgba(3,10,7,.60)),linear-gradient(0deg,rgba(3,10,7,.35),transparent 60%)}
+.scene.photo-scene .scene-photo img{filter:saturate(.72)}
+.scene.atmospheric-scene .scene-photo:after{background:linear-gradient(90deg,rgba(3,10,7,.92),rgba(3,10,7,.82) 50%,rgba(3,10,7,.68))}
+.personal-scene:before,.training-scene:before,.closing-scene:before{display:none}
+.scene.atmospheric-scene:after{left:0;top:0;bottom:auto;right:auto;width:32%;height:1.1cqw;background:linear-gradient(90deg,var(--g),var(--y));clip-path:polygon(0 0,100% 0,94% 100%,0 100%);z-index:5}
+.friends-family{display:grid;gap:.9cqw}
+.personal-steps>div,.training-scene .journey-card{background:rgba(5,12,8,.66);border-color:rgba(126,154,112,.34);box-shadow:none}
+.training-scene .journey-card strong{font-size:2.2cqw;line-height:1.2}.training-scene .journey-card{padding:2.2cqw 1.7cqw}
+.training-scene .journey{margin-top:3cqw}
+.team-line{margin-top:2cqw}
+.closing-number{opacity:.10;color:var(--g)}
+[data-cue]{transition:opacity .45s ease;transform:none}
+@media(max-width:700px) and (orientation:portrait){
+ .friends-family{gap:8px}
+ .scene.photo-scene .scene-photo:after{background:linear-gradient(180deg,rgba(3,10,7,.94),rgba(3,10,7,.85) 45%,rgba(3,10,7,.55))}
+ .scene.atmospheric-scene .scene-photo img{height:100%;object-position:65% center}
+ .scene.atmospheric-scene .scene-photo:after{background:linear-gradient(180deg,rgba(3,10,7,.90),rgba(3,10,7,.78))}
+ .scene.atmospheric-scene:after{height:6px}
+ .training-scene .journey-card strong{font-size:18px}.training-scene .journey-card{padding:20px 15px}
+ .training-scene .journey{margin-top:22px}.team-line{margin-top:22px}
+}
+
+
+/* Slide 2 uses the approved subdued photographic treatment and small text packets. */
+.s2-copy{width:62%;position:relative;z-index:4}
+#slide2 h2{font-size:5.2cqw;line-height:1.05}
+#slide2 p{font-size:2.1cqw;line-height:1.35;margin-top:2.4cqw}
+.s2-support{font-size:2.5cqw;font-weight:800;line-height:1.35;margin-top:3cqw;color:#edf3e9}
+.s2-support strong{color:var(--y)}
+#slide2 .hopes-scene h2{font-size:4.5cqw}
+.s2-habits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2cqw;margin-top:3cqw}
+.s2-habits>div{padding:2.3cqw 1.8cqw;border-top:.35cqw solid var(--g);background:rgba(3,12,7,.64);border-radius:.6cqw}
+.s2-habits>div:nth-child(2){border-color:#abd63e}.s2-habits>div:nth-child(3){border-color:var(--y)}
+.s2-habits strong{display:block;font-size:2.3cqw;margin-bottom:1cqw}.s2-habits span{font-size:1.8cqw;line-height:1.3;color:#e3ebde}
+@media(max-width:700px) and (orientation:portrait){
+ #slide2 .scene{justify-content:flex-start;padding:55px 22px 32px}
+ .s2-copy{width:100%}#slide2 h2,#slide2 .hopes-scene h2{font-size:34px;line-height:1.07}
+ #slide2 p{font-size:17px;margin-top:21px}.s2-support{font-size:21px;margin-top:25px}
+ #slide2 .scene-photo img{position:absolute;bottom:0;height:66%;object-position:76% center}
+ #slide2 .atmospheric-scene .scene-photo img{height:100%;object-position:65% center}
+ .s2-habits{grid-template-columns:1fr;gap:14px;margin-top:25px}
+ .s2-habits>div{padding:18px 15px;border-top-width:3px;border-radius:6px}
+ .s2-habits strong{font-size:21px;margin-bottom:7px}.s2-habits span{font-size:17px}
+}
+
+
+/* Slide 3: varied guest and readiness visuals, coordinated communication. */
+.s3-copy{width:63%;position:relative;z-index:4}
+#slide3 h2{font-size:4.9cqw;line-height:1.05}
+.s3-support{font-size:2.4cqw;font-weight:800;line-height:1.35;margin-top:2.6cqw;color:#edf3e9}
+.s3-note{font-size:1.9cqw;line-height:1.35;color:#dce9d5;font-weight:700;margin-top:2.4cqw}
+.s3-team{display:flex;flex-wrap:wrap;gap:1.2cqw;margin-top:3cqw;max-width:90%}
+.s3-team span{padding:1.4cqw 1.7cqw;background:rgba(3,12,7,.64);border-left:.35cqw solid var(--g);font-size:1.9cqw;font-weight:800;border-radius:.4cqw}
+.s3-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.8cqw;margin-top:2.7cqw}
+.s3-flow>div{padding:1.5cqw;background:rgba(3,12,7,.7);border-top:.35cqw solid var(--g);border-radius:.6cqw}
+.s3-flow>div:nth-child(2){border-color:#abd63e}.s3-flow>div:nth-child(3){border-color:var(--y)}
+.s3-flow span{display:block;color:var(--g);font-size:2.2cqw;font-weight:900;margin-bottom:.9cqw}
+.s3-flow strong{display:block;font-size:2.1cqw;line-height:1.18}
+.s3-flow small{display:block;font-size:1.45cqw;line-height:1.35;color:#dce9d5;margin-top:1.1cqw}
+#slide3 .followthrough-scene h2{font-size:5cqw}.followthrough-scene .s3-support{font-size:2.1cqw}
+@media(max-width:700px) and (orientation:portrait){
+ #slide3 .scene{justify-content:flex-start;padding:55px 22px 32px}
+ .s3-copy{width:100%}#slide3 h2,#slide3 .followthrough-scene h2{font-size:34px;line-height:1.07}
+ .s3-support,.followthrough-scene .s3-support{font-size:20px;margin-top:24px}.s3-note{font-size:16px;margin-top:23px}
+ #slide3 .scene-photo img{position:absolute;bottom:0;height:66%;object-position:76% center}
+ #slide3 .atmospheric-scene .scene-photo img{height:100%;object-position:65% center}
+ .s3-team{gap:12px;max-width:100%;margin-top:25px}.s3-team span{padding:13px 15px;font-size:18px;border-left-width:3px;border-radius:4px}
+ .s3-flow{grid-template-columns:1fr;gap:11px;margin-top:22px}.s3-flow>div{padding:13px 14px 13px 48px;border-top-width:3px;position:relative;border-radius:6px}
+ .s3-flow span{position:absolute;left:13px;top:14px;font-size:19px;margin:0}.s3-flow strong{font-size:18px}.s3-flow strong br{display:none}.s3-flow small{font-size:14px;margin-top:8px}
+}
+
+
+/* Slide 4: two guest perspectives, grouped phrases and distinct activity imagery. */
+.s4-copy{width:65%;position:relative;z-index:4}
+#slide4 h2{font-size:4.8cqw;line-height:1.05}
+#slide4 p{font-size:2.1cqw;line-height:1.35;margin-top:2.3cqw}
+.s4-support{font-size:2.4cqw;font-weight:800;line-height:1.35;margin-top:2.8cqw;color:#edf3e9}
+.s4-note{font-size:1.9cqw;line-height:1.35;color:#dce9d5;font-weight:700;margin-top:2.5cqw}
+.s4-pair{display:grid;grid-template-columns:1fr 1fr;gap:2cqw;max-width:80%;margin-top:3cqw}
+.s4-pair>div{padding:2cqw;background:rgba(3,12,7,.65);border-top:.35cqw solid var(--g);border-radius:.6cqw}
+.s4-pair>div:nth-child(2){border-color:var(--y)}.s4-pair strong{font-size:2.5cqw}
+.s4-examples{display:grid;gap:1.7cqw;margin-top:2.5cqw;max-width:95%}
+.s4-example{display:grid;grid-template-columns:1fr 1fr;gap:2cqw;padding:1.7cqw 2cqw;background:rgba(3,12,7,.7);border-left:.35cqw solid var(--g);border-radius:.6cqw}
+.s4-example:nth-child(2){border-color:var(--y)}.s4-example strong{display:block;font-size:1.7cqw;color:var(--g);margin-bottom:.7cqw}.s4-example span{font-size:2.1cqw;font-weight:700;line-height:1.25}
+.s4-questions{display:grid;gap:1.8cqw;margin-top:2.8cqw}.s4-questions strong{display:block;font-size:1.5cqw;color:var(--g);margin-bottom:.5cqw}.s4-questions span{font-size:2.2cqw;line-height:1.25;font-weight:800}
+#slide4 .check-both-scene h2{font-size:4.5cqw}
+@media(max-width:700px) and (orientation:portrait){
+ #slide4 .scene{justify-content:flex-start;padding:55px 22px 32px}.s4-copy{width:100%}
+ #slide4 h2,#slide4 .check-both-scene h2{font-size:34px;line-height:1.07}#slide4 p{font-size:17px;margin-top:20px}
+ .s4-support{font-size:20px;margin-top:24px}.s4-note{font-size:16px;margin-top:23px}
+ #slide4 .scene-photo img{position:absolute;bottom:0;height:66%;object-position:76% center}
+ #slide4 .atmospheric-scene .scene-photo img{height:100%;object-position:65% center}
+ .s4-pair{grid-template-columns:1fr;max-width:100%;gap:16px;margin-top:25px}.s4-pair>div{padding:20px 15px;border-top-width:3px;border-radius:6px}.s4-pair strong{font-size:22px}
+ .s4-examples{gap:16px;margin-top:24px;max-width:100%}.s4-example{grid-template-columns:1fr;gap:15px;padding:15px;border-left-width:3px;border-radius:6px}
+ .s4-example strong{font-size:15px;margin-bottom:5px}.s4-example span{font-size:18px}
+ .s4-questions{gap:22px;margin-top:26px}.s4-questions strong{font-size:15px;margin-bottom:6px}.s4-questions span{font-size:21px}
+}
+
+
+/* Slide 5: connection, personality and a genuine Launch Airtrack example. */
+.s5-copy{width:65%;position:relative;z-index:4}
+#slide5 h2{font-size:4.8cqw;line-height:1.05}
+.s5-support{font-size:2.2cqw;font-weight:800;line-height:1.35;margin-top:2.5cqw;color:#edf3e9}
+.s5-question{font-size:2.7cqw;font-weight:800;line-height:1.25;color:#fff;margin-top:2.5cqw}
+.s5-note{font-size:1.85cqw;line-height:1.35;color:#dce9d5;font-weight:700;margin-top:2cqw}
+.s5-keypoints{font-size:2.1cqw;line-height:1.5}
+.s5-result{font-size:2.6cqw;line-height:1.25;font-weight:900;color:var(--y);margin-top:2.5cqw}
+#slide5 .remember-detail-scene h2{font-size:4.1cqw}
+@media(max-width:700px) and (orientation:portrait){
+ #slide5 .scene{justify-content:flex-start;padding:55px 22px 32px}.s5-copy{width:100%}
+ #slide5 h2{font-size:33px;line-height:1.07}#slide5 .remember-detail-scene h2{font-size:30px}
+ .s5-support{font-size:19px;margin-top:23px}.s5-question{font-size:23px;margin-top:24px}
+ .s5-note{font-size:16px;margin-top:20px}.s5-keypoints{font-size:18px;line-height:1.5}
+ .s5-result{font-size:23px;margin-top:24px}
+ #slide5 .scene-photo img{position:absolute;bottom:0;height:66%;object-position:76% center}
+ #slide5 .remember-detail-scene .scene-photo img{object-position:61% center}
+}
+
+
+/* Slide 6: team roles and a single coordinated route to the kitchen. */
+.s6-copy{width:66%;position:relative;z-index:4}
+#slide6 h2{font-size:4.8cqw;line-height:1.05}
+.s6-support{font-size:2.4cqw;font-weight:800;line-height:1.35;margin-top:2.8cqw;color:#edf3e9}
+.s6-note{font-size:2cqw;line-height:1.35;color:#dce9d5;font-weight:700;margin-top:2.5cqw}
+.s6-result{font-size:3.2cqw;line-height:1.2;font-weight:900;color:var(--y);margin-top:3cqw}
+.s6-team-pair{display:grid;grid-template-columns:1fr 1fr;gap:2cqw;margin-top:3cqw;max-width:85%}
+.s6-team-pair>div{padding:2cqw;background:rgba(3,12,7,.66);border-top:.35cqw solid var(--g);border-radius:.6cqw}
+.s6-team-pair>div:nth-child(2){border-color:var(--y)}.s6-team-pair strong{display:block;font-size:2.5cqw;margin-bottom:1cqw}.s6-team-pair span{font-size:2cqw;line-height:1.3}
+#slide6 .kitchen-route-scene h2{font-size:4.1cqw;max-width:100%}
+.s6-route{display:grid;grid-template-columns:1fr 3.5cqw 1fr 3.5cqw 1fr;gap:1cqw;align-items:center;margin-top:3cqw}
+.s6-route>div{padding:1.8cqw 1.4cqw;background:rgba(3,12,7,.74);border-top:.35cqw solid var(--g);border-radius:.6cqw;min-height:10cqw}
+.s6-route>div:nth-of-type(2){border-color:var(--y)}.s6-route strong{display:block;font-size:2cqw;line-height:1.2;margin-bottom:1cqw}.s6-route span{font-size:1.65cqw;line-height:1.3;color:#dce9d5}
+.s6-route svg{width:3.5cqw;height:3.5cqw;fill:none;stroke:var(--g);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.s6-tasks{display:grid;grid-template-columns:1fr 1fr;gap:1.2cqw;margin-top:3cqw;max-width:86%}
+.s6-tasks span{padding:1.3cqw 1.5cqw;font-size:2cqw;font-weight:800;background:rgba(3,12,7,.7);border-left:.3cqw solid var(--g);border-radius:.4cqw}
+@media(max-width:700px) and (orientation:portrait){
+ #slide6 .scene{justify-content:flex-start;padding:55px 22px 32px}.s6-copy{width:100%}
+ #slide6 h2{font-size:33px;line-height:1.07}#slide6 .kitchen-route-scene h2{font-size:29px}
+ .s6-support{font-size:20px;margin-top:24px}.s6-note{font-size:17px;margin-top:23px}.s6-result{font-size:26px;margin-top:30px}
+ #slide6 .scene-photo img{position:absolute;bottom:0;height:66%;object-position:76% center}
+ #slide6 .atmospheric-scene .scene-photo img{height:100%;object-position:65% center}
+ .s6-team-pair{grid-template-columns:1fr;max-width:100%;gap:18px;margin-top:28px}.s6-team-pair>div{padding:20px 15px;border-top-width:3px;border-radius:6px}.s6-team-pair strong{font-size:24px;margin-bottom:10px}.s6-team-pair span{font-size:19px}
+ .s6-route{grid-template-columns:1fr;gap:7px;margin-top:22px}.s6-route>div{padding:11px 14px;min-height:0;border-top-width:3px;border-radius:6px}.s6-route strong{font-size:18px;margin-bottom:5px}.s6-route span{font-size:15px}.s6-route svg{width:18px;height:18px;justify-self:center;transform:rotate(90deg)}
+ .kitchen-route-scene .s6-note{font-size:16px;margin-top:18px}
+ .s6-tasks{gap:12px;max-width:100%;margin-top:25px}.s6-tasks span{padding:15px;font-size:18px;border-left-width:3px;border-radius:4px}
+}
+
+
+/* Slide 7: airport metaphor, controlled routes and audio-clock flight motion. */
+#slide7 .s7-defs{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
+.s7-copy{width:65%;position:relative;z-index:4}#slide7 h2{font-size:4.7cqw;line-height:1.05}
+.s7-support{font-size:2.35cqw;font-weight:800;line-height:1.35;margin-top:2.7cqw;color:#edf3e9}
+.s7-note{font-size:2cqw;line-height:1.35;color:#dce9d5;font-weight:700;margin-top:2.4cqw}
+.s7-warning{font-size:2.1cqw;line-height:1.3;font-weight:800;color:#ffd56b;margin-top:2.5cqw}
+.s7-party-stages{display:flex;gap:1cqw;flex-wrap:wrap;margin-top:3cqw}.s7-party-stages span{font-size:1.7cqw;padding:1.2cqw 1.5cqw;border-bottom:.25cqw solid var(--g);background:rgba(3,12,7,.6);border-radius:.4cqw}
+.s7-flight-grid{position:absolute;right:5%;top:26%;width:26%;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5cqw;color:var(--g)}
+.plane-token{width:4.2cqw;height:4.8cqw;transform:rotate(35deg);filter:drop-shadow(0 2px 4px #000)}
+.s7-conflict-copy{width:55%}#slide7 .conflict-airport-scene h2{font-size:4.3cqw}
+.s7-conflict-graphic{position:absolute;right:3%;top:27%;width:41%;height:45%;background:rgba(3,12,7,.56);border-radius:1cqw}
+.s7-conflict-graphic>svg{display:block;width:100%;height:100%;overflow:visible}
+.flight-route{fill:none;stroke:#ffbf61;stroke-width:5;stroke-dasharray:10 10}.route-b{stroke:#f28b7a}
+.s7-aircraft{color:var(--y)}.s7-aircraft.second{color:#97df76}.s7-conflict-point circle{fill:#43221b;stroke:#ffa589;stroke-width:3}.s7-conflict-point path{stroke:#ffd56b;stroke-width:5;stroke-linecap:round;fill:none}
+.s7-consequences{display:grid;grid-template-columns:1fr 1fr;gap:2cqw;margin-top:2.4cqw;max-width:90%}
+.s7-consequences>div{padding:1.8cqw;background:rgba(3,12,7,.7);border-left:.3cqw solid #e7bf62;border-radius:.6cqw}.s7-consequences strong{display:block;font-size:2.5cqw;margin-bottom:.8cqw}.s7-consequences span{font-size:2cqw;line-height:1.3}
+.s7-route{display:grid;grid-template-columns:1fr 3.5cqw 1fr 3.5cqw 1fr;gap:1cqw;align-items:center;margin-top:2.4cqw}
+.s7-route>div{padding:1.6cqw 1.4cqw;background:rgba(3,12,7,.76);border-top:.35cqw solid var(--g);border-radius:.6cqw;min-height:9cqw}.s7-route>div:nth-of-type(2){border-color:var(--y)}
+.s7-route strong{display:block;font-size:2cqw;line-height:1.2;margin-bottom:.9cqw}.s7-route span{font-size:1.6cqw;line-height:1.3;color:#dce9d5}.s7-route svg{width:3.5cqw;height:3.5cqw;fill:none;stroke:var(--g);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.s7-report-packet{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6cqw;margin-top:3cqw}.s7-report-packet span{padding:1.8cqw 1.5cqw;background:rgba(3,12,7,.72);border-top:.3cqw solid var(--g);font-size:2.2cqw;font-weight:800;line-height:1.25;border-radius:.6cqw}
+.s7-closing-pair{display:grid;grid-template-columns:1fr 1fr;gap:2cqw;margin-top:3cqw;max-width:95%}.s7-closing-pair>div{padding:2cqw;background:rgba(3,12,7,.72);border-top:.35cqw solid var(--g);border-radius:.6cqw}.s7-closing-pair>div:nth-child(2){border-color:var(--y)}.s7-closing-pair strong{display:block;font-size:2.3cqw;margin-bottom:1cqw}.s7-closing-pair span{font-size:2.1cqw;line-height:1.3}
+@media(max-width:700px) and (orientation:portrait){
+ #slide7 .scene{justify-content:flex-start;padding:55px 22px 32px}.s7-copy,.s7-conflict-copy{width:100%}#slide7 h2,#slide7 .conflict-airport-scene h2{font-size:32px;line-height:1.07}
+ .s7-support{font-size:19px;margin-top:23px}.s7-note{font-size:17px;margin-top:22px}.s7-warning{font-size:18px;margin-top:21px}
+ #slide7 .scene-photo img{position:absolute;bottom:0;height:66%;object-position:70% center}#slide7 .atmospheric-scene .scene-photo img{height:100%;object-position:65% center}
+ .s7-party-stages{gap:10px;margin-top:25px}.s7-party-stages span{font-size:15px;padding:11px 12px;border-bottom-width:3px;border-radius:4px}
+ .s7-flight-grid{right:22px;left:22px;top:auto;bottom:63px;width:auto;gap:17px;grid-template-columns:repeat(6,1fr)}.plane-token{width:32px;height:38px}
+ .s7-conflict-graphic{right:22px;left:22px;top:auto;bottom:38px;width:auto;height:210px;border-radius:8px}
+ .s7-consequences{grid-template-columns:1fr;max-width:100%;gap:15px;margin-top:24px}.s7-consequences>div{padding:15px;border-left-width:3px;border-radius:6px}.s7-consequences strong{font-size:22px;margin-bottom:8px}.s7-consequences span{font-size:18px}
+ .s7-route{grid-template-columns:1fr;gap:7px;margin-top:23px}.s7-route>div{padding:11px 14px;min-height:0;border-top-width:3px;border-radius:6px}.s7-route strong{font-size:18px;margin-bottom:5px}.s7-route span{font-size:15px}.s7-route svg{width:18px;height:18px;justify-self:center;transform:rotate(90deg)}
+ .s7-report-packet{grid-template-columns:1fr;gap:14px;margin-top:25px}.s7-report-packet span{padding:16px;font-size:20px;border-top-width:3px;border-radius:6px}
+ .s7-closing-pair{grid-template-columns:1fr;max-width:100%;gap:20px;margin-top:28px}.s7-closing-pair>div{padding:20px 15px;border-top-width:3px;border-radius:6px}.s7-closing-pair strong{font-size:22px;margin-bottom:11px}.s7-closing-pair span{font-size:20px}
+}
+
+
+/* Slide 8: local knowledge and complete question/answer packets. */
+.s8-copy{width:66%;position:relative;z-index:4}#slide8 h2{font-size:4.7cqw;line-height:1.05}
+.s8-support{font-size:2.3cqw;font-weight:800;line-height:1.35;margin-top:2.8cqw;color:#edf3e9}
+.s8-note{font-size:2cqw;font-weight:700;line-height:1.35;color:#dce9d5;margin-top:2.5cqw}
+.s8-qualifier{font-size:1.9cqw;color:#dce9d5;font-weight:700}
+.s8-locations{display:grid;grid-template-columns:1fr 1fr;gap:1.4cqw;margin-top:3cqw;max-width:95%}
+.s8-locations span{font-size:2cqw;font-weight:800;padding:1.2cqw 1.5cqw;background:rgba(3,12,7,.68);border-left:.3cqw solid var(--g);border-radius:.4cqw}
+.s8-question-stage{position:relative;min-height:17cqw;margin-top:3cqw}
+.s8-question-packet,.s8-response-packet{position:absolute;top:0;left:0;right:0}
+#slide8 .s8-question-packet p{font-size:2.2cqw;font-weight:800;line-height:1.35;margin:0 0 1.6cqw;color:#fff}
+.s8-response-packet>strong{display:block;font-size:3.4cqw;line-height:1.2;color:var(--y)}
+.s8-result{font-size:2.7cqw;line-height:1.25;font-weight:900;color:var(--y);margin-top:2.7cqw}
+@media(max-width:700px) and (orientation:portrait){
+ #slide8 .scene{justify-content:flex-start;padding:55px 22px 32px}.s8-copy{width:100%}#slide8 h2{font-size:32px;line-height:1.07}
+ .s8-support{font-size:20px;margin-top:24px}.s8-note{font-size:18px;margin-top:23px}.s8-qualifier{font-size:17px}
+ #slide8 .scene-photo img{position:absolute;bottom:0;height:66%;object-position:76% center}#slide8 .trainer-tour-scene .scene-photo img{object-position:65% center}
+ .s8-locations{gap:12px;max-width:100%;margin-top:25px}.s8-locations span{padding:13px 12px;font-size:17px;border-left-width:3px;border-radius:4px}
+ .s8-question-stage{min-height:235px;margin-top:28px}#slide8 .s8-question-packet p{font-size:21px;margin-bottom:22px}.s8-response-packet>strong{font-size:29px}
+ .s8-result{font-size:24px;margin-top:25px}
+}
+
+
+/* Slide 9: readable source excerpts and narration-led report highlights. */
+#slide9 h2{font-size:4.5cqw;line-height:1.08}.s9-copy{position:relative;z-index:4;width:72%}.s9-wide{width:100%;position:relative;z-index:4}
+.s9-support{font-size:2.35cqw;font-weight:800;line-height:1.4;margin-top:2.7cqw}.s9-note{font-size:1.9cqw;line-height:1.4;font-weight:700;margin-top:2cqw;color:#e2eadd}.s9-result{font-size:2.35cqw;line-height:1.4;font-weight:900;color:var(--y);margin-top:2.5cqw}
+.s9-flow{display:flex;gap:2cqw;margin-top:4cqw}.s9-flow span{border-bottom:.35cqw solid var(--g);padding:1cqw 1.6cqw;font-size:2.4cqw;font-weight:800}
+.s9-report-title{margin-top:2.3cqw;border-left:.4cqw solid var(--g);padding-left:1.7cqw}.s9-report-title span{display:block;font-size:1.6cqw;color:#d1dfcb;margin-bottom:.7cqw}.s9-report-title strong{font-size:2.9cqw;line-height:1.15;display:block}
+.s9-booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:3cqw;margin-top:3cqw}.s9-booking strong{display:block;font-size:2.6cqw;color:var(--y);margin-bottom:1.2cqw}.s9-booking .s9-report{max-width:100%;width:100%}.s9-booking:last-child .s9-report{width:58%}
+.s9-report{position:relative;background:white;padding:1cqw;border-radius:.6cqw;box-shadow:0 12px 30px #0006;overflow:hidden}.s9-report img{width:100%;height:auto;display:block}.s9-split{display:grid;grid-template-columns:1.1fr 1fr;gap:4cqw;align-items:center;width:100%;position:relative;z-index:4}.s9-split h2{font-size:4cqw!important}
+.s9-times{display:grid;grid-template-columns:1fr 1fr;gap:1.7cqw;margin-top:2.5cqw}.s9-time span{display:block;font-size:1.5cqw;color:#e1e8de;margin-bottom:.4cqw}.s9-time strong{font-size:2.5cqw;color:var(--y)}.s9-source-stack{display:grid;gap:2cqw}.s9-source-stack>div:first-child{width:65%;margin-left:auto}.s9-table-label{display:block;font-size:2.4cqw;color:var(--y);margin-bottom:1cqw}
+.s9-definition{display:flex;gap:1.5cqw;align-items:center;margin-top:2.6cqw}.s9-definition b{font-size:3.2cqw;color:var(--y);width:7cqw;flex-shrink:0}.s9-definition span{font-size:2cqw;line-height:1.25;max-width:18cqw}.s9-item-source{width:84%;margin-left:auto}
+.s9-highlight{position:absolute;border:3px solid #62a62e;background:#9be75b25;transform:none!important;pointer-events:none;border-radius:3px}.s9-highlight.add-highlight{border-color:#c7aa00;background:#ffe10033}
+.inc-highlight{left:2.5%;right:2.5%;top:17.5%;height:47.5%}.add-highlight{left:2.5%;right:2.5%;top:89%;height:9%}
+.pizza-highlight{left:2%;right:2%;top:49.5%;height:47%}.drink-highlight{left:2%;right:2%;top:19.5%;height:31%}.shirt-highlight{left:2%;right:2%;top:3.5%;height:17%}
+.s9-extra-source{max-width:56%;margin-top:2.5cqw}.s9-equation{display:flex;align-items:center;gap:3cqw;margin-top:3cqw}.s9-equation div{min-width:10cqw;text-align:center}.s9-equation strong{display:block;font-size:6cqw;line-height:1;color:#fff}.s9-equation span{display:block;font-size:1.7cqw;margin-top:.7cqw}.s9-equation>b{font-size:3.6cqw;color:var(--g)}.s9-equation .s9-total strong,.s9-equation .s9-total span{color:var(--y)}
+@media(max-width:700px) and (orientation:portrait){
+ #slide9 .scene{justify-content:flex-start;padding:48px 22px 28px}#slide9 h2{font-size:31px;line-height:1.08}.s9-copy{width:100%}.s9-support{font-size:20px;margin-top:24px}.s9-note{font-size:17px;margin-top:19px}.s9-result{font-size:20px;margin-top:22px}
+ #slide9 .scene-photo img{position:absolute;bottom:0;height:65%;object-position:75% center}.s9-flow{gap:9px;margin-top:28px}.s9-flow span{font-size:18px;padding:10px 9px;border-bottom-width:3px}
+ .s9-report-title{margin-top:23px;border-left-width:4px;padding-left:15px}.s9-report-title span{font-size:15px;margin-bottom:8px}.s9-report-title strong{font-size:25px}
+ .s9-booking-grid{grid-template-columns:1fr;gap:23px;margin-top:24px}.s9-booking strong{font-size:22px;margin-bottom:10px}.s9-booking:last-child .s9-report{width:62%}.s9-report{padding:8px;border-radius:6px}
+ .s9-split{grid-template-columns:1fr;gap:22px;align-items:start}.s9-split h2{font-size:29px!important}.s9-times{gap:15px;margin-top:20px}.s9-time span{font-size:15px;margin-bottom:4px}.s9-time strong{font-size:22px}.s9-source-stack{display:grid;grid-template-columns:1fr 1.15fr;gap:15px;align-items:center}.s9-source-stack>div:first-child{width:100%;margin:0}.s9-table-label{font-size:19px;margin-bottom:10px}
+ .s9-definition{margin-top:16px;gap:12px}.s9-definition b{font-size:27px;width:54px}.s9-definition span{font-size:18px;max-width:220px}.s9-item-source{width:84%;margin:auto}.s9-highlight{border-width:2px}
+ .s9-extra-source{max-width:100%;margin-top:25px}.s9-equation{gap:12px;margin-top:33px}.s9-equation div{min-width:64px}.s9-equation strong{font-size:55px}.s9-equation span{font-size:14px;margin-top:8px}.s9-equation>b{font-size:28px}
+}
+
+
+/* Keep the complete first party and its original field locations visible. */
+#slide9 .v19-report-scene{padding:0;justify-content:initial}.v19-sheet{position:absolute!important;left:4cqw;top:4.2cqw;width:66cqw;background:#fff;z-index:4!important;line-height:0;box-shadow:0 10px 30px #0008;border-radius:4px;overflow:hidden}.v19-sheet>img{display:block;width:100%;height:auto}
+.v19-highlight{position:absolute;border:3px solid #b48e00;background:rgba(255,224,0,.22);border-radius:3px;transform:none!important;box-shadow:0 0 0 1px #fff7}
+.v19-caption{position:absolute!important;left:73cqw;right:3cqw;top:12cqw;bottom:9cqw;z-index:4!important}.v19-packet{position:absolute;inset:0}#slide9 .v19-caption h2{font-size:2.5cqw;line-height:1.12;letter-spacing:-.04cqw}.v19-caption .eyebrow{font-size:.95cqw;letter-spacing:.1cqw;line-height:1.4;margin-bottom:1.3cqw}.v19-note{font-size:1.65cqw;font-weight:800;line-height:1.4;margin-top:2cqw}.v19-note strong{color:var(--y)}.v19-small{font-size:1.3cqw;line-height:1.4;margin-top:1.6cqw;color:#e2eade;font-weight:700}.v19-sum{font-size:2.6cqw}.v19-packet:nth-child(3)>.v19-note,.v19-packet:nth-child(4)>.v19-note,.v19-packet:nth-child(5)>.v19-note{position:absolute;top:9.5cqw;left:0;right:0;margin-top:0}
+.v19-enlarge{position:absolute!important;left:73cqw;bottom:6cqw;z-index:8!important;background:#19271b;color:#fff;border:1px solid #76aa63;padding:.9cqw 1.1cqw;border-radius:30px;font-size:1.25cqw;font-weight:800;cursor:pointer;pointer-events:auto}
+.v19-viewer{width:min(96vw,1200px);max-width:96vw;max-height:94vh;background:#101a12;color:white;border:1px solid #73906c;border-radius:14px;padding:14px}.v19-viewer::backdrop{background:#000d}.v19-viewer-bar{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:12px;font-size:16px;line-height:1.3}.v19-viewer-bar button{background:var(--g);color:#071007;border:0;border-radius:24px;padding:9px 17px;font-size:16px;font-weight:bold;cursor:pointer}.v19-viewer-scroll{max-height:78vh;overflow:auto}.v19-viewer .v19-sheet{position:relative!important;left:0;top:0;width:1100px;max-width:none;margin:0}.v19-viewer [data-cue]{transition:none}.v19-viewer .v19-sheet .v19-highlight{border-width:3px}
+@media(max-width:700px) and (orientation:portrait){
+ #slide9 .v19-report-scene{padding:0}.v19-sheet{left:14px;top:46px;width:calc(100% - 28px)}.v19-caption{left:24px;right:24px;top:320px;bottom:60px}#slide9 .v19-caption h2{font-size:27px;letter-spacing:-.5px}.v19-caption .eyebrow{font-size:11px;letter-spacing:1px;margin-bottom:9px}.v19-note{font-size:20px;margin-top:16px}.v19-small{font-size:16px;margin-top:13px}.v19-sum{font-size:30px}.v19-packet:nth-child(3)>.v19-note,.v19-packet:nth-child(4)>.v19-note,.v19-packet:nth-child(5)>.v19-note{top:104px}.v19-enlarge{left:auto;right:23px;bottom:23px;font-size:14px;padding:10px 14px}.v19-highlight{border-width:1.5px}.v19-viewer-bar{font-size:14px}.v19-packet:nth-child(7)>.v19-note{font-size:18px;margin-top:14px}.v19-packet:nth-child(7)>.v19-small{font-size:15px;margin-top:10px}
+}
+
+
+/* Rule of Five: complete phrase packets and distinct photographic scenes. */
+.s10-copy{position:relative;z-index:4;width:76%}#slide10 h2{font-size:4.7cqw;line-height:1.07}.s10-support{font-size:2.3cqw;line-height:1.4;font-weight:800;margin-top:3cqw;color:#f1f4ef}.s10-result{font-size:2.5cqw;line-height:1.3;font-weight:900;color:var(--y);margin-top:2.7cqw}.s10-note{font-size:1.9cqw;line-height:1.4;font-weight:700;margin-top:2.3cqw;color:#e2eadd}
+.s10-reminders{display:flex;gap:1.2cqw;flex-wrap:wrap;margin-top:3.8cqw;max-width:68cqw}.s10-reminders span{font-size:1.8cqw;font-weight:900;border-left:.3cqw solid var(--g);background:rgba(4,14,7,.7);padding:1cqw 1.3cqw;border-radius:.4cqw}.s10-questions{font-size:2.4cqw;line-height:1.75;font-weight:800;margin-top:2.6cqw}.s10-stars{font-size:4cqw;letter-spacing:.6cqw;line-height:1.2;color:var(--y);margin-top:2cqw}.s10-recap{font-size:2.8cqw;line-height:1.5;font-weight:900;margin-top:2.5cqw;color:#f1f6ed}
+@media(max-width:700px) and (orientation:portrait){
+ #slide10 .scene{justify-content:flex-start;padding:55px 22px 30px}.s10-copy{width:100%}#slide10 h2{font-size:32px;line-height:1.08}.s10-support{font-size:20px;line-height:1.4;margin-top:26px}.s10-result{font-size:23px;margin-top:24px}.s10-note{font-size:17px;margin-top:22px}.s10-reminders{gap:12px;max-width:100%;margin-top:30px}.s10-reminders span{font-size:18px;padding:12px 14px;border-left-width:3px;border-radius:4px}.s10-questions{font-size:20px;line-height:1.65;margin-top:28px}.s10-stars{font-size:33px;letter-spacing:4px;margin-top:25px}.s10-recap{font-size:24px;line-height:1.55;margin-top:27px}
+ #slide10 .scene-photo img{position:absolute;bottom:0;height:66%;object-position:70% center}
+}
+
+
+/* Closing repeats the exact five rule names; each action is one phrase packet. */
+.s10-close .s10-copy{width:100%}#slide10 .s10-close h2{font-size:3.9cqw;line-height:1.1}.s10-rules{display:grid;gap:.7cqw;margin-top:2.2cqw;max-width:83cqw}.s10-rule{position:relative;display:grid;grid-template-columns:22cqw 1fr;align-items:center;gap:1.8cqw;min-height:4.5cqw;padding:.9cqw 1.5cqw;border-left:.35cqw solid var(--g);background:rgba(3,11,6,.78);border-radius:.4cqw}.s10-rule>strong,.s10-rule>span{position:relative;z-index:1}.s10-rule>strong{font-size:2cqw;line-height:1.15;color:#fff}.s10-rule>span{font-size:1.65cqw;line-height:1.25;font-weight:800;color:#e7eddf}.s10-rule-focus{position:absolute;inset:0;z-index:0;border:2px solid var(--y);border-radius:.4cqw;background:rgba(242,230,0,.07);transform:none!important;pointer-events:none}.s10-goal{font-size:2cqw;font-weight:900;color:var(--y);margin-top:1.7cqw;line-height:1.25}
+@media(max-width:700px) and (orientation:portrait){
+ #slide10 .s10-close{padding:48px 22px 25px}#slide10 .s10-close h2{font-size:28px}.s10-rules{gap:9px;max-width:100%;margin-top:21px}.s10-rule{grid-template-columns:1fr;gap:5px;min-height:62px;padding:9px 12px;border-left-width:3px;border-radius:4px}.s10-rule>strong{font-size:19px}.s10-rule>span{font-size:15px;line-height:1.3}.s10-rule-focus{border-radius:4px}.s10-goal{font-size:19px;margin-top:17px}
+}
+
+
+/* Slide 11: useful presence, confirmed room access, and scheduled activities. */
+.s11-copy{position:relative;z-index:4;width:76%}#slide11 h2{font-size:4.7cqw;line-height:1.07}.s11-support{font-size:2.3cqw;line-height:1.4;font-weight:800;margin-top:2.8cqw;color:#f1f4ef}.s11-result{font-size:2.45cqw;line-height:1.35;font-weight:900;color:var(--y);margin-top:2.6cqw}.s11-note{font-size:1.9cqw;line-height:1.4;font-weight:700;margin-top:2.2cqw;color:#e2eadd}.s11-arrangements{display:grid;grid-template-columns:1fr 1fr;gap:1.5cqw;margin-top:2.5cqw}.s11-arrangements>div{padding:1.5cqw;border-left:.3cqw solid var(--g);border-radius:.5cqw;background:rgba(3,12,6,.75)}.s11-arrangements strong{display:block;font-size:1.9cqw;line-height:1.25;color:var(--y);margin-bottom:.8cqw}.s11-arrangements span{font-size:1.65cqw;line-height:1.35;display:block}
+@media(max-width:700px) and (orientation:portrait){
+ #slide11 .scene{justify-content:flex-start;padding:55px 22px 30px}.s11-copy{width:100%}#slide11 h2{font-size:32px;line-height:1.08}.s11-support{font-size:20px;line-height:1.4;margin-top:25px}.s11-result{font-size:22px;margin-top:23px}.s11-note{font-size:17px;margin-top:21px}.s11-arrangements{grid-template-columns:1fr;gap:13px;margin-top:23px}.s11-arrangements>div{padding:15px;border-left-width:3px;border-radius:5px}.s11-arrangements strong{font-size:18px;margin-bottom:8px}.s11-arrangements span{font-size:16px}
+ #slide11 .scene-photo img{position:absolute;bottom:0;height:66%;object-position:70% center}
+}
+
+
+/* Slide 12: concise requests, complete examples, and clear follow-through. */
+.s12-copy{position:relative;z-index:4;width:78%}#slide12 h2{font-size:4.6cqw;line-height:1.08}.s12-support{font-size:2.25cqw;line-height:1.4;font-weight:800;margin-top:2.8cqw}.s12-result{font-size:2.4cqw;line-height:1.35;font-weight:900;color:var(--y);margin-top:2.5cqw}.s12-note{font-size:1.9cqw;line-height:1.4;font-weight:700;margin-top:2.2cqw;color:#e2eadd}
+.s12-quote-stage{position:relative;min-height:16cqw;margin-top:3.3cqw}.s12-vague,.s12-answer{position:absolute;top:0;left:0;right:0;font-size:2.65cqw;line-height:1.4;font-weight:800}.s12-vague{color:#dce2d8}.s12-answer strong,.s12-message strong{color:var(--y)}
+.s12-chips{display:flex;gap:1.1cqw;flex-wrap:wrap;margin-top:2.8cqw}.s12-chips span{padding:1.1cqw 1.4cqw;border-left:.3cqw solid var(--g);font-size:2cqw;font-weight:900;background:rgba(3,12,6,.7);border-radius:.4cqw}
+.s12-flow{display:grid;grid-template-columns:1fr auto 1.6fr auto 1fr;align-items:center;gap:1.3cqw;margin-top:4cqw}.s12-flow>div{padding:1.5cqw 1cqw;text-align:center;border-top:.3cqw solid var(--g);background:rgba(3,12,6,.7);border-radius:.5cqw}.s12-flow strong{font-size:2.6cqw;line-height:1.15;display:block}.s12-flow>b{font-size:3cqw;color:var(--y)}
+.s12-message{font-size:2.2cqw;line-height:1.45;font-weight:800;margin-top:2.8cqw;padding-left:1.6cqw;border-left:.3cqw solid var(--g)}
+.s12-loop{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6cqw;margin-top:3cqw}.s12-loop>div{padding:1.5cqw;border-left:.3cqw solid var(--g);background:rgba(3,12,6,.75);border-radius:.5cqw}.s12-loop strong{display:block;color:var(--y);font-size:2.2cqw;line-height:1.15;margin-bottom:1cqw}.s12-loop span{display:block;font-size:1.7cqw;line-height:1.3;font-weight:700}.s12-recap{font-size:2.55cqw;line-height:1.6;font-weight:900;margin-top:2.8cqw}
+@media(max-width:700px) and (orientation:portrait){
+ #slide12 .scene{justify-content:flex-start;padding:55px 22px 30px}.s12-copy{width:100%}#slide12 h2{font-size:31px;line-height:1.08}.s12-support{font-size:20px;margin-top:25px}.s12-result{font-size:22px;margin-top:23px}.s12-note{font-size:17px;margin-top:21px}.s12-quote-stage{min-height:260px;margin-top:29px}.s12-vague,.s12-answer{font-size:24px;line-height:1.4}
+ .s12-chips{gap:10px;margin-top:24px}.s12-chips span{font-size:18px;padding:12px 14px;border-left-width:3px;border-radius:4px}.s12-flow{gap:7px;margin-top:25px;grid-template-columns:1fr}.s12-flow>div{padding:8px 12px;border-top-width:3px;border-radius:5px}.s12-flow strong{font-size:18px}.s12-flow>b{font-size:21px;line-height:1;text-align:center;transform:rotate(90deg)}.s12-message{font-size:19px;line-height:1.45;margin-top:24px;padding-left:14px;border-left-width:3px}
+ .s12-loop{grid-template-columns:1fr;gap:12px;margin-top:25px}.s12-loop>div{padding:13px 15px;border-left-width:3px;border-radius:5px}.s12-loop strong{font-size:21px;margin-bottom:7px}.s12-loop span{font-size:17px}.s12-recap{font-size:22px;line-height:1.55;margin-top:26px}
+ #slide12 .scene-photo img{position:absolute;bottom:0;height:66%;object-position:70% center}
+}
+
+
+/* Slide 13: readiness, safety awareness, role boundaries and local procedures. */
+.s13-copy{position:relative;z-index:4;width:80%}#slide13 h2{font-size:4.65cqw;line-height:1.08}.s13-support{font-size:2.3cqw;line-height:1.4;font-weight:800;margin-top:2.8cqw}.s13-note{font-size:1.9cqw;line-height:1.4;font-weight:700;color:#e2eadd;margin-top:2.2cqw}.s13-result{font-size:2.35cqw;line-height:1.35;font-weight:900;color:var(--y);margin-top:2.6cqw}.s13-chips{display:flex;gap:1.2cqw;flex-wrap:wrap;margin-top:2.7cqw}.s13-chips span{padding:1cqw 1.3cqw;border-left:.3cqw solid var(--g);background:rgba(3,12,6,.7);font-size:1.9cqw;font-weight:900;border-radius:.4cqw}.s13-recap{font-size:2.7cqw;line-height:1.55;font-weight:900;margin-top:2.8cqw}
+@media(max-width:700px) and (orientation:portrait){
+ #slide13 .scene{justify-content:flex-start;padding:55px 22px 30px}.s13-copy{width:100%}#slide13 h2{font-size:31px;line-height:1.08}.s13-support{font-size:20px;margin-top:25px}.s13-note{font-size:17px;margin-top:21px}.s13-result{font-size:21px;margin-top:23px}.s13-chips{gap:11px;margin-top:25px}.s13-chips span{font-size:17px;padding:11px 13px;border-left-width:3px;border-radius:4px}.s13-recap{font-size:23px;line-height:1.55;margin-top:26px}
+ #slide13 .scene-photo img{position:absolute;bottom:0;height:66%;object-position:70% center}
+}
+
+
+.s14-copy{position:relative;z-index:4;width:80%}#slide14 h2{font-size:4.6cqw;line-height:1.08}.s14-support{font-size:2.3cqw;line-height:1.4;font-weight:800;margin-top:2.8cqw}.s14-note{font-size:1.9cqw;line-height:1.4;font-weight:700;color:#e2eadd;margin-top:2.2cqw}.s14-result{font-size:2.4cqw;line-height:1.35;font-weight:900;color:var(--y);margin-top:2.6cqw}.s14-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1cqw;margin-top:2.8cqw}.s14-grid span{padding:1cqw 1.3cqw;border-left:.3cqw solid var(--g);background:rgba(3,12,6,.75);font-size:1.9cqw;font-weight:900;line-height:1.25;border-radius:.4cqw}.s14-team{margin-top:2.6cqw;border-left:.35cqw solid var(--g);padding-left:1.7cqw}.s14-team strong{display:block;font-size:2.7cqw;color:var(--y);margin-bottom:.8cqw}.s14-team span{display:block;font-size:2.1cqw;line-height:1.5;font-weight:800}.s14-recap{font-size:2.65cqw;line-height:1.55;font-weight:900;margin-top:2.7cqw}
+.s14-price-wrap{margin-top:2.7cqw;max-width:64cqw}.s14-price-preview{width:100%;border-collapse:collapse;background:rgba(3,12,6,.8)}.s14-price-preview th,.s14-price-preview td{padding:1cqw 1.3cqw;text-align:left;border-bottom:1px solid #6cc24a66;font-size:1.9cqw}.s14-price-preview thead th{font-size:1.25cqw;color:var(--g);text-transform:uppercase}.s14-price-preview tbody th{width:25%}.s14-price-preview td:last-child{width:25%}.s14-price-preview td:last-child i{min-width:0;width:calc(100% - 18px)}.s14-price-preview i{display:inline-block;min-width:75%;height:1.4cqw;border-bottom:1px solid #cfddc5}
+.s14-rule-scene .s14-copy{width:100%}#slide14 .s14-rule-scene h2{font-size:3.8cqw;line-height:1.06}
+@media(max-width:700px) and (orientation:portrait){
+ #slide14 .scene{justify-content:flex-start;padding:55px 22px 30px}.s14-copy{width:100%}#slide14 h2{font-size:31px;line-height:1.08}.s14-support{font-size:20px;margin-top:25px}.s14-note{font-size:17px;margin-top:21px}.s14-result{font-size:22px;margin-top:23px}.s14-grid{gap:11px;margin-top:24px}.s14-grid span{font-size:17px;padding:12px 11px;border-left-width:3px;border-radius:4px}.s14-team{margin-top:24px;padding-left:15px;border-left-width:3px}.s14-team strong{font-size:24px;margin-bottom:9px}.s14-team span{font-size:19px;line-height:1.5}.s14-recap{font-size:23px;line-height:1.55;margin-top:26px}
+ .s14-price-wrap{max-width:100%;margin-top:24px}.s14-price-preview th,.s14-price-preview td{padding:12px 10px;font-size:17px}.s14-price-preview thead th{font-size:12px}.s14-price-preview i{height:16px}.s14-price-preview td:last-child{width:26%}
+ #slide14 .s14-rule-scene{padding:48px 22px 25px}#slide14 .s14-rule-scene h2{font-size:28px}.s14-rule-scene .s10-rules{margin-top:19px}.s14-rule-scene .s10-rule{min-height:60px}
+ #slide14 .scene-photo img{position:absolute;bottom:0;height:66%;object-position:70% center}
+}
+
+</style>
+<style id="party-host-initial-lock">html:not(.party-host-ready){visibility:hidden}</style>
+<script src="../access.js" defer></script>
+</head>
+<body>
+<div class="start-overlay" id="startOverlay">
+  <div class="start-card">
+    <img src="../assets/launch-family-entertainment-logo.png" alt="Launch Family Entertainment">
+    <h1>Begin Party Host Training</h1>
+    <p>The narration controls the pace of each slide. Watch and listen as the Day 1 foundations are introduced.</p>
+    <div class="start-actions">
+      <button class="start" id="startButton">Start Day 1 Training</button>
+      <button class="fullscreen" id="fullscreenButton">Full Screen</button>
+    </div>
+    <p style="margin-top:14px;font-size:.9rem">Narration must finish before Next becomes available.</p>
+  </div>
+</div>
+
+<main class="deck">
+<header class="topbar">
+  <div class="brand"><img src="../assets/launch-family-entertainment-logo.png" alt="Launch Family Entertainment"><div><strong>Party Host Training</strong><span>Day 1 · Own the Experience</span></div></div>
+  <div class="top-actions"><a class="link" href="index.html">Day 1 Home</a><a class="link" href="../index.html">Party Host Home</a><span class="link" id="slideCounter">Slide 1 / 14</span></div>
+</header>
+
+<section class="stage">
+  <div class="slide-shell">
+    <article class="slide active" id="slide1" data-duration="42.696" data-audio="audio/slide-01.m4a">
+      <div class="slide-number">Day 1 · Slide 1</div>
+
+      <section class="scene visible welcome-scene photo-scene" data-start="0" data-end="2.9">
+        <div class="scene-photo" aria-hidden="true"><img src="images/party-atmosphere.webp" alt=""></div>
+        <div class="hero-lockup" data-cue="0">
+          <div class="eyebrow">Party Host Training</div>
+          <h1>Day 1</h1>
+          <div class="welcome-title">Own the <span class="accent">Experience</span></div>
+        </div>
+      </section>
+
+      <section class="scene photo-scene child-scene" data-start="2.9" data-end="12.18">
+        <div class="scene-photo"><img src="images/birthday-child-celebration.webp" alt="A birthday child celebrating with friends and a parent"></div>
+        <div class="scene-copy">
+          <div class="eyebrow" data-cue="2.9">The Birthday Child</div>
+          <h2 data-cue="2.9">This is<br><span class="accent">their day.</span></h2>
+          <p data-cue="2.9">They’ve been looking forward to it.</p>
+          <div class="celebration-lines"><div class="friends-family" data-cue="7.2">
+            <span>Their friends are here.</span>
+            <span>Their family is celebrating.</span></div>
+            <strong data-cue="10.84">You help make it special.</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene photo-scene family-scene" data-start="12.18" data-end="17.64">
+        <div class="scene-photo"><img src="images/family-taken-care-of.webp" alt="Parents and their child enjoying a relaxed moment at a birthday celebration"></div>
+        <div class="scene-copy">
+          <div class="eyebrow" data-cue="12.18">As Their Party Host</div>
+          <h2 data-cue="13.52">Help the family<br><span class="accent">feel cared for.</span></h2>
+          <div class="care-list" data-cue="13.52">
+            <div><span aria-hidden="true">✓</span> Welcomed</div>
+            <div><span aria-hidden="true">✓</span> Informed</div>
+            <div><span aria-hidden="true">✓</span> Taken care of</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene personal-scene atmospheric-scene photo-scene" data-start="17.64" data-end="24.66">
+        <div class="scene-photo" aria-hidden="true"><img src="images/family-taken-care-of.webp" alt=""></div>
+        <div class="eyebrow" data-cue="17.64">Personal Attention</div>
+        <h2 data-cue="17.64">Make it <span class="accent">personal.</span></h2>
+        <div class="personal-steps" data-cue="17.64">
+          <div>
+            <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="7" y="12" width="50" height="40" rx="6"/><circle cx="22" cy="27" r="6"/><path d="M13 43c1-9 17-9 18 0M37 25h12M37 33h12M37 41h8"/></svg>
+            <strong>Learn names.</strong>
+          </div>
+          <div>
+            <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M5 32s10-17 27-17 27 17 27 17-10 17-27 17S5 32 5 32Z"/><circle cx="32" cy="32" r="8"/></svg>
+            <strong>Notice their needs.</strong>
+          </div>
+          <div>
+            <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="24"/><path d="M32 15v18l12 8"/></svg>
+            <strong>Make time for<br>the birthday child.</strong>
+          </div>
+        </div>
+        <div class="memory-result" data-cue="23.62">A great memory.</div>
+      </section>
+
+      <section class="scene photo-scene memories-scene" data-start="24.66" data-end="27.5">
+        <div class="scene-photo"><img src="images/joyful-jumps-at-launch-park.webp" alt="Children sharing a joyful moment at Launch"></div>
+        <div class="scene-copy">
+          <div class="eyebrow" data-cue="24.66">That’s Your Role</div>
+          <div class="memory-word" data-cue="24.66">CREATING<br>AWESOME<br>MEMORIES</div>
+        </div>
+      </section>
+
+      <section class="scene training-scene atmospheric-scene photo-scene" data-start="27.5" data-end="37.76">
+        <div class="scene-photo" aria-hidden="true"><img src="images/joyful-jumps-at-launch-park.webp" alt=""></div>
+        <div class="eyebrow" data-cue="27.5">Your Three Party Host Training Shifts</div>
+        <h2 data-cue="27.5">Build the complete<br><span class="accent">Party Host experience.</span></h2>
+        <div class="journey" data-cue="31.32">
+          <div class="journey-card"><strong>Prepare for a party</strong></div>
+          <div class="journey-card"><strong>Keep it running smoothly</strong></div>
+          <div class="journey-card"><strong>Deliver five-star service</strong></div>
+        </div>
+        <div class="team-line" data-cue="35.76">Alongside the Launch team.</div>
+      </section>
+
+      <section class="scene final-focus closing-scene atmospheric-scene photo-scene" data-start="37.76" data-end="42.8">
+        <div class="scene-photo" aria-hidden="true"><img src="images/joyful-jumps-at-launch-park.webp" alt=""></div>
+        <div class="eyebrow" data-cue="37.76">Today · Your First Training Shift</div>
+        <h2 data-cue="37.76">Begin with<br>your role.</h2>
+        <div class="focus-line" data-cue="38.9">Understand your role.<br><span class="accent">Own the experience.</span></div>
+        <div class="closing-number" aria-hidden="true">1</div>
+      </section>
+
+      <div class="progress"><span id="progressBar"></span></div>
+    </article>
+
+    <article class="slide" id="slide2" data-duration="54.408" data-audio="audio/slide-02.m4a">
+      <div class="slide-number">Day 1 · Slide 2</div>
+      <section class="scene photo-scene why-scene" data-start="0" data-end="12.26">
+        <div class="scene-photo" aria-hidden="true"><img src="images/party-family-expectations.webp" alt=""></div>
+        <div class="s2-copy">
+          <div data-cue="0"><div class="eyebrow">Why Birthday Parties Matter</div><h2>More than<br><span class="accent">a reservation.</span></h2></div>
+          <div class="s2-support" data-cue="3.86">Planning. Time. Money. <strong>Trust.</strong></div>
+          <p data-cue="8.92">They chose Launch to celebrate<br>someone important.</p>
+        </div>
+      </section>
+      <section class="scene photo-scene hopes-scene" data-start="12.26" data-end="22.62">
+        <div class="scene-photo" aria-hidden="true"><img src="images/party-family-expectations.webp" alt=""></div>
+        <div class="s2-copy">
+          <div data-cue="12.26"><div class="eyebrow">The Family’s Expectations</div><h2>A celebration<br><span class="accent">everyone can enjoy.</span></h2><p><strong>The child:</strong> Have fun. Feel celebrated.</p></div>
+          <p data-cue="15.86"><strong>The parent:</strong> Feel prepared.<br>Understand the plan.</p>
+          <div class="s2-support" data-cue="20.1">Enjoy the celebration, too.</div>
+        </div>
+      </section>
+      <section class="scene photo-scene habits-scene atmospheric-scene" data-start="22.62" data-end="34.32">
+        <div class="scene-photo" aria-hidden="true"><img src="images/party-family-arrival.webp" alt=""></div>
+        <div data-cue="22.62"><div class="eyebrow">Your Attention Makes a Difference</div><h2>Build <span class="accent">confidence.</span></h2></div>
+        <div class="s2-habits" data-cue="24.36"><div><strong>Explain</strong><span>What happens next.</span></div><div><strong>Follow through</strong><span>On what you say.</span></div><div><strong>Notice</strong><span>A need before they ask.</span></div></div>
+        <div class="s2-support" data-cue="30.22">“Our party is in good hands.”</div>
+      </section>
+      <section class="scene photo-scene arrival-scene" data-start="34.32" data-end="44.82">
+        <div class="scene-photo" aria-hidden="true"><img src="images/party-family-arrival.webp" alt=""></div>
+        <div class="s2-copy">
+          <div data-cue="34.32"><div class="eyebrow">Put Yourself in Their Place</div><h2>A cake. Gifts.<br><span class="accent">An excited child.</span></h2></div>
+          <div class="s2-support" data-cue="39.54">A warm introduction.<br>An offer to help.</div>
+          <p data-cue="42.4">Make arrival feel easier.</p>
+        </div>
+      </section>
+      <section class="scene photo-scene trust-scene" data-start="44.82" data-end="54.6">
+        <div class="scene-photo" aria-hidden="true"><img src="images/party-family-arrival.webp" alt=""></div>
+        <div class="s2-copy">
+          <div data-cue="44.82"><div class="eyebrow">Small Moments Build Trust</div><h2>Your attention.<br><span class="accent">Their memories.</span></h2></div>
+          <div class="s2-support" data-cue="47.08">Help the family relax<br>and enjoy themselves.</div>
+          <p data-cue="51.52">A memory worth celebrating.</p>
+        </div>
+      </section>
+      <div class="progress"><span></span></div>
+    </article>
+
+    <article class="slide" id="slide3" data-duration="61.296" data-audio="audio/slide-03.m4a">
+      <div class="slide-number">Day 1 · Slide 3</div>
+      <section class="scene photo-scene ownership-scene" data-start="0" data-end="11.58">
+        <div class="scene-photo" aria-hidden="true"><img src="images/host-connected.webp" alt=""></div>
+        <div class="s3-copy">
+          <div data-cue="0"><div class="eyebrow">What a Party Host Owns</div><h2>Own the<br><span class="accent">guest experience.</span></h2></div>
+          <div class="s3-support" data-cue="4.2">Stay aware.<br>Keep the family informed.<br>Help the party run smoothly.</div>
+        </div>
+      </section>
+      <section class="scene photo-scene readiness-scene" data-start="11.58" data-end="22.9">
+        <div class="scene-photo" aria-hidden="true"><img src="images/host-ready.webp" alt=""></div>
+        <div class="s3-copy">
+          <div data-cue="11.58"><div class="eyebrow">Think Ahead</div><h2>Be ready.<br><span class="accent">Stay connected.</span></h2></div>
+          <div class="s3-support" data-cue="11.58">Before: Know the details.<br>Be ready to welcome guests.</div>
+          <div class="s3-support" data-cue="16.34">During: Watch the timing.<br>Stay visible. Anticipate needs.</div>
+        </div>
+      </section>
+      <section class="scene photo-scene atmospheric-scene teamwork-scene" data-start="22.9" data-end="32.98">
+        <div class="scene-photo" aria-hidden="true"><img src="images/host-ready.webp" alt=""></div>
+        <div data-cue="22.9"><div class="eyebrow">Work With the Party Team</div><h2>Clear communication.<br><span class="accent">A coordinated experience.</span></h2></div>
+        <div class="s3-team" data-cue="22.9"><span>Event Coordinator</span><span>Krave</span><span>Attraction Staff</span><span>Other Team Members</span></div>
+        <div class="s3-support" data-cue="28.14">Help everyone deliver their part.</div>
+      </section>
+      <section class="scene photo-scene atmospheric-scene delay-scene" data-start="32.98" data-end="44.12">
+        <div class="scene-photo" aria-hidden="true"><img src="images/host-followthrough.webp" alt=""></div>
+        <div data-cue="32.98"><div class="eyebrow">Example · Food Is Running Behind</div><h2>Communicate early.<br><span class="accent">Follow through.</span></h2></div>
+        <div class="s3-flow" data-cue="35.3"><div><span>01</span><strong>Notify the<br>Event Coordinator.</strong><small>They communicate kitchen changes.</small></div><div><span>02</span><strong>Help confirm<br>the plan.</strong></div><div><span>03</span><strong>Keep the<br>parent informed.</strong></div></div>
+        <div class="s3-note" data-cue="41.22">The family knows what to expect.</div>
+      </section>
+      <section class="scene photo-scene followthrough-scene" data-start="44.12" data-end="61.5">
+        <div class="scene-photo" aria-hidden="true"><img src="images/host-followthrough.webp" alt=""></div>
+        <div class="s3-copy">
+          <div data-cue="44.12"><div class="eyebrow">Take the Next Appropriate Step</div><h2>Notice.<br>Act.<br><span class="accent">Follow through.</span></h2></div>
+          <div class="s3-support" data-cue="49.8">Work within your role.<br>Ask for help when needed.<br>Stay involved.</div>
+          <div class="s3-note" data-cue="55.08">Be prepared. Stay connected. Follow through.</div>
+        </div>
+      </section>
+      <div class="progress"><span></span></div>
+    </article>
+
+    <article class="slide" id="slide4" data-duration="57.696" data-audio="audio/slide-04.m4a">
+      <div class="slide-number">Day 1 · Slide 4</div>
+      <section class="scene photo-scene atmospheric-scene two-guests-scene" data-start="0" data-end="11.02">
+        <div class="scene-photo" aria-hidden="true"><img src="images/two-guests-child.webp" alt=""></div>
+        <div data-cue="0"><div class="eyebrow">Two Key Guests</div><h2>One celebration.<br><span class="accent">Two perspectives.</span></h2></div>
+        <div class="s4-pair" data-cue="0"><div><strong>The Birthday Child</strong></div><div><strong>The Party Parent</strong></div></div>
+        <div class="s4-support" data-cue="6.88">Different needs. Your attention matters to both.</div>
+      </section>
+      <section class="scene photo-scene child-perspective-scene" data-start="11.02" data-end="23.6">
+        <div class="scene-photo" aria-hidden="true"><img src="images/two-guests-child.webp" alt=""></div>
+        <div class="s4-copy">
+          <div data-cue="11.02"><div class="eyebrow">The Birthday Child</div><h2>Feel special.<br><span class="accent">Be part of the fun.</span></h2><p>Friends. Excitement. Celebration.</p></div>
+          <div class="s4-support" data-cue="18.18">Use their name.<br>Include them.<br>Make time to connect.</div>
+        </div>
+      </section>
+      <section class="scene photo-scene parent-perspective-scene" data-start="23.6" data-end="33.88">
+        <div class="scene-photo" aria-hidden="true"><img src="images/two-guests-parent.webp" alt=""></div>
+        <div class="s4-copy">
+          <div data-cue="23.6"><div class="eyebrow">The Party Parent</div><h2>Feel informed.<br><span class="accent">Feel supported.</span></h2></div>
+          <div class="s4-support" data-cue="27.02">Explain what happens next.<br>Check what they need.<br>Follow through.</div>
+        </div>
+      </section>
+      <section class="scene photo-scene atmospheric-scene both-perspectives-scene" data-start="33.88" data-end="45.42">
+        <div class="scene-photo" aria-hidden="true"><img src="images/two-guests-parent.webp" alt=""></div>
+        <div data-cue="33.88"><div class="eyebrow">Notice the Whole Experience</div><h2>Pay attention to<br><span class="accent">both perspectives.</span></h2></div>
+        <div class="s4-examples">
+          <div class="s4-example" data-cue="36.16"><div><strong>Child</strong><span>Having a great time.</span></div><div><strong>Parent</strong><span>Unsure when food will arrive.</span></div></div>
+          <div class="s4-example" data-cue="41.24"><div><strong>Parent</strong><span>Knows the schedule.</span></div><div><strong>Child</strong><span>Feels left out of the group.</span></div></div>
+        </div>
+      </section>
+      <section class="scene photo-scene check-both-scene" data-start="45.42" data-end="57.9">
+        <div class="scene-photo" aria-hidden="true"><img src="images/two-guests-connected.webp" alt=""></div>
+        <div class="s4-copy">
+          <div data-cue="45.42"><div class="eyebrow">Check In With Each of Them</div><h2>Help both feel<br><span class="accent">seen and cared for.</span></h2></div>
+          <div class="s4-questions" data-cue="47.18"><div><strong>Child</strong><span>“How are you enjoying the party?”</span></div><div><strong>Parent</strong><span>“How are things going?”</span></div></div>
+          <div class="s4-note" data-cue="51.94">Help the whole family enjoy the celebration.</div>
+        </div>
+      </section>
+      <div class="progress"><span></span></div>
+    </article>
+
+    <article class="slide" id="slide5" data-duration="60.480" data-audio="audio/slide-05.m4a">
+      <div class="slide-number">Day 1 · Slide 5</div>
+      <section class="scene photo-scene personal-connection-scene" data-start="0" data-end="15.34">
+        <div class="scene-photo" aria-hidden="true"><img src="images/engagement-listen.webp" alt=""></div>
+        <div class="s5-copy">
+          <div data-cue="0"><div class="eyebrow">Birthday-Child Engagement</div><h2>Make a<br><span class="accent">personal connection.</span></h2></div>
+          <div class="s5-support" data-cue="4.3">Introduce yourself. Use their name.</div>
+          <div class="s5-question" data-cue="9.48">“What are you most excited<br>to do today?”</div>
+          <div class="s5-note" data-cue="11.76">Listen. Let their answer start a conversation.</div>
+        </div>
+      </section>
+      <section class="scene photo-scene match-approach-scene" data-start="15.34" data-end="29.14">
+        <div class="scene-photo" aria-hidden="true"><img src="images/engagement-approach.webp" alt=""></div>
+        <div class="s5-copy">
+          <div data-cue="15.34"><div class="eyebrow">Meet Them Where They Are</div><h2>Match their<br><span class="accent">age and personality.</span></h2></div>
+          <div class="s5-support" data-cue="18.1">Eager to talk? Let them share.</div>
+          <div class="s5-support" data-cue="21.08">Need time? Let them warm up.</div>
+          <div class="s5-note" data-cue="23.74">A smile. A simple question.<br>An offered high five.</div>
+        </div>
+      </section>
+      <section class="scene photo-scene keep-connection-scene" data-start="29.14" data-end="42.9">
+        <div class="scene-photo" aria-hidden="true"><img src="images/engagement-include.webp" alt=""></div>
+        <div class="s5-copy">
+          <div data-cue="29.14"><div class="eyebrow">Throughout the Party</div><h2>Keep the<br><span class="accent">connection going.</span></h2></div>
+          <div class="s5-support" data-cue="32.26">Speak to the child<br>as well as the parent.</div>
+          <div class="s5-note s5-keypoints" data-cue="36.16">Ask about an activity.<br>Notice what makes them proud.<br>Help them feel included.</div>
+        </div>
+      </section>
+      <section class="scene photo-scene remember-detail-scene" data-start="42.9" data-end="60.7">
+        <div class="scene-photo" aria-hidden="true"><img src="images/airtrack-basketball-launch.jpg" alt=""></div>
+        <div class="s5-copy">
+          <div data-cue="42.9"><div class="eyebrow">Remember What They Love</div><h2>“I love<br><span class="accent">Airtrack Basketball.”</span></h2></div>
+          <div class="s5-question" data-cue="46.3">“How did it go?”</div>
+          <div class="s5-note" data-cue="48.46">Remembering the detail shows you listened.</div>
+          <div class="s5-result" data-cue="51.42">Recognized. Celebrated.</div>
+          <div class="s5-note" data-cue="56.32">Make your attention part of their memory.</div>
+        </div>
+      </section>
+      <div class="progress"><span></span></div>
+    </article>
+
+    <article class="slide" id="slide6" data-duration="70.656" data-audio="audio/slide-06.m4a">
+      <div class="slide-number">Day 1 · Slide 6</div>
+      <section class="scene photo-scene atmospheric-scene party-team-scene" data-start="0" data-end="8.66">
+        <div class="scene-photo" aria-hidden="true"><img src="images/team-checkin.webp" alt=""></div>
+        <div data-cue="0"><div class="eyebrow">The Party Team</div><h2>A great party<br><span class="accent">takes a team.</span></h2></div>
+        <div class="s6-team-pair" data-cue="2.18"><div><strong>You</strong><span>Stay connected with the family.</span></div><div><strong>The Team</strong><span>Helps deliver the celebration.</span></div></div>
+      </section>
+      <section class="scene photo-scene coordinator-role-scene" data-start="8.66" data-end="22.24">
+        <div class="scene-photo" aria-hidden="true"><img src="images/team-checkin.webp" alt=""></div>
+        <div class="s6-copy">
+          <div data-cue="8.66"><div class="eyebrow">The Event Coordinator</div><h2>Leads the<br><span class="accent">party operation.</span></h2></div>
+          <div class="s6-support" data-cue="11.52">Generally leads check-in:<br>Waivers. Attendee counts.</div>
+          <div class="s6-note" data-cue="16.68">Keep them informed about<br>requests, changes, and concerns.</div>
+        </div>
+      </section>
+      <section class="scene photo-scene atmospheric-scene kitchen-route-scene" data-start="22.24" data-end="36.46">
+        <div class="scene-photo" aria-hidden="true"><img src="images/team-kitchen.webp" alt=""></div>
+        <div class="eyebrow" data-cue="22.24">Krave · Food and Beverages</div>
+        <h2 data-cue="24.52">Kitchen changes go through<br><span class="accent">the Event Coordinator.</span></h2>
+        <div class="s6-route" data-cue="24.52"><div><strong>Party Host</strong><span>Reports the request.</span></div><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M3 20h31M24 10l10 10-10 10"/></svg><div><strong>Event Coordinator</strong><span>Communicates the change.</span></div><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M3 20h31M24 10l10 10-10 10"/></svg><div><strong>Krave</strong><span>Receives coordinated instructions.</span></div></div>
+        <div class="s6-note" data-cue="31.18">Additional food or a change?<br>Bring the request to the coordinator.</div>
+      </section>
+      <section class="scene photo-scene attraction-team-scene" data-start="36.46" data-end="47.98">
+        <div class="scene-photo" aria-hidden="true"><img src="images/team-attractions-launch.jpg" alt=""></div>
+        <div class="s6-copy">
+          <div data-cue="36.46"><div class="eyebrow">Attraction Staff</div><h2>Manage activities.<br><span class="accent">Reinforce safety.</span></h2></div>
+          <div class="s6-support" data-cue="41.34">Coordinate scheduled activities<br>through your park’s process.</div>
+          <div class="s6-note" data-cue="44.06">Respect the team responsible<br>for each attraction.</div>
+        </div>
+      </section>
+      <section class="scene photo-scene runner-support-scene" data-start="47.98" data-end="57.18">
+        <div class="scene-photo" aria-hidden="true"><img src="images/team-spaces.webp" alt=""></div>
+        <div class="s6-copy">
+          <div data-cue="47.98"><div class="eyebrow">Where Runners Are Scheduled</div><h2>Support<br><span class="accent">behind the scenes.</span></h2></div>
+          <div class="s6-tasks" data-cue="49.3"><span>Room setup</span><span>Food delivery</span><span>Cleanup</span><span>Supplies</span></div>
+          <div class="s6-note" data-cue="53.24">Other hosts and managers<br>can provide support, too.</div>
+        </div>
+      </section>
+      <section class="scene photo-scene atmospheric-scene team-recap-scene" data-start="57.18" data-end="70.9">
+        <div class="scene-photo" aria-hidden="true"><img src="images/team-spaces.webp" alt=""></div>
+        <div data-cue="57.18"><div class="eyebrow">Work Together</div><h2>Know the roles.<br><span class="accent">Communicate early.</span></h2></div>
+        <div class="s6-support" data-cue="61.04">Ask for help before a small issue grows.</div>
+        <div class="s6-result" data-cue="64.36">One team. An organized,<br>cared-for celebration.</div>
+      </section>
+      <div class="progress"><span></span></div>
+    </article>
+
+    <article class="slide" id="slide7" data-duration="76.728" data-audio="audio/slide-07.m4a">
+      <svg class="s7-defs" aria-hidden="true"><defs><symbol id="s7-plane" viewBox="-32 -36 64 72"><path d="M0-34C4-34 5-28 5-24L5-8 29 10 29 16 5 8 5 24 14 31 14 35 0 30-14 35-14 31-5 24-5 8-29 16-29 10-5-8-5-24C-5-28-4-34 0-34Z" fill="currentColor"/></symbol></defs></svg>
+      <div class="slide-number">Day 1 · Slide 7</div>
+      <section class="scene photo-scene airport-intro-scene" data-start="0" data-end="11.24">
+        <div class="scene-photo" aria-hidden="true"><img src="images/coordinator-airport.webp" alt=""></div>
+        <div class="s7-copy">
+          <div data-cue="0"><div class="eyebrow">The Event Coordinator</div><h2>A busy party day.<br><span class="accent">Think of an airport.</span></h2></div>
+          <div class="s7-party-stages" data-cue="3.1"><span>Arrive</span><span>Activities</span><span>Party space</span><span>Depart</span></div>
+          <div class="s7-support" data-cue="7.76">Planes come and go.<br>So do parties.</div>
+        </div>
+      </section>
+      <section class="scene photo-scene atmospheric-scene twelve-parties-scene" data-start="11.24" data-end="21.74">
+        <div class="scene-photo" aria-hidden="true"><img src="images/coordinator-airport.webp" alt=""></div>
+        <div class="s7-copy">
+          <div data-cue="11.24"><div class="eyebrow">At Some Launch Locations</div><h2>Up to <span class="accent">12 parties</span><br>at the same time.</h2></div>
+          <div class="s7-support" data-cue="16.66">Each has its own schedule,<br>food order, room, and family.</div>
+        </div>
+        <div class="s7-flight-grid" data-cue="11.24" aria-hidden="true"><svg class="plane-token" viewBox="-32 -36 64 72" aria-hidden="true"><use href="#s7-plane"/></svg><svg class="plane-token" viewBox="-32 -36 64 72" aria-hidden="true"><use href="#s7-plane"/></svg><svg class="plane-token" viewBox="-32 -36 64 72" aria-hidden="true"><use href="#s7-plane"/></svg><svg class="plane-token" viewBox="-32 -36 64 72" aria-hidden="true"><use href="#s7-plane"/></svg><svg class="plane-token" viewBox="-32 -36 64 72" aria-hidden="true"><use href="#s7-plane"/></svg><svg class="plane-token" viewBox="-32 -36 64 72" aria-hidden="true"><use href="#s7-plane"/></svg><svg class="plane-token" viewBox="-32 -36 64 72" aria-hidden="true"><use href="#s7-plane"/></svg><svg class="plane-token" viewBox="-32 -36 64 72" aria-hidden="true"><use href="#s7-plane"/></svg><svg class="plane-token" viewBox="-32 -36 64 72" aria-hidden="true"><use href="#s7-plane"/></svg><svg class="plane-token" viewBox="-32 -36 64 72" aria-hidden="true"><use href="#s7-plane"/></svg><svg class="plane-token" viewBox="-32 -36 64 72" aria-hidden="true"><use href="#s7-plane"/></svg><svg class="plane-token" viewBox="-32 -36 64 72" aria-hidden="true"><use href="#s7-plane"/></svg></div>
+      </section>
+      <section class="scene photo-scene conflict-airport-scene" data-start="21.74" data-end="31.7">
+        <div class="scene-photo" aria-hidden="true"><img src="images/coordinator-airport.webp" alt=""></div>
+        <div class="s7-copy s7-conflict-copy">
+          <div data-cue="21.74"><div class="eyebrow">Imagine Conflicting Instructions</div><h2>Too many directions.<br><span class="accent">No shared view.</span></h2></div>
+          <div class="s7-support" data-cue="25.94">No one overseeing<br>the whole airport.</div>
+          <div class="s7-warning" data-cue="28.4">Conflicting directions can collide.</div>
+        </div>
+        <div class="s7-conflict-graphic" data-cue="21.74" aria-hidden="true">
+          <svg viewBox="0 0 420 310">
+            <path class="flight-route route-a" d="M35 65L345 225"/>
+            <path class="flight-route route-b" d="M35 245L345 75"/>
+            <g class="s7-aircraft" data-flight data-flight-start="21.74" data-flight-duration="6.66" data-x="60" data-y="78" data-dx="126" data-dy="65"><g transform="rotate(117)"><use href="#s7-plane" x="-23" y="-26" width="46" height="52"/></g></g>
+            <g class="s7-aircraft second" data-flight data-flight-start="21.74" data-flight-duration="6.66" data-x="60" data-y="231" data-dx="126" data-dy="-69"><g transform="rotate(63)"><use href="#s7-plane" x="-23" y="-26" width="46" height="52"/></g></g>
+            <g class="s7-conflict-point" data-cue="28.4"><circle cx="206" cy="152" r="30"/><path d="M206 132v24M206 169v2"/></g>
+          </svg>
+        </div>
+      </section>
+      <section class="scene photo-scene atmospheric-scene party-ripple-scene" data-start="31.7" data-end="44.96">
+        <div class="scene-photo" aria-hidden="true"><img src="images/coordinator-tower.webp" alt=""></div>
+        <div data-cue="31.7"><div class="eyebrow">The Same Problem Can Affect Parties</div><h2>One change.<br><span class="accent">Many ripple effects.</span></h2></div>
+        <div class="s7-note" data-cue="34.92">Uncoordinated kitchen instructions or timing.</div>
+        <div class="s7-consequences" data-cue="38.94"><div><strong>Requests</strong><span>Get mixed up.</span></div><div><strong>Food</strong><span>Arrives at the wrong time.</span></div></div>
+        <div class="s7-warning" data-cue="42.46">One party’s changes can affect another.</div>
+      </section>
+      <section class="scene photo-scene controller-scene" data-start="44.96" data-end="59.88">
+        <div class="scene-photo" aria-hidden="true"><img src="images/coordinator-tower.webp" alt=""></div>
+        <div data-cue="44.96"><div class="eyebrow">One Dedicated Person · The Event Coordinator</div><h2>One coordinator.<br><span class="accent">The whole picture.</span></h2></div>
+        <div class="s7-support" data-cue="50.54">Our air traffic controller.</div>
+        <div class="s7-route" data-cue="54.2"><div><strong>Host</strong><span>Reports kitchen requests.</span></div><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M3 20h31M24 10l10 10-10 10"/></svg><div><strong>Event Coordinator</strong><span>Communicates the change.</span></div><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M3 20h31M24 10l10 10-10 10"/></svg><div><strong>Krave</strong><span>Receives the instructions.</span></div></div>
+      </section>
+      <section class="scene photo-scene atmospheric-scene report-clearly-scene" data-start="59.88" data-end="71.28">
+        <div class="scene-photo" aria-hidden="true"><img src="images/s07-oversight.webp" alt=""></div>
+        <div data-cue="59.88"><div class="eyebrow">Help the Coordinator Coordinate</div><h2>Make your<br><span class="accent">message clear.</span></h2></div>
+        <div class="s7-report-packet" data-cue="59.88"><span>Identify the party.</span><span>Explain what’s needed.</span><span>Include the timing.</span></div>
+        <div class="s7-support" data-cue="66.72">Communicate early. Confirm the next step.<br>Follow through on the plan.</div>
+      </section>
+      <section class="scene photo-scene controller-close-scene" data-start="71.28" data-end="77">
+        <div class="scene-photo" aria-hidden="true"><img src="images/s07-oversight.webp" alt=""></div>
+        <div data-cue="71.28"><div class="eyebrow">Stay Connected</div><h2>Your family.<br><span class="accent">The whole operation.</span></h2></div>
+        <div class="s7-closing-pair"><div data-cue="71.28"><strong>You</strong><span>Care for your family.</span></div><div data-cue="73.46"><strong>Event Coordinator</strong><span>Keeps all the moving parties working together.</span></div></div>
+      </section>
+      <div class="progress"><span></span></div>
+    </article>
+
+    <article class="slide" id="slide8" data-duration="62.328" data-audio="audio/slide-08.m4a">
+      <div class="slide-number">Day 1 · Slide 8</div>
+      <section class="scene photo-scene know-park-scene" data-start="0" data-end="12.64">
+        <div class="scene-photo" aria-hidden="true"><img src="images/park-overview.webp" alt=""></div>
+        <div class="s8-copy">
+          <div data-cue="0"><div class="eyebrow">Know Your Park</div><h2>Know the park.<br><span class="accent">Give clear answers.</span></h2></div>
+          <div class="s8-locations" data-cue="5.3"><span>Event Check-In</span><span>Party rooms & tables</span><span>Krave</span><span>Restrooms</span><span>Attractions</span></div>
+        </div>
+      </section>
+      <section class="scene photo-scene find-supplies-scene" data-start="12.64" data-end="16.8">
+        <div class="scene-photo" aria-hidden="true"><img src="images/park-supplies.webp" alt=""></div>
+        <div class="s8-copy" data-cue="12.64"><div class="eyebrow">Be Ready to Help</div><h2>Know where.<br><span class="accent">Know who.</span></h2><div class="s8-support">Party supplies.<br>The right person for help.</div></div>
+      </section>
+      <section class="scene photo-scene current-resources-scene" data-start="16.8" data-end="29.08">
+        <div class="scene-photo" aria-hidden="true"><img src="images/park-supplies.webp" alt=""></div>
+        <div class="s8-copy">
+          <div data-cue="16.8"><div class="eyebrow">Find Current Party Information</div><h2>Use current<br><span class="accent">local information.</span></h2></div>
+          <div class="s8-support" data-cue="20.26">Packages. Activities. Procedures.<br><span class="s8-qualifier">They can vary by location.</span></div>
+          <div class="s8-note" data-cue="25.22">Use your park’s resources.<br>Confirm with the Event Coordinator.</div>
+        </div>
+      </section>
+      <section class="scene photo-scene family-questions-scene" data-start="29.08" data-end="47.68">
+        <div class="scene-photo" aria-hidden="true"><img src="images/park-family-questions.webp" alt=""></div>
+        <div class="s8-copy">
+          <div data-cue="29.08"><div class="eyebrow">Families Will Have Questions</div><h2>Clear answers.<br><span class="accent">Comfortable families.</span></h2></div>
+          <div class="s8-question-stage">
+            <div class="s8-question-packet" data-cue="32.48" data-cue-end="40.73"><p>“Where should our guests check in?”</p><p>“Where are the restrooms?”</p><p>“What happens next?”</p></div>
+            <div class="s8-response-packet" data-cue="41.18"><strong>“I’ll find out.”</strong><div class="s8-note" data-cue="44.42">Check with the right person.<br>Return with the answer.</div></div>
+          </div>
+        </div>
+      </section>
+      <section class="scene photo-scene trainer-tour-scene" data-start="47.68" data-end="62.6">
+        <div class="scene-photo" aria-hidden="true"><img src="images/park-tour-launch.jpg" alt=""></div>
+        <div class="s8-copy">
+          <div data-cue="47.68"><div class="eyebrow">During Hands-On Training</div><h2>Learn it<br><span class="accent">with your trainer.</span></h2></div>
+          <div class="s8-support" data-cue="51.66">Spaces. Supplies. Local procedures.</div>
+          <div class="s8-note" data-cue="55.48">Ask questions.<br>Practice finding what you need.</div>
+          <div class="s8-result" data-cue="58.22">Know your park.<br>Focus on your guests.</div>
+        </div>
+      </section>
+      <div class="progress"><span></span></div>
+    </article>
+<article class="slide" id="slide9" data-duration="141.912" data-audio="audio/slide-09.m4a"><div class="slide-number">Day 1 · Slide 9</div><section class="scene photo-scene s9-scene " data-start="0" data-end="9.26"><div class="scene-photo" aria-hidden="true"><img src="images/s09-planning.webp" alt=""></div><div class="s9-copy"><div class="" data-cue="0"><div class="eyebrow">The Party Lifecycle</div><h2>Think ahead.<br><span class="accent">Keep it flowing.</span></h2></div><div class="s9-flow" data-cue="1.7"><span>Beginning</span><span>Middle</span><span>Finish</span></div></div></section><section class="scene photo-scene s9-scene" data-start="9.26" data-end="12.2"><div class="scene-photo" aria-hidden="true"><img src="images/s09-planning.webp" alt=""></div><div class="s9-copy" data-cue="9.26"><div class="eyebrow">Before the Family Arrives</div><h2>Preparation starts<br><span class="accent">with the plan.</span></h2></div></section><section class="scene photo-scene v19-report-scene" data-start="12.2" data-end="87.54">
+<div class="scene-photo" aria-hidden="true"><img src="images/s09-planning.webp" alt=""></div>
+<div class="v19-sheet"><img src="images/report-first-party.png" alt="CenterEdge Groups Arriving by Arrival Date report header and complete first party entry. Customer fields on the left, party times and group size in the middle, item descriptions and quantities on the right, and location schedule below. Customer identifying values removed."><div class="v19-highlight" data-field="package" data-cue="27.44" data-cue-end="37.84" style="left:68.2131%;top:23.8208%;width:30.5842%;height:3.3019%"></div><div class="v19-highlight" data-field="count" data-cue="29.24" data-cue-end="37.84" style="left:44.8454%;top:30.6604%;width:11.5120%;height:3.5377%"></div><div class="v19-highlight" data-field="checkin" data-cue="37.84" data-cue-end="39.7" style="left:45.8763%;top:20.5189%;width:13.9175%;height:3.0660%"></div><div class="v19-highlight" data-field="activities" data-cue="39.7" data-cue-end="41.82" style="left:5.6701%;top:68.3962%;width:50.6873%;height:3.3019%"></div><div class="v19-highlight" data-field="food" data-cue="41.82" data-cue-end="43.46" style="left:49.1409%;top:27.3585%;width:10.6529%;height:3.0660%"></div><div class="v19-highlight" data-field="checkout" data-cue="43.46" data-cue-end="45.62" style="left:44.8454%;top:23.8208%;width:15.1203%;height:3.3019%"></div><div class="v19-highlight" data-field="table" data-cue="45.62" data-cue-end="48.68" style="left:5.6701%;top:64.8585%;width:50.6873%;height:3.3019%"></div><div class="v19-highlight" data-field="items" data-cue="48.68" data-cue-end="51.02" style="left:68.0412%;top:20.2830%;width:30.7560%;height:3.3019%"></div><div class="v19-highlight" data-field="inc" data-cue="51.02" data-cue-end="55.26" style="left:68.0412%;top:27.1226%;width:30.7560%;height:20.7547%"></div><div class="v19-highlight" data-field="add" data-cue="55.26" data-cue-end="57.72" style="left:68.0412%;top:57.5472%;width:30.7560%;height:4.0094%"></div><div class="v19-highlight" data-field="pizzas" data-cue="59.18" data-cue-end="62.78" style="left:68.0412%;top:37.5000%;width:30.7560%;height:10.3774%"></div><div class="v19-highlight" data-field="drinks" data-cue="62.78" data-cue-end="64.08" style="left:68.0412%;top:30.6604%;width:30.7560%;height:6.6038%"></div><div class="v19-highlight" data-field="shirt" data-cue="64.08" data-cue-end="66.3" style="left:68.0412%;top:27.3585%;width:30.7560%;height:3.0660%"></div><div class="v19-highlight" data-field="extra" data-cue="66.3" data-cue-end="73" style="left:68.0412%;top:57.5472%;width:30.7560%;height:4.0094%"></div><div class="v19-highlight" data-field="total-included" data-cue="70.1" data-cue-end="73" style="left:68.0412%;top:37.5000%;width:30.7560%;height:10.3774%"></div></div>
+<aside class="v19-caption"><div class="v19-packet" data-cue="12.2" data-cue-end="25.9"><div class="eyebrow">Before the Party</div><h2>Read the<br><span class="accent">party plan.</span></h2><div class="v19-note">Package<br>Participating guests<br>Schedule & space<br>Planned items</div></div><div class="v19-packet" data-cue="25.9" data-cue-end="37.84"><div class="eyebrow">Package & Group Size</div><h2>Know the<br><span class="accent">booking.</span></h2><div class="v19-note" data-cue="27.44" data-cue-end="37.84">All Star package</div><div class="v19-note" data-cue="29.24" data-cue-end="37.84"><strong>10 participating guests</strong></div><div class="v19-small" data-cue="33.74" data-cue-end="37.84">Nonparticipating adults are outside this count.</div></div><div class="v19-packet" data-cue="37.84" data-cue-end="48.68"><div class="eyebrow">Schedule & Space</div><h2>Know<br><span class="accent">the flow.</span></h2><div class="v19-note" data-cue="37.84" data-cue-end="39.7">Check-in<br><strong>6:15 PM</strong></div><div class="v19-note" data-cue="39.7" data-cue-end="41.82">Activities begin<br><strong>6:30 PM</strong></div><div class="v19-note" data-cue="41.82" data-cue-end="43.46">Food<br><strong>8:00 PM</strong></div><div class="v19-note" data-cue="43.46" data-cue-end="45.62">Checkout<br><strong>8:45 PM</strong></div><div class="v19-note" data-cue="45.62" data-cue-end="48.68">Assigned space<br><strong>Party Table 1</strong></div></div><div class="v19-packet" data-cue="48.68" data-cue-end="57.72"><div class="eyebrow">Descriptions & Qty</div><h2>Included<br><span class="accent">or extra?</span></h2><div class="v19-note" data-cue="51.02" data-cue-end="55.26"><strong>Inc</strong><br>Included with the package</div><div class="v19-note" data-cue="55.26" data-cue-end="57.72"><strong>Add</strong><br>Purchased extras</div></div><div class="v19-packet" data-cue="57.72" data-cue-end="66.3"><div class="eyebrow">Included Items</div><h2>Check each<br><span class="accent">quantity.</span></h2><div class="v19-note" data-cue="59.18" data-cue-end="62.78">1 cheese pizza<br>2 pepperoni pizzas</div><div class="v19-note" data-cue="62.78" data-cue-end="64.08">2 drink pitchers</div><div class="v19-note" data-cue="64.08" data-cue-end="66.3">Youth XL shirt</div></div><div class="v19-packet" data-cue="66.3" data-cue-end="73"><div class="eyebrow">Purchased Extra</div><h2>One more<br><span class="accent">cheese pizza.</span></h2><div class="v19-note" data-cue="70.1" data-cue-end="73"><strong class="v19-sum">3 + 1 = 4</strong><br>Pizzas planned</div></div><div class="v19-packet" data-cue="73" data-cue-end="87.54"><div class="eyebrow">Before the Party</div><h2>Read carefully.<br><span class="accent">Ask early.</span></h2><div class="v19-note">Review every line and any notes.</div><div class="v19-small" data-cue="76.68" data-cue-end="87.54">Questions or conflicting details?<br>Ask the Event Coordinator.</div><div class="v19-small" data-cue="82.1" data-cue-end="87.54">Packages vary.<br>Use the actual booking.</div></div></aside>
+<button type="button" class="v19-enlarge">Enlarge report</button>
+</section><section class="scene photo-scene s9-scene " data-start="87.54" data-end="100.6"><div class="scene-photo" aria-hidden="true"><img src="images/s09-arrival.webp" alt=""></div><div class="s9-copy"><div class="" data-cue="87.54"><div class="eyebrow">Arrival</div><h2>Start with<br><span class="accent">a warm welcome.</span></h2></div><div class="s9-support" data-cue="88.78">Welcome the child and parent.<br>Introduce yourself. Explain what’s next.</div><div class="s9-note" data-cue="94.7">Event Coordinator generally leads check-in<br>and verifies participating guest count.</div></div></section><section class="scene photo-scene s9-scene " data-start="100.6" data-end="106.7"><div class="scene-photo" aria-hidden="true"><img src="images/s09-arrival.webp" alt=""></div><div class="s9-copy"><div class="" data-cue="100.6"><div class="eyebrow">Activities</div><h2>Stay visible.<br><span class="accent">Stay aware.</span></h2></div><div class="s9-support" data-cue="102.78">Check in with the family.<br>Keep upcoming party times in mind.</div></div></section><section class="scene photo-scene s9-scene " data-start="106.7" data-end="115.82"><div class="scene-photo" aria-hidden="true"><img src="images/s09-celebration.webp" alt=""></div><div class="s9-copy"><div class="" data-cue="106.7"><div class="eyebrow">Food & Celebration</div><h2>Anticipate<br><span class="accent">what they need.</span></h2></div><div class="s9-support" data-cue="108.7">Attentive service.<br>A table ready to celebrate.</div><div class="s9-result" data-cue="112.8">Help ensure Joey’s visit<br>around cake time.</div></div></section><section class="scene photo-scene s9-scene " data-start="115.82" data-end="124.22"><div class="scene-photo" aria-hidden="true"><img src="images/s09-celebration.webp" alt=""></div><div class="s9-copy"><div class="" data-cue="115.82"><div class="eyebrow">Useful Additions</div><h2>Offer more.<br><span class="accent">Know the price.</span></h2></div><div class="s9-support" data-cue="116.24">Food · Drinks · Arcade</div><div class="s9-result" data-cue="120.56">All kitchen changes:<br>Host → Event Coordinator → Krave</div></div></section><section class="scene photo-scene s9-scene " data-start="124.22" data-end="134.66"><div class="scene-photo" aria-hidden="true"><img src="images/s09-departure.webp" alt=""></div><div class="s9-copy"><div class="" data-cue="124.22"><div class="eyebrow">Departure</div><h2>Finish<br><span class="accent">with care.</span></h2></div><div class="s9-support" data-cue="125.7">Reconnect. Gather belongings.<br>Guide the local checkout process.</div><div class="s9-result" data-cue="132.02">Personally thank the family.</div></div></section><section class="scene photo-scene s9-scene " data-start="134.66" data-end="142.15"><div class="scene-photo" aria-hidden="true"><img src="images/s09-departure.webp" alt=""></div><div class="s9-copy"><div class="" data-cue="134.66"><div class="eyebrow">At Every Stage</div><h2>Think one<br><span class="accent">step ahead.</span></h2></div><div class="s9-support" data-cue="137.78">What’s happening now?<br>What comes next?<br>What does this family need from me?</div></div></section><div class="progress"><span></span></div></article>
+<article class="slide" id="slide10" data-duration="121.800" data-audio="audio/slide-10.m4a"><div class="slide-number">Day 1 · Slide 10</div><section class="scene photo-scene s10-scene" data-start="0" data-end="13.62"><div class="scene-photo" aria-hidden="true"><img src="images/s10-welcome.webp" alt=""></div><div class="s10-copy"><div class="" data-cue="0"><div class="eyebrow">The Rule of Five</div><h2>Consistent attention.<br><span class="accent">A great experience.</span></h2></div><div class="s10-reminders" data-cue="7.46"><span>First Five</span><span>Every Five</span><span>Meal Plus Five</span><span>Last Five</span><span>Five-Star Finish</span></div></div></section><section class="scene photo-scene s10-scene" data-start="13.62" data-end="28.26"><div class="scene-photo" aria-hidden="true"><img src="images/s10-welcome.webp" alt=""></div><div class="s10-copy"><div class="" data-cue="13.62"><div class="eyebrow">First Five · First Five Minutes</div><h2>Start with<br><span class="accent">a connection.</span></h2></div><div class="s10-support" data-cue="18.84">Welcome the child and parent.<br>Introduce yourself. Explain what’s next.</div><div class="s10-result" data-cue="24.88">Comfortable. Confident.<br>Ready to celebrate.</div></div></section><section class="scene photo-scene s10-scene" data-start="28.26" data-end="45.02"><div class="scene-photo" aria-hidden="true"><img src="images/s10-welcome.webp" alt=""></div><div class="s10-copy"><div class="" data-cue="28.26"><div class="eyebrow">Every Five · Approximately Every Five Minutes</div><h2>Stay visible.<br><span class="accent">Check in.</span></h2></div><div class="s10-support" data-cue="33.88">Reconnect with the family.<br>Look for what they need.</div><div class="s10-result" data-cue="37.84">Visible presence.<br>Room to explore.</div></div></section><section class="scene photo-scene s10-scene" data-start="45.02" data-end="55.82"><div class="scene-photo" aria-hidden="true"><img src="images/s10-meal.webp" alt=""></div><div class="s10-copy"><div class="" data-cue="45.02"><div class="eyebrow">Meal Plus Five · After Food Service Begins</div><h2>Check back<br><span class="accent">about five minutes later.</span></h2></div><div class="s10-questions" data-cue="49.88">Does everyone have what they need?<br>Are drinks running low?<br>Would another pizza help?</div></div></section><section class="scene photo-scene s10-scene" data-start="55.82" data-end="62.88"><div class="scene-photo" aria-hidden="true"><img src="images/s10-meal.webp" alt=""></div><div class="s10-copy"><div class="" data-cue="55.82"><div class="eyebrow">During the Meal</div><h2>Make useful<br><span class="accent">recommendations.</span></h2></div><div class="s10-support" data-cue="57.98">Know your local prices.</div><div class="s10-result" data-cue="59.1">Kitchen changes go through<br><strong>the Event Coordinator.</strong></div></div></section><section class="scene photo-scene s10-scene" data-start="62.88" data-end="77.98"><div class="scene-photo" aria-hidden="true"><img src="images/s10-farewell.webp" alt=""></div><div class="s10-copy"><div class="" data-cue="62.88"><div class="eyebrow">Last Five · As the Party Wraps Up</div><h2>Finish<br><span class="accent">with care.</span></h2></div><div class="s10-support" data-cue="67.46">Gather belongings.<br>Explain checkout steps.</div><div class="s10-result" data-cue="70.94">Personally thank<br>the child and parent.</div><div class="s10-note" data-cue="74.98">A goodbye as thoughtful as the welcome.</div></div></section><section class="scene photo-scene s10-scene" data-start="77.98" data-end="90.22"><div class="scene-photo" aria-hidden="true"><img src="images/s10-farewell.webp" alt=""></div><div class="s10-copy"><div class="" data-cue="77.98"><div class="eyebrow">Five-Star Finish</div><h2>Earn it through<br><span class="accent">your care.</span></h2><div class="s10-stars" aria-label="Five stars">★★★★★</div></div><div class="s10-support" data-cue="82.4">Invite feedback through<br>your park’s process.</div><div class="s10-note" data-cue="85.28">Great service throughout the party.</div></div></section><section class="scene photo-scene s10-scene" data-start="90.22" data-end="95.76"><div class="scene-photo" aria-hidden="true"><img src="images/s10-farewell.webp" alt=""></div><div class="s10-copy"><div class="" data-cue="90.22"><div class="eyebrow">Stay Attentive</div><h2>Need help sooner?<br><span class="accent">Respond sooner.</span></h2></div></div></section><section class="scene photo-scene s10-scene s10-close" data-start="95.76" data-end="122.1"><div class="scene-photo" aria-hidden="true"><img src="images/s10-farewell.webp" alt=""></div><div class="s10-copy"><div data-cue="95.76"><div class="eyebrow">The Rule of Five</div><h2>Remember the <span class="accent">five rules.</span></h2></div><div class="s10-rules" data-cue="95.76"><div class="s10-rule"><strong>The First Five</strong><span data-cue="98.96">Connect at arrival.</span><i class="s10-rule-focus" aria-hidden="true" data-cue="97.66" data-cue-end="100.42"></i></div><div class="s10-rule"><strong>Every Five</strong><span data-cue="101.7">Stay visible and check in.</span><i class="s10-rule-focus" aria-hidden="true" data-cue="100.42" data-cue-end="103.86"></i></div><div class="s10-rule"><strong>Meal Plus Five</strong><span data-cue="105.24">Check back after food service begins.</span><i class="s10-rule-focus" aria-hidden="true" data-cue="103.86" data-cue-end="107.46"></i></div><div class="s10-rule"><strong>The Last Five</strong><span data-cue="108.84">Finish with a thoughtful goodbye.</span><i class="s10-rule-focus" aria-hidden="true" data-cue="107.46" data-cue-end="110.46"></i></div><div class="s10-rule"><strong>Five-Star Finish</strong><span data-cue="113.16">Earn great feedback through consistent care.</span><i class="s10-rule-focus" aria-hidden="true" data-cue="110.46" data-cue-end="115.82"></i></div></div><div class="s10-goal" data-cue="120">Creating awesome memories.</div></div></section><div class="progress"><span></span></div></article>
+<article class="slide" id="slide11" data-duration="97.656" data-audio="audio/slide-11.m4a"><div class="slide-number">Day 1 · Slide 11</div><section class="scene photo-scene s11-scene " data-start="0" data-end="6.58"><div class="scene-photo" aria-hidden="true"><img src="images/s11-visible.webp" alt=""></div><div class="s11-copy"><div class="" data-cue="0"><div class="eyebrow">Being Present</div><h2>Be known.<br><span class="accent">Be easy to find.</span></h2></div><div class="s11-support" data-cue="1.8">Guests know who you are.<br>They know you’re paying attention.</div></div></section><section class="scene photo-scene s11-scene " data-start="6.58" data-end="24.36"><div class="scene-photo" aria-hidden="true"><img src="images/s11-visible.webp" alt=""></div><div class="s11-copy"><div class="" data-cue="6.58"><div class="eyebrow">During Scheduled Attraction Time</div><h2>Room to explore.<br><span class="accent">Support close by.</span></h2></div><div class="s11-support" data-cue="16.64">Know the schedule.<br>Remain visible.</div><div class="s11-result" data-cue="19.74">Reconnect with the child and parent<br>approximately every five minutes.</div></div></section><section class="scene photo-scene s11-scene " data-start="24.36" data-end="36.44"><div class="scene-photo" aria-hidden="true"><img src="images/s11-visible.webp" alt=""></div><div class="s11-copy"><div class="" data-cue="24.36"><div class="eyebrow">Make Check-Ins Useful</div><h2>Ask. Answer.<br><span class="accent">Think ahead.</span></h2></div><div class="s11-support" data-cue="26.0">How is it going?<br>What does this family need next?</div><div class="s11-result" data-cue="31.2">Catch concerns.<br>Prepare for the next transition.</div></div></section><section class="scene photo-scene s11-scene " data-start="36.44" data-end="53.52"><div class="scene-photo" aria-hidden="true"><img src="images/s11-transition.webp" alt=""></div><div class="s11-copy"><div class="" data-cue="36.44"><div class="eyebrow">Before Attraction Time Ends</div><h2>Prepare<br><span class="accent">the transition.</span></h2></div><div class="s11-support" data-cue="38.86">When to gather. Where to meet.</div><div class="s11-arrangements" data-cue="43.6"><div><strong>Full-duration room access</strong><span>Return to the party room.</span></div><div><strong>Food & celebration access</strong><span>Enter the assigned room or space.</span></div></div><div class="s11-note" data-cue="51.74">Know the arrangement for this booking.</div></div></section><section class="scene photo-scene s11-scene " data-start="53.52" data-end="63.98"><div class="scene-photo" aria-hidden="true"><img src="images/s11-private.webp" alt=""></div><div class="s11-copy"><div class="" data-cue="53.52"><div class="eyebrow">Scheduled Private Activities</div><h2>Know when.<br><span class="accent">Know where.</span></h2></div><div class="s11-support" data-cue="56.2">Private laser tag · XP Arena</div><div class="s11-result" data-cue="60.96">Confirmed start time.<br>Confirmed meeting location.</div></div></section><section class="scene photo-scene s11-scene " data-start="63.98" data-end="74.7"><div class="scene-photo" aria-hidden="true"><img src="images/s11-private.webp" alt=""></div><div class="s11-copy"><div class="" data-cue="63.98"><div class="eyebrow">Coordinate the Experience</div><h2>Follow the<br><span class="accent">confirmed plan.</span></h2></div><div class="s11-support" data-cue="63.98">Scheduled activities may occur<br>before or after food and celebration.</div><div class="s11-note" data-cue="68.34">Gather or escort guests<br>through your park’s process.</div><div class="s11-result" data-cue="71.02">Coordinate with the Event Coordinator<br>and attraction team.</div></div></section><section class="scene photo-scene s11-scene " data-start="74.7" data-end="86.72"><div class="scene-photo" aria-hidden="true"><img src="images/s11-private.webp" alt=""></div><div class="s11-copy"><div class="" data-cue="74.7"><div class="eyebrow">While Taking Care of Party Needs</div><h2>Stay accessible.<br><span class="accent">Follow through.</span></h2></div><div class="s11-support" data-cue="76.74">Prepare supplies.<br>Take care of party needs.</div><div class="s11-note" data-cue="81.1">Communicate where you’ll be<br>when appropriate.</div><div class="s11-result" data-cue="84.0">Keep your promises.</div></div></section><section class="scene photo-scene s11-scene " data-start="86.72" data-end="92.02"><div class="scene-photo" aria-hidden="true"><img src="images/s11-private.webp" alt=""></div><div class="s11-copy"><div class="" data-cue="86.72"><div class="eyebrow">Your Goal</div><h2>Room to enjoy.<br><span class="accent">Help easy to find.</span></h2></div></div></section><section class="scene photo-scene s11-scene " data-start="92.02" data-end="97.9"><div class="scene-photo" aria-hidden="true"><img src="images/s11-private.webp" alt=""></div><div class="s11-copy"><div class="" data-cue="92.02"><div class="eyebrow">Being Present</div><h2>Stay visible.<br><span class="accent">Check in. Think ahead.</span></h2></div><div class="s11-result" data-cue="95.42">Help each transition happen smoothly.</div></div></section><div class="progress"><span></span></div></article>
+<article class="slide" id="slide12" data-duration="121.656" data-audio="audio/slide-12.m4a"><div class="slide-number">Day 1 · Slide 12</div><section class="scene photo-scene s12-scene" data-start="0" data-end="9"><div class="scene-photo" aria-hidden="true"><img src="images/s12-listening.webp" alt=""></div><div class="s12-copy"><div class="" data-cue="0"><div class="eyebrow">Clear Communication</div><h2>Guests know what’s next.<br><span class="accent">The team knows the plan.</span></h2></div></div></section><section class="scene photo-scene s12-scene" data-start="9" data-end="24.44"><div class="scene-photo" aria-hidden="true"><img src="images/s12-listening.webp" alt=""></div><div class="s12-copy"><div class="" data-cue="9"><div class="eyebrow">Speaking With the Family · Example</div><h2>Warm. Direct.<br><span class="accent">Specific.</span></h2></div><div class="s12-quote-stage"><div class="s12-vague" data-cue="13.78" data-cue-end="15.65">“We’ll eat soon.”</div><div class="s12-answer" data-cue="16.1" data-cue-end="18.21">Use the confirmed time and location.</div><div class="s12-answer" data-cue="18.66">“Your food and celebration time begins at <strong>2:15.</strong><br>We’ll meet at your <strong>assigned party room.</strong>”</div></div></div></section><section class="scene photo-scene s12-scene" data-start="24.44" data-end="38.78"><div class="scene-photo" aria-hidden="true"><img src="images/s12-listening.webp" alt=""></div><div class="s12-copy"><div class="" data-cue="24.44"><div class="eyebrow">When a Parent Makes a Request</div><h2>Listen carefully.<br><span class="accent">Confirm the details.</span></h2></div><div class="s12-support" data-cue="27.36">Repeat the important details back.</div><div class="s12-chips" data-cue="31.58"><span>Type</span><span>Quantity</span><span>Current local price</span></div><div class="s12-note" data-cue="36.38">Follow your park’s ordering process.</div></div></section><section class="scene photo-scene s12-scene" data-start="38.78" data-end="50.86"><div class="scene-photo" aria-hidden="true"><img src="images/s12-coordination.webp" alt=""></div><div class="s12-copy"><div class="" data-cue="38.78"><div class="eyebrow">All Kitchen Changes</div><h2>One coordinator.<br><span class="accent">Clear instructions.</span></h2></div><div class="s12-flow" data-cue="38.78"><div><strong>Host</strong></div><b>→</b><div><strong>Event<br>Coordinator</strong></div><b>→</b><div><strong>Krave</strong></div></div><div class="s12-note" data-cue="42.26">Multiple parties. One coordinated channel.</div></div></section><section class="scene photo-scene s12-scene" data-start="50.86" data-end="67.14"><div class="scene-photo" aria-hidden="true"><img src="images/s12-coordination.webp" alt=""></div><div class="s12-copy"><div class="" data-cue="50.86"><div class="eyebrow">Make Your Message Useful · Example</div><h2>Party. Request.<br><span class="accent">Timing.</span></h2></div><div class="s12-support" data-cue="52.42">Identify the party or assigned table.<br>Explain the request and timing concern.</div><div class="s12-message" data-cue="59.42">“<strong>Party Table Three</strong> would like <strong>one additional cheese pizza.</strong><br>Their food time begins in <strong>twenty minutes.</strong>”</div></div></section><section class="scene photo-scene s12-scene" data-start="67.14" data-end="83.62"><div class="scene-photo" aria-hidden="true"><img src="images/s12-coordination.webp" alt=""></div><div class="s12-copy"><div class="" data-cue="67.14"><div class="eyebrow">For Other Needs</div><h2>Report promptly.<br><span class="accent">Keep it professional.</span></h2></div><div class="s12-support" data-cue="70.56">Schedule concerns · Attraction delays<br>Guest issues</div><div class="s12-result" data-cue="75.62">What did you observe?<br>What help is needed?</div><div class="s12-note" data-cue="78.62">Follow local radio procedures.<br>Keep internal conversations discreet.</div></div></section><section class="scene photo-scene s12-scene" data-start="83.62" data-end="90.28"><div class="scene-photo" aria-hidden="true"><img src="images/s12-followthrough.webp" alt=""></div><div class="s12-copy"><div class="" data-cue="83.62"><div class="eyebrow">When You Need an Answer</div><h2>“I’ll find out.”<br><span class="accent">Then follow through.</span></h2></div><div class="s12-support" data-cue="87.04">Check with the right person.<br>Return to the guest.</div></div></section><section class="scene photo-scene s12-scene" data-start="90.28" data-end="95.78"><div class="scene-photo" aria-hidden="true"><img src="images/s12-followthrough.webp" alt=""></div><div class="s12-copy"><div class="" data-cue="90.28"><div class="eyebrow">Information You Should Already Know</div><h2>Know your<br><span class="accent">common add-on prices.</span></h2></div><div class="s12-support" data-cue="90.28">Food · Drinks · Arcade</div></div></section><section class="scene photo-scene s12-scene" data-start="95.78" data-end="105.6"><div class="scene-photo" aria-hidden="true"><img src="images/s12-followthrough.webp" alt=""></div><div class="s12-copy"><div class="" data-cue="95.78"><div class="eyebrow">When the Confirmed Plan Changes</div><h2>Keep the<br><span class="accent">family informed.</span></h2></div><div class="s12-support" data-cue="99.28">Give clear next steps.</div><div class="s12-result" data-cue="101.2">Confirm a time or solution<br>before promising it.</div></div></section><section class="scene photo-scene s12-scene" data-start="105.6" data-end="115.32"><div class="scene-photo" aria-hidden="true"><img src="images/s12-followthrough.webp" alt=""></div><div class="s12-copy"><div class="" data-cue="105.6"><div class="eyebrow">Finally, Follow Through</div><h2>Passing it along<br><span class="accent">is only part of the job.</span></h2></div><div class="s12-loop" data-cue="110.26"><div><strong>Received?</strong><span>Check that the request reached the right person.</span></div><div><strong>Progress?</strong><span>Stay aware of what’s happening.</span></div><div><strong>Guest updated?</strong><span>Reconnect with the guest.</span></div></div></div></section><section class="scene photo-scene s12-scene" data-start="115.32" data-end="121.9"><div class="scene-photo" aria-hidden="true"><img src="images/s12-followthrough.webp" alt=""></div><div class="s12-copy"><div class="" data-cue="115.32"><div class="eyebrow">Clear Communication</div><h2>Close<br><span class="accent">the loop.</span></h2></div><div class="s12-recap" data-cue="115.32">Listen carefully.<br>Share clear details.<br>Use the right communication channel.<br>Close the loop.</div></div></section><div class="progress"><span></span></div></article>
+<article class="slide" id="slide13" data-duration="120.024" data-audio="audio/slide-13.m4a"><div class="slide-number">Day 1 · Slide 13</div><section class="scene photo-scene s13-scene" data-start="0" data-end="8.32"><div class="scene-photo" aria-hidden="true"><img src="images/s13-ready.webp" alt=""></div><div class="s13-copy"><div class="" data-cue="0"><div class="eyebrow">Professionalism, Safety & Good Judgment</div><h2>Families trust you.<br><span class="accent">Earn that trust.</span></h2></div></div></section><section class="scene photo-scene s13-scene" data-start="8.32" data-end="23.48"><div class="scene-photo" aria-hidden="true"><img src="images/s13-ready.webp" alt=""></div><div class="s13-copy"><div class="" data-cue="8.32"><div class="eyebrow">Arrive Ready to Work</div><h2>Ready. Focused.<br><span class="accent">Welcoming.</span></h2></div><div class="s13-support" data-cue="8.32">Required uniform.<br>Attention on the party.</div><div class="s13-note" data-cue="13.48">Respectful language. Patient listening.<br>Calm when it’s busy.</div><div class="s13-result" data-cue="18.66">Words, expression, and body language<br>help guests feel welcome.</div></div></section><section class="scene photo-scene s13-scene" data-start="23.48" data-end="33.4"><div class="scene-photo" aria-hidden="true"><img src="images/s13-ready.webp" alt=""></div><div class="s13-copy"><div class="" data-cue="23.48"><div class="eyebrow">Professional Habits</div><h2>Focus on service.<br><span class="accent">Protect guest information.</span></h2></div><div class="s13-support" data-cue="26.26">Use your park’s approved<br>communication channels.</div></div></section><section class="scene photo-scene s13-scene" data-start="33.4" data-end="49.42"><div class="scene-photo" aria-hidden="true"><img src="images/s13-awareness.webp" alt=""></div><div class="s13-copy"><div class="" data-cue="33.4"><div class="eyebrow">Stay Aware of Your Surroundings</div><h2>Notice concerns.<br><span class="accent">Respond promptly.</span></h2></div><div class="s13-chips" data-cue="35.2"><span>Spills</span><span>Blocked walkways</span><span>Crowded areas</span></div><div class="s13-support" data-cue="40.84">Respond within your training.<br>Notify the appropriate team member.</div><div class="s13-result" data-cue="45.08">Safety concerns do not wait<br>for the next five-minute check-in.</div></div></section><section class="scene photo-scene s13-scene" data-start="49.42" data-end="64.92"><div class="scene-photo" aria-hidden="true"><img src="images/s13-awareness.webp" alt=""></div><div class="s13-copy"><div class="" data-cue="49.42"><div class="eyebrow">Party Host & Attraction Team</div><h2>Know your role.<br><span class="accent">Follow the safety process.</span></h2></div><div class="s13-support" data-cue="52.8">Support directions and transitions.<br>Follow the attraction team’s instructions.</div><div class="s13-result" data-cue="61.1">Unsure whether it’s allowed?<br>Check before giving permission.</div></div></section><section class="scene photo-scene s13-scene" data-start="64.92" data-end="79.88"><div class="scene-photo" aria-hidden="true"><img src="images/s13-support.webp" alt=""></div><div class="s13-copy"><div class="" data-cue="64.92"><div class="eyebrow">Know When to Get Help</div><h2>Get the<br><span class="accent">right support.</span></h2></div><div class="s13-support" data-cue="66.3">Guest concerns. Booking discrepancies.<br>Requests outside your authority.</div><div class="s13-note" data-cue="71.2">Event Coordinator or appropriate manager.</div><div class="s13-result" data-cue="74.1">Approval before promises:<br>Discounts · Extra access · Schedule changes</div></div></section><section class="scene photo-scene s13-scene" data-start="79.88" data-end="95.72"><div class="scene-photo" aria-hidden="true"><img src="images/s13-support.webp" alt=""></div><div class="s13-copy"><div class="" data-cue="79.88"><div class="eyebrow">Food Questions Need Accurate Answers</div><h2>Ingredients or allergies?<br><span class="accent">Get confirmed information.</span></h2></div><div class="s13-support" data-cue="87.28">Through the Event Coordinator<br>and your park’s approved process.</div><div class="s13-result" data-cue="92.1">All kitchen changes still go<br>through the Event Coordinator.</div></div></section><section class="scene photo-scene s13-scene" data-start="95.72" data-end="105.88"><div class="scene-photo" aria-hidden="true"><img src="images/s13-support.webp" alt=""></div><div class="s13-copy"><div class="" data-cue="95.72"><div class="eyebrow">If an Injury or Emergency Occurs</div><h2>Follow your park’s<br><span class="accent">emergency procedures.</span></h2></div><div class="s13-support" data-cue="100">Get the appropriate<br>trained personnel involved.</div><div class="s13-result" data-cue="103.32">Stay calm. Communicate clearly.</div></div></section><section class="scene photo-scene s13-scene" data-start="105.88" data-end="115.08"><div class="scene-photo" aria-hidden="true"><img src="images/s13-support.webp" alt=""></div><div class="s13-copy"><div class="" data-cue="105.88"><div class="eyebrow">Be Helpful Within Your Role</div><h2>Get the right help.<br><span class="accent">Stay connected.</span></h2></div><div class="s13-support" data-cue="109.4">Take ownership until the guest<br>knows what happens next.</div></div></section><section class="scene photo-scene s13-scene" data-start="115.08" data-end="120.3"><div class="scene-photo" aria-hidden="true"><img src="images/s13-support.webp" alt=""></div><div class="s13-copy"><div class="" data-cue="115.08"><div class="eyebrow">Professionalism, Safety & Boundaries</div><h2>Earn trust<br><span class="accent">through good judgment.</span></h2></div><div class="s13-recap" data-cue="115.08">Be professional.<br>Stay alert.<br>Know your role.<br>Get help when it’s needed.</div></div></section><div class="progress"><span></span></div></article>
+<article class="slide" id="slide14" data-duration="136.680" data-audio="audio/slide-14.m4a"><div class="slide-number">Day 1 · Slide 14</div><section class="scene photo-scene s14-scene " data-start="0" data-end="6.62"><div class="scene-photo" aria-hidden="true"><img src="images/s14-trainer.webp" alt=""></div><div class="s14-copy"><div class="" data-cue="0"><div class="eyebrow">Day 1 Recap & Hands-On Training</div><h2>Put it<br><span class="accent">into practice.</span></h2></div><div class="s14-support" data-cue="3.18">With your trainer.</div></div></section><section class="scene photo-scene s14-scene " data-start="6.62" data-end="18.84"><div class="scene-photo" aria-hidden="true"><img src="images/s14-trainer.webp" alt=""></div><div class="s14-copy"><div class="" data-cue="6.62"><div class="eyebrow">The Purpose of Your Role</div><h2>Awesome memories.<br><span class="accent">An easier experience.</span></h2></div><div class="s14-support" data-cue="6.62">For the birthday child and parent.</div><div class="s14-result" data-cue="14.34">Connect. Think ahead. Follow through.</div></div></section><section class="scene photo-scene s14-scene " data-start="18.84" data-end="35.58"><div class="scene-photo" aria-hidden="true"><img src="images/s14-trainer.webp" alt=""></div><div class="s14-copy"><div class="" data-cue="18.84"><div class="eyebrow">Before Each Party</div><h2>Review the<br><span class="accent">confirmed booking.</span></h2></div><div class="s14-grid" data-cue="22.06"><span>Package</span><span>Participating guests</span><span>Schedule</span><span>Assigned space</span><span>Included items</span><span>Purchased extras</span></div><div class="s14-note" data-cue="30.08">Questions or conflicting details?<br>Bring them to the Event Coordinator.</div></div></section><section class="scene photo-scene s14-scene s14-rule-scene" data-start="35.58" data-end="52.12"><div class="scene-photo" aria-hidden="true"><img src="images/s14-trainer.webp" alt=""></div><div class="s14-copy"><div class="" data-cue="35.58"><div class="eyebrow">Consistent Care Throughout the Party</div><h2>Remember the<br><span class="accent">Rule of Five.</span></h2></div><div class="s10-rules" data-cue="35.58"><div class="s10-rule"><strong>The First Five</strong><span data-cue="43.08">Connect at arrival.</span></div><div class="s10-rule"><strong>Every Five</strong><span data-cue="44.44">Stay visible and check in.</span></div><div class="s10-rule"><strong>Meal Plus Five</strong><span data-cue="45.36">Check back after food service begins.</span></div><div class="s10-rule"><strong>The Last Five</strong><span data-cue="47.68">Give a thoughtful goodbye.</span></div><div class="s10-rule"><strong>Five-Star Finish</strong><span data-cue="49.46">Earn great feedback through consistent care.</span></div></div></div></section><section class="scene photo-scene s14-scene " data-start="52.12" data-end="66.38"><div class="scene-photo" aria-hidden="true"><img src="images/s14-trainer.webp" alt=""></div><div class="s14-copy"><div class="" data-cue="52.12"><div class="eyebrow">Work as Part of the Party Team</div><h2>Work together.<br><span class="accent">Communicate clearly.</span></h2></div><div class="s14-team" data-cue="53.66"><strong>Event Coordinator</strong><span>Oversees the flow.</span><span>Generally leads check-in.</span><span>Communicates all kitchen changes.</span></div><div class="s14-note" data-cue="60.52">Clear details. Your park’s process.<br>Close the loop with the guest.</div></div></section><section class="scene photo-scene s14-scene " data-start="66.38" data-end="81.92"><div class="scene-photo" aria-hidden="true"><img src="images/s14-tour.webp" alt=""></div><div class="s14-copy"><div class="" data-cue="66.38"><div class="eyebrow">During Hands-On Training</div><h2>Walk the park<br><span class="accent">with your trainer.</span></h2></div><div class="s14-grid" data-cue="70.26"><span>Check-in</span><span>Party spaces</span><span>Krave</span><span>Restrooms</span><span>Attractions</span><span>Supplies</span></div><div class="s14-note" data-cue="76.28">Room access. Scheduled activities.<br>Transitions through the party.</div></div></section><section class="scene photo-scene s14-scene " data-start="81.92" data-end="91.36"><div class="scene-photo" aria-hidden="true"><img src="images/s14-tour.webp" alt=""></div><div class="s14-copy"><div class="" data-cue="81.92"><div class="eyebrow">Demonstrate the Basics</div><h2>Practice<br><span class="accent">the service.</span></h2></div><div class="s14-grid" data-cue="81.92"><span>Read a party report</span><span>Welcome a family</span><span>Answer common questions</span><span>Food request through the Event Coordinator</span></div></div></section><section class="scene photo-scene s14-scene " data-start="91.36" data-end="104.42"><div class="scene-photo" aria-hidden="true"><img src="images/s14-practice.webp" alt=""></div><div class="s14-copy"><div class="" data-cue="91.36"><div class="eyebrow">Popular Food, Drink & Arcade Add-Ons</div><h2>Know the offerings.<br><span class="accent">Know the prices.</span></h2></div><div class="s14-price-wrap" data-cue="96.64"><table class="s14-price-preview"><thead><tr><th>Category</th><th>Local item</th><th>Price</th></tr></thead><tbody><tr><th>Food</th><td><i></i></td><td>$ <i></i></td></tr><tr><th>Drinks</th><td><i></i></td><td>$ <i></i></td></tr><tr><th>Arcade</th><td><i></i></td><td>$ <i></i></td></tr></tbody></table></div><div class="s14-note" data-cue="99.94">Record local prices in your checklist.<br>Practice confident answers and useful recommendations.</div></div></section><section class="scene photo-scene s14-scene " data-start="104.42" data-end="114.04"><div class="scene-photo" aria-hidden="true"><img src="images/s14-practice.webp" alt=""></div><div class="s14-copy"><div class="" data-cue="104.42"><div class="eyebrow">With Your Trainer</div><h2>Learn the<br><span class="accent">local routines.</span></h2></div><div class="s14-support" data-cue="104.42">Opening · Setup · Stocking<br>Cleanup · Closing</div><div class="s14-result" data-cue="110.44">Safety procedures.<br>When to get help.</div></div></section><section class="scene photo-scene s14-scene " data-start="114.04" data-end="124.52"><div class="scene-photo" aria-hidden="true"><img src="images/s14-practice.webp" alt=""></div><div class="s14-copy"><div class="" data-cue="114.04"><div class="eyebrow">Use the Day 1 Checklist</div><h2>Ask. Practice.<br><span class="accent">Demonstrate.</span></h2></div><div class="s14-support" data-cue="114.04">Use the checklist to guide practice.</div><div class="s14-result" data-cue="119.94">Have your trainer verify completed items<br>before the Day 1 exam.</div></div></section><section class="scene photo-scene s14-scene " data-start="124.52" data-end="131.04"><div class="scene-photo" aria-hidden="true"><img src="images/s14-practice.webp" alt=""></div><div class="s14-copy"><div class="" data-cue="124.52"><div class="eyebrow">Your First Training Shift</div><h2>Keep learning.<br><span class="accent">Keep improving.</span></h2></div><div class="s14-support" data-cue="127.14">Pay attention.<br>Ask for help.</div></div></section><section class="scene photo-scene s14-scene " data-start="131.04" data-end="137"><div class="scene-photo" aria-hidden="true"><img src="images/s14-practice.webp" alt=""></div><div class="s14-copy"><div class="" data-cue="131.04"><div class="eyebrow">Ready for Hands-On Practice</div><h2>Create<br><span class="accent">awesome memories.</span></h2></div><div class="s14-recap" data-cue="131.04">Know the plan.<br>Connect with the family.<br>Work with your team.<br>Create awesome memories.</div></div></section><div class="progress"><span></span></div></article>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="home-links"><a class="link" href="index.html">Day 1 Home</a><a class="link" href="../index.html">Party Host Home</a></div>
+  <div id="audioStatus">Ready · Slide 1 narration loaded</div>
+  <div class="controls">
+    <button class="control" id="backButton" disabled>Back</button>
+    <button class="control audio" id="playButton">Play Narration</button>
+    <button class="control pause" id="pauseButton" disabled>⏸ Pause</button>
+    <button class="control next" id="nextButton" disabled>Next</button>
+  </div>
+</footer>
+</main>
+
+<audio id="narration" preload="metadata" src="audio/slide-01.m4a"></audio>
+
+<script>
+(function(){
+'use strict';
+const overlay=document.getElementById('startOverlay'),audio=document.getElementById('narration');
+const slides=[...document.querySelectorAll('.slide')];
+const playButton=document.getElementById('playButton'),pauseButton=document.getElementById('pauseButton'),nextButton=document.getElementById('nextButton'),backButton=document.getElementById('backButton'),audioStatus=document.getElementById('audioStatus');
+let index=0,slide=slides[0],scenes=[],cues=[],progressBar,raf=null,completed=false;
+const finished=new Set();
+function formatTime(t){t=Math.max(0,Math.floor(t||0));return Math.floor(t/60)+':'+String(t%60).padStart(2,'0');}
+function duration(){return Number.isFinite(audio.duration)&&audio.duration>0?audio.duration:Number(slide.dataset.duration);}
+function syncVisuals(){
+ cancelAnimationFrame(raf);const t=audio.currentTime||0;
+ cues.forEach(el=>el.classList.toggle('revealed',t>=Number(el.dataset.cue)&&(!el.hasAttribute('data-cue-end')||t<Number(el.dataset.cueEnd))));
+ slide.querySelectorAll('.scene-photo img').forEach(img=>{const local=Math.max(0,t-Number(img.closest('.scene').dataset.start));img.style.transform='scale('+(1.02+Math.min(local,20)*.0015)+')';});
+ slide.querySelectorAll('[data-flight]').forEach(el=>{const f=Math.min(1,Math.max(0,(t-Number(el.dataset.flightStart))/Number(el.dataset.flightDuration)));el.setAttribute('transform','translate('+(Number(el.dataset.x)+f*Number(el.dataset.dx))+' '+(Number(el.dataset.y)+f*Number(el.dataset.dy))+')');});
+ scenes.forEach(scene=>scene.classList.toggle('visible',t>=Number(scene.dataset.start)&&t<Number(scene.dataset.end)));
+ progressBar.style.width=Math.min(100,t/duration()*100)+'%';
+ if(slide.classList.contains('paused'))audioStatus.textContent='Paused · '+formatTime(t)+' / '+formatTime(duration());
+ if(!audio.paused&&!audio.ended){audioStatus.textContent='Playing · '+formatTime(t)+' / '+formatTime(duration());raf=requestAnimationFrame(syncVisuals);}
+}
+function resetToStart(){
+ audio.currentTime=0;completed=false;nextButton.disabled=true;nextButton.textContent='Next';playButton.disabled=false;playButton.textContent='Play Narration';pauseButton.disabled=true;pauseButton.textContent='⏸ Pause';slide.classList.remove('paused');syncVisuals();
+}
+async function play(){
+ try{await audio.play();playButton.disabled=true;pauseButton.disabled=false;pauseButton.textContent='⏸ Pause';slide.classList.remove('paused');syncVisuals();}
+ catch(e){audioStatus.textContent='Select Play Narration to begin';playButton.disabled=false;pauseButton.disabled=true;}
+}
+function selectSlide(n,autoplay){
+ audio.pause();cancelAnimationFrame(raf);slides.forEach(s=>s.classList.remove('active','paused'));
+ index=n;slide=slides[n];slide.classList.add('active');scenes=[...slide.querySelectorAll('.scene')];cues=[...slide.querySelectorAll('[data-cue]')];progressBar=slide.querySelector('.progress span');
+ completed=finished.has(index);nextButton.disabled=!completed;nextButton.textContent=index===slides.length-1&&completed?'Open Trainer Checklist':'Next';backButton.disabled=index===0;playButton.disabled=false;playButton.textContent='Play Narration';pauseButton.disabled=true;pauseButton.textContent='⏸ Pause';
+ document.getElementById('slideCounter').textContent='Slide '+(index+1)+' / '+slides.length;
+ audio.src=slide.dataset.audio;audio.load();syncVisuals();audioStatus.textContent='Ready · Slide '+(index+1)+' narration';
+ if(autoplay)play();
+}
+function finish(){
+ completed=true;finished.add(index);cancelAnimationFrame(raf);progressBar.style.width='100%';scenes.forEach(s=>s.classList.remove('visible'));scenes[scenes.length-1].classList.add('visible');scenes[scenes.length-1].querySelectorAll('[data-cue]').forEach(el=>el.classList.toggle('revealed',!el.hasAttribute('data-cue-end')));
+ slide.classList.remove('paused');playButton.disabled=false;playButton.textContent='Replay Narration';pauseButton.disabled=true;pauseButton.textContent='⏸ Pause';nextButton.disabled=false;nextButton.textContent=index===slides.length-1?'Open Trainer Checklist':'Next';audioStatus.textContent=index===slides.length-1?'Day 1 slideshow complete · Continue with your trainer':'Slide complete · Next unlocked';
+}
+function advance(){
+ if(!completed)return;
+ if(index+1<slides.length)selectSlide(index+1,true);
+ else{audio.pause();cancelAnimationFrame(raf);window.location.href='checklist.html';}
+}
+ document.getElementById('startButton').addEventListener('click',()=>{overlay.style.display='none';resetToStart();play();});
+ document.getElementById('fullscreenButton').addEventListener('click',async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen();}catch(e){}});
+ document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==='f'){e.preventDefault();audio.pause();finish();advance();}});
+ playButton.addEventListener('click',()=>{if(audio.ended||completed)resetToStart();play();});
+ pauseButton.addEventListener('click',()=>{if(audio.paused)play();else{audio.pause();pauseButton.textContent='▶ Resume';slide.classList.add('paused');syncVisuals();}});
+ backButton.addEventListener('click',()=>{if(index>0)selectSlide(index-1,false);});
+ nextButton.addEventListener('click',advance);
+ audio.addEventListener('loadedmetadata',()=>{slide.dataset.duration=audio.duration.toFixed(3);if(audio.paused&&!completed)audioStatus.textContent='Ready · Slide '+(index+1)+' · '+formatTime(audio.duration)+' narration';});
+ audio.addEventListener('timeupdate',syncVisuals);audio.addEventListener('seeked',syncVisuals);audio.addEventListener('ended',finish);
+ const stage=document.querySelector('.stage'),shell=document.querySelector('.slide-shell');
+ function fitSlide(){if(matchMedia('(max-width:700px) and (orientation:portrait)').matches)return;const st=getComputedStyle(stage),w=stage.clientWidth-parseFloat(st.paddingLeft)-parseFloat(st.paddingRight),h=stage.clientHeight-parseFloat(st.paddingTop)-parseFloat(st.paddingBottom),f=Math.min(w,h*16/9,1280);shell.style.width=Math.max(0,f)+'px';shell.style.height=Math.max(0,f*9/16)+'px';}
+ new ResizeObserver(fitSlide).observe(stage);selectSlide(0,false);
+ window.PARTY_HOST_SLIDE_ENGINE_TEMPLATE={slides:14,audioLoaded:true,narrationCompletionGating:true,pauseVisualSync:true};
+})();
+
+</script>
+<dialog class="v19-viewer" id="reportViewer" aria-label="Complete first party report"><div class="v19-viewer-bar"><span>First party · Scroll to inspect the report</span><button type="button" id="closeReportViewer">Close</button></div><div class="v19-viewer-scroll"></div></dialog>
+<script>
+document.querySelector('.v19-enlarge').addEventListener('click',()=>{
+ if(!narration.paused)document.getElementById('pauseButton').click();
+ const viewer=document.getElementById('reportViewer'),copy=document.querySelector('#slide9 .v19-sheet').cloneNode(true);
+ viewer.querySelector('.v19-viewer-scroll').replaceChildren(copy);viewer.showModal();
+});
+document.getElementById('closeReportViewer').addEventListener('click',()=>document.getElementById('reportViewer').close());
+</script>
+</body>
+</html>

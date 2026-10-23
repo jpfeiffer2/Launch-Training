@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Party Host Day 1 Trainer Checklist</title>
+<style>
+    :root {
+      --launch-green:#6cc24a;
+      --launch-yellow:#f2e600;
+      --ink:#111820;
+      --muted:#4b5563;
+      --line:#dfe5ea;
+      --soft:#f7fbf5;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      padding:28px;
+      background:linear-gradient(135deg,#101410,#1c2418);
+      color:var(--ink);
+      font-family:Arial,Helvetica,sans-serif;
+    }
+    .page {
+      max-width:980px;
+      margin:0 auto;
+      overflow:hidden;
+      border-radius:22px;
+      background:#fff;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+    header {
+      padding:28px 34px 22px;
+      border-top:8px solid var(--launch-green);
+      border-bottom:1px solid var(--line);
+    }
+    .eyebrow {
+      margin-bottom:8px;
+      color:#2d9a22;
+      font-size:.82rem;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+    h1 { margin:0; font-size:2.35rem; letter-spacing:-.04em; }
+    .sub { margin-top:8px; color:var(--muted); font-size:1rem; line-height:1.4; }
+    .actions {
+      display:flex;
+      gap:12px;
+      padding:18px 34px;
+      border-bottom:1px solid var(--line);
+      background:#f8fafc;
+    }
+    button,.button {
+      display:inline-block;
+      padding:12px 20px;
+      border:0;
+      border-radius:999px;
+      font-size:.95rem;
+      font-weight:900;
+      text-decoration:none;
+      cursor:pointer;
+    }
+    .print { background:var(--launch-yellow); color:#000; }
+    .back { background:#111820; color:#fff; }
+    main { padding:24px 34px 34px; }
+    .info-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+      margin-bottom:22px;
+    }
+    .field { min-height:58px; padding:10px 12px; border:1px solid var(--line); border-radius:12px; }
+    .field label {
+      display:block;
+      margin-bottom:10px;
+      color:var(--muted);
+      font-size:.72rem;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .line { height:20px; border-bottom:1px solid #9ca3af; }
+    section { margin-bottom:16px; overflow:hidden; border:1px solid var(--line); border-radius:16px; }
+    .section-head {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:12px 16px;
+      background:#111820;
+      color:#fff;
+      font-weight:900;
+    }
+    .section-head span { color:var(--launch-yellow); font-size:.82rem; letter-spacing:.08em; text-transform:uppercase; }
+    .rows { padding:8px 14px 12px; }
+    .row {
+      display:grid;
+      grid-template-columns:26px 1fr 95px 95px;
+      gap:10px;
+      align-items:start;
+      padding:10px 0;
+      border-bottom:1px solid #eef2f4;
+      font-size:.92rem;
+      line-height:1.3;
+    }
+    .row:last-child { border-bottom:0; }
+    .box { width:20px; height:20px; margin-top:1px; border:2px solid #111820; border-radius:4px; }
+    .initial-line { height:24px; border-bottom:1px solid #9ca3af; }
+    .small-label {
+      margin-top:3px;
+      color:var(--muted);
+      font-size:.62rem;
+      font-weight:800;
+      letter-spacing:.07em;
+      text-transform:uppercase;
+    }
+    .notes-area { margin-top:18px; padding:14px; border:1px solid var(--line); border-radius:16px; }
+    .notes-lines { height:40px; margin-top:10px; background:repeating-linear-gradient(#fff,#fff 29px,#cbd5e1 30px); }
+    .signatures { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:60px; }
+    .sig { padding-top:8px; border-top:2px solid #111820; color:#374151; font-weight:800; }
+    .footer-note {
+      margin-top:18px;
+      padding:12px 14px;
+      border:2px solid var(--launch-yellow);
+      border-radius:14px;
+      background:#fff8dc;
+      font-weight:800;
+      line-height:1.35;
+    }
+    @media(max-width:720px) {
+      body { padding:12px; }
+      header,.actions,main { padding-left:18px; padding-right:18px; }
+      .info-grid { grid-template-columns:1fr; }
+      .row { grid-template-columns:24px 1fr 68px 68px; font-size:.84rem; }
+      .section-head { align-items:flex-start; flex-direction:column; gap:4px; }
+    }
+    @media print {
+      body { padding:0; background:#fff; }
+      .page { max-width:none; border-radius:0; box-shadow:none; }
+      .actions { display:none; }
+      header { padding:18px 24px 14px; }
+      h1 { font-size:1.9rem; }
+      main { padding:16px 24px; }
+      .info-grid,.footer-note,.notes-area,.signatures { break-inside:avoid; page-break-inside:avoid; }
+      section { break-inside:auto; page-break-inside:auto; }
+      .section-head,.row { break-inside:avoid; page-break-inside:avoid; }
+      .row { grid-template-columns:24px 1fr 80px 80px; padding:7px 0; font-size:.82rem; }
+      .section-head { print-color-adjust:exact; -webkit-print-color-adjust:exact; }
+      .notes-area { margin-top:8px; padding:8px 10px; }
+      .notes-area strong { font-size:.78rem; }
+      .notes-lines { height:34px; margin-top:6px; background:repeating-linear-gradient(#fff,#fff 16px,#cbd5e1 17px); }
+      .signatures { margin-top:34px; gap:24px; }
+      .sig { min-height:42px; font-size:.82rem; }
+    }
+  
+.check-header{display:flex;align-items:center;justify-content:space-between;gap:20px}.check-header img{width:145px;height:auto}.info-grid{grid-template-columns:repeat(4,1fr)}.page-heading{font-size:1.35rem;margin:8px 0 18px}.check-page+.check-page{margin-top:35px;padding-top:25px;border-top:2px solid #dfe5ea}.actions{flex-wrap:wrap}.pricing-body{padding:14px 16px}.pricing-body p{margin:0 0 15px;font-size:.9rem;line-height:1.4;color:#4b5563}.price-table{width:100%;border-collapse:collapse;table-layout:fixed}.price-table th,.price-table td{padding:12px 9px;border:1px solid #dfe5ea;text-align:left;font-size:.86rem}.price-table thead th{background:#edf5e9}.price-table tbody th{font-weight:700}.write-line{height:22px;border-bottom:1px solid #9ca3af}.price-line{height:22px;width:calc(100% - 18px);border-bottom:1px solid #9ca3af;display:inline-block;vertical-align:bottom}.pricing-meta{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:20px;font-size:.86rem}.inline-line{display:inline-block;width:48%;height:22px;vertical-align:bottom;border-bottom:1px solid #9ca3af}
+@media(max-width:720px){.check-header{align-items:flex-start;flex-wrap:wrap}.check-header img{width:125px}.info-grid{grid-template-columns:1fr 1fr}.row{grid-template-columns:22px 1fr 48px 48px;gap:7px}.small-label{font-size:.54rem;letter-spacing:0}.price-table th,.price-table td{padding:9px 5px;font-size:.7rem}.pricing-meta{grid-template-columns:1fr}.signatures{grid-template-columns:1fr;gap:45px}.page-heading{font-size:1.2rem}.pricing-body{padding:12px 10px}}
+@media print{ @page{size:letter;margin:.35in}.check-page+.check-page{break-before:page;page-break-before:always;margin-top:0;padding-top:0;border:0}.info-grid{grid-template-columns:repeat(4,1fr);margin-bottom:14px}.field{min-height:46px;padding:7px 9px}.field label{margin-bottom:6px;font-size:.62rem}.field .line{height:16px}.page-heading{font-size:1.1rem;margin:0 0 13px}.check-header{padding:14px 20px}.check-header h1{font-size:1.7rem}.check-header .sub{font-size:.8rem}.check-header img{width:120px}main{padding:14px 20px}.section-head{padding:9px 12px;font-size:.85rem;flex-direction:row}.section-head span{font-size:.65rem}.rows{padding:5px 12px 8px}.row{font-size:.78rem;line-height:1.28;padding:5px 0;grid-template-columns:22px 1fr 70px 70px;gap:8px}.small-label{font-size:.56rem}.initial-line{height:18px}section{margin-bottom:13px}.box{width:17px;height:17px}.pricing-section{break-inside:avoid;page-break-inside:avoid}.pricing-body{padding:11px 12px}.pricing-body p{font-size:.78rem;margin-bottom:12px}.price-table th,.price-table td{font-size:.78rem;padding:9px 8px}.write-line,.price-line{height:19px}.pricing-meta{grid-template-columns:1fr 1fr;font-size:.78rem;margin-top:15px;gap:14px}.signatures{grid-template-columns:1fr 1fr;margin-top:34px;gap:24px}.footer-note{font-size:.78rem;padding:10px 12px}}
+
+</style>
+<style>.blank-checklist{padding:22px;border:2px dashed #cfd6db;border-radius:14px;background:#fafbfc;color:#667078;font-weight:800}</style>
+<style id="party-host-initial-lock">html:not(.party-host-ready){visibility:hidden}</style>
+<script src="../access.js" defer></script>
+</head><body><div class="page"><header class="check-header"><div><div class="eyebrow">Party Host Day 1</div><h1>Trainer Floor Checklist</h1><div class="sub">Use during supervised hands-on practice. Trainer and trainee initial verified skills; record current local information.</div></div><img src="../assets/launch-family-entertainment-logo.png" alt="Launch Family Entertainment"></header><div class="actions"><button class="print" onclick="window.print()">Print / Save as PDF</button><a class="button back" href="index.html">Back to Day 1 Menu</a><a class="button back" href="../index.html">Party Host Home</a></div><main><div class="check-page"><div class="info-grid"><div class="field"><label>Trainee Name</label><div class="line"></div></div><div class="field"><label>Trainer Name</label><div class="line"></div></div><div class="field"><label>Park Location</label><div class="line"></div></div><div class="field"><label>Training Shift Date</label><div class="line"></div></div></div><section><div class="section-head">Ready for the Shift<span>Trainer verified</span></div><div class="rows"><div class="row"><div class="box" aria-hidden="true"></div><div>Arrive in the required uniform, ready to work; review professional conduct and guest privacy expectations.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Explain how the Party Host supports both the birthday child and parent through connection, attention, and follow-through.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Identify the Event Coordinator and appropriate manager; explain the host’s role and when to get help.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section><section><div class="section-head">Park Walkthrough &amp; Local Party Flow<span>Trainer verified</span></div><div class="rows"><div class="row"><div class="box" aria-hidden="true"></div><div>Locate event check-in, party rooms or tables, Krave, restrooms, attractions, and party supplies.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Review where supplies are stored, how they are restocked, and who can help with equipment or service needs.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Walk through arrival, scheduled attraction time, food and celebration, any later scheduled activities, checkout, and departure.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Review full-duration room access versus access during food and celebration; confirm the arrangement for a sample booking.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Review private laser tag, XP Arena, or other scheduled activity meeting locations, start times, and local gathering or escort procedures.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Review any post-party attraction access and the wristband-swap procedure during food and celebration when the package includes jumping after the party.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section><section><div class="section-head">Read the Confirmed Party Plan<span>Trainer verified</span></div><div class="rows"><div class="row"><div class="box" aria-hidden="true"></div><div>Read a Groups Arriving by Arrival Date report: identify package, forecasted participating guests, check-in, attraction start, food, checkout, and assigned space.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Explain that Group Size forecasts participating guests; the Event Coordinator generally leads check-in and verifies the actual participating count.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Distinguish “Inc” items from “Add” extras; review quantities, repeated item rows, and notes to determine the planned totals.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Identify booking questions or conflicting details and explain how to confirm them with the Event Coordinator before arrival.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section></div><div class="check-page"><h2 class="page-heading">Day 1 · Hands-On Practice</h2><section><div class="section-head">Practice Guest Service &amp; Communication<span>Trainer verified</span></div><div class="rows"><div class="row"><div class="box" aria-hidden="true"></div><div>Practice welcoming the child and parent, introducing yourself, and explaining the confirmed next steps.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Explain the First Five, Every Five, Meal Plus Five, Last Five, and Five-Star Finish; demonstrate a useful check-in while remaining accessible.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Practice answering common location and schedule questions with clear, specific information; demonstrate returning with an answer when help is needed.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Practice a kitchen add-on request: confirm type, quantity, and current local price; communicate party identification and timing through the Event Coordinator.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Review Joey’s visit near cake time and silent participation in “Happy Birthday”; explain the recommendation to take presents home to open.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Practice room or activity transitions, departure assistance, the parent’s local checkout process, a personal thank-you, and closing the loop on requests.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section><section><div class="section-head">Local Opening, Setup &amp; Closing<span>Trainer verified</span></div><div class="rows"><div class="row"><div class="box" aria-hidden="true"></div><div>Demonstrate local opening responsibilities and the process for reviewing assigned parties and schedules.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Prepare the assigned room or table and required supplies according to the confirmed booking and local standards.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Demonstrate local stocking and replenishment procedures for party supplies.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Demonstrate clearing, cleaning, and resetting the party area through the park’s approved process.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Review closing responsibilities, supply storage, and communication of remaining needs.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section><section><div class="section-head">Professionalism, Safety &amp; Escalation<span>Trainer verified</span></div><div class="rows"><div class="row"><div class="box" aria-hidden="true"></div><div>Identify spills, blocked walkways, crowding, or other concerns; explain prompt reporting and responding within training.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Review attraction-team responsibilities and local safety procedures; check before granting uncertain permissions or making promises outside your authority.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Explain how ingredient or allergy questions are confirmed through the Event Coordinator and approved local process; route all kitchen changes through the coordinator.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Locate and review local emergency procedures, identify appropriate trained personnel, and practice calm, clear reporting.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section></div><div class="check-page"><h2 class="page-heading">Day 1 · Local Knowledge & Verification</h2><section class="pricing-section"><div class="section-head">Popular Local Add-Ons & Prices<span>Fill in at this park</span></div><div class="pricing-body"><p>With your trainer, record popular items, their portion or amount, and current local prices. Use approved local resources to verify the entries before practicing.</p><table class="price-table"><colgroup><col style="width:16%"><col style="width:42%"><col style="width:24%"><col style="width:18%"></colgroup><thead><tr><th>Category</th><th>Popular local item</th><th>Portion / amount</th><th>Current price</th></tr></thead><tbody><tr><th scope="row">Food</th><td><div class="write-line"></div></td><td><div class="write-line"></div></td><td>$ <div class="price-line"></div></td></tr><tr><th scope="row">Food</th><td><div class="write-line"></div></td><td><div class="write-line"></div></td><td>$ <div class="price-line"></div></td></tr><tr><th scope="row">Food</th><td><div class="write-line"></div></td><td><div class="write-line"></div></td><td>$ <div class="price-line"></div></td></tr><tr><th scope="row">Drinks</th><td><div class="write-line"></div></td><td><div class="write-line"></div></td><td>$ <div class="price-line"></div></td></tr><tr><th scope="row">Drinks</th><td><div class="write-line"></div></td><td><div class="write-line"></div></td><td>$ <div class="price-line"></div></td></tr><tr><th scope="row">Arcade</th><td><div class="write-line"></div></td><td><div class="write-line"></div></td><td>$ <div class="price-line"></div></td></tr><tr><th scope="row">Arcade</th><td><div class="write-line"></div></td><td><div class="write-line"></div></td><td>$ <div class="price-line"></div></td></tr></tbody></table><div class="pricing-meta"><div>Prices verified on: <span class="inline-line"></span></div><div>Verified by: <span class="inline-line"></span></div></div></div></section><section><div class="section-head">Practice Local Add-On Recommendations<span>Trainer verified</span></div><div class="rows"><div class="row"><div class="box" aria-hidden="true"></div><div>Identify the popular food, drink, and arcade add-ons listed above and answer their current prices confidently without leaving to check a menu.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Practice useful food, drink, and arcade recommendations for a party; clearly explain the item and price and follow the local ordering process.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div><div class="row"><div class="box" aria-hidden="true"></div><div>Demonstrate routing every kitchen change through the Event Coordinator and following through with the guest.</div><div><div class="initial-line"></div><div class="small-label">Trainer</div></div><div><div class="initial-line"></div><div class="small-label">Trainee</div></div></div></div></section><div class="notes-area"><strong>Local notes / skills to revisit</strong><div class="notes-lines"></div></div><div class="signatures"><div class="sig">Trainer / Manager Signature</div><div class="sig">Trainee Signature</div></div><div class="footer-note">Trainer: verify the demonstrated skills and identify any follow-up practice before the Day 1 exam. Training shifts do not have to occur on consecutive days.</div></div></main></div></body></html>
